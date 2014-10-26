@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains mespronos_leagues.module
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+
+function mespronos_leagues_help($route_name, RouteMatchInterface $route_match)
+{
+  switch ($route_name) {
+    // Main module help for the mespronos_leagues module.
+    case 'help.page.mespronos_leagues':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Gestion des journées de compétition') . '</p>';
+      return $output;
+    break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+
+function mespronos_leagues_theme()
+{
+  $theme = [];
+
+  return $theme;
+}

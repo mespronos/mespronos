@@ -1,0 +1,7 @@
+# League menu items definition
+
+league.admin.structure.settings:
+  title: League Settings
+  description: 'Configure League entity'
+  route_name:  league.settings
+  parent: system.admin_structure

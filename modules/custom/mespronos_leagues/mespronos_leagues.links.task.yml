@@ -1,0 +1,26 @@
+# League routing definition
+league.settings_tab:
+  route_name: league.settings
+  title: 'Settings'
+  base_route: league.settings
+
+league.view:
+  route_name: league.view
+  base_route: league.view
+  title: 'View'
+
+league.edit:
+  route_name: league.edit
+  base_route: league.view
+  title: Edit
+
+league.delete_confirm:
+  route_name:  league.delete
+  base_route:  league.view
+  title: Delete
+
+league.list:
+  title: 'Compétitions'
+  route_name: league.list
+  description: 'Liste de toutes les compétitions'
+  base_route: system.admin_content
