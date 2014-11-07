@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains mespronos_sports.module
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+
+function mespronos_sports_help($route_name, RouteMatchInterface $route_match)
+{
+  switch ($route_name) {
+    // Main module help for the mespronos_sports module.
+    case 'help.page.mespronos_sports':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Gestion des sports') . '</p>';
+      return $output;
+    break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+
+function mespronos_sports_theme()
+{
+  $theme = [];
+
+  return $theme;
+}

@@ -1,0 +1,6 @@
+day.add:
+  route_name: day.add
+  title: 'Add Day'
+  appears_on:
+    - day.list
+    - day.view

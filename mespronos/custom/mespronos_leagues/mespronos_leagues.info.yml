@@ -3,3 +3,5 @@ type: module
 description: Gestion des journées de compétition
 core: 8.x
 package: Mespronos
+dependencies:
+  - mespronos_sports

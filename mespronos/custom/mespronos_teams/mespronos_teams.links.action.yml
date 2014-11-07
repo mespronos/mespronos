@@ -1,0 +1,6 @@
+team.add:
+  route_name: team.add
+  title: 'Add Team'
+  appears_on:
+    - team.list
+    - team.view

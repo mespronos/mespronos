@@ -1,0 +1,6 @@
+sport.add:
+  route_name: sport.add
+  title: 'Add Sport'
+  appears_on:
+    - sport.list
+    - sport.view

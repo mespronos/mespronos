@@ -44,6 +44,7 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
+ *     "canonical" = "league.view",
  *     "edit-form" = "league.edit",
  *     "admin-form" = "league.settings",
  *     "delete-form" = "league.delete"
@@ -122,6 +123,49 @@ class League extends ContentEntityBase implements LeagueInterface
       ->setDescription(t('The UUID of the League entity.'))
       ->setReadOnly(TRUE);
 
+    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Authored by'))
+      ->setDescription(t('The user ID of the {{ entity_class }} entity author.'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'user')
+      ->setSetting('handler', 'default')
+      ->setDefaultValueCallback('Drupal\node\Entity\Node::getCurrentUserId')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', array(
+      'label' => 'hidden',
+      'type' => 'author',
+      'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
+        'settings' => array(
+        'match_operator' => 'CONTAINS',
+        'size' => '60',
+        'autocomplete_type' => 'tags',
+        'placeholder' => '',
+      ),
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['sport'] = BaseFieldDefinition::create('entity_reference')
+                                           ->setLabel(t('Sport'))
+                                           ->setSetting('target_type', 'sport')
+                                           ->setSetting('handler', 'default')
+                                           ->setDisplayOptions('view', array('type' => 'hidden'))
+                                           ->setDisplayOptions('form', array(
+                                             'type'     => 'entity_reference_autocomplete',
+                                             'settings' => array(
+                                               'match_operator'    => 'CONTAINS',
+                                               'size'              => 60,
+                                               'autocomplete_type' => 'tags',
+                                               'placeholder'       => t('Renseignez les premières lettre du sport'),
+                                             ),
+                                             'weight'   => -3,
+                                           ))
+                                           ->setDisplayConfigurable('form', TRUE)
+                                           ->setDisplayConfigurable('view', TRUE);
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Nom'))

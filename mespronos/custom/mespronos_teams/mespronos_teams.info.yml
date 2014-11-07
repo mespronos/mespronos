@@ -1,0 +1,7 @@
+name: Mespronos Teams
+type: module
+description: Gestion des équipes
+core: 8.x
+package: Mespronos
+#dependencies:
+#  - mespronos_leagues

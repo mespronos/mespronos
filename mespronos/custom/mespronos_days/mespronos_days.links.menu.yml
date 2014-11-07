@@ -1,0 +1,8 @@
+# Day menu items definition
+
+
+day.admin.structure.settings:
+  title: Day Settings
+  description: 'Configure Day entity'
+  route_name:  day.settings
+  parent: system.admin_structure

@@ -1,0 +1,5 @@
+name: Mespronos Sports
+type: module
+description: Gestion des sports
+core: 8.x
+package: Mespronos

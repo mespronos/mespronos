@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Contains mespronos_days.module
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+
+function mespronos_days_help($route_name, RouteMatchInterface $route_match)
+{
+  switch ($route_name) {
+    // Main module help for the mespronos_days module.
+    case 'help.page.mespronos_days':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Gestion des journées') . '</p>';
+      return $output;
+    break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+
+function mespronos_days_theme()
+{
+  $theme = [];
+
+  return $theme;
+}

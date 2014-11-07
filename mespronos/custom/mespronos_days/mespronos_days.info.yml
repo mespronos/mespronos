@@ -1,0 +1,7 @@
+name: Mespronos Days
+type: module
+description: Gestion des journées
+core: 8.x
+package: Mespronos
+dependencies:
+  - mespronos_leagues
