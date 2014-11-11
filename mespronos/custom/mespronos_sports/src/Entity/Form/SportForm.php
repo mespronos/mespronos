@@ -26,10 +26,9 @@ class SportForm extends ContentEntityForm
     /* @var $entity \Drupal\mespronos_sports\Entity\Sport */
     $form = parent::buildForm($form, $form_state);
     $entity = $this->entity;
-
     $form['langcode'] = array(
       '#title' => t('Language'),
-      '#type' => 'language_select',
+      '#type' => 'value',
       '#default_value' => $entity->getUntranslated()->language()->getId(),
       '#languages' => Language::STATE_ALL,
     );
