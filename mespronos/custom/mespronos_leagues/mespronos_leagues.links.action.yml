@@ -1,6 +1,0 @@
-league.add:
-  route_name: league.add
-  title: 'Add League'
-  appears_on:
-    - league.list
-    - league.view
