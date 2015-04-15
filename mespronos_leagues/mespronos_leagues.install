@@ -1,0 +1,24 @@
+<?php
+function mespronos_leagues_install() {
+  $entities = [
+    entity_create('league', array(
+      'created' => time(),
+      'changed' => time(),
+      'user_id' => 1,
+      'name' => 'Ligue 1 2014-2015',
+      'status' => 'future',
+      'classement' => true,
+    )),
+    entity_create('league', array(
+      'created' => time(),
+      'changed' => time(),
+      'user_id' => 1,
+      'name' => 'Coupe du monde de Rugby 2015',
+      'status' => 'future',
+      'classement' => false,
+    )),
+  ];
+  foreach ($entities as $entity) {
+    $entity->save();
+  }
+}

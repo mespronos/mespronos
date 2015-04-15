@@ -71,6 +71,11 @@ class League extends ContentEntityBase implements LeagueInterface {
     }
   }
 
+
+  public function HasClassement() {
+    return $this->get('classement')->value;
+  }
+
   /**
    * {@inheritdoc}
    */

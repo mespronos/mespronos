@@ -24,6 +24,7 @@ class LeagueListController extends EntityListBuilder {
     $header['id'] = t('Id');
     $header['name'] = t('Nom');
     $header['status'] = t('Statut');
+    $header['classement'] = t('Classement activé ?');
     return $header + parent::buildHeader();
   }
 
@@ -42,6 +43,7 @@ class LeagueListController extends EntityListBuilder {
       )
     );
     $row['status'] = $entity->getStatus(false);
+    $row['classement'] = $entity->hasClassement() ? '✓' : '✗';
     return $row + parent::buildRow($entity);
   }
 
