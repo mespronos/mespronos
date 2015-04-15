@@ -1,0 +1,12 @@
+# Team menu items definition
+entity.team.collection:
+  title: 'Team: Listing'
+  route_name: entity.team.collection
+  description: 'List Team'
+
+team.admin.structure.settings:
+  title: Team Settings
+  description: 'Configure Team entity'
+  route_name:  team.settings
+  parent: system.admin_structure
+
