@@ -1,0 +1,49 @@
+# League routing definition
+entity.league.canonical:
+  path: '/admin/league/{league}'
+  defaults:
+    _entity_view: 'league'
+    _title: 'League Content'
+  requirements:
+    _entity_access: 'league.view'
+
+entity.league.collection:
+  path: '/admin/league'
+  defaults:
+    _entity_list: 'league'
+    _title: 'League List'
+  requirements:
+    _permission: 'view League entity'
+
+entity.league.add_form:
+  path: '/admin/league/add'
+  defaults:
+    _entity_form: league.add
+    _title: 'Add League'
+  requirements:
+    _entity_create_access: 'league'
+
+entity.league.edit_form:
+  path: '/admin/league/{league}/edit'
+  defaults:
+    _entity_form: league.edit
+    _title: 'Edit League'
+  requirements:
+    _entity_access: 'league.edit'
+
+entity.league.delete_form:
+  path: '/admin/league/{league}/delete'
+  defaults:
+    _entity_form: league.delete
+    _title: 'Delete League'
+  requirements:
+    _entity_access: 'league.delete'
+
+league.settings:
+  path: 'admin/structure/league'
+  defaults:
+   _form: '\Drupal\mespronos_leagues\Entity\Form\LeagueSettingsForm'
+   _title: 'League Settings'
+  requirements:
+    _permission: 'administer League entity'
+

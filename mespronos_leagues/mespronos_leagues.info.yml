@@ -1,0 +1,6 @@
+name: Compétitions
+type: module
+description: Gestion des compétitions
+core: 8.x
+package: MesPronos
+

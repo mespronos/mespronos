@@ -1,0 +1,12 @@
+# League menu items definition
+entity.league.collection:
+  title: 'League: Listing'
+  route_name: entity.league.collection
+  description: 'List League'
+
+league.admin.structure.settings:
+  title: League Settings
+  description: 'Configure League entity'
+  route_name:  league.settings
+  parent: system.admin_structure
+

@@ -1,0 +1,21 @@
+# League routing definition
+league.settings_tab:
+  route_name: league.settings
+  title: 'Settings'
+  base_route: league.settings
+
+entity.league.canonical:
+  route_name: entity.league.canonical
+  base_route: entity.league.canonical
+  title: 'View'
+
+entity.league.edit_form:
+  route_name: entity.league.edit_form
+  base_route: entity.league.canonical
+  title: Edit
+
+entity.league.delete_form:
+  route_name:  entity.league.delete_form
+  base_route:  entity.league.canonical
+  title: Delete
+
