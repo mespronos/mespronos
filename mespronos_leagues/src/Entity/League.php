@@ -61,6 +61,16 @@ class League extends ContentEntityBase implements LeagueInterface {
   ];
   protected static $status_default_value = 'active';
 
+  public function getStatus($asMachineName = false) {
+    $s = $this->get('status')->value;
+    if($asMachineName) {
+      return $s;
+    }
+    else {
+      return self::$status_allowed_value[$s];
+    }
+  }
+
   /**
    * {@inheritdoc}
    */

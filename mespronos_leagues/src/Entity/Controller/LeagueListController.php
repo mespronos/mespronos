@@ -21,8 +21,9 @@ class LeagueListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = t('LeagueID');
-    $header['name'] = t('Name');
+    $header['id'] = t('Id');
+    $header['name'] = t('Nom');
+    $header['status'] = t('Statut');
     return $header + parent::buildHeader();
   }
 
@@ -40,6 +41,7 @@ class LeagueListController extends EntityListBuilder {
         )
       )
     );
+    $row['status'] = $entity->getStatus(false);
     return $row + parent::buildRow($entity);
   }
 
