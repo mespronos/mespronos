@@ -2,11 +2,11 @@
 entity.league.collection:
   title: 'League: Listing'
   route_name: entity.league.collection
-  description: 'List League'
+  description: 'Liste des compétitions'
 
 league.admin.structure.settings:
   title: League Settings
-  description: 'Configure League entity'
+  description: 'Configurer l\'entité Compétition'
   route_name:  league.settings
   parent: system.admin_structure
 

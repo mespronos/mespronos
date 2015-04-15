@@ -1,6 +1,6 @@
 entity.league.add_form:
   route_name: entity.league.add_form
-  title: 'Add League'
+  title: 'Créer une nouvelle compétition'
   appears_on:
     - entity.league.collection
     - entity.league.canonical

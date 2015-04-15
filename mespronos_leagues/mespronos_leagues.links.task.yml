@@ -1,7 +1,7 @@
 # League routing definition
 league.settings_tab:
   route_name: league.settings
-  title: 'Settings'
+  title: 'Paramètres'
   base_route: league.settings
 
 entity.league.canonical:
@@ -12,17 +12,17 @@ entity.league.canonical:
 entity.league.edit_form:
   route_name: entity.league.edit_form
   base_route: entity.league.canonical
-  title: Edit
+  title: 'Modifier'
 
 entity.league.delete_form:
   route_name:  entity.league.delete_form
   base_route:  entity.league.canonical
-  title: Delete
+  title: 'Supprimer'
 
 
 entity.league.collection:
   route_name: entity.league.collection
-  title: Compétitions
+  title: 'Compétitions'
   description: 'Liste de toutes les compétitions'
   base_route: system.admin_content
 
