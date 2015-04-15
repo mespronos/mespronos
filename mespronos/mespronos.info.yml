@@ -1,0 +1,6 @@
+name: Mespronos
+type: module
+description: Gestion du core du site
+core: 8.x
+package: MesPronos
+
