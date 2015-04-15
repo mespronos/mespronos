@@ -1,0 +1,21 @@
+# Sport routing definition
+sport.settings_tab:
+  route_name: sport.settings
+  title: 'Settings'
+  base_route: sport.settings
+
+entity.sport.canonical:
+  route_name: entity.sport.canonical
+  base_route: entity.sport.canonical
+  title: 'View'
+
+entity.sport.edit_form:
+  route_name: entity.sport.edit_form
+  base_route: entity.sport.canonical
+  title: Edit
+
+entity.sport.delete_form:
+  route_name:  entity.sport.delete_form
+  base_route:  entity.sport.canonical
+  title: Delete
+

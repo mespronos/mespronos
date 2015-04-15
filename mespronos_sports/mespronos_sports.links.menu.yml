@@ -1,0 +1,12 @@
+# Sport menu items definition
+entity.sport.collection:
+  title: 'Sport: Listing'
+  route_name: entity.sport.collection
+  description: 'List Sport'
+
+sport.admin.structure.settings:
+  title: Sport Settings
+  description: 'Configure Sport entity'
+  route_name:  sport.settings
+  parent: system.admin_structure
+
