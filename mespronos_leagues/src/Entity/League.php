@@ -166,6 +166,70 @@ class League extends ContentEntityBase implements LeagueInterface {
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
+    $fields['name'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Nom'))
+      ->setDescription(t('Nom de la compétition'))
+      ->setSettings(array(
+        'default_value' => '',
+        'max_length' => 50,
+        'text_processing' => 0,
+      ))
+      ->setDisplayOptions('view', array(
+        'label' => 'above',
+        'type' => 'string',
+        'weight' => -4,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'string',
+        'weight' => -4,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    //Création d'un champ booléen avec un widget checkbox
+    $fields['classement'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Classement activé'))
+      ->setDescription(t('Doit-on calculer le classement entre les équipes pour cette competitions'))
+      //est-ce que l'on autorise les modifications d'affichage dans le formulaire
+      ->setDisplayConfigurable('form', TRUE)
+      //est-ce que l'on autorise les modifications d'affichage en frontoffice
+      ->setDisplayConfigurable('view', TRUE)
+      //définition de la valeur par défaut
+      ->setDefaultValue(TRUE)
+      //définition des options d'affichage par défaut (front => view, back => form)
+      ->setDisplayOptions('form', array(
+        //on veut une checkbox
+        'type' => 'boolean_checkbox',
+        'settings' => array(
+          'display_label' => TRUE,
+        )
+      ))
+      ->setDisplayOptions('view', array(
+        //pas d'affichage en front
+        'type' => 'hidden',
+      ));
+    //Création d'une propriété "liste de texte"
+    $fields['status'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Statut du championnat'))
+      ->setRequired(true)
+      ->setSettings(array(
+        //définition des valeurs possible
+        //@todo : à externaliser dans une méthode
+        'allowed_values' => array(
+          'active' => 'En cours',
+          'over' => 'Terminé',
+          'archived' => 'Archivé',
+        ),
+      ))
+      //définition de la valeur par défaut
+      ->setDefaultValue('active')
+      ->setDisplayOptions('view', array(
+        'type' => 'hidden',
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'options_select',
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language code'))

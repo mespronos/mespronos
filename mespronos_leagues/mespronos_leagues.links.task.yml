@@ -19,3 +19,10 @@ entity.league.delete_form:
   base_route:  entity.league.canonical
   title: Delete
 
+
+entity.league.collection:
+  route_name: entity.league.collection
+  title: Compétitions
+  description: 'Liste de toutes les compétitions'
+  base_route: system.admin_content
+

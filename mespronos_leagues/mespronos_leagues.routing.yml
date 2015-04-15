@@ -1,6 +1,6 @@
 # League routing definition
 entity.league.canonical:
-  path: '/admin/league/{league}'
+  path: '/admin/content/league/{league}'
   defaults:
     _entity_view: 'league'
     _title: 'League Content'
@@ -8,7 +8,7 @@ entity.league.canonical:
     _entity_access: 'league.view'
 
 entity.league.collection:
-  path: '/admin/league'
+  path: '/admin/content/league'
   defaults:
     _entity_list: 'league'
     _title: 'League List'
@@ -16,7 +16,7 @@ entity.league.collection:
     _permission: 'view League entity'
 
 entity.league.add_form:
-  path: '/admin/league/add'
+  path: '/admin/content/league/add'
   defaults:
     _entity_form: league.add
     _title: 'Add League'
@@ -24,7 +24,7 @@ entity.league.add_form:
     _entity_create_access: 'league'
 
 entity.league.edit_form:
-  path: '/admin/league/{league}/edit'
+  path: '/admin/content/league/{league}/edit'
   defaults:
     _entity_form: league.edit
     _title: 'Edit League'
@@ -32,7 +32,7 @@ entity.league.edit_form:
     _entity_access: 'league.edit'
 
 entity.league.delete_form:
-  path: '/admin/league/{league}/delete'
+  path: '/admin/content/league/{league}/delete'
   defaults:
     _entity_form: league.delete
     _title: 'Delete League'
@@ -47,3 +47,8 @@ league.settings:
   requirements:
     _permission: 'administer League entity'
 
+league.list:
+  title: 'Compétitions'
+  route_name: league.list
+  description: 'Liste de toutes les compétitions'
+  base_route: system.admin_content
