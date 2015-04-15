@@ -53,6 +53,14 @@ use Drupal\user\UserInterface;
  * )
  */
 class League extends ContentEntityBase implements LeagueInterface {
+  protected static $status_allowed_value = [
+    'future' => 'À venir',
+    'active' => 'En cours',
+    'over' => 'Terminé',
+    'archived' => 'Archivé',
+  ];
+  protected static $status_default_value = 'active';
+
   /**
    * {@inheritdoc}
    */
@@ -134,22 +142,12 @@ class League extends ContentEntityBase implements LeagueInterface {
         'type' => 'author',
         'weight' => 0,
       ))
-      ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
-        'weight' => 5,
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'size' => '60',
-          'autocomplete_type' => 'tags',
-          'placeholder' => '',
-        ),
-      ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setDescription(t('The name of the League entity.'))
+      ->setLabel(t('Nom'))
+      ->setDescription(t('Nom de la compétition.'))
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 50,
@@ -162,29 +160,11 @@ class League extends ContentEntityBase implements LeagueInterface {
       ))
       ->setDisplayOptions('form', array(
         'type' => 'string_textfield',
-        'weight' => -4,
+        'weight' => -5,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-    $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Nom'))
-      ->setDescription(t('Nom de la compétition'))
-      ->setSettings(array(
-        'default_value' => '',
-        'max_length' => 50,
-        'text_processing' => 0,
-      ))
-      ->setDisplayOptions('view', array(
-        'label' => 'above',
-        'type' => 'string',
-        'weight' => -4,
-      ))
-      ->setDisplayOptions('form', array(
-        'type' => 'string',
-        'weight' => -4,
-      ))
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
+
     //Création d'un champ booléen avec un widget checkbox
     $fields['classement'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Classement activé'))
@@ -199,34 +179,29 @@ class League extends ContentEntityBase implements LeagueInterface {
       ->setDisplayOptions('form', array(
         //on veut une checkbox
         'type' => 'boolean_checkbox',
+        'weight' => - 4,
         'settings' => array(
           'display_label' => TRUE,
         )
       ))
-      ->setDisplayOptions('view', array(
-        //pas d'affichage en front
-        'type' => 'hidden',
-      ));
+      ->setDisplayOptions('view', array('type' => 'hidden'));
+
     //Création d'une propriété "liste de texte"
     $fields['status'] = BaseFieldDefinition::create('list_string')
-      ->setLabel(t('Statut du championnat'))
+      ->setLabel(t('Statut de la compétition'))
       ->setRequired(true)
       ->setSettings(array(
         //définition des valeurs possible
-        //@todo : à externaliser dans une méthode
-        'allowed_values' => array(
-          'active' => 'En cours',
-          'over' => 'Terminé',
-          'archived' => 'Archivé',
-        ),
+        'allowed_values' => self::$status_allowed_value,
       ))
       //définition de la valeur par défaut
-      ->setDefaultValue('active')
+      ->setDefaultValue(self::$status_default_value)
       ->setDisplayOptions('view', array(
         'type' => 'hidden',
       ))
       ->setDisplayOptions('form', array(
         'type' => 'options_select',
+        'weight' => -4,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
