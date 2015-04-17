@@ -21,7 +21,7 @@ use Drupal\user\UserInterface;
  *
  * @ContentEntityType(
  *   id = "sport",
- *   label = @Translation("Sport entity"),
+ *   label = @Translation("Sport"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos_sports\Entity\Controller\SportListController",
@@ -35,19 +35,22 @@ use Drupal\user\UserInterface;
  *     },
  *     "access" = "Drupal\mespronos_sports\SportAccessControlHandler",
  *   },
- *   base_table = "sport",
+ *   base_table = "mespronos__sport",
+ *   data_table = "mespronos__sport__field_data",
+ *   translatable = TRUE,
  *   admin_permission = "administer Sport entity",
  *   fieldable = TRUE,
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
- *     "uuid" = "uuid"
+ *     "uuid" = "uuid",
+ *     "langcode" = "langcode"
  *   },
  *   links = {
- *     "canonical" = "entity.sport.canonical",
- *     "edit-form" = "entity.sport.edit_form",
- *     "delete-form" = "entity.sport.delete_form",
- *     "collection" = "entity.sport.collection"
+ *     "canonical" = "/entity.sport.canonical",
+ *     "edit-form" = "/entity.sport.edit_form",
+ *     "delete-form" = "/entity.sport.delete_form",
+ *     "collection" = "/entity.sport.collection"
  *   },
  *   field_ui_base_route = "sport.settings"
  * )
@@ -128,7 +131,6 @@ class Sport extends ContentEntityBase implements SportInterface {
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
       ->setDefaultValueCallback('Drupal\node\Entity\Node::getCurrentUserId')
-      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', array(
         'label' => 'hidden',
         'type' => 'author',
@@ -150,6 +152,7 @@ class Sport extends ContentEntityBase implements SportInterface {
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Sport entity.'))
+      ->setTranslatable(true)
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 50,
@@ -168,8 +171,17 @@ class Sport extends ContentEntityBase implements SportInterface {
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['langcode'] = BaseFieldDefinition::create('language')
-      ->setLabel(t('Language code'))
-      ->setDescription(t('The language code of Sport entity.'));
+      ->setLabel(t('Language'))
+      ->setDescription(t('The node language code.'))
+      ->setTranslatable(TRUE)
+      ->setRevisionable(TRUE)
+      ->setDisplayOptions('view', array(
+        'type' => 'hidden',
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'language_select',
+        'weight' => 2,
+      ));
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
