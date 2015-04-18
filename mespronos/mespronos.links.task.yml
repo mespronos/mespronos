@@ -19,3 +19,8 @@ entity.team.delete_form:
   base_route:  entity.team.canonical
   title: Delete
 
+entity.team.collection:
+  route_name: entity.team.collection
+  title: 'Équipes'
+  description: 'Liste de toutes les équipes'
+  base_route: system.admin_content

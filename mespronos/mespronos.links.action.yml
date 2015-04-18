@@ -1,6 +1,6 @@
 entity.team.add_form:
   route_name: entity.team.add_form
-  title: 'Add Team'
+  title: 'Ajouter une équipe'
   appears_on:
     - entity.team.collection
     - entity.team.canonical
