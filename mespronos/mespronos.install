@@ -17,6 +17,18 @@ function mespronos_install() {
       'status' => 'future',
       'classement' => false,
     )),
+    entity_create('sport', array(
+      'created' => time(),
+      'changed' => time(),
+      'user_id' => 1,
+      'name' => 'Football',
+    )),
+    entity_create('sport', array(
+      'created' => time(),
+      'changed' => time(),
+      'user_id' => 1,
+      'name' => 'Rugby',
+    )),
   ];
   foreach ($entities as $entity) {
     $entity->save();

@@ -12,3 +12,10 @@ entity.league.add_form:
     - entity.league.collection
     - entity.league.canonical
 
+entity.sport.add_form:
+  route_name: entity.sport.add_form
+  title: 'Add Sport'
+  appears_on:
+    - entity.sport.collection
+    - entity.sport.canonical
+
