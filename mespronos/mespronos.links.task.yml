@@ -24,3 +24,32 @@ entity.team.collection:
   title: 'Équipes'
   description: 'Liste de toutes les équipes'
   base_route: system.admin_content
+
+# League routing definition
+league.settings_tab:
+  route_name: league.settings
+  title: 'Paramètres'
+  base_route: league.settings
+
+entity.league.canonical:
+  route_name: entity.league.canonical
+  base_route: entity.league.canonical
+  title: 'View'
+
+entity.league.edit_form:
+  route_name: entity.league.edit_form
+  base_route: entity.league.canonical
+  title: 'Modifier'
+
+entity.league.delete_form:
+  route_name:  entity.league.delete_form
+  base_route:  entity.league.canonical
+  title: 'Supprimer'
+
+
+entity.league.collection:
+  route_name: entity.league.collection
+  title: 'Compétitions'
+  description: 'Liste de toutes les compétitions'
+  base_route: system.admin_content
+

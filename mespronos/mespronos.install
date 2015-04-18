@@ -1,5 +1,5 @@
 <?php
-function mespronos_leagues_install() {
+function mespronos_install() {
   $entities = [
     entity_create('league', array(
       'created' => time(),
