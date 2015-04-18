@@ -25,8 +25,7 @@ use Drupal\user\UserInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\LeagueListController",
- *     "views_data" = "Drupal\mespronos\Entity\LeagueViewsData",
- *
+ *     "views_data" = "Drupal\mespronos\Entity\LeagueViewsData", *
  *     "form" = {
  *       "default" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "add" = "Drupal\mespronos\Entity\Form\LeagueForm",
