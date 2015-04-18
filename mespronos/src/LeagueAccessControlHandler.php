@@ -5,7 +5,7 @@
  * Contains Drupal\mespronos_leagues\LeagueAccessControlHandler.
  */
 
-namespace Drupal\mespronos_leagues;
+namespace Drupal\mespronos;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;

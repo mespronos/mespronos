@@ -5,13 +5,13 @@
  * Contains Drupal\mespronos_leagues\Entity\League.
  */
 
-namespace Drupal\mespronos_leagues\Entity;
+namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\mespronos_leagues\LeagueInterface;
+use Drupal\mespronos\LeagueInterface;
 use Drupal\user\UserInterface;
 
 /**

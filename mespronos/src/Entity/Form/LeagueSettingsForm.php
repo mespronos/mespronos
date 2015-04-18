@@ -5,7 +5,7 @@
  * Contains Drupal\mespronos_leagues\Entity\Form\LeagueSettingsForm.
  */
 
-namespace Drupal\mespronos_leagues\Entity\Form;
+namespace Drupal\mespronos\Entity\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;

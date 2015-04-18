@@ -5,7 +5,7 @@
  * Contains Drupal\mespronos_leagues\Entity\League.
  */
 
-namespace Drupal\mespronos_leagues\Entity;
+namespace Drupal\mespronos\Entity;
 
 use Drupal\views\EntityViewsData;
 use Drupal\views\EntityViewsDataInterface;

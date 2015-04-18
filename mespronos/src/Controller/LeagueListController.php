@@ -5,7 +5,7 @@
  * Contains Drupal\mespronos_leagues\Entity\Controller\LeagueListController.
  */
 
-namespace Drupal\mespronos_leagues\Entity\Controller;
+namespace Drupal\mespronos\Entity\Controller;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
