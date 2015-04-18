@@ -2,38 +2,38 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_teams\Entity\Team.
+ * Contains Drupal\mespronos\Entity\Team.
  */
 
-namespace Drupal\mespronos_teams\Entity;
+namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\mespronos_teams\TeamInterface;
+use Drupal\mespronos\TeamInterface;
 use Drupal\user\UserInterface;
 
 /**
  * Defines the Team entity.
  *
- * @ingroup mespronos_teams
+ * @ingroup mespronos
  *
  * @ContentEntityType(
  *   id = "team",
  *   label = @Translation("Team entity"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\mespronos_teams\Entity\Controller\TeamListController",
- *     "views_data" = "Drupal\mespronos_teams\Entity\TeamViewsData",
+ *     "list_builder" = "Drupal\mespronos\Entity\Controller\TeamListController",
+ *     "views_data" = "Drupal\mespronos\Entity\TeamViewsData",
  *
  *     "form" = {
- *       "default" = "Drupal\mespronos_teams\Entity\Form\TeamForm",
- *       "add" = "Drupal\mespronos_teams\Entity\Form\TeamForm",
- *       "edit" = "Drupal\mespronos_teams\Entity\Form\TeamForm",
- *       "delete" = "Drupal\mespronos_teams\Entity\Form\TeamDeleteForm",
+ *       "default" = "Drupal\mespronos\Entity\Form\TeamForm",
+ *       "add" = "Drupal\mespronos\Entity\Form\TeamForm",
+ *       "edit" = "Drupal\mespronos\Entity\Form\TeamForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\TeamDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos_teams\TeamAccessControlHandler",
+ *     "access" = "Drupal\mespronos\TeamAccessControlHandler",
  *   },
  *   base_table = "team",
  *   admin_permission = "administer Team entity",

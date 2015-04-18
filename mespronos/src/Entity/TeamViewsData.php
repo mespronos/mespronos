@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_teams\Entity\Team.
+ * Contains Drupal\mespronos\Entity\Team.
  */
 
-namespace Drupal\mespronos_teams\Entity;
+namespace Drupal\mespronos\Entity;
 
 use Drupal\views\EntityViewsData;
 use Drupal\views\EntityViewsDataInterface;

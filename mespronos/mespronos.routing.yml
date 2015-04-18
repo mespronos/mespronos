@@ -1,3 +1,11 @@
+mespronos.default_controller_hello:
+  path: '/mespronos/hello/{name}'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\DefaultController::hello'
+    _title: 'mespronos Title'
+  requirements:
+    _permission: 'access content'
+
 # Team routing definition
 entity.team.canonical:
   path: '/admin/team/{team}'
@@ -42,7 +50,7 @@ entity.team.delete_form:
 team.settings:
   path: 'admin/structure/team'
   defaults:
-   _form: '\Drupal\mespronos_teams\Entity\Form\TeamSettingsForm'
+   _form: '\Drupal\mespronos\Entity\Form\TeamSettingsForm'
    _title: 'Team Settings'
   requirements:
     _permission: 'administer Team entity'

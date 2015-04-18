@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_teams\Entity\Form\TeamDeleteForm.
+ * Contains Drupal\mespronos\Entity\Form\TeamDeleteForm.
  */
 
-namespace Drupal\mespronos_teams\Entity\Form;
+namespace Drupal\mespronos\Entity\Form;
 
 use Drupal\Core\Entity\ContentEntityConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -14,7 +14,7 @@ use Drupal\Core\Url;
 /**
  * Provides a form for deleting a Team entity.
  *
- * @ingroup mespronos_teams
+ * @ingroup mespronos
  */
 class TeamDeleteForm extends ContentEntityConfirmFormBase {
   /**

@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_teams\Entity\Form\TeamSettingsForm.
+ * Contains Drupal\mespronos\Entity\Form\TeamSettingsForm.
  */
 
-namespace Drupal\mespronos_teams\Entity\Form;
+namespace Drupal\mespronos\Entity\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -13,9 +13,9 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class TeamSettingsForm.
  *
- * @package Drupal\mespronos_teams\Form
+ * @package Drupal\mespronos\Form
  *
- * @ingroup mespronos_teams
+ * @ingroup mespronos
  */
 class TeamSettingsForm extends FormBase {
   /**

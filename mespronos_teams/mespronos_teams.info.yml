@@ -1,6 +1,0 @@
-name: Equipes
-type: module
-description: Gestion de l'entité équipe
-core: 8.x
-package: MesPronos
-

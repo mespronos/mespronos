@@ -1,6 +1,6 @@
-name: Mespronos
+name: MesPronos
 type: module
-description: Gestion du core du site
+description: Gestion de pronostics
 core: 8.x
 package: MesPronos
 

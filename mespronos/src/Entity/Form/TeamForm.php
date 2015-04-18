@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_teams\Entity\Form\TeamForm.
+ * Contains Drupal\mespronos\Entity\Form\TeamForm.
  */
 
-namespace Drupal\mespronos_teams\Entity\Form;
+namespace Drupal\mespronos\Entity\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
@@ -14,14 +14,14 @@ use Drupal\Core\Language\Language;
 /**
  * Form controller for the Team entity edit forms.
  *
- * @ingroup mespronos_teams
+ * @ingroup mespronos
  */
 class TeamForm extends ContentEntityForm {
   /**
    * Overrides Drupal\Core\Entity\EntityFormController::buildForm().
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\mespronos_teams\Entity\Team */
+    /* @var $entity \Drupal\mespronos\Entity\Team */
     $form = parent::buildForm($form, $form_state);
     $entity = $this->entity;
 

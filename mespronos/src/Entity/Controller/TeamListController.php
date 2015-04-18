@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_teams\Entity\Controller\TeamListController.
+ * Contains Drupal\mespronos\Entity\Controller\TeamListController.
  */
 
-namespace Drupal\mespronos_teams\Entity\Controller;
+namespace Drupal\mespronos\Entity\Controller;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
@@ -14,7 +14,7 @@ use Drupal\Core\Url;
 /**
  * Provides a list controller for Team entity.
  *
- * @ingroup mespronos_teams
+ * @ingroup mespronos
  */
 class TeamListController extends EntityListBuilder {
   /**
@@ -30,7 +30,7 @@ class TeamListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\mespronos_teams\Entity\Team */
+    /* @var $entity \Drupal\mespronos\Entity\Team */
     $row['id'] = $entity->id();
     $row['name'] = \Drupal::l(
       $this->getLabel($entity),

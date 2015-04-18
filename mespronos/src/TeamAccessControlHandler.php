@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_teams\TeamAccessControlHandler.
+ * Contains Drupal\mespronos\TeamAccessControlHandler.
  */
 
-namespace Drupal\mespronos_teams;
+namespace Drupal\mespronos;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
@@ -15,7 +15,7 @@ use Drupal\Core\Access\AccessResult;
 /**
  * Access controller for the Team entity.
  *
- * @see \Drupal\mespronos_teams\Entity\Team.
+ * @see \Drupal\mespronos\Entity\Team.
  */
 class TeamAccessControlHandler extends EntityAccessControlHandler {
   /**
