@@ -23,7 +23,8 @@ class LeagueForm extends ContentEntityForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /* @var $entity \Drupal\mespronos\Entity\League */
     $form = parent::buildForm($form, $form_state);
-    $entity = $this->entity;$entity->
+    $entity = $this->entity;
+
     $form['langcode'] = array(
       '#title' => t('Language'),
       '#type' => 'language_select',
