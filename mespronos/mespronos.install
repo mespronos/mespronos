@@ -3,31 +3,35 @@ function mespronos_install() {
   $entities = [
     entity_create('league', array(
       'created' => time(),
-      'changed' => time(),
-      'user_id' => 1,
+      'updated' => time(),
+      'creator' => 1,
       'name' => 'Ligue 1 2014-2015',
       'status' => 'future',
       'classement' => true,
+      'langcode' => 'fr',
     )),
     entity_create('league', array(
       'created' => time(),
-      'changed' => time(),
-      'user_id' => 1,
+      'updated' => time(),
+      'creator' => 1,
       'name' => 'Coupe du monde de Rugby 2015',
       'status' => 'future',
       'classement' => false,
+      'langcode' => 'fr',
     )),
     entity_create('sport', array(
       'created' => time(),
-      'changed' => time(),
-      'user_id' => 1,
+      'updated' => time(),
+      'creator' => 1,
       'name' => 'Football',
+      'langcode' => 'fr',
     )),
     entity_create('sport', array(
       'created' => time(),
-      'changed' => time(),
-      'user_id' => 1,
+      'updated' => time(),
+      'creator' => 1,
       'name' => 'Rugby',
+      'langcode' => 'fr',
     )),
   ];
   foreach ($entities as $entity) {

@@ -21,7 +21,7 @@ use Drupal\user\UserInterface;
  *
  * @ContentEntityType(
  *   id = "league",
- *   label = @Translation("League entity"),
+ *   label = @Translation("League"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\LeagueListController",
@@ -34,19 +34,22 @@ use Drupal\user\UserInterface;
  *     },
  *     "access" = "Drupal\mespronos\LeagueAccessControlHandler",
  *   },
- *   base_table = "league",
+ *   base_table = "mespronos__league",
+ *   data_table = "mespronos__league__field_data",
  *   admin_permission = "administer League entity",
+ *   translatable = TRUE,
  *   fieldable = TRUE,
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
- *     "uuid" = "uuid"
+ *     "uuid" = "uuid",
+ *     "langcode" = "langcode"
  *   },
  *   links = {
- *     "canonical" = "entity.league.canonical",
- *     "edit-form" = "entity.league.edit_form",
- *     "delete-form" = "entity.league.delete_form",
- *     "collection" = "entity.league.collection"
+ *     "canonical" = "/entity.league.canonical",
+ *     "edit-form" = "/entity.league.edit_form",
+ *     "delete-form" = "/entity.league.delete_form",
+ *     "collection" = "/entity.league.collection"
  *   },
  *   field_ui_base_route = "league.settings"
  * )
@@ -81,7 +84,7 @@ class League extends ContentEntityBase implements LeagueInterface {
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
     $values += array(
-      'user_id' => \Drupal::currentUser()->id(),
+      'creator' => \Drupal::currentUser()->id(),
     );
   }
 
@@ -95,29 +98,29 @@ class League extends ContentEntityBase implements LeagueInterface {
   /**
    * {@inheritdoc}
    */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
+  public function getupdatedTime() {
+    return $this->get('updated')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwner() {
-    return $this->get('user_id')->entity;
+    return $this->get('creator')->entity;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwnerId() {
-    return $this->get('user_id')->target_id;
+    return $this->get('creator')->target_id;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
+    $this->set('creator', $uid);
     return $this;
   }
 
@@ -125,7 +128,7 @@ class League extends ContentEntityBase implements LeagueInterface {
    * {@inheritdoc}
    */
   public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
+    $this->set('creator', $account->id());
     return $this;
   }
 
@@ -143,7 +146,7 @@ class League extends ContentEntityBase implements LeagueInterface {
       ->setDescription(t('The UUID of the League entity.'))
       ->setReadOnly(TRUE);
 
-    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
+    $fields['creator'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Authored by'))
       ->setDescription(t('The user ID of the League entity author.'))
       ->setRevisionable(TRUE)
@@ -162,6 +165,7 @@ class League extends ContentEntityBase implements LeagueInterface {
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Nom'))
       ->setDescription(t('Nom de la compétition.'))
+      ->setTranslatable(TRUE)
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 50,
@@ -220,16 +224,26 @@ class League extends ContentEntityBase implements LeagueInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+
     $fields['langcode'] = BaseFieldDefinition::create('language')
-      ->setLabel(t('Language code'))
-      ->setDescription(t('The language code of League entity.'));
+      ->setLabel(t('Language'))
+      ->setDescription(t('The node language code.'))
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', array(
+        'type' => 'hidden',
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'language_select',
+        'weight' => 2,
+      ));
+
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
 
-    $fields['changed'] = BaseFieldDefinition::create('changed')
-      ->setLabel(t('Changed'))
+    $fields['updated'] = BaseFieldDefinition::create('changed')
+      ->setLabel(t('updated'))
       ->setDescription(t('The time that the entity was last edited.'));
 
     return $fields;

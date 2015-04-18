@@ -21,7 +21,7 @@ use Drupal\user\UserInterface;
  *
  * @ContentEntityType(
  *   id = "team",
- *   label = @Translation("Team entity"),
+ *   label = @Translation("Team"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\TeamListController",
@@ -44,10 +44,10 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "entity.team.canonical",
- *     "edit-form" = "entity.team.edit_form",
- *     "delete-form" = "entity.team.delete_form",
- *     "collection" = "entity.team.collection"
+ *     "canonical" = "/entity.team.canonical",
+ *     "edit-form" = "/entity.team.edit_form",
+ *     "delete-form" = "/entity.team.delete_form",
+ *     "collection" = "/entity.team.collection"
  *   },
  *   field_ui_base_route = "team.settings"
  * )
@@ -59,7 +59,7 @@ class Team extends ContentEntityBase implements TeamInterface {
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
     $values += array(
-      'user_id' => \Drupal::currentUser()->id(),
+      'creator' => \Drupal::currentUser()->id(),
     );
   }
 
@@ -74,28 +74,28 @@ class Team extends ContentEntityBase implements TeamInterface {
    * {@inheritdoc}
    */
   public function getChangedTime() {
-    return $this->get('changed')->value;
+    return $this->get('updated')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwner() {
-    return $this->get('user_id')->entity;
+    return $this->get('creator')->entity;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwnerId() {
-    return $this->get('user_id')->target_id;
+    return $this->get('creator')->target_id;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
+    $this->set('creator', $uid);
     return $this;
   }
 
@@ -103,7 +103,7 @@ class Team extends ContentEntityBase implements TeamInterface {
    * {@inheritdoc}
    */
   public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
+    $this->set('creator', $account->id());
     return $this;
   }
 
@@ -121,7 +121,7 @@ class Team extends ContentEntityBase implements TeamInterface {
       ->setDescription(t('The UUID of the Team entity.'))
       ->setReadOnly(TRUE);
 
-    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
+    $fields['creator'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Authored by'))
       ->setDescription(t('The user ID of the Team entity author.'))
       ->setRevisionable(TRUE)
@@ -175,7 +175,7 @@ class Team extends ContentEntityBase implements TeamInterface {
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
 
-    $fields['changed'] = BaseFieldDefinition::create('changed')
+    $fields['updated'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
 

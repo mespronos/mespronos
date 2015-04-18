@@ -62,7 +62,7 @@ class Sport extends ContentEntityBase implements SportInterface {
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
     $values += array(
-      'user_id' => \Drupal::currentUser()->id(),
+      'creator' => \Drupal::currentUser()->id(),
     );
   }
 
@@ -77,28 +77,28 @@ class Sport extends ContentEntityBase implements SportInterface {
    * {@inheritdoc}
    */
   public function getChangedTime() {
-    return $this->get('changed')->value;
+    return $this->get('updated')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwner() {
-    return $this->get('user_id')->entity;
+    return $this->get('creator')->entity;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwnerId() {
-    return $this->get('user_id')->target_id;
+    return $this->get('creator')->target_id;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
+    $this->set('creator', $uid);
     return $this;
   }
 
@@ -106,7 +106,7 @@ class Sport extends ContentEntityBase implements SportInterface {
    * {@inheritdoc}
    */
   public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
+    $this->set('creator', $account->id());
     return $this;
   }
 
@@ -124,7 +124,7 @@ class Sport extends ContentEntityBase implements SportInterface {
       ->setDescription(t('The UUID of the Sport entity.'))
       ->setReadOnly(TRUE);
 
-    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
+    $fields['creator'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Authored by'))
       ->setDescription(t('The user ID of the Sport entity author.'))
       ->setRevisionable(TRUE)
@@ -187,7 +187,7 @@ class Sport extends ContentEntityBase implements SportInterface {
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
 
-    $fields['changed'] = BaseFieldDefinition::create('changed')
+    $fields['updated'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
 

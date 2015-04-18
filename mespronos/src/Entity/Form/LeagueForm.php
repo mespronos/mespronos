@@ -26,7 +26,7 @@ class LeagueForm extends ContentEntityForm {
     $entity = $this->entity;$entity->
     $form['langcode'] = array(
       '#title' => t('Language'),
-      '#type' => 'value',
+      '#type' => 'language_select',
       '#default_value' => $entity->getUntranslated()->language()->getId(),
       '#languages' => Language::STATE_ALL,
     );
