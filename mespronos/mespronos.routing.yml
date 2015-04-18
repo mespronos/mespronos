@@ -99,7 +99,7 @@ entity.league.delete_form:
 league.settings:
   path: 'admin/structure/league'
   defaults:
-   _form: '\Drupal\mespronos_leagues\Entity\Form\LeagueSettingsForm'
+   _form: '\Drupal\mespronos\Entity\Form\LeagueSettingsForm'
    _title: 'League Settings'
   requirements:
     _permission: 'administer League entity'

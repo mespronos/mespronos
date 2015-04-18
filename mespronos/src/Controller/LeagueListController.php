@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_leagues\Entity\Controller\LeagueListController.
+ * Contains Drupal\mespronos\Entity\Controller\LeagueListController.
  */
 
 namespace Drupal\mespronos\Entity\Controller;
@@ -14,7 +14,7 @@ use Drupal\Core\Url;
 /**
  * Provides a list controller for League entity.
  *
- * @ingroup mespronos_leagues
+ * @ingroup mespronos
  */
 class LeagueListController extends EntityListBuilder {
   /**
@@ -32,7 +32,7 @@ class LeagueListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\mespronos_leagues\Entity\League */
+    /* @var $entity \Drupal\mespronos\Entity\League */
     $row['id'] = $entity->id();
     $row['name'] = \Drupal::l(
       $this->getLabel($entity),

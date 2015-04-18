@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_leagues\Entity\League.
+ * Contains Drupal\mespronos\Entity\League.
  */
 
 namespace Drupal\mespronos\Entity;

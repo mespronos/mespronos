@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_leagues\Entity\Form\LeagueSettingsForm.
+ * Contains Drupal\mespronos\Entity\Form\LeagueSettingsForm.
  */
 
 namespace Drupal\mespronos\Entity\Form;
@@ -13,9 +13,9 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class LeagueSettingsForm.
  *
- * @package Drupal\mespronos_leagues\Form
+ * @package Drupal\mespronos\Form
  *
- * @ingroup mespronos_leagues
+ * @ingroup mespronos
  */
 class LeagueSettingsForm extends FormBase {
   /**

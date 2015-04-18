@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_leagues\Entity\League.
+ * Contains Drupal\mespronos\Entity\League.
  */
 
 namespace Drupal\mespronos\Entity;
@@ -17,23 +17,23 @@ use Drupal\user\UserInterface;
 /**
  * Defines the League entity.
  *
- * @ingroup mespronos_leagues
+ * @ingroup mespronos
  *
  * @ContentEntityType(
  *   id = "league",
  *   label = @Translation("League entity"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\mespronos_leagues\Entity\Controller\LeagueListController",
- *     "views_data" = "Drupal\mespronos_leagues\Entity\LeagueViewsData",
+ *     "list_builder" = "Drupal\mespronos\Entity\Controller\LeagueListController",
+ *     "views_data" = "Drupal\mespronos\Entity\LeagueViewsData",
  *
  *     "form" = {
- *       "default" = "Drupal\mespronos_leagues\Entity\Form\LeagueForm",
- *       "add" = "Drupal\mespronos_leagues\Entity\Form\LeagueForm",
- *       "edit" = "Drupal\mespronos_leagues\Entity\Form\LeagueForm",
- *       "delete" = "Drupal\mespronos_leagues\Entity\Form\LeagueDeleteForm",
+ *       "default" = "Drupal\mespronos\Entity\Form\LeagueForm",
+ *       "add" = "Drupal\mespronos\Entity\Form\LeagueForm",
+ *       "edit" = "Drupal\mespronos\Entity\Form\LeagueForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\LeagueDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos_leagues\LeagueAccessControlHandler",
+ *     "access" = "Drupal\mespronos\LeagueAccessControlHandler",
  *   },
  *   base_table = "league",
  *   admin_permission = "administer League entity",

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_leagues\LeagueInterface.
+ * Contains Drupal\mespronos\LeagueInterface.
  */
 
 namespace Drupal\mespronos;
@@ -14,7 +14,7 @@ use Drupal\user\EntityOwnerInterface;
 /**
  * Provides an interface defining a League entity.
  *
- * @ingroup mespronos_leagues
+ * @ingroup mespronos
  */
 interface LeagueInterface extends ContentEntityInterface, EntityOwnerInterface {
   // Add get/set methods for your configuration properties here.

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_leagues\Entity\Form\LeagueForm.
+ * Contains Drupal\mespronos\Entity\Form\LeagueForm.
  */
 
 namespace Drupal\mespronos\Entity\Form;
@@ -14,17 +14,16 @@ use Drupal\Core\Language\Language;
 /**
  * Form controller for the League entity edit forms.
  *
- * @ingroup mespronos_leagues
+ * @ingroup mespronos
  */
 class LeagueForm extends ContentEntityForm {
   /**
    * Overrides Drupal\Core\Entity\EntityFormController::buildForm().
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\mespronos_leagues\Entity\League */
+    /* @var $entity \Drupal\mespronos\Entity\League */
     $form = parent::buildForm($form, $form_state);
-    $entity = $this->entity;
-
+    $entity = $this->entity;$entity->
     $form['langcode'] = array(
       '#title' => t('Language'),
       '#type' => 'value',

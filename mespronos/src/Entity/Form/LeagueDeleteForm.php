@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_leagues\Entity\Form\LeagueDeleteForm.
+ * Contains Drupal\mespronos\Entity\Form\LeagueDeleteForm.
  */
 
 namespace Drupal\mespronos\Entity\Form;
@@ -14,7 +14,7 @@ use Drupal\Core\Url;
 /**
  * Provides a form for deleting a League entity.
  *
- * @ingroup mespronos_leagues
+ * @ingroup mespronos
  */
 class LeagueDeleteForm extends ContentEntityConfirmFormBase {
   /**

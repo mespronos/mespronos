@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_leagues\LeagueAccessControlHandler.
+ * Contains Drupal\mespronos\LeagueAccessControlHandler.
  */
 
 namespace Drupal\mespronos;
@@ -15,7 +15,7 @@ use Drupal\Core\Access\AccessResult;
 /**
  * Access controller for the League entity.
  *
- * @see \Drupal\mespronos_leagues\Entity\League.
+ * @see \Drupal\mespronos\Entity\League.
  */
 class LeagueAccessControlHandler extends EntityAccessControlHandler {
   /**
