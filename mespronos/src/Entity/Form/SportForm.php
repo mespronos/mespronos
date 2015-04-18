@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_sports\Entity\Form\SportForm.
+ * Contains Drupal\mespronos\Entity\Form\SportForm.
  */
 
-namespace Drupal\mespronos_sports\Entity\Form;
+namespace Drupal\mespronos\Entity\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
@@ -14,14 +14,14 @@ use Drupal\Core\Language\Language;
 /**
  * Form controller for the Sport entity edit forms.
  *
- * @ingroup mespronos_sports
+ * @ingroup mespronos
  */
 class SportForm extends ContentEntityForm {
   /**
    * Overrides Drupal\Core\Entity\EntityFormController::buildForm().
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\mespronos_sports\Entity\Sport */
+    /* @var $entity \Drupal\mespronos\Entity\Sport */
     $form = parent::buildForm($form, $form_state);
     $entity = $this->entity;
 

@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_sports\Entity\Controller\SportListController.
+ * Contains Drupal\mespronos\Entity\Controller\SportListController.
  */
 
-namespace Drupal\mespronos_sports\Entity\Controller;
+namespace Drupal\mespronos\Entity\Controller;
 
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
@@ -14,7 +14,7 @@ use Drupal\Core\Url;
 /**
  * Provides a list controller for Sport entity.
  *
- * @ingroup mespronos_sports
+ * @ingroup mespronos
  */
 class SportListController extends EntityListBuilder {
   /**
@@ -30,7 +30,7 @@ class SportListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\mespronos_sports\Entity\Sport */
+    /* @var $entity \Drupal\mespronos\Entity\Sport */
     $row['id'] = $entity->id();
     $row['name'] = \Drupal::l(
       $this->getLabel($entity),

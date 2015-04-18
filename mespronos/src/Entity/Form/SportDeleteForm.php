@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_sports\Entity\Form\SportDeleteForm.
+ * Contains Drupal\mespronos\Entity\Form\SportDeleteForm.
  */
 
-namespace Drupal\mespronos_sports\Entity\Form;
+namespace Drupal\mespronos\Entity\Form;
 
 use Drupal\Core\Entity\ContentEntityConfirmFormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -14,7 +14,7 @@ use Drupal\Core\Url;
 /**
  * Provides a form for deleting a Sport entity.
  *
- * @ingroup mespronos_sports
+ * @ingroup mespronos
  */
 class SportDeleteForm extends ContentEntityConfirmFormBase {
   /**

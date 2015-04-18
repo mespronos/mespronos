@@ -2,38 +2,38 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_sports\Entity\Sport.
+ * Contains Drupal\mespronos\Entity\Sport.
  */
 
-namespace Drupal\mespronos_sports\Entity;
+namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\mespronos_sports\SportInterface;
+use Drupal\mespronos\SportInterface;
 use Drupal\user\UserInterface;
 
 /**
  * Defines the Sport entity.
  *
- * @ingroup mespronos_sports
+ * @ingroup mespronos
  *
  * @ContentEntityType(
  *   id = "sport",
  *   label = @Translation("Sport"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\mespronos_sports\Entity\Controller\SportListController",
- *     "views_data" = "Drupal\mespronos_sports\Entity\SportViewsData",
+ *     "list_builder" = "Drupal\mespronos\Entity\Controller\SportListController",
+ *     "views_data" = "Drupal\mespronos\Entity\SportViewsData",
  *
  *     "form" = {
- *       "default" = "Drupal\mespronos_sports\Entity\Form\SportForm",
- *       "add" = "Drupal\mespronos_sports\Entity\Form\SportForm",
- *       "edit" = "Drupal\mespronos_sports\Entity\Form\SportForm",
- *       "delete" = "Drupal\mespronos_sports\Entity\Form\SportDeleteForm",
+ *       "default" = "Drupal\mespronos\Entity\Form\SportForm",
+ *       "add" = "Drupal\mespronos\Entity\Form\SportForm",
+ *       "edit" = "Drupal\mespronos\Entity\Form\SportForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\SportDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos_sports\SportAccessControlHandler",
+ *     "access" = "Drupal\mespronos\SportAccessControlHandler",
  *   },
  *   base_table = "mespronos__sport",
  *   data_table = "mespronos__sport__field_data",

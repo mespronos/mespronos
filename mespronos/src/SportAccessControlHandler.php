@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_sports\SportAccessControlHandler.
+ * Contains Drupal\mespronos\SportAccessControlHandler.
  */
 
-namespace Drupal\mespronos_sports;
+namespace Drupal\mespronos;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
@@ -15,7 +15,7 @@ use Drupal\Core\Access\AccessResult;
 /**
  * Access controller for the Sport entity.
  *
- * @see \Drupal\mespronos_sports\Entity\Sport.
+ * @see \Drupal\mespronos\Entity\Sport.
  */
 class SportAccessControlHandler extends EntityAccessControlHandler {
   /**

@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos_sports\Entity\Form\SportSettingsForm.
+ * Contains Drupal\mespronos\Entity\Form\SportSettingsForm.
  */
 
-namespace Drupal\mespronos_sports\Entity\Form;
+namespace Drupal\mespronos\Entity\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
@@ -13,9 +13,9 @@ use Drupal\Core\Form\FormStateInterface;
 /**
  * Class SportSettingsForm.
  *
- * @package Drupal\mespronos_sports\Form
+ * @package Drupal\mespronos\Form
  *
- * @ingroup mespronos_sports
+ * @ingroup mespronos
  */
 class SportSettingsForm extends FormBase {
   /**

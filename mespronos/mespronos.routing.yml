@@ -154,7 +154,7 @@ entity.sport.delete_form:
 sport.settings:
   path: 'admin/structure/sport'
   defaults:
-   _form: '\Drupal\mespronos_sports\Entity\Form\SportSettingsForm'
+   _form: '\Drupal\mespronos\Entity\Form\SportSettingsForm'
    _title: 'Sport Settings'
   requirements:
     _permission: 'administer Sport entity'
