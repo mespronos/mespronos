@@ -21,8 +21,8 @@ class TeamListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = t('TeamID');
-    $header['name'] = t('Name');
+    $header['id'] = t('ID');
+    $header['name'] = t('Nom de l\'equipe');
     return $header + parent::buildHeader();
   }
 

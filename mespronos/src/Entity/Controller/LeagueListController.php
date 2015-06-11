@@ -21,7 +21,7 @@ class LeagueListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = t('Id');
+    $header['id'] = t('ID');
     $header['name'] = t('Nom');
     $header['status'] = t('Statut');
     $header['classement'] = t('Classement activé ?');

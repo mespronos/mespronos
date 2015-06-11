@@ -21,8 +21,8 @@ class SportListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = t('SportID');
-    $header['name'] = t('Name');
+    $header['id'] = t('ID');
+    $header['name'] = t('Label');
     return $header + parent::buildHeader();
   }
 
