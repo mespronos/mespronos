@@ -21,10 +21,10 @@ class DefaultController extends ControllerBase {
    * @return string
    *   Return Hello string.
    */
-  public function hello($name) {
+  public function index() {
     return [
         '#type' => 'markup',
-        '#markup' => $this->t('Hello @name!', ['@name' => $name])
+        '#markup' => $this->t('Hello World!', [])
     ];
   }
 

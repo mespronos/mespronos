@@ -1,14 +1,14 @@
-mespronos.default_controller_hello:
-  path: '/mespronos/hello/{name}'
+mespronos.dashboard:
+  path: '/admin/mespronos'
   defaults:
-    _controller: '\Drupal\mespronos\Controller\DefaultController::hello'
-    _title: 'mespronos Title'
+    _controller: '\Drupal\mespronos\Controller\DefaultController::index'
+    _title: 'Mespronos'
   requirements:
-    _permission: 'access content'
+    _permission: 'access administration mespronos'
 
 # Team routing definition
 entity.team.canonical:
-  path: '/admin/team/{team}'
+  path: '/admin/mespronos/team/{team}'
   defaults:
     _entity_view: 'team'
     _title: 'Team Content'
@@ -16,7 +16,7 @@ entity.team.canonical:
     _entity_access: 'team.view'
 
 entity.team.collection:
-  path: '/admin/team'
+  path: '/admin/mespronos/team'
   defaults:
     _entity_list: 'team'
     _title: 'Team List'
@@ -24,7 +24,7 @@ entity.team.collection:
     _permission: 'view Team entity'
 
 entity.team.add_form:
-  path: '/admin/team/add'
+  path: '/admin/mespronos/team/add'
   defaults:
     _entity_form: team.add
     _title: 'Add Team'
@@ -32,7 +32,7 @@ entity.team.add_form:
     _entity_create_access: 'team'
 
 entity.team.edit_form:
-  path: '/admin/team/{team}/edit'
+  path: '/admin/mespronos/team/{team}/edit'
   defaults:
     _entity_form: team.edit
     _title: 'Edit Team'
@@ -40,7 +40,7 @@ entity.team.edit_form:
     _entity_access: 'team.edit'
 
 entity.team.delete_form:
-  path: '/admin/team/{team}/delete'
+  path: '/admin/mespronos/team/{team}/delete'
   defaults:
     _entity_form: team.delete
     _title: 'Delete Team'
@@ -48,7 +48,7 @@ entity.team.delete_form:
     _entity_access: 'team.delete'
 
 team.settings:
-  path: 'admin/structure/team'
+  path: '/admin/mespronos/structure/team'
   defaults:
    _form: '\Drupal\mespronos\Entity\Form\TeamSettingsForm'
    _title: 'Team Settings'
@@ -57,7 +57,7 @@ team.settings:
 
 # League routing definition
 entity.league.canonical:
-  path: '/admin/content/league/{league}'
+  path: '/admin/mespronos/content/league/{league}'
   defaults:
     _entity_view: 'league'
     _title: 'League Content'
@@ -65,7 +65,7 @@ entity.league.canonical:
     _entity_access: 'league.view'
 
 entity.league.collection:
-  path: '/admin/content/league'
+  path: '/admin/mespronos/content/league'
   defaults:
     _entity_list: 'league'
     _title: 'League List'
@@ -73,7 +73,7 @@ entity.league.collection:
     _permission: 'view League entity'
 
 entity.league.add_form:
-  path: '/admin/content/league/add'
+  path: '/admin/mespronos/content/league/add'
   defaults:
     _entity_form: league.add
     _title: 'Add League'
@@ -81,7 +81,7 @@ entity.league.add_form:
     _entity_create_access: 'league'
 
 entity.league.edit_form:
-  path: '/admin/content/league/{league}/edit'
+  path: '/admin/mespronos/content/league/{league}/edit'
   defaults:
     _entity_form: league.edit
     _title: 'Edit League'
@@ -89,7 +89,7 @@ entity.league.edit_form:
     _entity_access: 'league.edit'
 
 entity.league.delete_form:
-  path: '/admin/content/league/{league}/delete'
+  path: '/admin/mespronos/content/league/{league}/delete'
   defaults:
     _entity_form: league.delete
     _title: 'Delete League'
@@ -97,22 +97,16 @@ entity.league.delete_form:
     _entity_access: 'league.delete'
 
 league.settings:
-  path: 'admin/structure/league'
+  path: '/admin/mespronos/structure/league'
   defaults:
    _form: '\Drupal\mespronos\Entity\Form\LeagueSettingsForm'
    _title: 'League Settings'
   requirements:
     _permission: 'administer League entity'
 
-league.list:
-  title: 'Compétitions'
-  route_name: league.list
-  description: 'Liste de toutes les compétitions'
-  base_route: system.admin_content
-
 # Sport routing definition
 entity.sport.canonical:
-  path: '/admin/sport/{sport}'
+  path: '/admin/mespronos/sport/{sport}'
   defaults:
     _entity_view: 'sport'
     _title: 'Sport Content'
@@ -120,7 +114,7 @@ entity.sport.canonical:
     _entity_access: 'sport.view'
 
 entity.sport.collection:
-  path: '/admin/sport'
+  path: '/admin/mespronos/sport'
   defaults:
     _entity_list: 'sport'
     _title: 'Sport List'
@@ -128,7 +122,7 @@ entity.sport.collection:
     _permission: 'view Sport entity'
 
 entity.sport.add_form:
-  path: '/admin/sport/add'
+  path: '/admin/mespronos/sport/add'
   defaults:
     _entity_form: sport.add
     _title: 'Add Sport'
@@ -136,7 +130,7 @@ entity.sport.add_form:
     _entity_create_access: 'sport'
 
 entity.sport.edit_form:
-  path: '/admin/sport/{sport}/edit'
+  path: '/admin/mespronos/sport/{sport}/edit'
   defaults:
     _entity_form: sport.edit
     _title: 'Edit Sport'
@@ -144,7 +138,7 @@ entity.sport.edit_form:
     _entity_access: 'sport.edit'
 
 entity.sport.delete_form:
-  path: '/admin/sport/{sport}/delete'
+  path: '/admin/mespronos/sport/{sport}/delete'
   defaults:
     _entity_form: sport.delete
     _title: 'Delete Sport'
@@ -152,7 +146,7 @@ entity.sport.delete_form:
     _entity_access: 'sport.delete'
 
 sport.settings:
-  path: 'admin/structure/sport'
+  path: '/admin/mespronos/structure/sport'
   defaults:
    _form: '\Drupal\mespronos\Entity\Form\SportSettingsForm'
    _title: 'Sport Settings'
