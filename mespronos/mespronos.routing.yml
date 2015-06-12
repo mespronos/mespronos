@@ -152,3 +152,52 @@ sport.settings:
    _title: 'Sport Settings'
   requirements:
     _permission: 'administer Sport entity'
+# Day routing definition
+entity.day.canonical:
+  path: '/admin/day/{day}'
+  defaults:
+    _entity_view: 'day'
+    _title: 'Day Content'
+  requirements:
+    _entity_access: 'day.view'
+
+entity.day.list:
+  path: '/admin/mespronos/day'
+  defaults:
+    _entity_list: 'day'
+    _title: 'Day List'
+  requirements:
+    _permission: 'view Day entity'
+
+entity.day.add_form:
+  path: '/admin/day/add'
+  defaults:
+    _entity_form: day.add
+    _title: 'Add Day'
+  requirements:
+    _entity_create_access: 'day'
+
+entity.day.edit_form:
+  path: '/admin/day/{day}/edit'
+  defaults:
+    _entity_form: day.edit
+    _title: 'Edit Day'
+  requirements:
+    _entity_access: 'day.edit'
+
+entity.day.delete_form:
+  path: '/admin/day/{day}/delete'
+  defaults:
+    _entity_form: day.delete
+    _title: 'Delete Day'
+  requirements:
+    _entity_access: 'day.delete'
+
+day.settings:
+  path: 'admin/structure/day'
+  defaults:
+   _form: '\Drupal\mespronos\Entity\Form\DaySettingsForm'
+   _title: 'Day Settings'
+  requirements:
+    _permission: 'administer Day entity'
+

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos\Entity\Team.
+ * Contains Drupal\mespronos\Entity\Day.
  */
 
 namespace Drupal\mespronos\Entity;
@@ -11,32 +11,31 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\mespronos\TeamInterface;
+use Drupal\mespronos\DayInterface;
 use Drupal\user\UserInterface;
 
 /**
- * Defines the Team entity.
+ * Defines the Day entity.
  *
  * @ingroup mespronos
  *
  * @ContentEntityType(
- *   id = "team",
- *   label = @Translation("Team"),
+ *   id = "day",
+ *   label = @Translation("Day entity"),
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
- *     "list_builder" = "Drupal\mespronos\Entity\Controller\TeamListController",
- *     "views_data" = "Drupal\mespronos\Entity\TeamViewsData",
+ *     "list_builder" = "Drupal\mespronos\Entity\Controller\DayListController",
+ *     "views_data" = "Drupal\mespronos\Entity\DayViewsData",
  *
  *     "form" = {
- *       "default" = "Drupal\mespronos\Entity\Form\TeamForm",
- *       "add" = "Drupal\mespronos\Entity\Form\TeamForm",
- *       "edit" = "Drupal\mespronos\Entity\Form\TeamForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\TeamDeleteForm",
+ *       "add" = "Drupal\mespronos\Entity\Form\DayForm",
+ *       "edit" = "Drupal\mespronos\Entity\Form\DayForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\DayDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos\TeamAccessControlHandler",
+ *     "access" = "Drupal\mespronos\DayAccessControlHandler",
  *   },
- *   base_table = "mespronos__team",
- *   admin_permission = "administer Team entity",
+ *   base_table = "mespronos__day",
+ *   admin_permission = "administer Day entity",
  *   fieldable = TRUE,
  *   entity_keys = {
  *     "id" = "id",
@@ -44,22 +43,23 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/entity.team.canonical",
- *     "edit-form" = "/entity.team.edit_form",
- *     "delete-form" = "/entity.team.delete_form",
- *     "collection" = "/entity.team.collection"
+ *     "canonical" = "entity.day.canonical",
+ *     "edit-form" = "entity.day.edit_form",
+ *     "delete-form" = "entity.day.delete_form"
  *   },
- *   field_ui_base_route = "team.settings"
+ *   field_ui_base_route = "day.settings"
  * )
  */
-class Team extends ContentEntityBase implements TeamInterface {
+class Day extends ContentEntityBase implements DayInterface
+{
+
   /**
    * {@inheritdoc}
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
     $values += array(
-      'creator' => \Drupal::currentUser()->id(),
+      'user_id' => \Drupal::currentUser()->id(),
     );
   }
 
@@ -74,28 +74,28 @@ class Team extends ContentEntityBase implements TeamInterface {
    * {@inheritdoc}
    */
   public function getChangedTime() {
-    return $this->get('updated')->value;
+    return $this->get('changed')->value;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwner() {
-    return $this->get('creator')->entity;
+    return $this->get('user_id')->entity;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwnerId() {
-    return $this->get('creator')->target_id;
+    return $this->get('user_id')->target_id;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setOwnerId($uid) {
-    $this->set('creator', $uid);
+    $this->set('user_id', $uid);
     return $this;
   }
 
@@ -103,7 +103,7 @@ class Team extends ContentEntityBase implements TeamInterface {
    * {@inheritdoc}
    */
   public function setOwner(UserInterface $account) {
-    $this->set('creator', $account->id());
+    $this->set('user_id', $account->id());
     return $this;
   }
 
@@ -113,17 +113,17 @@ class Team extends ContentEntityBase implements TeamInterface {
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the Team entity.'))
+      ->setDescription(t('The ID of the Day entity.'))
       ->setReadOnly(TRUE);
 
     $fields['uuid'] = BaseFieldDefinition::create('uuid')
       ->setLabel(t('UUID'))
-      ->setDescription(t('The UUID of the Team entity.'))
+      ->setDescription(t('The UUID of the Day entity.'))
       ->setReadOnly(TRUE);
 
-    $fields['creator'] = BaseFieldDefinition::create('entity_reference')
+    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Authored by'))
-      ->setDescription(t('The user ID of the Team entity author.'))
+      ->setDescription(t('The user ID of the Day entity author.'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
@@ -134,22 +134,12 @@ class Team extends ContentEntityBase implements TeamInterface {
         'type' => 'author',
         'weight' => 0,
       ))
-      ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
-        'weight' => 5,
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'size' => '60',
-          'autocomplete_type' => 'tags',
-          'placeholder' => '',
-        ),
-      ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
-      ->setDescription(t('The name of the Team entity.'))
+      ->setDescription(t('The name of the Day entity.'))
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 50,
@@ -161,7 +151,7 @@ class Team extends ContentEntityBase implements TeamInterface {
         'weight' => -4,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'string_textfield',
+        'type' => 'string',
         'weight' => -4,
       ))
       ->setDisplayConfigurable('form', TRUE)
@@ -169,17 +159,16 @@ class Team extends ContentEntityBase implements TeamInterface {
 
     $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language code'))
-      ->setDescription(t('The language code of Team entity.'));
+      ->setDescription(t('The language code of Day entity.'));
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
 
-    $fields['updated'] = BaseFieldDefinition::create('changed')
+    $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('Changed'))
       ->setDescription(t('The time that the entity was last edited.'));
 
     return $fields;
   }
-
 }
