@@ -14,8 +14,15 @@ entity.league.add_form:
 
 entity.sport.add_form:
   route_name: entity.sport.add_form
-  title: 'Add Sport'
+  title: 'Ajouter un sport'
   appears_on:
     - entity.sport.collection
     - entity.sport.canonical
+
+entity.day.add_form:
+  route_name: entity.day.add_form
+  title: 'Ajouter une journée de compétition'
+  appears_on:
+    - entity.day.list
+    - entity.day.canonical
 
