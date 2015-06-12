@@ -79,3 +79,29 @@ entity.sport.collection:
   title: 'Sports'
   description: 'Liste de tous les sports'
   base_route: system.admin_content
+# Day routing definition
+day.settings_tab:
+  route_name: day.settings
+  title: 'Settings'
+  base_route: day.settings
+
+entity.day.canonical:
+  route_name: entity.day.canonical
+  base_route: entity.day.canonical
+  title: 'View'
+
+entity.day.edit_form:
+  route_name: entity.day.edit_form
+  base_route: entity.day.canonical
+  title: Edit
+
+entity.day.delete_form:
+  route_name:  entity.day.delete_form
+  base_route:  entity.day.canonical
+  title: Delete
+
+entity.day.list:
+  route_name: entity.day.list
+  title: 'Journées'
+  description: 'Liste des journées de compétitions'
+  base_route: system.admin_content

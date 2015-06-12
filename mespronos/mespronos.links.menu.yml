@@ -34,3 +34,15 @@ sport.admin.structure.settings:
   route_name:  sport.settings
   parent: system.admin_structure
 
+# Day menu items definition
+entity.day.list:
+  title: 'Day: Listing'
+  route_name: entity.day.list
+  description: 'List Day'
+
+day.admin.structure.settings:
+  title: Day Settings
+  description: 'Configure Day entity'
+  route_name:  day.settings
+  parent: system.admin_structure
+
