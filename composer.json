@@ -1,6 +1,7 @@
 {
     "name": "kgaut/mespronos",
     "description": "Pronostic module for drupal 8",
+    "type": "drupal-custom-module",
     "require": {
     	"composer/installers": "~1.0"
     }
