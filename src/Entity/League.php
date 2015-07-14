@@ -162,6 +162,31 @@ class League extends ContentEntityBase implements LeagueInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+
+    $fields['sport'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Sport'))
+      ->setDescription(t('Sport entity reference'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'sport')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'entity_reference',
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'entity_reference_autocomplete',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'size' => 60,
+          'placeholder' => '',
+        ),
+        'weight' => -3,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Nom'))
       ->setDescription(t('Nom de la compétition.'))
