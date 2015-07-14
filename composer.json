@@ -1,5 +1,5 @@
 {
-    "name": "kgaut/mespronos",
+    "name": "mespronos",
     "description": "Pronostic module for drupal 8",
     "type":"drupal-custom-module",
     "require": {
