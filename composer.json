@@ -6,5 +6,8 @@
     },
     "extra": {
         "installer-name": "mespronos"
-    }
+    },,
+    "config": {
+        "vendor-dir": "web/modules"
+    },
 }
