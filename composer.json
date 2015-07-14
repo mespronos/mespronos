@@ -7,7 +7,5 @@
     "extra": {
         "installer-name": "mespronos"
     },
-    "config": {
-        "vendor-dir": "web/modules"
-    },
+    "type":"drupal-custom-module",
 }
