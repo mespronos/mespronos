@@ -157,6 +157,42 @@ class Day extends ContentEntityBase implements DayInterface
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    $fields['league'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('League'))
+      ->setDescription(t('League entity reference'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'league')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'entity_reference',
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'entity_reference_autocomplete',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'size' => 60,
+          'placeholder' => '',
+        ),
+        'weight' => -3,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+    $fields['number'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Day number')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+      ));
+
     $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language code'))
       ->setDescription(t('The language code of Day entity.'));
