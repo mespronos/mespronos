@@ -1,6 +1,6 @@
 name: MesPronos
 type: module
-description: Gestion de pronostics
+description: Pronostics module for drupal 8
 core: 8.x
 package: MesPronos
 
