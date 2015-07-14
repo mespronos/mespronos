@@ -43,9 +43,9 @@ use Drupal\user\UserInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "entity.day.canonical",
- *     "edit-form" = "entity.day.edit_form",
- *     "delete-form" = "entity.day.delete_form"
+ *     "canonical" = "/entity.day.canonical",
+ *     "edit-form" = "/entity.day.edit_form",
+ *     "delete-form" = "/entity.day.delete_form"
  *   },
  *   field_ui_base_route = "day.settings"
  * )

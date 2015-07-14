@@ -9,7 +9,7 @@ namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Form\ImportForm;
-
+use Symfony\Component\Yaml\Parser;
 /**
  * Class ImporterController.
  *
@@ -25,6 +25,18 @@ class ImporterController extends ControllerBase {
   public function index() {
     $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\FormImport');
     return $form;
+  }
+
+  public static function import($fid) {
+    $file = file_load($fid);
+    if(!$file) {
+      throw new \Exception('NotAFileException');
+    }
+    $yaml = new Parser();
+    $data = $yaml->parse(file_get_contents($file->getFileUri()));
+    return [
+      '#markup' => 'lol'
+    ];
   }
 
 }

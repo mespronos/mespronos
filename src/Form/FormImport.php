@@ -42,8 +42,8 @@ class FormImport extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    dpm($form_state);
-    drupal_set_message($this->t('Your phone number is @number', array('@number' => $form_state->getValue('phone_number'))));
+    $fid = $form_state->getValue('imported_file')[0];
+    $form_state->setRedirect('mespronos.importer_start',['fid'=>$fid]);
   }
 
 }

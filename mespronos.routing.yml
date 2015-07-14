@@ -210,3 +210,12 @@ mespronos.importer_controller_index:
   requirements:
     _permission: 'import league content'
 
+
+mespronos.importer_start:
+  path: 'admin/mespronos/import/{fid}'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\ImporterController::import'
+    _title: 'Import League'
+  requirements:
+    _permission: 'import league content'
+
