@@ -7,5 +7,5 @@
     "extra": {
         "installer-name": "mespronos"
     },
-    "type":"drupal-custom-module",
+    "type":"drupal-custom-module"
 }
