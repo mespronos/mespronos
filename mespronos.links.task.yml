@@ -12,23 +12,23 @@ entity.team.canonical:
 entity.team.edit_form:
   route_name: entity.team.edit_form
   base_route: entity.team.canonical
-  title: Edit
+  title: 'Edit'
 
 entity.team.delete_form:
   route_name:  entity.team.delete_form
   base_route:  entity.team.canonical
-  title: Delete
+  title: 'Delete'
 
 entity.team.collection:
   route_name: entity.team.collection
-  title: 'Équipes'
-  description: 'Liste de toutes les équipes'
+  title: 'Teams'
+  description: 'Teams listing'
   base_route: system.admin_content
 
 # League routing definition
 league.settings_tab:
   route_name: league.settings
-  title: 'Paramètres'
+  title: 'Settings'
   base_route: league.settings
 
 entity.league.canonical:
@@ -39,18 +39,18 @@ entity.league.canonical:
 entity.league.edit_form:
   route_name: entity.league.edit_form
   base_route: entity.league.canonical
-  title: 'Modifier'
+  title: 'Edit'
 
 entity.league.delete_form:
   route_name:  entity.league.delete_form
   base_route:  entity.league.canonical
-  title: 'Supprimer'
+  title: 'Delete'
 
 
 entity.league.collection:
   route_name: entity.league.collection
-  title: 'Compétitions'
-  description: 'Liste de toutes les compétitions'
+  title: 'Leagues'
+  description: 'Leagues listing'
   base_route: system.admin_content
 
 # Sport routing definition
@@ -67,17 +67,17 @@ entity.sport.canonical:
 entity.sport.edit_form:
   route_name: entity.sport.edit_form
   base_route: entity.sport.canonical
-  title: Edit
+  title: 'Edit'
 
 entity.sport.delete_form:
   route_name:  entity.sport.delete_form
   base_route:  entity.sport.canonical
-  title: Delete
+  title: 'Delete'
 
 entity.sport.collection:
   route_name: entity.sport.collection
   title: 'Sports'
-  description: 'Liste de tous les sports'
+  description: 'Sports listing'
   base_route: system.admin_content
 # Day routing definition
 day.settings_tab:
@@ -93,15 +93,15 @@ entity.day.canonical:
 entity.day.edit_form:
   route_name: entity.day.edit_form
   base_route: entity.day.canonical
-  title: Edit
+  title: 'Edit'
 
 entity.day.delete_form:
   route_name:  entity.day.delete_form
   base_route:  entity.day.canonical
-  title: Delete
+  title: 'Delete'
 
 entity.day.list:
   route_name: entity.day.list
-  title: 'Journées'
-  description: 'Liste des journées de compétitions'
+  title: 'League days'
+  description: 'League days listing'
   base_route: system.admin_content

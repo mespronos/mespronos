@@ -1,47 +1,47 @@
 # Team menu items definition
 entity.team.collection:
-  title: 'Équipes'
+  title: 'Teams'
   route_name: entity.team.collection
-  description: 'Liste de toutes les équipes'
+  description: 'Teams listing'
 
 team.admin.structure.settings:
-  title: Paramétrages des équipes
-  description: 'Configuration de l\'entitée "Équipe"'
+  title: 'Teams settings'
+  description: 'Configure Team entity'
   route_name:  team.settings
   parent: system.admin_structure
 
 # League menu items definition
 entity.league.collection:
-  title: 'League: Listing'
+  title: 'Leagues'
   route_name: entity.league.collection
-  description: 'Liste des compétitions'
+  description: 'Leagues listing'
 
 league.admin.structure.settings:
-  title: League Settings
-  description: 'Configurer l\'entité Compétition'
+  title: 'League Settings'
+  description: 'Configure League entity'
   route_name:  league.settings
   parent: system.admin_structure
 
 # Sport menu items definition
 entity.sport.collection:
-  title: 'Sport: Listing'
+  title: 'Sports'
   route_name: entity.sport.collection
-  description: 'List Sport'
+  description: 'Sports listing'
 
 sport.admin.structure.settings:
-  title: Sport Settings
+  title: 'Sport Settings'
   description: 'Configure Sport entity'
   route_name:  sport.settings
   parent: system.admin_structure
 
 # Day menu items definition
 entity.day.list:
-  title: 'Day: Listing'
+  title: 'Days'
   route_name: entity.day.list
-  description: 'List Day'
+  description: 'Leagues days listing'
 
 day.admin.structure.settings:
-  title: Day Settings
+  title: 'Day Settings'
   description: 'Configure Day entity'
   route_name:  day.settings
   parent: system.admin_structure
