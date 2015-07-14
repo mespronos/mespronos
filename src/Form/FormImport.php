@@ -22,8 +22,12 @@ class FormImport extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $form['imported_file'] = array(
-      '#type' => 'file',
-      '#title' => t('YAML file to import')
+      '#type' => 'managed_file',
+      '#title' => t('YAML file to import'),
+      '#upload_location' => 'public://imports/'.date('U'),
+      '#upload_validators' => [
+        'file_validate_extensions' => ['yaml']
+      ]
     );
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = array(
@@ -37,16 +41,8 @@ class FormImport extends FormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    kint($form_state);
-    kint($form);
-    $form_state->setErrorByName('imported_file', $this->t('The phone number is too short. Please enter a full phone number.'));
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    dpm($form_state);
     drupal_set_message($this->t('Your phone number is @number', array('@number' => $form_state->getValue('phone_number'))));
   }
 
