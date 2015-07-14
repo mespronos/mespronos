@@ -1,3 +1,6 @@
 access administration mespronos:
   title: 'Access MesPronos dashboard'
   description : 'Accès au tableau de bord du module MesPronos'
+import league content:
+  title: 'Import league to MesPronos'
+  description : 'Import a league, team and days'
