@@ -145,25 +145,104 @@ class Game extends ContentEntityBase implements GameInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setDescription(t('The name of the Game entity.'))
-      ->setSettings(array(
-        'max_length' => 50,
-        'text_processing' => 0,
-      ))
-      ->setDefaultValue('')
+    $fields['day'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Day'))
+      ->setDescription(t('Day entity reference'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'day')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', array(
-        'label' => 'above',
-        'type' => 'string',
-        'weight' => -4,
+        'label' => 'hidden',
+        'type' => 'entity_reference',
+        'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'string_textfield',
-        'weight' => -4,
+        'type' => 'entity_reference_autocomplete',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'size' => 60,
+          'placeholder' => '',
+        ),
+        'weight' => -3,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
+
+    $fields['team_1'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Receving Team'))
+      ->setDescription(t('Hosting team'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'team')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'entity_reference',
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'entity_reference_autocomplete',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'size' => 60,
+          'placeholder' => '',
+        ),
+        'weight' => -2,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['team_2'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Guest Team'))
+      ->setDescription(t('Second team'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'team')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'entity_reference',
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'entity_reference_autocomplete',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'size' => 60,
+          'placeholder' => '',
+        ),
+        'weight' => -1,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['score_team_1'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Score Team 1')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+      ));
+
+    $fields['score_team_2'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Score Team 2')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 1,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+      ));
+
 
     $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language code'))
