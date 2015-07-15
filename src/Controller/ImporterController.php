@@ -37,9 +37,12 @@ class ImporterController extends ControllerBase {
     }
     $yaml = new Parser();
     $data = $yaml->parse(file_get_contents($file->getFileUri()));
-
+    dpm($data);
     $sport = self::importSport($data['league']['sport']);
     $league = self::importLeague($data['league']['name'], $sport);
+    foreach($data['league']['days'] as $day) {
+      $day = self::importDay($day,$league);
+    }
 
     dpm($sport);
     dpm($league);
@@ -90,5 +93,27 @@ class ImporterController extends ControllerBase {
       $league = entity_load('league', array_pop($id));
     }
     return $league;
+  }
+
+  public static function importDay($day,League $league) {
+    $query = \Drupal::entityQuery('day')->condition('number', $day['number']);
+    $id = $query->execute();
+    if(count($id) == 0) {
+      $day = entity_create('day', array(
+        'created' => time(),
+        'updated' => time(),
+        'creator' => 1,
+        'league' => $league->id(),
+        'number' => $day['number'],
+        'name' => t('Journée @nb',array('@nb'=>$day['number'])),
+        'langcode' => 'fr',
+      ));
+      $day->save();
+      drupal_set_message(t('The day @number of @league_name has been created',array('@league_name'=> $league->get('name')->value,'@number'=>$day->get('number')->value)));
+    }
+    else {
+      $day = entity_load('league', array_pop($id));
+    }
+    return $day;
   }
 }

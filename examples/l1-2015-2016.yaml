@@ -1,3 +1,10 @@
 league :
   name : 'Ligue 1 2015/2016'
   sport : 'Football'
+  days:
+    - number : 1
+      date : 2015-08-01T19:00:00
+    - number : 2
+      date : 2015-08-08T19:00:00
+
+
