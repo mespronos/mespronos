@@ -127,3 +127,8 @@ entity.game.delete_form:
   title: Delete
   weight: 10
 
+entity.game.collection:
+  route_name: entity.game.collection
+  title: 'Games'
+  description: 'Games listing'
+  base_route: system.admin_content
