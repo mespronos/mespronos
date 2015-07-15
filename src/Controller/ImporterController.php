@@ -12,6 +12,7 @@ use Drupal\mespronos\Form\ImportForm;
 use Symfony\Component\Yaml\Parser;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Sport;
+use Drupal\mespronos\Entity\Day;
 
 /**
  * Class ImporterController.
@@ -57,7 +58,7 @@ class ImporterController extends ControllerBase {
     $query = \Drupal::entityQuery('sport')->condition('name', '%'.$sport_name.'%', 'LIKE');
     $id = $query->execute();
     if (count($id) == 0) {
-      $sport = entity_create('sport', array(
+      $sport = Sport::create(array(
         'created' => time(),
         'updated' => time(),
         'creator' => 1,
@@ -76,7 +77,7 @@ class ImporterController extends ControllerBase {
     $query = \Drupal::entityQuery('league')->condition('name', '%'.$league_name.'%','LIKE');
     $id = $query->execute();
     if(count($id) == 0) {
-      $league = entity_create('league', array(
+      $league = League::create(array(
         'created' => time(),
         'updated' => time(),
         'creator' => 1,
@@ -99,7 +100,7 @@ class ImporterController extends ControllerBase {
     $query = \Drupal::entityQuery('day')->condition('number', $day['number']);
     $id = $query->execute();
     if(count($id) == 0) {
-      $day = entity_create('day', array(
+      $day = Day::create(array(
         'created' => time(),
         'updated' => time(),
         'creator' => 1,
