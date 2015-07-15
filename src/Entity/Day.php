@@ -176,7 +176,6 @@ class Day extends ContentEntityBase implements DayInterface
           'size' => 60,
           'placeholder' => '',
         ),
-        'weight' => -3,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);

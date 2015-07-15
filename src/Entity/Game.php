@@ -130,20 +130,10 @@ class Game extends ContentEntityBase implements GameInterface {
       ->setDisplayOptions('view', array(
         'label' => 'hidden',
         'type' => 'author',
-        'weight' => 0,
+        'weight' => -2,
       ))
-      ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
-        'weight' => 5,
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'size' => '60',
-          'autocomplete_type' => 'tags',
-          'placeholder' => '',
-        ),
-      ))
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
+      ->setDisplayConfigurable('form', false)
+      ->setDisplayConfigurable('view', false);
 
     $fields['day'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Day'))
@@ -158,15 +148,11 @@ class Game extends ContentEntityBase implements GameInterface {
         'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'size' => 60,
-          'placeholder' => '',
-        ),
-        'weight' => -3,
+        'type' => 'options_select',
+        'weight' => -1,
+        'settings' => array(),
       ))
-      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('form', false)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['team_1'] = BaseFieldDefinition::create('entity_reference')
@@ -182,15 +168,11 @@ class Game extends ContentEntityBase implements GameInterface {
         'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'size' => 60,
-          'placeholder' => '',
-        ),
-        'weight' => -2,
+        'type' => 'options_select',
+        'weight' => 2,
+        'settings' => array(),
       ))
-      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('form', false)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['team_2'] = BaseFieldDefinition::create('entity_reference')
@@ -206,15 +188,11 @@ class Game extends ContentEntityBase implements GameInterface {
         'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'size' => 60,
-          'placeholder' => '',
-        ),
-        'weight' => -1,
+        'type' => 'options_select',
+        'weight' => 3,
+        'settings' => array(),
       ))
-      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('form', false)
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['score_team_1'] = BaseFieldDefinition::create('integer')
@@ -224,7 +202,7 @@ class Game extends ContentEntityBase implements GameInterface {
       ->setDisplayOptions('view', array(
         'label' => 'hidden',
         'type' => 'integer',
-        'weight' => 0,
+        'weight' => 4,
       ))
       ->setDisplayOptions('form', array(
         'type' => 'number',
@@ -237,7 +215,7 @@ class Game extends ContentEntityBase implements GameInterface {
       ->setDisplayOptions('view', array(
         'label' => 'hidden',
         'type' => 'integer',
-        'weight' => 1,
+        'weight' => 5,
       ))
       ->setDisplayOptions('form', array(
         'type' => 'number',
