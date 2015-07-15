@@ -157,6 +157,29 @@ class Day extends ContentEntityBase implements DayInterface
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    $fields['day_date'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Date'))
+      ->setDescription(t('The day\'s date'))
+      ->setSettings(array(
+        'default_value' => '',
+        'max_length' => 50,
+        'text_processing' => 0,
+      ))
+      ->setDefaultValue(array(0 => array(
+        'default_date_type' => 'now',
+        'default_date' => 'now',
+      )))
+      ->setDisplayOptions('view', array(
+        'type' => 'datetime_default',
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'datetime_default',
+        'weight' => 2,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
     $fields['league'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('League'))
       ->setDescription(t('League entity reference'))
@@ -170,12 +193,8 @@ class Day extends ContentEntityBase implements DayInterface
         'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'size' => 60,
-          'placeholder' => '',
-        ),
+        'type' => 'options_select',
+        'settings' => array(),
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
