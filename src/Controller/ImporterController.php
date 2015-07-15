@@ -13,6 +13,7 @@ use Symfony\Component\Yaml\Parser;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Sport;
 use Drupal\mespronos\Entity\Day;
+use Drupal\file\Entity;
 
 /**
  * Class ImporterController.
@@ -32,7 +33,7 @@ class ImporterController extends ControllerBase {
   }
 
   public static function import($fid) {
-    $file = file_load($fid);
+    $file = File::load($fid);
     if (!$file) {
       throw new \Exception('NotAFileException');
     }
