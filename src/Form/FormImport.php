@@ -32,7 +32,7 @@ class FormImport extends FormBase {
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = array(
       '#type' => 'submit',
-      '#value' => $this->t('Save'),
+      '#value' => $this->t('Send'),
       '#button_type' => 'primary',
     );
     return $form;
