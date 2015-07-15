@@ -26,3 +26,10 @@ entity.day.add_form:
     - entity.day.list
     - entity.day.canonical
 
+entity.game.add_form:
+  route_name: entity.game.add_form
+  title: 'Add Game'
+  appears_on:
+    - entity.game.collection
+    - entity.game.canonical
+

@@ -105,3 +105,25 @@ entity.day.list:
   title: 'League days'
   description: 'League days listing'
   base_route: system.admin_content
+# Game routing definition
+game.settings_tab:
+  route_name: game.settings
+  title: 'Settings'
+  base_route: game.settings
+
+entity.game.canonical:
+  route_name: entity.game.canonical
+  base_route: entity.game.canonical
+  title: 'View'
+
+entity.game.edit_form:
+  route_name: entity.game.edit_form
+  base_route: entity.game.canonical
+  title: Edit
+
+entity.game.delete_form:
+  route_name:  entity.game.delete_form
+  base_route:  entity.game.canonical
+  title: Delete
+  weight: 10
+

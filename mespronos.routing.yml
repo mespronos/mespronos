@@ -219,3 +219,53 @@ mespronos.importer_start:
   requirements:
     _permission: 'import league content'
 
+
+# Game routing definition
+entity.game.canonical:
+  path: '/admin/game/{game}'
+  defaults:
+    _entity_view: 'game'
+    _title: 'Game Content'
+  requirements:
+    _entity_access: 'game.view'
+
+entity.game.collection:
+  path: '/admin/game'
+  defaults:
+    _entity_list: 'game'
+    _title: 'Game List'
+  requirements:
+    _permission: 'view Game entity'
+
+entity.game.add_form:
+  path: '/admin/game/add'
+  defaults:
+    _entity_form: game.add
+    _title: 'Add Game'
+  requirements:
+    _entity_create_access: 'game'
+
+entity.game.edit_form:
+  path: '/admin/game/{game}/edit'
+  defaults:
+    _entity_form: game.edit
+    _title: 'Edit Game'
+  requirements:
+    _entity_access: 'game.edit'
+
+entity.game.delete_form:
+  path: '/admin/game/{game}/delete'
+  defaults:
+    _entity_form: game.delete
+    _title: 'Delete Game'
+  requirements:
+    _entity_access: 'game.delete'
+
+game.settings:
+  path: 'admin/structure/game'
+  defaults:
+   _form: '\Drupal\mespronos\Entity\Form\GameSettingsForm'
+   _title: 'Game Settings'
+  requirements:
+    _permission: 'administer Game entity'
+

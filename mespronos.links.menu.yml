@@ -46,3 +46,15 @@ day.admin.structure.settings:
   route_name:  day.settings
   parent: system.admin_structure
 
+# Game menu items definition
+entity.game.collection:
+  title: 'Game: Listing'
+  route_name: entity.game.collection
+  description: 'List Game'
+
+game.admin.structure.settings:
+  title: Game Settings
+  description: 'Configure Game entity'
+  route_name: game.settings
+  parent: system.admin_structure
+

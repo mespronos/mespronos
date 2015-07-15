@@ -4,3 +4,18 @@ access administration mespronos:
 import league content:
   title: 'Import league to MesPronos'
   description : 'Import a league, team and days'
+view Game entity:
+  title: 'View Game entity'
+  description: 'Allow view my Game'
+
+edit Game entity:
+  title: 'Edit Game entity'
+  description: 'Allow edit my Game'
+
+delete Game entity:
+  title: 'Delete Game entity'
+  description: 'Allow delete my Game'
+
+administer Game entity:
+  title: 'Adminster Game entity'
+  description: 'Allow administer my Game'
