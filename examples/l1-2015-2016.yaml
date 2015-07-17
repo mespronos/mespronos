@@ -1,9 +1,13 @@
 league :
   name : 'Ligue 1 2015/2016'
   sport : 'Football'
+  classement : true
   days:
     - number : 1
-      date : 2015-08-01T19:00:00
+      date : 2015-08-07T19:00:00
+      games :
+        -
+
     - number : 2
       date : 2015-08-08T19:00:00
 

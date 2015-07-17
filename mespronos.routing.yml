@@ -6,6 +6,23 @@ mespronos.dashboard:
   requirements:
     _permission: 'access administration mespronos'
 
+
+mespronos.importer_controller_index:
+  path: 'admin/mespronos/import'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\ImporterController::index'
+    _title: 'Import League'
+  requirements:
+    _permission: 'import league content'
+
+mespronos.importer_controller_empty:
+  path: 'admin/mespronos/import/remove'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\ImporterController::remove'
+    _title: 'remove data'
+  requirements:
+    _permission: 'import league content'
+
 # Team routing definition
 entity.team.canonical:
   path: '/admin/mespronos/team/{team}'
@@ -200,16 +217,6 @@ day.settings:
    _title: 'Day Settings'
   requirements:
     _permission: 'administer Day entity'
-
-
-mespronos.importer_controller_index:
-  path: 'admin/mespronos/import'
-  defaults:
-    _controller: '\Drupal\mespronos\Controller\ImporterController::index'
-    _title: 'Import League'
-  requirements:
-    _permission: 'import league content'
-
 
 mespronos.importer_start:
   path: 'admin/mespronos/import/{fid}'

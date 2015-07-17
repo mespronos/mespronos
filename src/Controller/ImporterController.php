@@ -13,7 +13,7 @@ use Symfony\Component\Yaml\Parser;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Sport;
 use Drupal\mespronos\Entity\Day;
-use Drupal\file\Entity;
+use Drupal\file\Entity\File;
 
 /**
  * Class ImporterController.
@@ -30,6 +30,22 @@ class ImporterController extends ControllerBase {
   public function index() {
     $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\FormImport');
     return $form;
+  }
+
+  public function remove() {
+    $entities_types = array('game','day','league','sport');
+
+    foreach($entities_types as $entity_type) {
+      $query = \Drupal::entityQuery($entity_type);
+      $ids = $query->execute();
+      $controller = \Drupal::entityManager()->getStorage($entity_type);
+      $entities = $controller->loadMultiple($ids);
+      $controller->delete($entities);
+    }
+
+    return [
+      '#markup' => 'lol'
+    ];
   }
 
   public static function import($fid) {
@@ -50,7 +66,6 @@ class ImporterController extends ControllerBase {
     dpm($league);
 
     return [
-
       '#markup' => 'lol'
     ];
   }
