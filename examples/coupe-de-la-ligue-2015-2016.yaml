@@ -5,19 +5,19 @@ league :
   days:
     - number : 1
       name : 1er tour
-      date : 2015-08-11T19:00:00
+      day_date : '2015-08-11T19:00:00'
       games :
-        - Stade Lavallois – Nîmes Olympique
-        - AJ Auxerre – Red Star FC
-        - Stade Brestois 29 – Bourg en Bresse 01
-        - AC Arles-Avignon – Evian TG FC
-        - AS Nancy-Lorraine – Châteauroux
-        - Paris FC – FC Metz
-        - Valenciennes FC – Clermont Foot
-        - FC Sochaux-Montbéliard – Chamois Niortais
-        - CA Bastia – Havre AC
-        - RC Lens – AC Ajaccio
-        - US Orléans – Tours FC
-        - Dijon FCO – US Créteil-Lusitanos
+        - game : Stade Lavallois | Nîmes Olympique
+        - game : AJ Auxerre | Red Star FC
+        - game : Stade Brestois 29 | Bourg en Bresse 01
+        - game : AC Arles-Avignon | Evian TG FC
+        - game : AS Nancy-Lorraine | Châteauroux
+        - game : Paris FC | FC Metz
+        - game : Valenciennes FC | Clermont Foot
+        - game : FC Sochaux-Montbéliard | Chamois Niortais
+        - game : CA Bastia | Havre AC
+        - game : RC Lens | AC Ajaccio
+        - game : US Orléans | Tours FC
+        - game : Dijon FCO | US Créteil-Lusitanos
 
 
