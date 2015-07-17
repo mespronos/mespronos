@@ -1,0 +1,23 @@
+league :
+  name : 'Coupe de la ligue 2015/2016'
+  sport : 'Football'
+  classement : false
+  days:
+    - number : 1
+      name : 1er tour
+      date : 2015-08-11T19:00:00
+      games :
+        - Stade Lavallois – Nîmes Olympique
+        - AJ Auxerre – Red Star FC
+        - Stade Brestois 29 – Bourg en Bresse 01
+        - AC Arles-Avignon – Evian TG FC
+        - AS Nancy-Lorraine – Châteauroux
+        - Paris FC – FC Metz
+        - Valenciennes FC – Clermont Foot
+        - FC Sochaux-Montbéliard – Chamois Niortais
+        - CA Bastia – Havre AC
+        - RC Lens – AC Ajaccio
+        - US Orléans – Tours FC
+        - Dijon FCO – US Créteil-Lusitanos
+
+
