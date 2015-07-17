@@ -4,11 +4,11 @@ league :
   classement : true
   days:
     - number : 1
-      day_date : 2015-08-07T19:00:00
+      day_default_date : 2015-8-7T19:00:00
       games :
         -
 
     - number : 2
-      day_date : 2015-08-08T19:00:00
+      day_default_date : 2015-08-08T19:00:00
 
 

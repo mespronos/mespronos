@@ -4,7 +4,7 @@ league :
   classement : true
   days:
     - number : 1
-      day_date : 2014–08–08T19:00:00
+      day_default_date : 2014–08–08T19:00:00
       games :
         - game : Stade de Reims | Paris Saint–Germain
           mark : 2 | 2
