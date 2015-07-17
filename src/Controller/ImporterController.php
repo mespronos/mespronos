@@ -61,12 +61,14 @@ class ImporterController extends ControllerBase {
     $sport = self::importSport($data['league']['sport']);
     $league = self::importLeague($data['league'], $sport);
     foreach($data['league']['days'] as $_day) {
+      dpm($_day);
       $day = self::importDay($_day,$league);
       foreach($_day['games'] as $_game) {
         $teams = explode(' | ',$_game['game']);
         $team_1 = self::importTeam(trim(array_shift($teams)));
         $team_2 = self::importTeam(trim(array_shift($teams)));
-        $date = isset($_game['game_date']) ? $_game['game_date'] : $_day['day_date'];
+        $date = isset($_game['game_date']) ? trim($_game['game_date']) : trim($_day['day_default_date']);
+        dpm($date);
         $game = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
       }
     }

@@ -35,7 +35,7 @@ use Drupal\user\UserInterface;
  *     },
  *     "access" = "Drupal\mespronos\GameAccessControlHandler",
  *   },
- *   base_table = "game",
+ *   base_table = "mespronos__game",
  *   admin_permission = "administer Game entity",
  *   entity_keys = {
  *     "id" = "id",
@@ -103,6 +103,18 @@ class Game extends ContentEntityBase implements GameInterface {
   public function setOwner(UserInterface $account) {
     $this->set('user_id', $account->id());
     return $this;
+  }
+
+  public function label() {
+    $team1 = entity_load('team', $this->get('team_1')->target_id);
+    $team2 = entity_load('team', $this->get('team_2')->target_id);
+    return t('@team1 - @team2',array('@team1'=> $team1->label(),'@team2'=> $team2->label()));
+  }
+
+  public function getLeague() {
+    $day = entity_load('day', $this->get('day')->target_id);
+    $league = entity_load('league', $day->get('league')->target_id);
+    return $league;
   }
 
   /**
@@ -220,6 +232,29 @@ class Game extends ContentEntityBase implements GameInterface {
       ->setDisplayOptions('form', array(
         'type' => 'number',
       ));
+
+    $fields['game_date'] = BaseFieldDefinition::create('datetime')
+      ->setLabel(t('Date'))
+      ->setDescription(t('The game\'s date'))
+      ->setSettings(array(
+        'default_value' => '',
+        'max_length' => 50,
+        'text_processing' => 0,
+      ))
+      ->setDefaultValue(array(0 => array(
+        'default_date_type' => 'now',
+        'default_date' => 'now',
+      )))
+      ->setDisplayOptions('view', array(
+        'type' => 'datetime_default',
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'datetime_default',
+        'weight' => 2,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
 
 
     $fields['langcode'] = BaseFieldDefinition::create('language')
