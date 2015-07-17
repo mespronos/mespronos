@@ -35,7 +35,7 @@ class ImporterController extends ControllerBase {
   }
 
   public function remove() {
-    $entities_types = array('game','day','league','sport');
+    $entities_types = array('game','day','league','team','sport');
 
     foreach($entities_types as $entity_type) {
       $query = \Drupal::entityQuery($entity_type);
@@ -62,10 +62,12 @@ class ImporterController extends ControllerBase {
     $league = self::importLeague($data['league'], $sport);
     foreach($data['league']['days'] as $_day) {
       $day = self::importDay($_day,$league);
-      foreach($_day['games'] as $games) {
-        $teams = explode(' – ',$games['game']);
+      foreach($_day['games'] as $_game) {
+        $teams = explode(' | ',$_game['game']);
         $team_1 = self::importTeam(trim(array_shift($teams)));
         $team_2 = self::importTeam(trim(array_shift($teams)));
+        $date = isset($_game['game_date']) ? $_game['game_date'] : $_day['day_date'];
+        $game = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
       }
     }
     return [
@@ -132,13 +134,13 @@ class ImporterController extends ControllerBase {
       drupal_set_message(t('The day @number of @league_name has been created',array('@league_name'=> $league->get('name')->value,'@number'=>$day->get('number')->value)));
     }
     else {
-      $day = entity_load('league', array_pop($id));
+      $day = entity_load('day', array_pop($id));
     }
     return $day;
   }
 
   public static function importTeam($team_name) {
-    $query = \Drupal::entityQuery('day')->condition('name', $team_name);
+    $query = \Drupal::entityQuery('team')->condition('name', $team_name);
     $id = $query->execute();
     if(count($id) == 0) {
       $team = Team::create(array(
@@ -155,5 +157,41 @@ class ImporterController extends ControllerBase {
       $team = entity_load('team', array_pop($id));
     }
     return $team;
+  }
+
+  public static function importGame($_game,$date,Team $team_1,Team $team_2,Day $day, League $league) {
+    $query = \Drupal::entityQuery('game')
+      ->condition('team_1', $team_1->id())
+      ->condition('team_2', $team_2->id())
+      ->condition('day', $day->id());
+    $id = $query->execute();
+    if(count($id) == 0) {
+      if(isset($_game['mark'])) {
+        $mark = explode(' | ',$_game['mark']);
+        $score_team_1 = trim(array_shift($mark));
+        $score_team_2 = trim(array_shift($mark));
+      }
+      else {
+        $score_team_1 = $score_team_2 = null;
+      }
+      $game = Game::create(array(
+        'created' => time(),
+        'updated' => time(),
+        'creator' => 1,
+        'team_1' => $team_1->id(),
+        'team_2' => $team_2->id(),
+        'score_team_1' => $score_team_1,
+        'score_team_2' => $score_team_2,
+        'day' => $day->id(),
+        'game_date' => $date,
+        'langcode' => 'fr',
+      ));
+      $game->save();
+      drupal_set_message(t('The game @team1 - @team2 has been created',array('@team1'=> $team_1->get('name')->value,'@team2'=> $team_2->get('name')->value)));
+    }
+    else {
+      $game = entity_load('game', array_pop($id));
+    }
+    return $game;
   }
 }
