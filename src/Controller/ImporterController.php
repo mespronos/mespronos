@@ -41,7 +41,7 @@ class ImporterController extends ControllerBase {
     $data = $yaml->parse(file_get_contents($file->getFileUri()));
     dpm($data);
     $sport = self::importSport($data['league']['sport']);
-    $league = self::importLeague($data['league']['name'], $sport);
+    $league = self::importLeague($data['league'], $sport);
     foreach($data['league']['days'] as $day) {
       $day = self::importDay($day,$league);
     }
@@ -74,8 +74,8 @@ class ImporterController extends ControllerBase {
     return $sport;
   }
 
-  public static function importLeague($league_name,Sport $sport) {
-    $query = \Drupal::entityQuery('league')->condition('name', '%'.$league_name.'%','LIKE');
+  public static function importLeague($league,Sport $sport) {
+    $query = \Drupal::entityQuery('league')->condition('name', '%'.$league['name'].'%','LIKE');
     $id = $query->execute();
     if(count($id) == 0) {
       $league = League::create(array(
@@ -83,13 +83,13 @@ class ImporterController extends ControllerBase {
         'updated' => time(),
         'creator' => 1,
         'sport' => $sport->id(),
-        'name' => $league_name,
+        'name' => $league['name'],
+        'classement' => $league['classement'],
         'status' => 'future',
-        'classement' => TRUE,
         'langcode' => 'fr',
       ));
       $league->save();
-      drupal_set_message(t('The league @league_name of @sport_name has been created',array('@league_name'=> $league_name,'@sport_name'=>$sport->get('name')->value)));
+      drupal_set_message(t('The league @league_name of @sport_name has been created',array('@league_name'=> $league['name'],'@sport_name'=>$sport->get('name')->value)));
     }
     else {
       $league = entity_load('league', array_pop($id));
@@ -107,7 +107,7 @@ class ImporterController extends ControllerBase {
         'creator' => 1,
         'league' => $league->id(),
         'number' => $day['number'],
-        'name' => t('Journée @nb',array('@nb'=>$day['number'])),
+        'name' => isset($day['name']) ? $day['name'] : t('Journée @nb',array('@nb'=>$day['number'])),
         'langcode' => 'fr',
       ));
       $day->save();
