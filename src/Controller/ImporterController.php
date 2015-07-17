@@ -13,6 +13,8 @@ use Symfony\Component\Yaml\Parser;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Sport;
 use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\Team;
+use Drupal\mespronos\Entity\Game;
 use Drupal\file\Entity\File;
 
 /**
@@ -58,13 +60,14 @@ class ImporterController extends ControllerBase {
     dpm($data);
     $sport = self::importSport($data['league']['sport']);
     $league = self::importLeague($data['league'], $sport);
-    foreach($data['league']['days'] as $day) {
-      $day = self::importDay($day,$league);
+    foreach($data['league']['days'] as $_day) {
+      $day = self::importDay($_day,$league);
+      foreach($_day['games'] as $games) {
+        $teams = explode(' – ',$games['game']);
+        $team_1 = self::importTeam(trim(array_shift($teams)));
+        $team_2 = self::importTeam(trim(array_shift($teams)));
+      }
     }
-
-    dpm($sport);
-    dpm($league);
-
     return [
       '#markup' => 'lol'
     ];
@@ -89,8 +92,8 @@ class ImporterController extends ControllerBase {
     return $sport;
   }
 
-  public static function importLeague($league,Sport $sport) {
-    $query = \Drupal::entityQuery('league')->condition('name', '%'.$league['name'].'%','LIKE');
+  public static function importLeague($_league,Sport $sport) {
+    $query = \Drupal::entityQuery('league')->condition('name', '%'.$_league['name'].'%','LIKE');
     $id = $query->execute();
     if(count($id) == 0) {
       $league = League::create(array(
@@ -98,13 +101,13 @@ class ImporterController extends ControllerBase {
         'updated' => time(),
         'creator' => 1,
         'sport' => $sport->id(),
-        'name' => $league['name'],
-        'classement' => $league['classement'],
+        'name' => $_league['name'],
+        'classement' => $_league['classement'],
         'status' => 'future',
         'langcode' => 'fr',
       ));
       $league->save();
-      drupal_set_message(t('The league @league_name of @sport_name has been created',array('@league_name'=> $league['name'],'@sport_name'=>$sport->get('name')->value)));
+      drupal_set_message(t('The league @league_name of @sport_name has been created',array('@league_name'=> $_league['name'],'@sport_name'=>$sport->get('name')->value)));
     }
     else {
       $league = entity_load('league', array_pop($id));
@@ -132,5 +135,25 @@ class ImporterController extends ControllerBase {
       $day = entity_load('league', array_pop($id));
     }
     return $day;
+  }
+
+  public static function importTeam($team_name) {
+    $query = \Drupal::entityQuery('day')->condition('name', $team_name);
+    $id = $query->execute();
+    if(count($id) == 0) {
+      $team = Team::create(array(
+        'created' => time(),
+        'updated' => time(),
+        'creator' => 1,
+        'name' => $team_name,
+        'langcode' => 'fr',
+      ));
+      $team->save();
+      drupal_set_message(t('The team @team has been created',array('@team'=> $team_name)));
+    }
+    else {
+      $team = entity_load('team', array_pop($id));
+    }
+    return $team;
   }
 }
