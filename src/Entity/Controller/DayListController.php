@@ -24,7 +24,9 @@ class DayListController extends EntityListBuilder
    */
   public function buildHeader() {
     $header['id'] = t('DayID');
-    $header['name'] = t('Name');
+    $header['league'] = t('League');
+    $header['name'] = t('Day name');
+    $header['nb_game'] = t('Game number');
     return $header + parent::buildHeader();
   }
 
@@ -33,7 +35,10 @@ class DayListController extends EntityListBuilder
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\Day */
+    dpm($entity);
+    $league = $entity->getLeague();
     $row['id'] = $entity->id();
+    $row['league'] = $league->label();
     $row['name'] = \Drupal::l(
         $this->getLabel($entity),
         new Url(
@@ -42,6 +47,7 @@ class DayListController extends EntityListBuilder
         )
       )
     );
+    $row['nb_game'] = $entity->getNbGame();
     return $row + parent::buildRow($entity);
   }
 }

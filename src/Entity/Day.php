@@ -107,6 +107,16 @@ class Day extends ContentEntityBase implements DayInterface
     return $this;
   }
 
+  public function getLeague() {
+    $league = entity_load('league', $this->get('league')->target_id);
+    return $league;
+  }
+
+  public function getNbGame() {
+    $query = \Drupal::entityQuery('game')->condition('day', $this->id());
+    $ids = $query->execute();
+    return count($ids);
+  }
   /**
    * {@inheritdoc}
    */
