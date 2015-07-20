@@ -218,6 +218,7 @@ class Game extends ContentEntityBase implements GameInterface {
       ))
       ->setDisplayOptions('form', array(
         'type' => 'number',
+        'weight' => 4,
       ));
 
     $fields['score_team_2'] = BaseFieldDefinition::create('integer')
@@ -231,6 +232,7 @@ class Game extends ContentEntityBase implements GameInterface {
       ))
       ->setDisplayOptions('form', array(
         'type' => 'number',
+        'weight' => 5,
       ));
 
     $fields['game_date'] = BaseFieldDefinition::create('datetime')
@@ -251,7 +253,7 @@ class Game extends ContentEntityBase implements GameInterface {
       ))
       ->setDisplayOptions('form', array(
         'type' => 'datetime_default',
-        'weight' => 2,
+        'weight' => 1,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
