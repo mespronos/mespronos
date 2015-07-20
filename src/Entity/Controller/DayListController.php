@@ -26,7 +26,7 @@ class DayListController extends EntityListBuilder
     $header['id'] = t('DayID');
     $header['league'] = t('League');
     $header['name'] = t('Day name');
-    $header['nb_game'] = t('Game number');
+    $header['nb_game'] = t('Game items');
     return $header + parent::buildHeader();
   }
 
@@ -35,7 +35,6 @@ class DayListController extends EntityListBuilder
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\Day */
-    dpm($entity);
     $league = $entity->getLeague();
     $row['id'] = $entity->id();
     $row['league'] = $league->label();

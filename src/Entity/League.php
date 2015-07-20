@@ -132,6 +132,11 @@ class League extends ContentEntityBase implements LeagueInterface {
     return $this;
   }
 
+  public function getSport() {
+    $sport = entity_load('sport', $this->get('sport')->target_id);
+    return $sport;
+  }
+
   /**
    * {@inheritdoc}
    */

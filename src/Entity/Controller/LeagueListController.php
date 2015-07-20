@@ -22,6 +22,7 @@ class LeagueListController extends EntityListBuilder {
    */
   public function buildHeader() {
     $header['id'] = t('ID');
+    $header['sport'] = t('Sport');
     $header['name'] = t('Nom');
     $header['status'] = t('Statut');
     $header['classement'] = t('Classement activé ?');
@@ -33,7 +34,9 @@ class LeagueListController extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\League */
+    $sport = $entity->getSport();
     $row['id'] = $entity->id();
+    $row['sport'] = $sport->label();
     $row['name'] = \Drupal::l(
       $this->getLabel($entity),
       new Url(
