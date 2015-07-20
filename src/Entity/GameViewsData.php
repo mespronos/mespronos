@@ -20,7 +20,7 @@ class GameViewsData extends EntityViewsData implements EntityViewsDataInterface 
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['game']['table']['base'] = array(
+    $data['mespronos__game']['table']['base'] = array(
       'field' => 'id',
       'title' => $this->t('Game'),
       'help' => $this->t('The game entity ID.'),

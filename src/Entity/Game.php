@@ -39,7 +39,6 @@ use Drupal\user\UserInterface;
  *   admin_permission = "administer Game entity",
  *   entity_keys = {
  *     "id" = "id",
- *     "label" = "name",
  *     "uuid" = "uuid"
  *   },
  *   links = {
@@ -116,9 +115,17 @@ class Game extends ContentEntityBase implements GameInterface {
     $league = entity_load('league', $day->get('league')->target_id);
     return $league;
   }
+
   public function getDay() {
     $day = entity_load('day', $this->get('day')->target_id);
     return $day;
+  }
+
+  public function getBaseTable() {
+    return 'mespronos__game';
+  }
+  public function getDataTable() {
+    return 'mespronos__game';
   }
 
   /**
