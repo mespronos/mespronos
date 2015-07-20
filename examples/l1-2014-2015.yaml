@@ -6,7 +6,7 @@ league :
     - number : 1
       day_default_date : 2014-08-08T19:00:00
       games :
-        - game : Stade de Reims | Paris Saint–Germain
+        - game : Stade de Reims | Paris Saint-Germain
           mark : 2 | 2
           game_date : 2014-08-08T20:30:00
         - game : SC Bastia | Olympique de Marseille
@@ -15,7 +15,7 @@ league :
         - game : Evian TG FC | SM Caen
           mark : 0 | 3
           day_date : 2014-08-09T21:00:00
-        - game : EA Guingamp | AS Saint–Etienne
+        - game : EA Guingamp | AS Saint-Etienne
           mark : 0 | 2
           day_date : 2014-08-09T21:00:00
         - game : LOSC Lille | FC Metz
@@ -36,3 +36,36 @@ league :
         - game : AS Monaco | FC Lorient
           mark : 1 | 2
           day_date : 2014-08-10T21:00:00
+    - number : 2
+      day_default_date : 2014-08-16T19:00:00
+      games :
+        - game : SM Caen | LOSC Lille
+          mark : 0 | 1
+          game_date : 2014-08-15T20:30:00
+        - game : Paris Saint-Germain | SC Bastia
+          mark : 2 | 0
+          day_date : 2014-08-16T17:00:00
+        - game : RC Lens | EA Guingamp
+          mark : 0 | 1
+          day_date : 2014-08-16T20:00:00
+        - game : FC Lorient | OGC Nice
+          mark : 0 | 0
+          day_date : 2014-08-16T20:00:00
+        - game : FC Metz | FC Nantes
+          mark : 1 | 1
+          day_date : 2014-08-16T20:00:00
+        - game : Stade Rennais FC | Evian TG FC
+          mark : 6 | 2
+          day_date : 2014-08-16T20:00:00
+        - game : Toulouse FC | Olympique Lyonnais
+          mark : 2 | 1
+          day_date : 2014-08-16T20:00:00
+        - game : Olympique de Marseille | Montpellier Hérault SC
+          mark : 0 | 2
+          day_date : 2014-08-17T17:00:00
+        - game : AS Saint-Etienne | Stade de Reims
+          mark : 3 | 1
+          day_date : 2014-08-17T17:00:00
+        - game : Girondins de Bordeaux | AS Monaco
+          mark : 4 | 1
+          day_date : 2014-08-17T21:00:00
