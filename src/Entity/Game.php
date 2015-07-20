@@ -116,6 +116,10 @@ class Game extends ContentEntityBase implements GameInterface {
     $league = entity_load('league', $day->get('league')->target_id);
     return $league;
   }
+  public function getDay() {
+    $day = entity_load('day', $this->get('day')->target_id);
+    return $day;
+  }
 
   /**
    * {@inheritdoc}

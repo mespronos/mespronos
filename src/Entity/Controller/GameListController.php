@@ -23,6 +23,7 @@ class GameListController extends EntityListBuilder {
   public function buildHeader() {
     $header['id'] = $this->t('GameID');
     $header['league'] = $this->t('League');
+    $header['day'] = $this->t('Day');
     $header['game_date'] = $this->t('Date');
     $header['name'] = $this->t('Name');
     $header['score'] = $this->t('Mark');
@@ -34,14 +35,13 @@ class GameListController extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\Game */
-    dpm($entity->get('game_date')->value);
-    $date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$entity->get('game_date')->value,new \DateTimeZone("Europe/Paris"));
-    dpm('date : '.$date);
-    dpm(\DateTime::getLastErrors() );
+    $date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$entity->get('game_date')->value);
     $league = $entity->getLeague();
+    $day = $entity->getDay();
     $row['id'] = $entity->id();
     $row['league'] = $league->label();
-    $row['game_date'] ='';
+    $row['day'] = $day->label();
+    $row['game_date'] = format_date($date->format('U'),'short');
     $row['name'] = \Drupal::l(
       $this->getLabel($entity),
       new Url(
