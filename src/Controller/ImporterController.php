@@ -86,7 +86,7 @@ class ImporterController extends ControllerBase {
         'updated' => time(),
         'creator' => 1,
         'name' => $sport_name,
-        'langcode' => 'fr',
+        'langcode' => 'und',
       ));
       $sport->save();
     }
@@ -108,7 +108,7 @@ class ImporterController extends ControllerBase {
         'name' => $_league['name'],
         'classement' => $_league['classement'],
         'status' => 'future',
-        'langcode' => 'fr',
+        'langcode' => 'und',
       ));
       $league->save();
       drupal_set_message(t('The league @league_name of @sport_name has been created',array('@league_name'=> $_league['name'],'@sport_name'=>$sport->get('name')->value)));
@@ -130,7 +130,7 @@ class ImporterController extends ControllerBase {
         'league' => $league->id(),
         'number' => $day['number'],
         'name' => isset($day['name']) ? $day['name'] : t('Journée @nb',array('@nb'=>$day['number'])),
-        'langcode' => 'fr',
+        'langcode' => 'und',
       ));
       $day->save();
       drupal_set_message(t('The day @number of @league_name has been created',array('@league_name'=> $league->get('name')->value,'@number'=>$day->get('number')->value)));
@@ -150,7 +150,7 @@ class ImporterController extends ControllerBase {
         'updated' => time(),
         'creator' => 1,
         'name' => $team_name,
-        'langcode' => 'fr',
+        'langcode' => 'und',
       ));
       $team->save();
       drupal_set_message(t('The team @team has been created',array('@team'=> $team_name)));
@@ -186,7 +186,7 @@ class ImporterController extends ControllerBase {
         'score_team_2' => $score_team_2,
         'day' => $day->id(),
         'game_date' => $date,
-        'langcode' => 'fr',
+        'langcode' => 'und',
       ));
       $game->save();
       drupal_set_message(t('The game @team1 - @team2 has been created',array('@team1'=> $team_1->get('name')->value,'@team2'=> $team_2->get('name')->value)));
