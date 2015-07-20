@@ -6,8 +6,10 @@ league :
     - number : 1
       day_default_date : 2015-08-07T20:30:00
       games :
-        - game : Olympique de Marseille | SM Caen
+        - game : LOSC | Paris Saint-Germain
           day_date : 2015-08-07T20:30:00
+        - game : Olympique de Marseille | SM Caen
+          day_date : 2015-08-05T21:00:00
         - game : Montpellier Hérault SC | Angers SCO
           day_date : 2015-08-08T21:00:00
         - game : OGC Nice | AS Monaco
