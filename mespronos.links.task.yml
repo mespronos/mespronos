@@ -24,6 +24,7 @@ entity.team.collection:
   title: 'Teams'
   description: 'Teams listing'
   base_route: system.admin_content
+  weight : 11
 
 # League routing definition
 league.settings_tab:
@@ -52,6 +53,7 @@ entity.league.collection:
   title: 'Leagues'
   description: 'Leagues listing'
   base_route: system.admin_content
+  weight : 12
 
 # Sport routing definition
 sport.settings_tab:
@@ -79,6 +81,8 @@ entity.sport.collection:
   title: 'Sports'
   description: 'Sports listing'
   base_route: system.admin_content
+  weight : 10
+
 # Day routing definition
 day.settings_tab:
   route_name: day.settings
@@ -105,6 +109,8 @@ entity.day.list:
   title: 'League days'
   description: 'League days listing'
   base_route: system.admin_content
+  weight : 13
+
 # Game routing definition
 game.settings_tab:
   route_name: game.settings
@@ -125,10 +131,10 @@ entity.game.delete_form:
   route_name:  entity.game.delete_form
   base_route:  entity.game.canonical
   title: Delete
-  weight: 10
 
 entity.game.collection:
   route_name: entity.game.collection
   title: 'Games'
   description: 'Games listing'
   base_route: system.admin_content
+  weight: 14

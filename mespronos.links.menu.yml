@@ -57,4 +57,3 @@ game.admin.structure.settings:
   description: 'Configure Game entity'
   route_name: game.settings
   parent: system.admin_structure
-
