@@ -61,6 +61,7 @@ class ImporterController extends ControllerBase {
     $sport = self::importSport($data['league']['sport']);
     $league = self::importLeague($data['league'], $sport);
     foreach($data['league']['days'] as $_day) {
+      dpm($league);
       $day = self::importDay($_day,$league);
       foreach($_day['games'] as $_game) {
         $teams = explode(' | ',$_game['game']);
@@ -122,7 +123,9 @@ class ImporterController extends ControllerBase {
   }
 
   public static function importDay($day,League $league) {
-    $query = \Drupal::entityQuery('day')->condition('number', $day['number']);
+    $query = \Drupal::entityQuery('day')
+      ->condition('number', $day['number'])
+      ->condition('league', $league->id());
     $id = $query->execute();
     if(count($id) == 0) {
       $day = Day::create(array(
