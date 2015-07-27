@@ -119,8 +119,8 @@ class Bet extends ContentEntityBase implements BetInterface {
       ->setDescription(t('The UUID of the Bet entity.'))
       ->setReadOnly(TRUE);
 
-    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Authored by'))
+    $fields['better'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Better'))
       ->setDescription(t('The user ID of the Bet entity author.'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
@@ -145,25 +145,57 @@ class Bet extends ContentEntityBase implements BetInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setDescription(t('The name of the Bet entity.'))
-      ->setSettings(array(
-        'max_length' => 50,
-        'text_processing' => 0,
-      ))
-      ->setDefaultValue('')
+    $fields['game'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Game'))
+      ->setDescription(t('Game reference'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'game')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', array(
-        'label' => 'above',
-        'type' => 'string',
-        'weight' => -4,
+        'label' => 'hidden',
+        'type' => 'entity_reference',
+        'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'string_textfield',
-        'weight' => -4,
+        'type' => 'entity_reference_autocomplete',
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'size' => 60,
+          'placeholder' => '',
+        ),
+        'weight' => -3,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
+
+    $fields['score_team_1'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Score Team 1')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 4,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 4,
+      ));
+
+    $fields['score_team_2'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Score Team 2')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 5,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 5,
+      ));
 
     $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language code'))
