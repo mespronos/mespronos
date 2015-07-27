@@ -56,4 +56,15 @@ game.admin.structure.settings:
   title: Game Settings
   description: 'Configure Game entity'
   route_name: game.settings
+  parent: system.admin_structure# Bet menu items definition
+entity.bet.collection:
+  title: 'Bet: Listing'
+  route_name: entity.bet.collection
+  description: 'List Bet'
+
+bet.admin.structure.settings:
+  title: Bet Settings
+  description: 'Configure Bet entity'
+  route_name: bet.settings
   parent: system.admin_structure
+

@@ -19,3 +19,19 @@ delete Game entity:
 administer Game entity:
   title: 'Adminster Game entity'
   description: 'Allow administer my Game'
+
+view Bet entity:
+  title: 'View Bet entity'
+  description: 'Allow view my Bet'
+
+edit Bet entity:
+  title: 'Edit Bet entity'
+  description: 'Allow edit my Bet'
+
+delete Bet entity:
+  title: 'Delete Bet entity'
+  description: 'Allow delete my Bet'
+
+administer Bet entity:
+  title: 'Adminster Bet entity'
+  description: 'Allow administer my Bet'

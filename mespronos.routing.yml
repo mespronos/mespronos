@@ -276,3 +276,53 @@ game.settings:
   requirements:
     _permission: 'administer Game entity'
 
+
+# Bet routing definition
+entity.bet.canonical:
+  path: '/admin/bet/{bet}'
+  defaults:
+    _entity_view: 'bet'
+    _title: 'Bet Content'
+  requirements:
+    _entity_access: 'bet.view'
+
+entity.bet.collection:
+  path: '/admin/bet'
+  defaults:
+    _entity_list: 'bet'
+    _title: 'Bet List'
+  requirements:
+    _permission: 'view Bet entity'
+
+entity.bet.add_form:
+  path: '/admin/bet/add'
+  defaults:
+    _entity_form: bet.add
+    _title: 'Add Bet'
+  requirements:
+    _entity_create_access: 'bet'
+
+entity.bet.edit_form:
+  path: '/admin/bet/{bet}/edit'
+  defaults:
+    _entity_form: bet.edit
+    _title: 'Edit Bet'
+  requirements:
+    _entity_access: 'bet.edit'
+
+entity.bet.delete_form:
+  path: '/admin/bet/{bet}/delete'
+  defaults:
+    _entity_form: bet.delete
+    _title: 'Delete Bet'
+  requirements:
+    _entity_access: 'bet.delete'
+
+bet.settings:
+  path: 'admin/structure/bet'
+  defaults:
+   _form: '\Drupal\mespronos\Entity\Form\BetSettingsForm'
+   _title: 'Bet Settings'
+  requirements:
+    _permission: 'administer Bet entity'
+

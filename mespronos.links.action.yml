@@ -33,3 +33,10 @@ entity.game.add_form:
     - entity.game.collection
     - entity.game.canonical
 
+entity.bet.add_form:
+  route_name: entity.bet.add_form
+  title: 'Add Bet'
+  appears_on:
+    - entity.bet.collection
+    - entity.bet.canonical
+
