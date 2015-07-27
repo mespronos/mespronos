@@ -35,9 +35,7 @@ use Drupal\user\UserInterface;
  *     "access" = "Drupal\mespronos\LeagueAccessControlHandler",
  *   },
  *   base_table = "mespronos__league",
- *   data_table = "mespronos__league__field_data",
  *   admin_permission = "administer League entity",
- *   translatable = TRUE,
  *   fieldable = TRUE,
  *   entity_keys = {
  *     "id" = "id",
@@ -60,6 +58,10 @@ class League extends ContentEntityBase implements LeagueInterface {
     'active' => 'En cours',
     'over' => 'Terminé',
     'archived' => 'Archivé',
+  ];
+  protected static $betting_types = [
+    'score' => 'Score',
+    'winner' => '1N2',
   ];
   protected static $status_default_value = 'active';
 
@@ -254,6 +256,23 @@ class League extends ContentEntityBase implements LeagueInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    $fields['betting_type'] = BaseFieldDefinition::create('list_string')
+      ->setLabel(t('Betting type'))
+      ->setRequired(true)
+      ->setSettings(array(
+        //définition des valeurs possible
+        'allowed_values' => self::$betting_types,
+      ))
+      //définition de la valeur par défaut
+      ->setDisplayOptions('view', array(
+        'type' => 'hidden',
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'options_select',
+        'weight' => -4,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
 
     $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language'))

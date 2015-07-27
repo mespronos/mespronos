@@ -36,8 +36,6 @@ use Drupal\user\UserInterface;
  *     "access" = "Drupal\mespronos\SportAccessControlHandler",
  *   },
  *   base_table = "mespronos__sport",
- *   data_table = "mespronos__sport__field_data",
- *   translatable = TRUE,
  *   admin_permission = "administer Sport entity",
  *   fieldable = TRUE,
  *   entity_keys = {

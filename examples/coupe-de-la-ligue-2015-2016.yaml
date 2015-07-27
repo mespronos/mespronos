@@ -2,6 +2,7 @@ league :
   name : 'Coupe de la ligue 2015/2016'
   sport : 'Football'
   classement : false
+  betting_type : 'score'
   days:
     - number : 1
       name : 1er tour

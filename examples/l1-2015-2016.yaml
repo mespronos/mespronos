@@ -2,6 +2,7 @@ league :
   name : 'Ligue 1 2015/2016'
   sport : 'Football'
   classement : true
+  betting_type : 'score'
   days:
     - number : 1
       day_default_date : 2015-08-07T20:30:00

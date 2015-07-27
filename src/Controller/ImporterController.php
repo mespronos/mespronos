@@ -109,6 +109,7 @@ class ImporterController extends ControllerBase {
         'creator' => 1,
         'sport' => $sport->id(),
         'name' => $_league['name'],
+        'betting_type' => $_league['betting_type'],
         'classement' => $_league['classement'],
         'status' => 'future',
         'langcode' => 'und',
