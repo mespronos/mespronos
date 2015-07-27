@@ -35,7 +35,7 @@ use Drupal\user\UserInterface;
  *     },
  *     "access" = "Drupal\mespronos\BetAccessControlHandler",
  *   },
- *   base_table = "bet",
+ *   base_table = "mespronos__bet",
  *   admin_permission = "administer Bet entity",
  *   entity_keys = {
  *     "id" = "id",
