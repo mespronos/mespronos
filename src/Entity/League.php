@@ -75,6 +75,16 @@ class League extends ContentEntityBase implements LeagueInterface {
     }
   }
 
+  public function getBettingType($asMachineName = false) {
+    $s = $this->get('betting_type')->value;
+    if($asMachineName) {
+      return $s;
+    }
+    else {
+      return self::$betting_types[$s];
+    }
+  }
+
 
   public function HasClassement() {
     return $this->get('classement')->value;

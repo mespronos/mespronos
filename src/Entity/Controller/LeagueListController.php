@@ -23,8 +23,9 @@ class LeagueListController extends EntityListBuilder {
   public function buildHeader() {
     $header['id'] = t('ID');
     $header['sport'] = t('Sport');
-    $header['name'] = t('Nom');
-    $header['status'] = t('Statut');
+    $header['name'] = t('Name');
+    $header['status'] = t('Status');
+    $header['betting_type'] = t('Betting type');
     $header['classement'] = t('Classement activé ?');
     return $header + parent::buildHeader();
   }
@@ -46,6 +47,7 @@ class LeagueListController extends EntityListBuilder {
       )
     );
     $row['status'] = $entity->getStatus(false);
+    $row['betting_type'] = $entity->getBettingType(false);
     $row['classement'] = $entity->hasClassement() ? '✓' : '✗';
     return $row + parent::buildRow($entity);
   }
