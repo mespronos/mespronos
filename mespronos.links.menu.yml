@@ -68,3 +68,26 @@ bet.admin.structure.settings:
   route_name: bet.settings
   parent: system.admin_structure
 
+# RankingDay menu items definition
+entity.ranking_day.collection:
+  title: 'RankingDay: Listing'
+  route_name: entity.ranking_day.collection
+  description: 'List RankingDay'
+
+ranking_day.admin.structure.settings:
+  title: RankingDay Settings
+  description: 'Configure RankingDay entity'
+  route_name: ranking_day.settings
+  parent: system.admin_structure
+# RankingLeague menu items definition
+entity.ranking_league.collection:
+  title: 'RankingLeague: Listing'
+  route_name: entity.ranking_league.collection
+  description: 'List RankingLeague'
+
+ranking_league.admin.structure.settings:
+  title: RankingLeague Settings
+  description: 'Configure RankingLeague entity'
+  route_name: ranking_league.settings
+  parent: system.admin_structure
+

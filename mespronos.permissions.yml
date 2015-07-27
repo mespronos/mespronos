@@ -35,3 +35,35 @@ delete Bet entity:
 administer Bet entity:
   title: 'Adminster Bet entity'
   description: 'Allow administer my Bet'
+
+view RankingDay entity:
+  title: 'View RankingDay entity'
+  description: 'Allow view my RankingDay'
+
+edit RankingDay entity:
+  title: 'Edit RankingDay entity'
+  description: 'Allow edit my RankingDay'
+
+delete RankingDay entity:
+  title: 'Delete RankingDay entity'
+  description: 'Allow delete my RankingDay'
+
+administer RankingDay entity:
+  title: 'Adminster RankingDay entity'
+  description: 'Allow administer my RankingDay'
+
+view RankingLeague entity:
+  title: 'View RankingLeague entity'
+  description: 'Allow view my RankingLeague'
+
+edit RankingLeague entity:
+  title: 'Edit RankingLeague entity'
+  description: 'Allow edit my RankingLeague'
+
+delete RankingLeague entity:
+  title: 'Delete RankingLeague entity'
+  description: 'Allow delete my RankingLeague'
+
+administer RankingLeague entity:
+  title: 'Adminster RankingLeague entity'
+  description: 'Allow administer my RankingLeague'

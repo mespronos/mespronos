@@ -1,0 +1,22 @@
+{#
+/**
+ * @file ranking_league.html.twig
+ * Default theme implementation to present RankingLeague data.
+ *
+ * This template is used when viewing a ranking_league entity's page,
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_ranking_league()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('ranking_league') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

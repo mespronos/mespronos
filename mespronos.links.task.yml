@@ -160,3 +160,46 @@ entity.bet.delete_form:
   title: Delete
   weight: 10
 
+# RankingDay routing definition
+ranking_day.settings_tab:
+  route_name: ranking_day.settings
+  title: 'Settings'
+  base_route: ranking_day.settings
+
+entity.ranking_day.canonical:
+  route_name: entity.ranking_day.canonical
+  base_route: entity.ranking_day.canonical
+  title: 'View'
+
+entity.ranking_day.edit_form:
+  route_name: entity.ranking_day.edit_form
+  base_route: entity.ranking_day.canonical
+  title: Edit
+
+entity.ranking_day.delete_form:
+  route_name:  entity.ranking_day.delete_form
+  base_route:  entity.ranking_day.canonical
+  title: Delete
+  weight: 10
+# RankingLeague routing definition
+ranking_league.settings_tab:
+  route_name: ranking_league.settings
+  title: 'Settings'
+  base_route: ranking_league.settings
+
+entity.ranking_league.canonical:
+  route_name: entity.ranking_league.canonical
+  base_route: entity.ranking_league.canonical
+  title: 'View'
+
+entity.ranking_league.edit_form:
+  route_name: entity.ranking_league.edit_form
+  base_route: entity.ranking_league.canonical
+  title: Edit
+
+entity.ranking_league.delete_form:
+  route_name:  entity.ranking_league.delete_form
+  base_route:  entity.ranking_league.canonical
+  title: Delete
+  weight: 10
+

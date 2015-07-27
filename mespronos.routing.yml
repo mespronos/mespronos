@@ -326,3 +326,102 @@ bet.settings:
   requirements:
     _permission: 'administer Bet entity'
 
+
+# RankingDay routing definition
+entity.ranking_day.canonical:
+  path: '/admin/ranking_day/{ranking_day}'
+  defaults:
+    _entity_view: 'ranking_day'
+    _title: 'RankingDay Content'
+  requirements:
+    _entity_access: 'ranking_day.view'
+
+entity.ranking_day.collection:
+  path: '/admin/ranking_day'
+  defaults:
+    _entity_list: 'ranking_day'
+    _title: 'RankingDay List'
+  requirements:
+    _permission: 'view RankingDay entity'
+
+entity.ranking_day.add_form:
+  path: '/admin/ranking_day/add'
+  defaults:
+    _entity_form: ranking_day.add
+    _title: 'Add RankingDay'
+  requirements:
+    _entity_create_access: 'ranking_day'
+
+entity.ranking_day.edit_form:
+  path: '/admin/ranking_day/{ranking_day}/edit'
+  defaults:
+    _entity_form: ranking_day.edit
+    _title: 'Edit RankingDay'
+  requirements:
+    _entity_access: 'ranking_day.edit'
+
+entity.ranking_day.delete_form:
+  path: '/admin/ranking_day/{ranking_day}/delete'
+  defaults:
+    _entity_form: ranking_day.delete
+    _title: 'Delete RankingDay'
+  requirements:
+    _entity_access: 'ranking_day.delete'
+
+ranking_day.settings:
+  path: 'admin/structure/ranking_day'
+  defaults:
+   _form: '\Drupal\mespronos\Entity\Form\RankingDaySettingsForm'
+   _title: 'RankingDay Settings'
+  requirements:
+    _permission: 'administer RankingDay entity'
+
+# RankingLeague routing definition
+entity.ranking_league.canonical:
+  path: '/admin/ranking_league/{ranking_league}'
+  defaults:
+    _entity_view: 'ranking_league'
+    _title: 'RankingLeague Content'
+  requirements:
+    _entity_access: 'ranking_league.view'
+
+entity.ranking_league.collection:
+  path: '/admin/ranking_league'
+  defaults:
+    _entity_list: 'ranking_league'
+    _title: 'RankingLeague List'
+  requirements:
+    _permission: 'view RankingLeague entity'
+
+entity.ranking_league.add_form:
+  path: '/admin/ranking_league/add'
+  defaults:
+    _entity_form: ranking_league.add
+    _title: 'Add RankingLeague'
+  requirements:
+    _entity_create_access: 'ranking_league'
+
+entity.ranking_league.edit_form:
+  path: '/admin/ranking_league/{ranking_league}/edit'
+  defaults:
+    _entity_form: ranking_league.edit
+    _title: 'Edit RankingLeague'
+  requirements:
+    _entity_access: 'ranking_league.edit'
+
+entity.ranking_league.delete_form:
+  path: '/admin/ranking_league/{ranking_league}/delete'
+  defaults:
+    _entity_form: ranking_league.delete
+    _title: 'Delete RankingLeague'
+  requirements:
+    _entity_access: 'ranking_league.delete'
+
+ranking_league.settings:
+  path: 'admin/structure/ranking_league'
+  defaults:
+   _form: '\Drupal\mespronos\Entity\Form\RankingLeagueSettingsForm'
+   _title: 'RankingLeague Settings'
+  requirements:
+    _permission: 'administer RankingLeague entity'
+
