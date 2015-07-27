@@ -197,6 +197,21 @@ class Bet extends ContentEntityBase implements BetInterface {
         'weight' => 5,
       ));
 
+
+    $fields['points'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Points won')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 6,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 6,
+      ));
+
     $fields['langcode'] = BaseFieldDefinition::create('language')
       ->setLabel(t('Language code'))
       ->setDescription(t('The language code of Bet entity.'));
