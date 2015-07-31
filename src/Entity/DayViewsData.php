@@ -22,7 +22,7 @@ class DayViewsData extends EntityViewsData implements EntityViewsDataInterface
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['day']['table']['base'] = array(
+    $data['mespronos__day']['table']['base'] = array(
       'field' => 'id',
       'title' => t('Day'),
       'help' => t('The day entity ID.'),

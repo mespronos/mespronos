@@ -20,7 +20,7 @@ class SportViewsData extends EntityViewsData implements EntityViewsDataInterface
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['sport']['table']['base'] = array(
+    $data['mespronos__sport']['table']['base'] = array(
       'field' => 'id',
       'title' => t('Sport'),
       'help' => t('The sport entity ID.'),

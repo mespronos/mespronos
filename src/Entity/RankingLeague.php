@@ -35,7 +35,7 @@ use Drupal\user\UserInterface;
  *     },
  *     "access" = "Drupal\mespronos\RankingLeagueAccessControlHandler",
  *   },
- *   base_table = "ranking_league",
+ *   base_table = "mespronos__ranking_league",
  *   admin_permission = "administer RankingLeague entity",
  *   entity_keys = {
  *     "id" = "id",

@@ -35,7 +35,7 @@ use Drupal\user\UserInterface;
  *     },
  *     "access" = "Drupal\mespronos\RankingDayAccessControlHandler",
  *   },
- *   base_table = "ranking_day",
+ *   base_table = "mespronos__ranking_day",
  *   admin_permission = "administer RankingDay entity",
  *   entity_keys = {
  *     "id" = "id",

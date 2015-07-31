@@ -20,7 +20,7 @@ class LeagueViewsData extends EntityViewsData implements EntityViewsDataInterfac
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['league']['table']['base'] = array(
+    $data['mespronos__league']['table']['base'] = array(
       'field' => 'id',
       'title' => t('League'),
       'help' => t('The league entity ID.'),

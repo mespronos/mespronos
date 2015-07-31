@@ -20,7 +20,7 @@ class BetViewsData extends EntityViewsData implements EntityViewsDataInterface {
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['bet']['table']['base'] = array(
+    $data['mespronos__bet']['table']['base'] = array(
       'field' => 'id',
       'title' => $this->t('Bet'),
       'help' => $this->t('The bet entity ID.'),

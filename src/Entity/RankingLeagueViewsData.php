@@ -20,7 +20,7 @@ class RankingLeagueViewsData extends EntityViewsData implements EntityViewsDataI
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['ranking_league']['table']['base'] = array(
+    $data['mespronos__ranking_league']['table']['base'] = array(
       'field' => 'id',
       'title' => $this->t('RankingLeague'),
       'help' => $this->t('The ranking_league entity ID.'),

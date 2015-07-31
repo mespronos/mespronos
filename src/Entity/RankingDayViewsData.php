@@ -20,7 +20,7 @@ class RankingDayViewsData extends EntityViewsData implements EntityViewsDataInte
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['ranking_day']['table']['base'] = array(
+    $data['mespronos__ranking_day']['table']['base'] = array(
       'field' => 'id',
       'title' => $this->t('RankingDay'),
       'help' => $this->t('The ranking_day entity ID.'),

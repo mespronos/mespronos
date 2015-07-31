@@ -20,7 +20,7 @@ class TeamViewsData extends EntityViewsData implements EntityViewsDataInterface 
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['team']['table']['base'] = array(
+    $data['mespronos__team']['table']['base'] = array(
       'field' => 'id',
       'title' => t('Team'),
       'help' => t('The team entity ID.'),
