@@ -62,7 +62,7 @@ class RemoveDataForm extends ConfirmFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    $entities_types = array('game','day','league','team','sport');
+    $entities_types = array('user_involve','ranking_day','ranking_league','bet','game','day','league','team','sport');
 
     foreach($entities_types as $entity_type) {
       $query = \Drupal::entityQuery($entity_type);
