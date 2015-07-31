@@ -79,8 +79,9 @@ display:
           summary: ''
           description: ''
           columns:
-            name: name
             sport: sport
+            name: name
+            name_3: name_3
             game_date: game_date
             name_2: name_2
             score_team_1: score_team_1
@@ -88,6 +89,13 @@ display:
             name_1: name_1
             operations: operations
           info:
+            sport:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ''
+              empty_column: false
+              responsive: ''
             name:
               sortable: true
               default_sort_order: asc
@@ -95,7 +103,7 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-            sport:
+            name_3:
               sortable: true
               default_sort_order: asc
               align: ''
@@ -154,6 +162,71 @@ display:
           hide_empty: false
           default_field_elements: true
       fields:
+        sport:
+          id: sport
+          table: mespronos__league
+          field: sport
+          relationship: league
+          group_type: group
+          admin_label: ''
+          label: Sport
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: false
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: target_id
+          type: entity_reference_label
+          settings:
+            link: true
+          group_column: target_id
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: league
+          entity_field: sport
+          plugin_id: field
         name:
           id: name
           table: mespronos__league
@@ -219,14 +292,14 @@ display:
           entity_type: league
           entity_field: name
           plugin_id: field
-        sport:
-          id: sport
-          table: mespronos__league
-          field: sport
-          relationship: league
+        name_3:
+          id: name_3
+          table: mespronos__day
+          field: name
+          relationship: day
           group_type: group
           admin_label: ''
-          label: Sport
+          label: Day
           exclude: false
           alter:
             alter_text: false
@@ -259,7 +332,7 @@ display:
           element_class: ''
           element_label_type: ''
           element_label_class: ''
-          element_label_colon: false
+          element_label_colon: true
           element_wrapper_type: ''
           element_wrapper_class: ''
           element_default_classes: true
@@ -267,11 +340,11 @@ display:
           hide_empty: false
           empty_zero: false
           hide_alter_empty: true
-          click_sort_column: target_id
-          type: entity_reference_label
+          click_sort_column: value
+          type: string
           settings:
-            link: true
-          group_column: target_id
+            link_to_entity: false
+          group_column: value
           group_columns: {  }
           group_rows: true
           delta_limit: 0
@@ -281,8 +354,8 @@ display:
           multi_type: separator
           separator: ', '
           field_api_classes: false
-          entity_type: league
-          entity_field: sport
+          entity_type: day
+          entity_field: name
           plugin_id: field
         game_date:
           id: game_date
@@ -665,7 +738,43 @@ display:
           hide_alter_empty: true
           destination: true
       filters: {  }
-      sorts: {  }
+      sorts:
+        sport:
+          id: sport
+          table: mespronos__league
+          field: sport
+          entity_type: league
+          entity_field: sport
+          plugin_id: standard
+        league:
+          id: league
+          table: mespronos__day
+          field: league
+          relationship: day
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: ''
+          entity_type: day
+          entity_field: league
+          plugin_id: standard
+        day:
+          id: day
+          table: mespronos__game
+          field: day
+          relationship: none
+          group_type: group
+          admin_label: ''
+          order: ASC
+          exposed: false
+          expose:
+            label: Day
+            order: ASC
+          entity_type: game
+          entity_field: day
+          plugin_id: standard
       header: {  }
       footer: {  }
       empty: {  }
