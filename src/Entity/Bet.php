@@ -83,6 +83,14 @@ class Bet extends ContentEntityBase implements BetInterface {
   }
 
   /**
+   * @todo implement
+   * @param \Drupal\mespronos\Entity\Game $game
+   */
+  public function definePoints(Game $game) {
+
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function getOwnerId() {

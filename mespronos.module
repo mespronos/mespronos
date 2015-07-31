@@ -6,6 +6,7 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\mespronos\Entity\Controller\BetController;
 
 /**
  * Implements hook_help().
@@ -21,6 +22,10 @@ function mespronos_help($route_name, RouteMatchInterface $route_match) {
 
     default:
   }
+}
+
+function mespronos_game_update($entity) {
+  BetController::updateBetsFromGame($entity);
 }
 
 /**
