@@ -46,21 +46,18 @@ class ImporterController extends ControllerBase {
     }
     $yaml = new Parser();
     $data = $yaml->parse(file_get_contents($file->getFileUri()));
-    dpm($data);
     $sport = self::importSport($data['league']['sport']);
     $league = self::importLeague($data['league'], $sport);
     foreach($data['league']['days'] as $_day) {
-      dpm($league);
       $day = self::importDay($_day,$league);
       foreach($_day['games'] as $_game) {
-        $teams = explode(' | ',$_game['game']);
+        $teams = explode('|',$_game['game']);
         $team_1 = self::importTeam(trim(array_shift($teams)));
         $team_2 = self::importTeam(trim(array_shift($teams)));
         $date = isset($_game['game_date']) ? trim($_game['game_date']) : trim($_day['day_default_date']);
         $date = \DateTime::createFromFormat('U',$date);
         $date->setTimezone(new \DateTimeZone('Europe/Paris'));
         $date = $date->format('Y-m-d\TH:i:s');
-        dpm($date);
         $game = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
       }
     }
@@ -164,7 +161,7 @@ class ImporterController extends ControllerBase {
     $id = $query->execute();
     if(count($id) == 0) {
       if(isset($_game['mark'])) {
-        $mark = explode(' | ',$_game['mark']);
+        $mark = explode('|',$_game['mark']);
         $score_team_1 = trim(array_shift($mark));
         $score_team_2 = trim(array_shift($mark));
       }
