@@ -1,0 +1,29 @@
+uuid: 6d25cf85-74f7-4b36-8800-ee1e67c77e10
+langcode: en
+status: true
+dependencies:
+  module:
+    - mespronos
+    - system
+  theme:
+    - bartik
+id: last_bets
+theme: bartik
+region: content
+weight: -6
+provider: null
+plugin: last_bets
+settings:
+  id: last_bets
+  label: 'Last bets'
+  provider: mespronos
+  label_display: visible
+  cache:
+    max_age: -1
+  number_of_days_to_display: '2'
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

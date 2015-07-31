@@ -1,0 +1,29 @@
+uuid: 4f0baac1-7b69-4c71-8200-f099eab48e1a
+langcode: en
+status: true
+dependencies:
+  module:
+    - mespronos
+    - system
+  theme:
+    - bartik
+id: next_bets
+theme: bartik
+region: content
+weight: -7
+provider: null
+plugin: next_bets
+settings:
+  id: next_bets
+  label: 'Next bets'
+  provider: mespronos
+  label_display: visible
+  cache:
+    max_age: 3600
+  number_of_days_to_display: '5'
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
