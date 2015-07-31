@@ -6,7 +6,6 @@ mespronos.dashboard:
   requirements:
     _permission: 'access administration mespronos'
 
-
 mespronos.importer_controller_index:
   path: 'admin/mespronos/import'
   defaults:

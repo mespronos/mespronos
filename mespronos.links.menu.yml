@@ -1,4 +1,4 @@
-mespronos.main:
+mespronos.dashboard:
   title: Mespronos
   description: 'Reference for usage, configuration, and modules.'
   route_name: mespronos.dashboard
@@ -64,6 +64,7 @@ game.admin.structure.settings:
   description: 'Configure Game entity'
   route_name: game.settings
   parent: system.admin_structure# Bet menu items definition
+
 entity.bet.collection:
   title: 'Bet: Listing'
   route_name: entity.bet.collection
@@ -86,6 +87,7 @@ ranking_day.admin.structure.settings:
   description: 'Configure RankingDay entity'
   route_name: ranking_day.settings
   parent: system.admin_structure
+
 # RankingLeague menu items definition
 entity.ranking_league.collection:
   title: 'RankingLeague: Listing'

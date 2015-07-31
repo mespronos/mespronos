@@ -46,6 +46,7 @@ entity.ranking_day.add_form:
   appears_on:
     - entity.ranking_day.collection
     - entity.ranking_day.canonical
+
 entity.ranking_league.add_form:
   route_name: entity.ranking_league.add_form
   title: 'Add RankingLeague'
