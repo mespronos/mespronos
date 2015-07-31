@@ -5,6 +5,13 @@ mespronos.dashboard:
   base_route: mespronos.dashboard
   weight : 1
 
+mespronos.import:
+  route_name: mespronos.import
+  title: 'Import'
+  description: 'Import file containing a league and all of his games'
+  base_route: mespronos.dashboard
+  weight : 1
+
 # Team routing definition
 team.settings_tab:
   route_name: team.settings

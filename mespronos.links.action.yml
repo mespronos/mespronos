@@ -1,3 +1,9 @@
+mespronos.remove:
+  route_name: mespronos.remove
+  title: 'Remove all datas'
+  appears_on:
+    - mespronos.import
+
 entity.team.add_form:
   route_name: entity.team.add_form
   title: 'Add team'
