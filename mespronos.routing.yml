@@ -17,7 +17,7 @@ mespronos.import:
 mespronos.set_marks:
   path: 'admin/mespronos/set-marks'
   defaults:
-    _controller: '\Drupal\mespronos\Controller\administrationController::setMarks'
+    _controller: '\Drupal\mespronos\Controller\AdministrationController::setMarks'
     _title: 'Set Marks'
   requirements:
     _permission: 'set marks'

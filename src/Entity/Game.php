@@ -124,6 +124,7 @@ class Game extends ContentEntityBase implements GameInterface {
   public function getBaseTable() {
     return 'mespronos__game';
   }
+
   public function getDataTable() {
     return 'mespronos__game';
   }

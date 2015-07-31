@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\mespronos\Entity\Controller\GameController;
 use Drupal\mespronos\Form\ImportForm;
 use Symfony\Component\Yaml\Parser;
 use Drupal\mespronos\Entity\League;
@@ -22,9 +23,14 @@ use Drupal\file\Entity\File;
  *
  * @package Drupal\mespronos\Controller
  */
-class ImporterController extends ControllerBase {
+class AdministrationController extends ControllerBase {
 
   public function setMarks() {
+    $games = GameController::getGameWithoutMarks();
+    if(count($games) == 0) {
+      drupal_set_message($this->t('There\'s no game for which mark is not set'));
+    }
+    dpm($games);
     $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\FormImport');
     return $form;
   }

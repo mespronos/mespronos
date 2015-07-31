@@ -5,6 +5,13 @@ mespronos.dashboard:
   base_route: mespronos.dashboard
   weight : 1
 
+mespronos.set_marks:
+  route_name: mespronos.set_marks
+  title: 'Set Marks'
+  description: 'Set games marks'
+  base_route: mespronos.dashboard
+  weight : 1
+
 mespronos.import:
   route_name: mespronos.import
   title: 'Import'
