@@ -35,19 +35,8 @@ class ImporterController extends ControllerBase {
   }
 
   public function remove() {
-    $entities_types = array('game','day','league','team','sport');
-
-    foreach($entities_types as $entity_type) {
-      $query = \Drupal::entityQuery($entity_type);
-      $ids = $query->execute();
-      $controller = \Drupal::entityManager()->getStorage($entity_type);
-      $entities = $controller->loadMultiple($ids);
-      $controller->delete($entities);
-    }
-
-    return [
-      '#markup' => 'lol'
-    ];
+    $form =  \Drupal::formBuilder()->getForm('\Drupal\mespronos\Form\RemoveDataForm');
+    return $form;
   }
 
   public static function import($fid) {
