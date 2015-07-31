@@ -1,9 +1,15 @@
 access administration mespronos:
   title: 'Access MesPronos dashboard'
   description : 'Accès au tableau de bord du module MesPronos'
+
 import league content:
   title: 'Import league to MesPronos'
   description : 'Import a league, team and days'
+
+set marks:
+  title: 'Set Marks'
+  description : 'Define game marks'
+
 view Game entity:
   title: 'View Game entity'
   description: 'Allow view my Game'

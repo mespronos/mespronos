@@ -14,6 +14,14 @@ mespronos.import:
   requirements:
     _permission: 'import league content'
 
+mespronos.set_marks:
+  path: 'admin/mespronos/set-marks'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\administrationController::setMarks'
+    _title: 'Set Marks'
+  requirements:
+    _permission: 'set marks'
+
 mespronos.remove:
   path: 'admin/mespronos/import/remove'
   defaults:
