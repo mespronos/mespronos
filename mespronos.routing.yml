@@ -432,3 +432,53 @@ ranking_league.settings:
   requirements:
     _permission: 'administer RankingLeague entity'
 
+
+# UserInvolve routing definition
+entity.user_involve.canonical:
+  path: '/admin/user_involve/{user_involve}'
+  defaults:
+    _entity_view: 'user_involve'
+    _title: 'UserInvolve Content'
+  requirements:
+    _entity_access: 'user_involve.view'
+
+entity.user_involve.collection:
+  path: '/admin/user_involve'
+  defaults:
+    _entity_list: 'user_involve'
+    _title: 'UserInvolve List'
+  requirements:
+    _permission: 'view UserInvolve entity'
+
+entity.user_involve.add_form:
+  path: '/admin/user_involve/add'
+  defaults:
+    _entity_form: user_involve.add
+    _title: 'Add UserInvolve'
+  requirements:
+    _entity_create_access: 'user_involve'
+
+entity.user_involve.edit_form:
+  path: '/admin/user_involve/{user_involve}/edit'
+  defaults:
+    _entity_form: user_involve.edit
+    _title: 'Edit UserInvolve'
+  requirements:
+    _entity_access: 'user_involve.edit'
+
+entity.user_involve.delete_form:
+  path: '/admin/user_involve/{user_involve}/delete'
+  defaults:
+    _entity_form: user_involve.delete
+    _title: 'Delete UserInvolve'
+  requirements:
+    _entity_access: 'user_involve.delete'
+
+user_involve.settings:
+  path: 'admin/structure/user_involve'
+  defaults:
+   _form: '\Drupal\mespronos\Entity\Form\UserInvolveSettingsForm'
+   _title: 'UserInvolve Settings'
+  requirements:
+    _permission: 'administer UserInvolve entity'
+

@@ -100,3 +100,15 @@ ranking_league.admin.structure.settings:
   route_name: ranking_league.settings
   parent: system.admin_structure
 
+# UserInvolve menu items definition
+entity.user_involve.collection:
+  title: 'UserInvolve: Listing'
+  route_name: entity.user_involve.collection
+  description: 'List UserInvolve'
+
+user_involve.admin.structure.settings:
+  title: UserInvolve Settings
+  description: 'Configure UserInvolve entity'
+  route_name: user_involve.settings
+  parent: system.admin_structure
+

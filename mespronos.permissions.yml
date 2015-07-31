@@ -73,3 +73,19 @@ delete RankingLeague entity:
 administer RankingLeague entity:
   title: 'Adminster RankingLeague entity'
   description: 'Allow administer my RankingLeague'
+
+view UserInvolve entity:
+  title: 'View UserInvolve entity'
+  description: 'Allow view my UserInvolve'
+
+edit UserInvolve entity:
+  title: 'Edit UserInvolve entity'
+  description: 'Allow edit my UserInvolve'
+
+delete UserInvolve entity:
+  title: 'Delete UserInvolve entity'
+  description: 'Allow delete my UserInvolve'
+
+administer UserInvolve entity:
+  title: 'Adminster UserInvolve entity'
+  description: 'Allow administer my UserInvolve'

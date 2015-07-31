@@ -60,3 +60,10 @@ entity.ranking_league.add_form:
     - entity.ranking_league.collection
     - entity.ranking_league.canonical
 
+entity.user_involve.add_form:
+  route_name: entity.user_involve.add_form
+  title: 'Add UserInvolve'
+  appears_on:
+    - entity.user_involve.collection
+    - entity.user_involve.canonical
+
