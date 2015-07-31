@@ -25,7 +25,8 @@ class GamesMarks extends FormBase {
     $form['#attached']['library'][] = 'mespronos/administration_style';
 
     $form['games'] = array(
-      '#type' => 'container'
+      '#type' => 'container',
+      '#tree' => true,
     );
     foreach($games as $game) {
       $form['games'][$game->id()] = array(
@@ -53,12 +54,35 @@ class GamesMarks extends FormBase {
     return $form;
   }
 
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $games = $form_state->getValue('games');
+    foreach($games as $game_id => $game_data) {
+      if ($game_data['score_team_1'] != '' && $game_data['score_team_1'] < 0) {
+        $form_state->setErrorByName('games][' . $game_id . '][score_team_1', $this->t("Can't be less than 0."));
+      }
+      if ($game_data['score_team_2'] != '' && $game_data['score_team_2'] < 0) {
+        $form_state->setErrorByName('games][' . $game_id . '][score_team_2', $this->t("Can't be less than 0."));
+      }
+    }
+  }
+
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $fid = $form_state->getValue('imported_file')[0];
-    $form_state->setRedirect('mespronos.importer_start',['fid'=>$fid]);
+    $games = $form_state->getValue('games');
+    $i = 0;
+    foreach($games as $game_id => $game_data) {
+      $game_storage = \Drupal::entityManager()->getStorage('game');
+      if($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '') {
+        $i++;
+        $game = $game_storage->load($game_id);
+        $game->set('score_team_1',$game_data['score_team_1']);
+        $game->set('score_team_2',$game_data['score_team_2']);
+        $game->save();
+      }
+    }
+    drupal_set_message($this->t('@nb_mark games updated',array('@nb_mark'=>$i)));
   }
 
 }
