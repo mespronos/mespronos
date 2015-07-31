@@ -145,12 +145,13 @@ entity.game.delete_form:
   base_route:  entity.game.canonical
   title: Delete
 
-entity.game.collection:
-  route_name: entity.game.collection
-  title: 'Games'
-  description: 'Games listing'
-  base_route: mespronos.dashboard
-  weight: 14
+# Now a view
+#entity.game.collection:
+#  route_name: entity.game.collection
+#  title: 'Games'
+#  description: 'Games listing'
+#  base_route: mespronos.dashboard
+#  weight: 14
 
 # Bet routing definition
 bet.settings_tab:
