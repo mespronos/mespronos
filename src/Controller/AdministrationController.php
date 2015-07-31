@@ -30,8 +30,7 @@ class AdministrationController extends ControllerBase {
     if(count($games) == 0) {
       drupal_set_message($this->t('There\'s no game for which mark is not set'));
     }
-    dpm($games);
-    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\FormImport');
+    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesMarks',$games);
     return $form;
   }
 

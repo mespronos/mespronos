@@ -1,0 +1,12 @@
+/* line 3, sass/administration.scss */
+form#games-marks fieldset.game .form-type-textfield {
+  float: left;
+}
+/* line 5, sass/administration.scss */
+form#games-marks fieldset.game .form-type-textfield:first-of-type {
+  margin-right: 5px;
+}
+/* line 8, sass/administration.scss */
+form#games-marks fieldset.game .form-type-textfield:last-of-type {
+  margin-left: 5px;
+}

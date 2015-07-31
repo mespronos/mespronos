@@ -21,14 +21,29 @@ class GamesMarks extends FormBase {
    * {@inheritdoc}.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $form['imported_file'] = array(
-      '#type' => 'managed_file',
-      '#title' => t('YAML file to import'),
-      '#upload_location' => 'public://imports/'.date('U'),
-      '#upload_validators' => [
-        'file_validate_extensions' => ['yaml']
-      ]
+    $games = $form_state->getBuildInfo()['args'][0];
+    $form['#attached']['library'][] = 'mespronos/administration_style';
+
+    $form['games'] = array(
+      '#type' => 'container'
     );
+    foreach($games as $game) {
+      $form['games'][$game->id()] = array(
+        '#type' => 'fieldset',
+        '#title' => $game->label(),
+        '#attributes' => array(
+          'class' => array('game'),
+        ),
+      );
+      $form['games'][$game->id()]['score_team_1'] = array(
+        '#type' => 'textfield',
+        '#size' => '5',
+      );
+      $form['games'][$game->id()]['score_team_2'] = array(
+        '#type' => 'textfield',
+        '#size' => '5',
+      );
+    }
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = array(
       '#type' => 'submit',

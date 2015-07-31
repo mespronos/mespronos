@@ -25,10 +25,8 @@ class GameController {
     $query = \Drupal::entityQuery('game');
 
     $group = $query->orConditionGroup()
-      ->condition('score_team_1', 'NULL')
-      ->condition('score_team_2', 'NULL')
-      ->condition('score_team_1', '')
-      ->condition('score_team_2', '');
+      ->condition('score_team_1',null,'is')
+      ->condition('score_team_2',null,'is');
 
     $ids = $query->condition($group)->execute();
 
