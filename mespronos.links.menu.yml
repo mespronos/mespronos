@@ -1,3 +1,10 @@
+mespronos.main:
+  title: Mespronos
+  description: 'Reference for usage, configuration, and modules.'
+  route_name: mespronos.dashboard
+  weight: 9
+  parent: system.admin
+
 # Team menu items definition
 entity.team.collection:
   title: 'Teams'
