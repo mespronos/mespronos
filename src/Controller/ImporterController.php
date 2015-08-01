@@ -159,15 +159,15 @@ class ImporterController extends ControllerBase {
       ->condition('team_2', $team_2->id())
       ->condition('day', $day->id());
     $id = $query->execute();
+    if(isset($_game['mark'])) {
+      $mark = explode('|',$_game['mark']);
+      $score_team_1 = trim(array_shift($mark));
+      $score_team_2 = trim(array_shift($mark));
+    }
+    else {
+      $score_team_1 = $score_team_2 = null;
+    }
     if(count($id) == 0) {
-      if(isset($_game['mark'])) {
-        $mark = explode('|',$_game['mark']);
-        $score_team_1 = trim(array_shift($mark));
-        $score_team_2 = trim(array_shift($mark));
-      }
-      else {
-        $score_team_1 = $score_team_2 = null;
-      }
       $game = Game::create(array(
         'created' => time(),
         'updated' => time(),
@@ -185,6 +185,13 @@ class ImporterController extends ControllerBase {
     }
     else {
       $game = entity_load('game', array_pop($id));
+      if($game->get('score_team_1') != $score_team_1) {
+        $game->set('score_team_1',$score_team_1);
+      }
+      if($game->get('score_team_2') != $score_team_2) {
+        $game->set('score_team_2',$score_team_2);
+      }
+      $game->save();
     }
     return $game;
   }
