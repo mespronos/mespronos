@@ -9,6 +9,10 @@ namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\mespronos\Entity\Controller\DayController;
+use Drupal\mespronos\Entity\Controller\GameController;
+use Drupal\mespronos\Entity\Controller\UserInvolveController;
+use Drupal\mespronos\Entity\UserInvolve;
 
 /**
  * Provides a 'NextBets' block.
@@ -45,6 +49,19 @@ class NextBets extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    global $user;
+    $user_involvements = array();
+    //$days = DayController::getNextDays($this->configuration['number_of_days_to_display']);
+    $games = GameController::getNextGames();
+    foreach ($days  as $day) {
+      if(!isset($user_involvements[$day->get('league')])) {
+        $user_involvements[$day->get('league')] = UserInvolveController::isUserInvolve($user->get('uid'),$day->get('league'));
+      }
+    }
+
+    dpm($days);
+    dpm($user_involvements);
+
     $build = [];
     $build['next_bets_number_of_days_to_display']['#markup'] = '<p>' . $this->configuration['number_of_days_to_display'] . '</p>';
 

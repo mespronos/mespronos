@@ -34,4 +34,26 @@ class GameController {
 
     return $games;
   }
+
+  public static function getNextGames() {
+    $game_storage = \Drupal::entityManager()->getStorage('game');
+
+    $now = new \DateTime();
+
+    $query = db_select('mespronos__game','g');
+    $query->fields('g',array('id','day'));
+    $query->addExpression('min(game_date)','day_date');
+    $query->addExpression('count(id)','nb_game');
+    $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>')
+      ->groupBy('day')
+      //->orderBy('game_date','ASC')
+      ->execute();
+    $results = $query->fetchAllAssoc('id');
+
+    dpm($results);
+
+    $games = $game_storage->loadMultiple($results);
+
+    return $games;
+  }
 }
