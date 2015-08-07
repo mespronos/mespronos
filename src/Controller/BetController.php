@@ -14,7 +14,7 @@ use Drupal\Core\Controller\ControllerBase;
  *
  * @package Drupal\mespronos\Controller
  */
-class DefaultController extends ControllerBase {
+class BetController extends ControllerBase {
   /**
    * Hello.
    *
@@ -25,6 +25,13 @@ class DefaultController extends ControllerBase {
     return [
         '#type' => 'markup',
         '#markup' => $this->t('Hello World!', [])
+    ];
+  }
+
+  public function bet($day) {
+    return [
+      '#type' => 'markup',
+      '#markup' => $this->t('Hello World!', [])
     ];
   }
 
