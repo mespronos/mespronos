@@ -24,6 +24,7 @@ class FormImport extends FormBase {
     $form['imported_file'] = array(
       '#type' => 'managed_file',
       '#title' => t('YAML file to import'),
+      '#required' => true,
       '#upload_location' => 'public://imports/'.date('U'),
       '#upload_validators' => [
         'file_validate_extensions' => ['yaml']
