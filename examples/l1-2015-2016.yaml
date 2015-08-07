@@ -9,23 +9,23 @@ league :
       day_default_date : 2015-08-07T20:30:00
       games :
         - game : LOSC | Paris Saint-Germain
-          day_date : 2015-08-07T20:30:00
+          game_date : 2015-08-07T20:30:00
         - game : Olympique de Marseille | SM Caen
-          day_date : 2015-08-05T21:00:00
+          game_date : 2015-08-05T21:00:00
         - game : Montpellier Hérault SC | Angers SCO
-          day_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08T21:00:00
         - game : OGC Nice | AS Monaco
-          day_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08T21:00:00
         - game : FC Nantes | EA Guingamp
-          day_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08T21:00:00
         - game : SC Bastia | Stade Rennais FC
-          day_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08T21:00:00
         - game : GFC Ajaccio | ESTAC Troyes
-          day_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08T21:00:00
         - game : Girondins de Bordeaux | Stade de Reims
-          day_date : 2015-08-09T17:00:00
+          game_date : 2015-08-09T17:00:00
         - game : Toulouse FC | AS Saint-Etienne
-          day_date : 2015-08-09T17:00:00
+          game_date : 2015-08-09T17:00:00
         - game : Olympique Lyonnais | FC Lorient
-          day_date : 2015-08-09T21:00:00
+          game_date : 2015-08-09T21:00:00
 
