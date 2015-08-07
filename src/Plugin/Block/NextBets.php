@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\Core\Url;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\mespronos\Entity\Controller\DayController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
@@ -52,7 +53,7 @@ class NextBets extends BlockBase {
     $user_involvements = array();
     $days = DayController::getNextDaysToBet($this->configuration['number_of_days_to_display']);
     $rows = [];
-    foreach ($days  as $day) {
+    foreach ($days  as $day_id => $day) {
       $league_id = $day->entity->get('league')->first()->getValue()['target_id'];
       if(!isset($leagues[$league_id])) {
         $leagues[$league_id] = League::load($league_id);
@@ -69,10 +70,16 @@ class NextBets extends BlockBase {
       $i = $game_date->diff($now_date);
 
       if($day->involve) {
-        $action_links = $this->t('Bet now');
+        $action_links = \Drupal::l(
+          $this->t('Bet now'),
+          new Url('mespronos.day.bet', array('day' => $day_id))
+        );
       }
       else {
-        $action_links = $this->t('Subscribe now !');
+        $action_links = \Drupal::l(
+          $this->t('Subscribe now !'),
+          new Url('mespronos.league.register', array('league' => $league->id()))
+        );
       }
 
       $row = [
