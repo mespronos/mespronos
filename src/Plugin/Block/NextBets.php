@@ -11,7 +11,7 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\mespronos\Entity\Controller\DayController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
-use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\League;
 
 /**
  * Provides a 'NextBets' block.
@@ -49,22 +49,58 @@ class NextBets extends BlockBase {
    */
   public function build() {
     $user_uid =  \Drupal::currentUser()->id();
-    dpm($user_uid);
     $user_involvements = array();
     $days = DayController::getNextDaysToBet($this->configuration['number_of_days_to_display']);
-
+    $rows = [];
     foreach ($days  as $day) {
-      $day_entity = $day->entity;
-      $league_id = $day_entity->get('league')->first()->getValue()['target_id'];
+      $league_id = $day->entity->get('league')->first()->getValue()['target_id'];
+      if(!isset($leagues[$league_id])) {
+        $leagues[$league_id] = League::load($league_id);
+      }
+      $league = $leagues[$league_id];
       if(!isset($user_involvements[$league_id])) {
         $user_involvements[$league_id] = UserInvolveController::isUserInvolve($user_uid ,$league_id);
       }
+      $day->involve = $user_involvements[$league_id];
+
+      $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date);
+      $now_date = new \DateTime();
+
+      $i = $game_date->diff($now_date);
+
+      if($day->involve) {
+        $action_links = $this->t('Bet now');
+      }
+      else {
+        $action_links = $this->t('Subscribe now !');
+      }
+
+      $row = [
+        $league->label(),
+        $day->entity->label(),
+        $day->nb_game,
+        $this->t('@d days, @H hours @m minutes',array('@d'=>$i->format('%a'),'@H'=>$i->format('%H'),'@m'=>$i->format('%m'))),
+        $action_links,
+      ];
+
+
+      $rows[] = $row;
     }
+    $header = [
+      $this->t('League'),
+      $this->t('Day'),
+      $this->t('Game to bet on'),
+      $this->t('Time left'),
+      $this->t('Action'),
+    ];
 
-    $build = [];
-    $build['next_bets_number_of_days_to_display']['#markup'] = '<p>' . $this->configuration['number_of_days_to_display'] . '</p>';
 
-    return $build;
+    return [
+      '#theme' => 'table',
+      '#rows' => $rows,
+      '#header' => $header,
+    ];
+
   }
 
 }

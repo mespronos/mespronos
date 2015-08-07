@@ -65,6 +65,12 @@ class League extends ContentEntityBase implements LeagueInterface {
   ];
   protected static $status_default_value = 'active';
 
+  public static function load($id) {
+    $storage = \Drupal::entityManager()->getStorage('league');
+    $entity = $storage->loadMultiple(array($id));
+    return array_pop($entity);
+  }
+
   public function getStatus($asMachineName = false) {
     $s = $this->get('status')->value;
     if($asMachineName) {

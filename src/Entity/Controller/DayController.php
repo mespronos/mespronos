@@ -23,9 +23,9 @@ class DayController {
 
     $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
     $query->orderBy('day_date','ASC');
+    $query->range(0,$nb);
     $results = $query->execute();
     $results = $results->fetchAllAssoc('day');
-
     $days = $day_storage->loadMultiple(array_keys($results));
 
     foreach($results as $key => &$day_data) {
