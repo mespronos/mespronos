@@ -1,6 +1,7 @@
 league :
   name : 'Ligue 1 2014/2015'
   sport : 'Football'
+  status : 'over'
   classement : true
   betting_type : 'score'
   days:

@@ -1,6 +1,7 @@
 league :
   name : 'Coupe de la ligue 2015/2016'
   sport : 'Football'
+  status : 'active'
   classement : false
   betting_type : 'score'
   days:

@@ -1,6 +1,7 @@
 league :
   name : 'Ligue 1 2015/2016'
   sport : 'Football'
+  status : 'active'
   classement : true
   betting_type : 'score'
   days:

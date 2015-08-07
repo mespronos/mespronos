@@ -97,7 +97,7 @@ class ImporterController extends ControllerBase {
         'name' => $_league['name'],
         'betting_type' => $_league['betting_type'],
         'classement' => $_league['classement'],
-        'status' => 'future',
+        'status' => $_league['status'],
         'langcode' => 'und',
       ));
       $league->save();
