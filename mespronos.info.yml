@@ -1,6 +1,6 @@
 name: MesPronos
 type: module
-description: Pronostics module for drupal 8
+description: Betting module for drupal 8
 core: 8.x
 package: MesPronos
 
