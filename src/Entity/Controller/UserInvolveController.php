@@ -7,12 +7,10 @@
 
 namespace Drupal\mespronos\Entity\Controller;
 
-use Symfony\Component\Validator\Constraints\DateTime;
-
 class UserInvolveController {
 
   public static function isUserInvolve($uid,$league_id) {
-    $involvements = \Drupal::entityQuery('day')
+    $involvements = \Drupal::entityQuery('user_involve')
       ->condition('user',$uid)
       ->condition('league',$league_id)
       ->execute();

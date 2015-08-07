@@ -10,9 +10,8 @@ namespace Drupal\mespronos\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\mespronos\Entity\Controller\DayController;
-use Drupal\mespronos\Entity\Controller\GameController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
-use Drupal\mespronos\Entity\UserInvolve;
+use Drupal\mespronos\Entity\Day;
 
 /**
  * Provides a 'NextBets' block.
@@ -49,18 +48,18 @@ class NextBets extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    global $user;
+    $user_uid =  \Drupal::currentUser()->id();
+    dpm($user_uid);
     $user_involvements = array();
-    //$days = DayController::getNextDays($this->configuration['number_of_days_to_display']);
-    $games = GameController::getNextGames();
+    $days = DayController::getNextDaysToBet($this->configuration['number_of_days_to_display']);
+
     foreach ($days  as $day) {
-      if(!isset($user_involvements[$day->get('league')])) {
-        $user_involvements[$day->get('league')] = UserInvolveController::isUserInvolve($user->get('uid'),$day->get('league'));
+      $day_entity = $day->entity;
+      $league_id = $day_entity->get('league')->first()->getValue()['target_id'];
+      if(!isset($user_involvements[$league_id])) {
+        $user_involvements[$league_id] = UserInvolveController::isUserInvolve($user_uid ,$league_id);
       }
     }
-
-    dpm($days);
-    dpm($user_involvements);
 
     $build = [];
     $build['next_bets_number_of_days_to_display']['#markup'] = '<p>' . $this->configuration['number_of_days_to_display'] . '</p>';

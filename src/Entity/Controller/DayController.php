@@ -9,17 +9,28 @@ namespace Drupal\mespronos\Entity\Controller;
 
 
 class DayController {
-  public static function getNextDays($nb = 5) {
-    $game_storage = \Drupal::entityManager()->getStorage('day');
+
+  public static function getNextDaysToBet($nb = 5) {
+    $day_storage = \Drupal::entityManager()->getStorage('day');
+
     $now = new \DateTime();
-    $days_ids = \Drupal::entityQuery('day')
-      ->condition('day_date',$now->format('Y-m-d\TH:i:s'),'>')
-      ->range(0,$nb)
-      ->joi
-      ->execute();
 
-    $days = $game_storage->loadMultiple($days_ids);
+    $query = db_select('mespronos__game','g');
+    $query->addExpression('min(game_date)','day_date');
+    $query->addExpression('count(id)','nb_game');
+    $query->groupBy('day');
+    $query->fields('g',array('day'));
 
-    return $days;
+    $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
+    $query->orderBy('day_date','ASC');
+    $results = $query->execute();
+    $results = $results->fetchAllAssoc('day');
+
+    $days = $day_storage->loadMultiple(array_keys($results));
+
+    foreach($results as $key => &$day_data) {
+     $day_data->entity = $days[$key];
+    }
+    return $results;
   }
 }
