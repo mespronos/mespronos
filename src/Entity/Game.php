@@ -271,10 +271,6 @@ class Game extends ContentEntityBase implements GameInterface {
       ->setDisplayConfigurable('view', TRUE);
 
 
-    $fields['langcode'] = BaseFieldDefinition::create('language')
-      ->setLabel(t('Language code'))
-      ->setDescription(t('The language code of Game entity.'));
-
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
