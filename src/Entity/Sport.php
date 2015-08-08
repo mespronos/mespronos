@@ -42,7 +42,6 @@ use Drupal\user\UserInterface;
  *     "id" = "id",
  *     "label" = "name",
  *     "uuid" = "uuid",
- *     "langcode" = "langcode"
  *   },
  *   links = {
  *     "canonical" = "/entity.sport.canonical",
@@ -167,19 +166,6 @@ class Sport extends ContentEntityBase implements SportInterface {
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-
-    $fields['langcode'] = BaseFieldDefinition::create('language')
-      ->setLabel(t('Language'))
-      ->setDescription(t('The node language code.'))
-      ->setTranslatable(TRUE)
-      ->setRevisionable(TRUE)
-      ->setDisplayOptions('view', array(
-        'type' => 'hidden',
-      ))
-      ->setDisplayOptions('form', array(
-        'type' => 'language_select',
-        'weight' => 2,
-      ));
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))

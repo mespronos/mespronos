@@ -41,7 +41,6 @@ use Drupal\user\UserInterface;
  *     "id" = "id",
  *     "label" = "name",
  *     "uuid" = "uuid",
- *     "langcode" = "langcode"
  *   },
  *   links = {
  *     "canonical" = "/entity.league.canonical",
