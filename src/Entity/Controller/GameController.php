@@ -20,9 +20,14 @@ class GameController {
   /**
    * {@inheritdoc}
    */
-  public static function getGameWithoutMarks() {
+  public static function getGameWithoutMarks($only_past = true) {
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
+
+    if($only_past) {
+      $now = new \DateTime();
+      $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'<');
+    }
 
     $group = $query->orConditionGroup()
       ->condition('score_team_1',null,'is')
