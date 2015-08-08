@@ -25,6 +25,11 @@ use Drupal\file\Entity\File;
  */
 class AdministrationController extends ControllerBase {
 
+  public function settings() {
+    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\AdministrationConfigForm');
+    return $form;
+  }
+
   public function setMarks() {
     $games = GameController::getGameWithoutMarks();
     if(count($games) == 0) {

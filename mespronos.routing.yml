@@ -14,6 +14,14 @@ mespronos.import:
   requirements:
     _permission: 'import league content'
 
+mespronos.settings:
+  path: 'admin/mespronos/settings'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\AdministrationController::settings'
+    _title: 'Settings'
+  requirements:
+    _permission: 'manage settings'
+
 mespronos.set_marks:
   path: 'admin/mespronos/set-marks'
   defaults:

@@ -2,6 +2,10 @@ access administration mespronos:
   title: 'Access MesPronos dashboard'
   description : 'Accès au tableau de bord du module MesPronos'
 
+manage settings:
+  title: 'manage MesPronos settings'
+   description: 'such as points settings'
+
 import league content:
   title: 'Import league to MesPronos'
   description : 'Import a league, team and days'

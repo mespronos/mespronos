@@ -19,6 +19,13 @@ mespronos.import:
   base_route: mespronos.dashboard
   weight : 1
 
+mespronos.settings:
+  route_name: mespronos.settings
+  title: 'Settings'
+  description: 'Manage Mespronos Settings'
+  base_route: mespronos.dashboard
+  weight : 100
+
 # Team routing definition
 team.settings_tab:
   route_name: team.settings
