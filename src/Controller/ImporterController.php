@@ -56,7 +56,7 @@ class ImporterController extends ControllerBase {
         $team_2 = self::importTeam(trim(array_shift($teams)));
         $date = isset($_game['game_date']) ? trim($_game['game_date']) : trim($_day['day_default_date']);
         $date = \DateTime::createFromFormat('U',$date);
-        $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+        //$date->setTimezone(new \DateTimeZone('Europe/Paris'));
         $date = $date->format('Y-m-d\TH:i:s');
         $game = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
       }

@@ -6,26 +6,26 @@ league :
   betting_type : 'score'
   days:
     - number : 1
-      day_default_date : 2015-08-07T20:30:00
+      day_default_date : 2015-08-07t20:30:00+02:00
       games :
         - game : LOSC | Paris Saint-Germain
-          game_date : 2015-08-07T20:30:00
+          game_date : 2015-08-07t20:30:00+02:00
         - game : Olympique de Marseille | SM Caen
-          game_date : 2015-08-05T21:00:00
+          game_date : 2015-08-08t21:00:00+02:00
         - game : Montpellier Hérault SC | Angers SCO
-          game_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08t21:00:00+02:00
         - game : OGC Nice | AS Monaco
-          game_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08t21:00:00+02:00
         - game : FC Nantes | EA Guingamp
-          game_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08t21:00:00+02:00
         - game : SC Bastia | Stade Rennais FC
-          game_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08t21:00:00+02:00
         - game : GFC Ajaccio | ESTAC Troyes
-          game_date : 2015-08-08T21:00:00
+          game_date : 2015-08-08t21:00:00+02:00
         - game : Girondins de Bordeaux | Stade de Reims
-          game_date : 2015-08-09T17:00:00
+          game_date : 2015-08-09t17:00:00+02:00
         - game : Toulouse FC | AS Saint-Etienne
-          game_date : 2015-08-09T17:00:00
+          game_date : 2015-08-09t17:00:00+02:00
         - game : Olympique Lyonnais | FC Lorient
-          game_date : 2015-08-09T21:00:00
+          game_date : 2015-08-09t21:00:00+02:00
 
