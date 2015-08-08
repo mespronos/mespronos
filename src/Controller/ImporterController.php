@@ -191,6 +191,9 @@ class ImporterController extends ControllerBase {
       if($game->get('score_team_2') != $score_team_2) {
         $game->set('score_team_2',$score_team_2);
       }
+      if($game->get('game_date')->value != $date) {
+        $game->set('game_date',$date);
+      }
       $game->save();
     }
     return $game;
