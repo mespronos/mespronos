@@ -86,7 +86,8 @@ class NextBets extends BlockBase {
         $league->label(),
         $day->entity->label(),
         $day->nb_game,
-        $this->t('@d days, @H hours @m minutes',array('@d'=>$i->format('%a'),'@H'=>$i->format('%H'),'@m'=>$i->format('%m'))),
+
+        $i->format('%a') >0 ? $this->t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : $this->t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
         $action_links,
       ];
 
@@ -98,9 +99,8 @@ class NextBets extends BlockBase {
       $this->t('Day'),
       $this->t('Game to bet on'),
       $this->t('Time left'),
-      $this->t('Action'),
+      '',
     ];
-
 
     return [
       '#theme' => 'table',
