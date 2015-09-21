@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
  *
  * @package Drupal\mespronos\Controller
  */
-class BetController extends ControllerBase {
+class BettingController extends ControllerBase {
   /**
    * Hello.
    *

@@ -49,7 +49,7 @@ mespronos.league.register:
 mespronos.day.bet:
   path: 'mespronos/day/{day}/bet'
   defaults:
-    _controller: '\Drupal\mespronos\Controller\BetController::bet'
+    _controller: '\Drupal\mespronos\Controller\BettingController::bet'
     _title: 'Bet !'
   requirements:
     _permission: 'bet on day'
