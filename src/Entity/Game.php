@@ -108,11 +108,19 @@ class Game extends ContentEntityBase implements GameInterface {
     return $this->get('game_date')->value;
   }
 
+  public function getTeam1() {
+    return $this->get('team_1')->target_id;
+  }
+
+  public function getTeam2() {
+    return $this->get('team_2')->target_id;
+  }
+
   public function label() {
     $team_storage = \Drupal::entityManager()->getStorage('team');
 
-    $team1 = $team_storage->load($this->get('team_1')->target_id);
-    $team2 = $team_storage->load($this->get('team_2')->target_id);
+    $team1 = $team_storage->load($this->getTeam1());
+    $team2 = $team_storage->load($this->getTeam2());
 
     return t('@team1 - @team2',array('@team1'=> $team1->label(),'@team2'=> $team2->label()));
   }
@@ -120,8 +128,8 @@ class Game extends ContentEntityBase implements GameInterface {
   public function label_full() {
     $team_storage = \Drupal::entityManager()->getStorage('team');
 
-    $team1 = $team_storage->load($this->get('team_1')->target_id);
-    $team2 = $team_storage->load($this->get('team_2')->target_id);
+    $team1 = $team_storage->load($this->getTeam1());
+    $team2 = $team_storage->load($this->getTeam2());
 
     $date =  new \DateTime($this->getGameDate());
     return t('@team1 - @team2 - %date',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'%date'=> $date->format('d/m//Y H:i:s')));
