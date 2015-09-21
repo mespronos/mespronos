@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\mespronos\Entity\Controller\GameController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
@@ -43,8 +44,9 @@ class BettingController extends ControllerBase {
       drupal_set_message($this->t('You\'re not subscribed to this day'),'warning');
       throw new AccessDeniedHttpException();
     }
+    $games_to_bet = GameController::getGamesToBet($day->id());
 
-
+    dpm($games_to_bet);
 
 
     return [

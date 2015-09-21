@@ -40,4 +40,27 @@ class GameController {
     return $games;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public static function getGamesToBet($day_id) {
+    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $query = \Drupal::entityQuery('game');
+
+    $now = new \DateTime();
+    $query->condition('day',$day_id);
+    $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
+    $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
+
+    $group = $query->orConditionGroup()
+      ->condition('score_team_1',null,'is')
+      ->condition('score_team_2',null,'is');
+
+    $ids = $query->condition($group)->execute();
+
+    $games = $game_storage->loadMultiple($ids);
+
+    return $games;
+  }
+
 }
