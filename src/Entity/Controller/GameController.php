@@ -43,12 +43,12 @@ class GameController {
   /**
    * {@inheritdoc}
    */
-  public static function getGamesToBet($day_id) {
+  public static function getGamesToBet(Day $day) {
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
 
     $now = new \DateTime();
-    $query->condition('day',$day_id);
+    $query->condition('day',$day->id());
     $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
     $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
 

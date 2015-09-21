@@ -32,7 +32,8 @@ class BettingController extends ControllerBase {
   }
 
   public function bet($day) {
-    $user_uid =  \Drupal::currentUser()->id();
+    $user = \Drupal::currentUser();
+    $user_uid =  $user->id();
     $day_storage = \Drupal::entityManager()->getStorage('day');
     $day = $day_storage->load($day);
     if($day === NULL) {
@@ -44,15 +45,11 @@ class BettingController extends ControllerBase {
       drupal_set_message($this->t('You\'re not subscribed to this day'),'warning');
       throw new AccessDeniedHttpException();
     }
-    $games_to_bet = GameController::getGamesToBet($day->id());
+    $games_to_bet = GameController::getGamesToBet($day);
 
-    dpm($games_to_bet);
+    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesBetting',$games_to_bet,$user);
+    return $form;
 
-
-    return [
-      '#type' => 'markup',
-      '#markup' => $this->t('Hello World!', [])
-    ];
   }
 
 }
