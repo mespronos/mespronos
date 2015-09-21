@@ -1,0 +1,13 @@
+form#games-betting {
+  fieldset {
+    legend {
+      text-align: center
+    }
+    clear: both;
+    div.form-item {
+      float: left;
+      width: 50%;
+      text-align: center;
+    }
+  }
+}
