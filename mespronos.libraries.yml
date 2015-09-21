@@ -4,3 +4,9 @@ administration_style :
   css:
     theme :
       css/administration.css : {}
+front_style :
+  version: 1.x
+  header: true
+  css:
+    theme :
+      css/front.css : {}
