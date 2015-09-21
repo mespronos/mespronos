@@ -37,7 +37,7 @@ class GamesBetting extends FormBase {
     foreach($games as $game) {
       $form['games'][$game->id()] = array(
         '#type' => 'fieldset',
-        //'#title' => $game->label(),
+        '#title' => $game->label_full(),
         '#attributes' => array(
           'class' => array('game'),
         ),
@@ -45,18 +45,24 @@ class GamesBetting extends FormBase {
       $form['games'][$game->id()]['score_team_1'] = array(
         '#type' => 'textfield',
         '#size' => '5',
-        '#title' => $game->get('team_1')->entity->label(),
+        //'#title' => $game->get('team_1')->entity->label(),
+        '#attributes' => array(
+          'class' => array('team_1')
+        )
       );
       $form['games'][$game->id()]['score_team_2'] = array(
         '#type' => 'textfield',
         '#size' => '5',
-        '#title' => $game->get('team_2')->entity->label(),
+        //'#title' => $game->get('team_2')->entity->label(),
+        '#attributes' => array(
+          'class' => array('team_2')
+        )
       );
     }
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = array(
       '#type' => 'submit',
-      '#value' => $this->t('Send'),
+      '#value' => $this->t('Save my bets'),
       '#button_type' => 'primary',
     );
     return $form;
