@@ -136,13 +136,16 @@ class Game extends ContentEntityBase implements GameInterface {
   }
 
   public function getLeague() {
-    $day = entity_load('day', $this->get('day')->target_id);
-    $league = entity_load('league', $day->get('league')->target_id);
+    $day_storage = \Drupal::entityManager()->getStorage('day');
+    $league_storage = \Drupal::entityManager()->getStorage('league');
+    $day = $day_storage->load($this->get('day')->target_id);
+    $league = $league_storage->load($day->get('league')->target_id);
     return $league;
   }
 
   public function getDay() {
-    $day = entity_load('day', $this->get('day')->target_id);
+    $day_storage = \Drupal::entityManager()->getStorage('day');
+    $day = $day_storage->load($this->get('day')->target_id);
     return $day;
   }
 
