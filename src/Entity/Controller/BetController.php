@@ -33,4 +33,25 @@ class BetController {
       $bet->definePoints($game);
     }
   }
+
+  /**
+   * @param \Drupal\User $user
+   * @param \Drupal\mespronos\Entity\Game $game
+   * @return \Drupal\mespronos\Entity\Bet
+   */
+  public static function loadForUser(User $user,Game $game) {
+
+    $bet_storage = \Drupal::entityManager()->getStorage('bet');
+
+    $ids = \Drupal::entityQuery('bet')
+      ->condition('game',$game->id())
+      ->condition('better',$user->id())
+      ->execute();
+    if(count($ids)>0) {
+      $bets = $bet_storage->loadMultiple($ids);
+    }
+    else {
+      return $bet_storage->create(array());;
+    }
+  }
 }

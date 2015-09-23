@@ -5,6 +5,8 @@ namespace Drupal\mespronos\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Drupal\mespronos\Entity\Controller\BetController;
+
 /**
  * Implements an example form.
  */
@@ -35,6 +37,7 @@ class GamesBetting extends FormBase {
       '#value' => $user->id(),
     );
     foreach($games as $game) {
+      $bet = BetController::loadForUser($user,$game);
       $form['games'][$game->id()] = array(
         '#type' => 'fieldset',
         '#title' => $game->label_full(),
@@ -42,10 +45,19 @@ class GamesBetting extends FormBase {
           'class' => array('game'),
         ),
       );
+      $form['games'][$game->id()]['token_id'] = array(
+        '#type' => 'hidden',
+        '#value' =>$game->id(),
+      );
+      $form['games'][$game->id()]['bet_id'] = array(
+        '#type' => 'hidden',
+        '#value' => $bet->id(),
+      );
       $form['games'][$game->id()]['score_team_1'] = array(
         '#type' => 'textfield',
         '#size' => '5',
-        //'#title' => $game->get('team_1')->entity->label(),
+        '#default_value' => $bet->getScoreTeam1(),
+        '#title' => $game->get('team_1')->entity->label(),
         '#attributes' => array(
           'class' => array('team_1')
         )
@@ -53,7 +65,8 @@ class GamesBetting extends FormBase {
       $form['games'][$game->id()]['score_team_2'] = array(
         '#type' => 'textfield',
         '#size' => '5',
-        //'#title' => $game->get('team_2')->entity->label(),
+        '#default_value' => $bet->getScoreTeam2,
+        '#title' => $game->get('team_2')->entity->label(),
         '#attributes' => array(
           'class' => array('team_2')
         )
@@ -87,14 +100,15 @@ class GamesBetting extends FormBase {
     $games = $form_state->getValue('games');
     $i = 0;
     foreach($games as $game_id => $game_data) {
+      dpm($game_data);
       $game_storage = \Drupal::entityManager()->getStorage('game');
       if($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '') {
         $i++;
         $game = $game_storage->load($game_id);
-        $game->set('score_team_1',$game_data['score_team_1']);
-        $game->set('score_team_2',$game_data['score_team_2']);
-        $game->save();
-      }
+      //  $game->set('score_team_1',$game_data['score_team_1']);
+      //  $game->set('score_team_2',$game_data['score_team_2']);
+      //  $game->save();
+      //}
     }
     drupal_set_message($this->t('@nb_mark games updated',array('@nb_mark'=>$i)));
   }
