@@ -108,7 +108,7 @@ class GamesBetting extends FormBase {
       //  $game->set('score_team_1',$game_data['score_team_1']);
       //  $game->set('score_team_2',$game_data['score_team_2']);
       //  $game->save();
-      //}
+      }
     }
     drupal_set_message($this->t('@nb_mark games updated',array('@nb_mark'=>$i)));
   }
