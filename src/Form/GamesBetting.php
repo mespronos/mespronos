@@ -104,7 +104,6 @@ class GamesBetting extends FormBase {
     $i = 0;
     $j = 0;
     foreach($games as $game_id => $game_data) {
-      $game_storage = \Drupal::entityManager()->getStorage('game');
       $bet_storage = \Drupal::entityManager()->getStorage('bet');
       if($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '' && $game_id == $game_data['token_id']) {
         dpm($game_data);
@@ -113,9 +112,9 @@ class GamesBetting extends FormBase {
         }
         else {
           $bet = $bet_storage->create(array());
+          $bet->set('game',$game_id);
+          $bet->set('better',$user->id());
         }
-        $bet->set('game',$game_id);
-        $bet->set('better',$user->id());
         $bet->set('score_team_1',$game_data['score_team_1']);
         $bet->set('score_team_2',$game_data['score_team_2']);
         if(BetController::isBetAllowed($bet,$user)) {
