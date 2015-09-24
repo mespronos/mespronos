@@ -65,7 +65,7 @@ class GamesBetting extends FormBase {
       $form['games'][$game->id()]['score_team_2'] = array(
         '#type' => 'textfield',
         '#size' => '5',
-        '#default_value' => $bet->getScoreTeam2,
+        '#default_value' => $bet->getScoreTeam2(),
         '#title' => $game->get('team_2')->entity->label(),
         '#attributes' => array(
           'class' => array('team_2')
@@ -98,19 +98,41 @@ class GamesBetting extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $games = $form_state->getValue('games');
+    $user_id = $form_state->getValue('user');
+    $user_storage = \Drupal::entityManager()->getStorage('user');
+    $user = $user_storage->load($user_id);
     $i = 0;
+    $j = 0;
     foreach($games as $game_id => $game_data) {
-      dpm($game_data);
       $game_storage = \Drupal::entityManager()->getStorage('game');
-      if($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '') {
-        $i++;
-        $game = $game_storage->load($game_id);
-      //  $game->set('score_team_1',$game_data['score_team_1']);
-      //  $game->set('score_team_2',$game_data['score_team_2']);
-      //  $game->save();
+      $bet_storage = \Drupal::entityManager()->getStorage('bet');
+      if($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '' && $game_id == $game_data['token_id']) {
+        dpm($game_data);
+        if($game_data['bet_id'] !== null) {
+          $bet = $bet_storage->load($game_data['bet_id']);
+        }
+        else {
+          $bet = $bet_storage->create(array());
+        }
+        $bet->set('game',$game_id);
+        $bet->set('better',$user->id());
+        $bet->set('score_team_1',$game_data['score_team_1']);
+        $bet->set('score_team_2',$game_data['score_team_2']);
+        if(BetController::isBetAllowed($bet,$user)) {
+          $bet->save();
+          $i++;
+        }
+        else {
+          $j++;
+        }
       }
     }
-    drupal_set_message($this->t('@nb_mark games updated',array('@nb_mark'=>$i)));
+    if($i>0) {
+      drupal_set_message($this->t('@nb_mark bets saved/updated',array('@nb_mark'=>$i)));
+    }
+    if($j>0) {
+      drupal_set_message($this->t('@nb_mark bet couldn\'t be saved or updated',array('@nb_mark'=>$j)),'warning');
+    }
   }
 
 }

@@ -105,13 +105,25 @@ class Bet extends ContentEntityBase implements BetInterface {
     return $this;
   }
 
-
   public function getScoreTeam1() {
     return $this->get('score_team_1')->value;
   }
 
   public function getScoreTeam2() {
     return $this->get('score_team_2')->value;
+  }
+
+  /**
+   * @param bool|FALSE $asEntity
+   * @return \Drupal\mespronos\Entity\Game
+   */
+  public function getGame($asEntity = false) {
+    $game =  $this->get('game')->target_id;
+    if($asEntity) {
+      $game_storage = \Drupal::entityManager()->getStorage('game');
+      $game = $game_storage->load($game);
+    }
+    return $game;
   }
 
   /**

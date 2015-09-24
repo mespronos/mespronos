@@ -10,6 +10,8 @@ namespace Drupal\mespronos\Entity\Controller;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Url;
+use Drupal\datetime\Plugin\views\Argument\Date;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Provides a list controller for Game entity.
@@ -48,10 +50,28 @@ class BetController {
       ->condition('better',$user->id())
       ->execute();
     if(count($ids)>0) {
-      $bets = $bet_storage->loadMultiple($ids);
+      return $bet_storage->load(array_pop($ids));
     }
     else {
       return $bet_storage->create(array());;
     }
+  }
+
+  /**
+   * @param \Drupal\mespronos\Entity\Bet $bet
+   * @param \Drupal\User $user
+   */
+  public static function isBetAllowed(Bet $bet,User $user) {
+    $game = $bet->getGame(true);
+    $now = new \DateTime();
+    $game_date = new \DateTime($game->getGameDate());
+    //@TODO ajouter un tampon, genre 15 minutes
+    if($now->diff($game_date)>=0) {
+      dpm('bon');
+      return true;
+    }
+    dpm('pas bon');
+    //@TODO test si user involve
+    return true;
   }
 }
