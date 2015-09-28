@@ -289,6 +289,36 @@ class League extends ContentEntityBase implements LeagueInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    $fields['points_score_found'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Points when the game\'s score is found'))
+      ->setRequired(true)
+      ->setDefaultValue(10)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array('type' => 'hidden'))
+      ->setDisplayOptions('form', array('type' => 'number'))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['points_winner_found'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Points when the game\'s winner is found'))
+      ->setRequired(true)
+      ->setDefaultValue(5)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array('type' => 'hidden'))
+      ->setDisplayOptions('form', array('type' => 'number'))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['points_participation'] = BaseFieldDefinition::create('integer')
+      ->setLabel(t('Points when nothing is right.'))
+      ->setRequired(true)
+      ->setDefaultValue(1)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array('type' => 'hidden'))
+      ->setDisplayOptions('form', array('type' => 'number'))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
