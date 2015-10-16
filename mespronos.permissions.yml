@@ -4,7 +4,7 @@ access administration mespronos:
 
 manage settings:
   title: 'manage MesPronos settings'
-   description: 'such as points settings'
+  description: 'such as points settings'
 
 import league content:
   title: 'Import league to MesPronos'
