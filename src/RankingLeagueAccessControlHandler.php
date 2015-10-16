@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\user\Entity\User;
 
 /**
  * Access controller for the RankingLeague entity.
@@ -22,6 +23,9 @@ class RankingLeagueAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, $langcode, AccountInterface $account) {
+    if(is_null($account)) {
+      $account = User::load(\Drupal::currentUser()->id());
+    }
 
     switch ($operation) {
       case 'view':

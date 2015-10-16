@@ -22,6 +22,9 @@ class UserInvolveAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkAccess(EntityInterface $entity, $operation, $langcode, AccountInterface $account) {
+    if(is_null($account)) {
+      $account = User::load(\Drupal::currentUser()->id());
+    }
 
     switch ($operation) {
       case 'view':
