@@ -8,14 +8,16 @@
 namespace Drupal\mespronos\Entity\Controller;
 
 
+use Drupal\Core\Database\Database;
+
 class DayController {
 
   public static function getNextDaysToBet($nb = 5) {
     $day_storage = \Drupal::entityManager()->getStorage('day');
-
+    $injected_database = Database::getConnection();
     $now = new \DateTime();
 
-    $query = db_select('mespronos__game','g');
+    $query = $injected_database->select('mespronos__game','g');
     $query->addExpression('min(game_date)','day_date');
     $query->addExpression('count(id)','nb_game');
     $query->groupBy('day');
