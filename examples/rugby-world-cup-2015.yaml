@@ -89,4 +89,16 @@ league :
           game_date : 2015-10-11t17:45:00+02:00
         - game : Etats-unis | Japon
           game_date : 2015-10-11t21:00:00+02:00
+    - number : 2
+      name : '1/4 de finale'
+      day_default_date : 2015-10-17t17:00:00+02:00
+      games :
+        - game : Afrique Du Sud | Galles
+          game_date : 2015-10-17t17:00:00+02:00
+        - game : Nouvelle-zelande | France
+          game_date : 2015-10-17t21:00:00+02:00
+        - game : Irlande | Argentine
+          game_date : 2015-10-18t14:00:00+02:00
+        - game : Australie | Ecosse
+          game_date : 2015-10-18t17:00:00+02:00
 
