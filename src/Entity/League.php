@@ -36,7 +36,7 @@ use Drupal\user\UserInterface;
  *   },
  *   base_table = "mespronos__league",
  *   admin_permission = "administer League entity",
- *   fieldable = TRUE,
+ *   fieldable = FALSE,
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",

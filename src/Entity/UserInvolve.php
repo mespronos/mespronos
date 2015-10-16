@@ -37,6 +37,7 @@ use Drupal\user\UserInterface;
  *   },
  *   base_table = "mespronos__user_involve",
  *   admin_permission = "administer UserInvolve entity",
+ *   fieldable = FALSE,
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",

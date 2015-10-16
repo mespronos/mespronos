@@ -36,7 +36,7 @@ use Drupal\user\UserInterface;
  *   },
  *   base_table = "mespronos__day",
  *   admin_permission = "administer Day entity",
- *   fieldable = TRUE,
+ *   fieldable = FALSE,
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",

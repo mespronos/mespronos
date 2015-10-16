@@ -37,7 +37,7 @@ use Drupal\user\UserInterface;
  *   },
  *   base_table = "mespronos__sport",
  *   admin_permission = "administer Sport entity",
- *   fieldable = TRUE,
+ *   fieldable = FALSE,
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",

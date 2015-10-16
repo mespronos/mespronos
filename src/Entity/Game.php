@@ -37,6 +37,7 @@ use Drupal\user\UserInterface;
  *   },
  *   base_table = "mespronos__game",
  *   admin_permission = "administer Game entity",
+ *   fieldable = FALSE,
  *   entity_keys = {
  *     "id" = "id",
  *     "uuid" = "uuid"

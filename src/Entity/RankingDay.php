@@ -37,6 +37,7 @@ use Drupal\user\UserInterface;
  *   },
  *   base_table = "mespronos__ranking_day",
  *   admin_permission = "administer RankingDay entity",
+ *   fieldable = FALSE,
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
