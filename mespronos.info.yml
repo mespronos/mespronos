@@ -3,3 +3,13 @@ type: module
 description: Betting module for drupal 8
 core: 8.x
 package: MesPronos
+dependencies :
+  - block
+  - views
+  - field
+  - system
+  - datetime
+  - user
+  - entity_reference
+  - options
+  - text
