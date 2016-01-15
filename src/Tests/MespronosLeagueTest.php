@@ -76,4 +76,32 @@ class MespronosLeagueTest extends WebTestBase {
     $this->assertNotEqual($league->id(),$league2->id(),t('If we save a new league, ids are different id1 => @id1, id2 => @id2',array('@id1'=>$league->id(),'@id2'=>$league2->id())));
   }
 
+  public function testLeagueCreationWithBadAttributes() {
+    try {
+      League::create(array(
+        'sport' => $this->sport->id(),
+        'name' => 'test championnat',
+        'betting_type' => 'Lorem',
+        'classement' => true,
+        'status' => 'active',
+      ));
+      $this->fail('League should has a correct betting type, throw an exception elsewise');
+    } catch (\Exception $e) {
+      $this->pass('League without a correct betting type throw an exception');
+    }
+
+    try {
+      League::create(array(
+        'sport' => $this->sport->id(),
+        'name' => 'test championnat',
+        'betting_type' => 'score',
+        'classement' => true,
+        'status' => 'ipsum',
+      ));
+      $this->fail('League should has a correct status, throw an exception elsewise');
+    } catch (\Exception $e) {
+      $this->pass('League without a correct status throw an exception');
+    }
+  }
+
 }
