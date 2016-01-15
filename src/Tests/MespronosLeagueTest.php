@@ -104,4 +104,45 @@ class MespronosLeagueTest extends WebTestBase {
     }
   }
 
+  public function testLeagueCreationWithoutAttributes() {
+    $league = League::create(array(
+      'sport' => $this->sport->id(),
+      'name' => 'test championnat',
+      'classement' => true,
+      'status' => 'active',
+    ));
+    $this->assertNotNull($league->getBettingType(true),t('If no betting type set, a default is set'));
+    $this->assertEqual($league->getBettingType(true),League::$betting_type_default_value,t('If no betting type set, default one is used : @betting_type',array('@betting_type'=>$league->getBettingType())));
+
+    $league = League::create(array(
+      'sport' => $this->sport->id(),
+      'name' => 'test championnat',
+      'betting_type' => '',
+      'classement' => true,
+      'status' => 'active',
+    ));
+    $this->assertNotNull($league->getBettingType(true),t('If betting type is empty,a default is set'));
+    $this->assertEqual($league->getBettingType(true),League::$betting_type_default_value,t('If no betting type set, default one is used : @betting_type',array('@betting_type'=>$league->getBettingType())));
+
+    $league = League::create(array(
+      'sport' => $this->sport->id(),
+      'name' => 'test championnat',
+      'classement' => true,
+      'betting_type' => 'score',
+    ));
+    $this->assertNotNull($league->getStatus(true),t('If betting type is empty,a default is set'));
+    $this->assertEqual($league->getStatus(true),League::$status_default_value,t('If no betting type set, default one is used : @betting_type',array('@betting_type'=>$league->getStatus())));
+
+    $league = League::create(array(
+      'sport' => $this->sport->id(),
+      'name' => 'test championnat',
+      'classement' => true,
+      'status' => '',
+      'betting_type' => 'score',
+    ));
+    $this->assertNotNull($league->getBettingType(true),t('If betting type is empty,a default is set'));
+    $this->assertEqual($league->getStatus(true),League::$status_default_value,t('If no betting type set, default one is used : @betting_type',array('@betting_type'=>$league->getStatus())));
+
+  }
+
 }

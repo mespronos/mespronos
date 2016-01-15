@@ -58,11 +58,13 @@ class League extends ContentEntityBase implements LeagueInterface {
     'over' => 'Terminé',
     'archived' => 'Archivé',
   ];
+
   protected static $betting_types = [
     'score' => 'Score',
     'winner' => '1N2',
   ];
-  protected static $status_default_value = 'active';
+  public static $status_default_value = 'active';
+  public static $betting_type_default_value = 'score';
 
   public static function load($id) {
     $storage = \Drupal::entityManager()->getStorage('league');
@@ -105,7 +107,18 @@ class League extends ContentEntityBase implements LeagueInterface {
     );
   }
 
+  /**
+   * @param array $values
+   * @return League
+   * @throws \Exception
+   */
   public static function create(array $values = array()) {
+    if(!isset($values['betting_type']) || empty($values['betting_type'])) {
+      $values['betting_type'] = self::$betting_type_default_value;
+    }
+    if(!isset($values['status']) || empty($values['status'])) {
+      $values['status'] = self::$status_default_value;
+    }
     if(!in_array($values['betting_type'],array_keys(self::$betting_types))) {
       throw new \Exception(t('The choosen betting type is not valid'));
     }
