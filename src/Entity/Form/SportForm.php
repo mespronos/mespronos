@@ -43,18 +43,30 @@ class SportForm extends ContentEntityForm {
    */
   public function save(array $form, FormStateInterface $form_state) {
     $entity = $this->entity;
-    $status = $entity->save();
 
-    if ($status) {
-      drupal_set_message($this->t('Saved the %label Sport.', array(
-        '%label' => $entity->label(),
-      )));
+    $query = \Drupal::entityQuery('sport')->condition('name', '%'.$entity->get('name').'%', 'LIKE');
+    $id = $query->execute();
+
+    if (count($id) == 0) {
+      $status = $entity->save();
+      if ($status) {
+        drupal_set_message($this->t('Saved the %label Sport.', array(
+          '%label' => $entity->label(),
+        )));
+      }
+      else {
+        drupal_set_message($this->t('The %label Sport was not saved.', array(
+          '%label' => $entity->label(),
+        )));
+      }
     }
     else {
-      drupal_set_message($this->t('The %label Sport was not saved.', array(
+      drupal_set_message($this->t('The %label Sport was not saved as it already exist.', array(
         '%label' => $entity->label(),
       )));
+      $entity = entity_load('sport', array_pop($id));
     }
+
     $form_state->setRedirect('entity.sport.edit_form', ['sport' => $entity->id()]);
   }
 
