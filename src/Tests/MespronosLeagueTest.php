@@ -105,6 +105,32 @@ class MespronosLeagueTest extends WebTestBase {
   }
 
   public function testLeagueCreationWithoutAttributes() {
+    try {
+      League::create(array(
+        'sport' => $this->sport->id(),
+        'betting_type' => 'score',
+        'classement' => true,
+        'status' => 'active',
+      ));
+      $this->fail('League\'name shouldn\' be null');
+    } catch (\Exception $e) {
+      $this->pass(t('Unset League\'name throw exception | exception message : @msg',array('@msg'=>$e->getMessage())));
+    }
+
+    try {
+      League::create(array(
+        'sport' => $this->sport->id(),
+        'name' => '',
+        'betting_type' => 'score',
+        'classement' => true,
+        'status' => 'active',
+      ));
+      $this->fail('League\'name shouldn\' be empty');
+    } catch (\Exception $e) {
+      $this->pass(t('Empty League\'name throw exception | exception message : @msg',array('@msg'=>$e->getMessage())));
+    }
+
+
     $league = League::create(array(
       'sport' => $this->sport->id(),
       'name' => 'test championnat',
@@ -150,7 +176,7 @@ class MespronosLeagueTest extends WebTestBase {
       ));
       $this->fail('League\'s must not be empty');
     } catch (\Exception $e) {
-      $this->pass('League\'s sport should be set');
+      $this->pass(t('League\'s sport should be set | exception message : @msg',array('@msg'=>$e->getMessage())));
     }
 
     try {
@@ -161,7 +187,7 @@ class MespronosLeagueTest extends WebTestBase {
       ));
       $this->fail('League should refere to a sport entity');
     } catch (\Exception $e) {
-      $this->pass('League\'s sport should be set');
+      $this->pass(t('League\'s sport should be set  | exception message : @msg',array('@msg'=>$e->getMessage())));
     }
 
   }
