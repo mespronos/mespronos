@@ -24,7 +24,7 @@ class DayAccessControlHandler extends EntityAccessControlHandler
   /**
    * {@inheritdoc}
    */
-  protected function checkAccess(EntityInterface $entity, $operation, $langcode, AccountInterface $account) {
+  protected function checkAccess(EntityInterface $entity, $operation, AccountInterface $account) {
     if(is_null($account)) {
       $account = User::load(\Drupal::currentUser()->id());
     }
