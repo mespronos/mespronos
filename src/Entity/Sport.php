@@ -13,6 +13,7 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\SportInterface;
 use Drupal\user\UserInterface;
+use Masterminds\HTML5\Exception;
 
 /**
  * Defines the Sport entity.
@@ -64,6 +65,9 @@ class Sport extends ContentEntityBase implements SportInterface {
   }
 
   public static function create(array $values = array()) {
+    if(trim($values['name']) == '') {
+      throw new \Exception(t('Sport name should not be empty'));
+    }
     $query = \Drupal::entityQuery('sport')->condition('name', '%'.$values['name'].'%', 'LIKE');
     $id = $query->execute();
     if (count($id) == 0) {
@@ -139,6 +143,7 @@ class Sport extends ContentEntityBase implements SportInterface {
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
+      ->setRequired(TRUE)
       ->setDefaultValueCallback('Drupal\node\Entity\Node::getCurrentUserId')
       ->setDisplayOptions('view', array(
         'label' => 'hidden',
@@ -162,6 +167,7 @@ class Sport extends ContentEntityBase implements SportInterface {
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Sport entity.'))
       ->setTranslatable(true)
+      ->setRequired(TRUE)
       ->setSettings(array(
         'default_value' => '',
         'max_length' => 50,
