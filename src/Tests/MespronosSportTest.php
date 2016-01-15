@@ -83,7 +83,9 @@ class MespronosSportTest extends WebTestBase {
     ));
     $this->assertTrue($sport->save(),t('Saving sport with only the name works'));
     $this->assertTrue($sport->id()>0,t('Saved sport has an id => @id',array('@id'=>$sport->id())));
-    $this->assertTrue($sport->getOwnerId() == $this->user->id() ,t('Saved sport has an creator => @id',array('@id'=>$sport->getOwnerId())));
+    $this->assertTrue($sport->getOwnerId() == $this->user->id() ,t('Saved sport has a creator => @id',array('@id'=>$sport->getOwnerId())));
+    $this->assertTrue($sport->getCreatedTime() > 0 ,t('Saved sport has a created time => @id',array('@id'=>$sport->getCreatedTime())));
+    $this->assertTrue($sport->getChangedTime() > 0 ,t('Saved sport has a created time => @id',array('@id'=>$sport->getChangedTime())));
 
   }
 }

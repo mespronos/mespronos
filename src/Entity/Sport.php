@@ -64,6 +64,11 @@ class Sport extends ContentEntityBase implements SportInterface {
     );
   }
 
+  /**
+   * @param array $values
+   * @return Sport
+   * @throws \Exception
+   */
   public static function create(array $values = array()) {
     if(trim($values['name']) == '') {
       throw new \Exception(t('Sport name should not be empty'));
