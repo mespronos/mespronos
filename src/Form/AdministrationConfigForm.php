@@ -22,7 +22,6 @@ class AdministrationConfigForm extends FormBase {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
     $games = $form_state->getBuildInfo()['args'][0];
-    $form['#attached']['library'][] = 'mespronos/administration_style';
 
     $form['games'] = array(
       '#type' => 'container',

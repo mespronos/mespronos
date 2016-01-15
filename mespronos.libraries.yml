@@ -1,12 +1,10 @@
-administration_style :
-  version: 1.x
-  header: true
+administration-style :
+  version: VERSION
   css:
     theme :
       css/administration.css : {}
-front_style :
-  version: 1.x
-  header: true
+front-style :
+  version: VERSION
   css:
     theme :
       css/front.css : {}
