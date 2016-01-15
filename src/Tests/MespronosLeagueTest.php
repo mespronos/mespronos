@@ -143,6 +143,27 @@ class MespronosLeagueTest extends WebTestBase {
     $this->assertNotNull($league->getBettingType(true),t('If betting type is empty,a default is set'));
     $this->assertEqual($league->getStatus(true),League::$status_default_value,t('If no betting type set, default one is used : @betting_type',array('@betting_type'=>$league->getStatus())));
 
+    try {
+      League::create(array(
+        'name' => 'test championnat',
+        'classement' => true,
+      ));
+      $this->fail('League\'s must not be empty');
+    } catch (\Exception $e) {
+      $this->pass('League\'s sport should be set');
+    }
+
+    try {
+      League::create(array(
+        'sport' => 47,
+        'name' => 'test championnat',
+        'classement' => true,
+      ));
+      $this->fail('League should refere to a sport entity');
+    } catch (\Exception $e) {
+      $this->pass('League\'s sport should be set');
+    }
+
   }
 
 }
