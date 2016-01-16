@@ -1,11 +1,9 @@
 Mespronos
 =========
 
-L'objectif de ce module et de fournir l'ensemble des fonctionnalités afin de gérer un site de pronostics sportifs.
+Module **Drupal 8** pour gérer un site de pronostics sportifs.
 
-C'est un module **en cours de développement** loin d'être prêt pour être utilisé en production.
-
-Plus d'informations sur le développement de ce module sur le site du site : [mon blog](http://blog.mespronos.net?utm_source=github&utm_medium=post&utm_campaign=github-mespronos)
+Le module est **en cours de développement** et est loin d'être prêt pour être utilisé en production.
 
 Ce module à servi de base à quelques tutoriaux Drupal 8 sur [mon blog](http://www.kgaut.net/journal.html?utm_source=github&utm_medium=post&utm_campaign=github-mespronos)
 
