@@ -11,5 +11,5 @@ Ce module à servi de base à quelques tutoriaux Drupal 8 sur [mon blog](http://
  - [Création d'une entité et ajout de fields + configuration](http://www.kgaut.net/journal/a-la-decouverte-de-drupal-8-2-creation-dune-entite-avec-fields.html?utm_source=github&utm_medium=post1&utm_campaign=github-mespronos)
  - [Populer automatiquement un type d'entité lors de l'installation](http://www.kgaut.net/journal/a-la-decouverte-de-drupal-8-3-populer-une-entitee-lors-de-linstallation.html?utm_source=github&utm_medium=post1&utm_campaign=github-mespronos)
 
-##Credits
+##Crédits
 Icons from [Freepik](http://www.freepik.com/) 
