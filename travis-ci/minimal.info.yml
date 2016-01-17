@@ -1,0 +1,15 @@
+# This file lives in the travis-ci subdirectory
+name: Minimal
+type: profile
+description: 'Build a custom site without pre-configured functionality. Suitable for advanced users.'
+version: VERSION
+core: 8.x
+dependencies:
+  - node
+  - block
+  - dblog
+  - page_cache
+  - dynamic_page_cache
+  - decoupled_auth
+themes:
+  - stark
