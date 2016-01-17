@@ -1,5 +1,6 @@
 Mespronos
 =========
+[![Build Status](https://travis-ci.org/kgaut/mespronos.svg?branch=master)](https://travis-ci.org/kgaut/mespronos)
 
 Module **Drupal 8** pour gérer un site de pronostics sportifs.
 
