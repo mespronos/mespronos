@@ -74,4 +74,8 @@ after_script:
   - drupal-ti after_script
 
 notifications:
-  email: mespronos@kgaut.net
+  email:
+  recipients:
+    - mespronos@kgaut.net
+  on_success: always
+  on_failure: always
