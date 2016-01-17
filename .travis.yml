@@ -75,7 +75,7 @@ after_script:
 
 notifications:
   email:
-  recipients:
-    - mespronos@kgaut.net
-  on_success: always
-  on_failure: always
+    recipients:
+      - mespronos@kgaut.net
+    on_success: always
+    on_failure: always
