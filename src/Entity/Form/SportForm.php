@@ -23,6 +23,7 @@ class SportForm extends ContentEntityForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /* @var $entity \Drupal\mespronos\Entity\Sport */
     $form = parent::buildForm($form, $form_state);
+    $form['creator']['#access'] = false;
     $entity = $this->entity;
 
     return $form;
