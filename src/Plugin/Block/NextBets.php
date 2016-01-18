@@ -9,6 +9,7 @@ namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Url;
+use Drupal\Core\Link;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\mespronos\Entity\Controller\DayController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
@@ -70,18 +71,17 @@ class NextBets extends BlockBase {
       $i = $game_date->diff($now_date);
 
       if($day->involve) {
-        $action_links = \Drupal::l(
+        $action_links = Link::fromTextAndUrl(
           $this->t('Bet now'),
           new Url('mespronos.day.bet', array('day' => $day_id))
         );
       }
       else {
-        $action_links = \Drupal::l(
-          $this->t('Subscribe now !'),
+        $action_links = Link::fromTextAndUrl(
+          $this->t('Start betting now !'),
           new Url('mespronos.league.register', array('league' => $league->id()))
         );
       }
-
       $row = [
         $league->label(),
         $day->entity->label(),
@@ -90,18 +90,15 @@ class NextBets extends BlockBase {
         $i->format('%a') >0 ? $this->t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : $this->t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
         $action_links,
       ];
-
-
       $rows[] = $row;
     }
     $header = [
-      $this->t('League'),
-      $this->t('Day'),
-      $this->t('Game to bet on'),
-      $this->t('Time left'),
+      $this->t('League',array(),array('context'=>'mespronos')),
+      $this->t('Day',array(),array('context'=>'mespronos')),
+      $this->t('Bets left',array(),array('context'=>'mespronos')),
+      $this->t('Time left',array(),array('context'=>'mespronos')),
       '',
     ];
-
     return [
       '#theme' => 'table',
       '#rows' => $rows,
