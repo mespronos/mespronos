@@ -112,14 +112,6 @@ entity.team.delete_form:
   requirements:
     _entity_access: 'team.delete'
 
-team.settings:
-  path: '/admin/mespronos/structure/team'
-  defaults:
-   _form: '\Drupal\mespronos\Entity\Form\TeamSettingsForm'
-   _title: 'Team Settings'
-  requirements:
-    _permission: 'administer Team entity'
-
 # League routing definition
 entity.league.canonical:
   path: '/admin/mespronos/content/league/{league}'
@@ -160,14 +152,6 @@ entity.league.delete_form:
     _title: 'Delete League'
   requirements:
     _entity_access: 'league.delete'
-
-league.settings:
-  path: '/admin/mespronos/structure/league'
-  defaults:
-   _form: '\Drupal\mespronos\Entity\Form\LeagueSettingsForm'
-   _title: 'League Settings'
-  requirements:
-    _permission: 'administer League entity'
 
 # Sport routing definition
 entity.sport.canonical:
@@ -210,13 +194,6 @@ entity.sport.delete_form:
   requirements:
     _entity_access: 'sport.delete'
 
-sport.settings:
-  path: '/admin/mespronos/structure/sport'
-  defaults:
-   _form: '\Drupal\mespronos\Entity\Form\SportSettingsForm'
-   _title: 'Sport Settings'
-  requirements:
-    _permission: 'administer Sport entity'
 # Day routing definition
 entity.day.canonical:
   path: '/admin/day/{day}'
@@ -257,14 +234,6 @@ entity.day.delete_form:
     _title: 'Delete Day'
   requirements:
     _entity_access: 'day.delete'
-
-day.settings:
-  path: 'admin/structure/day'
-  defaults:
-   _form: '\Drupal\mespronos\Entity\Form\DaySettingsForm'
-   _title: 'Day Settings'
-  requirements:
-    _permission: 'administer Day entity'
 
 mespronos.importer_start:
   path: 'admin/mespronos/import/{fid}'
@@ -316,15 +285,6 @@ entity.game.delete_form:
   requirements:
     _entity_access: 'game.delete'
 
-game.settings:
-  path: 'admin/structure/game'
-  defaults:
-   _form: '\Drupal\mespronos\Entity\Form\GameSettingsForm'
-   _title: 'Game Settings'
-  requirements:
-    _permission: 'administer Game entity'
-
-
 # Bet routing definition
 entity.bet.canonical:
   path: '/admin/bet/{bet}'
@@ -365,15 +325,6 @@ entity.bet.delete_form:
     _title: 'Delete Bet'
   requirements:
     _entity_access: 'bet.delete'
-
-bet.settings:
-  path: 'admin/structure/bet'
-  defaults:
-   _form: '\Drupal\mespronos\Entity\Form\BetSettingsForm'
-   _title: 'Bet Settings'
-  requirements:
-    _permission: 'administer Bet entity'
-
 
 # RankingDay routing definition
 entity.ranking_day.canonical:
@@ -416,14 +367,6 @@ entity.ranking_day.delete_form:
   requirements:
     _entity_access: 'ranking_day.delete'
 
-ranking_day.settings:
-  path: 'admin/structure/ranking_day'
-  defaults:
-   _form: '\Drupal\mespronos\Entity\Form\RankingDaySettingsForm'
-   _title: 'RankingDay Settings'
-  requirements:
-    _permission: 'administer RankingDay entity'
-
 # RankingLeague routing definition
 entity.ranking_league.canonical:
   path: '/admin/ranking_league/{ranking_league}'
@@ -465,15 +408,6 @@ entity.ranking_league.delete_form:
   requirements:
     _entity_access: 'ranking_league.delete'
 
-ranking_league.settings:
-  path: 'admin/structure/ranking_league'
-  defaults:
-   _form: '\Drupal\mespronos\Entity\Form\RankingLeagueSettingsForm'
-   _title: 'RankingLeague Settings'
-  requirements:
-    _permission: 'administer RankingLeague entity'
-
-
 # UserInvolve routing definition
 entity.user_involve.canonical:
   path: '/admin/user_involve/{user_involve}'
@@ -514,12 +448,3 @@ entity.user_involve.delete_form:
     _title: 'Delete UserInvolve'
   requirements:
     _entity_access: 'user_involve.delete'
-
-user_involve.settings:
-  path: 'admin/structure/user_involve'
-  defaults:
-   _form: '\Drupal\mespronos\Entity\Form\UserInvolveSettingsForm'
-   _title: 'UserInvolve Settings'
-  requirements:
-    _permission: 'administer UserInvolve entity'
-

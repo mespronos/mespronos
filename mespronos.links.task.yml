@@ -27,11 +27,6 @@ mespronos.settings:
   weight : 100
 
 # Team routing definition
-team.settings_tab:
-  route_name: team.settings
-  title: 'Settings'
-  base_route: team.settings
-
 entity.team.canonical:
   route_name: entity.team.canonical
   base_route: entity.team.canonical
@@ -55,10 +50,6 @@ entity.team.collection:
   weight : 11
 
 # League routing definition
-league.settings_tab:
-  route_name: league.settings
-  title: 'Settings'
-  base_route: league.settings
 
 entity.league.canonical:
   route_name: entity.league.canonical
@@ -83,11 +74,6 @@ entity.league.collection:
   weight : 12
 
 # Sport routing definition
-sport.settings_tab:
-  route_name: sport.settings
-  title: 'Settings'
-  base_route: sport.settings
-
 entity.sport.canonical:
   route_name: entity.sport.canonical
   base_route: entity.sport.canonical
@@ -111,11 +97,6 @@ entity.sport.collection:
   weight : 10
 
 # Day routing definition
-day.settings_tab:
-  route_name: day.settings
-  title: 'Settings'
-  base_route: day.settings
-
 entity.day.canonical:
   route_name: entity.day.canonical
   base_route: entity.day.canonical
@@ -139,11 +120,6 @@ entity.day.list:
   weight : 13
 
 # Game routing definition
-game.settings_tab:
-  route_name: game.settings
-  title: 'Settings'
-  base_route: game.settings
-
 entity.game.canonical:
   route_name: entity.game.canonical
   base_route: entity.game.canonical
@@ -168,11 +144,6 @@ entity.game.delete_form:
 #  weight: 14
 
 # Bet routing definition
-bet.settings_tab:
-  route_name: bet.settings
-  title: 'Settings'
-  base_route: bet.settings
-
 entity.bet.canonical:
   route_name: entity.bet.canonical
   base_route: entity.bet.canonical
@@ -190,11 +161,6 @@ entity.bet.delete_form:
   weight: 10
 
 # RankingDay routing definition
-ranking_day.settings_tab:
-  route_name: ranking_day.settings
-  title: 'Settings'
-  base_route: ranking_day.settings
-
 entity.ranking_day.canonical:
   route_name: entity.ranking_day.canonical
   base_route: entity.ranking_day.canonical
@@ -212,11 +178,6 @@ entity.ranking_day.delete_form:
   weight: 10
 
 # RankingLeague routing definition
-ranking_league.settings_tab:
-  route_name: ranking_league.settings
-  title: 'Settings'
-  base_route: ranking_league.settings
-
 entity.ranking_league.canonical:
   route_name: entity.ranking_league.canonical
   base_route: entity.ranking_league.canonical
@@ -240,11 +201,6 @@ entity.user_involve.collection:
   description: 'User involvements'
   base_route: mespronos.dashboard
   weight: 20
-
-user_involve.settings_tab:
-  route_name: user_involve.settings
-  title: 'Settings'
-  base_route: user_involve.settings
 
 entity.user_involve.canonical:
   route_name: entity.user_involve.canonical
