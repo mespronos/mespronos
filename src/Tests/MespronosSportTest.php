@@ -15,14 +15,15 @@ use Drupal\mespronos\Entity\Sport;
  * @group mespronos
  */
 class MespronosSportTest extends WebTestBase {
+  public $user;
   /**
    * {@inheritdoc}
    */
   public static function getInfo() {
     return array(
-      'name' => "mespronos DefaultController's controller functionality",
-      'description' => 'Test Unit for module mespronos and controller DefaultController.',
-      'group' => 'Other',
+      'name' => "MesPronos Sport entity functionality",
+      'description' => 'Test Unit for entity Sport from mespronos.',
+      'group' => 'MesPronos',
     );
   }
 
@@ -67,9 +68,9 @@ class MespronosSportTest extends WebTestBase {
         'name' => '',
         'langcode' => 'und',
       ));
-      $this->fail('Sport with empty name should throw exception');
+      $this->fail('An empty name should throw an exception');
     } catch (\Exception $e) {
-      $this->pass('Sport with empty name throw exception');
+      $this->pass('An empty name throw an exception');
     }
   }
 

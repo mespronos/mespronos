@@ -16,14 +16,16 @@ use Drupal\mespronos\Entity\League;
  * @group mespronos
  */
 class MespronosLeagueTest extends WebTestBase {
+
+  public $sport;
   /**
    * {@inheritdoc}
    */
   public static function getInfo() {
     return array(
-      'name' => "mespronos DefaultController's controller functionality",
-      'description' => 'Test Unit for module mespronos and controller DefaultController.',
-      'group' => 'Other',
+      'name' => "MesPronos League entity functionality",
+      'description' => 'Test Unit for entity League from mespronos.',
+      'group' => 'MesPronos',
     );
   }
 
