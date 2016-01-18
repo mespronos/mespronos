@@ -98,5 +98,5 @@ subscribe to league:
   title: 'Subscribe to a league'
   description: 'Allow to bet on this league'
 
-bet on day:
-  title: 'Bet on a league day'
+make a bet:
+  title: 'make a bet'

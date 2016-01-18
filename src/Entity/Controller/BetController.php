@@ -7,11 +7,7 @@
 
 namespace Drupal\mespronos\Entity\Controller;
 
-use Drupal\Core\Entity\EntityInterface;
-use Drupal\Core\Entity\EntityListBuilder;
-use Drupal\Core\Url;
-use Drupal\datetime\Plugin\views\Argument\Date;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Drupal\mespronos\Entity\League;
 
 /**
  * Provides a list controller for Game entity.
@@ -34,6 +30,11 @@ class BetController {
     foreach($bets as $bet) {
       $bet->definePoints($game);
     }
+  }
+
+  public static function nextbets(League $league=null) {
+    kint($league);
+    return ['#markup'=>'loool'];
   }
 
   /**
