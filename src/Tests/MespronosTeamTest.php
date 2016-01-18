@@ -63,7 +63,7 @@ class MespronosTeamTest extends WebTestBase {
 
   }
 
-  public function testLeagueSimpleCreation() {
+  public function testTeamSimpleCreation() {
 
     $team = Team::create(array(
       'created' => time(),
@@ -88,5 +88,46 @@ class MespronosTeamTest extends WebTestBase {
     $this->assertNotEqual($team2->id(),$team->id(),t('If we save a new team, ids are different id1 => @id1, id2 => @id2',array('@id1'=>$team->id(),'@id2'=>$team2->id())));
   }
 
+  public function testTeamCreationWithoutName() {
+    try {
+      $team2 = Team::create(array(
+        'created' => time(),
+        'updated' => time(),
+        'creator' => 1,
+        'langcode' => 'und',
+      ));
+      $this->fail('Empty Team\'name shouldn\'t be null');
+    } catch (\Exception $e) {
+      $this->pass(t('Unset team \'name throw exception | exception message : @msg', array('@msg' => $e->getMessage())));
+    }
+  }
+  public function testTeamCreationWithEmptyName() {
+    try {
+      $team2 = Team::create(array(
+        'created' => time(),
+        'updated' => time(),
+        'creator' => 1,
+        'langcode' => 'und',
+        'name' => '',
+      ));
+      $this->fail('Teams\'name shouldn\' be empty');
+    } catch (\Exception $e) {
+      $this->pass(t('Empty Teams\'name throw exception | exception message : @msg', array('@msg' => $e->getMessage())));
+    }
+  }
 
+  public function testTeamCreationWithOnlySpaceInName() {
+    try {
+      $team2 = Team::create(array(
+        'created' => time(),
+        'updated' => time(),
+        'creator' => 1,
+        'langcode' => 'und',
+        'name' => ' ',
+      ));
+      $this->fail('Teams\'name (with spaces) shouldn\' be empty');
+    } catch (\Exception $e) {
+      $this->pass(t('Empty Teams\'name (with spaces) throw exception | exception message : @msg', array('@msg' => $e->getMessage())));
+    }
+  }
 }

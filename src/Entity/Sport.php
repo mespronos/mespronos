@@ -70,7 +70,7 @@ class Sport extends ContentEntityBase implements SportInterface {
    * @throws \Exception
    */
   public static function create(array $values = array()) {
-    if(trim($values['name']) == '') {
+    if(!isset($values['name']) || empty(trim($values['name']))) {
       throw new \Exception(t('Sport name should not be empty'));
     }
     $query = \Drupal::entityQuery('sport')->condition('name', '%'.$values['name'].'%', 'LIKE');

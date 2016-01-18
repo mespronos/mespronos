@@ -59,6 +59,20 @@ class MespronosSportTest extends WebTestBase {
     $this->assertEqual($sport2->id(),$sport->id(),t('If we tried to create a sport with an existing name, ti load the existing. id1 => @id1, id2 => @id2',array('@sport_name'=>$sport_name,'@id1'=>$sport->id(),'@id2'=>$sport2->id())));
   }
 
+  public function testCreationOfSportWithoutSportName() {
+    try {
+      $sport3 = Sport::create(array(
+        'created' => time(),
+        'updated' => time(),
+        'creator' => 1,
+        'langcode' => 'und',
+      ));
+      $this->fail('An unset name should throw an exception');
+    } catch (\Exception $e) {
+      $this->pass('An unset name throw an exception');
+    }
+  }
+
   public function testCreationOfSportWithEmptySportName() {
     try {
       $sport3 = Sport::create(array(
@@ -66,6 +80,21 @@ class MespronosSportTest extends WebTestBase {
         'updated' => time(),
         'creator' => 1,
         'name' => '',
+        'langcode' => 'und',
+      ));
+      $this->fail('An empty name should throw an exception');
+    } catch (\Exception $e) {
+      $this->pass('An empty name throw an exception');
+    }
+  }
+
+  public function testCreationOfSportWithOnlySpaceInName() {
+    try {
+      $sport3 = Sport::create(array(
+        'created' => time(),
+        'updated' => time(),
+        'creator' => 1,
+        'name' => '  ',
         'langcode' => 'und',
       ));
       $this->fail('An empty name should throw an exception');

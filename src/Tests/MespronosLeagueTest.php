@@ -116,7 +116,7 @@ class MespronosLeagueTest extends WebTestBase {
       ));
       $this->fail('League\'name shouldn\' be null');
     } catch (\Exception $e) {
-      $this->pass(t('Unset League\'name throw exception | exception message : @msg',array('@msg'=>$e->getMessage())));
+      $this->pass(t('Unset League\'name throws exception | exception message : @msg',array('@msg'=>$e->getMessage())));
     }
 
     try {
@@ -129,7 +129,20 @@ class MespronosLeagueTest extends WebTestBase {
       ));
       $this->fail('League\'name shouldn\' be empty');
     } catch (\Exception $e) {
-      $this->pass(t('Empty League\'name throw exception | exception message : @msg',array('@msg'=>$e->getMessage())));
+      $this->pass(t('Empty League\'name throws exception | exception message : @msg',array('@msg'=>$e->getMessage())));
+    }
+
+    try {
+      League::create(array(
+        'sport' => $this->sport->id(),
+        'name' => '  ',
+        'betting_type' => 'score',
+        'classement' => true,
+        'status' => 'active',
+      ));
+      $this->fail('League\'name shouldn\'t be composed only of spaces');
+    } catch (\Exception $e) {
+      $this->pass(t('Empty League\'s name (with only spaces) throws exception | exception message : @msg',array('@msg'=>$e->getMessage())));
     }
 
 

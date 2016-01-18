@@ -63,6 +63,13 @@ class Team extends ContentEntityBase implements TeamInterface {
     );
   }
 
+  public static function create(array $values = array()) {
+    if(!isset($values['name']) || empty(trim($values['name']))) {
+      throw new \Exception(t('The team\'s name should be set and should not be empty'));
+    }
+    return parent::create($values);
+  }
+
   /**
    * {@inheritdoc}
    */
