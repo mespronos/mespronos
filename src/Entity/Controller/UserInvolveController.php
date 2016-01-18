@@ -39,12 +39,7 @@ class UserInvolveController extends ControllerBase {
     $userInvolve->save();
 
     drupal_set_message(t('You\'ve been subscribe to this league, you can now bet on it !'));
-    return $this->redirect('<front>');
-
-
-    return [
-      '#markup'=>'lol'
-    ];
+    return $this->redirect('mespronos/bet/next-bets/league/'.$league->id());
   }
 
   public static function isUserInvolve($uid,$league_id) {
