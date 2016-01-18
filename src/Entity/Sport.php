@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\SportInterface;
 use Drupal\user\UserInterface;
@@ -54,6 +55,8 @@ use Masterminds\HTML5\Exception;
  * )
  */
 class Sport extends ContentEntityBase implements SportInterface {
+    
+  use EntityChangedTrait;
   /**
    * {@inheritdoc}
    */

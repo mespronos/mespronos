@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\LeagueInterface;
 use Drupal\user\UserInterface;
@@ -52,6 +53,9 @@ use Drupal\user\UserInterface;
  * )
  */
 class League extends ContentEntityBase implements LeagueInterface {
+    
+  use EntityChangedTrait;
+    
   protected static $status_allowed_value = [
     'future' => 'À venir',
     'active' => 'En cours',
@@ -96,7 +100,7 @@ class League extends ContentEntityBase implements LeagueInterface {
   public function HasClassement() {
     return $this->get('classement')->value;
   }
-
+  
   /**
    * {@inheritdoc}
    */

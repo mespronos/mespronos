@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\BetInterface;
 use Drupal\user\UserInterface;
@@ -51,6 +52,8 @@ use Drupal\user\UserInterface;
  * )
  */
 class Bet extends ContentEntityBase implements BetInterface {
+    
+  use EntityChangedTrait;
   /**
    * {@inheritdoc}
    */
