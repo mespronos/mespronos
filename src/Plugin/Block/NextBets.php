@@ -78,10 +78,18 @@ class NextBets extends BlockBase {
       }
       else {
         if($user_uid == 0) {
-          $action_links = Link::fromTextAndUrl(
-            $this->t('Register or login and start betting'),
-            new Url('user.register')
-          );
+          if(\Drupal::moduleHandler()->moduleExists(('mespronos_registration'))) {
+            $action_links = Link::fromTextAndUrl(
+              $this->t('Register or login and start betting'),
+              new Url('mespronos_registration.join')
+            );
+          }
+          else {
+            $action_links = Link::fromTextAndUrl(
+              $this->t('Register or login and start betting'),
+              new Url('user.register')
+            );
+          }
         }
         else {
           $action_links = Link::fromTextAndUrl(
