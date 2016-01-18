@@ -26,7 +26,11 @@ function mespronos_registration_help($route_name, RouteMatchInterface $route_mat
 function mespronos_registration_theme() {
   $theme = [];
   $theme['join'] = array(
-    'variables' => array('test_var' => NULL),
+    'variables' => array(
+      'test_var' => NULL,
+      'login_form' => NULL,
+      'registration_form' => NULL,
+    ),
   );
 
   return $theme;
