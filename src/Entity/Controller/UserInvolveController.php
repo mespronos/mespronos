@@ -19,7 +19,6 @@ class UserInvolveController extends ControllerBase {
     $uid = \Drupal::currentUser()->id();
     if(self::isUserInvolve($uid,$league)) {
       drupal_set_message(t('You are already involve in this league'),'warning');
-      return $this->redirect('<front>');
     }
     $league = League::load($league);
     if(!$league) {
