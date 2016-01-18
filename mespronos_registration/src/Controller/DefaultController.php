@@ -44,14 +44,12 @@ class DefaultController extends ControllerBase {
   public static function getRegistrationForm() {
     $account = \Drupal::entityManager()->getStorage('user') ->create(array());
     $form =\Drupal::service('entity.form_builder')->getForm($account, 'default');
-    dpm($form);
     $form['status']['#access'] = false;
     $form['roles']['#access'] = false;
     $form['notify']['#access'] = false;
     $form['user_picture']['#access'] = false;
     $form['contact']['#access'] = false;
     $form['timezone']['#access'] = false;
-    ///$form
     return $form;
 
   }
