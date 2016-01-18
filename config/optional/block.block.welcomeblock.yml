@@ -18,4 +18,9 @@ settings:
   provider: mespronos
   label_display: '0'
   mespronos_welcome_message: Lorem
-visibility: {  }
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
