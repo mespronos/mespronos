@@ -23,8 +23,8 @@ class DefaultController extends ControllerBase {
    */
   public function join() {
     return [
-        '#type' => 'markup',
-        '#markup' => $this->t('Implement method: join')
+        '#theme' => 'join',
+        '#test_var' => 'looool'
     ];
   }
 
