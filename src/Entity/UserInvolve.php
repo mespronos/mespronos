@@ -11,7 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\mespronos\UserInvolveInterface;
+use Drupal\mespronos\EntityInterface;
 use Drupal\user\UserInterface;
 
 /**
@@ -51,7 +51,7 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "user_involve.settings"
  * )
  */
-class UserInvolve extends ContentEntityBase implements UserInvolveInterface {
+class UserInvolve extends ContentEntityBase implements EntityInterface {
   /**
    * {@inheritdoc}
    */

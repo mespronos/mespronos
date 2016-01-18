@@ -11,7 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\mespronos\RankingDayInterface;
+use Drupal\mespronos\EntityInterface;
 use Drupal\user\UserInterface;
 
 /**
@@ -51,7 +51,7 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "ranking_day.settings"
  * )
  */
-class RankingDay extends ContentEntityBase implements RankingDayInterface {
+class RankingDay extends ContentEntityBase implements EntityInterface {
   /**
    * {@inheritdoc}
    */

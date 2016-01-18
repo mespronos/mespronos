@@ -11,9 +11,8 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\mespronos\SportInterface;
+use Drupal\mespronos\EntityInterface;
 use Drupal\user\UserInterface;
-use Masterminds\HTML5\Exception;
 
 /**
  * Defines the Sport entity.
@@ -53,7 +52,7 @@ use Masterminds\HTML5\Exception;
  *   field_ui_base_route = "sport.settings"
  * )
  */
-class Sport extends ContentEntityBase implements SportInterface {
+class Sport extends ContentEntityBase implements EntityInterface {
   /**
    * {@inheritdoc}
    */
