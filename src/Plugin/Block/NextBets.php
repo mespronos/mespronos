@@ -77,10 +77,18 @@ class NextBets extends BlockBase {
         );
       }
       else {
-        $action_links = Link::fromTextAndUrl(
-          $this->t('Start betting now !'),
-          new Url('mespronos.league.register', array('league' => $league->id()))
-        );
+        if($user_uid == 0) {
+          $action_links = Link::fromTextAndUrl(
+            $this->t('Register or login and start betting'),
+            new Url('user.register')
+          );
+        }
+        else {
+          $action_links = Link::fromTextAndUrl(
+            $this->t('Start betting now !'),
+            new Url('mespronos.league.register', array('league' => $league->id()))
+          );
+        }
       }
       $row = [
         $league->label(),
