@@ -1,0 +1,17 @@
+<?php
+
+function mespronos_install() {
+  $permission_anonymous = [
+    'view next bets days',
+    'view last bets days',
+  ];
+  $permission_authenticated = [
+    'view next bets days',
+    'view last bets days',
+    'subscribe to league',
+    'make a bet',
+  ];
+
+  user_role_grant_permissions('anonymous', $permission_anonymous);
+  user_role_grant_permissions('authenticated', $permission_authenticated);
+}
