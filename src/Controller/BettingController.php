@@ -114,13 +114,23 @@ class BettingController extends ControllerBase {
         if(\Drupal::moduleHandler()->moduleExists(('mespronos_registration'))) {
           $action_links = Link::fromTextAndUrl(
             t('Register or login and start betting'),
-            new Url('mespronos_registration.join')
+            new Url('mespronos_registration.join'),
+            [
+              'query' => [
+                'destination' => Url('mespronos.league.register', array('league' => $league->id())
+              ]
+            ]
           );
         }
         else {
           $action_links = Link::fromTextAndUrl(
             t('Register or login and start betting'),
-            new Url('user.register')
+            new Url('user.register'),
+            [
+              'query' => [
+                'destination' => Url('mespronos.league.register', array('league' => $league->id())
+              ]
+            ]
           );
         }
       }
