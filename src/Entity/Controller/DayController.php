@@ -15,7 +15,7 @@ class DayController {
   public static function getNextDaysToBet($nb = 5) {
     $day_storage = \Drupal::entityManager()->getStorage('day');
     $injected_database = Database::getConnection();
-    $now = new \DateTime();
+    $now = new \DateTime(null, new \DateTimeZone("UTC"));
 
     $query = $injected_database->select('mespronos__game','g');
     $query->addExpression('min(game_date)','day_date');
@@ -39,7 +39,7 @@ class DayController {
   public static function getlastDays($nb = 5) {
     $day_storage = \Drupal::entityManager()->getStorage('day');
     $injected_database = Database::getConnection();
-    $now = new \DateTime();
+    $now = new \DateTime(null, new \DateTimeZone("UTC"));
 
     $query = $injected_database->select('mespronos__game','g');
     $query->addExpression('min(game_date)','day_date');

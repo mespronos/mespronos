@@ -25,7 +25,7 @@ class GameController {
     $query = \Drupal::entityQuery('game');
 
     if($only_past) {
-      $now = new \DateTime();
+      $now = new \DateTime(null, new \DateTimeZone("UTC"));
       $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'<');
     }
 
@@ -47,7 +47,8 @@ class GameController {
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
 
-    $now = new \DateTime();
+    $now = new \DateTime(null, new \DateTimeZone("UTC"));
+
     $query->condition('day',$day->id());
     $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
     $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
