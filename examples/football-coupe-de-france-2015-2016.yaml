@@ -1,0 +1,44 @@
+league :
+  name : 'Coupe de France 2016'
+  sport : 'Football'
+  status : 'active'
+  classement : FALSE
+  betting_type : 'score'
+  days:
+    - number : 1
+      name : '1/16 de finale'
+      day_default_date : 2015-01-16t19:00:00+02:00
+      games :
+        - game : Saint-Malo | Mont-de-Marsan
+          game_date : 2015-08-07t20:30:00+02:00
+        - game : GFC Ajaccio | Guingamp
+          game_date : 2015-01-19t18:00:00+02:00
+        - game : Rennes | Bourg-en-Bresse
+          game_date : 2015-01-19t18:00:00+02:00
+        - game : Angers | Bordeaux
+          game_date : 2015-01-19t18:30:00+02:00
+        - game : Bastia | Sochaux
+          game_date : 2015-01-19t19:00:00+02:00
+        - game : Sarre-Union | Niort
+          game_date : 2015-01-19t19:00:00+02:00
+        - game : Paris-SG | Toulouse
+          game_date : 2015-01-19t21:00:00+02:00
+        - game : Evian-TG | Monaco
+          game_date : 2015-01-20t18:30:00+02:00
+        - game : Chambly | Lyon
+          game_date : 2015-01-20t18:30:00+02:00
+        - game : Mantes | Nantes
+          game_date : 2015-01-20t18:30:00+02:00
+        - game : Concarneau | Troyes
+          game_date : 2015-01-20t18:30:00+02:00
+        - game : Trélissac | Lille
+          game_date : 2015-01-20t18:30:00+02:00
+        - game : Boulogne | Lorient
+          game_date : 2015-01-20t19:30:00+02:00
+        - game : Marseille | Montpellier
+          game_date : 2015-01-20t21:00:00+02:00
+        - game : Saint-Étienne | AC Ajaccio
+          game_date : 2015-01-21t21:00:00+02:00
+        - game : Granville | Sarreguemines
+          game_date : 2015-01-23t18:00:00+02:00
+
