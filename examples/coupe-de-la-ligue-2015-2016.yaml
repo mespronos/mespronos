@@ -7,7 +7,7 @@ league :
   days:
     - number : 1
       name : 1er tour
-      day_default_date : 2015-08-11t19:00:00+02:00
+      day_default_date : 2015-08-11t19:00:00
       games :
         - game : Stade Lavallois | Nîmes Olympique
         - game : AJ Auxerre | Red Star FC

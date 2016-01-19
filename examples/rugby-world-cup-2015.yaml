@@ -7,98 +7,98 @@ league :
   days:
     - number : 1
       name : 'Matches de poules'
-      day_default_date : 2015-09-18t21:00:00+02:00
+      day_default_date : 2015-09-18t21:00:00
       games :
         - game : Angleterre | Fidji
-          game_date : 2015-09-18t21:00:00+02:00
+          game_date : 2015-09-18t21:00:00
         - game : Tonga | Georgie
-          game_date : 2015-09-19t13:00:00+02:00
+          game_date : 2015-09-19t13:00:00
         - game : Irlande | Canada
-          game_date : 2015-09-19t15:30:00+02:00
+          game_date : 2015-09-19t15:30:00
         - game : Japon | Afrique Du Sud
-          game_date : 2015-09-19t17:45:00+02:00
+          game_date : 2015-09-19t17:45:00
         - game : France | Italie
-          game_date : 2015-09-19t21:00:00+02:00
+          game_date : 2015-09-19t21:00:00
         - game : Samoa | Etats-unis
-          game_date : 2015-09-20t13:00:00+02:00
+          game_date : 2015-09-20t13:00:00
         - game : Galles | Uruguay
-          game_date : 2015-09-20t15:30:00+02:00
+          game_date : 2015-09-20t15:30:00
         - game : Nouvelle-zelande | Argentine
-          game_date : 2015-09-20t17:45:00+02:00
+          game_date : 2015-09-20t17:45:00
         - game : Ecosse | Japon
-          game_date : 2015-09-23t15:30:00+02:00
+          game_date : 2015-09-23t15:30:00
         - game : Australie | Fidji
-          game_date : 2015-09-23t17:45:00+02:00
+          game_date : 2015-09-23t17:45:00
         - game : France | Roumanie
-          game_date : 2015-09-23t21:00:00+02:00
+          game_date : 2015-09-23t21:00:00
         - game : Nouvelle-zelande | Namibie
-          game_date : 2015-09-24t21:00:00+02:00
+          game_date : 2015-09-24t21:00:00
         - game : Argentine | Georgie
-          game_date : 2015-09-25t17:45:00+02:00
+          game_date : 2015-09-25t17:45:00
         - game : Italie | Canada
-          game_date : 2015-09-26t15:30:00+02:00
+          game_date : 2015-09-26t15:30:00
         - game : Afrique Du Sud | Samoa
-          game_date : 2015-09-26t17:45:00+02:00
+          game_date : 2015-09-26t17:45:00
         - game : Angleterre | Galles
-          game_date : 2015-09-26t21:00:00+02:00
+          game_date : 2015-09-26t21:00:00
         - game : Australie | Uruguay
-          game_date : 2015-09-27t13:00:00+02:00
+          game_date : 2015-09-27t13:00:00
         - game : Ecosse | Etats-unis
-          game_date : 2015-09-27t15:30:00+02:00
+          game_date : 2015-09-27t15:30:00
         - game : Irlande | Roumanie
-          game_date : 2015-09-27t17:45:00+02:00
+          game_date : 2015-09-27t17:45:00
         - game : Tonga | Namibie
-          game_date : 2015-09-29t17:45:00+02:00
+          game_date : 2015-09-29t17:45:00
         - game : Galles | Fidji
-          game_date : 2015-10-01t17:45:00+02:00
+          game_date : 2015-10-01t17:45:00
         - game : France | Canada
-          game_date : 2015-10-01t21:00:00+02:00
+          game_date : 2015-10-01t21:00:00
         - game : Nouvelle-zelande | Georgie
-          game_date : 2015-10-02t21:00:00+02:00
+          game_date : 2015-10-02t21:00:00
         - game : Samoa | Japon
-          game_date : 2015-10-03t15:30:00+02:00
+          game_date : 2015-10-03t15:30:00
         - game : Afrique Du Sud | Ecosse
-          game_date : 2015-10-03t17:45:00+02:00
+          game_date : 2015-10-03t17:45:00
         - game : Angleterre | Australie
-          game_date : 2015-10-04t21:00:00+02:00
+          game_date : 2015-10-04t21:00:00
         - game : Argentine | Tonga
-          game_date : 2015-10-04t15:30:00+02:00
+          game_date : 2015-10-04t15:30:00
         - game : Irlande | Italie
-          game_date : 2015-10-04t17:45:00+02:00
+          game_date : 2015-10-04t17:45:00
         - game : Canada | Roumanie
-          game_date : 2015-10-06t17:45:00+02:00
+          game_date : 2015-10-06t17:45:00
         - game : Fidji | Uruguay
-          game_date : 2015-10-06t21:00:00+02:00
+          game_date : 2015-10-06t21:00:00
         - game : Afrique Du Sud | Etats-unis
-          game_date : 2015-10-07t17:45:00+02:00
+          game_date : 2015-10-07t17:45:00
         - game : Namibie | Georgie
-          game_date : 2015-10-07t21:00:00+02:00
+          game_date : 2015-10-07t21:00:00
         - game : Nouvelle-zelande | Tonga
-          game_date : 2015-10-09t21:00:00+02:00
+          game_date : 2015-10-09t21:00:00
         - game : Samoa | Ecosse
-          game_date : 2015-10-10t15:30:00+02:00
+          game_date : 2015-10-10t15:30:00
         - game : Australie | Galles
-          game_date : 2015-10-10t17:45:00+02:00
+          game_date : 2015-10-10t17:45:00
         - game : Angleterre | Uruguay
-          game_date : 2015-10-10t21:00:00+02:00
+          game_date : 2015-10-10t21:00:00
         - game : Argentine | Namibie
-          game_date : 2015-10-11t13:00:00+02:00
+          game_date : 2015-10-11t13:00:00
         - game : Italie | Roumanie
-          game_date : 2015-10-11t15:30:00+02:00
+          game_date : 2015-10-11t15:30:00
         - game : France |  	Irlande
-          game_date : 2015-10-11t17:45:00+02:00
+          game_date : 2015-10-11t17:45:00
         - game : Etats-unis | Japon
-          game_date : 2015-10-11t21:00:00+02:00
+          game_date : 2015-10-11t21:00:00
     - number : 2
       name : '1/4 de finale'
-      day_default_date : 2015-10-17t17:00:00+02:00
+      day_default_date : 2015-10-17t17:00:00
       games :
         - game : Afrique Du Sud | Galles
-          game_date : 2015-10-17t17:00:00+02:00
+          game_date : 2015-10-17t17:00:00
         - game : Nouvelle-zelande | France
-          game_date : 2015-10-17t21:00:00+02:00
+          game_date : 2015-10-17t21:00:00
         - game : Irlande | Argentine
-          game_date : 2015-10-18t14:00:00+02:00
+          game_date : 2015-10-18t14:00:00
         - game : Australie | Ecosse
-          game_date : 2015-10-18t17:00:00+02:00
+          game_date : 2015-10-18t17:00:00
 
