@@ -24,7 +24,6 @@ class DefaultController extends ControllerBase {
   public function join() {
     $login_form = self::getLoginForm();
     $registration_form = self::getRegistrationForm();
-
     return [
         '#theme' => 'join',
         '#test_var' => 'looool',

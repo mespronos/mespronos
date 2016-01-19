@@ -46,21 +46,6 @@ mespronos.league.register:
   requirements:
     _permission: 'subscribe to league'
 
-mespronos.bet.nextbets:
-  path: 'mespronos/bet/next-bets'
-  defaults:
-    _controller: '\Drupal\mespronos\Entity\Controller\BetController::nextbets'
-    _title: 'Next bets'
-  requirements:
-    _permission: 'make a bet'
-mespronos.bet.nextbetsofleague:
-  path: 'mespronos/bet/next-bets/league/{league}'
-  defaults:
-    _controller: '\Drupal\mespronos\Entity\Controller\BetController::nextbets'
-    _title: 'Next bets'
-  requirements:
-    _permission: 'make a bet'
-
 mespronos.nextbets:
   path: 'mespronos/next-bets'
   defaults:
@@ -76,8 +61,6 @@ mespronos.day.bet:
     _title: 'Bet !'
   requirements:
     _permission: 'make a bet'
-
-
 
 # Team routing definition
 entity.team.canonical:

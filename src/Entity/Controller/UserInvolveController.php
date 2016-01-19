@@ -17,28 +17,25 @@ class UserInvolveController extends ControllerBase {
 
   public function registerUser($league) {
     $uid = \Drupal::currentUser()->id();
-    if(self::isUserInvolve($uid,$league)) {
-      drupal_set_message(t('You are already involve in this league'),'warning');
+    if(!self::isUserInvolve($uid,$league)) {
+      $league = League::load($league);
+      if(!$league) {
+        drupal_set_message(t('Oops, seems that this league doesn\'t exist.'),'error');
+        return $this->redirect('<front>');
+      }
+      if($league->getStatus(true) != 'active') {
+        drupal_set_message(t('It\'s not possible to subscribe to this league.'),'error');
+        return $this->redirect('<front>');
+      }
+      $userInvolve = UserInvolve::create(array(
+        'created' => time(),
+        'updated' => time(),
+        'user' => $uid,
+        'league' => $league,
+      ));
+      $userInvolve->save();
     }
-    $league = League::load($league);
-    if(!$league) {
-      drupal_set_message(t('Oops, seems that this league doesn\'t exist.'),'error');
-      return $this->redirect('<front>');
-    }
-    if($league->getStatus(true) != 'active') {
-      drupal_set_message(t('It\'s not possible to subscribe to this league.'),'error');
-      return $this->redirect('<front>');
-    }
-    $userInvolve = UserInvolve::create(array(
-      'created' => time(),
-      'updated' => time(),
-      'user' => $uid,
-      'league' => $league,
-    ));
-    $userInvolve->save();
-
-    drupal_set_message(t('You\'ve been subscribe to this league, you can now bet on it !'));
-    return $this->redirect('mespronos/bet/next-bets/league/'.$league->id());
+    return $this->redirect('mespronos.nextbets');
   }
 
   public static function isUserInvolve($uid,$league_id) {

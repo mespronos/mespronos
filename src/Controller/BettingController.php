@@ -40,6 +40,7 @@ class BettingController extends ControllerBase {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
     $days = DayController::getNextDaysToBet(10);
+
     foreach ($days  as $day_id => $day) {
       $league_id = $day->entity->get('league')->first()->getValue()['target_id'];
       if(!isset($leagues[$league_id])) {
@@ -114,23 +115,23 @@ class BettingController extends ControllerBase {
         if(\Drupal::moduleHandler()->moduleExists(('mespronos_registration'))) {
           $action_links = Link::fromTextAndUrl(
             t('Register or login and start betting'),
-            new Url('mespronos_registration.join'),
-            [
-              'query' => [
-                'destination' => Url('mespronos.league.register', array('league' => $league->id())
+            Url::fromRoute('mespronos_registration.join',[],[
+                'query' => [
+                  'destination' => Url::fromRoute('mespronos.league.register', ['league' => $league->id()])->toString(),
+                ]
               ]
-            ]
+            )
           );
         }
         else {
           $action_links = Link::fromTextAndUrl(
             t('Register or login and start betting'),
-            new Url('user.register'),
-            [
-              'query' => [
-                'destination' => Url('mespronos.league.register', array('league' => $league->id())
+            Url::fromRoute('user.register',[],[
+                'query' => [
+                  'destination' => Url::fromRoute('mespronos.league.register', ['league' => $league->id()])->toString(),
+                ]
               ]
-            ]
+            )
           );
         }
       }
