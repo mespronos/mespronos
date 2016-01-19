@@ -67,7 +67,7 @@ mespronos.nextbets:
     _controller: '\Drupal\mespronos\Controller\BettingController::nextBets'
     _title: 'Next bets'
   requirements:
-    _permission: 'make a bet'
+    _permission: 'view next bets days'
 
 mespronos.day.bet:
   path: 'mespronos/day/{day}/bet'

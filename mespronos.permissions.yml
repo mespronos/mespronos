@@ -14,6 +14,9 @@ set marks:
   title: 'Set Marks'
   description : 'Define game marks'
 
+view next bets days:
+  title: "View upcoming bets' days"
+
 view Game entity:
   title: 'View Game entity'
   description: 'Allow view my Game'
