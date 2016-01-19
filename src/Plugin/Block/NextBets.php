@@ -108,6 +108,17 @@ class NextBets extends BlockBase {
       ];
       $rows[] = $row;
     }
+    $footer = [
+      'data' => array(
+        array(
+          'data' => Link::fromTextAndUrl(
+            $this->t('See all upcoming bets'),
+            new Url('mespronos.nextbets')
+          ),
+          'colspan' => 5
+        )
+      )
+    ];
     $header = [
       $this->t('League',array(),array('context'=>'mespronos')),
       $this->t('Day',array(),array('context'=>'mespronos')),
@@ -119,6 +130,7 @@ class NextBets extends BlockBase {
       '#theme' => 'table',
       '#rows' => $rows,
       '#header' => $header,
+      '#footer' => $footer,
     ];
 
   }
