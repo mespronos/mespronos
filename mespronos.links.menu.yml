@@ -4,3 +4,11 @@ mespronos.dashboard:
   route_name: mespronos.dashboard
   weight: 9
   parent: system.admin
+
+mespronos.main.nextbets:
+  title: Next bets
+  description: 'See all next bets available.'
+  route_name: mespronos.nextbets
+  weight: 9
+  parent: main
+  menu_name: main

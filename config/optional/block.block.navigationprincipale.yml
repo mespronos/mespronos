@@ -1,0 +1,24 @@
+uuid: b661088c-4954-419b-bc00-d4610248f9e7
+langcode: fr
+status: true
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - bartik
+id: navigationprincipale
+theme: bartik
+region: primary_menu
+weight: null
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Navigation principale'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }
