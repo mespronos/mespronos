@@ -106,7 +106,6 @@ class GamesBetting extends FormBase {
     foreach($games as $game_id => $game_data) {
       $bet_storage = \Drupal::entityManager()->getStorage('bet');
       if($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '' && $game_id == $game_data['token_id']) {
-        dpm($game_data);
         if($game_data['bet_id'] !== null) {
           $bet = $bet_storage->load($game_data['bet_id']);
         }

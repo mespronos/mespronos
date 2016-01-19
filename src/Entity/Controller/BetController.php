@@ -82,10 +82,8 @@ class BetController {
     $game_date = new \DateTime($game->getGameDate());
     //@TODO ajouter un tampon, genre 15 minutes
     if($now->diff($game_date)>=0) {
-      dpm('bon');
       return true;
     }
-    dpm('pas bon');
     //@TODO test si user involve
     return true;
   }
