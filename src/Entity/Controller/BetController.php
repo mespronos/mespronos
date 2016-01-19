@@ -20,7 +20,6 @@ class BetController {
    * {@inheritdoc}
    */
   public static function updateBetsFromGame(Game $game) {
-
     $bet_storage = \Drupal::entityManager()->getStorage('bet');
     $ids = \Drupal::entityQuery('bet')
       ->condition('game',$game->id())

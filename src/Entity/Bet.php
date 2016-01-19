@@ -87,7 +87,30 @@ class Bet extends ContentEntityBase implements EntityInterface {
    * @param \Drupal\mespronos\Entity\Game $game
    */
   public function definePoints(Game $game) {
+    $league = $game->getLeague();
+    $league_points = $league->getPoints();
+    $score_t1 = $game->get('score_team_1')->value;
+    $score_t2 = $game->get('score_team_2')->value;
+    $bet_t1 = $this->get('score_team_1')->value;
+    $bet_t2 = $this->get('score_team_2')->value;
+    if($score_t1 == $bet_t1 && $score_t2 == $bet_t2){
+      $points = $league_points['points_score_found'];
+    }
+    elseif($score_t1 > $score_t2 && $bet_t1 > $bet_t2){
+      $points = $league_points['points_winner_found'];
+    }
+    elseif($score_t1 < $score_t2 && $bet_t1 < $bet_t2){
+      $points = $league_points['points_winner_found'];
+    }
+    elseif($score_t1 == $score_t2 && $bet_t1 == $bet_t2){
+      $points = $league_points['points_winner_found'];
+    }
+    else {
+      $points = $league_points['points_participation'];
+    }
 
+    $this->set('points',$points);
+    $this->save();
   }
 
   /**

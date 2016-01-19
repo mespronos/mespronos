@@ -32,7 +32,7 @@ class GameController {
     $group = $query->orConditionGroup()
       ->condition('score_team_1',null,'is')
       ->condition('score_team_2',null,'is');
-
+    $query->sort('game_date','ASC');
     $ids = $query->condition($group)->execute();
 
     $games = $game_storage->loadMultiple($ids);

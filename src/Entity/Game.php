@@ -12,6 +12,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\EntityInterface;
+use Drupal\mespronos\Entity\Controller\BetController;
 use Drupal\user\UserInterface;
 
 /**
@@ -136,6 +137,9 @@ class Game extends ContentEntityBase implements EntityInterface {
     return t('@team1 - @team2 - %date',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'%date'=> $date->format('d/m/Y H\hi')));
   }
 
+  /**
+   * @return League
+   */
   public function getLeague() {
     $day_storage = \Drupal::entityManager()->getStorage('day');
     $league_storage = \Drupal::entityManager()->getStorage('league');
@@ -156,6 +160,11 @@ class Game extends ContentEntityBase implements EntityInterface {
 
   public function getDataTable() {
     return 'mespronos__game';
+  }
+
+  public function postSave(EntityStorageInterface $storage, $update = TRUE) {
+    BetController::updateBetsFromGame($this);
+    parent::postSave($storage, $update);
   }
 
   /**

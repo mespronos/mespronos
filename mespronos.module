@@ -24,10 +24,6 @@ function mespronos_help($route_name, RouteMatchInterface $route_match) {
   }
 }
 
-function mespronos_game_update($entity) {
-  BetController::updateBetsFromGame($entity);
-}
-
 function mespronos_preprocess_page(&$variables) {
   if($variables['is_admin']) {
     $variables['#attached']['library'][] = 'mespronos/administration-style';
