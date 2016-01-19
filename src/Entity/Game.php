@@ -120,11 +120,12 @@ class Game extends ContentEntityBase implements EntityInterface {
 
   public function label() {
     $team_storage = \Drupal::entityManager()->getStorage('team');
+    $league = $this->getLeague();
 
     $team1 = $team_storage->load($this->getTeam1());
     $team2 = $team_storage->load($this->getTeam2());
 
-    return t('@team1 - @team2',array('@team1'=> $team1->label(),'@team2'=> $team2->label()));
+    return t('@team1 - @team2 (@league)',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'@league'=>$league->label()));
   }
 
   public function label_full() {
