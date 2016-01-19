@@ -21,6 +21,9 @@ set marks:
 view next bets days:
   title: "View upcoming bets' days"
 
+view last bets days:
+  title: "View passed bets' days"
+
 subscribe to league:
   title: 'Subscribe to a league'
   description: 'Allow to bet on this league'

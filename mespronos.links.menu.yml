@@ -12,3 +12,11 @@ mespronos.main.nextbets:
   weight: 9
   parent: main
   menu_name: main
+
+mespronos.main.lastbets:
+  title: Last bets
+  description: 'See all last bets and results.'
+  route_name: mespronos.lastbets
+  weight: 10
+  parent: main
+  menu_name: main

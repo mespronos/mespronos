@@ -71,6 +71,19 @@ class BetController {
     return $nb_bets;
   }
 
+  public static function pointsWon(User $user,Day $day) {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__bet','b');
+    $query->addExpression('sum(b.points)','points');
+    $query->join('mespronos__game','g','b.game = g.id');
+    $query->condition('g.day',$day->id());
+    $query->condition('b.better',$user->id());
+
+    $results = $query->execute()->fetchAssoc();
+    $points = intval($results['points']);
+    return $points;
+  }
+
   /**
    * @param \Drupal\mespronos\Entity\Bet $bet
    * @param \Drupal\User $user
