@@ -61,6 +61,14 @@ mespronos.bet.nextbetsofleague:
   requirements:
     _permission: 'make a bet'
 
+mespronos.nextbets:
+  path: 'mespronos/next-bets'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\BettingController::nextBets'
+    _title: 'Next bets'
+  requirements:
+    _permission: 'make a bet'
+
 mespronos.day.bet:
   path: 'mespronos/day/{day}/bet'
   defaults:
