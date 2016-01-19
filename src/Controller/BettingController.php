@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\mespronos\Entity\Controller\BetController;
 use Drupal\mespronos\Entity\Controller\GameController;
 use Drupal\mespronos\Entity\Controller\DayController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
@@ -57,11 +58,12 @@ class BettingController extends ControllerBase {
 
       $i = $game_date->diff($now_date);
       $action_links = self::getActionBetLink($day->entity,$league,$user_uid,$user_involvements[$league_id]);
-
+      $bets_done = BetController::betsDone($user,$day->entity);
       $row = [
         $league->label(),
         $day->entity->label(),
         $day->nb_game,
+        $day->nb_game - $bets_done,
 
         $i->format('%a') >0 ? $this->t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : $this->t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
         $action_links,
@@ -71,6 +73,7 @@ class BettingController extends ControllerBase {
     $header = [
       $this->t('League',array(),array('context'=>'mespronos')),
       $this->t('Day',array(),array('context'=>'mespronos')),
+      $this->t('Games',array(),array('context'=>'mespronos')),
       $this->t('Bets left',array(),array('context'=>'mespronos')),
       $this->t('Time left',array(),array('context'=>'mespronos')),
       '',

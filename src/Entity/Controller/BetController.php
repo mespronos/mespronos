@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Entity\Controller;
 
 use Drupal\mespronos\Entity\League;
+use Drupal\Core\Database\Database;
 
 /**
  * Provides a list controller for Game entity.
@@ -56,6 +57,19 @@ class BetController {
     else {
       return $bet_storage->create(array());;
     }
+  }
+
+  public static function betsDone(User $user,Day $day) {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__bet','b');
+    $query->addExpression('count(b.id)','nb_bet');
+    $query->join('mespronos__game','g','b.game = g.id');
+    $query->condition('g.day',$day->id());
+    $query->condition('b.better',$user->id());
+
+    $results = $query->execute()->fetchAssoc();
+    $nb_bets = intval($results['nb_bet']);
+    return $nb_bets;
   }
 
   /**
