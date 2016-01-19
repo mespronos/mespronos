@@ -6,6 +6,7 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\mespronos\Entity\Controller\BetController;
+use Drupal\mespronos\Entity\Controller\GameController;
 
 /**
  * Implements an example form.
@@ -23,10 +24,34 @@ class GamesBetting extends FormBase {
    * {@inheritdoc}.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $games = $form_state->getBuildInfo()['args'][0];
-    $user = $form_state->getBuildInfo()['args'][1];
+    $user = $this->extractUser($form_state);
+    $day = $this->extractDay($form_state);
+    $league = $day->getLeague();
+    $games = GameController::getGamesToBet($day);
 
-    $form['#attached']['library'][] = 'mespronos/front_style';
+
+    $form['infos'] = array(
+      '#type' => 'container',
+      '#tree' => true,
+    );
+
+    $form['infos']['league'] = [
+      '#markup' => '<h2>'.$league->label().'</h2>',
+    ];
+    $form['infos']['day'] = [
+      '#markup' => '<h3>'.$day->label().'</h3>',
+    ];
+    $points = $league->getPoints();
+    $form['infos']['points'] = [
+      '#markup' => '<h4>'.t('Points :').'</h4>'.
+        '<ul>'.
+          '<li>'.t('Exact score found : @nb points',array('@nb'=>$points['points_score_found'])).'</li>'.
+          '<li>'.t('Winner found : @nb points',array('@nb'=>$points['points_winner_found'])).'</li>'.
+          '<li>'.t('Nothing found : @nb points',array('@nb'=>$points['points_participation'])).'</li>'.
+        '</ul>'
+      ,
+    ];
+
 
     $form['games'] = array(
       '#type' => 'container',
@@ -131,6 +156,22 @@ class GamesBetting extends FormBase {
     if($j>0) {
       drupal_set_message($this->t('@nb_mark bet couldn\'t be saved or updated',array('@nb_mark'=>$j)),'warning');
     }
+  }
+
+  /**
+   * @param $form_state
+   * @return Day
+   */
+  protected function extractDay(FormStateInterface $form_state) {
+    return $form_state->getBuildInfo()['args'][0];
+  }
+
+  /**
+   * @param $form_state
+   * @return \Drupal\User
+   */
+  protected function extractUser(FormStateInterface $form_state) {
+    return $form_state->getBuildInfo()['args'][1];
   }
 
 }

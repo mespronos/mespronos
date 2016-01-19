@@ -190,6 +190,20 @@ class League extends ContentEntityBase implements EntityInterface {
     return $sport;
   }
 
+  public function label() {
+    return $this->get('name')->value;
+  }
+
+  public function getPoints() {
+    $points = [
+      'points_score_found' => $this->get('points_score_found')->value,
+      'points_winner_found' => $this->get('points_winner_found')->value,
+      'points_participation' => $this->get('points_participation')->value,
+    ];
+
+    return $points;
+  }
+
   /**
    * {@inheritdoc}
    */

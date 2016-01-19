@@ -9,7 +9,6 @@ namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Entity\Controller\BetController;
-use Drupal\mespronos\Entity\Controller\GameController;
 use Drupal\mespronos\Entity\Controller\DayController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
 use Drupal\mespronos\Entity\League;
@@ -99,9 +98,8 @@ class BettingController extends ControllerBase {
       drupal_set_message($this->t('You\'re not subscribed to this day'),'warning');
       throw new AccessDeniedHttpException();
     }
-    $games_to_bet = GameController::getGamesToBet($day);
 
-    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesBetting',$games_to_bet,$user);
+    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesBetting',$day,$user);
     return $form;
 
   }

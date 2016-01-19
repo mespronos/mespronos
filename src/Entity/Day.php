@@ -117,6 +117,10 @@ class Day extends ContentEntityBase implements EntityInterface
     $ids = $query->execute();
     return count($ids);
   }
+
+  public function label() {
+    return $this->get('name')->value;
+  }
   /**
    * {@inheritdoc}
    */
