@@ -52,9 +52,10 @@ class BettingController extends ControllerBase {
       }
       $day->involve = $user_involvements[$league_id];
 
-      $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date);
+      $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date,new \DateTimeZone("GMT"));
+      $game_date->setTimezone(new \DateTimeZone("Europe/Paris"));
       $now_date = new \DateTime();
-
+      
       $i = $game_date->diff($now_date);
       $action_links = self::getActionBetLink($day->entity,$league,$user_uid,$user_involvements[$league_id]);
       $bets_done = BetController::betsDone($user,$day->entity);
