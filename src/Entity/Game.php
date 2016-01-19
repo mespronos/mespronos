@@ -133,7 +133,7 @@ class Game extends ContentEntityBase implements EntityInterface {
     $team2 = $team_storage->load($this->getTeam2());
 
     $date =  new \DateTime($this->getGameDate());
-    return t('@team1 - @team2 - %date',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'%date'=> $date->format('d/m//Y H:i:s')));
+    return t('@team1 - @team2 - %date',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'%date'=> $date->format('d/m/Y H\hi')));
   }
 
   public function getLeague() {
