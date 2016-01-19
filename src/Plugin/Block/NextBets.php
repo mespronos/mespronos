@@ -11,9 +11,11 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\mespronos\Controller\BettingController;
 use Drupal\mespronos\Entity\Controller\DayController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
 use Drupal\mespronos\Entity\League;
+use Drupal\mespronos\Entity\Day;
 
 /**
  * Provides a 'NextBets' block.
@@ -70,34 +72,8 @@ class NextBets extends BlockBase {
 
       $i = $game_date->diff($now_date);
 
-      if($day->involve) {
-        $action_links = Link::fromTextAndUrl(
-          $this->t('Bet now'),
-          new Url('mespronos.day.bet', array('day' => $day_id))
-        );
-      }
-      else {
-        if($user_uid == 0) {
-          if(\Drupal::moduleHandler()->moduleExists(('mespronos_registration'))) {
-            $action_links = Link::fromTextAndUrl(
-              $this->t('Register or login and start betting'),
-              new Url('mespronos_registration.join')
-            );
-          }
-          else {
-            $action_links = Link::fromTextAndUrl(
-              $this->t('Register or login and start betting'),
-              new Url('user.register')
-            );
-          }
-        }
-        else {
-          $action_links = Link::fromTextAndUrl(
-            $this->t('Start betting now !'),
-            new Url('mespronos.league.register', array('league' => $league->id()))
-          );
-        }
-      }
+      $action_links = BettingController::getActionBetLink($day->entity,$league,$user_uid,$user_involvements[$league_id]);
+
       $row = [
         $league->label(),
         $day->entity->label(),

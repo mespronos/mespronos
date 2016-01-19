@@ -12,6 +12,7 @@ use Drupal\mespronos\Entity\Controller\GameController;
 use Drupal\mespronos\Entity\Controller\DayController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
 use Drupal\mespronos\Entity\League;
+use Drupal\mespronos\Entity\Day;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
@@ -54,35 +55,8 @@ class BettingController extends ControllerBase {
       $now_date = new \DateTime();
 
       $i = $game_date->diff($now_date);
+      $action_links = self::getActionBetLink($day->entity,$league,$user_uid,$user_involvements[$league_id]);
 
-      if($day->involve) {
-        $action_links = Link::fromTextAndUrl(
-          $this->t('Bet now'),
-          new Url('mespronos.day.bet', array('day' => $day_id))
-        );
-      }
-      else {
-        if($user_uid == 0) {
-          if(\Drupal::moduleHandler()->moduleExists(('mespronos_registration'))) {
-            $action_links = Link::fromTextAndUrl(
-              $this->t('Register or login and start betting'),
-              new Url('mespronos_registration.join')
-            );
-          }
-          else {
-            $action_links = Link::fromTextAndUrl(
-              $this->t('Register or login and start betting'),
-              new Url('user.register')
-            );
-          }
-        }
-        else {
-          $action_links = Link::fromTextAndUrl(
-            $this->t('Start betting now !'),
-            new Url('mespronos.league.register', array('league' => $league->id()))
-          );
-        }
-      }
       $row = [
         $league->label(),
         $day->entity->label(),
@@ -128,4 +102,35 @@ class BettingController extends ControllerBase {
 
   }
 
+  public static function getActionBetLink(Day $day,League $league,$user_uid,$isInvolve) {
+    if($isInvolve) {
+      $action_links = Link::fromTextAndUrl(
+        t('Bet now'),
+        new Url('mespronos.day.bet', array('day' => $day->id()))
+      );
+    }
+    else {
+      if($user_uid == 0) {
+        if(\Drupal::moduleHandler()->moduleExists(('mespronos_registration'))) {
+          $action_links = Link::fromTextAndUrl(
+            t('Register or login and start betting'),
+            new Url('mespronos_registration.join')
+          );
+        }
+        else {
+          $action_links = Link::fromTextAndUrl(
+            t('Register or login and start betting'),
+            new Url('user.register')
+          );
+        }
+      }
+      else {
+        $action_links = Link::fromTextAndUrl(
+          t('Start betting now !'),
+          new Url('mespronos.league.register', array('league' => $league->id()))
+        );
+      }
+    }
+    return $action_links;
+  }
 }
