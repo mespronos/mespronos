@@ -20,7 +20,7 @@ mespronos.settings:
     _controller: '\Drupal\mespronos\Controller\AdministrationController::settings'
     _title: 'Settings'
   requirements:
-    _permission: 'manage settings'
+    _permission: 'manage mespronos settings'
 
 mespronos.set_marks:
   path: 'admin/mespronos/set-marks'

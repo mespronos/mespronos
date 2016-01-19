@@ -2,9 +2,13 @@ access administration mespronos:
   title: 'Access MesPronos dashboard'
   description : 'Accès au tableau de bord du module MesPronos'
 
-manage settings:
+manage mespronos settings:
   title: 'manage MesPronos settings'
   description: 'such as points settings'
+
+manage mespronos content:
+  title: 'Access to Mespronos configuration and content'
+  description: 'All entity settings, change content...'
 
 import league content:
   title: 'Import league to MesPronos'
@@ -16,86 +20,6 @@ set marks:
 
 view next bets days:
   title: "View upcoming bets' days"
-
-view Game entity:
-  title: 'View Game entity'
-  description: 'Allow view my Game'
-
-edit Game entity:
-  title: 'Edit Game entity'
-  description: 'Allow edit my Game'
-
-delete Game entity:
-  title: 'Delete Game entity'
-  description: 'Allow delete my Game'
-
-administer Game entity:
-  title: 'Adminster Game entity'
-  description: 'Allow administer my Game'
-
-view Bet entity:
-  title: 'View Bet entity'
-  description: 'Allow view my Bet'
-
-edit Bet entity:
-  title: 'Edit Bet entity'
-  description: 'Allow edit my Bet'
-
-delete Bet entity:
-  title: 'Delete Bet entity'
-  description: 'Allow delete my Bet'
-
-administer Bet entity:
-  title: 'Adminster Bet entity'
-  description: 'Allow administer my Bet'
-
-view RankingDay entity:
-  title: 'View RankingDay entity'
-  description: 'Allow view my RankingDay'
-
-edit RankingDay entity:
-  title: 'Edit RankingDay entity'
-  description: 'Allow edit my RankingDay'
-
-delete RankingDay entity:
-  title: 'Delete RankingDay entity'
-  description: 'Allow delete my RankingDay'
-
-administer RankingDay entity:
-  title: 'Adminster RankingDay entity'
-  description: 'Allow administer my RankingDay'
-
-view RankingLeague entity:
-  title: 'View RankingLeague entity'
-  description: 'Allow view my RankingLeague'
-
-edit RankingLeague entity:
-  title: 'Edit RankingLeague entity'
-  description: 'Allow edit my RankingLeague'
-
-delete RankingLeague entity:
-  title: 'Delete RankingLeague entity'
-  description: 'Allow delete my RankingLeague'
-
-administer RankingLeague entity:
-  title: 'Adminster RankingLeague entity'
-  description: 'Allow administer my RankingLeague'
-
-view UserInvolve entity:
-  title: 'View UserInvolve entity'
-  description: 'Allow view my UserInvolve'
-
-edit UserInvolve entity:
-  title: 'Edit UserInvolve entity'
-  description: 'Allow edit my UserInvolve'
-
-delete UserInvolve entity:
-  title: 'Delete UserInvolve entity'
-  description: 'Allow delete my UserInvolve'
-
-administer UserInvolve entity:
-  title: 'Adminster UserInvolve entity'
-  description: 'Allow administer my UserInvolve'
 
 subscribe to league:
   title: 'Subscribe to a league'

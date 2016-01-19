@@ -28,13 +28,13 @@ class UserInvolveAccessControlHandler extends EntityAccessControlHandler {
 
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view UserInvolve entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'update':
-        return AccessResult::allowedIfHasPermission($account, 'edit UserInvolve entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'delete UserInvolve entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
     }
 
     return AccessResult::allowed();

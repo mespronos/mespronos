@@ -25,13 +25,13 @@ class BetAccessControlHandler extends EntityAccessControlHandler {
 
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view Bet entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'update':
-        return AccessResult::allowedIfHasPermission($account, 'edit Bet entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'delete Bet entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
     }
 
     return AccessResult::allowed();

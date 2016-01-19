@@ -29,13 +29,13 @@ class LeagueAccessControlHandler extends EntityAccessControlHandler {
 
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view League entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'edit':
-        return AccessResult::allowedIfHasPermission($account, 'edit League entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'delete League entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
     }
 
     return AccessResult::allowed();

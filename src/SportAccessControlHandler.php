@@ -29,13 +29,13 @@ class SportAccessControlHandler extends EntityAccessControlHandler {
 
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view Sport entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'edit':
-        return AccessResult::allowedIfHasPermission($account, 'edit Sport entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'delete Sport entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
     }
 
     return AccessResult::allowed();

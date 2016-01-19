@@ -29,13 +29,13 @@ class TeamAccessControlHandler extends EntityAccessControlHandler {
 
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view Team entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'edit':
-        return AccessResult::allowedIfHasPermission($account, 'edit Team entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'delete Team entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
     }
 
     return AccessResult::allowed();

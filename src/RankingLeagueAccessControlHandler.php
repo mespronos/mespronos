@@ -29,13 +29,13 @@ class RankingLeagueAccessControlHandler extends EntityAccessControlHandler {
 
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'view RankingLeague entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'update':
-        return AccessResult::allowedIfHasPermission($account, 'edit RankingLeague entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'delete':
-        return AccessResult::allowedIfHasPermission($account, 'delete RankingLeague entity');
+        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
     }
 
     return AccessResult::allowed();
