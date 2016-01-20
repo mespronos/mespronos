@@ -80,7 +80,8 @@ class NextBets extends BlockBase {
         $league->label(),
         $day->entity->label(),
         $day->nb_game,
-        $day->nb_game - $bets_done,
+        $day->nb_game_left,
+        $bets_done,
 
         $i->format('%a') >0 ? $this->t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : $this->t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
         $action_links,
@@ -94,15 +95,16 @@ class NextBets extends BlockBase {
             $this->t('See all upcoming bets'),
             new Url('mespronos.nextbets')
           ),
-          'colspan' => 6
+          'colspan' => 7
         )
       )
     ];
     $header = [
       $this->t('League',array(),array('context'=>'mespronos')),
       $this->t('Day',array(),array('context'=>'mespronos')),
-      $this->t('game',array(),array('context'=>'mespronos')),
-      $this->t('Bets left',array(),array('context'=>'mespronos')),
+      $this->t('Games',array(),array('context'=>'mespronos')),
+      $this->t('Games to play',array(),array('context'=>'mespronos')),
+      $this->t('Bets done',array(),array('context'=>'mespronos')),
       $this->t('Time left',array(),array('context'=>'mespronos')),
       '',
     ];

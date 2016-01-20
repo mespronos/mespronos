@@ -19,7 +19,7 @@ class DayController {
 
     $query = $injected_database->select('mespronos__game','g');
     $query->addExpression('min(game_date)','day_date');
-    $query->addExpression('count(id)','nb_game');
+    $query->addExpression('count(id)','nb_game_left');
     $query->groupBy('day');
     $query->fields('g',array('day'));
 
@@ -31,6 +31,7 @@ class DayController {
     $days = $day_storage->loadMultiple(array_keys($results));
 
     foreach($results as $key => &$day_data) {
+      $day_data->nb_game = $days[$key]->getNbGame();
       $day_data->entity = $days[$key];
     }
     return $results;
