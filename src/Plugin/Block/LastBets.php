@@ -70,6 +70,12 @@ class LastBets extends BlockBase {
 
       $bets_done = BetController::betsDone($user,$day->entity);
       $points_won = BetController::PointsWon($user,$day->entity);
+
+      $action_links = Link::fromTextAndUrl(
+        t('Details'),
+        Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])
+      );
+
       $row = [
         $league->label(),
         $day->entity->label(),
@@ -77,6 +83,7 @@ class LastBets extends BlockBase {
         $day->nb_game_with_score,
         $bets_done,
         $points_won,
+        $action_links,
 
       ];
       $rows[] = $row;
@@ -88,7 +95,7 @@ class LastBets extends BlockBase {
             $this->t('See all the last bets'),
             new Url('mespronos.lastbets')
           ),
-          'colspan' => 6
+          'colspan' => 7
         )
       )
     ];
@@ -99,6 +106,7 @@ class LastBets extends BlockBase {
       $this->t('Games with score',array(),array('context'=>'mespronos')),
       $this->t('Bets done',array(),array('context'=>'mespronos')),
       $this->t('Points',array(),array('context'=>'mespronos')),
+      '',
 
     ];
     return [

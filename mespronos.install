@@ -10,6 +10,8 @@ function mespronos_install() {
     'view last bets days',
     'subscribe to league',
     'make a bet',
+    'view own last bets',
+    'view others last bets',
   ];
 
   user_role_grant_permissions('anonymous', $permission_anonymous);

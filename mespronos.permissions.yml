@@ -24,6 +24,12 @@ view next bets days:
 view last bets days:
   title: "View passed bets' days"
 
+view own last bets:
+  title: "View passed own bets result"
+
+view others last bets:
+  title: "View passed bets result for another user"
+
 subscribe to league:
   title: 'Subscribe to a league'
   description: 'Allow to bet on this league'

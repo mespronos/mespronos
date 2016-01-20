@@ -13,6 +13,9 @@ use Drupal\mespronos\Entity\Controller\DayController;
 use Drupal\mespronos\Entity\Controller\UserInvolveController;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\Bet;
+use Drupal\mespronos\Entity\Game;
+use Drupal\user\Entity\User;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
@@ -153,6 +156,62 @@ class BettingController extends ControllerBase {
     $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesBetting',$day,$user);
     return $form;
 
+  }
+
+  public function LastBetsForDay(Day $day, \Drupal\Core\Session\AccountProxyInterface $user = null) {
+    if($user == null) {
+      $user = \Drupal::currentUser();
+    }
+    else {
+      $user = User::load($user);
+    }
+    $league = $day->getLeague();
+    $games = Game::getGamesForDay($day);
+    $games_ids = $games['ids'];
+    $games_entity = $games['entities'];
+    $points = $league->getPoints();
+    $bets = Bet::getUserBetsForGames($games_ids,$user);
+    $rows = [];
+    foreach($games_entity as $gid => $game) {
+      if($user->id() !== \Drupal::currentUser()->id() && !$game->isPassed()) {
+        $bet = '?';
+      }
+      else {
+        $bet = isset($bets[$gid]) ? $bets[$gid]->labelBet() : '/';
+      }
+      $points = isset($bets[$gid]) ? $bets[$gid]->get('points')->value : '/';
+      $row = [
+        $game->labelTeams(),
+        $game->labelScore(),
+        $bet,
+        $points,
+      ];
+      $header = [
+        $this->t('Game',array(),array('context'=>'mespronos')),
+        $this->t('Score',array(),array('context'=>'mespronos')),
+        $this->t('Bet',array(),array('context'=>'mespronos')),
+        $this->t('Points',array(),array('context'=>'mespronos')),
+      ];
+      $rows[] = $row;
+    }
+
+    $table_array = [
+      '#theme' => 'table',
+      '#rows' => $rows,
+      '#header' => $header,
+    ];
+    $table = render($table_array);
+
+    $header = '<h2>'.$league->label().'</h2>';
+    $header .= '<h3>'.$day->label().'</h3>';
+    $header .= '<h4>'.t('Points :').'</h4>'.
+      '<ul>'.
+      '<li>'.t('Exact score found : @nb points',array('@nb'=>$points['points_score_found'])).'</li>'.
+      '<li>'.t('Winner found : @nb points',array('@nb'=>$points['points_winner_found'])).'</li>'.
+      '<li>'.t('Nothing found : @nb points',array('@nb'=>$points['points_participation'])).'</li>'.
+      '</ul>';
+
+    return ['#markup'=>$header.$table];
   }
 
   public static function getActionBetLink(Day $day,League $league,$user_uid,$isInvolve) {

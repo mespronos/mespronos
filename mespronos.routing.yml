@@ -71,6 +71,22 @@ mespronos.lastbets:
   requirements:
     _permission: 'view last bets days'
 
+mespronos.lastbetsdetails:
+  path: 'mespronos/last-bets/day/{day}'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\BettingController::LastBetsForDay'
+    _title: 'Last bets'
+  requirements:
+    _permission: 'view own last bets'
+
+mespronos.lastbetsdetailsforuser:
+  path: 'mespronos/last-bets/day/{day}/user/{user}'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\BettingController::LastBetsForDay'
+    _title: 'Last bets'
+  requirements:
+    _permission: 'view others last bets'
+
 # Team routing definition
 entity.team.canonical:
   path: '/admin/mespronos/team/{team}'

@@ -113,6 +113,24 @@ class Bet extends ContentEntityBase implements EntityInterface {
     $this->save();
   }
 
+  public static function getUserBetsForGames($games_ids, \Drupal\Core\Session\AccountProxyInterface $user){
+    $bet_storage = \Drupal::entityManager()->getStorage('bet');
+    $query = \Drupal::entityQuery('bet');
+    $query->condition('game',$games_ids,'IN');
+    $query->condition('better',$user->id());
+    $ids = $query->execute();
+    $bets = $bet_storage->loadMultiple($ids);
+    $bets_keyed_as_game = [];
+    foreach($bets as $b) {
+      $bets_keyed_as_game[$b->getGame()] = $b;
+    }
+    return $bets_keyed_as_game;
+  }
+
+  public function labelBet() {
+    return t('@t1 - @t2',array('@t1'=> $this->get('score_team_1')->value,'@t2'=> $this->get('score_team_2')->value));
+  }
+
   /**
    * {@inheritdoc}
    */
