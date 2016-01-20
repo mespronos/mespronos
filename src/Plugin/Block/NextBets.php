@@ -113,6 +113,11 @@ class NextBets extends BlockBase {
       '#rows' => $rows,
       '#header' => $header,
       '#footer' => $footer,
+      '#cache' => [
+        'contexts' => [
+          'user',
+        ],
+      ],
     ];
 
   }
