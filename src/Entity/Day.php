@@ -117,6 +117,15 @@ class Day extends ContentEntityBase implements EntityInterface
     $ids = $query->execute();
     return count($ids);
   }
+  public function getNbGameWIthScore() {
+    $query = \Drupal::entityQuery('game')
+      ->condition('day', $this->id())
+      ->condition('score_team_1',NULL,'IS NOT')
+      ->condition('score_team_2',NULL,'IS NOT');
+    $ids = $query->execute();
+    return count($ids);
+  }
+
 
   public function label() {
     return $this->get('name')->value;

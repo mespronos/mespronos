@@ -73,7 +73,8 @@ class LastBets extends BlockBase {
       $row = [
         $league->label(),
         $day->entity->label(),
-        $day->nb_game,
+        $day->nb_game_over,
+        $day->nb_game_with_score,
         $bets_done,
         $points_won,
 
@@ -94,7 +95,8 @@ class LastBets extends BlockBase {
     $header = [
       $this->t('League',array(),array('context'=>'mespronos')),
       $this->t('Day',array(),array('context'=>'mespronos')),
-      $this->t('Games',array(),array('context'=>'mespronos')),
+      $this->t('Games over',array(),array('context'=>'mespronos')),
+      $this->t('Games with score',array(),array('context'=>'mespronos')),
       $this->t('Bets done',array(),array('context'=>'mespronos')),
       $this->t('Points',array(),array('context'=>'mespronos')),
 
