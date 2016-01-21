@@ -98,6 +98,14 @@ class Game extends ContentEntityBase implements EntityInterface {
     return $this;
   }
 
+  public function getScoreTeam1() {
+    return $this->get('score_team_1')->value;
+  }
+
+  public function getScoreTeam2() {
+    return $this->get('score_team_2')->value;
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -228,9 +236,18 @@ class Game extends ContentEntityBase implements EntityInterface {
     return 'mespronos__game';
   }
 
+  /**
+   * @return bool
+   */
+  public function isScoreSetted() {
+    return !isNull($this->getScoreTeam1()) && !isNull($this->getScoreTeam1());
+  }
+
   public function postSave(EntityStorageInterface $storage, $update = TRUE) {
-    BetController::updateBetsFromGame($this);
     parent::postSave($storage, $update);
+    if($this->isScoreSetted) {
+      BetController::updateBetsFromGame($this);
+    }
   }
 
   /**
