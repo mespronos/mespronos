@@ -85,7 +85,7 @@ class BettingController extends ControllerBase {
     ];
   }
 
-  public function lastBets() {
+  public function lastBets($forBlock = false) {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
     $days = DayController::getlastDays(10);
@@ -142,10 +142,27 @@ class BettingController extends ControllerBase {
       ''
 
     ];
+    if($forBlock) {
+      $footer = [
+        'data' => array(
+          array(
+            'data' => Link::fromTextAndUrl(
+              $this->t('See all the last bets'),
+              new Url('mespronos.lastbets')
+            ),
+            'colspan' => 7
+          )
+        )
+      ];
+    }
+    else {
+      $footer = [];
+    }
     return [
       '#theme' => 'table',
       '#rows' => $rows,
       '#header' => $header,
+      '#footer' => $footer,
     ];
   }
 
