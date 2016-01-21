@@ -70,19 +70,31 @@ class LastBets extends BlockBase {
 
       $bets_done = BetController::betsDone($user,$day->entity);
       $points_won = BetController::PointsWon($user,$day->entity);
-
-      $action_links = Link::fromTextAndUrl(
-        t('Details'),
-        Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])
-      );
+      if($user_uid>0) {
+        $action_links = Link::fromTextAndUrl(
+            t('Details'),
+            Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])
+        );
+      }
+      else {
+        $action_links = Link::fromTextAndUrl(
+            t('Log in to see your score'),
+            Url::fromRoute('user.login',[],[
+                    'query' => [
+                        'destination' => Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])->toString(),
+                    ]
+                ]
+            )
+        );
+      }
 
       $row = [
         $league->label(),
         $day->entity->label(),
         $day->nb_game_over,
         $day->nb_game_with_score,
-        $bets_done,
-        $points_won,
+        $user_uid > 0 ? $bets_done : '/',
+        $user_uid > 0 ? $points_won : '/',
         $action_links,
 
       ];
