@@ -112,13 +112,31 @@ class BettingController extends ControllerBase {
 
       $bets_done = BetController::betsDone($user,$day->entity);
       $points_won = BetController::PointsWon($user,$day->entity);
+      if($user_uid>0) {
+        $action_links = Link::fromTextAndUrl(
+            t('Details'),
+            Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])
+        );
+      }
+      else {
+        $action_links = Link::fromTextAndUrl(
+            t('Log in to see your score'),
+            Url::fromRoute('user.login',[],[
+                    'query' => [
+                        'destination' => Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])->toString(),
+                    ]
+                ]
+            )
+        );
+      }
       $row = [
         $league->label(),
         $day->entity->label(),
         $day->nb_game_over,
         $day->nb_game_with_score,
-        $bets_done,
-        $points_won,
+        $user_uid > 0 ? $bets_done : '/',
+        $user_uid > 0 ? $points_won : '/',
+        $action_links,
       ];
       $rows[] = $row;
     }
@@ -129,6 +147,7 @@ class BettingController extends ControllerBase {
       $this->t('Games with score',array(),array('context'=>'mespronos')),
       $this->t('Bets done',array(),array('context'=>'mespronos')),
       $this->t('Points',array(),array('context'=>'mespronos')),
+      ''
 
     ];
     return [
