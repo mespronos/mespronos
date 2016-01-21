@@ -80,21 +80,21 @@ class RankingLeague extends ContentEntityBase implements EntityInterface {
    * {@inheritdoc}
    */
   public function getOwner() {
-    return $this->get('user_id')->entity;
+    return $this->get('better')->entity;
   }
 
   /**
    * {@inheritdoc}
    */
   public function getOwnerId() {
-    return $this->get('user_id')->target_id;
+    return $this->get('better')->target_id;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
+    $this->set('better', $uid);
     return $this;
   }
 
@@ -102,8 +102,42 @@ class RankingLeague extends ContentEntityBase implements EntityInterface {
    * {@inheritdoc}
    */
   public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
+    $this->set('better', $account->id());
     return $this;
+  }
+
+  /**
+   * @return mixed
+   */
+  public function getLeagueiD() {
+    return $this->get('league')->target_id;
+  }
+
+  /**
+   * @return League
+   */
+  public function getLeague() {
+    $day_storage = \Drupal::entityManager()->getStorage('league');
+    $day = $day_storage->load($this->get('league')->target_id);
+    return $day;
+  }
+
+  public function setGameBetted($nb_games_betted) {
+    $this->set('games_betted', $nb_games_betted);
+    return $this;
+  }
+
+  public function getGameBetted() {
+    return $this->get('games_betted')->value;
+  }
+
+  public function setPoints($points) {
+    $this->set('points', $points);
+    return $this;
+  }
+
+  public function getPoints() {
+    return $this->get('points')->value;
   }
 
   /**
@@ -120,9 +154,9 @@ class RankingLeague extends ContentEntityBase implements EntityInterface {
       ->setDescription(t('The UUID of the RankingLeague entity.'))
       ->setReadOnly(TRUE);
 
-    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Authored by'))
-      ->setDescription(t('The user ID of the RankingLeague entity author.'))
+    $fields['better'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Better'))
+      ->setDescription(t('The user ID of the Bet entity author.'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
@@ -146,25 +180,52 @@ class RankingLeague extends ContentEntityBase implements EntityInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setDescription(t('The name of the RankingLeague entity.'))
-      ->setSettings(array(
-        'max_length' => 50,
-        'text_processing' => 0,
-      ))
-      ->setDefaultValue('')
+    $fields['league'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('League'))
+      ->setDescription(t('League entity reference'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'league')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', array(
-        'label' => 'above',
-        'type' => 'string',
-        'weight' => -4,
+        'label' => 'hidden',
+        'type' => 'entity_reference',
+        'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'string_textfield',
-        'weight' => -4,
+        'type' => 'options_select',
+        'settings' => array(),
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
+
+    $fields['games_betted'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Games betted')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 6,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 6,
+      ));
+
+    $fields['points'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Points won')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 6,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 6,
+      ));
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
