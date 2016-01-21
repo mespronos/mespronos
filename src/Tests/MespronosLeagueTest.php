@@ -106,6 +106,24 @@ class MespronosLeagueTest extends WebTestBase {
     }
   }
 
+  public function testLeagueDefaultAttributes() {
+    $league = League::create(array(
+      'created' => time(),
+      'updated' => time(),
+      'creator' => 1,
+      'sport' => $this->sport->id(),
+      'name' => 'test championnat',
+      'betting_type' => 'score',
+      'classement' => true,
+      'status' => 'active',
+    ));
+    $points = $league->getPoints();
+    $this->assertNotNull($points['points_score_found'],t('points_score_found is set : @val points',array('@val'=>$points['points_score_found'])));
+    $this->assertNotNull($points['points_winner_found'],t('points_winner_found is set : @val points',array('@val'=>$points['points_winner_found'])));
+    $this->assertNotNull($points['points_participation'],t('points_participation is set : @val points',array('@val'=>$points['points_participation'])));
+
+  }
+
   public function testLeagueCreationWithoutAttributes() {
     try {
       League::create(array(
