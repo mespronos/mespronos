@@ -52,16 +52,36 @@ use Drupal\user\UserInterface;
  * )
  */
 class RankingDay extends ContentEntityBase implements EntityInterface {
+
   /**
    * {@inheritdoc}
    */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
-    $values += array(
-      'user_id' => \Drupal::currentUser()->id(),
-    );
+  public function setOwner(UserInterface $account) {
+    $this->set('better', $account->id());
+    return $this;
   }
 
+  /**
+   * {@inheritdoc}
+   */
+  public function getOwner() {
+    return $this->get('better')->entity;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function getOwnerId() {
+    return $this->get('better')->target_id;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setOwnerId($uid) {
+    $this->set('better', $uid);
+    return $this;
+  }
   /**
    * {@inheritdoc}
    */
@@ -77,33 +97,37 @@ class RankingDay extends ContentEntityBase implements EntityInterface {
   }
 
   /**
-   * {@inheritdoc}
+   * @return mixed
    */
-  public function getOwner() {
-    return $this->get('user_id')->entity;
+  public function getDayiD() {
+    return $this->get('day')->target_id;
   }
 
   /**
-   * {@inheritdoc}
+   * @return Day
    */
-  public function getOwnerId() {
-    return $this->get('user_id')->target_id;
+  public function getDay() {
+    $day_storage = \Drupal::entityManager()->getStorage('day');
+    $day = $day_storage->load($this->get('day')->target_id);
+    return $day;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
+  public function setGameBetted($nb_games_betted) {
+    $this->set('games_betted', $nb_games_betted);
     return $this;
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
+  public function getGameBetted() {
+    return $this->get('games_betted')->value;
+  }
+
+  public function setPoints($points) {
+    $this->set('points', $points);
     return $this;
+  }
+
+  public function getPoints() {
+    return $this->get('points')->value;
   }
 
   /**
@@ -120,9 +144,9 @@ class RankingDay extends ContentEntityBase implements EntityInterface {
       ->setDescription(t('The UUID of the RankingDay entity.'))
       ->setReadOnly(TRUE);
 
-    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Authored by'))
-      ->setDescription(t('The user ID of the RankingDay entity author.'))
+    $fields['better'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Better'))
+      ->setDescription(t('The user ID of the Bet entity author.'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
@@ -146,25 +170,53 @@ class RankingDay extends ContentEntityBase implements EntityInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setDescription(t('The name of the RankingDay entity.'))
-      ->setSettings(array(
-        'max_length' => 50,
-        'text_processing' => 0,
-      ))
-      ->setDefaultValue('')
+    $fields['day'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Day'))
+      ->setDescription(t('Day entity reference'))
+      ->setRevisionable(TRUE)
+      ->setSetting('target_type', 'day')
+      ->setSetting('handler', 'default')
+      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', array(
-        'label' => 'above',
-        'type' => 'string',
-        'weight' => -4,
+        'label' => 'hidden',
+        'type' => 'entity_reference',
+        'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'string_textfield',
-        'weight' => -4,
+        'type' => 'options_select',
+        'weight' => -1,
+        'settings' => array(),
       ))
-      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('form', false)
       ->setDisplayConfigurable('view', TRUE);
+
+    $fields['games_betted'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Games betted')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 6,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 6,
+      ));
+
+    $fields['points'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Points won')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 6,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 6,
+      ));
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
