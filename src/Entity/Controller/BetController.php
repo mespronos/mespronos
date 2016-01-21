@@ -8,6 +8,9 @@
 namespace Drupal\mespronos\Entity\Controller;
 
 use Drupal\mespronos\Entity\League;
+use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\Bet;
+use Drupal\mespronos\Entity\Game;
 use Drupal\Core\Database\Database;
 
 /**
@@ -42,7 +45,7 @@ class BetController {
    * @param \Drupal\mespronos\Entity\Game $game
    * @return \Drupal\mespronos\Entity\Bet
    */
-  public static function loadForUser(User $user,Game $game) {
+  public static function loadForUser(\Drupal\Core\Session\AccountProxy $user,Game $game) {
 
     $bet_storage = \Drupal::entityManager()->getStorage('bet');
 
@@ -58,7 +61,7 @@ class BetController {
     }
   }
 
-  public static function betsDone(User $user,Day $day) {
+  public static function betsDone(\Drupal\Core\Session\AccountProxy $user,Day $day) {
     $injected_database = Database::getConnection();
     $query = $injected_database->select('mespronos__bet','b');
     $query->addExpression('count(b.id)','nb_bet');
@@ -71,7 +74,7 @@ class BetController {
     return $nb_bets;
   }
 
-  public static function pointsWon(User $user,Day $day) {
+  public static function pointsWon( \Drupal\Core\Session\AccountProxyInterface $user,Day $day) {
     $injected_database = Database::getConnection();
     $query = $injected_database->select('mespronos__bet','b');
     $query->addExpression('sum(b.points)','points');
@@ -88,7 +91,7 @@ class BetController {
    * @param \Drupal\mespronos\Entity\Bet $bet
    * @param \Drupal\User $user
    */
-  public static function isBetAllowed(Bet $bet,User $user) {
+  public static function isBetAllowed(Bet $bet, \Drupal\Core\Session\AccountProxyInterface $user) {
     $game = $bet->getGame(true);
     $now = new \DateTime();
     $game_date = new \DateTime($game->getGameDate());

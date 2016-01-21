@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Entity\Controller;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Url;
+use Drupal\mespronos\Entity\Day;
 
 /**
  * Provides a list controller for Game entity.

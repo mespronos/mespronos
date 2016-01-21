@@ -224,7 +224,7 @@ class BettingController extends ControllerBase {
           t('Register or login and start betting'),
           Url::fromRoute('mespronos_registration.join',[],[
               'query' => [
-                'destination' => Url::fromRoute('mespronos.league.register', ['league' => $league->id()])->toString(),
+                'destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(),
               ]
             ]
           )
@@ -235,7 +235,7 @@ class BettingController extends ControllerBase {
           t('Register or login and start betting'),
           Url::fromRoute('user.register',[],[
               'query' => [
-                'destination' => Url::fromRoute('mespronos.league.register', ['league' => $league->id()])->toString(),
+                'destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(),
               ]
             ]
           )
@@ -245,7 +245,7 @@ class BettingController extends ControllerBase {
     else {
       $action_links = Link::fromTextAndUrl(
         t('Start betting now !'),
-        new Url('mespronos.league.register', array('league' => $league->id()))
+        new Url('mespronos.day.bet', array('day' => $day->id()))
       );
     }
     return $action_links;
