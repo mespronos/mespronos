@@ -38,7 +38,7 @@ class BettingController extends ControllerBase {
     ];
   }
 
-  public function nextBets() {
+  public function nextBets($asBlock = false) {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
     $days = DayController::getNextDaysToBet(10);
@@ -69,6 +69,22 @@ class BettingController extends ControllerBase {
       ];
       $rows[] = $row;
     }
+    if($asBlock) {
+      $footer = [
+        'data' => array(
+          array(
+            'data' => Link::fromTextAndUrl(
+              $this->t('See all upcoming bets'),
+              new Url('mespronos.nextbets')
+            ),
+            'colspan' => 7
+          )
+        )
+      ];
+    }
+    else {
+      $footer = [];
+    }
     $header = [
       $this->t('League',array(),array('context'=>'mespronos')),
       $this->t('Day',array(),array('context'=>'mespronos')),
@@ -82,6 +98,7 @@ class BettingController extends ControllerBase {
       '#theme' => 'table',
       '#rows' => $rows,
       '#header' => $header,
+      '#footer' => $footer,
     ];
   }
 

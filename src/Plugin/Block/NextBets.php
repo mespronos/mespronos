@@ -52,69 +52,8 @@ class NextBets extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $user_uid =  \Drupal::currentUser()->id();
-    $user_involvements = array();
-    $days = DayController::getNextDaysToBet($this->configuration['number_of_days_to_display']);
-    $rows = [];
-    foreach ($days  as $day_id => $day) {
-      $league_id = $day->entity->get('league')->first()->getValue()['target_id'];
-      if(!isset($leagues[$league_id])) {
-        $leagues[$league_id] = League::load($league_id);
-      }
-      $league = $leagues[$league_id];;
-
-      $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date);
-      $now_date = new \DateTime();
-
-      $i = $game_date->diff($now_date);
-      $bets_done = BetController::betsDone(\Drupal::currentUser(),$day->entity);
-
-      $action_links = BettingController::getActionBetLink($day->entity,$league,$user_uid);
-
-      $row = [
-        $league->label(),
-        $day->entity->label(),
-        $day->nb_game,
-        $day->nb_game_left,
-        $bets_done,
-
-        $i->format('%a') >0 ? $this->t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : $this->t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
-        $action_links,
-      ];
-      $rows[] = $row;
-    }
-    $footer = [
-      'data' => array(
-        array(
-          'data' => Link::fromTextAndUrl(
-            $this->t('See all upcoming bets'),
-            new Url('mespronos.nextbets')
-          ),
-          'colspan' => 7
-        )
-      )
-    ];
-    $header = [
-      $this->t('League',array(),array('context'=>'mespronos')),
-      $this->t('Day',array(),array('context'=>'mespronos')),
-      $this->t('Games',array(),array('context'=>'mespronos')),
-      $this->t('Games to play',array(),array('context'=>'mespronos')),
-      $this->t('Bets done',array(),array('context'=>'mespronos')),
-      $this->t('Time left',array(),array('context'=>'mespronos')),
-      '',
-    ];
-    return [
-      '#theme' => 'table',
-      '#rows' => $rows,
-      '#header' => $header,
-      '#footer' => $footer,
-      '#cache' => [
-        'contexts' => [
-          'user',
-        ],
-      ],
-    ];
-
+    $betController = new BettingController();
+    return $betController->nextBets(true);
   }
 
 }
