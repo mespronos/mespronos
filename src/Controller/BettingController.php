@@ -10,7 +10,6 @@ namespace Drupal\mespronos\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Entity\Controller\BetController;
 use Drupal\mespronos\Entity\Controller\DayController;
-use Drupal\mespronos\Entity\Controller\UserInvolveController;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Bet;
@@ -50,17 +49,13 @@ class BettingController extends ControllerBase {
         $leagues[$league_id] = League::load($league_id);
       }
       $league = $leagues[$league_id];
-      if(!isset($user_involvements[$league_id])) {
-        $user_involvements[$league_id] = UserInvolveController::isUserInvolve($user_uid ,$league_id);
-      }
-      $day->involve = $user_involvements[$league_id];
 
       $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date,new \DateTimeZone("GMT"));
       $game_date->setTimezone(new \DateTimeZone("Europe/Paris"));
       $now_date = new \DateTime();
       
       $i = $game_date->diff($now_date);
-      $action_links = self::getActionBetLink($day->entity,$league,$user_uid,$user_involvements[$league_id]);
+      $action_links = self::getActionBetLink($day->entity,$league,$user_uid);
       $bets_done = BetController::betsDone($user,$day->entity);
       $row = [
         $league->label(),
@@ -101,9 +96,6 @@ class BettingController extends ControllerBase {
         $leagues[$league_id] = League::load($league_id);
       }
       $league = $leagues[$league_id];
-      if(!isset($user_involvements[$league_id])) {
-        $user_involvements[$league_id] = UserInvolveController::isUserInvolve($user_uid ,$league_id);
-      }
 
       $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date);
       $now_date = new \DateTime();
@@ -159,22 +151,14 @@ class BettingController extends ControllerBase {
 
   public function bet($day) {
     $user = \Drupal::currentUser();
-    $user_uid =  $user->id();
     $day_storage = \Drupal::entityManager()->getStorage('day');
     $day = $day_storage->load($day);
     if($day === NULL) {
       drupal_set_message($this->t('This day doesn\'t exist.'),'error');
       throw new AccessDeniedHttpException();
     }
-    $league_id =$day->get('league')->first()->getValue()['target_id'];
-    if(!UserInvolveController::isUserInvolve($user_uid,$league_id)) {
-      drupal_set_message($this->t('You\'re not subscribed to this day'),'warning');
-      throw new AccessDeniedHttpException();
-    }
-
     $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesBetting',$day,$user);
     return $form;
-
   }
 
   public function LastBetsForDay(Day $day, \Drupal\Core\Session\AccountProxyInterface $user = null) {
@@ -233,44 +217,36 @@ class BettingController extends ControllerBase {
     return ['#markup'=>$header.$table];
   }
 
-  public static function getActionBetLink(Day $day,League $league,$user_uid,$isInvolve) {
-    if($isInvolve) {
-      $action_links = Link::fromTextAndUrl(
-        t('Bet now'),
-        new Url('mespronos.day.bet', array('day' => $day->id()))
-      );
-    }
-    else {
-      if($user_uid == 0) {
-        if(\Drupal::moduleHandler()->moduleExists(('mespronos_registration'))) {
-          $action_links = Link::fromTextAndUrl(
-            t('Register or login and start betting'),
-            Url::fromRoute('mespronos_registration.join',[],[
-                'query' => [
-                  'destination' => Url::fromRoute('mespronos.league.register', ['league' => $league->id()])->toString(),
-                ]
+  public static function getActionBetLink(Day $day,League $league,$user_uid) {
+    if($user_uid == 0) {
+      if(\Drupal::moduleHandler()->moduleExists(('mespronos_registration'))) {
+        $action_links = Link::fromTextAndUrl(
+          t('Register or login and start betting'),
+          Url::fromRoute('mespronos_registration.join',[],[
+              'query' => [
+                'destination' => Url::fromRoute('mespronos.league.register', ['league' => $league->id()])->toString(),
               ]
-            )
-          );
-        }
-        else {
-          $action_links = Link::fromTextAndUrl(
-            t('Register or login and start betting'),
-            Url::fromRoute('user.register',[],[
-                'query' => [
-                  'destination' => Url::fromRoute('mespronos.league.register', ['league' => $league->id()])->toString(),
-                ]
-              ]
-            )
-          );
-        }
+            ]
+          )
+        );
       }
       else {
         $action_links = Link::fromTextAndUrl(
-          t('Start betting now !'),
-          new Url('mespronos.league.register', array('league' => $league->id()))
+          t('Register or login and start betting'),
+          Url::fromRoute('user.register',[],[
+              'query' => [
+                'destination' => Url::fromRoute('mespronos.league.register', ['league' => $league->id()])->toString(),
+              ]
+            ]
+          )
         );
       }
+    }
+    else {
+      $action_links = Link::fromTextAndUrl(
+        t('Start betting now !'),
+        new Url('mespronos.league.register', array('league' => $league->id()))
+      );
     }
     return $action_links;
   }

@@ -38,14 +38,6 @@ mespronos.remove:
   requirements:
     _permission: 'import league content'
 
-mespronos.league.register:
-  path: 'mespronos/league/{league}/register'
-  defaults:
-    _controller: '\Drupal\mespronos\Entity\Controller\UserInvolveController::registerUser'
-    _title: 'Register'
-  requirements:
-    _permission: 'subscribe to league'
-
 mespronos.nextbets:
   path: 'mespronos/next-bets'
   defaults:

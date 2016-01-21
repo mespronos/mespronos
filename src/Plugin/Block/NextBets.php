@@ -13,7 +13,6 @@ use Drupal\Core\Link;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\mespronos\Controller\BettingController;
 use Drupal\mespronos\Entity\Controller\DayController;
-use Drupal\mespronos\Entity\Controller\UserInvolveController;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Controller\BetController;
@@ -62,11 +61,7 @@ class NextBets extends BlockBase {
       if(!isset($leagues[$league_id])) {
         $leagues[$league_id] = League::load($league_id);
       }
-      $league = $leagues[$league_id];
-      if(!isset($user_involvements[$league_id])) {
-        $user_involvements[$league_id] = UserInvolveController::isUserInvolve($user_uid ,$league_id);
-      }
-      $day->involve = $user_involvements[$league_id];
+      $league = $leagues[$league_id];;
 
       $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date);
       $now_date = new \DateTime();
@@ -74,7 +69,7 @@ class NextBets extends BlockBase {
       $i = $game_date->diff($now_date);
       $bets_done = BetController::betsDone(\Drupal::currentUser(),$day->entity);
 
-      $action_links = BettingController::getActionBetLink($day->entity,$league,$user_uid,$user_involvements[$league_id]);
+      $action_links = BettingController::getActionBetLink($day->entity,$league,$user_uid);
 
       $row = [
         $league->label(),

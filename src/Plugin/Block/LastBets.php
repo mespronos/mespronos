@@ -11,11 +11,8 @@ use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\mespronos\Controller\BettingController;
 use Drupal\mespronos\Entity\Controller\DayController;
-use Drupal\mespronos\Entity\Controller\UserInvolveController;
 use Drupal\mespronos\Entity\League;
-use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Controller\BetController;
 
 
@@ -64,9 +61,6 @@ class LastBets extends BlockBase {
         $leagues[$league_id] = League::load($league_id);
       }
       $league = $leagues[$league_id];
-      if(!isset($user_involvements[$league_id])) {
-        $user_involvements[$league_id] = UserInvolveController::isUserInvolve($user_uid ,$league_id);
-      }
 
       $bets_done = BetController::betsDone($user,$day->entity);
       $points_won = BetController::PointsWon($user,$day->entity);
