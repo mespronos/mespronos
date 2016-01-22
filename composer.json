@@ -1,6 +1,6 @@
 {
     "name": "kgaut/mespronos",
-    "description": "Pronostic module for drupal 8",
+    "description": " Betting module build on Drupal 8",
     "require": {
     	"composer/installers": "~1.0"
     },
