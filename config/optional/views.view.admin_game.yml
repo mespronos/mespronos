@@ -6,6 +6,8 @@ dependencies:
     - datetime
     - mespronos
     - user
+_core:
+  default_config_hash: nzA9s6WSLkltWSiW-lt_kdTDeXS0ttHWFON3vFYBBUQ
 id: admin_game
 label: 'Admin - Game'
 module: views
@@ -81,13 +83,14 @@ display:
           columns:
             sport: sport
             name: name
-            name_3: name_3
+            name_3: number
             game_date: game_date
             name_2: name_2
             score_team_1: score_team_1
             score_team_2: score_team_1
             name_1: name_1
             operations: operations
+            number: number
           info:
             sport:
               sortable: true
@@ -104,7 +107,7 @@ display:
               empty_column: false
               responsive: ''
             name_3:
-              sortable: true
+              sortable: false
               default_sort_order: asc
               align: ''
               separator: ''
@@ -152,7 +155,14 @@ display:
               separator: ''
               empty_column: false
               responsive: ''
-          default: '-1'
+            number:
+              sortable: false
+              default_sort_order: asc
+              align: ''
+              separator: ' - '
+              empty_column: false
+              responsive: ''
+          default: game_date
           empty_table: false
       row:
         type: fields
@@ -291,6 +301,72 @@ display:
           field_api_classes: false
           entity_type: league
           entity_field: name
+          plugin_id: field
+        number:
+          id: number
+          table: mespronos__day
+          field: number
+          relationship: day
+          group_type: group
+          admin_label: ''
+          label: Day
+          exclude: false
+          alter:
+            alter_text: false
+            text: ''
+            make_link: false
+            path: ''
+            absolute: false
+            external: false
+            replace_spaces: false
+            path_case: none
+            trim_whitespace: false
+            alt: ''
+            rel: ''
+            link_class: ''
+            prefix: ''
+            suffix: ''
+            target: ''
+            nl2br: false
+            max_length: 0
+            word_boundary: true
+            ellipsis: true
+            more_link: false
+            more_link_text: ''
+            more_link_path: ''
+            strip_tags: false
+            trim: false
+            preserve_tags: ''
+            html: false
+          element_type: ''
+          element_class: ''
+          element_label_type: ''
+          element_label_class: ''
+          element_label_colon: true
+          element_wrapper_type: ''
+          element_wrapper_class: ''
+          element_default_classes: true
+          empty: ''
+          hide_empty: false
+          empty_zero: false
+          hide_alter_empty: true
+          click_sort_column: value
+          type: number_integer
+          settings:
+            thousand_separator: ''
+            prefix_suffix: true
+          group_column: value
+          group_columns: {  }
+          group_rows: true
+          delta_limit: 0
+          delta_offset: 0
+          delta_reversed: false
+          delta_first_last: false
+          multi_type: separator
+          separator: ', '
+          field_api_classes: false
+          entity_type: day
+          entity_field: number
           plugin_id: field
         name_3:
           id: name_3
@@ -746,35 +822,6 @@ display:
           entity_type: league
           entity_field: sport
           plugin_id: standard
-        league:
-          id: league
-          table: mespronos__day
-          field: league
-          relationship: day
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: ''
-          entity_type: day
-          entity_field: league
-          plugin_id: standard
-        day:
-          id: day
-          table: mespronos__game
-          field: day
-          relationship: none
-          group_type: group
-          admin_label: ''
-          order: ASC
-          exposed: false
-          expose:
-            label: Day
-            order: ASC
-          entity_type: game
-          entity_field: day
-          plugin_id: standard
       header: {  }
       footer: {  }
       empty: {  }
@@ -833,6 +880,8 @@ display:
         - url.query_args
         - user.permissions
       cacheable: false
+      max-age: 0
+      tags: {  }
   admin_games:
     display_plugin: page
     id: admin_games
@@ -856,3 +905,5 @@ display:
         - url.query_args
         - user.permissions
       cacheable: false
+      max-age: 0
+      tags: {  }
