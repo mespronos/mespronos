@@ -94,7 +94,7 @@ class MespronosRankingDayTest extends WebTestBase {
       'score_team_2' => 1,
       'points' => 10,
     ));
-    $this->game->save();
+    $this->bet->save();
   }
 
   public function testCreationRankingDay() {
@@ -122,12 +122,12 @@ class MespronosRankingDayTest extends WebTestBase {
 
   public function testCreationWithExistingBet() {
     $dataFetched = RankingDay::getData($this->day);
-
+    debug($dataFetched);
     $this->assertEqual(1,count($dataFetched),t('Data fetched is an array of 1 line'));
     $dataRow = array_pop($dataFetched);
-    $this->assertEqual(10,$dataRow['points'],t('Points are right'));
-    $this->assertEqual(1,$dataRow['better'],t('better is right'));
-    $this->assertEqual(1,$dataRow['nb_bet'],t('bet number is right'));
+    $this->assertEqual(10,$dataRow->points,t('Points are right'));
+    $this->assertEqual(1,$dataRow->better,t('better is right'));
+    $this->assertEqual(1,$dataRow->nb_bet,t('bet number is right'));
 
     //$rankingDay = RankingDay::createRanking($this->day);
     //$this->assertEqual($rankingDay->get('points')->value,10,t('Points are correctly setted'));
