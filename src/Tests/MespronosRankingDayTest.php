@@ -122,6 +122,7 @@ class MespronosRankingDayTest extends WebTestBase {
 
   public function testCreationWithExistingBet() {
     $dataFetched = RankingDay::getData($this->day);
+
     $this->assertEqual(1,count($dataFetched),t('Data fetched is an array of 1 line'));
     $dataRow = array_pop($dataFetched);
     $this->assertEqual(10,$dataRow['points'],t('Points are right'));

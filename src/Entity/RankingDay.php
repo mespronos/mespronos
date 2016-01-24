@@ -149,14 +149,13 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
   public static function getData(Day $day) {
     $injected_database = Database::getConnection();
     $query = $injected_database->select('mespronos__bet','b');
-    $query->addField('b','id');
     $query->addField('b','better');
     $query->addExpression('sum(b.points)','points');
     $query->addExpression('count(b.id)','nb_bet');
     $query->join('mespronos__game','g','b.game = g.id');
     $query->groupBy('b.better');
     $query->condition('g.day',$day->id());
-    $results = $query->execute()->fetchAllAssoc('id');
+    $results = $query->execute()->fetchAllAssoc('better');
     return $results;
   }
 
