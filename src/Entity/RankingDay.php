@@ -13,6 +13,7 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Database\Database;
 
 /**
  * Defines the RankingDay entity.
@@ -135,12 +136,19 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
   }
 
   public static function removeRanking(\Drupal\mespronos\Entity\Day $day) {
-    $injected_database = Database::getConnection();
-    $query = $injected_database->delete('mespronos__ranking_day','rd');
-    $query->condition('rd.day',$day->id());
 
-    $results = $query->execute();
-    return $results;
+    $storage = \Drupal::entityManager()->getStorage('ranking_day');
+    $query = \Drupal::entityQuery('ranking_day');
+    $query->condition('day',$day->id());
+    $ids = $query->execute();
+
+    $rankings = $storage->loadMultiple($ids);
+    $nb_deleted = count($rankings);
+    foreach ($rankings as $ranking) {
+      $ranking->delete();
+    }
+
+    return $nb_deleted;
   }
 
   /**

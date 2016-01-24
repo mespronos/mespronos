@@ -93,7 +93,21 @@ class MespronosRankingDayTest extends WebTestBase {
       'games_betted' => 5,
       'points' => 10
     ]);
-    $rankingDay->save();
+    $this->assertTrue($rankingDay->save(),t('Ranking day saving return true'));
   }
+
+  public function testMethodRemoveRankingDay() {
+    $this->assertEqual(0,RankingDay::removeRanking($this->day),t('Remove ranking return 0 when no ranking exit'));
+    $rankingDay = RankingDay::create([
+      'better' => 1,
+      'day' => $this->day->id(),
+      'games_betted' => 5,
+      'points' => 10
+    ]);
+    $rankingDay->save();
+    $this->assertEqual(1,RankingDay::removeRanking($this->day),t('Remove ranking return 1 when a ranking exit'));
+    $this->assertEqual(0,RankingDay::removeRanking($this->day),t('And then 0 after deletion'));
+  }
+
 
 }
