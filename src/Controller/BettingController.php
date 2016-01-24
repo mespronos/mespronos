@@ -118,11 +118,6 @@ class BettingController extends ControllerBase {
       }
       $league = $leagues[$league_id];
 
-      $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date);
-      $now_date = new \DateTime();
-
-      $i = $game_date->diff($now_date);
-
       $bets_done = BetController::betsDone($user,$day->entity);
       $points_won = BetController::PointsWon($user,$day->entity);
       if($user_uid>0) {
