@@ -25,18 +25,6 @@ use Drupal\Core\Link;
  * @package Drupal\mespronos\Controller
  */
 class BettingController extends ControllerBase {
-  /**
-   * Hello.
-   *
-   * @return string
-   *   Return Hello string.
-   */
-  public function index() {
-    return [
-        '#type' => 'markup',
-        '#markup' => $this->t('Hello World!', [])
-    ];
-  }
 
   public function nextBets($asBlock = false) {
     $user = \Drupal::currentUser();
