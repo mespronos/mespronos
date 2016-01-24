@@ -42,6 +42,7 @@ class BettingController extends ControllerBase {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
     $days = DayController::getNextDaysToBet(10);
+    $rows = [];
 
     foreach ($days  as $day_id => $day) {
       $league_id = $day->entity->get('league')->first()->getValue()['target_id'];
@@ -106,6 +107,7 @@ class BettingController extends ControllerBase {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
     $days = DayController::getlastDays(10);
+    $rows = [];
 
     foreach ($days  as $day_id => $day) {
       $league_id = $day->entity->get('league')->first()->getValue()['target_id'];
