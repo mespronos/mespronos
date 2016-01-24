@@ -135,14 +135,15 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
   public static function createRanking(\Drupal\mespronos\Entity\Day $day) {
     $nb_removed = self::removeRanking($day);
     $data = self::getData($day);
-    $points = BetController::pointsWon(\Drupal::currentUser(),$day);
-    $rankingDay = RankingDay::create([
-      'better' => 1,
-      'day' => $day->id(),
-      'games_betted' => 5,
-      'points' => $points
-    ]);
-    $rankingDay->save();
+    foreach($data as $row) {
+      $rankingDay = RankingDay::create([
+        'better' => $data['better'],
+        'day' => $day->id(),
+        'games_betted' => $data['nb_bet'],
+        'points' => $data['points']
+      ]);
+      $rankingDay->save();
+    }
   }
 
   public static function getData(Day $day) {
@@ -152,7 +153,9 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     $query->addField('b','better');
     $query->addExpression('sum(b.points)','points');
     $query->addExpression('count(b.id)','nb_bet');
-    $query->condition('b.day',$day->id());
+    $query->join('mespronos__game','g','b.game = g.id');
+    $query->groupBy('b.better');
+    $query->condition('g.day',$day->id());
     $results = $query->execute()->fetchAllAssoc('id');
     return $results;
   }
