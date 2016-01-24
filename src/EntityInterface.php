@@ -2,7 +2,6 @@
 namespace Drupal\mespronos;
 
 use Drupal\Core\Entity\ContentEntityInterface;
-use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\EntityOwnerInterface;
 
 /**
@@ -10,7 +9,7 @@ use Drupal\user\EntityOwnerInterface;
  *
  * @ingroup mespronos
  */
-interface EntityInterface extends ContentEntityInterface, EntityOwnerInterface {
+interface MPNEntityInterface extends ContentEntityInterface, EntityOwnerInterface {
   // Add get/set methods for your configuration properties here.
 
 }
