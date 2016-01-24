@@ -130,6 +130,19 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     return $this->get('points')->value;
   }
 
+  public static function createRanking(\Drupal\mespronos\Entity\Day $day) {
+    $nb_removed = self::removeRankingDay($day);
+  }
+
+  public static function removeRanking(\Drupal\mespronos\Entity\Day $day) {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->delete('mespronos__ranking_day','rd');
+    $query->condition('rd.day',$day->id());
+
+    $results = $query->execute();
+    return $results;
+  }
+
   /**
    * {@inheritdoc}
    */
