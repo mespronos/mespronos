@@ -14,6 +14,7 @@ use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Team;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Game;
+use Drupal\mespronos\Entity\Bet;
 
 /**
  * Provides automated tests for the mespronos module.
@@ -26,6 +27,7 @@ class MespronosRankingDayTest extends WebTestBase {
   public $team2;
   public $day;
   public $game;
+  public $bet;
   /**
    * {@inheritdoc}
    */
@@ -84,6 +86,15 @@ class MespronosRankingDayTest extends WebTestBase {
       'game_date' => $date,
     ));
     $this->game->save();
+
+    $this->bet = Bet::create(array(
+      'better' => 1,
+      'game' => $this->game->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+      'points' => 10,
+    ));
+    $this->game->save();
   }
 
   public function testCreationRankingDay() {
@@ -109,5 +120,16 @@ class MespronosRankingDayTest extends WebTestBase {
     $this->assertEqual(0,RankingDay::removeRanking($this->day),t('And then 0 after deletion'));
   }
 
+  public function testCreationWithExistingBet() {
+    $dataFetched = RankingDay::getData($this->day);
+    $this->assertEqual(1,count($dataFetched),t('Data fetched is an array of 1 line'));
+    $dataRow = array_pop($dataFetched);
+    $this->assertEqual(10,$dataRow['points'],t('Points are right'));
+    $this->assertEqual(1,$dataRow['better'],t('better is right'));
+    $this->assertEqual(1,$dataRow['nb_bet'],t('bet number is right'));
+
+    //$rankingDay = RankingDay::createRanking($this->day);
+    //$this->assertEqual($rankingDay->get('points')->value,10,t('Points are correctly setted'));
+  }
 
 }

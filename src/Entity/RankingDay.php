@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\mespronos\Entity\Controller\BetController;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Database\Database;
@@ -132,7 +133,28 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
   }
 
   public static function createRanking(\Drupal\mespronos\Entity\Day $day) {
-    $nb_removed = self::removeRankingDay($day);
+    $nb_removed = self::removeRanking($day);
+    $data = self::getData($day);
+    $points = BetController::pointsWon(\Drupal::currentUser(),$day);
+    $rankingDay = RankingDay::create([
+      'better' => 1,
+      'day' => $day->id(),
+      'games_betted' => 5,
+      'points' => $points
+    ]);
+    $rankingDay->save();
+  }
+
+  public static function getData(Day $day) {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__bet','b');
+    $query->addField('b','id');
+    $query->addField('b','better');
+    $query->addExpression('sum(b.points)','points');
+    $query->addExpression('count(b.id)','nb_bet');
+    $query->condition('b.day',$day->id());
+    $results = $query->execute()->fetchAllAssoc('id');
+    return $results;
   }
 
   public static function removeRanking(\Drupal\mespronos\Entity\Day $day) {
