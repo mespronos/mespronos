@@ -57,34 +57,36 @@ class BetController {
       return $bet_storage->load(array_pop($ids));
     }
     else {
-      return $bet_storage->create(array());;
+      return $bet_storage->create(array());
     }
   }
 
   public static function betsDone(\Drupal\Core\Session\AccountProxy $user,Day $day) {
+    return self::getInfos('bets',$user,$day);
+  }
+
+  public static function pointsWon(\Drupal\Core\Session\AccountProxy $user,Day $day) {
+    return self::getInfos('points',$user,$day);
+  }
+
+  protected static function getInfos($type, \Drupal\Core\Session\AccountProxyInterface $user,Day $day) {
     $injected_database = Database::getConnection();
     $query = $injected_database->select('mespronos__bet','b');
+    $query->addExpression('sum(b.points)','points');
     $query->addExpression('count(b.id)','nb_bet');
     $query->join('mespronos__game','g','b.game = g.id');
     $query->condition('g.day',$day->id());
     $query->condition('b.better',$user->id());
 
     $results = $query->execute()->fetchAssoc();
-    $nb_bets = intval($results['nb_bet']);
-    return $nb_bets;
-  }
-
-  public static function pointsWon( \Drupal\Core\Session\AccountProxyInterface $user,Day $day) {
-    $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__bet','b');
-    $query->addExpression('sum(b.points)','points');
-    $query->join('mespronos__game','g','b.game = g.id');
-    $query->condition('g.day',$day->id());
-    $query->condition('b.better',$user->id());
-
-    $results = $query->execute()->fetchAssoc();
-    $points = intval($results['points']);
-    return $points;
+    if($type == 'points') {
+      $points = intval($results['points']);
+      return $points;
+    }
+    else {
+      $nb_bets = intval($results['nb_bet']);
+      return $nb_bets;
+    }
   }
 
   /**
