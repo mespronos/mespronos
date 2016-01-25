@@ -135,14 +135,14 @@ class Bet extends ContentEntityBase implements MPNEntityInterface {
    * {@inheritdoc}
    */
   public function getOwnerId() {
-    return $this->get('user_id')->target_id;
+    return $this->get('better')->target_id;
   }
 
   /**
    * {@inheritdoc}
    */
   public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
+    $this->set('better', $uid);
     return $this;
   }
 
@@ -171,8 +171,28 @@ class Bet extends ContentEntityBase implements MPNEntityInterface {
    * {@inheritdoc}
    */
   public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
+    $this->set('better', $account->id());
     return $this;
+  }
+
+  /**
+   * @param \Drupal\Core\Session\AccountProxyInterface|null $user
+   * @return bool
+   */
+  public function isAllowed() {
+    $game = $this->getGame(true);
+    if($game->isPassed()) {
+      return false;
+    }
+    $league = $game->getLeague();
+    if(!$league->isActive()) {
+      return false;
+    }
+    if($this->getOwnerId() == 0) {
+      return false;
+    }
+
+    return true;
   }
 
   /**

@@ -204,6 +204,10 @@ class League extends ContentEntityBase implements MPNEntityInterface {
     return $points;
   }
 
+  public function isActive() {
+    return $this->get('status')->value == 'active';
+  }
+
   /**
    * {@inheritdoc}
    */

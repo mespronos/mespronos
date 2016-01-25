@@ -89,20 +89,4 @@ class BetController {
     }
   }
 
-  /**
-   * @param \Drupal\mespronos\Entity\Bet $bet
-   * @TODO : Unit testing
-   */
-  public static function isBetAllowed(Bet $bet) {
-    $game = $bet->getGame(true);
-    $now = new \DateTime(null, new \DateTimeZone("UTC"));
-    $game_date = new \DateTime($game->getGameDate(),new \DateTimeZone("UTC"));
-
-    //@TODO ajouter un tampon, genre 15 minutes
-    if($now->diff($game_date)>=0) {
-      return true;
-    }
-
-    return false;
-  }
 }

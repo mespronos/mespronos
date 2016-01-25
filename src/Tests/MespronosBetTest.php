@@ -100,5 +100,58 @@ class MespronosBetTest extends WebTestBase {
     $this->assertTrue($bet->save(),t('Bet saving return true'));
   }
 
+  public function testMethodIsAllowedInFuture() {
+    $dateO = new \DateTime(null,new \DateTimeZone(drupal_get_user_timezone()));
+    $dateO->setTimezone(new \DateTimeZone('UTC'));
+    $dateO->add(new \DateInterval('P2D'));
+    $date = $dateO->format('Y-m-d\TH:i:s');
+
+    $futureGame = Game::create(array(
+      'team_1' => $this->team1->id(),
+      'team_2' => $this->team2->id(),
+      'day' => $this->day->id(),
+      'game_date' => $date,
+    ));
+    $futureGame->save();
+
+
+    $bet = Bet::create(array(
+      'better' => 1,
+      'game' => $futureGame->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+      'points' => 10,
+    ));
+
+    $this->assertTrue($bet->isAllowed(),t('A bet on upcomming game is allowed'));
+  }
+
+
+  public function testMethodIsAllowedInPassed() {
+    $dateO = new \DateTime(null,new \DateTimeZone(drupal_get_user_timezone()));
+    $dateO->setTimezone(new \DateTimeZone('UTC'));
+    $dateO->sub(new \DateInterval('P2D'));
+    $date = $dateO->format('Y-m-d\TH:i:s');
+
+    $passedGame = Game::create(array(
+      'team_1' => $this->team1->id(),
+      'team_2' => $this->team2->id(),
+      'day' => $this->day->id(),
+      'game_date' => $date,
+    ));
+    $passedGame->save();
+
+
+    $bet = Bet::create(array(
+      'better' => 1,
+      'game' => $passedGame->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+      'points' => 10,
+    ));
+
+    $this->assertFalse($bet->isAllowed(),t('A bet on passed game is forbbiden'));
+  }
+
 
 }

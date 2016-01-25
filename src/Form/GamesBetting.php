@@ -141,7 +141,7 @@ class GamesBetting extends FormBase {
         }
         $bet->set('score_team_1',$game_data['score_team_1']);
         $bet->set('score_team_2',$game_data['score_team_2']);
-        if(BetController::isBetAllowed($bet,$user)) {
+        if($bet->isAllowed()) {
           $bet->save();
           $i++;
         }
