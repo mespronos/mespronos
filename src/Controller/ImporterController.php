@@ -58,11 +58,11 @@ class ImporterController extends ControllerBase {
         $date = \DateTime::createFromFormat('U',$date,new \DateTimeZone(drupal_get_user_timezone()));
         $date->setTimezone(new \DateTimeZone('UTC'));
         $date = $date->format('Y-m-d\TH:i:s');
-        $game = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
+        $games = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
       }
     }
     return [
-      '#markup' => 'lol'
+      '#markup' => t('@nb games created / updated',array('@nb' => count($games)))
     ];
   }
 
@@ -71,11 +71,7 @@ class ImporterController extends ControllerBase {
     $id = $query->execute();
     if (count($id) == 0) {
       $sport = Sport::create(array(
-        'created' => time(),
-        'updated' => time(),
-        'creator' => 1,
         'name' => $sport_name,
-        'langcode' => 'und',
       ));
       $sport->save();
     }
@@ -90,15 +86,11 @@ class ImporterController extends ControllerBase {
     $id = $query->execute();
     if(count($id) == 0) {
       $league = League::create(array(
-        'created' => time(),
-        'updated' => time(),
-        'creator' => 1,
         'sport' => $sport->id(),
         'name' => $_league['name'],
         'betting_type' => $_league['betting_type'],
         'classement' => $_league['classement'],
         'status' => $_league['status'],
-        'langcode' => 'und',
       ));
       $league->save();
       drupal_set_message(t('The league @league_name of @sport_name has been created',array('@league_name'=> $_league['name'],'@sport_name'=>$sport->get('name')->value)));
@@ -116,13 +108,9 @@ class ImporterController extends ControllerBase {
     $id = $query->execute();
     if(count($id) == 0) {
       $day = Day::create(array(
-        'created' => time(),
-        'updated' => time(),
-        'creator' => 1,
         'league' => $league->id(),
         'number' => $day['number'],
         'name' => isset($day['name']) ? $day['name'] : t('Journée @nb',array('@nb'=>$day['number'])),
-        'langcode' => 'und',
       ));
       $day->save();
       drupal_set_message(t('The day @number of @league_name has been created',array('@league_name'=> $league->get('name')->value,'@number'=>$day->get('number')->value)));
@@ -138,11 +126,7 @@ class ImporterController extends ControllerBase {
     $id = $query->execute();
     if(count($id) == 0) {
       $team = Team::create(array(
-        'created' => time(),
-        'updated' => time(),
-        'creator' => 1,
         'name' => $team_name,
-        'langcode' => 'und',
       ));
       $team->save();
       drupal_set_message(t('The team @team has been created',array('@team'=> $team_name)));
@@ -169,16 +153,12 @@ class ImporterController extends ControllerBase {
     }
     if(count($id) == 0) {
       $game = Game::create(array(
-        'created' => time(),
-        'updated' => time(),
-        'creator' => 1,
         'team_1' => $team_1->id(),
         'team_2' => $team_2->id(),
         'score_team_1' => $score_team_1,
         'score_team_2' => $score_team_2,
         'day' => $day->id(),
         'game_date' => $date,
-        'langcode' => 'und',
       ));
       $game->save();
       drupal_set_message(t('The game @team1 - @team2 has been created',array('@team1'=> $team_1->get('name')->value,'@team2'=> $team_2->get('name')->value)));
