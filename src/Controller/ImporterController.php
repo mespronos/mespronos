@@ -48,6 +48,7 @@ class ImporterController extends ControllerBase {
     $data = $yaml->parse(file_get_contents($file->getFileUri()));
     $sport = self::importSport($data['league']['sport']);
     $league = self::importLeague($data['league'], $sport);
+    $games = [];
     foreach($data['league']['days'] as $_day) {
       $day = self::importDay($_day,$league);
       foreach($_day['games'] as $_game) {
@@ -58,7 +59,7 @@ class ImporterController extends ControllerBase {
         $date = \DateTime::createFromFormat('U',$date,new \DateTimeZone(drupal_get_user_timezone()));
         $date->setTimezone(new \DateTimeZone('UTC'));
         $date = $date->format('Y-m-d\TH:i:s');
-        $games = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
+        $games[] = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
       }
     }
     return [
