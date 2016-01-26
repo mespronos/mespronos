@@ -53,6 +53,10 @@ use Drupal\user\UserInterface;
 class Day extends ContentEntityBase implements MPNEntityInterface
 {
 
+  public function createRanking() {
+    RankingDay::createRanking($this);
+  }
+
   /**
    * {@inheritdoc}
    */

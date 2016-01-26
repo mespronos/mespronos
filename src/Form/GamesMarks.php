@@ -5,6 +5,9 @@ namespace Drupal\mespronos\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Drupal\mespronos\Entity\Game;
+use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\RankingDay;
 /**
  * Implements an example form.
  */
@@ -71,17 +74,22 @@ class GamesMarks extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $games = $form_state->getValue('games');
     $i = 0;
+    $days_to_update = [];
     foreach($games as $game_id => $game_data) {
-      $game_storage = \Drupal::entityManager()->getStorage('game');
       if($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '') {
         $i++;
-        $game = $game_storage->load($game_id);
-        $game->set('score_team_1',$game_data['score_team_1']);
-        $game->set('score_team_2',$game_data['score_team_2']);
+        $game = Game::load($game_id);
+        $game->setScore($game_data['score_team_1'],$game_data['score_team_2']);
         $game->save();
+        $days_to_update[$game->getDayId()] = $game->getDayId();
       }
     }
     drupal_set_message($this->t('@nb_mark games updated',array('@nb_mark'=>$i)));
+    foreach($days_to_update as $day_id) {
+      $i++;
+      $day = Day::load($day_id);
+      $day->createRanking();
+      drupal_set_message($this->t('Ranking updated for @nb_ranking days',array('@nb_ranking'=>$i)));
+    }
   }
-
 }

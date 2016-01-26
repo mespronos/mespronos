@@ -133,7 +133,7 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
   }
 
   public static function createRanking(\Drupal\mespronos\Entity\Day $day) {
-    $nb_removed = self::removeRanking($day);
+    self::removeRanking($day);
     $data = self::getData($day);
     foreach($data as $row) {
       $rankingDay = RankingDay::create([
