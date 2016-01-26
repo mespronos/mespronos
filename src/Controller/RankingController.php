@@ -11,28 +11,48 @@ use Drupal\mespronos\Entity\Day;
  * @package Drupal\mespronos\Controller
  */
 class RankingController extends ControllerBase {
-  public static function getRankingTableForDay(Day $day) {
-    $rankingDays = RankingDay::getRankingForDay($day);
-    return self::getTableFromRanking($rankingDays);
+
+  public static function recalculateDay($day) {
+    $day_storage = \Drupal::entityManager()->getStorage('day');
+    $day = $day_storage->load($day);
+    $nb_updates = RankingDay::createRanking($day);
+    drupal_set_message(t('Ranking updated for @nb betters',array('@nb'=>$nb_updates)));
+    return new RedirectResponse(\Drupal::url('entity.day.list'));
   }
 
-  public static function getTableFromRanking($rankingDays) {
-    $position = 0;
-    $next_position = 1;
-    $rows = [];
-    foreach ($rankingDays  as  $ranking) {
-      $position = $next_position;
+  public static function sortRankingDataAndDefinedPosition(&$data) {
+    usort($data,function($item1, $item2) {
+      if (intval($item1->points) == intval($item2->points)) return 0;
+      return intval($item1->points) > intval($item2->points) ? -1 : 1;
+    });
+    $position = 1;
+    $next_position = 2;
+    foreach($data as &$value) {
       if(isset($old_points)) {
-        if($old_points == $ranking->get('points')->value) {
+        if($old_points == $value->points) {
           $next_position++;
         }
         else {
           $position++;
         }
       }
-      $old_points =  $ranking->get('points')->value;
+      $value->position = $position;
+      $old_points = $value->points;
+    }
+    return $data;
+
+  }
+
+  public static function getRankingTableForDay(Day $day) {
+    $rankingDays = RankingDay::getRankingForDay($day);
+    return self::getTableFromRanking($rankingDays);
+  }
+
+  public static function getTableFromRanking($rankingDays) {
+    $rows = [];
+    foreach ($rankingDays  as  $ranking) {;
       $row = [
-        'position' => $position,
+        'position' => $ranking->get('position')->value,
         'better' => $ranking->getOwner()->getUsername(),
         'points' => $ranking->get('points')->value,
         'games_betted' => $ranking->get('games_betted')->value,

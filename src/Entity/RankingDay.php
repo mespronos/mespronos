@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\mespronos\Controller\RankingController;
 use Drupal\mespronos\Entity\Controller\BetController;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\user\UserInterface;
@@ -135,12 +136,14 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
   public static function createRanking(\Drupal\mespronos\Entity\Day $day) {
     self::removeRanking($day);
     $data = self::getData($day);
+    RankingController::sortRankingDataAndDefinedPosition($data);
     foreach($data as $row) {
       $rankingDay = RankingDay::create([
         'better' => $row->better,
         'day' => $day->id(),
         'games_betted' => $row->nb_bet,
         'points' => $row->points,
+        'position' => $row->position,
       ]);
       $rankingDay->save();
     }
@@ -155,6 +158,8 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     $query->addExpression('count(b.id)','nb_bet');
     $query->join('mespronos__game','g','b.game = g.id');
     $query->groupBy('b.better');
+    $query->orderBy('points','DESC');
+    $query->orderBy('nb_bet','DESC');
     $query->condition('g.day',$day->id());
     $results = $query->execute()->fetchAllAssoc('better');
     return $results;
@@ -180,8 +185,7 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     $storage = \Drupal::entityManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
     $query->condition('day', $day->id());
-    $query->sort('points','DESC');
-    $query->sort('games_betted','DESC');
+    $query->sort('position','ASC');
     $ids = $query->execute();
 
     $rankings = $storage->loadMultiple($ids);
@@ -265,6 +269,20 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
 
     $fields['points'] = BaseFieldDefinition::create('integer')
       ->setLabel('Points won')
+      ->setRevisionable(TRUE)
+      ->setSetting('unsigned', TRUE)
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'integer',
+        'weight' => 6,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 6,
+      ));
+
+    $fields['position'] = BaseFieldDefinition::create('integer')
+      ->setLabel('Position')
       ->setRevisionable(TRUE)
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array(

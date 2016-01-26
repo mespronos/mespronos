@@ -238,7 +238,7 @@ entity.day.edit_form:
 entity.day.recalculate_ranking:
   path: '/admin/day/{day}/recalculate_ranking'
   defaults:
-    _controller: '\Drupal\mespronos\Controller\BettingController::recalculateRankingForDay'
+    _controller: '\Drupal\mespronos\Controller\RankingController::recalculateDay'
     _title: 'Recaulculate ranking for Day'
   requirements:
     _permission: 'set marks'
