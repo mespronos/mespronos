@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos\LeagueAccessControlHandler.
+ * Contains Drupal\mespronos\RankingDayAccessControlHandler.
  */
 
-namespace Drupal\mespronos;
+namespace Drupal\mespronos\ControlHandler;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
@@ -14,11 +14,11 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\user\Entity\User;
 
 /**
- * Access controller for the League entity.
+ * Access controller for the RankingDay entity.
  *
- * @see \Drupal\mespronos\Entity\League.
+ * @see \Drupal\mespronos\Entity\RankingDay.
  */
-class LeagueAccessControlHandler extends EntityAccessControlHandler {
+class RankingDayAccessControlHandler extends EntityAccessControlHandler {
   /**
    * {@inheritdoc}
    */
@@ -31,7 +31,7 @@ class LeagueAccessControlHandler extends EntityAccessControlHandler {
       case 'view':
         return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
-      case 'edit':
+      case 'update':
         return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
 
       case 'delete':
@@ -45,7 +45,7 @@ class LeagueAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    return AccessResult::allowedIfHasPermission($account, 'add League entity');
+    return AccessResult::allowedIfHasPermission($account, 'add RankingDay entity');
   }
 
 }

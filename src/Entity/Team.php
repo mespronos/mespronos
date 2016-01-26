@@ -25,7 +25,7 @@ use Drupal\user\UserInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\TeamListController",
- *     "views_data" = "Drupal\mespronos\Entity\TeamViewsData",
+ *     "views_data" = "Drupal\mespronos\Entity\ViewsData\TeamViewsData",
  *
  *     "form" = {
  *       "default" = "Drupal\mespronos\Entity\Form\TeamForm",
@@ -33,7 +33,7 @@ use Drupal\user\UserInterface;
  *       "edit" = "Drupal\mespronos\Entity\Form\TeamForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\TeamDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos\TeamAccessControlHandler",
+ *     "access" = "Drupal\mespronos\ControlHandler\TeamAccessControlHandler",
  *   },
  *   base_table = "mespronos__team",
  *   admin_permission = "administer Team entity",

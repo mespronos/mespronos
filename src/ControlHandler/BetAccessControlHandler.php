@@ -5,7 +5,7 @@
  * Contains Drupal\mespronos\BetAccessControlHandler.
  */
 
-namespace Drupal\mespronos;
+namespace Drupal\mespronos\ControlHandler;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;

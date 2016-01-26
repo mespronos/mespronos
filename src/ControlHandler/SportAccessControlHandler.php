@@ -2,10 +2,10 @@
 
 /**
  * @file
- * Contains Drupal\mespronos\TeamAccessControlHandler.
+ * Contains Drupal\mespronos\SportAccessControlHandler.
  */
 
-namespace Drupal\mespronos;
+namespace Drupal\mespronos\ControlHandler;
 
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
@@ -14,11 +14,11 @@ use Drupal\Core\Access\AccessResult;
 use Drupal\user\Entity\User;
 
 /**
- * Access controller for the Team entity.
+ * Access controller for the Sport entity.
  *
- * @see \Drupal\mespronos\Entity\Team.
+ * @see \Drupal\mespronos\Entity\Sport.
  */
-class TeamAccessControlHandler extends EntityAccessControlHandler {
+class SportAccessControlHandler extends EntityAccessControlHandler {
   /**
    * {@inheritdoc}
    */
@@ -45,7 +45,7 @@ class TeamAccessControlHandler extends EntityAccessControlHandler {
    * {@inheritdoc}
    */
   protected function checkCreateAccess(AccountInterface $account, array $context, $entity_bundle = NULL) {
-    return AccessResult::allowedIfHasPermission($account, 'add Team entity');
+    return AccessResult::allowedIfHasPermission($account, 'add Sport entity');
   }
 
 }

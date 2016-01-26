@@ -5,7 +5,7 @@
  * Contains Drupal\mespronos\Entity\Sport.
  */
 
-namespace Drupal\mespronos\Entity;
+namespace Drupal\mespronos\Entity\ViewsData;
 
 use Drupal\views\EntityViewsData;
 use Drupal\views\EntityViewsDataInterface;

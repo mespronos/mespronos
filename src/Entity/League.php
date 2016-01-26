@@ -25,14 +25,14 @@ use Drupal\user\UserInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\LeagueListController",
- *     "views_data" = "Drupal\mespronos\Entity\LeagueViewsData", *
+ *     "views_data" = "Drupal\mespronos\Entity\ViewsData\LeagueViewsData", *
  *     "form" = {
  *       "default" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "add" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\LeagueDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos\LeagueAccessControlHandler",
+ *     "access" = "Drupal\mespronos\ControlHandler\LeagueAccessControlHandler",
  *   },
  *   base_table = "mespronos__league",
  *   admin_permission = "administer League entity",

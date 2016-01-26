@@ -28,7 +28,7 @@ use Drupal\Core\Database\Database;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\RankingDayListController",
- *     "views_data" = "Drupal\mespronos\Entity\RankingDayViewsData",
+ *     "views_data" = "Drupal\mespronos\Entity\ViewsData\RankingDayViewsData",
  *
  *     "form" = {
  *       "default" = "Drupal\mespronos\Entity\Form\RankingDayForm",
@@ -36,7 +36,7 @@ use Drupal\Core\Database\Database;
  *       "edit" = "Drupal\mespronos\Entity\Form\RankingDayForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\RankingDayDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos\RankingDayAccessControlHandler",
+ *     "access" = "Drupal\mespronos\ControlHandler\RankingDayAccessControlHandler",
  *   },
  *   base_table = "mespronos__ranking_day",
  *   admin_permission = "administer RankingDay entity",

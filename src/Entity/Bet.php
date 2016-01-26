@@ -25,7 +25,7 @@ use Drupal\user\UserInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\BetListController",
- *     "views_data" = "Drupal\mespronos\Entity\BetViewsData",
+ *     "views_data" = "Drupal\mespronos\Entity\ViewsData\BetViewsData",
  *
  *     "form" = {
  *       "default" = "Drupal\mespronos\Entity\Form\BetForm",
@@ -33,7 +33,7 @@ use Drupal\user\UserInterface;
  *       "edit" = "Drupal\mespronos\Entity\Form\BetForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\BetDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos\BetAccessControlHandler",
+ *     "access" = "Drupal\mespronos\ControlHandler\BetAccessControlHandler",
  *   },
  *   base_table = "mespronos__bet",
  *   admin_permission = "administer Bet entity",

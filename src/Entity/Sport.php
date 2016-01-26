@@ -25,7 +25,7 @@ use Drupal\user\UserInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\SportListController",
- *     "views_data" = "Drupal\mespronos\Entity\SportViewsData",
+ *     "views_data" = "Drupal\mespronos\Entity\ViewsData\SportViewsData",
  *
  *     "form" = {
  *       "default" = "Drupal\mespronos\Entity\Form\SportForm",
@@ -33,7 +33,7 @@ use Drupal\user\UserInterface;
  *       "edit" = "Drupal\mespronos\Entity\Form\SportForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\SportDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos\SportAccessControlHandler",
+ *     "access" = "Drupal\mespronos\ControlHandler\SportAccessControlHandler",
  *   },
  *   base_table = "mespronos__sport",
  *   admin_permission = "administer Sport entity",

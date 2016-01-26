@@ -25,14 +25,14 @@ use Drupal\user\UserInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\DayListController",
- *     "views_data" = "Drupal\mespronos\Entity\DayViewsData",
+ *     "views_data" = "Drupal\mespronos\Entity\ViewsData\DayViewsData",
  *
  *     "form" = {
  *       "add" = "Drupal\mespronos\Entity\Form\DayForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\DayForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\DayDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos\DayAccessControlHandler",
+ *     "access" = "Drupal\mespronos\ControlHandler\DayAccessControlHandler",
  *   },
  *   base_table = "mespronos__day",
  *   admin_permission = "administer Day entity",

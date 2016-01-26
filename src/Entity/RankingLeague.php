@@ -25,7 +25,7 @@ use Drupal\user\UserInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\RankingLeagueListController",
- *     "views_data" = "Drupal\mespronos\Entity\RankingLeagueViewsData",
+ *     "views_data" = "Drupal\mespronos\Entity\ViewsData\RankingLeagueViewsData",
  *
  *     "form" = {
  *       "default" = "Drupal\mespronos\Entity\Form\RankingLeagueForm",
@@ -33,7 +33,7 @@ use Drupal\user\UserInterface;
  *       "edit" = "Drupal\mespronos\Entity\Form\RankingLeagueForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\RankingLeagueDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos\RankingLeagueAccessControlHandler",
+ *     "access" = "Drupal\mespronos\ControlHandler\RankingLeagueAccessControlHandler",
  *   },
  *   base_table = "mespronos__ranking_league",
  *   admin_permission = "administer RankingLeague entity",

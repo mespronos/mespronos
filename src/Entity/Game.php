@@ -26,7 +26,7 @@ use Drupal\user\UserInterface;
  *   handlers = {
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\GameListController",
- *     "views_data" = "Drupal\mespronos\Entity\GameViewsData",
+ *     "views_data" = "Drupal\mespronos\Entity\ViewsData\GameViewsData",
  *
  *     "form" = {
  *       "default" = "Drupal\mespronos\Entity\Form\GameForm",
@@ -34,7 +34,7 @@ use Drupal\user\UserInterface;
  *       "edit" = "Drupal\mespronos\Entity\Form\GameForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\GameDeleteForm",
  *     },
- *     "access" = "Drupal\mespronos\GameAccessControlHandler",
+ *     "access" = "Drupal\mespronos\ControlHandler\GameAccessControlHandler",
  *   },
  *   base_table = "mespronos__game",
  *   admin_permission = "administer Game entity",
