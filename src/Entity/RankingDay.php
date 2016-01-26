@@ -176,6 +176,19 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     return $nb_deleted;
   }
 
+  public static function getRankingForDay(Day $day) {
+    $storage = \Drupal::entityManager()->getStorage('ranking_day');
+    $query = \Drupal::entityQuery('ranking_day');
+    $query->condition('day', $day->id());
+    $query->sort('points','DESC');
+    $query->sort('games_betted','DESC');
+    $ids = $query->execute();
+
+    $rankings = $storage->loadMultiple($ids);
+    return $rankings;
+  }
+
+
   /**
    * {@inheritdoc}
    */

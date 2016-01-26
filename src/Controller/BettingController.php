@@ -195,7 +195,6 @@ class BettingController extends ControllerBase {
     $games = Game::getGamesForDay($day);
     $games_ids = $games['ids'];
     $games_entity = $games['entities'];
-    $points = $league->getPoints();
     $bets = Bet::getUserBetsForGames($games_ids,$user);
     $rows = [];
     foreach($games_entity as $gid => $game) {
@@ -229,16 +228,9 @@ class BettingController extends ControllerBase {
     ];
     $table = render($table_array);
 
-    $headerContent = '<h2>'.$league->label().'</h2>';
-    $headerContent .= '<h3>'.$day->label().'</h3>';
-    $headerContent .= '<h4>'.t('Points :').'</h4>'.
-      '<ul>'.
-      '<li>'.t('Exact score found : @nb points',array('@nb'=>$points['points_score_found'])).'</li>'.
-      '<li>'.t('Winner found : @nb points',array('@nb'=>$points['points_winner_found'])).'</li>'.
-      '<li>'.t('Nothing found : @nb points',array('@nb'=>$points['points_participation'])).'</li>'.
-      '</ul>';
-
-    return ['#markup'=>$headerContent.$table];
+    $tableRanking = RankingController::getRankingTableForDay($day);
+    $tableRanking = render($tableRanking);
+    return ['#markup'=>$table.$tableRanking];
   }
 
   public static function getActionBetLink(Day $day,League $league,$user_uid) {
