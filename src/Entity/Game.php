@@ -111,12 +111,12 @@ class Game extends ContentEntityBase implements MPNEntityInterface {
    * @return bool
    */
   public function isScoreSetted() {
-    return !isNull($this->getScoreTeam1()) && !isNull($this->getScoreTeam1());
+    return !is_null($this->getScoreTeam1()) && !is_null($this->getScoreTeam1());
   }
 
   public function postSave(EntityStorageInterface $storage, $update = TRUE) {
     parent::postSave($storage, $update);
-    if($this->isScoreSetted) {
+    if($this->isScoreSetted()) {
       BetController::updateBetsFromGame($this);
     }
   }
