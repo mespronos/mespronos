@@ -147,10 +147,42 @@ class MespronosBetTest extends WebTestBase {
       'game' => $passedGame->id(),
       'score_team_1' => 1,
       'score_team_2' => 1,
-      'points' => 10,
     ));
 
     $this->assertFalse($bet->isAllowed(),t('A bet on passed game is forbbiden'));
+  }
+
+  public function testSettingGameScoreSetBetPoints() {
+    $dateO = new \DateTime(null,new \DateTimeZone(drupal_get_user_timezone()));
+    $dateO->setTimezone(new \DateTimeZone('UTC'));
+    $dateO->sub(new \DateInterval('P2D'));
+    $date = $dateO->format('Y-m-d\TH:i:s');
+
+    $passedGame = Game::create(array(
+      'team_1' => $this->team1->id(),
+      'team_2' => $this->team2->id(),
+      'day' => $this->day->id(),
+      'game_date' => $date,
+    ));
+    $passedGame->save();
+
+    $bet = Bet::create(array(
+      'better' => 1,
+      'game' => $passedGame->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bet->save();
+    $bet_id = $bet->id();
+
+
+    $passedGame->setScore(1,1);
+    $passedGame->save();
+
+    $bet_reloaded = Bet::load($bet_id);
+
+    $this->assertEqual($bet_reloaded->getPoints(),10,t('Setting a game score update bets points'));
+
   }
 
 

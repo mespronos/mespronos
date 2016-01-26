@@ -195,6 +195,10 @@ class Bet extends ContentEntityBase implements MPNEntityInterface {
     return true;
   }
 
+  public function getPoints() {
+    return $this->get('points')->value;
+  }
+
   /**
    * {@inheritdoc}
    */
