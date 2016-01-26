@@ -49,4 +49,23 @@ class DayListController extends EntityListBuilder
     $row['nb_game'] = $entity->getNbGame();
     return $row + parent::buildRow($entity);
   }
+
+  protected function getDefaultOperations(EntityInterface $entity) {
+    $operations = parent::getDefaultOperations($entity);
+    $user = \Drupal::currentUser();
+
+    if ($user->hasPermission('set marks')) {
+      $operations['update_ranking'] = array(
+        'title' => $this->t('Update ranking'),
+        'weight' => 20,
+        'url' =>
+          new Url(
+            'entity.day.recalculate_ranking', array(
+            'day' => $entity->id(),
+          ))
+      );
+    }
+
+    return $operations;
+  }
 }

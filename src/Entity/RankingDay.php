@@ -137,13 +137,14 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     $data = self::getData($day);
     foreach($data as $row) {
       $rankingDay = RankingDay::create([
-        'better' => $data->better,
+        'better' => $row->better,
         'day' => $day->id(),
-        'games_betted' => $data->nb_bet,
-        'points' => $data->points,
+        'games_betted' => $row->nb_bet,
+        'points' => $row->points,
       ]);
       $rankingDay->save();
     }
+    return count($data);
   }
 
   public static function getData(Day $day) {

@@ -88,7 +88,7 @@ class GamesMarks extends FormBase {
     foreach($days_to_update as $day_id) {
       $i++;
       $day = Day::load($day_id);
-      $day->createRanking();
+      RankingDay::createRanking($day);
       drupal_set_message($this->t('Ranking updated for @nb_ranking days',array('@nb_ranking'=>$i)));
     }
   }

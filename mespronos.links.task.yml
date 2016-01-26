@@ -107,6 +107,11 @@ entity.day.edit_form:
   base_route: entity.day.canonical
   title: 'Edit'
 
+entity.day.recalculate_ranking:
+  route_name: entity.day.recalculate_ranking
+  base_route: entity.day.canonical
+  title: 'Recalculate ranking'
+
 entity.day.delete_form:
   route_name:  entity.day.delete_form
   base_route:  entity.day.canonical

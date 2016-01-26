@@ -45,6 +45,7 @@ use Drupal\user\UserInterface;
  *   links = {
  *     "canonical" = "/entity.day.canonical",
  *     "edit-form" = "/entity.day.edit_form",
+ *     "recalculate_ranking" = "/entity.day.recalculate_ranking",
  *     "delete-form" = "/entity.day.delete_form"
  *   },
  *   field_ui_base_route = "day.settings"
@@ -52,10 +53,6 @@ use Drupal\user\UserInterface;
  */
 class Day extends ContentEntityBase implements MPNEntityInterface
 {
-
-  public function createRanking() {
-    RankingDay::createRanking($this);
-  }
 
   /**
    * {@inheritdoc}

@@ -14,8 +14,10 @@ use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Bet;
 use Drupal\mespronos\Entity\Game;
+use Drupal\mespronos\Entity\RankingDay;
 use Drupal\user\Entity\User;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 
@@ -272,4 +274,14 @@ class BettingController extends ControllerBase {
     }
     return $action_links;
   }
+
+  public static function recalculateRankingForDay($day) {
+    $day_storage = \Drupal::entityManager()->getStorage('day');
+    $day = $day_storage->load($day);
+    $nb_updates = RankingDay::createRanking($day);
+    drupal_set_message(t('Ranking updated for @nb betters',array('@nb'=>$nb_updates)));
+
+    return new RedirectResponse(\Drupal::url('entity.day.list'));
+  }
+
 }
