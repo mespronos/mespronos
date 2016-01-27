@@ -178,7 +178,7 @@ class MespronosRankingDayTest extends WebTestBase {
     $betWrong->save();
 
     $game->setScore(1,1);
-    RankingController::recalculateDay($this->day->id());
+    RankingDay::createRanking($this->day);
     $ranking = RankingDay::getRankingForDay($this->day);
     $this->assertEqual(count($ranking),2,t('A ranking with two better contains two lines'));
   }
