@@ -151,10 +151,18 @@ class MespronosRankingDayTest extends WebTestBase {
     $dateO = new \DateTime();
     $date = $dateO->format('Y-m-d\TH:i:s');
 
+    $day = Day::create(array(
+      'league' => $this->league->id(),
+      'number' => 2,
+      'name' => 'day test',
+    ));
+
+    $day->save();
+
     $game = Game::create(array(
       'team_1' => $this->team1->id(),
       'team_2' => $this->team2->id(),
-      'day' => $this->day->id(),
+      'day' => $day->id(),
       'game_date' => $date,
     ));
     $game->save();
@@ -178,8 +186,9 @@ class MespronosRankingDayTest extends WebTestBase {
     $betWrong->save();
 
     $game->setScore(1,1);
-    RankingDay::createRanking($this->day);
-    $ranking = RankingDay::getRankingForDay($this->day);
+
+    RankingDay::createRanking($day);
+    $ranking = RankingDay::getRankingForDay($day);
     $this->assertEqual(count($ranking),2,t('A ranking with two better contains two lines'));
   }
 
