@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Tests;
 
 use Drupal\mespronos\Entity\RankingDay;
+use Drupal\mespronos\Controller\RankingController;
 use Drupal\simpletest\WebTestBase;
 use Drupal\mespronos\Entity\Sport;
 use Drupal\mespronos\Entity\League;
@@ -177,7 +178,7 @@ class MespronosRankingDayTest extends WebTestBase {
     $betWrong->save();
 
     $game->setScore(1,1);
-    RankingDay::recalculateDay($this->day->id());
+    RankingController::recalculateDay($this->day->id());
     $ranking = RankingDay::getRankingForDay($this->day);
     $this->assertEqual(count($ranking),2,t('A ranking with two better contains two lines'));
   }
