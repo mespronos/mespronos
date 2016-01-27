@@ -95,6 +95,15 @@ class MespronosRankingDayTest extends WebTestBase {
       'points' => 10,
     ));
     $this->bet->save();
+
+    $this->bet = Bet::create(array(
+      'better' => 2,
+      'game' => $this->game->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+      'points' => 10,
+    ));
+    $this->bet->save();
   }
 
   public function testCreationRankingDay() {
@@ -131,6 +140,46 @@ class MespronosRankingDayTest extends WebTestBase {
 
     //$rankingDay = RankingDay::createRanking($this->day);
     //$this->assertEqual($rankingDay->get('points')->value,10,t('Points are correctly setted'));
+  }
+
+  public function testRankingPosition() {
+
+    $better_1 = $this->drupalCreateUser();
+    $better_2 = $this->drupalCreateUser();
+
+    $dateO = new \DateTime();
+    $date = $dateO->format('Y-m-d\TH:i:s');
+
+    $game = Game::create(array(
+      'team_1' => $this->team1->id(),
+      'team_2' => $this->team2->id(),
+      'day' => $this->day->id(),
+      'game_date' => $date,
+    ));
+    $game->save();
+
+    $betGood = Bet::create(array(
+      'better' => $better_1->id(),
+      'game' => $this->game->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+      'points' => 10,
+    ));
+    $betGood->save();
+
+    $betWrong = Bet::create(array(
+      'better' => $better_2->id(),
+      'game' => $this->game->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 0,
+      'points' => 10,
+    ));
+    $betWrong->save();
+
+    $game->setScore(1,1);
+    RankingDay::recalculateDay($this->day->id());
+    $ranking = RankingDay::getRankingForDay($this->day);
+    $this->assertEqual(count($ranking),2,t('A ranking with two better contains two lines'));
   }
 
 }
