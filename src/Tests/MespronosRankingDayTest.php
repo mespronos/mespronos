@@ -60,15 +60,15 @@ class MespronosRankingDayTest extends WebTestBase {
     ));
     $this->league->save();
 
-    $this->team1 = Team::create(array(
-      'name' => 'team1',
-    ));
-    $this->team1->save();
+    $this->team1 = Team::create(['name' => 'team1']);
+    $this->team2 = Team::create(['name' => 'team2']);
+    $this->team3 = Team::create(['name' => 'team3']);
+    $this->team4 = Team::create(['name' => 'team4']);
 
-    $this->team2   = Team::create(array(
-      'name' => 'team2',
-    ));
+    $this->team1->save();
     $this->team2->save();
+    $this->team3->save();
+    $this->team4->save();
 
     $this->day = Day::create(array(
       'league' => $this->league->id(),
@@ -166,7 +166,6 @@ class MespronosRankingDayTest extends WebTestBase {
       'game' => $game->id(),
       'score_team_1' => 1,
       'score_team_2' => 1,
-      'points' => 10,
     ));
     $betGood->save();
 
@@ -175,16 +174,81 @@ class MespronosRankingDayTest extends WebTestBase {
       'game' => $game->id(),
       'score_team_1' => 1,
       'score_team_2' => 0,
-      'points' => 10,
     ));
     $betWrong->save();
 
     $game->setScore(1,1);
 
+    $this->assertTrue($game->isScoreSetted(),t('Game score is setted'));
+
+    $game->save();
+
+    //on reload les bet
+    $betGood = Bet::load($betGood->id());
+    $betWrong = Bet::load($betWrong->id());
+
+    $this->assertEqual($betGood->getPoints(),10,t('A good bet worth 10 points'));
+    $this->assertEqual($betWrong->getPoints(),1,t('A bad bet worth 1 points'));
+
     RankingDay::createRanking($day);
 
     $ranking = RankingDay::getRankingForDay($day);
+
     $this->assertEqual(count($ranking),2,t('A ranking with two better contains two lines'));
+
+    $r1 = array_shift($ranking);
+    $r2 = array_shift($ranking);
+
+    $this->assertTrue($r1->getPoints()>$r2->getPoints(),t('First ranking has more points than the second one'));
+    $this->assertTrue($r1->getPosition()<$r2->getPosition(),t('First ranking has position less greater than the second'));
+
+    $game2 = Game::create(array(
+      'team_1' => $this->team3->id(),
+      'team_2' => $this->team4->id(),
+      'day' => $day->id(),
+      'game_date' => $date,
+    ));
+    $game2->save();
+
+    $bet2Good = Bet::create(array(
+      'better' => $better_1->id(),
+      'game' => $game2->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bet2Good->save();
+
+    $bet2Wrong = Bet::create(array(
+      'better' => $better_2->id(),
+      'game' => $game2->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 0,
+    ));
+    $bet2Wrong->save();
+
+    RankingDay::createRanking($day);
+    $ranking = RankingDay::getRankingForDay($day);
+
+    $this->assertEqual(count($ranking),2,t('With a second game, A ranking with two better contains still two lines'));
+
+    $r1 = array_shift($ranking);
+
+    $this->assertEqual($r1->getGameBetted(),1,t('The number of betted games coresponding to bet with score (1)'));
+
+    $game2->setScore(1,1);
+    $game2->save();
+
+    //on reload les bet
+    $bet2Good = Bet::load($bet2Good->id());
+    $bet2Wrong = Bet::load($bet2Wrong->id());
+
+    RankingDay::createRanking($day);
+    $ranking = RankingDay::getRankingForDay($day);
+
+    $this->assertEqual(count($ranking),2,t('With a second game, A ranking with two better contains still two lines'));
+
+    $r1 = array_shift($ranking);
+    $this->assertEqual($r1->getGameBetted(),2,t('The number of betted games coresponding to bet with score (2) now we set the second game score'));
   }
 
 }
