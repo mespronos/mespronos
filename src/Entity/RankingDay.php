@@ -171,7 +171,9 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     $query->orderBy('points','DESC');
     $query->orderBy('nb_bet','DESC');
     $query->condition('g.day',$day->id());
+    $query->isNotNull('b.points');
     $results = $query->execute()->fetchAllAssoc('better');
+
     return $results;
   }
 
