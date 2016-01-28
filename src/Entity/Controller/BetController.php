@@ -12,6 +12,7 @@ use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Bet;
 use Drupal\mespronos\Entity\Game;
 use Drupal\Core\Database\Database;
+use Drupal\Core\Database\Query\Condition;
 
 /**
  * Provides a list controller for Game entity.
@@ -23,16 +24,85 @@ class BetController {
    * {@inheritdoc}
    */
   public static function updateBetsFromGame(Game $game) {
-    $bet_storage = \Drupal::entityManager()->getStorage('bet');
-    $ids = \Drupal::entityQuery('bet')
-      ->condition('game',$game->id())
-      ->execute();
 
-    $bets = $bet_storage->loadMultiple($ids);
+    $st1 = $game->getScoreTeam1();
+    $st2 = $game->getScoreTeam2();
+    $points = $game->getLeague()->getPoints();
+    $injected_database = Database::getConnection();
 
-    foreach($bets as $bet) {
-      $bet->definePoints($game);
+    //perfect bet
+    $query = $injected_database->update('mespronos__bet');
+    $query->fields(['points'=>$points['points_score_found'],'changed'=>time()]);
+    $query->condition('score_team_1',$st1);
+    $query->condition('score_team_2',$st2);
+    $query->condition('game',$game->id());
+    $query->execute();
+    unset($query);
+
+    if($st1 == $st2) {
+      $query = $injected_database->update('mespronos__bet');
+      $query->fields(['points'=>$points['points_winner_found'],'changed'=>time()]);
+      $query->where('score_team_1 = score_team_2');
+      $query->condition('score_team_2',$st2,'!=');
+      $query->condition('score_team_1',$st1,'!=');
+      $query->condition('game',$game->id());
+      $query->execute();
+      unset($query);
+
+      $query = $injected_database->update('mespronos__bet');
+      $query->fields(['points'=>$points['points_participation'],'changed'=>time()]);
+      $query->where('score_team_1 <> score_team_2');
+      $query->condition('game',$game->id());
+      $query->execute();
+      unset($query);
     }
+    else {
+      $query = $injected_database->update('mespronos__bet');
+      $query->fields(['points'=>$points['points_participation'],'changed'=>time()]);
+      $query->where('score_team_1 = score_team_2');
+      $query->condition('game',$game->id());
+      $query->execute();
+      unset($query);
+
+      $notExactScore = new Condition('OR');
+      $notExactScore->condition('score_team_2',$st2,'!=');
+      $notExactScore->condition('score_team_1',$st1,'!=');
+
+      if($st1 > $st2) {
+        $query = $injected_database->update('mespronos__bet');
+        $query->fields(['points'=>$points['points_winner_found'],'changed'=>time()]);
+        $query->where('score_team_1 > score_team_2');
+        $query->condition($notExactScore);
+        $query->condition('game',$game->id());
+        $query->execute();
+        unset($query);
+
+        $query = $injected_database->update('mespronos__bet');
+        $query->fields(['points'=>$points['points_participation'],'changed'=>time()]);
+        $query->where('score_team_1 < score_team_2');
+        $query->condition('game',$game->id());
+        $query->execute();
+        unset($query);
+      }
+
+      if($st1 < $st2) {
+        $query = $injected_database->update('mespronos__bet');
+        $query->fields(['points'=>$points['points_winner_found'],'changed'=>time()]);
+        $query->where('score_team_1 < score_team_2');
+        $query->condition($notExactScore);
+        $query->condition('game',$game->id());
+        $query->execute();
+        unset($query);
+
+        $query = $injected_database->update('mespronos__bet');
+        $query->fields(['points'=>$points['points_participation'],'changed'=>time()]);
+        $query->where('score_team_1 > score_team_2');
+        $query->condition('game',$game->id());
+        $query->execute();
+        unset($query);
+      }
+    }
+
   }
 
   public static function nextbets(League $league=null) {

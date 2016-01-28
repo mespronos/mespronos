@@ -82,37 +82,6 @@ class Bet extends ContentEntityBase implements MPNEntityInterface {
     return $this->get('user_id')->entity;
   }
 
-  /**
-   * @todo implement
-   * @param \Drupal\mespronos\Entity\Game $game
-   */
-  public function definePoints(Game $game) {
-    $league = $game->getLeague();
-    $league_points = $league->getPoints();
-    $score_t1 = $game->get('score_team_1')->value;
-    $score_t2 = $game->get('score_team_2')->value;
-    $bet_t1 = $this->get('score_team_1')->value;
-    $bet_t2 = $this->get('score_team_2')->value;
-    if($score_t1 == $bet_t1 && $score_t2 == $bet_t2){
-      $points = $league_points['points_score_found'];
-    }
-    elseif($score_t1 > $score_t2 && $bet_t1 > $bet_t2){
-      $points = $league_points['points_winner_found'];
-    }
-    elseif($score_t1 < $score_t2 && $bet_t1 < $bet_t2){
-      $points = $league_points['points_winner_found'];
-    }
-    elseif($score_t1 == $score_t2 && $bet_t1 == $bet_t2){
-      $points = $league_points['points_winner_found'];
-    }
-    else {
-      $points = $league_points['points_participation'];
-    }
-
-    $this->setPoints($points);
-    $this->save();
-  }
-
   public static function getUserBetsForGames($games_ids, \Drupal\Core\Session\AccountProxyInterface $user){
     $bet_storage = \Drupal::entityManager()->getStorage('bet');
     $query = \Drupal::entityQuery('bet');
