@@ -129,8 +129,18 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     return $this;
   }
 
+  /**
+   * @return integer
+   */
   public function getPoints() {
     return $this->get('points')->value;
+  }
+
+  /**
+   * @return integer
+   */
+  public function getPosition() {
+    return $this->get('position')->value;
   }
 
   public static function createRanking(\Drupal\mespronos\Entity\Day $day) {
@@ -181,6 +191,11 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     return $nb_deleted;
   }
 
+
+  /**
+   * @param \Drupal\mespronos\Entity\Day $day
+   * @return \Drupal\mespronos\Entity\RankingDay[]
+   */
   public static function getRankingForDay(Day $day) {
     $storage = \Drupal::entityManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
