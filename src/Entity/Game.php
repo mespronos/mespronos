@@ -62,6 +62,14 @@ class Game extends ContentEntityBase implements MPNEntityInterface {
     );
   }
 
+  public function save() {
+    $return = parent::save();
+    if($this->isScoreSetted()) {
+      BetController::updateBetsFromGame($this);
+    }
+    return $return;
+  }
+
   public function label() {
     $league = $this->getLeague();
     $team1 = $this->getTeam1();
@@ -112,13 +120,6 @@ class Game extends ContentEntityBase implements MPNEntityInterface {
    */
   public function isScoreSetted() {
     return !is_null($this->getScoreTeam1()) && !is_null($this->getScoreTeam1());
-  }
-
-  public function postSave(EntityStorageInterface $storage, $update = TRUE) {
-    parent::postSave($storage, $update);
-    if($this->isScoreSetted()) {
-      BetController::updateBetsFromGame($this);
-    }
   }
 
   /**
