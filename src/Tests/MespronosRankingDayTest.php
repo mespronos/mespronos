@@ -96,15 +96,6 @@ class MespronosRankingDayTest extends WebTestBase {
       'points' => 10,
     ));
     $this->bet->save();
-
-    $this->bet = Bet::create(array(
-      'better' => 2,
-      'game' => $this->game->id(),
-      'score_team_1' => 1,
-      'score_team_2' => 1,
-      'points' => 10,
-    ));
-    $this->bet->save();
   }
 
   public function testCreationRankingDay() {
@@ -131,6 +122,9 @@ class MespronosRankingDayTest extends WebTestBase {
   }
 
   public function testCreationWithExistingBet() {
+    //Cleanup the shit from other tests
+    RankingDay::createRanking($this->day);
+
     $dataFetched = RankingDay::getData($this->day);
     debug($dataFetched);
     $this->assertEqual(1,count($dataFetched),t('Data fetched is an array of 1 line'));
@@ -169,7 +163,7 @@ class MespronosRankingDayTest extends WebTestBase {
 
     $betGood = Bet::create(array(
       'better' => $better_1->id(),
-      'game' => $this->game->id(),
+      'game' => $game->id(),
       'score_team_1' => 1,
       'score_team_2' => 1,
       'points' => 10,
@@ -178,7 +172,7 @@ class MespronosRankingDayTest extends WebTestBase {
 
     $betWrong = Bet::create(array(
       'better' => $better_2->id(),
-      'game' => $this->game->id(),
+      'game' => $game->id(),
       'score_team_1' => 1,
       'score_team_2' => 0,
       'points' => 10,
@@ -188,6 +182,7 @@ class MespronosRankingDayTest extends WebTestBase {
     $game->setScore(1,1);
 
     RankingDay::createRanking($day);
+
     $ranking = RankingDay::getRankingForDay($day);
     $this->assertEqual(count($ranking),2,t('A ranking with two better contains two lines'));
   }
