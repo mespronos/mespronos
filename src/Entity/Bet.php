@@ -109,7 +109,7 @@ class Bet extends ContentEntityBase implements MPNEntityInterface {
       $points = $league_points['points_participation'];
     }
 
-    $this->set('points',$points);
+    $this->setPoints($points);
     $this->save();
   }
 
@@ -197,6 +197,11 @@ class Bet extends ContentEntityBase implements MPNEntityInterface {
 
   public function getPoints() {
     return $this->get('points')->value;
+  }
+
+  public function setPoints($points) {
+    $this->set('points', $points);
+    return $this;
   }
 
   /**
