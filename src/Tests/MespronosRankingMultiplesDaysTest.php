@@ -158,16 +158,16 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
       'score_team_1' => 1,
       'score_team_2' => 1,
     ));
-    //GAME 2
+    //GAME 3 (day 2)
     $bets[] = Bet::create(array(
       'better' => $this->better1->id(),
-      'game' => $this->game2->id(),
+      'game' => $this->game3->id(),
       'score_team_1' => 1,
       'score_team_2' => 1,
     ));
     $bets[] = Bet::create(array(
       'better' => $this->better2->id(),
-      'game' => $this->game2->id(),
+      'game' => $this->game3->id(),
       'score_team_1' => 1,
       'score_team_2' => 1,
     ));
@@ -177,10 +177,10 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     }
 
     $this->game1->setScore(1,1)->save();
-    $this->game2->setScore(1,1)->save();
+    $this->game3->setScore(1,1)->save();
 
     $this->assertTrue($this->game1->isScoreSetted(),t('Game1 score is setted'));
-    $this->assertTrue($this->game2->isScoreSetted(),t('Game2 score is setted'));
+    $this->assertTrue($this->game3->isScoreSetted(),t('Game2 score is setted'));
 
     foreach($bets as $bet) {
       $bet = Bet::load($bet->id());
