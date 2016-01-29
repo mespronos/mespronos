@@ -21,7 +21,7 @@ use Drupal\mespronos\Entity\Bet;
  * Provides automated tests for the mespronos module.
  * @group mespronos
  */
-class MespronosRankingDayTest extends WebTestBase {
+class MespronosRankingMultiplesDaysTest extends WebTestBase {
   public $sport;
   public $league;
   public $day1;
@@ -130,5 +130,68 @@ class MespronosRankingDayTest extends WebTestBase {
       'game_date' => $date,
     ));
     $this->game4->save();
+  }
+
+  public function simpleTestWithOnlyOneDay() {
+    $bets = [];
+    $bets[] = Bet::create(array(
+      'better' => $this->better1->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bets[] = Bet::create(array(
+      'better' => $this->better2->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bets[] = Bet::create(array(
+      'better' => $this->better3->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bets[] = Bet::create(array(
+      'better' => $this->better4->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    //GAME 2
+    $bets[] = Bet::create(array(
+      'better' => $this->better1->id(),
+      'game' => $this->game2->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bets[] = Bet::create(array(
+      'better' => $this->better2->id(),
+      'game' => $this->game2->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bets[] = Bet::create(array(
+      'better' => $this->better3->id(),
+      'game' => $this->game2->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bets[] = Bet::create(array(
+      'better' => $this->better4->id(),
+      'game' => $this->game2->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    foreach($bets as $bet) {
+      $bet->save();
+    }
+
+    $this->game1->setScore(1,1);
+    $this->game2->setScore(1,1);
+
+    $this->assertTrue($this->game1->isScoreSetted(),t('Game1 score is setted'));
+    $this->assertTrue($this->game1->isScoreSetted(),t('Game2 score is setted'));
+
   }
 }
