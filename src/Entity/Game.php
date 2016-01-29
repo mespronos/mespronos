@@ -251,6 +251,7 @@ class Game extends ContentEntityBase implements MPNEntityInterface {
   public function setScore($score_team_1,$score_team_2) {
     $this->set('score_team_1',$score_team_1);
     $this->set('score_team_2',$score_team_2);
+    return $this;
   }
 
   public function getBaseTable() {
