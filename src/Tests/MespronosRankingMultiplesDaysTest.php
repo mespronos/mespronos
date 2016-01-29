@@ -132,7 +132,7 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     $this->game4->save();
   }
 
-  public function simpleTestWithOnlyOneDay() {
+  public function testSimpleWithOnlyOneDay() {
     $bets = [];
     $bets[] = Bet::create(array(
       'better' => $this->better1->id(),
@@ -187,11 +187,17 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
       $bet->save();
     }
 
-    $this->game1->setScore(1,1);
-    $this->game2->setScore(1,1);
+    $this->game1->setScore(1,1)->save();
+    $this->game2->setScore(1,1)->save();
+
+    foreach($bets as $bet) {
+      $bet = Bet::load($bet->id());
+      $this->assertEqual($bet->getPoints(),10,t('good bets worth 10 points'));
+    }
+
 
     $this->assertTrue($this->game1->isScoreSetted(),t('Game1 score is setted'));
-    $this->assertTrue($this->game1->isScoreSetted(),t('Game2 score is setted'));
+    $this->assertTrue($this->game2->isScoreSetted(),t('Game2 score is setted'));
 
   }
 }
