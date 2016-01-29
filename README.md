@@ -13,11 +13,7 @@ MesPronos is a Drupal 8 module which aims to provide all the features needed to 
 This is a "work in progress" module, without a stable release date (maybe late spring for UEFA Euro 2016 ?)
 
 ## Follow the development / Get in board
-I'm testing waffle.io in order to get an overview dashboard : https://waffle.io/kgaut/mespronos
-
-An idea ? Please fill an issue.
-
-Want to get in ? Fork and submit PR ! 
+Incoming features and status is visible on [Waffle](https://waffle.io/kgaut/mespronos).
 
 ## Blog posts
 The module is also an "excuse" to try and play with Drupal 8, It's the main topic of a series of blog posts (in french) : 
