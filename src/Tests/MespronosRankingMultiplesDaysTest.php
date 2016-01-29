@@ -171,18 +171,7 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
       'score_team_1' => 1,
       'score_team_2' => 1,
     ));
-    $bets[] = Bet::create(array(
-      'better' => $this->better3->id(),
-      'game' => $this->game2->id(),
-      'score_team_1' => 1,
-      'score_team_2' => 1,
-    ));
-    $bets[] = Bet::create(array(
-      'better' => $this->better4->id(),
-      'game' => $this->game2->id(),
-      'score_team_1' => 1,
-      'score_team_2' => 1,
-    ));
+
     foreach($bets as $bet) {
       $bet->save();
     }
@@ -190,14 +179,19 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     $this->game1->setScore(1,1)->save();
     $this->game2->setScore(1,1)->save();
 
+    $this->assertTrue($this->game1->isScoreSetted(),t('Game1 score is setted'));
+    $this->assertTrue($this->game2->isScoreSetted(),t('Game2 score is setted'));
+
     foreach($bets as $bet) {
       $bet = Bet::load($bet->id());
       $this->assertEqual($bet->getPoints(),10,t('good bets worth 10 points'));
     }
 
+    $ranking_day_1 = RankingDay::getRankingForDay($this->day1);
+    $ranking_day_2 = RankingDay::getRankingForDay($this->day2);
 
-    $this->assertTrue($this->game1->isScoreSetted(),t('Game1 score is setted'));
-    $this->assertTrue($this->game2->isScoreSetted(),t('Game2 score is setted'));
+    $this->assertEqual(count($ranking_day_1),4,t('Day 1 : four betters, so ranking contains 4 lines'));
+    $this->assertEqual(count($ranking_day_2),2,t('Day 2 : two betters, so ranking contains 2 lines'));
 
   }
 }
