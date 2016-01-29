@@ -187,6 +187,9 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
       $this->assertEqual($bet->getPoints(),10,t('good bets worth 10 points'));
     }
 
+    RankingDay::createRanking($this->day1);
+    RankingDay::createRanking($this->day2);
+
     $ranking_day_1 = RankingDay::getRankingForDay($this->day1);
     $ranking_day_2 = RankingDay::getRankingForDay($this->day2);
 
