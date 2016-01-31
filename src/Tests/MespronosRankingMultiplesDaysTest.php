@@ -260,5 +260,10 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     $this->assertEqual($ranking_3->getPoints(),5,t('Second ranking has 5 points'));
     $this->assertEqual($ranking_4->getPoints(),1,t('Second ranking has 1 points'));
 
+    $this->assertEqual($ranking_1->getPosition(),1,t('First ranking is first'));
+    $this->assertEqual($ranking_2->getPosition(),1,t('Second ranking is first'));
+    $this->assertEqual($ranking_3->getPosition(),3,t('Second ranking is third'));
+    $this->assertEqual($ranking_4->getPosition(),4,t('Second ranking is fourth'));
+
   }
 }
