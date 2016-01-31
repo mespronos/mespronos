@@ -97,7 +97,7 @@ class MespronosRankingControllerTest extends WebTestBase {
     $this->assertEqual($data[2]->better,3,t('Better three is third'));
   }
 
-  public function testSortingMethodWithEquality() {
+  public function testSortingMethodWithEqualityInFirst() {
     $data = [];
 
     $data_obj = new \stdClass();
@@ -129,7 +129,7 @@ class MespronosRankingControllerTest extends WebTestBase {
     RankingController::sortRankingDataAndDefinedPosition($data);
     debug($data);
     $this->assertEqual($data[0]->position,1,t('First data object has position 1'));
-    $this->assertEqual($data[1]->position,1,t('Second data object has position 2'));
+    $this->assertEqual($data[1]->position,1,t('Second data object has position 1'));
     $this->assertEqual($data[2]->position,3,t('Third data object has position 3'));
     $this->assertEqual($data[3]->position,4,t('Third data object has position 3'));
   }
