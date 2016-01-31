@@ -16,6 +16,7 @@ use Drupal\mespronos\Entity\Team;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Bet;
+use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
 
 /**
  * Provides automated tests for the mespronos module.
@@ -195,6 +196,49 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
 
     $this->assertEqual(count($ranking_day_1),4,t('Day 1 : four betters, so ranking contains 4 lines'));
     $this->assertEqual(count($ranking_day_2),2,t('Day 2 : two betters, so ranking contains 2 lines'));
+  }
+
+  public function testRankingOnSeveralDays() {
+    $bets = [];
+    $bets[1] = Bet::create(array(
+      'better' => $this->better1->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bets[2] = Bet::create(array(
+      'better' => $this->better2->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bets[3] = Bet::create(array(
+      'better' => $this->better3->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 2,
+      'score_team_2' => 2,
+    ));
+    $bets[4] = Bet::create(array(
+      'better' => $this->better4->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 0,
+    ));
+
+    //better 1 => 10points
+    $points[1] = 10;
+    //better 2 => 10points
+    $points[1] = 10;
+    //better 3 => 5points
+    $points[1] = 5;
+    //better 4 => 1points
+    $points[1] = 1;
+    $this->game1->setScore(1,1)->save();
+
+    foreach($bets as $key => $bet) {
+      $bet = Bet::load($bet->id());
+      $this->assertEqual($bet->getPoints(),$points[$key],t('Bet @id worth @points',array('@id'=>$key,'@points'=>$points[$key])));
+    }
 
   }
 }
