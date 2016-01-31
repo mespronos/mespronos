@@ -125,12 +125,45 @@ class MespronosRankingControllerTest extends WebTestBase {
     $data_obj->nb_bet = 1;
     $data[] = $data_obj;
 
-    debug($data);
     RankingController::sortRankingDataAndDefinedPosition($data);
-    debug($data);
     $this->assertEqual($data[0]->position,1,t('First data object has position 1'));
     $this->assertEqual($data[1]->position,1,t('Second data object has position 1'));
     $this->assertEqual($data[2]->position,3,t('Third data object has position 3'));
     $this->assertEqual($data[3]->position,4,t('Fourth data object has position 4'));
+  }
+
+  public function testSortingMethodWithEqualityInSecond() {
+    $data = [];
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 3;
+    $data_obj->points = 1;
+    $data_obj->nb_bet = 1;
+    $data[] = $data_obj;
+
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 4;
+    $data_obj->points = 5;
+    $data_obj->nb_bet = 1;
+    $data[] = $data_obj;
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 2;
+    $data_obj->points = 5;
+    $data_obj->nb_bet = 1;
+    $data[] = $data_obj;
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 1;
+    $data_obj->points = 10;
+    $data_obj->nb_bet = 1;
+    $data[] = $data_obj;
+
+    RankingController::sortRankingDataAndDefinedPosition($data);
+    $this->assertEqual($data[0]->position,1,t('First data object has position 1'));
+    $this->assertEqual($data[1]->position,1,t('Second data object has position 2'));
+    $this->assertEqual($data[2]->position,3,t('Third data object has position 2'));
+    $this->assertEqual($data[3]->position,4,t('fourth data object has position 4'));
   }
 }
