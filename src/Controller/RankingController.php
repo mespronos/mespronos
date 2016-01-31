@@ -25,19 +25,16 @@ class RankingController extends ControllerBase {
       if (intval($item1->points) == intval($item2->points)) return 0;
       return intval($item1->points) > intval($item2->points) ? -1 : 1;
     });
-    $position = 1;
-    $next_position = 2;
+    $next_position = 1;
     foreach($data as &$value) {
-      if(isset($old_points)) {
-        if($old_points == $value->points) {
-          $next_position++;
-        }
-        else {
-          $position++;
-        }
+      if(isset($old_object) && $old_object->points == $value->points) {
+        $value->position = $old_object->position;
       }
-      $value->position = $position;
-      $old_points = $value->points;
+      else {
+        $value->position = $next_position;
+      }
+      $next_position++;
+      $old_object = $value;
     }
     return $data;
 
