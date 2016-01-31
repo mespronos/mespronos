@@ -54,9 +54,7 @@ class MespronosRankingControllerTest extends WebTestBase {
     $data_obj->points = 1;
     $data_obj->nb_bet = 1;
     $data[] = $data_obj;
-    debug($data);
     RankingController::sortRankingDataAndDefinedPosition($data);
-    debug($data);
     $this->assertEqual(count($data),3,t('Data still has three lines'));
     $this->assertEqual($data[0]->position,1,t('First data object has position 1'));
     $this->assertEqual($data[1]->position,2,t('Second data object has position 2'));
@@ -88,9 +86,7 @@ class MespronosRankingControllerTest extends WebTestBase {
     $data_obj->nb_bet = 1;
     $data[] = $data_obj;
 
-    debug($data);
     RankingController::sortRankingDataAndDefinedPosition($data);
-    debug($data);
     $this->assertEqual(count($data),3,t('Data still has three lines'));
     $this->assertEqual($data[0]->position,1,t('First data object has position 1'));
     $this->assertEqual($data[1]->position,2,t('Second data object has position 2'));
