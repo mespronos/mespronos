@@ -45,18 +45,3 @@ entity.bet.add_form:
   appears_on:
     - entity.bet.collection
     - entity.bet.canonical
-
-entity.ranking_day.add_form:
-  route_name: entity.ranking_day.add_form
-  title: 'Add RankingDay'
-  appears_on:
-    - entity.ranking_day.collection
-    - entity.ranking_day.canonical
-
-entity.ranking_league.add_form:
-  route_name: entity.ranking_league.add_form
-  title: 'Add RankingLeague'
-  appears_on:
-    - entity.ranking_league.collection
-    - entity.ranking_league.canonical
-

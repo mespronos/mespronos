@@ -29,13 +29,6 @@ use Drupal\Core\Database\Database;
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\RankingDayListController",
  *     "views_data" = "Drupal\mespronos\Entity\ViewsData\RankingDayViewsData",
- *
- *     "form" = {
- *       "default" = "Drupal\mespronos\Entity\Form\RankingDayForm",
- *       "add" = "Drupal\mespronos\Entity\Form\RankingDayForm",
- *       "edit" = "Drupal\mespronos\Entity\Form\RankingDayForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\RankingDayDeleteForm",
- *     },
  *     "access" = "Drupal\mespronos\ControlHandler\RankingDayAccessControlHandler",
  *   },
  *   base_table = "mespronos__ranking_day",
@@ -45,11 +38,6 @@ use Drupal\Core\Database\Database;
  *     "id" = "id",
  *     "label" = "name",
  *     "uuid" = "uuid"
- *   },
- *   links = {
- *     "canonical" = "/admin/ranking_day/{ranking_day}",
- *     "edit-form" = "/admin/ranking_day/{ranking_day}/edit",
- *     "delete-form" = "/admin/ranking_day/{ranking_day}/delete"
  *   },
  *   field_ui_base_route = "ranking_day.settings"
  * )

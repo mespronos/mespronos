@@ -26,13 +26,6 @@ use Drupal\user\UserInterface;
  *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\RankingLeagueListController",
  *     "views_data" = "Drupal\mespronos\Entity\ViewsData\RankingLeagueViewsData",
- *
- *     "form" = {
- *       "default" = "Drupal\mespronos\Entity\Form\RankingLeagueForm",
- *       "add" = "Drupal\mespronos\Entity\Form\RankingLeagueForm",
- *       "edit" = "Drupal\mespronos\Entity\Form\RankingLeagueForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\RankingLeagueDeleteForm",
- *     },
  *     "access" = "Drupal\mespronos\ControlHandler\RankingLeagueAccessControlHandler",
  *   },
  *   base_table = "mespronos__ranking_league",
@@ -42,11 +35,6 @@ use Drupal\user\UserInterface;
  *     "id" = "id",
  *     "label" = "name",
  *     "uuid" = "uuid"
- *   },
- *   links = {
- *     "canonical" = "/admin/ranking_league/{ranking_league}",
- *     "edit-form" = "/admin/ranking_league/{ranking_league}/edit",
- *     "delete-form" = "/admin/ranking_league/{ranking_league}/delete"
  *   },
  *   field_ui_base_route = "ranking_league.settings"
  * )
