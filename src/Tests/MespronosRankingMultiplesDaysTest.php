@@ -232,11 +232,11 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     //better 1 => 10points
     $points[1] = 10;
     //better 2 => 10points
-    $points[1] = 10;
+    $points[2] = 10;
     //better 3 => 5points
-    $points[1] = 5;
+    $points[3] = 5;
     //better 4 => 1points
-    $points[1] = 1;
+    $points[4] = 1;
     $this->game1->setScore(1,1)->save();
 
     foreach($bets as $key => $bet) {
