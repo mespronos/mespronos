@@ -131,6 +131,6 @@ class MespronosRankingControllerTest extends WebTestBase {
     $this->assertEqual($data[0]->position,1,t('First data object has position 1'));
     $this->assertEqual($data[1]->position,1,t('Second data object has position 1'));
     $this->assertEqual($data[2]->position,3,t('Third data object has position 3'));
-    $this->assertEqual($data[3]->position,4,t('Third data object has position 3'));
+    $this->assertEqual($data[3]->position,4,t('Fourth data object has position 4'));
   }
 }
