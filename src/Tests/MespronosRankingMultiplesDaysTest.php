@@ -244,5 +244,19 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
       $this->assertEqual($bet->getPoints(),$points[$key],t('Bet @id worth @points',array('@id'=>$key,'@points'=>$points[$key])));
     }
 
+    $ranking_day_1 = RankingDay::getRankingForDay($this->day1);
+
+    $this->assertEqual(count($ranking_day_1),4,t('Day 1 : four betters, so ranking contains 4 lines'));
+    $ranking_1 = array_pop($ranking_day_1);
+    $ranking_2 = array_pop($ranking_day_2);
+    $ranking_3 = array_pop($ranking_day_3);
+    $ranking_4 = array_pop($ranking_day_4);
+
+    $this->assertEqual($ranking_1->getPoints(),10,t('First ranking has 10 points'));
+    $this->assertEqual($ranking_2->getPoints(),10,t('Second ranking has 10 points'));
+    $this->assertEqual($ranking_3->getPoints(),5,t('Second ranking has 5 points'));
+    $this->assertEqual($ranking_4->getPoints(),1,t('Second ranking has 1 points'));
+
+
   }
 }
