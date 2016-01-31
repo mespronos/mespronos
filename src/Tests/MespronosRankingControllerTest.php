@@ -166,4 +166,60 @@ class MespronosRankingControllerTest extends WebTestBase {
     $this->assertEqual($data[2]->position,2,t('Third data object has position 2'));
     $this->assertEqual($data[3]->position,4,t('fourth data object has position 4'));
   }
+
+  public function testSortingMethodWithTwoEqualities() {
+    $data = [];
+
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 7;
+    $data_obj->points = 1;
+    $data_obj->nb_bet = 1;
+    $data[] = $data_obj;
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 6;
+    $data_obj->points = 2;
+    $data_obj->nb_bet = 2;
+    $data[] = $data_obj;
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 5;
+    $data_obj->points = 5;
+    $data_obj->nb_bet = 1;
+    $data[] = $data_obj;
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 4;
+    $data_obj->points = 5;
+    $data_obj->nb_bet = 1;
+    $data[] = $data_obj;
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 3;
+    $data_obj->points = 10;
+    $data_obj->nb_bet = 2;
+    $data[] = $data_obj;
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 2;
+    $data_obj->points = 15;
+    $data_obj->nb_bet = 2;
+    $data[] = $data_obj;
+
+    $data_obj = new \stdClass();
+    $data_obj->better = 1;
+    $data_obj->points = 15;
+    $data_obj->nb_bet = 2;
+    $data[] = $data_obj;
+
+    RankingController::sortRankingDataAndDefinedPosition($data);
+    $this->assertEqual($data[0]->position,1,t('First data object has position 1'));
+    $this->assertEqual($data[1]->position,1,t('First data object has position 1'));
+    $this->assertEqual($data[2]->position,3,t('Third data object has position 3'));
+    $this->assertEqual($data[3]->position,4,t('fourth data object has position 4'));
+    $this->assertEqual($data[4]->position,4,t('fifth data object has position 4'));
+    $this->assertEqual($data[5]->position,6,t('sixth data object has position 6'));
+    $this->assertEqual($data[6]->position,7,t('seventh data object has position 7'));
+  }
 }
