@@ -40,6 +40,7 @@ use Drupal\user\UserInterface;
  * )
  */
 class RankingLeague extends ContentEntityBase implements MPNEntityInterface {
+
   /**
    * {@inheritdoc}
    */
@@ -126,6 +127,56 @@ class RankingLeague extends ContentEntityBase implements MPNEntityInterface {
 
   public function getPoints() {
     return $this->get('points')->value;
+  }
+
+  public static function createRanking(League $league) {
+    self::removeRanking($league);
+    $data = self::getData($league);
+    RankingController::sortRankingDataAndDefinedPosition($data);
+    foreach($data as $row) {
+      $rankingLeague = self::create([
+        'better' => $row->better,
+        'league' => $league->id(),
+        'games_betted' => $row->nb_bet,
+        'points' => $row->points,
+        'position' => $row->position,
+      ]);
+      $rankingLeague->save();
+    }
+    return count($data);
+  }
+
+  public static function getData(League $league) {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__ranking_day','rd');
+    $query->addField('rd','better');
+    $query->addExpression('sum(rd.points)','points');
+    $query->addExpression('count(rd.id)','nb_bet');
+    $query->join('mespronos__day','d','d.id = rd.day');
+    $query->groupBy('b.better');
+    $query->orderBy('points','DESC');
+    $query->orderBy('nb_bet','DESC');
+    $query->condition('d.league',$league->id());
+    //$query->isNotNull('b.points');
+    $results = $query->execute()->fetchAllAssoc('better');
+
+    return $results;
+  }
+
+  public static function removeRanking(League $league) {
+
+    $storage = \Drupal::entityManager()->getStorage('ranking_league');
+    $query = \Drupal::entityQuery('ranking_league');
+    $query->condition('day',$league->id());
+    $ids = $query->execute();
+
+    $rankings = $storage->loadMultiple($ids);
+    $nb_deleted = count($rankings);
+    foreach ($rankings as $ranking) {
+      $ranking->delete();
+    }
+
+    return $nb_deleted;
   }
 
   /**
