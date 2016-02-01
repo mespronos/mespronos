@@ -228,7 +228,7 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     foreach($bets as $bet) {
       $bet->save();
     }
-
+    $points = [];
     //better 1 => 10points
     $points[1] = 10;
     //better 2 => 10points
