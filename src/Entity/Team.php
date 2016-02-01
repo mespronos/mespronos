@@ -9,10 +9,8 @@ namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
-use Drupal\user\UserInterface;
 
 /**
  * Defines the Team entity.
@@ -52,7 +50,7 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "team.settings"
  * )
  */
-class Team extends ContentEntityBase implements MPNEntityInterface {
+class Team extends MPNContentEntityBase implements MPNEntityInterface {
   /**
    * {@inheritdoc}
    */
@@ -68,50 +66,6 @@ class Team extends ContentEntityBase implements MPNEntityInterface {
       throw new \Exception(t('The team\'s name should be set and should not be empty'));
     }
     return parent::create($values);
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('updated')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('creator')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('creator')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('creator', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('creator', $account->id());
-    return $this;
   }
 
   /**

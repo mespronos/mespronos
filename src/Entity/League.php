@@ -9,10 +9,8 @@ namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
-use Drupal\user\UserInterface;
 
 /**
  * Defines the League entity.
@@ -51,7 +49,7 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "league.settings"
  * )
  */
-class League extends ContentEntityBase implements MPNEntityInterface {
+class League extends MPNContentEntityBase implements MPNEntityInterface {
   protected static $status_allowed_value = [
     'future' => 'À venir',
     'active' => 'En cours',
@@ -152,36 +150,6 @@ class League extends ContentEntityBase implements MPNEntityInterface {
    */
   public function getupdatedTime() {
     return $this->get('updated')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('creator')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('creator')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('creator', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('creator', $account->id());
-    return $this;
   }
 
   public function getSport() {

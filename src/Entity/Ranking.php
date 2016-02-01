@@ -2,11 +2,9 @@
 
 namespace Drupal\mespronos\Entity;
 
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityStorageInterface;
-use Drupal\user\UserInterface;
 
-abstract class Ranking extends ContentEntityBase {
+abstract class Ranking extends MPNContentEntityBase {
 
   /**
    * {@inheritdoc}
@@ -16,32 +14,6 @@ abstract class Ranking extends ContentEntityBase {
     $values += array(
       'user_id' => \Drupal::currentUser()->id(),
     );
-  }
-
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  public function getChangedTime() {
-    return $this->get('changed')->value;
-  }
-
-  public function getOwner() {
-    return $this->get('better')->entity;
-  }
-
-  public function getOwnerId() {
-    return $this->get('better')->target_id;
-  }
-
-  public function setOwnerId($uid) {
-    $this->set('better', $uid);
-    return $this;
-  }
-
-  public function setOwner(UserInterface $account) {
-    $this->set('better', $account->id());
-    return $this;
   }
 
   public function setGameBetted($nb_games_betted) {

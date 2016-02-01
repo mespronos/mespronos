@@ -9,10 +9,8 @@ namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
-use Drupal\user\UserInterface;
 
 /**
  * Defines the Bet entity.
@@ -50,36 +48,13 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "bet.settings"
  * )
  */
-class Bet extends ContentEntityBase implements MPNEntityInterface {
-  /**
-   * {@inheritdoc}
-   */
+class Bet extends MPNContentEntityBase implements MPNEntityInterface {
+
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
     $values += array(
       'user_id' => \Drupal::currentUser()->id(),
     );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('user_id')->entity;
   }
 
   public static function getUserBetsForGames($games_ids, \Drupal\Core\Session\AccountProxyInterface $user){
@@ -100,16 +75,6 @@ class Bet extends ContentEntityBase implements MPNEntityInterface {
     return t('@t1 - @t2',array('@t1'=> $this->get('score_team_1')->value,'@t2'=> $this->get('score_team_2')->value));
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('better')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function setOwnerId($uid) {
     $this->set('better', $uid);
     return $this;
@@ -134,14 +99,6 @@ class Bet extends ContentEntityBase implements MPNEntityInterface {
       $game = $game_storage->load($game);
     }
     return $game;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('better', $account->id());
-    return $this;
   }
 
   /**

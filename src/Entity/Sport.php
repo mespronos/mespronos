@@ -9,10 +9,8 @@ namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
-use Drupal\user\UserInterface;
 
 /**
  * Defines the Sport entity.
@@ -52,7 +50,7 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "sport.settings"
  * )
  */
-class Sport extends ContentEntityBase implements MPNEntityInterface {
+class Sport extends MPNContentEntityBase implements MPNEntityInterface {
   /**
    * {@inheritdoc}
    */
@@ -81,50 +79,6 @@ class Sport extends ContentEntityBase implements MPNEntityInterface {
       $sport = entity_load('sport', array_pop($id));
       return $sport;
     }
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('updated')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('creator')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('creator')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('creator', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('creator', $account->id());
-    return $this;
   }
 
   /**

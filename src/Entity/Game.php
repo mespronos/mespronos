@@ -9,11 +9,9 @@ namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\mespronos\Entity\Controller\BetController;
-use Drupal\user\UserInterface;
 
 /**
  * Defines the Game entity.
@@ -51,7 +49,7 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "game.settings"
  * )
  */
-class Game extends ContentEntityBase implements MPNEntityInterface {
+class Game extends MPNContentEntityBase implements MPNEntityInterface {
   /**
    * {@inheritdoc}
    */
@@ -123,59 +121,17 @@ class Game extends ContentEntityBase implements MPNEntityInterface {
   }
 
   /**
-   * GETTER / SETTERS
+   * @return integer
    */
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('user_id')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('user_id')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
-    return $this;
-  }
-
   public function getScoreTeam1() {
     return $this->get('score_team_1')->value;
   }
 
+  /**
+   * @return integer
+   */
   public function getScoreTeam2() {
     return $this->get('score_team_2')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
-    return $this;
   }
 
   public function getGameDate() {
@@ -201,7 +157,7 @@ class Game extends ContentEntityBase implements MPNEntityInterface {
   }
 
   /**
-   * Return Team1 id
+   * Return Team2 id
    * @return integer
    */
   public function getTeam2Id() {
@@ -209,7 +165,7 @@ class Game extends ContentEntityBase implements MPNEntityInterface {
   }
 
   /**
-   * Return Team1 entity
+   * Return Team2 entity
    * @return Team
    */
   public function getTeam2() {
@@ -261,7 +217,6 @@ class Game extends ContentEntityBase implements MPNEntityInterface {
   public function getDataTable() {
     return 'mespronos__game';
   }
-
 
   /**
    * {@inheritdoc}

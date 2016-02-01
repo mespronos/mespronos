@@ -9,10 +9,8 @@ namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
-use Drupal\user\UserInterface;
 
 /**
  * Defines the Day entity.
@@ -51,61 +49,14 @@ use Drupal\user\UserInterface;
  *   field_ui_base_route = "day.settings"
  * )
  */
-class Day extends ContentEntityBase implements MPNEntityInterface
+class Day extends MPNContentEntityBase implements MPNEntityInterface
 {
 
-  /**
-   * {@inheritdoc}
-   */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
     $values += array(
       'user_id' => \Drupal::currentUser()->id(),
     );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('user_id')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('user_id')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('user_id', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('user_id', $account->id());
-    return $this;
   }
 
   public function getLeague() {
@@ -118,6 +69,7 @@ class Day extends ContentEntityBase implements MPNEntityInterface
     $ids = $query->execute();
     return count($ids);
   }
+
   public function getNbGameWIthScore() {
     $query = \Drupal::entityQuery('game')
       ->condition('day', $this->id())
@@ -126,7 +78,6 @@ class Day extends ContentEntityBase implements MPNEntityInterface
     $ids = $query->execute();
     return count($ids);
   }
-
 
   public function label() {
     return $this->get('name')->value;
