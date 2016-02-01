@@ -202,6 +202,7 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
+    $fields = [];
     $fields['id'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('ID'))
       ->setDescription(t('The ID of the RankingDay entity.'))
