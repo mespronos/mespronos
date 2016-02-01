@@ -159,7 +159,6 @@ class RankingLeague extends ContentEntityBase implements MPNEntityInterface {
     $query->orderBy('points','DESC');
     $query->orderBy('nb_bet','DESC');
     $query->condition('d.league',$league->id());
-    //$query->isNotNull('b.points');
     $results = $query->execute()->fetchAllAssoc('better');
 
     return $results;
