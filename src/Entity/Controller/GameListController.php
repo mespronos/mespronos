@@ -21,6 +21,7 @@ class GameListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
+    $header = [];
     $header['id'] = $this->t('GameID');
     $header['league'] = $this->t('League');
     $header['day'] = $this->t('Day');
@@ -38,6 +39,7 @@ class GameListController extends EntityListBuilder {
     $date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$entity->get('game_date')->value);
     $league = $entity->getLeague();
     $day = $entity->getDay();
+    $row = [];
     $row['id'] = $entity->id();
     $row['league'] = $league->label();
     $row['day'] = $day->label();
