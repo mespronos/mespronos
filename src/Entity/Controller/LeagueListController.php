@@ -21,6 +21,7 @@ class LeagueListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
+    $header = [];
     $header['id'] = t('ID');
     $header['sport'] = t('Sport');
     $header['name'] = t('Name');
@@ -35,6 +36,7 @@ class LeagueListController extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\League */
+    $row = [];
     $sport = $entity->getSport();
     $row['id'] = $entity->id();
     $row['sport'] = $sport->label();
