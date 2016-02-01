@@ -13,6 +13,7 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Database\Database;
 
 /**
  * Defines the RankingLeague entity.
