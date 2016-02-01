@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\mespronos\Controller\RankingController;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Database\Database;
@@ -133,7 +134,7 @@ class RankingLeague extends ContentEntityBase implements MPNEntityInterface {
   public static function createRanking(League $league) {
     self::removeRanking($league);
     $data = self::getData($league);
-    RankingController::$day($data);
+    RankingController::sortRankingDataAndDefinedPosition($data);
     foreach($data as $row) {
       $rankingLeague = self::create([
         'better' => $row->better,
