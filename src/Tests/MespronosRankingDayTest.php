@@ -132,9 +132,6 @@ class MespronosRankingDayTest extends WebTestBase {
     $this->assertEqual(10,$dataRow->points,t('Points are right'));
     $this->assertEqual(1,$dataRow->better,t('better is right'));
     $this->assertEqual(1,$dataRow->nb_bet,t('bet number is right'));
-
-    //$rankingDay = RankingDay::createRanking($this->day);
-    //$this->assertEqual($rankingDay->get('points')->value,10,t('Points are correctly setted'));
   }
 
   public function testRankingPosition() {
