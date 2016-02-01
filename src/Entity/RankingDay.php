@@ -8,11 +8,9 @@
 namespace Drupal\mespronos\Entity;
 
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
 use Drupal\mespronos\MPNEntityInterface;
-use Drupal\user\UserInterface;
 use Drupal\Core\Database\Database;
 
 /**
@@ -40,50 +38,7 @@ use Drupal\Core\Database\Database;
  *   field_ui_base_route = "ranking_day.settings"
  * )
  */
-class RankingDay extends ContentEntityBase implements MPNEntityInterface {
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('better', $account->id());
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('better')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('better')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('better', $uid);
-    return $this;
-  }
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
-  }
+class RankingDay extends Ranking implements MPNEntityInterface {
 
   /**
    * @return mixed
@@ -101,34 +56,9 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
     return $day;
   }
 
-  public function setGameBetted($nb_games_betted) {
-    $this->set('games_betted', $nb_games_betted);
-    return $this;
-  }
-
-  public function getGameBetted() {
-    return $this->get('games_betted')->value;
-  }
-
-  public function setPoints($points) {
-    $this->set('points', $points);
-    return $this;
-  }
-
   /**
    * @return integer
    */
-  public function getPoints() {
-    return $this->get('points')->value;
-  }
-
-  /**
-   * @return integer
-   */
-  public function getPosition() {
-    return $this->get('position')->value;
-  }
-
   public static function createRanking(\Drupal\mespronos\Entity\Day $day) {
     self::removeRanking($day);
     $data = self::getData($day);
@@ -180,7 +110,6 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
 
     return $nb_deleted;
   }
-
 
   /**
    * @param \Drupal\mespronos\Entity\Day $day

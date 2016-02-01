@@ -7,13 +7,10 @@
 
 namespace Drupal\mespronos\Entity;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
 use Drupal\mespronos\MPNEntityInterface;
-use Drupal\user\UserInterface;
 use Drupal\Core\Database\Database;
 
 /**
@@ -41,64 +38,11 @@ use Drupal\Core\Database\Database;
  *   field_ui_base_route = "ranking_league.settings"
  * )
  */
-class RankingLeague extends ContentEntityBase implements MPNEntityInterface {
+class RankingLeague extends Ranking implements MPNEntityInterface {
+
 
   /**
-   * {@inheritdoc}
-   */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
-    $values += array(
-      'user_id' => \Drupal::currentUser()->id(),
-    );
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getChangedTime() {
-    return $this->get('changed')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwner() {
-    return $this->get('better')->entity;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getOwnerId() {
-    return $this->get('better')->target_id;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwnerId($uid) {
-    $this->set('better', $uid);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setOwner(UserInterface $account) {
-    $this->set('better', $account->id());
-    return $this;
-  }
-
-  /**
-   * @return mixed
+   * @return integer
    */
   public function getLeagueiD() {
     return $this->get('league')->target_id;
@@ -111,24 +55,6 @@ class RankingLeague extends ContentEntityBase implements MPNEntityInterface {
     $day_storage = \Drupal::entityManager()->getStorage('league');
     $day = $day_storage->load($this->get('league')->target_id);
     return $day;
-  }
-
-  public function setGameBetted($nb_games_betted) {
-    $this->set('games_betted', $nb_games_betted);
-    return $this;
-  }
-
-  public function getGameBetted() {
-    return $this->get('games_betted')->value;
-  }
-
-  public function setPoints($points) {
-    $this->set('points', $points);
-    return $this;
-  }
-
-  public function getPoints() {
-    return $this->get('points')->value;
   }
 
   public static function createRanking(League $league) {
