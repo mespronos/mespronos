@@ -21,6 +21,7 @@ class TeamListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
+    $header = [];
     $header['id'] = t('ID');
     $header['name'] = t('Nom de l\'equipe');
     return $header + parent::buildHeader();
@@ -31,6 +32,7 @@ class TeamListController extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\Team */
+    $row = [];
     $row['id'] = $entity->id();
     $row['name'] = \Drupal::l(
       $this->getLabel($entity),
