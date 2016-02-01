@@ -90,7 +90,7 @@ class MespronosTeamTest extends WebTestBase {
 
   public function testTeamCreationWithoutName() {
     try {
-      $team2 = Team::create(array(
+      Team::create(array(
         'created' => time(),
         'updated' => time(),
         'creator' => 1,
@@ -101,9 +101,10 @@ class MespronosTeamTest extends WebTestBase {
       $this->pass(t('Unset team \'name throw exception | exception message : @msg', array('@msg' => $e->getMessage())));
     }
   }
+
   public function testTeamCreationWithEmptyName() {
     try {
-      $team2 = Team::create(array(
+      Team::create(array(
         'created' => time(),
         'updated' => time(),
         'creator' => 1,
@@ -118,7 +119,7 @@ class MespronosTeamTest extends WebTestBase {
 
   public function testTeamCreationWithOnlySpaceInName() {
     try {
-      $team2 = Team::create(array(
+      Team::create(array(
         'created' => time(),
         'updated' => time(),
         'creator' => 1,
