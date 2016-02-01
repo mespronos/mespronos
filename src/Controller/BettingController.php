@@ -191,7 +191,6 @@ class BettingController extends ControllerBase {
     else {
       $user = User::load($user);
     }
-    $league = $day->getLeague();
     $games = Game::getGamesForDay($day);
     $games_ids = $games['ids'];
     $games_entity = $games['entities'];
