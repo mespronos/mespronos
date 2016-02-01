@@ -239,6 +239,9 @@ class MespronosRankingDayTest extends WebTestBase {
     $bet2Good = Bet::load($bet2Good->id());
     $bet2Wrong = Bet::load($bet2Wrong->id());
 
+    $this->assertEqual($bet2Good->getPoints(),10,t('A good bet worth 10 points'));
+    $this->assertEqual($bet2Wrong->getPoints(),1,t('A bad bet worth 1 points'));
+
     RankingDay::createRanking($day);
     $ranking = RankingDay::getRankingForDay($day);
 
