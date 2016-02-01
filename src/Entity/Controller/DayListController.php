@@ -23,6 +23,7 @@ class DayListController extends EntityListBuilder
    * {@inheritdoc}
    */
   public function buildHeader() {
+    $header = [];
     $header['id'] = t('DayID');
     $header['league'] = t('League');
     $header['name'] = t('Day name');
@@ -36,6 +37,7 @@ class DayListController extends EntityListBuilder
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\Day */
     $league = $entity->getLeague();
+    $row = [];
     $row['id'] = $entity->id();
     $row['league'] = $league->label();
     $row['name'] = \Drupal::l(
