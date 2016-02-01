@@ -1,14 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: kgaut
- * Date: 31/07/15
- * Time: 12:00
- */
-/**
- * @file
- * Contains \Drupal\aggregator\Form\FeedItemsDeleteForm.
- */
 
 namespace Drupal\mespronos\Form;
 
@@ -17,7 +7,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Provides a deletion confirmation form for items that belong to a feed.
+ * Provides a deletion confirmation form when deleting mespronos datas
  */
 class RemoveDataForm extends ConfirmFormBase {
 
