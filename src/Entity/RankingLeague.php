@@ -154,7 +154,7 @@ class RankingLeague extends ContentEntityBase implements MPNEntityInterface {
     $query->addExpression('sum(rd.points)','points');
     $query->addExpression('count(rd.id)','nb_bet');
     $query->join('mespronos__day','d','d.id = rd.day');
-    $query->groupBy('b.better');
+    $query->groupBy('rd.better');
     $query->orderBy('points','DESC');
     $query->orderBy('nb_bet','DESC');
     $query->condition('d.league',$league->id());
