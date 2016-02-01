@@ -7,12 +7,10 @@
 
 namespace Drupal\mespronos\Entity;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
-use Drupal\mespronos\Entity\Controller\BetController;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\user\UserInterface;
 use Drupal\Core\Database\Database;
