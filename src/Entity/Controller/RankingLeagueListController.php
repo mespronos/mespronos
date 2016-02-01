@@ -21,6 +21,7 @@ class RankingLeagueListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
+    $header = [];
     $header['id'] = $this->t('RankingLeagueID');
     $header['name'] = $this->t('Name');
     return $header + parent::buildHeader();
@@ -31,6 +32,7 @@ class RankingLeagueListController extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\RankingLeague */
+    $row = [];
     $row['id'] = $entity->id();
     $row['name'] = \Drupal::l(
       $this->getLabel($entity),
