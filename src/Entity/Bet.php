@@ -145,7 +145,6 @@ class Bet extends ContentEntityBase implements MPNEntityInterface {
   }
 
   /**
-   * @param \Drupal\Core\Session\AccountProxyInterface|null $user
    * @return bool
    */
   public function isAllowed() {
