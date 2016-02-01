@@ -132,7 +132,7 @@ class RankingLeague extends ContentEntityBase implements MPNEntityInterface {
   public static function createRanking(League $league) {
     self::removeRanking($league);
     $data = self::getData($league);
-    RankingController::sortRankingDataAndDefinedPosition($data);
+    RankingController::$day($data);
     foreach($data as $row) {
       $rankingLeague = self::create([
         'better' => $row->better,
@@ -167,7 +167,7 @@ class RankingLeague extends ContentEntityBase implements MPNEntityInterface {
 
     $storage = \Drupal::entityManager()->getStorage('ranking_league');
     $query = \Drupal::entityQuery('ranking_league');
-    $query->condition('day',$league->id());
+    $query->condition('league',$league->id());
     $ids = $query->execute();
 
     $rankings = $storage->loadMultiple($ids);
