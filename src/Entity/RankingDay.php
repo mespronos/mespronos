@@ -144,6 +144,8 @@ class RankingDay extends ContentEntityBase implements MPNEntityInterface {
         'position' => $row->position,
       ]);
       $rankingDay->save();
+      $league = $day->getLeague();
+      RankingLeague::createRanking($league);
     }
     return count($data);
   }
