@@ -16,26 +16,6 @@ use Drupal\Core\Form\FormStateInterface;
  * @ingroup mespronos
  */
 class BetForm extends ContentEntityForm {
-  /**
-   * Overrides Drupal\Core\Entity\EntityFormController::buildForm().
-   */
-  public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\mespronos\Entity\Bet */
-    $form = parent::buildForm($form, $form_state);
-    $entity = $this->entity;
-
-    return $form;
-  }
-
-  /**
-   * Overrides \Drupal\Core\Entity\EntityFormController::submit().
-   */
-  public function submit(array $form, FormStateInterface $form_state) {
-    // Build the entity object from the submitted values.
-    $entity = parent::submit($form, $form_state);
-
-    return $entity;
-  }
 
   /**
    * Overrides Drupal\Core\Entity\EntityFormController::save().
