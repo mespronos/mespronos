@@ -21,6 +21,7 @@ class BetListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
+    $header = [];
     $header['id'] = $this->t('BetID');
     $header['name'] = $this->t('Name');
     return $header + parent::buildHeader();
@@ -31,6 +32,7 @@ class BetListController extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\Bet */
+    $row = [];
     $row['id'] = $entity->id();
     $row['name'] = \Drupal::l(
       $this->getLabel($entity),
