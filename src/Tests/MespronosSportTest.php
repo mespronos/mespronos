@@ -61,7 +61,7 @@ class MespronosSportTest extends WebTestBase {
 
   public function testCreationOfSportWithoutSportName() {
     try {
-      $sport3 = Sport::create(array(
+      Sport::create(array(
         'created' => time(),
         'updated' => time(),
         'creator' => 1,
@@ -75,7 +75,7 @@ class MespronosSportTest extends WebTestBase {
 
   public function testCreationOfSportWithEmptySportName() {
     try {
-      $sport3 = Sport::create(array(
+      Sport::create(array(
         'created' => time(),
         'updated' => time(),
         'creator' => 1,
@@ -90,7 +90,7 @@ class MespronosSportTest extends WebTestBase {
 
   public function testCreationOfSportWithOnlySpaceInName() {
     try {
-      $sport3 = Sport::create(array(
+      Sport::create(array(
         'created' => time(),
         'updated' => time(),
         'creator' => 1,
