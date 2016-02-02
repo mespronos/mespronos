@@ -97,7 +97,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
       ->setDescription(t('The UUID of the Day entity.'))
       ->setReadOnly(TRUE);
 
-    $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
+    $fields['creator'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Authored by'))
       ->setDescription(t('The user ID of the Day entity author.'))
       ->setRevisionable(TRUE)
