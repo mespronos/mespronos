@@ -19,7 +19,7 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
    * @return UserInterface
    */
   public function getOwner() {
-    if(self::hasField('better')) {
+    if(static::hasField('better')) {
       return $this->get('better')->entity;
     }
     else {
@@ -31,7 +31,7 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
    * @return integer
    */
   public function getOwnerId() {
-    if(self::hasField('better')) {
+    if(static::hasField('better')) {
       return $this->get('better')->target_id;
     }
     else {
@@ -40,7 +40,7 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
   }
 
   public function setOwner(UserInterface $account) {
-    if(self::hasField('better')) {
+    if(static::hasField('better')) {
       $this->set('better', $account->id());
     }
     else {
@@ -50,7 +50,7 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
   }
 
   public function setOwnerId($uid) {
-    if(self::hasField('better')) {
+    if(static::hasField('better')) {
       $this->set('better', $uid);
     }
     else {
