@@ -344,7 +344,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
 
-    $fields['updated'] = BaseFieldDefinition::create('changed')
+    $fields['changed'] = BaseFieldDefinition::create('changed')
       ->setLabel(t('updated'))
       ->setDescription(t('The time that the entity was last edited.'));
 
