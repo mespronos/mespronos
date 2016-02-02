@@ -1,9 +1,0 @@
-name: Mespronos Configuration
-type: module
-description: Advanced config for a full experience with MesPronos
-core: 8.x
-package: MesPronos
-dependencies:
-  - mespronos
-  - image
-  - user
