@@ -23,7 +23,7 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
       return $this->get('better')->entity;
     }
     else {
-      return $this->get('user_id')->entity;
+      return $this->get('creator')->entity;
     }
   }
 
@@ -35,7 +35,7 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
       return $this->get('better')->target_id;
     }
     else {
-      return $this->get('user_id')->target_id;
+      return $this->get('creator')->target_id;
     }
   }
 
@@ -44,7 +44,7 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
       $this->set('better', $account->id());
     }
     else {
-      $this->set('user_id', $account->id());
+      $this->set('creator', $account->id());
     }
     return $this;
   }
@@ -54,7 +54,7 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
       $this->set('better', $uid);
     }
     else {
-      $this->set('user_id', $uid);
+      $this->set('creator', $uid);
     }
     return $this;
   }
