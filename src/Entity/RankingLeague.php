@@ -110,42 +110,7 @@ class RankingLeague extends Ranking implements MPNEntityInterface {
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
-    $fields = [];
-    $fields['id'] = BaseFieldDefinition::create('integer')
-      ->setLabel(t('ID'))
-      ->setDescription(t('The ID of the RankingLeague entity.'))
-      ->setReadOnly(TRUE);
-
-    $fields['uuid'] = BaseFieldDefinition::create('uuid')
-      ->setLabel(t('UUID'))
-      ->setDescription(t('The UUID of the RankingLeague entity.'))
-      ->setReadOnly(TRUE);
-
-    $fields['better'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Better'))
-      ->setDescription(t('The user ID of the Bet entity author.'))
-      ->setRevisionable(TRUE)
-      ->setSetting('target_type', 'user')
-      ->setSetting('handler', 'default')
-      ->setDefaultValueCallback('Drupal\node\Entity\Node::getCurrentUserId')
-      ->setTranslatable(TRUE)
-      ->setDisplayOptions('view', array(
-        'label' => 'hidden',
-        'type' => 'author',
-        'weight' => 0,
-      ))
-      ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
-        'weight' => 5,
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'size' => '60',
-          'autocomplete_type' => 'tags',
-          'placeholder' => '',
-        ),
-      ))
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
+    $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['league'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('League'))
@@ -166,41 +131,6 @@ class RankingLeague extends Ranking implements MPNEntityInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['games_betted'] = BaseFieldDefinition::create('integer')
-      ->setLabel('Games betted')
-      ->setRevisionable(TRUE)
-      ->setSetting('unsigned', TRUE)
-      ->setDisplayOptions('view', array(
-        'label' => 'hidden',
-        'type' => 'integer',
-        'weight' => 6,
-      ))
-      ->setDisplayOptions('form', array(
-        'type' => 'number',
-        'weight' => 6,
-      ));
-
-    $fields['points'] = BaseFieldDefinition::create('integer')
-      ->setLabel('Points won')
-      ->setRevisionable(TRUE)
-      ->setSetting('unsigned', TRUE)
-      ->setDisplayOptions('view', array(
-        'label' => 'hidden',
-        'type' => 'integer',
-        'weight' => 6,
-      ))
-      ->setDisplayOptions('form', array(
-        'type' => 'number',
-        'weight' => 6,
-      ));
-
-    $fields['created'] = BaseFieldDefinition::create('created')
-      ->setLabel(t('Created'))
-      ->setDescription(t('The time that the entity was created.'));
-
-    $fields['changed'] = BaseFieldDefinition::create('changed')
-      ->setLabel(t('Changed'))
-      ->setDescription(t('The time that the entity was last edited.'));
 
     return $fields;
   }
