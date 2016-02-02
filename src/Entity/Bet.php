@@ -44,8 +44,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *     "canonical" = "/admin/bet/{bet}",
  *     "edit-form" = "/admin/bet/{bet}/edit",
  *     "delete-form" = "/admin/bet/{bet}/delete"
- *   },
- *   field_ui_base_route = "bet.settings"
+ *   }
  * )
  */
 class Bet extends MPNContentEntityBase implements MPNEntityInterface {

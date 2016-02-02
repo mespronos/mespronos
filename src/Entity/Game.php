@@ -45,8 +45,7 @@ use Drupal\mespronos\Entity\Controller\BetController;
  *     "canonical" = "/admin/game/{game}",
  *     "edit-form" = "/admin/game/{game}/edit",
  *     "delete-form" = "/admin/game/{game}/delete"
- *   },
- *   field_ui_base_route = "game.settings"
+ *   }
  * )
  */
 class Game extends MPNContentEntityBase implements MPNEntityInterface {

@@ -45,8 +45,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *     "edit-form" = "/entity.league.edit_form",
  *     "delete-form" = "/entity.league.delete_form",
  *     "collection" = "/entity.league.collection"
- *   },
- *   field_ui_base_route = "league.settings"
+ *   }
  * )
  */
 class League extends MPNContentEntityBase implements MPNEntityInterface {

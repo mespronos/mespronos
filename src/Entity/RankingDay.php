@@ -34,8 +34,7 @@ use Drupal\Core\Database\Database;
  *     "id" = "id",
  *     "label" = "name",
  *     "uuid" = "uuid"
- *   },
- *   field_ui_base_route = "ranking_day.settings"
+ *   }
  * )
  */
 class RankingDay extends Ranking implements MPNEntityInterface {

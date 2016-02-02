@@ -45,8 +45,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *     "edit-form" = "/entity.day.edit_form",
  *     "recalculate_ranking" = "/entity.day.recalculate_ranking",
  *     "delete-form" = "/entity.day.delete_form"
- *   },
- *   field_ui_base_route = "day.settings"
+ *   }
  * )
  */
 class Day extends MPNContentEntityBase implements MPNEntityInterface
