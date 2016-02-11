@@ -16,7 +16,11 @@ This is a "work in progress" module, without a stable release date (maybe late s
 
 Please see (https://github.com/kgaut/mespronos/milestones)[milestones] to get an overview of the planning.
 
-Basicaly, I would like to create an open test during march - april, to test the **8.x-1.0 alpha** version. After this test I aim to release the **8.x-1.0 beta** that will be used during UEFA Euro 2016. The **8.x-1.0 Final** Should be released during summer.
+Basicaly, I would like to create an open test during march - april, to test the **8.x-1.0 alpha** version. 
+
+After this two months test I aim to release the **8.x-1.0 beta** that will be used during UEFA Euro 2016.
+
+The **8.x-1.0 Final** should be released during summer.
 
 ## Follow the development / Get in board
 Incoming features and status is visible on [Waffle](https://waffle.io/kgaut/mespronos).
