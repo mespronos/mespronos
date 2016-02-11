@@ -28,7 +28,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *     "form" = {
  *       "add" = "Drupal\mespronos\Entity\Form\DayForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\DayForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\DayDeleteForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\DayAccessControlHandler",
  *   },

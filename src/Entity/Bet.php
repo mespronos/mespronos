@@ -29,7 +29,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *       "default" = "Drupal\mespronos\Entity\Form\BetForm",
  *       "add" = "Drupal\mespronos\Entity\Form\BetForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\BetForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\BetDeleteForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\BetAccessControlHandler",
  *   },

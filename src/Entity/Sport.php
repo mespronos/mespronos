@@ -29,7 +29,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *       "default" = "Drupal\mespronos\Entity\Form\SportForm",
  *       "add" = "Drupal\mespronos\Entity\Form\SportForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\SportForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\SportDeleteForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\SportAccessControlHandler",
  *   },

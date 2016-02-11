@@ -28,7 +28,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *       "default" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "add" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\LeagueForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\LeagueDeleteForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\LeagueAccessControlHandler",
  *   },

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos\Entity\Form\DayDeleteForm.
+ * Contains Drupal\mespronos\Entity\Form\BetDeleteForm.
  */
 
 namespace Drupal\mespronos\Entity\Form;
@@ -12,32 +12,30 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Url;
 
 /**
- * Provides a form for deleting a Day entity.
+ * Provides a form for deleting a Bet entity.
  *
  * @ingroup mespronos
  */
-class DayDeleteForm extends ContentEntityConfirmFormBase
-{
-
+class MPNContentEntityConfirmFormBase extends ContentEntityConfirmFormBase {
   /**
    * {@inheritdoc}
    */
   public function getQuestion() {
-    return t('Are you sure you want to delete entity %name?', array('%name' => $this->entity->label()));
+    return $this->t('Are you sure you want to delete entity %name?', array('%name' => $this->entity->label()));
   }
 
   /**
    * {@inheritdoc}
    */
   public function getCancelUrl() {
-    return new Url('entity.day.list');
+    return new Url('entity.bet.collection');
   }
 
   /**
    * {@inheritdoc}
    */
   public function getConfirmText() {
-    return t('Delete');
+    return $this->t('Delete');
   }
 
   /**
@@ -48,12 +46,14 @@ class DayDeleteForm extends ContentEntityConfirmFormBase
 
     drupal_set_message(
       $this->t('content @type: deleted @label.',
-      [
-        '@type' => $this->entity->bundle(),
-        '@label' => $this->entity->label()
-      ]
-    ));
+        [
+          '@type' => $this->entity->bundle(),
+          '@label' => $this->entity->label()
+        ]
+        )
+    );
 
     $form_state->setRedirectUrl($this->getCancelUrl());
   }
+
 }
