@@ -8,22 +8,6 @@
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\mespronos\Entity\Controller\BetController;
 
-/**
- * Implements hook_help().
- */
-function mespronos_help($route_name, RouteMatchInterface $route_match) {
-  switch ($route_name) {
-    // Main module help for the mespronos module.
-    case 'help.page.mespronos':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Gestion de pronostics') . '</p>';
-      return $output;
-
-    default:
-  }
-}
-
 function mespronos_preprocess_page(&$variables) {
   if($variables['is_admin']) {
     $variables['#attached']['library'][] = 'mespronos/administration-style';
@@ -31,10 +15,4 @@ function mespronos_preprocess_page(&$variables) {
   if($variables['is_front']) {
     $variables['#attached']['library'][] = 'mespronos/front-style';
   }
-}
-
-function mespronos_theme() {
-  $theme = [];
-
-  return $theme;
 }

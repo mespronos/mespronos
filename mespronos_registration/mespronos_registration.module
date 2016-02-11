@@ -6,32 +6,3 @@
  */
 
 use Drupal\Core\Routing\RouteMatchInterface;
-
-/**
- * Implements hook_help().
- */
-function mespronos_registration_help($route_name, RouteMatchInterface $route_match) {
-  switch ($route_name) {
-    // Main module help for the mespronos_registration module.
-    case 'help.page.mespronos_registration':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Registration tweaking for MesPronos') . '</p>';
-      return $output;
-
-    default:
-  }
-}
-
-function mespronos_registration_theme() {
-  $theme = [];
-  $theme['join'] = array(
-    'variables' => array(
-      'test_var' => NULL,
-      'login_form' => NULL,
-      'registration_form' => NULL,
-    ),
-  );
-
-  return $theme;
-}
