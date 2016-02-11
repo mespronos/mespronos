@@ -14,7 +14,7 @@ This is a "work in progress" module, without a stable release date (maybe late s
 
 ## Planning
 
-Please see (https://github.com/kgaut/mespronos/milestones)[milestones] to get an overview of the planning.
+Please see [milestones](https://github.com/kgaut/mespronos/milestones) to get an overview of the planning.
 
 Basicaly, I would like to create an open test during march - april, to test the **8.x-1.0 alpha** version. 
 
