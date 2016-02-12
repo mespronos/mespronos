@@ -29,6 +29,11 @@ class UserController extends ControllerBase {
     ];
   }
 
+  public function passwordReset() {
+    $registration_form = self::getResetPasswordForm();
+    return $registration_form;
+  }
+
   public static function getRegistrationForm() {
     $account = \Drupal::entityManager()->getStorage('user') ->create(array());
     $form =\Drupal::service('entity.form_builder')->getForm($account, 'default');
@@ -43,6 +48,13 @@ class UserController extends ControllerBase {
     $form['timezone']['#access'] = false;
     $form['actions']['submit']['#value'] = t('Create my account');
     return $form;
+  }
 
+  public static function getResetPasswordForm() {
+    $password_reset_form = \Drupal::formBuilder()
+      ->getForm('\Drupal\user\Form\UserPasswordForm');
+    unset($password_reset_form['mail']);
+    $password_reset_form['actions']['submit']['#value'] = t('Send me password reset instructions');
+    return $password_reset_form;
   }
 }
