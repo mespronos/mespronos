@@ -106,6 +106,21 @@ class RankingLeague extends Ranking implements MPNEntityInterface {
   }
 
   /**
+   * @param \Drupal\mespronos\Entity\League $league
+   * @return \Drupal\mespronos\Entity\RankingLeague[]
+   */
+  public static function getRankingForLeague(League $league) {
+    $storage = \Drupal::entityManager()->getStorage('ranking_league');
+    $query = \Drupal::entityQuery('ranking_league');
+    $query->condition('day', $league->id());
+    $query->sort('position','ASC');
+    $ids = $query->execute();
+
+    $rankings = $storage->loadMultiple($ids);
+    return $rankings;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
