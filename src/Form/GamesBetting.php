@@ -5,6 +5,7 @@ namespace Drupal\mespronos\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Cache\Cache;
 use Drupal\mespronos\Entity\Controller\BetController;
 use Drupal\mespronos\Entity\Controller\GameController;
 
@@ -208,6 +209,7 @@ class GamesBetting extends FormBase {
     if($j>0) {
       drupal_set_message($this->t('@nb_mark bet couldn\'t be saved or updated',array('@nb_mark'=>$j)),'warning');
     }
+    Cache::invalidateTags(array('user:'.$user->id()));
   }
 
   /**

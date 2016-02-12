@@ -8,6 +8,7 @@ use Drupal\Core\Render\Element;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\RankingDay;
+use Drupal\Core\Cache\Cache;
 /**
  * Implements an example form.
  */
@@ -91,5 +92,6 @@ class GamesMarks extends FormBase {
       RankingDay::createRanking($day);
       drupal_set_message($this->t('Ranking updated for @nb_ranking days',array('@nb_ranking'=>$i)));
     }
+    Cache::invalidateTags(array('nextbets'));
   }
 }

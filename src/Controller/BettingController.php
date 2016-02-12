@@ -91,6 +91,10 @@ class BettingController extends ControllerBase {
       '#rows' => $rows,
       '#header' => $header,
       '#footer' => $footer,
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => [ 'user:'.$user_uid,'nextbets'],
+      ],
     ];
   }
 
@@ -169,7 +173,18 @@ class BettingController extends ControllerBase {
       '#rows' => $rows,
       '#header' => $header,
       '#footer' => $footer,
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => [ 'user:'.$user_uid,'lastbets'],
+      ],
     ];
+
+
+    $renderable_array['#cache']['contexts'][] = 'user';
+    $renderable_array['#cache']['tags'][] = 'user:'.\Drupal::currentUser()->id();
+    $renderable_array['#cache']['tags'][] = 'lastbets';
+    $renderable_array['#cache']['tags'][] = 'lastbets';
+
   }
 
   public function bet($day) {
