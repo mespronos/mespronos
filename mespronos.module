@@ -27,3 +27,18 @@ function mespronos_theme() {
 
   return $theme;
 }
+
+
+/**
+ * @todo create a proper page in \Drupal\mespronos\Controller\UserController
+ */
+function mespronos_form_user_register_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['account']['pass']['#description'] = null;
+  $form['account']['mail']['#description'] = null;
+  $form['account']['name']['#description'] = null;
+  $form['status']['#access'] = false;
+  $form['roles']['#access'] = false;
+  $form['notify']['#access'] = false;
+  $form['user_picture']['widget'][0]['#description'] = null;
+  $form['contact']['#access'] = false;
+}

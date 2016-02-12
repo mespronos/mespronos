@@ -51,24 +51,6 @@ class UserController extends ControllerBase {
     return $login_form;
   }
 
-  public static function getRegistrationForm() {
-    $account = \Drupal::entityManager()->getStorage('user') ->create(array());
-    $form =\Drupal::service('entity.form_builder')->getForm($account, 'default');
-    $form['account']['pass']['#description'] = null;
-    $form['account']['mail']['#description'] = null;
-    $form['account']['name']['#description'] = null;
-    $form['status']['#access'] = false;
-    $form['roles']['#access'] = false;
-    $form['notify']['#access'] = false;
-    //$form['user_picture']['#access'] = false;
-    kint($form['user_picture']);
-    $form['user_picture']['widget'][0]['#description'] = null;
-    $form['contact']['#access'] = false;
-    $form['timezone']['#access'] = false;
-    $form['actions']['submit']['#value'] = t('Create my account');
-    return $form;
-  }
-
   public static function getResetPasswordForm() {
     $password_reset_form = \Drupal::formBuilder()
       ->getForm('\Drupal\user\Form\UserPasswordForm');

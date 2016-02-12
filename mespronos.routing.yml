@@ -82,10 +82,10 @@ mespronos.lastbetsdetailsforuser:
 mespronos.join:
   path: 'join'
   defaults:
-    _controller: '\Drupal\mespronos\Controller\UserController::join'
-    _title: 'join'
+    _entity_form: 'user.register'
+    _title: 'Join !'
   requirements:
-    _permission: 'access content'
+    _access_user_register: 'TRUE'
 
 mespronos.password-reset:
   path: 'reset-password'
