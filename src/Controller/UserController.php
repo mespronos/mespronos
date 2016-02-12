@@ -60,7 +60,9 @@ class UserController extends ControllerBase {
     $form['status']['#access'] = false;
     $form['roles']['#access'] = false;
     $form['notify']['#access'] = false;
-    $form['user_picture']['#access'] = false;
+    //$form['user_picture']['#access'] = false;
+    kint($form['user_picture']);
+    $form['user_picture']['widget'][0]['#description'] = null;
     $form['contact']['#access'] = false;
     $form['timezone']['#access'] = false;
     $form['actions']['submit']['#value'] = t('Create my account');
