@@ -10,7 +10,6 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
-use Drupal\mespronos\MPNEntityInterface;
 use Drupal\Core\Database\Database;
 
 /**
@@ -37,7 +36,7 @@ use Drupal\Core\Database\Database;
  *   }
  * )
  */
-class RankingDay extends Ranking implements MPNEntityInterface {
+class RankingDay extends Ranking {
 
   /**
    * @return mixed
@@ -125,6 +124,21 @@ class RankingDay extends Ranking implements MPNEntityInterface {
     return $rankings;
   }
 
+  /**
+   * @param \Drupal\Core\Session\AccountProxyInterface $better
+   * @return \Drupal\mespronos\Entity\RankingDay
+   */
+  public static function getRankingForBetter(\Drupal\Core\Session\AccountProxyInterface $better) {
+    $storage = \Drupal::entityManager()->getStorage('ranking_day');
+    $query = \Drupal::entityQuery('ranking_day');
+    $query->condition('better', $better->id());
+    $query->sort('position','ASC');
+    $ids = $query->execute();
+    $id = array_pop($ids);
+    $rankings = $storage->load($id);
+    return $rankings;
+
+  }
 
   /**
    * {@inheritdoc}

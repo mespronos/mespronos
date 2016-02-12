@@ -7,10 +7,8 @@
 
 namespace Drupal\mespronos\Entity;
 
-use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
-use Drupal\mespronos\MPNEntityInterface;
 use Drupal\Core\Database\Database;
 
 /**
@@ -37,7 +35,7 @@ use Drupal\Core\Database\Database;
  *   }
  * )
  */
-class RankingGeneral extends Ranking implements MPNEntityInterface {
+class RankingGeneral extends Ranking {
 
   public static function createRanking() {
     self::removeRanking();
@@ -82,6 +80,21 @@ class RankingGeneral extends Ranking implements MPNEntityInterface {
       $ranking->delete();
     }
     return $nb_deleted;
+  }
+
+  /**
+   * @param \Drupal\Core\Session\AccountProxyInterface $better
+   * @return \Drupal\mespronos\Entity\RankingGeneral
+   */
+  public static function getRankingForBetter(\Drupal\Core\Session\AccountProxyInterface $better) {
+    $storage = \Drupal::entityManager()->getStorage('ranking_general');
+    $query = \Drupal::entityQuery('ranking_general');
+    $query->condition('better', $better->id());
+    $query->sort('position','ASC');
+    $ids = $query->execute();
+    $id = array_pop($ids);
+    $rankings = $storage->load($id);
+    return $rankings;
   }
 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {

@@ -10,7 +10,6 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
-use Drupal\mespronos\MPNEntityInterface;
 use Drupal\Core\Database\Database;
 
 /**
@@ -37,7 +36,7 @@ use Drupal\Core\Database\Database;
  *   }
  * )
  */
-class RankingLeague extends Ranking implements MPNEntityInterface {
+class RankingLeague extends Ranking {
 
 
   /**
@@ -117,6 +116,21 @@ class RankingLeague extends Ranking implements MPNEntityInterface {
     $ids = $query->execute();
 
     $rankings = $storage->loadMultiple($ids);
+    return $rankings;
+  }
+
+  /**
+   * @param \Drupal\Core\Session\AccountProxyInterface $better
+   * @return \Drupal\mespronos\Entity\RankingLeague
+   */
+  public static function getRankingForBetter(\Drupal\Core\Session\AccountProxyInterface $better) {
+    $storage = \Drupal::entityManager()->getStorage('ranking_league');
+    $query = \Drupal::entityQuery('ranking_league');
+    $query->condition('better', $better->id());
+    $query->sort('position','ASC');
+    $ids = $query->execute();
+    $id = array_pop($ids);
+    $rankings = $storage->load($id);
     return $rankings;
   }
 
