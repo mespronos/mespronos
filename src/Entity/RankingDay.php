@@ -126,19 +126,11 @@ class RankingDay extends Ranking {
 
   /**
    * @param \Drupal\Core\Session\AccountProxyInterface $better
+   * @param String $type
    * @return \Drupal\mespronos\Entity\RankingDay
-   * @todo : abstract duplicated part in Ranking
    */
-  public static function getRankingForBetter(\Drupal\Core\Session\AccountProxyInterface $better) {
-    $storage = \Drupal::entityManager()->getStorage('ranking_day');
-    $query = \Drupal::entityQuery('ranking_day');
-    $query->condition('better', $better->id());
-    $query->sort('position','ASC');
-    $ids = $query->execute();
-    $id = array_pop($ids);
-    $rankings = $storage->load($id);
-    return $rankings;
-
+  public static function getRankingForBetter(\Drupal\Core\Session\AccountProxyInterface $better,$type=null) {
+    return parent::getRankingForBetter($better,'ranking_day');
   }
 
   /**
