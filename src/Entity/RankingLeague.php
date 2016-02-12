@@ -122,6 +122,7 @@ class RankingLeague extends Ranking {
   /**
    * @param \Drupal\Core\Session\AccountProxyInterface $better
    * @return \Drupal\mespronos\Entity\RankingLeague
+   * @todo : abstract duplicated part in Ranking
    */
   public static function getRankingForBetter(\Drupal\Core\Session\AccountProxyInterface $better) {
     $storage = \Drupal::entityManager()->getStorage('ranking_league');
