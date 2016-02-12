@@ -235,8 +235,8 @@ class BettingController extends ControllerBase {
   public static function getActionBetLink(Day $day,League $league,$user_uid) {
     if($user_uid == 0) {
       $action_links = Link::fromTextAndUrl(
-        t('Register or login and start betting'),
-        Url::fromRoute('mespronos.join',[],[
+        t('Log in and start betting'),
+        Url::fromRoute('mespronos.login',[],[
             'query' => [
               'destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(),
             ]
@@ -246,7 +246,7 @@ class BettingController extends ControllerBase {
     }
     else {
       $action_links = Link::fromTextAndUrl(
-        t('Start betting now !'),
+        t('Bet !'),
         new Url('mespronos.day.bet', array('day' => $day->id()))
       );
     }
