@@ -95,6 +95,14 @@ mespronos.password-reset:
   requirements:
     _permission: 'access content'
 
+mespronos.login:
+  path: 'login'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\UserController::login'
+    _title: 'Log in'
+  requirements:
+    _permission: 'access content'
+
 # Team routing definition
 entity.team.canonical:
   path: '/admin/mespronos/team/{team}'
