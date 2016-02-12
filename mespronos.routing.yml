@@ -239,7 +239,7 @@ entity.day.recalculate_ranking:
   path: '/admin/day/{day}/recalculate_ranking'
   defaults:
     _controller: '\Drupal\mespronos\Controller\RankingController::recalculateDay'
-    _title: 'Recaulculate ranking for Day'
+    _title: 'Recalculate ranking for Day'
   requirements:
     _permission: 'set marks'
 
