@@ -24,6 +24,14 @@ function mespronos_theme() {
       'registration_form' => NULL,
     ),
   );
+  $theme['user-block'] = array(
+    'template' => 'user_block',
+    'variables' => array(
+      'user' => NULL,
+      'user_picture' => NULL,
+      'links' => NULL,
+    ),
+  );
 
   return $theme;
 }
