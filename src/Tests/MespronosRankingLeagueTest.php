@@ -244,22 +244,81 @@ class MespronosRankingLeagueTest extends WebTestBase {
     }
 
     RankingDay::createRanking($this->league1day2);
-    $ranking_day_1 = RankingDay::getRankingForDay($this->league1day2);
+    $ranking_day_2 = RankingDay::getRankingForDay($this->league1day2);
 
-    $this->assertEqual(count($ranking_day_1),count($betsDay2),t('Day 1 : @nb betters, so ranking contains @nb lines',array('@nb'=>count($betsDay2))));
+    $this->assertEqual(count($ranking_day_2),count($betsDay2),t('Day 1 : @nb betters, so ranking contains @nb lines',array('@nb'=>count($betsDay2))));
 
     RankingLeague::createRanking($this->league1);
     $ranking_league_1 = RankingLeague::getRankingForLeague($this->league1);
     $this->assertEqual(count($ranking_league_1),max(count($betsDay2),count($betsDay1)),t('League 1 : @nb betters, so ranking contains @nb lines',array('@nb'=>max(count($betsDay2),count($betsDay1)))));
 
-    $rankingBetter1 = RankingLeague::getRankingForBetter($this->better1);
-    $this->assertEqual($rankingBetter1->getGameBetted(),2,t('Better 1 has betted on two games'));
-    $this->assertEqual($rankingBetter1->getPoints(),20,t('Better 1 has 20 points'));
-    $this->assertEqual($rankingBetter1->getPosition(),1,t('Better 1 is first'));
+    $rankingBetter1League1 = RankingLeague::getRankingForBetter($this->better1,$this->league1);
+    $this->assertEqual($rankingBetter1League1->getGameBetted(),2,t('Better 1 has betted on two games'));
+    $this->assertEqual($rankingBetter1League1->getPoints(),20,t('Better 1 has 20 points'));
+    $this->assertEqual($rankingBetter1League1->getPosition(),1,t('Better 1 is first'));
 
-    $rankingBetter4 = RankingLeague::getRankingForBetter($this->better4);
-    $this->assertEqual($rankingBetter4->getGameBetted(),1,t('Better 1 has betted on two games'));
-    $this->assertEqual($rankingBetter4->getPoints(),10,t('Better 1 has 20 points'));
-    $this->assertEqual($rankingBetter4->getPosition(),4,t('Better 1 is first'));
+    $rankingBetter4League1 = RankingLeague::getRankingForBetter($this->better4,$this->league1);
+    $this->assertEqual($rankingBetter4League1->getGameBetted(),1,t('Better 1 has betted on two games'));
+    $this->assertEqual($rankingBetter4League1->getPoints(),10,t('Better 1 has 20 points'));
+    $this->assertEqual($rankingBetter4League1->getPosition(),4,t('Better 1 is first'));
+
+    //DAY 3
+    $betsDay3 = [];
+    $betsDay3[] = Bet::create(array(
+      'better' => $this->better1->id(),
+      'game' => $this->l2d1game3->id(),
+      'score_team_1' => 2,
+      'score_team_2' => 1,
+    ));
+    $betsDay3[] = Bet::create(array(
+      'better' => $this->better2->id(),
+      'game' => $this->l2d1game3->id(),
+      'score_team_1' => 2,
+      'score_team_2' => 1,
+    ));
+    $betsDay3[] = Bet::create(array(
+      'better' => $this->better3->id(),
+      'game' => $this->l2d1game3->id(),
+      'score_team_1' => 2,
+      'score_team_2' => 1,
+    ));
+
+    foreach($betsDay3 as $bet) {
+      $bet->save();
+    }
+
+    $this->l2d1game3->setScore(2,1)->save();
+
+    $this->assertTrue($this->l2d1game3->isScoreSetted(),t('Game3 score is setted'));
+
+    foreach($betsDay3 as $bet) {
+      $bet = Bet::load($bet->id());
+      $this->assertEqual($bet->getPoints(),10,t('good bets worth 10 points'));
+    }
+
+    RankingDay::createRanking($this->league2day1);
+    $ranking_day_3 = RankingDay::getRankingForDay($this->league2day1);
+
+    $this->assertEqual(count($ranking_day_3),count($betsDay2),t('Day 1 : @nb betters, so ranking contains @nb lines',array('@nb'=>count($betsDay2))));
+
+    RankingLeague::createRanking($this->league1);
+    $ranking_league_1 = RankingLeague::getRankingForLeague($this->league1);
+    $this->assertEqual(count($ranking_league_1),max(count($betsDay2),count($betsDay1)),t('League 1 has no change : @nb betters, so ranking contains @nb lines',array('@nb'=>max(count($betsDay2),count($betsDay1)))));
+
+    RankingLeague::createRanking($this->league2);
+    $ranking_league_2 = RankingLeague::getRankingForLeague($this->league2);
+    $this->assertEqual(count($ranking_league_2),count($betsDay3),t('League 2 : @nb betters, so ranking contains @nb lines',array('@nb'=>count($betsDay3))));
+
+    $rankingBetter1League1 = RankingLeague::getRankingForBetter($this->better1,$this->league1);
+    $this->assertEqual($rankingBetter1League1->getGameBetted(),2,t('Better 1 has betted on two games on league 1'));
+    $this->assertEqual($rankingBetter1League1->getPoints(),20,t('Better 1 has 20 points'));
+    $this->assertEqual($rankingBetter1League1->getPosition(),1,t('Better 1 is first'));
+
+    $rankingBetter1League2 = RankingLeague::getRankingForBetter($this->better1,$this->league2);
+    $this->assertEqual($rankingBetter1League2->getGameBetted(),1,t('Better 1 has betted on one game on league 2'));
+    $this->assertEqual($rankingBetter1League2->getPoints(),10,t('Better 1 has 20 points'));
+    $this->assertEqual($rankingBetter1League2->getPosition(),1,t('Better 1 is first'));
+
+
   }
 }
