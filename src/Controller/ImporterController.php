@@ -91,6 +91,9 @@ class ImporterController extends ControllerBase {
         'name' => $_league['name'],
         'betting_type' => $_league['betting_type'],
         'classement' => $_league['classement'],
+        'points_score_found' => isset($_league['points_score_found']) ? $_league['points_score_found'] : null,
+        'points_winner_found' => isset($_league['points_winner_found']) ? $_league['points_winner_found'] : null,
+        'points_participation' => isset($_league['points_participation']) ? $_league['points_participation'] : null,
         'status' => $_league['status'],
       ));
       $league->save();
