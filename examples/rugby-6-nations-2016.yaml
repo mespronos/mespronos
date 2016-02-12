@@ -1,0 +1,52 @@
+league :
+  name : 'Tournois des VI nations'
+  sport : 'Rugby'
+  status : 'active'
+  classement : true
+  betting_type : 'winner'
+  days:
+    - number : 1
+      day_default_date : 2016-02-06t15:00:00
+      games :
+        - game : France | Italie
+          game_date : 2016-02-06t15:25:00
+        - game : Ecosse | Angleterre
+          game_date : 2016-02-06t17:50:00
+        - game : Irelande | Galles
+          game_date : 2016-02-07t15:00:00
+    - number : 2
+      day_default_date : 2016-02-13t15:25:00
+      games :
+        - game : France | Irelande
+          game_date : 2016-02-13t15:25:00
+        - game : Galles | Ecosse
+          game_date : 2016-02-13t17:50:00
+        - game : Italie | Angleterre
+          game_date : 2016-02-14t15:00:00
+    - number : 3
+      day_default_date : 2016-02-26t21:05:00
+      games :
+        - game : Galles | France
+          game_date : 2016-02-26t21:05:00
+        - game : Italie | Ecosse
+          game_date : 2016-02-27t15:25:00
+        - game : Angleterre | Irelande
+          game_date : 2016-02-27t17:50:00
+    - number : 4
+      day_default_date : 2016-03-12t14:30:00
+      games :
+        - game : Irelande | Italie
+          game_date : 2016-03-12t14:30:00
+        - game : Angleterre | Galles
+          game_date : 2016-03-12t17:30:00
+        - game : Ecosse | France
+          game_date : 2016-03-13t16:00:00
+    - number : 5
+      day_default_date : 2016-03-19t15:30:00
+      games :
+        - game : Galles | Italie
+          game_date : 2016-03-19t15:30:00
+        - game : Irelande | Ecosse
+          game_date : 2016-03-19t18:00:00
+        - game : France | Angleterre
+          game_date : 2016-03-19t20:00:00
