@@ -114,17 +114,16 @@ class RankingLeague extends Ranking {
     $query->condition('league', $league->id());
     $query->sort('position','ASC');
     $ids = $query->execute();
-
     $rankings = $storage->loadMultiple($ids);
     return $rankings;
   }
 
   /**
-   * @param \Drupal\Core\Session\AccountProxyInterface $better
+   * @param \Drupal\user\Entity\User $better
    * @param String $type
    * @return \Drupal\mespronos\Entity\RankingLeague
    */
-  public static function getRankingForBetter(\Drupal\Core\Session\AccountProxyInterface $better,$type=null) {
+  public static function getRankingForBetter(\Drupal\user\Entity\User $better,$type=null) {
     return parent::getRankingForBetter($better,'ranking_league');
   }
 

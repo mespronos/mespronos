@@ -9,6 +9,7 @@ namespace Drupal\mespronos\Tests;
 
 use Drupal\mespronos\Entity\RankingDay;
 use Drupal\mespronos\Controller\RankingController;
+use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\mespronos\Entity\RankingLeague;
 use Drupal\simpletest\WebTestBase;
 use Drupal\mespronos\Entity\Sport;
@@ -250,5 +251,15 @@ class MespronosRankingLeagueTest extends WebTestBase {
     RankingLeague::createRanking($this->league1);
     $ranking_league_1 = RankingLeague::getRankingForLeague($this->league1);
     $this->assertEqual(count($ranking_league_1),max(count($betsDay2),count($betsDay1)),t('League 1 : @nb betters, so ranking contains @nb lines',array('@nb'=>max(count($betsDay2),count($betsDay1)))));
+
+    $rankingBetter1 = RankingLeague::getRankingForBetter($this->better1);
+    $this->assertEqual($rankingBetter1->getGameBetted(),2,t('Better 1 has betted on two games'));
+    $this->assertEqual($rankingBetter1->getPoints(),20,t('Better 1 has 20 points'));
+    $this->assertEqual($rankingBetter1->getPosition(),1,t('Better 1 is first'));
+
+    $rankingBetter4 = RankingLeague::getRankingForBetter($this->better4);
+    $this->assertEqual($rankingBetter4->getGameBetted(),1,t('Better 1 has betted on two games'));
+    $this->assertEqual($rankingBetter4->getPoints(),10,t('Better 1 has 20 points'));
+    $this->assertEqual($rankingBetter4->getPosition(),4,t('Better 1 is first'));
   }
 }

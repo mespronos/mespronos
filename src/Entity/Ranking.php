@@ -41,14 +41,13 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
 
 
   /**
-   * @param \Drupal\Core\Session\AccountProxyInterface $better
+   * @param \Drupal\user\Entity\User $better
    * @return \Drupal\mespronos\Entity\RankingDay
    */
-  public static function getRankingForBetter(\Drupal\Core\Session\AccountProxyInterface $better,$type) {
+  public static function getRankingForBetter(\Drupal\user\Entity\User $better,$type) {
     $storage = \Drupal::entityManager()->getStorage($type);
     $query = \Drupal::entityQuery($type);
     $query->condition('better', $better->id());
-    $query->sort('position','ASC');
     $ids = $query->execute();
     $id = array_pop($ids);
     $rankings = $storage->load($id);
