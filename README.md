@@ -23,7 +23,7 @@ After this two months test I aim to release the **8.x-1.0 beta** that will be us
 The **8.x-1.0 Final** should be released during summer.
 
 ## Follow the development / Get in board
-Incoming features and status is visible on [Waffle](https://waffle.io/kgaut/mespronos).
+Incoming features and status is visible on [Waffle](https://waffle.io/mespronos/mespronos).
 
 ## Blog posts
 The module is also an "excuse" to try and play with Drupal 8, It's the main topic of a series of blog posts (in french) : 
