@@ -3,7 +3,6 @@ Mespronos
 
 [![Build Status](https://travis-ci.org/kgaut/mespronos.svg?branch=8.x-1.x)](https://travis-ci.org/kgaut/mespronos)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/kgaut/mespronos/badges/quality-score.png?b=8.x-1.x)](https://scrutinizer-ci.com/g/kgaut/mespronos/?branch=8.x-1.x)
-[![Join the chat at https://gitter.im/kgaut/mespronos](https://badges.gitter.im/kgaut/mespronos.svg)](https://gitter.im/kgaut/mespronos?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Stories in Ready](https://badge.waffle.io/mespronos/mespronos.svg?label=ready&title=Ready)](http://waffle.io/mespronos/mespronos)
 
 ## About
