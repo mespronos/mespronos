@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class DefaultController.
@@ -24,6 +25,9 @@ class UserController extends ControllerBase {
    *   Return Hello string.
    */
   public function join() {
+    if(\Drupal::currentUser()->id() > 0) {
+      return new RedirectResponse(\Drupal::url('<front>'));
+    }
     $registration_form = self::getRegistrationForm();
     return [
         '#theme' => 'join',
@@ -32,11 +36,17 @@ class UserController extends ControllerBase {
   }
 
   public function passwordReset() {
+    if(\Drupal::currentUser()->id() > 0) {
+      return new RedirectResponse(\Drupal::url('<front>'));
+    }
     $registration_form = self::getResetPasswordForm();
     return $registration_form;
   }
 
   public function login() {
+    if(\Drupal::currentUser()->id() > 0) {
+      return new RedirectResponse(\Drupal::url('<front>'));
+    }
     $login_form = self::getLoginForm();
     return $login_form;
   }
