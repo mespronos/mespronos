@@ -234,28 +234,15 @@ class BettingController extends ControllerBase {
 
   public static function getActionBetLink(Day $day,League $league,$user_uid) {
     if($user_uid == 0) {
-      if(\Drupal::moduleHandler()->moduleExists(('mespronos_registration'))) {
-        $action_links = Link::fromTextAndUrl(
-          t('Register or login and start betting'),
-          Url::fromRoute('mespronos_registration.join',[],[
-              'query' => [
-                'destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(),
-              ]
+      $action_links = Link::fromTextAndUrl(
+        t('Register or login and start betting'),
+        Url::fromRoute('mespronos.join',[],[
+            'query' => [
+              'destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(),
             ]
-          )
-        );
-      }
-      else {
-        $action_links = Link::fromTextAndUrl(
-          t('Register or login and start betting'),
-          Url::fromRoute('user.register',[],[
-              'query' => [
-                'destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(),
-              ]
-            ]
-          )
-        );
-      }
+          ]
+        )
+      );
     }
     else {
       $action_links = Link::fromTextAndUrl(
