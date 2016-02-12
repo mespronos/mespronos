@@ -61,6 +61,12 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     'winner' => '1N2',
   ];
 
+  protected static $points_default = [
+    'points_score_found' => 10,
+    'points_winner_found' => 5,
+    'points_participation' => 1,
+  ];
+
   public static $status_default_value = 'active';
   public static $betting_type_default_value = 'score';
 
@@ -133,6 +139,14 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     }
     if(!isset($values['name']) || empty(trim($values['name']))) {
       throw new \Exception(t('The league\'s name should be set'));
+    }
+    foreach(self::$points_default as $type => $points) {
+      if(!isset($values[$type]) || empty(trim($values[$type]))) {
+        $values[$type] = $points;
+      }
+    }
+    if($values['betting_type'] == 'winner') {
+      $values['points_score_found'] = $values['points_winner_found'];
     }
     return parent::create($values);
   }
@@ -303,7 +317,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     $fields['points_score_found'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Points when the game\'s score is found'))
       ->setRequired(true)
-      ->setDefaultValue(10)
+      ->setDefaultValue(self::$points_default['points_score_found'])
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array('type' => 'hidden'))
       ->setDisplayOptions('form', array('type' => 'number'))
@@ -313,7 +327,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     $fields['points_winner_found'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Points when the game\'s winner is found'))
       ->setRequired(true)
-      ->setDefaultValue(5)
+      ->setDefaultValue(self::$points_default['points_winner_found'])
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array('type' => 'hidden'))
       ->setDisplayOptions('form', array('type' => 'number'))
@@ -323,7 +337,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     $fields['points_participation'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Points when nothing is right.'))
       ->setRequired(true)
-      ->setDefaultValue(1)
+      ->setDefaultValue(self::$points_default['points_participation'])
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array('type' => 'hidden'))
       ->setDisplayOptions('form', array('type' => 'number'))
