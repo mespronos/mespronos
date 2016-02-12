@@ -5,7 +5,7 @@
  * Contains \Drupal\mespronos_registration\Controller\DefaultController.
  */
 
-namespace Drupal\mespronos_registration\Controller;
+namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 
@@ -14,7 +14,7 @@ use Drupal\Core\Controller\ControllerBase;
  *
  * @package Drupal\mespronos_registration\Controller
  */
-class DefaultController extends ControllerBase {
+class UserController extends ControllerBase {
   /**
    * Join.
    *
@@ -26,7 +26,6 @@ class DefaultController extends ControllerBase {
     $registration_form = self::getRegistrationForm();
     return [
         '#theme' => 'join',
-        '#test_var' => 'looool',
         '#login_form' => render($login_form),
         '#registration_form' => render($registration_form),
     ];

@@ -1,7 +1,0 @@
-mespronos_registration.join:
-  path: 'join'
-  defaults:
-    _controller: '\Drupal\mespronos_registration\Controller\DefaultController::join'
-    _title: 'join'
-  requirements:
-    _permission: 'access content'

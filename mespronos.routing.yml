@@ -79,6 +79,14 @@ mespronos.lastbetsdetailsforuser:
   requirements:
     _permission: 'view others last bets'
 
+mespronos.join:
+  path: 'join'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\UserController::join'
+    _title: 'join'
+  requirements:
+    _permission: 'access content'
+
 # Team routing definition
 entity.team.canonical:
   path: '/admin/mespronos/team/{team}'

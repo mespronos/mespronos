@@ -1,7 +1,0 @@
-name: Mespronos Registration
-type: module
-description: Registration tweaking for MesPronos
-core: 8.x
-package: MesPronos
-dependencies:
-  - mespronos

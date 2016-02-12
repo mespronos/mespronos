@@ -5,7 +5,7 @@
  * Contains \Drupal\mespronos_registration\Form\MespronosLoginForm.
  */
 
-namespace Drupal\mespronos_registration\Form;
+namespace Drupal\mespronos\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;

@@ -16,3 +16,15 @@ function mespronos_preprocess_page(&$variables) {
     $variables['#attached']['library'][] = 'mespronos/front-style';
   }
 }
+
+function mespronos_theme() {
+  $theme = [];
+  $theme['join'] = array(
+    'variables' => array(
+      'login_form' => NULL,
+      'registration_form' => NULL,
+    ),
+  );
+
+  return $theme;
+}
