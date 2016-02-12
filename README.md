@@ -1,7 +1,7 @@
 Mespronos
 =========
 
-[![Build Status](https://travis-ci.org/kgaut/mespronos.svg?branch=8.x-1.x)](https://travis-ci.org/kgaut/mespronos)
+[![Build Status](https://travis-ci.org/mespronos/mespronos.svg?branch=8.x-1.x)](https://travis-ci.org/mespronos/mespronos)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mespronos/mespronos/badges/quality-score.png?b=8.x-1.x)](https://scrutinizer-ci.com/g/mespronos/mespronos/?branch=8.x-1.x)
 [![Stories in Ready](https://badge.waffle.io/mespronos/mespronos.svg?label=ready&title=Ready)](http://waffle.io/mespronos/mespronos)
 
