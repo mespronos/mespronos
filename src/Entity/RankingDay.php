@@ -126,11 +126,13 @@ class RankingDay extends Ranking {
 
   /**
    * @param \Drupal\user\Entity\User $better
-   * @param String $type
+   * @param \Drupal\mespronos\Entity\Day $day
+   * @param String $entity_name
+   * @param String $storage_name
    * @return \Drupal\mespronos\Entity\RankingDay
    */
-  public static function getRankingForBetter(\Drupal\user\Entity\User $better,$type=null) {
-    return parent::getRankingForBetter($better,'ranking_day');
+  public static function getRankingForBetter(\Drupal\user\Entity\User $better,$day = null,$entity_name='day',$storage_name='ranking_day') {
+    return parent::getRankingForBetter($better,$day,$entity_name,$storage_name);
   }
 
   /**
