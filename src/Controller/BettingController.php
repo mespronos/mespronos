@@ -178,13 +178,6 @@ class BettingController extends ControllerBase {
         'tags' => [ 'user:'.$user_uid,'lastbets'],
       ],
     ];
-
-
-    $renderable_array['#cache']['contexts'][] = 'user';
-    $renderable_array['#cache']['tags'][] = 'user:'.\Drupal::currentUser()->id();
-    $renderable_array['#cache']['tags'][] = 'lastbets';
-    $renderable_array['#cache']['tags'][] = 'lastbets';
-
   }
 
   public function bet($day) {
