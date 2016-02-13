@@ -62,6 +62,7 @@ class ImporterController extends ControllerBase {
         $games[] = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
       }
     }
+    Cache::invalidateTags(array('nextbets'));
     return [
       '#markup' => t('@nb games created / updated',array('@nb' => count($games)))
     ];
