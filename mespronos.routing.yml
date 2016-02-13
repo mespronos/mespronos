@@ -79,14 +79,6 @@ mespronos.lastbetsdetailsforuser:
   requirements:
     _permission: 'view others last bets'
 
-mespronos.join:
-  path: 'join'
-  defaults:
-    _entity_form: 'user.register'
-    _title: 'Join !'
-  requirements:
-    _access_user_register: 'TRUE'
-
 mespronos.password-reset:
   path: 'reset-password'
   defaults:

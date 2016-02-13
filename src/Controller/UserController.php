@@ -18,22 +18,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  * @package Drupal\mespronos_registration\Controller
  */
 class UserController extends ControllerBase {
-  /**
-   * Join.
-   *
-   * @return string
-   *   Return Hello string.
-   */
-  public function join() {
-    if(\Drupal::currentUser()->id() > 0) {
-      return new RedirectResponse(\Drupal::url('<front>'));
-    }
-    $registration_form = self::getRegistrationForm();
-    return [
-        '#theme' => 'join',
-        '#registration_form' => render($registration_form),
-    ];
-  }
 
   public function passwordReset() {
     if(\Drupal::currentUser()->id() > 0) {
@@ -66,7 +50,7 @@ class UserController extends ControllerBase {
     $login_form['pass']['#description'] = '';
     $login_form['no_account'] = [
       '#markup' => '<p>'.Link::fromTextAndUrl(
-          t('No account ? Register now !'),Url::fromRoute('mespronos.join',[])
+          t('No account ? Register now !'),Url::fromRoute('user.register',[])
         )->toString().'</p>',
       '#weight' => 100,
     ];

@@ -18,11 +18,6 @@ function mespronos_preprocess_page(&$variables) {
 
 function mespronos_theme() {
   $theme = [];
-  $theme['join'] = array(
-    'variables' => array(
-      'registration_form' => NULL,
-    ),
-  );
   $theme['user-block'] = array(
     'template' => 'user_block',
     'variables' => array(
