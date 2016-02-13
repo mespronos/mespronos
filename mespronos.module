@@ -5,8 +5,7 @@
  * Contains mespronos.module.
  */
 
-use Drupal\Core\Routing\RouteMatchInterface;
-use Drupal\mespronos\Entity\Controller\BetController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 function mespronos_preprocess_page(&$variables) {
   if($variables['is_admin']) {
@@ -55,11 +54,6 @@ function mespronos_form_user_register_form_alter(&$form, \Drupal\Core\Form\FormS
 function mespronos_user_login($account) {
   $destination = \Drupal::destination()->getAsArray();
   if(isset($destination['destination'])) {
-    $response = new Symfony\Component\HttpFoundation\RedirectResponse($destination['destination']);
+    return new RedirectResponse($destination['destination']);
   }
-  else {
-    $response = new Symfony\Component\HttpFoundation\RedirectResponse('/');
-  }
-  $response->send();
-  return;
 }
