@@ -71,7 +71,19 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public function labelBet() {
-    return t('@t1 - @t2',array('@t1'=> $this->get('score_team_1')->value,'@t2'=> $this->get('score_team_2')->value));
+    $game = $this->getGame(true);
+    $day = $game->getDay();
+    $league = $day->getLeague();
+    if($league->getBettingType(true) == 'score') {
+      return t('@t1 - @t2',array('@t1'=> $this->getScoreTeam1(),'@t2'=> $this->getScoreTeam2()->value));
+    }
+    else {
+      switch($this->getScoreTeam1() - $this->getScoreTeam2()) {
+        case 0 : return t('Draw');
+        case 1 : return $game->getTeam1()->label();
+        case -1 : return $game->getTeam2()->label();
+      }
+    }
   }
 
   public function setOwnerId($uid) {
@@ -94,8 +106,7 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
   public function getGame($asEntity = false) {
     $game =  $this->get('game')->target_id;
     if($asEntity) {
-      $game_storage = \Drupal::entityManager()->getStorage('game');
-      $game = $game_storage->load($game);
+      $game = Game::load($game);
     }
     return $game;
   }
