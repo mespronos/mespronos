@@ -9,6 +9,9 @@ use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\RankingDay;
 use Drupal\Core\Cache\Cache;
+use Drupal\mespronos\Entity\RankingLeague;
+use Drupal\mespronos\Entity\RankingGeneral;
+
 /**
  * Implements an example form.
  */
@@ -86,10 +89,15 @@ class GamesMarks extends FormBase {
       }
     }
     drupal_set_message($this->t('@nb_mark games updated',array('@nb_mark'=>$i)));
+    dpm($days_to_update);
+    $i = 0;
     foreach($days_to_update as $day_id) {
       $i++;
       $day = Day::load($day_id);
+      kint($day->getLeague());
       RankingDay::createRanking($day);
+      RankingLeague::createRanking($day->getLeague());
+      RankingGeneral::createRanking();
       drupal_set_message($this->t('Ranking updated for @nb_ranking days',array('@nb_ranking'=>$i)));
     }
     Cache::invalidateTags(array('nextbets'));

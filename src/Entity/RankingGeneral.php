@@ -58,12 +58,12 @@ class RankingGeneral extends Ranking {
     $query = $injected_database->select('mespronos__ranking_league','rl');
     $query->addField('rl','better');
     $query->addExpression('sum(rl.points)','points');
-    $query->addExpression('count(rl.id)','nb_bet');
+    $query->addExpression('sum(rl.games_betted)','nb_bet');
     $query->join('mespronos__league','l','l.id = rl.league');
-    $query->groupBy('rd.better');
+    $query->groupBy('rl.better');
     $query->orderBy('points','DESC');
     $query->orderBy('nb_bet','DESC');
-    $query->condition('l.status',array('active','over'));
+    $query->condition('l.status',array('active','over'),'IN');
     $results = $query->execute()->fetchAllAssoc('better');
 
     return $results;

@@ -62,7 +62,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
    * @return \Drupal\mespronos\Entity\League
    */
   public function getLeague() {
-    $league = entity_load('league', $this->get('league')->target_id);
+    $league = League::load($this->get('league')->target_id);
     return $league;
   }
 

@@ -77,7 +77,7 @@ class RankingLeague extends Ranking {
     $query = $injected_database->select('mespronos__ranking_day','rd');
     $query->addField('rd','better');
     $query->addExpression('sum(rd.points)','points');
-    $query->addExpression('count(rd.id)','nb_bet');
+    $query->addExpression('sum(rd.games_betted)','nb_bet');
     $query->join('mespronos__day','d','d.id = rd.day');
     $query->groupBy('rd.better');
     $query->orderBy('points','DESC');

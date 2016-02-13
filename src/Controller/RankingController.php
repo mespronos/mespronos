@@ -3,7 +3,10 @@ namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Entity\RankingDay;
+use Drupal\mespronos\Entity\RankingLeague;
+use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\mespronos\Entity\Day;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class DefaultController.
@@ -12,10 +15,16 @@ use Drupal\mespronos\Entity\Day;
  */
 class RankingController extends ControllerBase {
 
+  /**
+   * @param \Drupal\mespronos\Entity\Day $day
+   * @return \Drupal\mespronos\Controller\RedirectResponse
+   */
   public static function recalculateDay($day) {
     $day_storage = \Drupal::entityManager()->getStorage('day');
     $day = $day_storage->load($day);
     $nb_updates = RankingDay::createRanking($day);
+    RankingLeague::createRanking($day->getLeague());
+    RankingGeneral::createRanking();
     drupal_set_message(t('Ranking updated for @nb betters',array('@nb'=>$nb_updates)));
     return new RedirectResponse(\Drupal::url('entity.day.list'));
   }
