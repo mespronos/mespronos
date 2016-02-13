@@ -258,28 +258,4 @@ class BettingController extends ControllerBase {
     $tableRanking = render($tableRanking);
     return ['#markup'=>$table.$tableRanking];
   }
-
-  public static function getActionBetLink(Day $day,League $league,$user_uid) {
-    if($user_uid == 0) {
-      $action_links = Link::fromTextAndUrl(
-        t('Log in and start betting'),
-        Url::fromRoute('mespronos.login',[],[
-            'query' => [
-              'destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(),
-            ]
-          ]
-        )
-      );
-    }
-    else {
-      $action_links = Link::fromTextAndUrl(
-        t('Bet !'),
-        new Url('mespronos.day.bet', array('day' => $day->id()))
-      );
-    }
-    return $action_links;
-  }
-
-
-
 }
