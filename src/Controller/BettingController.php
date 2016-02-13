@@ -47,18 +47,32 @@ class BettingController extends ControllerBase {
       $now_date = new \DateTime();
       
       $i = $game_date->diff($now_date);
-      $action_links = self::getActionBetLink($day->entity,$league,$user_uid);
       $bets_done = BetController::betsDone($user,$day->entity);
+      $bets_left = $day->nb_game - $bets_done;
+      if($bets_left > $day->nb_game_left ){
+        $bets_left = $day->nb_game_left;
+      }
       $row = [
         $league->label(),
         $day->entity->label(),
         $day->nb_game,
-        $day->nb_game_left,
-        $bets_done,
-
+        $bets_left,
         $i->format('%a') >0 ? $this->t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : $this->t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
-        $action_links,
       ];
+      if($user_uid>0) {
+        if($bets_left > 0) {
+          $row[] = Link::fromTextAndUrl(t('Bet !'),new Url('mespronos.day.bet', ['day' => $day_id]));
+        }
+        else {
+          $row[] = Link::fromTextAndUrl(t('Edit'),new Url('mespronos.day.bet', ['day' => $day_id]));
+        }
+      }
+      else {
+        $row[] = Link::fromTextAndUrl(
+          t('Log in and bet'),
+          Url::fromRoute('mespronos.login',[],['query' => ['destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day_id])->toString()]])
+        );
+      }
       $rows[] = $row;
     }
     if($asBlock) {
@@ -81,8 +95,7 @@ class BettingController extends ControllerBase {
       $this->t('League',array(),array('context'=>'mespronos')),
       $this->t('Day',array(),array('context'=>'mespronos')),
       $this->t('Games',array(),array('context'=>'mespronos')),
-      $this->t('Games to play',array(),array('context'=>'mespronos')),
-      $this->t('Bets done',array(),array('context'=>'mespronos')),
+      $this->t('Bets left',array(),array('context'=>'mespronos')),
       $this->t('Time left',array(),array('context'=>'mespronos')),
       '',
     ];

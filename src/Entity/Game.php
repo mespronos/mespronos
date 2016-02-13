@@ -94,7 +94,8 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public function isPassed() {
-    $game_date = new \DateTime($this->getGameDate());
+    $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$this->getGameDate(),new \DateTimeZone("GMT"));
+    $game_date->setTimezone(new \DateTimeZone("Europe/Paris"));
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
     return($game_date<$now);
   }
