@@ -43,17 +43,6 @@ class GamesBetting extends FormBase {
     $form['infos']['day'] = [
       '#markup' => '<h3>'.$day->label().'</h3>',
     ];
-    $points = $league->getPoints();
-    $form['infos']['points'] = [
-      '#markup' => '<h4>'.t('Points :').'</h4>'.
-        '<ul>'.
-          '<li>'.t('Exact score found : @nb points',array('@nb'=>$points['points_score_found'])).'</li>'.
-          '<li>'.t('Winner found : @nb points',array('@nb'=>$points['points_winner_found'])).'</li>'.
-          '<li>'.t('Nothing found : @nb points',array('@nb'=>$points['points_participation'])).'</li>'.
-        '</ul>'
-      ,
-    ];
-
 
     $form['games'] = array(
       '#type' => 'container',

@@ -26,6 +26,13 @@ function mespronos_theme() {
       'links' => NULL,
     ),
   );
+  $theme['block-bet-informations'] = array(
+    'template' => 'block_bet_informations',
+    'variables' => array(
+      'day' => NULL,
+      'league' => NULL,
+    ),
+  );
 
   return $theme;
 }
