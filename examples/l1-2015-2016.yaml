@@ -5,27 +5,28 @@ league :
   classement : true
   betting_type : 'score'
   days:
-    - number : 1
-      day_default_date : 2015-08-07t20:30:00
+    - number : 26
+      day_default_date : 2016-02-12t20:30:00
       games :
-        - game : LOSC | Paris Saint-Germain
-          game_date : 2015-08-07t20:30:00
-        - game : Olympique de Marseille | SM Caen
-          game_date : 2015-08-08t21:00:00
-        - game : Montpellier Hérault SC | Angers SCO
-          game_date : 2015-08-08t21:00:00
-        - game : OGC Nice | AS Monaco
-          game_date : 2015-08-08t21:00:00
-        - game : FC Nantes | EA Guingamp
-          game_date : 2015-08-08t21:00:00
-        - game : SC Bastia | Stade Rennais FC
-          game_date : 2015-08-08t21:00:00
-        - game : ESTAC Troyes | GFC Ajaccio
-          game_date : 2015-08-08t21:00:00
-        - game : Girondins de Bordeaux | Stade de Reims
-          game_date : 2015-08-09t17:00:00
-        - game : Toulouse FC | AS Saint-Etienne
-          game_date : 2015-08-09t17:00:00
-        - game : Olympique Lyonnais | FC Lorient
-          game_date : 2015-08-09t21:00:00
+        - game : Rennes | Angers
+          mark : 1 | 0
+          game_date : 2016-02-12t20:30:00
+        - game : Paris-SG | Lille
+          game_date : 2016-02-13t17:00:00
+        - game : Nantes | Lorient
+          game_date : 2016-02-13t20:00:00
+        - game : Guingamp | Bordeaux
+          game_date : 2016-02-13t20:00:00
+        - game : Reims | Bastia
+          game_date : 2016-02-13t20:00:00
+        - game : GFC Ajaccio | Troyes
+          game_date : 2016-02-13t20:00:00
+        - game : Montpellier | Toulouse
+          game_date : 2016-02-13t20:00:00
+        - game : Lyon | Caen
+          game_date : 2016-02-14t14:00:00
+        - game : Saint-Étienne | Monaco
+          game_date : 2016-02-14t17:00:00
+        - game : Nice | Marseille
+          game_date : 2016-02-14t21:00:00
 
