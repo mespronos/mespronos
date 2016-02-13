@@ -61,10 +61,16 @@ class BettingController extends ControllerBase {
       ];
       if($user_uid>0) {
         if($bets_left > 0) {
-          $row[] = Link::fromTextAndUrl(t('Bet !'),new Url('mespronos.day.bet', ['day' => $day_id]));
+          $row[] = Link::fromTextAndUrl(
+            t('Bet !'),
+            new Url('mespronos.day.bet', ['day' => $day_id],['query' => ['destination' => \Drupal::service('path.current')->getPath()]])
+          );
         }
         else {
-          $row[] = Link::fromTextAndUrl(t('Edit'),new Url('mespronos.day.bet', ['day' => $day_id]));
+          $row[] = Link::fromTextAndUrl(
+            t('Edit'),
+            new Url('mespronos.day.bet', ['day' => $day_id],['query' => ['destination' => \Drupal::service('path.current')->getPath()]])
+          );
         }
       }
       else {
