@@ -252,6 +252,12 @@ class BettingController extends ControllerBase {
 
     $tableRanking = RankingController::getRankingTableForDay($day);
     $tableRanking = render($tableRanking);
-    return ['#markup'=>$table.$tableRanking];
+    return [
+      '#markup'=>$table.$tableRanking,
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => [ 'user:'.$user->id(),'lastbets'],
+      ],
+    ];
   }
 }

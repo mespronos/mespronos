@@ -99,5 +99,6 @@ class GamesMarks extends FormBase {
       drupal_set_message($this->t('Ranking updated for @nb_ranking days',array('@nb_ranking'=>$i)));
     }
     Cache::invalidateTags(array('nextbets'));
+    Cache::invalidateTags(array('lastbets'));
   }
 }
