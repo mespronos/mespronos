@@ -134,6 +134,29 @@ class BetController {
   public static function betsDone(\Drupal\Core\Session\AccountProxy $user,Day $day) {
     return self::getInfos('bets',$user,$day);
   }
+  public static function betsLeft(\Drupal\Core\Session\AccountProxy $user,Day $day) {
+    $now_date = new \DateTime();
+    $now_date->setTimezone(new \DateTimeZone("GMT"));
+
+    $injected_database = Database::getConnection();
+
+    $subquery = $injected_database->select('mespronos__bet','b');
+    $subquery->leftJoin('mespronos__game','g','b.game = g.id');
+    $subquery->fields('g',['id']);
+    $subquery->condition('g.day',$day->id());
+    $subquery->condition('b.better',$user->id());
+    //$results = $subquery->execute()->fetchAllKeyed(0,0);
+
+
+    $query = $injected_database->select('mespronos__game','g');
+    $query->addExpression('count(g.id)','nb_bet_left');
+    $query->condition('g.day',$day->id());
+    $query->condition('g.game_date',$now_date->format('Y-m-d\TH:i:s'),'>');
+    $query->condition('g.id', $subquery, 'NOT IN');
+
+    $results = $query->execute()->fetchAssoc();
+    return $results['nb_bet_left'];
+  }
 
   public static function pointsWon(\Drupal\Core\Session\AccountProxy $user,Day $day) {
     return self::getInfos('points',$user,$day);

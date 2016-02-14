@@ -47,11 +47,8 @@ class BettingController extends ControllerBase {
       $now_date = new \DateTime();
       
       $i = $game_date->diff($now_date);
-      $bets_done = BetController::betsDone($user,$day->entity);
-      $bets_left = $day->nb_game - $bets_done;
-      if($bets_left > $day->nb_game_left ){
-        $bets_left = $day->nb_game_left;
-      }
+      $bets_left = BetController::betsLeft($user,$day->entity);
+
       $row = [
         $league->label(),
         $day->entity->label(),
