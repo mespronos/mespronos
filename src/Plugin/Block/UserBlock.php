@@ -41,6 +41,10 @@ class UserBlock extends BlockBase {
         'myaccount' => Link::fromTextAndUrl(t('My account'),Url::fromRoute('user.page',[]))
       ],
       '#user_picture' => $user_picture,
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => [ 'user:'.$user->id(),'user_block'],
+      ],
     ];
   }
 
