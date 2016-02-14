@@ -1,11 +1,22 @@
 {
-    "name": "mespronos/mespronos",
-    "description": " Betting module build on Drupal 8",
-    "require": {
-    	"composer/installers": "~1.0"
-    },
-    "extra": {
-        "installer-name": "mespronos"
-    },
-    "type":"drupal-module"
+  "name": "mespronos/mespronos",
+  "description": " Betting module build on Drupal 8",
+  "keywords": ["mespronos","drupal8","drupal"],
+  "license": "GNU GPL V2",
+  "homepage": "https://mespronos.net",
+  "authors": [
+    {
+      "name": "Kevin Gautreau",
+      "email": "contact@mespronos.net",
+      "homepage": "https://kgaut.net",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "composer/installers": "~1.0"
+  },
+  "extra": {
+    "installer-name": "mespronos"
+  },
+  "type":"drupal-module"
 }
