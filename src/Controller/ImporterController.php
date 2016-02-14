@@ -16,7 +16,10 @@ use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Team;
 use Drupal\mespronos\Entity\Game;
 use Drupal\file\Entity\File;
+use Drupal\mespronos\Entity\RankingDay;
 use Drupal\Core\Cache\Cache;
+use Drupal\mespronos\Entity\RankingLeague;
+use Drupal\mespronos\Entity\RankingGeneral;
 
 /**
  * Class ImporterController.
@@ -24,6 +27,8 @@ use Drupal\Core\Cache\Cache;
  * @package Drupal\mespronos\Controller
  */
 class ImporterController extends ControllerBase {
+
+  public static $days_need_ranking_update = [];
   /**
    * Index.
    *
@@ -63,9 +68,22 @@ class ImporterController extends ControllerBase {
         $games[] = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
       }
     }
+    $i = 0;
+    $messages = [];
+    foreach(self::$days_need_ranking_update as $day_id) {
+      $i++;
+      $day = Day::load($day_id);
+      RankingDay::createRanking($day);
+      RankingLeague::createRanking($day->getLeague());
+      RankingGeneral::createRanking();
+      $messages[] = t('Ranking updated for @nb_ranking days',array('@nb_ranking'=>$i));
+    }
     Cache::invalidateTags(array('nextbets'));
+    Cache::invalidateTags(array('lastbets'));
+
+    $messages[] =  t('@nb games created / updated',array('@nb' => count($games)));
     return [
-      '#markup' => t('@nb games created / updated',array('@nb' => count($games)))
+      '#markup' => implode('<br />',$messages)
     ];
   }
 
@@ -154,28 +172,30 @@ class ImporterController extends ControllerBase {
       $score_team_1 = trim(array_shift($mark));
       $score_team_2 = trim(array_shift($mark));
     }
-    else {
-      $score_team_1 = $score_team_2 = null;
-    }
     if(count($id) == 0) {
       $game = Game::create(array(
         'team_1' => $team_1->id(),
         'team_2' => $team_2->id(),
-        'score_team_1' => $score_team_1,
-        'score_team_2' => $score_team_2,
         'day' => $day->id(),
         'game_date' => $date,
       ));
+      if(isset($score_team_1) && isset($score_team_2)) {
+        $game->setScore($score_team_1,$score_team_2);
+      }
       $game->save();
       drupal_set_message(t('The game @team1 - @team2 has been created',array('@team1'=> $team_1->get('name')->value,'@team2'=> $team_2->get('name')->value)));
     }
     else {
-      $game = entity_load('game', array_pop($id));
-      if($game->get('score_team_1') != $score_team_1) {
-        $game->set('score_team_1',$score_team_1);
-      }
-      if($game->get('score_team_2') != $score_team_2) {
-        $game->set('score_team_2',$score_team_2);
+      $game = Game::load(array_pop($id));
+      if(isset($score_team_1) && isset($score_team_2)) {
+        if($game->get('score_team_1') != $score_team_1) {
+          self::$days_need_ranking_update[$day->id()] = $day->id();
+          $game->set('score_team_1',$score_team_1);
+        }
+        if($game->get('score_team_2') != $score_team_2) {
+          self::$days_need_ranking_update[$day->id()] = $day->id();
+          $game->set('score_team_2',$score_team_2);
+        }
       }
       if($game->get('game_date')->value != $date) {
         $game->set('game_date',$date);
