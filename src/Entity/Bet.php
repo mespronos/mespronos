@@ -75,7 +75,7 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
     $day = $game->getDay();
     $league = $day->getLeague();
     if($league->getBettingType(true) == 'score') {
-      return t('@t1 - @t2',array('@t1'=> $this->getScoreTeam1(),'@t2'=> $this->getScoreTeam2()->value));
+      return t('@t1 - @t2',array('@t1'=> $this->getScoreTeam1(),'@t2'=> $this->getScoreTeam2()));
     }
     else {
       switch($this->getScoreTeam1() - $this->getScoreTeam2()) {
