@@ -106,7 +106,6 @@ class BetController {
   }
 
   public static function nextbets(League $league=null) {
-    kint($league);
     return ['#markup'=>'loool'];
   }
 
