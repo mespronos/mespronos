@@ -201,8 +201,7 @@ class BettingController extends ControllerBase {
 
   public function bet($day) {
     $user = \Drupal::currentUser();
-    $day_storage = \Drupal::entityManager()->getStorage('day');
-    $day = $day_storage->load($day);
+    $day = Day::load($day);
     if($day === NULL) {
       drupal_set_message($this->t('This day doesn\'t exist.'),'error');
       throw new AccessDeniedHttpException();
