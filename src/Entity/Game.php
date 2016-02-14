@@ -105,6 +105,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     $query = \Drupal::entityQuery('game');
     $query->condition('day',$day->id());
     $query->sort('game_date','ASC');
+    $query->sort('id','ASC');
     $ids = $query->execute();
     $return = [
       'ids' => $ids,
