@@ -1,0 +1,26 @@
+uuid: b47c4103-c9be-4195-8a29-41c56995c72e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - mespronos
+    - system
+  theme:
+    - bartik
+id: generalrankingblock
+theme: bartik
+region: content
+weight: -3
+provider: null
+plugin: ranking_general_block
+settings:
+  id: ranking_general_block
+  label: 'General Ranking Block'
+  provider: mespronos
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }
