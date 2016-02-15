@@ -1,17 +1,59 @@
 form#games-betting {
-  fieldset {
+  fieldset.game {
     legend {
       text-align: center
     }
     clear: both;
-    div.form-item {
-      label {
-        display: block;
-        float: none;
+    .fieldset-wrapper {
+      display: flex;
+      justify-content : center;
+      .score_team_wrapper {
+        width : 100%;
+        margin :0  5px;
+        div.form-item {
+          width : 100%;
+          display: flex;
+          justify-content : flex-end;
+
+          label {
+            margin :0 5px;
+            position: relative;
+            top : 6px;
+          }
+        }
+        &.score_team_2_wrapper {
+          div.form-item {
+            flex-direction: row-reverse;
+            justify-content : flex-end;
+          }
+        }
       }
-      float: left;
-      width: 50%;
-      text-align: center;
+      .game_wrapper_winner {
+        width : 100%;
+        &>div.form-radios {
+          display: flex;
+          width : 100%;
+          justify-content : space-around;
+          div.form-type-radio {
+            width : 30%;
+            margin :0 10px;
+            label {
+              display: block;
+              text-align: center;
+              margin: 0 auto;
+            }
+            input {
+              display: block;
+              text-align: center;
+              margin: 0 auto;
+              &:checked+label{
+                font-weight: bold;
+              }
+
+            }
+          }
+        }
+      }
     }
   }
 }

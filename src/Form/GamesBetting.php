@@ -75,18 +75,22 @@ class GamesBetting extends FormBase {
           '#size' => '5',
           '#default_value' => $bet->getScoreTeam1(),
           '#title' => $game->get('team_1')->entity->label(),
-          '#attributes' => array(
-            'class' => array('team_1')
-          )
+          '#attributes' => [
+            'class' => ['team_1']
+          ],
+          '#prefix' => '<div class="score_team_wrapper score_team_1_wrapper">',
+          '#suffix' => '</div>',
         );
         $form['games'][$game->id()]['score_team_2'] = array(
           '#type' => 'textfield',
           '#size' => '5',
           '#default_value' => $bet->getScoreTeam2(),
           '#title' => $game->get('team_2')->entity->label(),
-          '#attributes' => array(
-            'class' => array('team_2')
-          )
+          '#attributes' => [
+            'class' => ['team_2']
+          ],
+          '#prefix' => '<div class="score_team_wrapper score_team_2_wrapper">',
+          '#suffix' => '</div>',
         );
       }
       else {
@@ -96,7 +100,9 @@ class GamesBetting extends FormBase {
             '1' => $game->get('team_1')->entity->label(),
             'N' => t('Draw'),
             '2' => $game->get('team_2')->entity->label(),
-          ]
+          ],
+          '#prefix' => '<div class="game_wrapper_winner">',
+          '#suffix' => '</div>',
         ];
         if(!is_null($bet->getScoreTeam1()) && !is_null($bet->getScoreTeam2())) {
           if($bet->getScoreTeam1() == $bet->getScoreTeam2()) {
