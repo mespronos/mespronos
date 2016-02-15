@@ -1,1 +1,8 @@
 @import "front/components/form_bet";
+@import "front/components/ranking";
+
+table {
+  tr.highlighted {
+    font-weight:bold;
+  }
+}
