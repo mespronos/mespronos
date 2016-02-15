@@ -11,9 +11,7 @@ function mespronos_preprocess_page(&$variables) {
   if($variables['is_admin']) {
     $variables['#attached']['library'][] = 'mespronos/administration-style';
   }
-  if($variables['is_front']) {
-    $variables['#attached']['library'][] = 'mespronos/front-style';
-  }
+  $variables['#attached']['library'][] = 'mespronos/front-style';
 }
 
 function mespronos_theme() {
