@@ -9,7 +9,6 @@ namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\mespronos\Controller\RankingController;
-use Drupal\mespronos\Entity\RankingGeneral;
 
 /**
  * Provides a 'RankingGeneralBlock' block.
@@ -26,7 +25,6 @@ class RankingGeneralBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $build = [];
     $build = [
       'table' => RankingController::getRankingGeneral(),
       '#cache' => [
