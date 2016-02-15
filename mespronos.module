@@ -51,6 +51,14 @@ function mespronos_form_user_register_form_alter(&$form, \Drupal\Core\Form\FormS
 }
 
 
+function mespronos_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['#submit'][] = 'mespronos_form_user_login_form_submit';
+}
+
+function mespronos_form_user_login_form_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $form_state->setRedirect('<front>');
+}
+
 function mespronos_user_login($account) {
   $destination = \Drupal::destination()->getAsArray();
   if(isset($destination['destination'])) {
