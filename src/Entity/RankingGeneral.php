@@ -83,6 +83,13 @@ class RankingGeneral extends Ranking {
   }
 
   /**
+   * @return \Drupal\mespronos\Entity\RankingGeneral
+   */
+  public static function getRanking($entity = null,$entity_name='general',$storage_name='ranking_general') {
+    return parent::getRanking(null,$entity_name,$storage_name);
+  }
+
+  /**
    * @param Drupal\user\Entity\User
    * @param String $type
    * @return \Drupal\mespronos\Entity\RankingGeneral

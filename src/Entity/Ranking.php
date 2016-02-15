@@ -39,6 +39,18 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
     return $this->get('position')->value;
   }
 
+  public static function getRanking($entity = null,$entity_name=null,$storage_name) {
+    $storage = \Drupal::entityManager()->getStorage($storage_name);
+    $query = \Drupal::entityQuery($storage_name);
+    if(!is_null($entity_name) && !is_null($entity)) {
+      $query->condition($entity_name, $entity->id());
+    }
+    $query->sort('position','ASC');
+    $ids = $query->execute();
+
+    $rankings = $storage->loadMultiple($ids);
+    return $rankings;
+  }
 
   /**
    * @param \Drupal\user\Entity\User $better
