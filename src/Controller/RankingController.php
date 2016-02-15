@@ -7,6 +7,7 @@ use Drupal\mespronos\Entity\RankingLeague;
 use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\mespronos\Entity\Day;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Class DefaultController.
@@ -26,6 +27,7 @@ class RankingController extends ControllerBase {
     RankingLeague::createRanking($day->getLeague());
     RankingGeneral::createRanking();
     drupal_set_message(t('Ranking updated for @nb betters',array('@nb'=>$nb_updates)));
+    Cache::invalidateTags(array('ranking'));
     return new RedirectResponse(\Drupal::url('entity.day.list'));
   }
 

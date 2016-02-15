@@ -76,6 +76,7 @@ class ImporterController extends ControllerBase {
       RankingDay::createRanking($day);
       RankingLeague::createRanking($day->getLeague());
       RankingGeneral::createRanking();
+      Cache::invalidateTags(array('ranking'));
       $messages[] = t('Ranking updated for @nb_ranking days',array('@nb_ranking'=>$i));
     }
     Cache::invalidateTags(array('nextbets'));
