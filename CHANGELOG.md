@@ -1,5 +1,7 @@
 # Changelog - Mespronos 
 ## 8.x-1.0alpha2, XXXX-XX-XX
+  - Update betting style
+  - Create a General Ranking block  
   - Add licence to composer.json among other metadatas
   
 ## 8.x-1.0alpha1, 2016-02-14
