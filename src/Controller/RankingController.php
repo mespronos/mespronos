@@ -2,6 +2,7 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\mespronos\Entity\Ranking;
 use Drupal\mespronos\Entity\RankingDay;
 use Drupal\mespronos\Entity\RankingLeague;
 use Drupal\mespronos\Entity\RankingGeneral;
@@ -61,11 +62,14 @@ class RankingController extends ControllerBase {
     return self::getTableFromRanking($rankingDays);
   }
 
-
-  public static function getTableFromRanking($rankingDays) {
+  /**
+   * @param Ranking[] $rankings
+   * @return array
+   */
+  public static function getTableFromRanking($rankings) {
     $user = \Drupal::currentUser();
     $rows = [];
-    foreach ($rankingDays  as  $ranking) {
+    foreach ($rankings  as  $ranking) {
       $row = [
         'data' => [
           'position' => $ranking->get('position')->value,
