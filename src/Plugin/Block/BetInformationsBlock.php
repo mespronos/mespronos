@@ -24,8 +24,7 @@ class BetInformationsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $day_id = \Drupal::routeMatch()->getParameter('day');
-    $day = Day::load($day_id);
+    $day = \Drupal::routeMatch()->getParameter('day');
     $league = $day->getLeague();
 
     return [
