@@ -67,7 +67,7 @@ mespronos.lastbetsdetails:
   path: 'mespronos/day/{day}/results'
   defaults:
     _controller: '\Drupal\mespronos\Controller\BettingController::LastBetsForDay'
-    _title: 'Last bets'
+    _title_callback: '\Drupal\mespronos\Controller\BettingController::LastBetsForDayTitle'
   requirements:
     _permission: 'view own last bets'
 
@@ -75,7 +75,7 @@ mespronos.lastbetsdetailsforuser:
   path: 'mespronos/day/{day}/results/user/{user}'
   defaults:
     _controller: '\Drupal\mespronos\Controller\BettingController::LastBetsForDay'
-    _title: 'Last bets'
+    _title_callback: '\Drupal\mespronos\Controller\BettingController::LastBetsForDayTitle'
   requirements:
     _permission: 'view others last bets'
 

@@ -260,4 +260,16 @@ class BettingController extends ControllerBase {
       ],
     ];
   }
+
+  public function LastBetsForDayTitle(Day $day, \Drupal\Core\Session\AccountProxyInterface $user = null) {
+    $league = $day->getLeague();
+    if($user == null) {
+      return t('My bets on @day',array('@day'=>$league->label().' - '.$day->label()));
+    }
+    else {
+      $user = User::load($user);
+      return t('@user\'s bets on @day',array('@day'=>$league->label().' - '.$day->label(),'@user'=>$user->getUsername()));
+    }
+
+  }
 }
