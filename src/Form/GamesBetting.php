@@ -37,13 +37,6 @@ class GamesBetting extends FormBase {
       '#tree' => true,
     );
 
-    $form['infos']['league'] = [
-      '#markup' => '<h2>'.$league->label().'</h2>',
-    ];
-    $form['infos']['day'] = [
-      '#markup' => '<h3>'.$day->label().'</h3>',
-    ];
-
     $form['games'] = array(
       '#type' => 'container',
       '#tree' => true,
