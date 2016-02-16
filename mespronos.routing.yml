@@ -50,7 +50,7 @@ mespronos.day.bet:
   path: 'mespronos/day/{day}/bet'
   defaults:
     _controller: '\Drupal\mespronos\Controller\BettingController::bet'
-    _title: 'Bet !'
+    _title_callback: '\Drupal\mespronos\Controller\BettingController::betTitle'
   requirements:
     _permission: 'make a bet'
 

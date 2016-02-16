@@ -196,15 +196,20 @@ class BettingController extends ControllerBase {
     ];
   }
 
-  public function bet($day) {
+  public function bet(Day $day) {
     $user = \Drupal::currentUser();
-    $day = Day::load($day);
+    //$day = Day::load($day);
     if($day === NULL) {
       drupal_set_message($this->t('This day doesn\'t exist.'),'error');
       throw new AccessDeniedHttpException();
     }
     $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesBetting',$day,$user);
     return $form;
+  }
+
+  public function betTitle(Day $day) {
+    $league = $day->getLeague();
+    return t('Bet on @day',array('@day'=>$league->label().' - '.$day->label()));
   }
 
   public function LastBetsForDay(Day $day, \Drupal\Core\Session\AccountProxyInterface $user = null) {
