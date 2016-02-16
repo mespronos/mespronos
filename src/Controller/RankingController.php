@@ -9,6 +9,8 @@ use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\mespronos\Entity\Day;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
 
 /**
  * Class DefaultController.
@@ -78,6 +80,12 @@ class RankingController extends ControllerBase {
           'games_betted' => $ranking->get('games_betted')->value,
         ]
       ];
+      if($ranking instanceof RankingDay) {
+        $row['data']['better'] = Link::fromTextAndUrl(
+          $ranking->getOwner()->getUsername(),
+          Url::fromRoute('mespronos.lastbetsdetailsforuser',['day'=>$ranking->getDayiD(),'user'=>$ranking->getOwner()->id()])
+        );
+      }
       if($ranking->getOwner()->id() == $user->id()) {
         $row['class'] = ['highlighted','bold'];
       }
