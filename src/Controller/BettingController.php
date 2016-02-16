@@ -212,12 +212,12 @@ class BettingController extends ControllerBase {
     return t('Bet on @day',array('@day'=>$league->label().' - '.$day->label()));
   }
 
-  public function LastBetsForDay(Day $day, \Drupal\Core\Session\AccountProxyInterface $user = null) {
-    if($user == null) {
+  public function LastBetsForDay(Day $day, $user_id = null) {
+    if($user_id == null) {
       $user = \Drupal::currentUser();
     }
     else {
-      $user = User::load($user);
+      $user = User::load($user_id);
     }
     $games = Game::getGamesForDay($day);
     $games_ids = $games['ids'];
