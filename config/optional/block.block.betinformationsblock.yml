@@ -1,0 +1,26 @@
+uuid: f1e2ea8d-e159-4f5c-ad00-fbd2a6a56747
+langcode: fr
+status: true
+dependencies:
+  module:
+    - mespronos
+    - system
+  theme:
+    - bartik
+id: betinformationsblock
+theme: bartik
+region: sidebar_second
+weight: -9
+provider: null
+plugin: bet_informations_block
+settings:
+  id: bet_informations_block
+  label: 'Bet informations block'
+  provider: mespronos
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: "/mespronos/day/*/bet\r\n/mespronos/day/*/results*"
+    negate: false
+    context_mapping: {  }
