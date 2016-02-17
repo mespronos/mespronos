@@ -11,6 +11,8 @@ MesPronos is a Drupal 8 module which aims to provide all the features needed to 
 
 This is a "work in progress" module, without a stable release date (maybe late spring for UEFA Euro 2016 ?)
 
+**[ALPHA TEST IS OPEN !](https://mespronos.net?utm_source=github&utm_medium=link&utm_campaign=github-readme)**
+
 ## Planning
 
 Please see [milestones](https://github.com/mespronos/mespronos/milestones) to get an overview of the planning.
@@ -20,6 +22,8 @@ Basicaly, I would like to create an open test during march - april, to test the 
 After this two months test I aim to release the **8.x-1.0 beta** that will be used during UEFA Euro 2016.
 
 The **8.x-1.0 Final** should be released during summer.
+
+**[ALPHA TEST IS OPEN !](https://mespronos.net?utm_source=github&utm_medium=link&utm_campaign=github-readme)**
 
 ## Follow the development / Get in board
 Incoming features and status is visible on [Waffle](https://waffle.io/mespronos/mespronos).
