@@ -212,12 +212,12 @@ class BettingController extends ControllerBase {
     return t('Bet on @day',array('@day'=>$league->label().' - '.$day->label()));
   }
 
-  public function LastBetsForDay(Day $day, $user_id = null) {
-    if($user_id == null) {
+  public function LastBetsForDay(Day $day, $user = null) {
+    if($user == null) {
       $user = \Drupal::currentUser();
     }
     else {
-      $user = User::load($user_id);
+      $user = User::load($user);
     }
     $games = Game::getGamesForDay($day);
     $games_ids = $games['ids'];
@@ -261,18 +261,18 @@ class BettingController extends ControllerBase {
       '#markup'=>$table.$tableRanking,
       '#cache' => [
         'contexts' => ['user'],
-        'tags' => [ 'user:'.$user->id(),'lastbets'],
+        'tags' => [ 'user:'.\Drupal::currentUser()->id().'_'.$user->id(),'lastbets'],
       ],
     ];
   }
 
-  public function LastBetsForDayTitle(Day $day, $user_id = null) {
+  public function LastBetsForDayTitle(Day $day, $user = null) {
     $league = $day->getLeague();
-    if($user_id == null) {
+    if($user == null) {
       return t('My bets on @day',array('@day'=>$league->label().' - '.$day->label()));
     }
     else {
-      $user = User::load($user_id);
+      $user = User::load($user);
       return t('@user\'s bets on @day',array('@day'=>$league->label().' - '.$day->label(),'@user'=>$user->getUsername()));
     }
 
