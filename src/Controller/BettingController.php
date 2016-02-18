@@ -129,8 +129,13 @@ class BettingController extends ControllerBase {
       }
       $league = $leagues[$league_id];
 
-      $bets_done = BetController::betsDone($user,$day->entity);
-      $points_won = BetController::PointsWon($user,$day->entity);
+      if($user_uid > 0) {
+        $ranking = RankingDay::getRankingForBetter($user,$day->entity);
+      }
+      else {
+        $ranking = false;
+      }
+
       if($user_uid>0) {
         $action_links = Link::fromTextAndUrl(
             t('Details'),
@@ -153,8 +158,9 @@ class BettingController extends ControllerBase {
         $day->entity->label(),
         $day->nb_game_over,
         $day->nb_game_with_score,
-        $user_uid > 0 ? $bets_done : '/',
-        $user_uid > 0 ? $points_won : '/',
+        $user_uid > 0 && $ranking ? $ranking->getGameBetted() : '/',
+        $user_uid > 0 && $ranking ? $ranking->getPoints() : '/',
+        $user_uid > 0 && $ranking ? $ranking->getPosition() : '/',
         $action_links,
       ];
       $rows[] = $row;
