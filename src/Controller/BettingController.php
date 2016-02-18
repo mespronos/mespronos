@@ -15,12 +15,10 @@ use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Bet;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\RankingDay;
-use Drupal\user\Entity\User;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
-use Drupal\user\UserInterface;
 
 /**
  * Class DefaultController.
@@ -79,22 +77,7 @@ class BettingController extends ControllerBase {
       }
       $rows[] = $row;
     }
-    if($asBlock) {
-      $footer = [
-        'data' => array(
-          array(
-            'data' => Link::fromTextAndUrl(
-              $this->t('See all upcoming bets'),
-              new Url('mespronos.nextbets')
-            ),
-            'colspan' => 7
-          )
-        )
-      ];
-    }
-    else {
-      $footer = [];
-    }
+    $footer = [];
     $header = [
       $this->t('League',array(),array('context'=>'mespronos')),
       $this->t('Day',array(),array('context'=>'mespronos')),
@@ -172,25 +155,11 @@ class BettingController extends ControllerBase {
       $this->t('Games with score',array(),array('context'=>'mespronos')),
       $this->t('Bets done',array(),array('context'=>'mespronos')),
       $this->t('Points',array(),array('context'=>'mespronos')),
+      $this->t('Rank',array(),array('context'=>'mespronos')),
       ''
 
     ];
-    if($forBlock) {
-      $footer = [
-        'data' => array(
-          array(
-            'data' => Link::fromTextAndUrl(
-              $this->t('See all the last bets'),
-              new Url('mespronos.lastbets')
-            ),
-            'colspan' => 7
-          )
-        )
-      ];
-    }
-    else {
-      $footer = [];
-    }
+    $footer = [];
     return [
       '#theme' => 'table',
       '#rows' => $rows,

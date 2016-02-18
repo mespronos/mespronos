@@ -130,9 +130,6 @@ class BetController {
     }
   }
 
-  public static function betsDone(\Drupal\Core\Session\AccountProxy $user,Day $day) {
-    return self::getInfos('bets',$user,$day);
-  }
   public static function betsLeft(\Drupal\Core\Session\AccountProxy $user,Day $day) {
     $now_date = new \DateTime();
     $now_date->setTimezone(new \DateTimeZone("GMT"));
@@ -155,30 +152,6 @@ class BetController {
 
     $results = $query->execute()->fetchAssoc();
     return $results['nb_bet_left'];
-  }
-
-  public static function pointsWon(\Drupal\Core\Session\AccountProxy $user,Day $day) {
-    return self::getInfos('points',$user,$day);
-  }
-
-  protected static function getInfos($type, \Drupal\Core\Session\AccountProxyInterface $user,Day $day) {
-    $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__bet','b');
-    $query->addExpression('sum(b.points)','points');
-    $query->addExpression('count(b.id)','nb_bet');
-    $query->join('mespronos__game','g','b.game = g.id');
-    $query->condition('g.day',$day->id());
-    $query->condition('b.better',$user->id());
-
-    $results = $query->execute()->fetchAssoc();
-    if($type == 'points') {
-      $points = intval($results['points']);
-      return $points;
-    }
-    else {
-      $nb_bets = intval($results['nb_bet']);
-      return $nb_bets;
-    }
   }
 
 }
