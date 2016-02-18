@@ -36,3 +36,6 @@ subscribe to league:
 
 make a bet:
   title: 'make a bet'
+
+see league details:
+  title: 'See league details (days, ranking...)'

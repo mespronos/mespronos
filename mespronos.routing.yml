@@ -46,6 +46,14 @@ mespronos.nextbets:
   requirements:
     _permission: 'view next bets days'
 
+mespronos.league.index:
+  path: 'mespronos/league/{league}'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\LeagueController::index'
+    _title_callback: '\Drupal\mespronos\Controller\LeagueController::indexTitle'
+  requirements:
+    _permission: 'see league details'
+
 mespronos.day.bet:
   path: 'mespronos/day/{day}/bet'
   defaults:
@@ -53,7 +61,6 @@ mespronos.day.bet:
     _title_callback: '\Drupal\mespronos\Controller\BettingController::betTitle'
   requirements:
     _permission: 'make a bet'
-
 
 mespronos.lastbets:
   path: 'mespronos/last-bets'
