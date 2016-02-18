@@ -149,13 +149,13 @@ class BettingController extends ControllerBase {
       $rows[] = $row;
     }
     $header = [
-      $this->t('League',array(),array('context'=>'mespronos')),
-      $this->t('Day',array(),array('context'=>'mespronos')),
-      $this->t('Games over',array(),array('context'=>'mespronos')),
-      $this->t('Games with score',array(),array('context'=>'mespronos')),
-      $this->t('Bets done',array(),array('context'=>'mespronos')),
-      $this->t('Points',array(),array('context'=>'mespronos')),
-      $this->t('Rank',array(),array('context'=>'mespronos')),
+      $this->t('League',array(),array('context'=>'mespronos-lastbets')),
+      $this->t('Day',array(),array('context'=>'mespronos-lastbets')),
+      $this->t('Games over',array(),array('context'=>'mespronos-lastbets')),
+      $this->t('Games with score',array(),array('context'=>'mespronos-lastbets')),
+      $this->t('Bets',array(),array('context'=>'mespronos-lastbets')),
+      $this->t('Points',array(),array('context'=>'mespronos-lastbets')),
+      $this->t('Rank',array(),array('context'=>'mespronos-lastbets')),
       ''
 
     ];
