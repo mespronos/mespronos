@@ -53,7 +53,7 @@ class NextBets extends BlockBase {
    */
   public function build() {
     $betController = new BettingController();
-    return $betController->nextBets(true);
+    return $betController->nextBets();
   }
 
 }

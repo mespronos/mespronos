@@ -53,7 +53,7 @@ class LastBets extends BlockBase {
    */
   public function build() {
     $betController = new BettingController();
-    return $betController->lastBets(true);
+    return $betController->lastBets();
   }
 
 }

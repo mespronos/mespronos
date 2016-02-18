@@ -27,7 +27,7 @@ use Drupal\Core\Link;
  */
 class BettingController extends ControllerBase {
 
-  public function nextBets($asBlock = false) {
+  public function nextBets() {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
     $days = DayController::getNextDaysToBet(10);
