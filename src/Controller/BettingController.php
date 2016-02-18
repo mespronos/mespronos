@@ -213,7 +213,7 @@ class BettingController extends ControllerBase {
     return t('Bet on @day',array('@day'=>$league->label().' - '.$day->label()));
   }
 
-  public function LastBetsForDay(Day $day, UserInterface $user = null) {
+  public function LastBetsForDay(Day $day, \Drupal\user\Entity\User $user = null) {
     if($user == null) {
       $user = \Drupal::currentUser();
     }
@@ -264,7 +264,7 @@ class BettingController extends ControllerBase {
     ];
   }
 
-  public function LastBetsForDayTitle(Day $day, UserInterface $user = null) {
+  public function LastBetsForDayTitle(Day $day, \Drupal\user\Entity\User $user = null) {
     $league = $day->getLeague();
     if($user == null) {
       return t('My bets on @day',array('@day'=>$league->label().' - '.$day->label()));
