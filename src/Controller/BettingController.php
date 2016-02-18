@@ -78,7 +78,7 @@ class BettingController extends ControllerBase {
         }
       }
       else {
-        $row[] = Link::fromTextAndUrl(
+        $row['data']['action'] = Link::fromTextAndUrl(
           t('Log in and bet'),
           Url::fromRoute('mespronos.login',[],['query' => ['destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day_id])->toString()]])
         );
