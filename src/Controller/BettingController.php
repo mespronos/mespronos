@@ -20,6 +20,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\user\UserInterface;
 
 /**
  * Class DefaultController.
@@ -212,12 +213,9 @@ class BettingController extends ControllerBase {
     return t('Bet on @day',array('@day'=>$league->label().' - '.$day->label()));
   }
 
-  public function LastBetsForDay(Day $day, $user = null) {
+  public function LastBetsForDay(Day $day, UserInterface $user = null) {
     if($user == null) {
       $user = \Drupal::currentUser();
-    }
-    else {
-      $user = User::load($user);
     }
     $games = Game::getGamesForDay($day);
     $games_ids = $games['ids'];
@@ -266,13 +264,12 @@ class BettingController extends ControllerBase {
     ];
   }
 
-  public function LastBetsForDayTitle(Day $day, $user = null) {
+  public function LastBetsForDayTitle(Day $day, UserInterface $user = null) {
     $league = $day->getLeague();
     if($user == null) {
       return t('My bets on @day',array('@day'=>$league->label().' - '.$day->label()));
     }
     else {
-      $user = User::load($user);
       return t('@user\'s bets on @day',array('@day'=>$league->label().' - '.$day->label(),'@user'=>$user->getUsername()));
     }
 
