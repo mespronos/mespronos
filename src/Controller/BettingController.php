@@ -19,6 +19,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\user\Entity\User;
 
 /**
  * Class DefaultController.
@@ -106,7 +107,7 @@ class BettingController extends ControllerBase {
   }
 
   public function lastBets(League $league = null) {
-    $user = \Drupal::currentUser();
+    $user = User::load(\Drupal::currentUser()->id());
     $user_uid =  $user->id();
     $days = DayController::getlastDays(10,$league);
     $rows = [];
@@ -203,7 +204,7 @@ class BettingController extends ControllerBase {
 
   public function LastBetsForDay(Day $day, \Drupal\user\Entity\User $user = null) {
     if($user == null) {
-      $user = \Drupal::currentUser();
+      $user = User::load(\Drupal::currentUser()->id());
     }
     $games = Game::getGamesForDay($day);
     $games_ids = $games['ids'];

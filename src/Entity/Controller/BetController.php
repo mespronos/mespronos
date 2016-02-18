@@ -110,7 +110,7 @@ class BetController {
   }
 
   /**
-   * @param \Drupal\User $user
+   * @param \Drupal\user\Entity\User $user
    * @param \Drupal\mespronos\Entity\Game $game
    * @return \Drupal\mespronos\Entity\Bet
    */
