@@ -1,5 +1,6 @@
 # Changelog - Mespronos 
 ## 8.x-1.0alpha2, XXXX-XX-XX
+  - Add league details with ranking
   - Update betting style
   - Create a General Ranking block  
   - Add licence to composer.json among other metadatas
