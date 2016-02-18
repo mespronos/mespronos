@@ -2,6 +2,7 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Ranking;
 use Drupal\mespronos\Entity\RankingDay;
 use Drupal\mespronos\Entity\RankingLeague;
@@ -56,6 +57,10 @@ class RankingController extends ControllerBase {
 
   public static function getRankingGeneral() {
     $ranking = RankingGeneral::getRanking();
+    return self::getTableFromRanking($ranking);
+  }
+  public static function getRankingLeague(League $league) {
+    $ranking = RankingLeague::getRanking($league);
     return self::getTableFromRanking($ranking);
   }
 

@@ -31,6 +31,14 @@ function mespronos_theme() {
       'league' => NULL,
     ),
   );
+  $theme['league-details'] = array(
+    'template' => 'league_details',
+    'variables' => array(
+      'last_bets' => NULL,
+      'next_bets' => NULL,
+      'ranking' => NULL,
+    ),
+  );
 
   return $theme;
 }

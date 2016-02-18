@@ -9,6 +9,7 @@ namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Entity\League;
+use Drupal\mespronos\Entity\RankingLeague;
 
 /**
  * Class LeagueController.
@@ -18,10 +19,19 @@ use Drupal\mespronos\Entity\League;
 class LeagueController extends ControllerBase {
 
   public function index(League $league) {
-
+    $betController = new BettingController();
+    $last_bets = $betController->lastBets($league);
+    $next_bets = $betController->nextBets($league);
+    $ranking = RankingController::getRankingLeague($league);
     return [
-        '#type' => 'markup',
-        '#markup' => $this->t("Implement method: hello with parameter(s): $league")
+      '#theme' =>'league-details',
+      '#last_bets' => $last_bets,
+      '#next_bets' => $next_bets,
+      '#ranking' => $ranking,
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => [ 'user:'.\Drupal::currentUser()->id(),'league:'.$league->id()],
+      ],
     ];
   }
   public function indexTitle(League $league) {

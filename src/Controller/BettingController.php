@@ -27,10 +27,10 @@ use Drupal\Core\Link;
  */
 class BettingController extends ControllerBase {
 
-  public function nextBets() {
+  public function nextBets(League $league = null) {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
-    $days = DayController::getNextDaysToBet(10);
+    $days = DayController::getNextDaysToBet(10,$league);
     $rows = [];
     $leagues = [];
 
@@ -49,21 +49,28 @@ class BettingController extends ControllerBase {
       $bets_left = BetController::betsLeft($user,$day->entity);
 
       $row = [
-        $league->label(),
-        $day->entity->label(),
-        $day->nb_game,
-        $bets_left,
-        $i->format('%a') >0 ? $this->t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : $this->t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
+        'data' => [
+          'league' => $league->label(),
+          'day' => $day->entity->label(),
+          'nb_game' => $day->nb_game,
+          'bets_left' => $bets_left,
+          'time_left' => $i->format('%a') >0 ? $this->t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : $this->t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
+          'action' => '',
+        ]
       ];
+      $row['data']['league'] = Link::fromTextAndUrl(
+        $league->label(),
+        Url::fromRoute('mespronos.league.index',['league'=>$league->id()])
+      );
       if($user_uid>0) {
         if($bets_left > 0) {
-          $row[] = Link::fromTextAndUrl(
+          $row['data']['action'] = Link::fromTextAndUrl(
             t('Bet !'),
             new Url('mespronos.day.bet', ['day' => $day_id],['query' => ['destination' => \Drupal::service('path.current')->getPath()]])
           );
         }
         else {
-          $row[] = Link::fromTextAndUrl(
+          $row['data']['action'] = Link::fromTextAndUrl(
             t('Edit'),
             new Url('mespronos.day.bet', ['day' => $day_id],['query' => ['destination' => \Drupal::service('path.current')->getPath()]])
           );
@@ -98,10 +105,10 @@ class BettingController extends ControllerBase {
     ];
   }
 
-  public function lastBets($forBlock = false) {
+  public function lastBets(League $league = null) {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
-    $days = DayController::getlastDays(10);
+    $days = DayController::getlastDays(10,$league);
     $rows = [];
     $leagues = [];
 
@@ -137,15 +144,21 @@ class BettingController extends ControllerBase {
         );
       }
       $row = [
-        $league->label(),
-        $day->entity->label(),
-        $day->nb_game_over,
-        $day->nb_game_with_score,
-        $user_uid > 0 && $ranking ? $ranking->getGameBetted() : '/',
-        $user_uid > 0 && $ranking ? $ranking->getPoints() : '/',
-        $user_uid > 0 && $ranking ? $ranking->getPosition() : '/',
-        $action_links,
+        'data' => [
+          'league' => $league->label(),
+          'day' => $day->entity->label(),
+          'nb_game_over' => $day->nb_game_over,
+          'nb_game_with_score' => $day->nb_game_with_score,
+          'games_betted' => $user_uid > 0 && $ranking ? $ranking->getGameBetted() : '/',
+          'points' => $user_uid > 0 && $ranking ? $ranking->getPoints() : '/',
+          'position' => $user_uid > 0 && $ranking ? $ranking->getPosition() : '/',
+          'action' => $action_links,
+        ]
       ];
+      $row['data']['league'] = Link::fromTextAndUrl(
+        $league->label(),
+        Url::fromRoute('mespronos.league.index',['league'=>$league->id()])
+      );
       $rows[] = $row;
     }
     $header = [

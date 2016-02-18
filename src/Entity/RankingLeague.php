@@ -118,6 +118,12 @@ class RankingLeague extends Ranking {
     return $rankings;
   }
 
+  /**
+   * @return \Drupal\mespronos\Entity\RankingLeague[]
+   */
+  public static function getRanking($entity = null,$entity_name='league',$storage_name='ranking_league') {
+    return parent::getRanking($entity,$entity_name,$storage_name);
+  }
 
   /**
    * @param \Drupal\user\Entity\User $better
