@@ -20,8 +20,8 @@ class LeagueController extends ControllerBase {
 
   public function index(League $league) {
     $betController = new BettingController();
-    $last_bets = $betController->lastBets($league);
-    $next_bets = $betController->nextBets($league);
+    $last_bets = $betController->lastBets($league,100);
+    $next_bets = $betController->nextBets($league,100);
     $ranking = RankingController::getRankingLeague($league);
     return [
       '#theme' =>'league-details',
