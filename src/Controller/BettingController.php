@@ -28,10 +28,10 @@ use Drupal\user\Entity\User;
  */
 class BettingController extends ControllerBase {
 
-  public function nextBets(League $league = null) {
+  public function nextBets(League $league = null,$nb=10) {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
-    $days = DayController::getNextDaysToBet(10,$league);
+    $days = DayController::getNextDaysToBet($nb,$league);
     $rows = [];
     $leagues = [];
 
@@ -108,10 +108,10 @@ class BettingController extends ControllerBase {
     ];
   }
 
-  public function lastBets(League $league = null) {
+  public function lastBets(League $league = null,$nb = 10) {
     $user = User::load(\Drupal::currentUser()->id());
     $user_uid =  $user->id();
-    $days = DayController::getlastDays(10,$league);
+    $days = DayController::getlastDays($nb,$league);
     $rows = [];
     $leagues = [];
 
