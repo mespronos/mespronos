@@ -32,6 +32,7 @@ class BettingController extends ControllerBase {
     $user = \Drupal::currentUser();
     $user_uid =  $user->id();
     $days = DayController::getNextDaysToBet($nb,$league);
+    $page_league = isset($league);
     $rows = [];
     $leagues = [];
 
@@ -58,12 +59,17 @@ class BettingController extends ControllerBase {
           'action' => '',
         ]
       ];
-      $cell['link'] = Link::fromTextAndUrl($league->label(),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
+      $cell = [];
+      if(!$page_league) {
+        $cell['link'] = Link::fromTextAndUrl($league->label(),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
+        $cell['backtoline'] = ['#markup' => '<br />'];
+      }
 
       $cell['day'] = [
         '#type' => 'markup',
-        '#markup' => '<br />'.$day->entity->label(),
+        '#markup' => $day->entity->label(),
       ];
+      
       $row['data']['day'] = render($cell);
 
       if($user_uid>0) {
@@ -112,6 +118,7 @@ class BettingController extends ControllerBase {
     $user = User::load(\Drupal::currentUser()->id());
     $user_uid =  $user->id();
     $days = DayController::getlastDays($nb,$league);
+    $page_league = isset($league);
     $rows = [];
     $leagues = [];
 
@@ -157,11 +164,14 @@ class BettingController extends ControllerBase {
           'action' => $action_links,
         ]
       ];
-
-      $cell['link'] = Link::fromTextAndUrl($league->label(),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
+      $cell = [];
+      if($page_league == null) {
+        $cell['link'] = Link::fromTextAndUrl($league->label(),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
+        $cell['backtoline'] = ['#markup' => '<br />'];
+      }
       $cell['day'] = [
         '#type' => 'markup',
-        '#markup' => '<br />'.$day->entity->label(),
+        '#markup' => $day->entity->label(),
       ];
       $row['data']['day'] = render($cell);
 
