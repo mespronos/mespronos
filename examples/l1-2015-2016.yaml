@@ -105,5 +105,28 @@ league :
           game_date : 2016-03-06t17:00:00
         - game : Lyon | Guingamp
           game_date : 2016-03-06t21:00:00
+    - number : 30
+      day_default_date : 2016-03-12t20:00:00
+      games :
+        - game : Lorient | Marseille
+          game_date : 2016-03-12t20:00:00
+        - game : Toulouse | Bordeaux
+          game_date : 2016-03-12t20:00:00
+        - game : Rennes | Lyon
+          game_date : 2016-03-12t20:00:00
+        - game : Troyes | Paris-SG
+          game_date : 2016-03-12t20:00:00
+        - game : Guingamp | Saint-Étienne
+          game_date : 2016-03-12t20:00:00
+        - game : GFC Ajaccio | Caen
+          game_date : 2016-03-12t20:00:00
+        - game : Bastia | Lille
+          game_date : 2016-03-12t20:00:00
+        - game : Montpellier | Nice
+          game_date : 2016-03-12t20:00:00
+        - game : Monaco | Reims
+          game_date : 2016-03-12t20:00:00
+        - game : Nantes | Angers
+          game_date : 2016-03-12t20:00:00
 
 
