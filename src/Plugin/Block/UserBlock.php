@@ -55,13 +55,12 @@ class UserBlock extends BlockBase {
 
     $user = User::load(\Drupal::currentUser()->id());
     $user_picture = $user->get("user_picture")->first();
-    if($user_picture) {
-      $user_picture = File::load($user_picture->getValue()['target_id']);
+    if($user_picture && !is_null($user_picture) && $user_picture_file = File::load($user_picture->getValue()['target_id'])) {      ;
       $variables = array(
         'style_name' => 'thumbnail',
-        'uri' => $user_picture->getFileUri(),
+        'uri' => $user_picture_file->getFileUri(),
       );
-      $image = \Drupal::service('image.factory')->get($user_picture->getFileUri());
+      $image = \Drupal::service('image.factory')->get($user_picture_file->getFileUri());
       if ($image->isValid()) {
         $variables['width'] = $image->getWidth();
         $variables['height'] = $image->getHeight();
