@@ -189,11 +189,11 @@ class ImporterController extends ControllerBase {
     else {
       $game = Game::load(array_pop($id));
       if(isset($score_team_1) && isset($score_team_2)) {
-        if($game->get('score_team_1') != $score_team_1) {
+        if($game->getScoreTeam1() != $score_team_1) {
           self::$days_need_ranking_update[$day->id()] = $day->id();
           $game->set('score_team_1',$score_team_1);
         }
-        if($game->get('score_team_2') != $score_team_2) {
+        if($game->getScoreTeam2() != $score_team_2) {
           self::$days_need_ranking_update[$day->id()] = $day->id();
           $game->set('score_team_2',$score_team_2);
         }
