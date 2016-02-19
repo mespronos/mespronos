@@ -110,6 +110,7 @@ class BettingController extends ControllerBase {
       '#cache' => [
         'contexts' => ['user'],
         'tags' => [ 'user:'.$user_uid,'nextbets'],
+        'max-age' => '120',
       ],
     ];
   }
