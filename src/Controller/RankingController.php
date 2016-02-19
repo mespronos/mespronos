@@ -97,10 +97,10 @@ class RankingController extends ControllerBase {
       $rows[] = $row;
     }
     $header = [
-      t('Position',array(),array('context'=>'mespronos')),
-      t('Better',array(),array('context'=>'mespronos')),
-      t('Points',array(),array('context'=>'mespronos')),
-      t('Games betted',array(),array('context'=>'mespronos')),
+      t('Rank',array(),array('context'=>'mespronos-ranking')),
+      t('Better',array(),array('context'=>'mespronos-ranking')),
+      t('Points',array(),array('context'=>'mespronos-ranking')),
+      t('Bets',array(),array('context'=>'mespronos-ranking')),
     ];
     return [
       '#theme' => 'table',
