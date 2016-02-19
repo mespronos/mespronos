@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\user\Entity\User;
 use Drupal\file\Entity\File;
 use Drupal\Core\Url;
@@ -30,15 +31,17 @@ class UserBlock extends BlockBase {
   public function build() {
     $user = User::load(\Drupal::currentUser()->id());
     $user_picture = $this->getUserPictureRendarableArray();
-
+    $ranking = RankingGeneral::getRankingForBetter($user);
     return [
       '#theme' =>'user-block',
       '#user' => [
         'name' => $user->getAccountName(),
+        'rank' => $ranking ? $ranking->getPosition() : '/',
+        'points' => $ranking ? $ranking->getPoints() : '/',
       ],
       '#links' => [
         'logout' => Link::fromTextAndUrl(t('Log out'),Url::fromRoute('user.logout',[])),
-        'myaccount' => Link::fromTextAndUrl(t('My account'),Url::fromRoute('user.page',[]))
+        'myaccount' => Link::fromTextAndUrl(t('My account'),Url::fromRoute('entity.user.edit_form',['user'=>$user->id()]))
       ],
       '#user_picture' => $user_picture,
       '#cache' => [
@@ -53,7 +56,6 @@ class UserBlock extends BlockBase {
     $user = User::load(\Drupal::currentUser()->id());
     $user_picture = $user->get("user_picture")->first();
     if($user_picture) {
-
       $user_picture = File::load($user_picture->getValue()['target_id']);
       $variables = array(
         'style_name' => 'thumbnail',
