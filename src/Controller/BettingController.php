@@ -51,22 +51,25 @@ class BettingController extends ControllerBase {
 
       $row = [
         'data' => [
-          'league' => $league->label(),
-          'day' => $day->entity->label(),
+          'day' => $league->label().'<br />'.$day->entity->label(),
           'nb_game' => $day->nb_game,
           'bets_left' => $bets_left,
           'time_left' => $i->format('%a') >0 ? $this->t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : $this->t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
           'action' => '',
         ]
       ];
-      $row['data']['league'] = Link::fromTextAndUrl(
-        $league->label(),
-        Url::fromRoute('mespronos.league.index',['league'=>$league->id()])
-      );
+      $cell['link'] = Link::fromTextAndUrl($league->label(),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
+
+      $cell['day'] = [
+        '#type' => 'markup',
+        '#markup' => '<br />'.$day->entity->label(),
+      ];
+      $row['data']['day'] = render($cell);
+
       if($user_uid>0) {
         if($bets_left > 0) {
           $row['data']['action'] = Link::fromTextAndUrl(
-            t('Bet !'),
+            t('Bet'),
             new Url('mespronos.day.bet', ['day' => $day_id],['query' => ['destination' => \Drupal::service('path.current')->getPath()]])
           );
         }
@@ -87,11 +90,10 @@ class BettingController extends ControllerBase {
     }
     $footer = [];
     $header = [
-      $this->t('League',array(),array('context'=>'mespronos')),
-      $this->t('Day',array(),array('context'=>'mespronos')),
-      $this->t('Games',array(),array('context'=>'mespronos')),
-      $this->t('Bets left',array(),array('context'=>'mespronos')),
-      $this->t('Time left',array(),array('context'=>'mespronos')),
+      $this->t('Day',array(),array('context'=>'mespronos-block')),
+      $this->t('Games',array(),array('context'=>'mespronos-block')),
+      $this->t('Bets left',array(),array('context'=>'mespronos-block')),
+      $this->t('Time left',array(),array('context'=>'mespronos-block')),
       '',
     ];
     return [
@@ -146,30 +148,32 @@ class BettingController extends ControllerBase {
       }
       $row = [
         'data' => [
-          'league' => $league->label(),
-          'day' => $day->entity->label(),
-          'nb_game_over' => $day->nb_game_over,
-          'nb_game_with_score' => $day->nb_game_with_score,
+          'day' => '',
+          //'nb_game_over' => $day->nb_game_over,
+          //'nb_game_with_score' => $day->nb_game_with_score,
           'games_betted' => $user_uid > 0 && $ranking ? $ranking->getGameBetted() : '/',
           'points' => $user_uid > 0 && $ranking ? $ranking->getPoints() : '/',
           'position' => $user_uid > 0 && $ranking ? $ranking->getPosition() : '/',
           'action' => $action_links,
         ]
       ];
-      $row['data']['league'] = Link::fromTextAndUrl(
-        $league->label(),
-        Url::fromRoute('mespronos.league.index',['league'=>$league->id()])
-      );
+
+      $cell['link'] = Link::fromTextAndUrl($league->label(),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
+      $cell['day'] = [
+        '#type' => 'markup',
+        '#markup' => '<br />'.$day->entity->label(),
+      ];
+      $row['data']['day'] = render($cell);
+
       $rows[] = $row;
     }
     $header = [
-      $this->t('League',array(),array('context'=>'mespronos-lastbets')),
-      $this->t('Day',array(),array('context'=>'mespronos-lastbets')),
-      $this->t('Games over',array(),array('context'=>'mespronos-lastbets')),
-      $this->t('Games with score',array(),array('context'=>'mespronos-lastbets')),
-      $this->t('Bets',array(),array('context'=>'mespronos-lastbets')),
-      $this->t('Points',array(),array('context'=>'mespronos-lastbets')),
-      $this->t('Rank',array(),array('context'=>'mespronos-lastbets')),
+      $this->t('Day',array(),array('context'=>'mespronos-block')),
+      //$this->t('Games over',array(),array('context'=>'mespronos-lastbets')),
+      //$this->t('Games with score',array(),array('context'=>'mespronos-lastbets')),
+      $this->t('Bets',array(),array('context'=>'mespronos-block')),
+      $this->t('Points',array(),array('context'=>'mespronos-block')),
+      $this->t('Rank',array(),array('context'=>'mespronos-block')),
       ''
 
     ];
