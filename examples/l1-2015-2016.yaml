@@ -151,5 +151,28 @@ league :
           game_date : 2016-03-19t20:00:00
         - game : Nice | GFC Ajaccio
           game_date : 2016-03-19t20:00:00
+    - number : 32
+      day_default_date : 2016-04-02t20:00:00
+      games :
+        - game : Bastia | Marseille
+          game_date : 2016-04-02t20:00:00
+        - game : Guingamp | Montpellier
+          game_date : 2016-04-02t20:00:00
+        - game : Monaco | Bordeaux
+          game_date : 2016-04-02t20:00:00
+        - game : Lorient | Lyon
+          game_date : 2016-04-02t20:00:00
+        - game : GFC Ajaccio | Saint-Étienne
+          game_date : 2016-04-02t20:00:00
+        - game : Toulouse | Caen
+          game_date : 2016-04-02t20:00:00
+        - game : Nantes | Lille
+          game_date : 2016-04-02t20:00:00
+        - game : Paris-SG | Nice
+          game_date : 2016-04-02t20:00:00
+        - game : Rennes | Reims
+          game_date : 2016-04-02t20:00:00
+        - game : Troyes | Angers
+          game_date : 2016-04-02t20:00:00
 
 
