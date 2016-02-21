@@ -70,8 +70,8 @@ class ImporterController extends ControllerBase {
         $date = $date->format('Y-m-d\TH:i:s');
         $result = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
         switch($result) {
-          case 'CREATED' : $games['created']++;break;
-          case 'UPDATED' : $games['updated']++;break;
+          case 'CREATED': $games['created']++;break;
+          case 'UPDATED': $games['updated']++;break;
         }
       }
     }
