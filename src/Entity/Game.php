@@ -11,7 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
-use Drupal\mespronos\Entity\Controller\BetController;
+use Drupal\mespronos\Controller\BetController;
 
 /**
  * Defines the Game entity.
