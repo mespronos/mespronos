@@ -54,7 +54,10 @@ class ImporterController extends ControllerBase {
     $data = $yaml->parse(file_get_contents($file->getFileUri()));
     $sport = self::importSport($data['league']['sport']);
     $league = self::importLeague($data['league'], $sport);
-    $games = [];
+    $games = [
+      'created' => 0,
+      'updated' => 0,
+    ];
     foreach($data['league']['days'] as $_day) {
       $day = self::importDay($_day,$league);
       foreach($_day['games'] as $_game) {
@@ -65,7 +68,11 @@ class ImporterController extends ControllerBase {
         $date = \DateTime::createFromFormat('U',$date,new \DateTimeZone(drupal_get_user_timezone()));
         $date->setTimezone(new \DateTimeZone('UTC'));
         $date = $date->format('Y-m-d\TH:i:s');
-        $games[] = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
+        $result = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
+        switch($result) {
+          case 'CREATED' : $games['created']++;break;
+          case 'UPDATED' : $games['updated']++;break;
+        }
       }
     }
     $i = 0;
@@ -82,7 +89,8 @@ class ImporterController extends ControllerBase {
     Cache::invalidateTags(array('nextbets'));
     Cache::invalidateTags(array('lastbets'));
 
-    $messages[] =  t('@nb games created / updated',array('@nb' => count($games)));
+    $messages[] =  t('@nb games created',array('@nb' => $games['created']));
+    $messages[] =  t('@nb games updated',array('@nb' => $games['updated']));
     return [
       '#markup' => implode('<br />',$messages)
     ];
@@ -185,24 +193,32 @@ class ImporterController extends ControllerBase {
       }
       $game->save();
       drupal_set_message(t('The game @team1 - @team2 has been created',array('@team1'=> $team_1->get('name')->value,'@team2'=> $team_2->get('name')->value)));
+      return 'CREATED';
     }
     else {
       $game = Game::load(array_pop($id));
+      $updated = false;
       if(isset($score_team_1) && isset($score_team_2)) {
         if($game->getScoreTeam1() != $score_team_1) {
           self::$days_need_ranking_update[$day->id()] = $day->id();
           $game->set('score_team_1',$score_team_1);
+          $updated = true;
         }
         if($game->getScoreTeam2() != $score_team_2) {
           self::$days_need_ranking_update[$day->id()] = $day->id();
           $game->set('score_team_2',$score_team_2);
+          $updated = true;
         }
       }
       if($game->get('game_date')->value != $date) {
         $game->set('game_date',$date);
+        $updated = true;
       }
-      $game->save();
+      if($updated) {
+        $game->save();
+        return 'UPDATED';
+      }
     }
-    return $game;
+    return false;
   }
 }
