@@ -76,15 +76,17 @@ class RankingController extends ControllerBase {
   public static function getTableFromRanking($rankings) {
     $user = \Drupal::currentUser();
     $rows = [];
+    $old_rank = null;
     foreach ($rankings  as  $ranking) {
       $row = [
         'data' => [
-          'position' => $ranking->get('position')->value,
+          'position' => $ranking->get('position')->value != $old_rank ? $ranking->get('position')->value : '-',
           'better' => $ranking->getOwner()->getUsername(),
           'points' => $ranking->get('points')->value,
           'games_betted' => $ranking->get('games_betted')->value,
         ]
       ];
+      $old_rank = $ranking->get('position')->value;
       if($ranking instanceof RankingDay) {
         $row['data']['better'] = Link::fromTextAndUrl(
           $ranking->getOwner()->getUsername(),
