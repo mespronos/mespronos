@@ -39,6 +39,13 @@ function mespronos_theme() {
       'ranking' => NULL,
     ),
   );
+  $theme['day-details'] = array(
+    'template' => 'day_details',
+    'variables' => array(
+      'last_bets' => NULL,
+      'ranking' => NULL,
+    ),
+  );
 
   return $theme;
 }

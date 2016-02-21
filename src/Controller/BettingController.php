@@ -196,7 +196,7 @@ class BettingController extends ControllerBase {
       '#footer' => $footer,
       '#cache' => [
         'contexts' => ['user'],
-        'tags' => [ 'user:'.$user_uid,'lastbets'],
+        'tags' => [ 'lastbets','user:'.$user_uid],
       ],
     ];
   }
@@ -216,66 +216,5 @@ class BettingController extends ControllerBase {
     $league = $day->getLeague();
     return t('Bet on @day',array('@day'=>$league->label().' - '.$day->label()));
   }
-
-  public function LastBetsForDay(Day $day, \Drupal\user\Entity\User $user = null) {
-    if($user == null) {
-      $user = User::load(\Drupal::currentUser()->id());
-    }
-    $games = Game::getGamesForDay($day);
-    $games_ids = $games['ids'];
-    $games_entity = $games['entities'];
-    $bets = Bet::getUserBetsForGames($games_ids,$user);
-    $rows = [];
-    foreach($games_entity as $gid => $game) {
-      if($user->id() !== \Drupal::currentUser()->id() && !$game->isPassed()) {
-        $bet = '?';
-      }
-      else {
-        $bet = isset($bets[$gid]) ? $bets[$gid]->labelBet() : '/';
-      }
-      $points = isset($bets[$gid]) ? $bets[$gid]->get('points')->value : '/';
-      $row = [
-        $game->labelTeams(),
-        $game->labelScore(),
-        $bet,
-        $points,
-      ];
-      $rows[] = $row;
-    }
-
-    $header = [
-        $this->t('Game',array(),array('context'=>'mespronos')),
-        $this->t('Score',array(),array('context'=>'mespronos')),
-        $this->t('Bet',array(),array('context'=>'mespronos')),
-        $this->t('Points',array(),array('context'=>'mespronos')),
-    ];
-
-    $table_array = [
-      '#theme' => 'table',
-      '#rows' => $rows,
-      '#header' => $header,
-    ];
-    $table = render($table_array);
-
-    $tableRanking = RankingController::getRankingTableForDay($day);
-    $tableRanking = render($tableRanking);
-    return [
-      '#markup'=>$table.$tableRanking,
-      '#cache' => [
-        'contexts' => ['user'],
-        'tags' => [ 'user:'.\Drupal::currentUser()->id().'_'.$user->id(),'lastbets'],
-      ],
-    ];
-  }
-
-  public function LastBetsForDayTitle(Day $day, \Drupal\user\Entity\User $user = null) {
-    $league = $day->getLeague();
-    if($user == null) {
-      return t('My bets on @day',array('@day'=>$league->label().' - '.$day->label()));
-    }
-    else {
-      return t('@user\'s bets on @day',array('@day'=>$league->label().' - '.$day->label(),'@user'=>$user->getUsername()));
-    }
-
-  }
+  
 }
