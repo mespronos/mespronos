@@ -1,4 +1,8 @@
 # Changelog - Mespronos 
+## 8.x-1.0alpha3, 2016-02-19
+  - Refactoring Controller
+  - Enhance Importer feedback
+  
 ## 8.x-1.0alpha2, 2016-02-19
   - Create a league details page with ranking
   - Enhance betting form display 
