@@ -6,8 +6,8 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Cache\Cache;
-use Drupal\mespronos\Entity\Controller\BetController;
-use Drupal\mespronos\Entity\Controller\GameController;
+use Drupal\mespronos\Controller\BetController;
+use Drupal\mespronos\Controller\GameController;
 
 /**
  * Implements an example form.

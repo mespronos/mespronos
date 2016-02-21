@@ -13,6 +13,7 @@ use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Bet;
 use Drupal\mespronos\Entity\League;
 use Drupal\user\Entity\User;
+use Drupal\Core\Database\Database;
 
 /**
  * Class DayController.
