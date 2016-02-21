@@ -126,20 +126,15 @@ class BettingController extends ControllerBase {
       }
       $league = $leagues[$league_id];
 
-      if($user_uid > 0) {
-        $ranking = RankingDay::getRankingForBetter($user,$day->entity);
-      }
-      else {
-        $ranking = false;
-      }
-
       if($user_uid>0) {
+        $ranking = RankingDay::getRankingForBetter($user,$day->entity);
         $action_links = Link::fromTextAndUrl(
             t('Details'),
             Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])
         );
       }
       else {
+        $ranking = false;
         $action_links = Link::fromTextAndUrl(
             t('Log in to see your score'),
             Url::fromRoute('user.login',[],[
@@ -178,9 +173,10 @@ class BettingController extends ControllerBase {
       $this->t('Points',array(),array('context'=>'mespronos-block')),
       $this->t('Rank',array(),array('context'=>'mespronos-block')),
       ''
-
     ];
+
     $footer = [];
+
     return [
       '#theme' => 'table',
       '#rows' => $rows,
