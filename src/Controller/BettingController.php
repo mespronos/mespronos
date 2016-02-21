@@ -153,8 +153,6 @@ class BettingController extends ControllerBase {
       $row = [
         'data' => [
           'day' => '',
-          //'nb_game_over' => $day->nb_game_over,
-          //'nb_game_with_score' => $day->nb_game_with_score,
           'games_betted' => $user_uid > 0 && $ranking ? $ranking->getGameBetted() : '/',
           'points' => $user_uid > 0 && $ranking ? $ranking->getPoints() : '/',
           'position' => $user_uid > 0 && $ranking ? $ranking->getPosition() : '/',
@@ -176,8 +174,6 @@ class BettingController extends ControllerBase {
     }
     $header = [
       $this->t('Day',array(),array('context'=>'mespronos-block')),
-      //$this->t('Games over',array(),array('context'=>'mespronos-lastbets')),
-      //$this->t('Games with score',array(),array('context'=>'mespronos-lastbets')),
       $this->t('Bets',array(),array('context'=>'mespronos-block')),
       $this->t('Points',array(),array('context'=>'mespronos-block')),
       $this->t('Rank',array(),array('context'=>'mespronos-block')),
@@ -199,7 +195,6 @@ class BettingController extends ControllerBase {
 
   public function bet(Day $day) {
     $user = \Drupal::currentUser();
-    //$day = Day::load($day);
     if($day === NULL) {
       drupal_set_message($this->t('This day doesn\'t exist.'),'error');
       throw new AccessDeniedHttpException();
