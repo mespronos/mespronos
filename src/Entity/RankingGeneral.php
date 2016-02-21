@@ -90,12 +90,15 @@ class RankingGeneral extends Ranking {
   }
 
   /**
-   * @param Drupal\user\Entity\User
-   * @param String $type
-   * @return \Drupal\mespronos\Entity\RankingGeneral
+   * Get General ranking for user
+   * @param \Drupal\user\Entity\User $better
+   * @param \Drupal\mespronos\Entity\Ranking $entity
+   * @param string $entity_name
+   * @param string $storage_name
+   * @return \Drupal\mespronos\Entity\RankingDay
    */
   public static function getRankingForBetter(\Drupal\user\Entity\User $better,$entity = null,$entity_name=null,$storage_name=null) {
-    return parent::getRankingForBetter($better,$entity,$entity_name,'ranking_general');
+    return parent::getRankingForBetter($better,null,null,'ranking_general');
   }
 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
