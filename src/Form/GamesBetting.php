@@ -155,15 +155,15 @@ class GamesBetting extends FormBase {
         if($betting_type == 'winner') {
           if($game_data['winner'] != '' && in_array($game_data['winner'],array('1','N','2'))) {
             switch ($game_data['winner']) {
-              case '1' :
+              case '1':
                 $game_data['score_team_1'] = 1;
                 $game_data['score_team_2'] = 0;
                 break;
-              case '2' :
+              case '2':
                 $game_data['score_team_1'] = 0;
                 $game_data['score_team_2'] = 1;
                 break;
-              case 'N' :
+              case 'N':
                 $game_data['score_team_1'] = 0;
                 $game_data['score_team_2'] = 0;
                 break;
