@@ -40,7 +40,7 @@ class DayController {
     return $results;
   }
 
-  public static function getlastDays($nb = 5,League $league = null,Day $day) {
+  public static function getlastDays($nb = 5,League $league = null) {
     $day_storage = \Drupal::entityManager()->getStorage('day');
     $injected_database = Database::getConnection();
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
