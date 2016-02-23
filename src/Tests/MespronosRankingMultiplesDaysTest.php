@@ -79,7 +79,6 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     $this->team4 = Team::create(['name' => 'team4']);
     $this->team4->save();
 
-
     $this->day1 = Day::create(array(
       'league' => $this->league->id(),
       'number' => 1,
@@ -158,8 +157,7 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
       'game' => $this->game1->id(),
       'score_team_1' => 1,
       'score_team_2' => 1,
-    ));
-    //GAME 3 (day 2)
+    ));    
     $bets[] = Bet::create(array(
       'better' => $this->better1->id(),
       'game' => $this->game3->id(),
@@ -229,13 +227,9 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
       $bet->save();
     }
     $points = [];
-    //better 1 => 10points
     $points[1] = 10;
-    //better 2 => 10points
     $points[2] = 10;
-    //better 3 => 5points
     $points[3] = 5;
-    //better 4 => 1points
     $points[4] = 1;
 
     $this->game1->setScore(1,1)->save();
