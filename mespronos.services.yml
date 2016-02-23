@@ -3,3 +3,7 @@ services:
     class: Drupal\mespronos\Breadcrumb\BetBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+  mespronos.breadcrumb.league:
+    class: Drupal\mespronos\Breadcrumb\LeagueBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }
