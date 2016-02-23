@@ -1,5 +1,6 @@
 # Changelog - Mespronos 
 ## 8.x-1.0alpha3, 2016-XX-XX
+  - Add breadcrumbs definition
   - Refactoring Controller
   - Enhance Importer feedback
   
