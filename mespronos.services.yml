@@ -1,0 +1,5 @@
+services:
+  mespronos.breadcrumb.bet:
+    class: Drupal\mespronos\Breadcrumb\BetBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }
