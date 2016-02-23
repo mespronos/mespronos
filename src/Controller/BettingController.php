@@ -70,17 +70,15 @@ class BettingController extends ControllerBase {
 
       if($user_uid>0) {
         if($bets_left > 0) {
-          $row['data']['action'] = Link::fromTextAndUrl(
-            t('Bet'),
-            new Url('mespronos.day.bet', ['day' => $day_id],['query' => ['destination' => \Drupal::service('path.current')->getPath()]])
-          );
+          $text = t('Bet');
         }
         else {
-          $row['data']['action'] = Link::fromTextAndUrl(
-            t('Edit'),
-            new Url('mespronos.day.bet', ['day' => $day_id],['query' => ['destination' => \Drupal::service('path.current')->getPath()]])
-          );
+          $text = t('Edit');
         }
+        $row['data']['action'] = Link::fromTextAndUrl(
+          $text,
+          new Url('mespronos.day.bet', ['day' => $day_id],['query' => ['destination' => \Drupal::service('path.current')->getPath()]])
+        );
       }
       else {
         $row['data']['action'] = Link::fromTextAndUrl(
@@ -107,84 +105,6 @@ class BettingController extends ControllerBase {
         'contexts' => ['user'],
         'tags' => [ 'user:'.$user_uid,'nextbets'],
         'max-age' => '120',
-      ],
-    ];
-  }
-
-  public function lastBets(League $league = null,$nb = 10) {
-    $user = User::load(\Drupal::currentUser()->id());
-    $user_uid =  $user->id();
-    $days = DayController::getlastDays($nb,$league);
-    $page_league = isset($league);
-    $rows = [];
-    $leagues = [];
-
-    foreach ($days  as $day_id => $day) {
-      $league_id = $day->entity->get('league')->first()->getValue()['target_id'];
-      if(!isset($leagues[$league_id])) {
-        $leagues[$league_id] = League::load($league_id);
-      }
-      $league = $leagues[$league_id];
-
-      if($user_uid>0) {
-        $ranking = RankingDay::getRankingForBetter($user,$day->entity);
-        $action_links = Link::fromTextAndUrl(
-            t('Details'),
-            Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])
-        );
-      }
-      else {
-        $ranking = false;
-        $action_links = Link::fromTextAndUrl(
-            t('Log in to see your score'),
-            Url::fromRoute('user.login',[],[
-                    'query' => [
-                        'destination' => Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])->toString(),
-                    ]
-                ]
-            )
-        );
-      }
-      $row = [
-        'data' => [
-          'day' => '',
-          'games_betted' => $user_uid > 0 && $ranking ? $ranking->getGameBetted() : '/',
-          'points' => $user_uid > 0 && $ranking ? $ranking->getPoints() : '/',
-          'position' => $user_uid > 0 && $ranking ? $ranking->getPosition() : '/',
-          'action' => $action_links,
-        ]
-      ];
-      $cell = [];
-      if($page_league == null) {
-        $cell['link'] = Link::fromTextAndUrl($league->label(),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
-        $cell['backtoline'] = ['#markup' => '<br />'];
-      }
-      $cell['day'] = [
-        '#type' => 'markup',
-        '#markup' => $day->entity->label(),
-      ];
-      $row['data']['day'] = render($cell);
-
-      $rows[] = $row;
-    }
-    $header = [
-      $this->t('Day',array(),array('context'=>'mespronos-block')),
-      $this->t('Bets',array(),array('context'=>'mespronos-block')),
-      $this->t('Points',array(),array('context'=>'mespronos-block')),
-      $this->t('Rank',array(),array('context'=>'mespronos-block')),
-      ''
-    ];
-
-    $footer = [];
-
-    return [
-      '#theme' => 'table',
-      '#rows' => $rows,
-      '#header' => $header,
-      '#footer' => $footer,
-      '#cache' => [
-        'contexts' => ['user'],
-        'tags' => [ 'lastbets','user:'.$user_uid],
       ],
     ];
   }
