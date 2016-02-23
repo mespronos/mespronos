@@ -46,6 +46,13 @@ mespronos.nextbets:
   requirements:
     _permission: 'view next bets days'
 
+mespronos.leagues.list:
+  path: 'mespronos/leagues'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\LeagueController::leaguesList'
+  requirements:
+    _permission: 'see league details'
+
 mespronos.league.index:
   path: 'mespronos/league/{league}'
   defaults:

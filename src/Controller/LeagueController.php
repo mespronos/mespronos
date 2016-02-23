@@ -19,9 +19,10 @@ use Drupal\mespronos\Entity\RankingLeague;
 class LeagueController extends ControllerBase {
 
   public function index(League $league) {
-    $betController = new BettingController();
-    $last_bets = $betController->lastBets($league,100);
-    $next_bets = $betController->nextBets($league,100);
+    $last_bets_controller = new LastBetsController();
+    $next_bets_controller = new NextBetsController();
+    $last_bets = $last_bets_controller->lastBets($league,100);
+    $next_bets = $next_bets_controller->nextBets($league,100);
     $ranking = RankingController::getRankingLeague($league);
     return [
       '#theme' =>'league-details',
@@ -38,4 +39,7 @@ class LeagueController extends ControllerBase {
     return $league->label();
   }
 
+  public function leaguesList() {
+
+  }
 }
