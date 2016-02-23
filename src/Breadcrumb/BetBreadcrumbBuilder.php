@@ -15,7 +15,7 @@ use Drupal\Core\Breadcrumb\Breadcrumb;
 class BetBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     public function applies(RouteMatchInterface $route_match) {
-        return $route_match->getCurrentRouteMatch()->getRouteName() == 'mespronos.day.bet';
+        return in_array($route_match->getCurrentRouteMatch()->getRouteName(),['mespronos.day.bet','mespronos.lastbetsdetails']);
     }
 
     public function build(RouteMatchInterface $route_match) {
