@@ -8,14 +8,8 @@
 namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\mespronos\Controller\BettingController;
-use Drupal\mespronos\Controller\LastBetController;
-use Drupal\mespronos\Entity\Controller\DayController;
-use Drupal\mespronos\Entity\League;
-use Drupal\mespronos\Entity\Controller\BetController;
+use Drupal\mespronos\Controller\LastBetsController;
 
 
 /**
@@ -53,8 +47,8 @@ class LastBets extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $lastBetController = new LastBetController();
-    return $lastBetController->lastBets(null,5);
+    $lastBetsController = new LastBetsController();
+    return $lastBetsController->lastBets(null,5);
   }
 
 }

@@ -12,6 +12,7 @@ use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\mespronos\Controller\BettingController;
+use Drupal\mespronos\Controller\NextBetsController;
 use Drupal\mespronos\Entity\Controller\DayController;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Day;
@@ -52,8 +53,8 @@ class NextBets extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $betController = new BettingController();
-    return $betController->nextBets(null,5);
+    $next_bet_controller = new NextBetsController();
+    return $next_bet_controller->nextBets(null,5);
   }
 
 }

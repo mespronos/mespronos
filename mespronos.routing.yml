@@ -41,7 +41,7 @@ mespronos.remove:
 mespronos.nextbets:
   path: 'mespronos/next-bets'
   defaults:
-    _controller: '\Drupal\mespronos\Controller\BettingController::nextBets'
+    _controller: '\Drupal\mespronos\Controller\NextBetsController::nextBets'
     _title: 'Next bets'
   requirements:
     _permission: 'view next bets days'
@@ -65,7 +65,7 @@ mespronos.day.bet:
 mespronos.lastbets:
   path: 'mespronos/last-bets'
   defaults:
-    _controller: '\Drupal\mespronos\Controller\LastBetController::lastbets'
+    _controller: '\Drupal\mespronos\Controller\LastBetsController::lastbets'
     _title: 'Last bets'
   requirements:
     _permission: 'view last bets days'

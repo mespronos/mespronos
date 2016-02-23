@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos\Controller\LastBetController.
+ * Contains Drupal\mespronos\Controller\LastBetsController.
  */
 
 namespace Drupal\mespronos\Controller;
@@ -16,11 +16,11 @@ use Drupal\Core\Link;
 use Drupal\user\Entity\User;
 
 /**
- * Class LastBetController.
+ * Class LastBetsController.
  *
  * @package Drupal\mespronos\Controller
  */
-class LastBetController extends ControllerBase {
+class LastBetsController extends ControllerBase {
 
     public function lastBets(League $league = null,$nb = 10) {
         $user = User::load(\Drupal::currentUser()->id());

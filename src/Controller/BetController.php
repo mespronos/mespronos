@@ -129,11 +129,11 @@ class BetController extends ControllerBase {
 
   /**
    * Determine number of games left to bet for a given user on a given day
-   * @param \Drupal\Core\Session\AccountProxy $user
+   * @param \Drupal\user\Entity\User $user
    * @param \Drupal\mespronos\Entity\Day $day
    * @return integer number of game left to bet
    */
-  public static function betsLeft(\Drupal\Core\Session\AccountProxy $user,Day $day) {
+  public static function betsLeft(\Drupal\user\Entity\User $user,Day $day) {
     $now_date = new \DateTime();
     $now_date->setTimezone(new \DateTimeZone("GMT"));
 
