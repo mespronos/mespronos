@@ -50,11 +50,12 @@ mespronos.leagues.list:
   path: 'mespronos/leagues'
   defaults:
     _controller: '\Drupal\mespronos\Controller\LeagueController::leaguesList'
+    _title: 'Leagues'
   requirements:
     _permission: 'see league details'
 
 mespronos.league.index:
-  path: 'mespronos/league/{league}'
+  path: 'mespronos/leagues/{league}'
   defaults:
     _controller: '\Drupal\mespronos\Controller\LeagueController::index'
     _title_callback: '\Drupal\mespronos\Controller\LeagueController::indexTitle'
