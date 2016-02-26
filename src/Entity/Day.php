@@ -43,7 +43,8 @@ use Drupal\mespronos\MPNEntityInterface;
  *   links = {
  *     "canonical" = "/entity.day.canonical",
  *     "edit-form" = "/entity.day.edit_form",
- *     "recalculate_ranking" = "/entity.day.recalculate_ranking",
+ *     "recount_points" = "/entity.day.recount_points",
+ *     "recount_ranking" = "/entity.day.recount_ranking",
  *     "delete-form" = "/entity.day.delete_form"
  *   }
  * )
@@ -70,6 +71,27 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
     $query = \Drupal::entityQuery('game')->condition('day', $this->id());
     $ids = $query->execute();
     return count($ids);
+  }
+
+
+  /**
+   * Return all games for day
+   * @return \Drupal\mespronos\Entity\Game[]
+   */
+  public function getGames() {
+    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $query = \Drupal::entityQuery('game');
+
+    $query->condition('day',$this->id());
+
+    $query->sort('game_date','ASC');
+    $query->sort('id','ASC');
+
+    $ids = $query->execute();
+
+    $games = $game_storage->loadMultiple($ids);
+
+    return $games;
   }
 
   public function getNbGameWIthScore() {

@@ -106,6 +106,17 @@ class BetController extends ControllerBase {
 
   }
 
+  public static function updateBetsForDay(Day $day) {
+    $games = $day->getGames();
+
+    foreach ($games as $game) {
+      self::updateBetsFromGame($game);
+    }
+    drupal_set_message(t('Points updated for @nb games',['@nb'=>count($games)]));
+    $response = RankingController::recalculateDay($day);
+    return $response;
+  }
+
   /**
    * @param \Drupal\Core\Session\AccountProxy $user
    * @param \Drupal\mespronos\Entity\Game $game

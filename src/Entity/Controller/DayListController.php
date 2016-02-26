@@ -57,12 +57,21 @@ class DayListController extends EntityListBuilder
     $user = \Drupal::currentUser();
 
     if ($user->hasPermission('set marks')) {
-      $operations['update_ranking'] = array(
-        'title' => $this->t('Update ranking'),
+      $operations['recount_points'] = array(
+        'title' => $this->t('Re-count points'),
         'weight' => 20,
         'url' =>
           new Url(
-            'entity.day.recalculate_ranking', array(
+            'entity.day.recount_points', array(
+            'day' => $entity->id(),
+          ))
+      );
+      $operations['recount_ranking'] = array(
+        'title' => $this->t('Re-count ranking'),
+        'weight' => 20,
+        'url' =>
+          new Url(
+            'entity.day.recount_ranking', array(
             'day' => $entity->id(),
           ))
       );

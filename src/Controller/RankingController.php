@@ -25,8 +25,6 @@ class RankingController extends ControllerBase {
    * @return \Drupal\mespronos\Controller\RedirectResponse
    */
   public static function recalculateDay($day) {
-    $day_storage = \Drupal::entityManager()->getStorage('day');
-    $day = $day_storage->load($day);
     $nb_updates = RankingDay::createRanking($day);
     RankingLeague::createRanking($day->getLeague());
     RankingGeneral::createRanking();
@@ -59,6 +57,7 @@ class RankingController extends ControllerBase {
     $ranking = RankingGeneral::getRanking();
     return self::getTableFromRanking($ranking);
   }
+  
   public static function getRankingLeague(League $league) {
     $ranking = RankingLeague::getRanking($league);
     return self::getTableFromRanking($ranking);
