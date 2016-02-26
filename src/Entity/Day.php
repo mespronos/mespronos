@@ -73,7 +73,6 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
     return count($ids);
   }
 
-
   /**
    * Return all games for day
    * @return \Drupal\mespronos\Entity\Game[]

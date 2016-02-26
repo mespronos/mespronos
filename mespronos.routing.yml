@@ -184,6 +184,14 @@ entity.league.edit_form:
   requirements:
     _entity_access: 'league.edit'
 
+entity.league.recount_points:
+  path: '/admin/league/{league}/recount_points'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\BetController::updateBetsForLeague'
+    _title: 'Recalculate points and ranking for a league'
+  requirements:
+    _permission: 'set marks'
+
 entity.league.delete_form:
   path: '/admin/mespronos/content/league/{league}/delete'
   defaults:

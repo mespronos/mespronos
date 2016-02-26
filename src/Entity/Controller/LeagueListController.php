@@ -54,4 +54,23 @@ class LeagueListController extends EntityListBuilder {
     return $row + parent::buildRow($entity);
   }
 
+  protected function getDefaultOperations(EntityInterface $entity) {
+    $operations = parent::getDefaultOperations($entity);
+    $user = \Drupal::currentUser();
+
+    if ($user->hasPermission('set marks')) {
+      $operations['recount_points'] = array(
+        'title' => $this->t('Re-count points and ranking'),
+        'weight' => 20,
+        'url' =>
+          new Url(
+            'entity.league.recount_points', array(
+            'league' => $entity->id(),
+          ))
+      );
+    }
+
+    return $operations;
+  }
+
 }

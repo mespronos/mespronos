@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
+use Drupal\Core\Database\Database;
 
 /**
  * Defines the League entity.
@@ -43,6 +44,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *   links = {
  *     "canonical" = "/entity.league.canonical",
  *     "edit-form" = "/entity.league.edit_form",
+ *     "recount_points" = "/entity.league.recount_points",
  *     "delete-form" = "/entity.league.delete_form",
  *     "collection" = "/entity.league.collection"
  *   }
@@ -105,6 +107,44 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       ->condition('league', $this->id());
     $ids = $query->execute();
     return count($ids);
+  }
+
+
+  /**
+   * Return all days for league
+   * @return \Drupal\mespronos\Entity\Day[]
+   */
+  public function getDays() {
+    $storage = \Drupal::entityManager()->getStorage('day');
+    $query = \Drupal::entityQuery('day');
+
+    $query->condition('league',$this->id());
+
+    $query->sort('id','ASC');
+
+    $ids = $query->execute();
+
+    $days = $storage->loadMultiple($ids);
+
+    return $days;
+  }
+
+  /**
+   * Return all games for day
+   * @return \Drupal\mespronos\Entity\Game[]
+   */
+  public function getGames() {
+    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__game','g');
+    $query->join('mespronos__day','d','d.id = g.day');
+    $query->addField('g','id');
+    $query->condition('d.league',$this->id());
+    $results = $query->execute()->fetchAllAssoc('id');
+
+    $results = array_map(function($v) {return $v->id;},$results);
+    $games = $game_storage->loadMultiple($results);
+    return $games;
   }
 
   /**

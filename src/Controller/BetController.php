@@ -9,9 +9,15 @@ namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\League;
+use Drupal\mespronos\Entity\RankingDay;
+use Drupal\mespronos\Entity\RankingLeague;
+use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\mespronos\Entity\Game;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Database\Query\Condition;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Cache\Cache;
 
 /**
  * Provides a list controller for Game entity.
@@ -23,13 +29,21 @@ class BetController extends ControllerBase {
   /**
    * Define bets scores for a given game
    * @param \Drupal\mespronos\Entity\Game $game
+   * @return boolean
    */
   public static function updateBetsFromGame(Game $game) {
-
+    $injected_database = Database::getConnection();
+    if(!$game->isScoreSetted()) {
+      $query = $injected_database->update('mespronos__bet');
+      $query->fields(['points'=>null,'changed'=>time()]);
+      $query->condition('game',$game->id());
+      $query->execute();
+      unset($query);
+      return false;
+    }
     $st1 = $game->getScoreTeam1();
     $st2 = $game->getScoreTeam2();
     $points = $game->getLeague()->getPoints();
-    $injected_database = Database::getConnection();
 
     //perfect bet
     $query = $injected_database->update('mespronos__bet');
@@ -103,7 +117,7 @@ class BetController extends ControllerBase {
         unset($query);
       }
     }
-
+    return true;
   }
 
   public static function updateBetsForDay(Day $day) {
@@ -115,6 +129,28 @@ class BetController extends ControllerBase {
     drupal_set_message(t('Points updated for @nb games',['@nb'=>count($games)]));
     $response = RankingController::recalculateDay($day);
     return $response;
+  }
+
+  public static function updateBetsForLeague(League $league) {
+    $games = $league->getGames();
+    $nb_game_updated = 0;
+    foreach ($games as $game) {
+      if(self::updateBetsFromGame($game)) {
+        $nb_game_updated++;
+      }
+    }
+    $days = $league->getDays();
+    $nb_updates = 0;
+    foreach($days as $day) {
+      $nb_updates += RankingDay::createRanking($day);
+    }
+    RankingLeague::createRanking($league);
+    RankingGeneral::createRanking();
+    Cache::invalidateTags(array('ranking'));
+
+    drupal_set_message(t('Points updated for @nb games',['@nb'=>$nb_game_updated]));
+    drupal_set_message(t('Ranking updated for @nb days',['@nb'=>count($days)]));
+    return new RedirectResponse(\Drupal::url('entity.league.collection'));
   }
 
   /**

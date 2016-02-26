@@ -22,9 +22,9 @@ class RankingController extends ControllerBase {
 
   /**
    * @param \Drupal\mespronos\Entity\Day $day
-   * @return \Drupal\mespronos\Controller\RedirectResponse
+   * @return \Symfony\Component\HttpFoundation\RedirectResponse
    */
-  public static function recalculateDay($day) {
+  public static function recalculateDay(Day $day) {
     $nb_updates = RankingDay::createRanking($day);
     RankingLeague::createRanking($day->getLeague());
     RankingGeneral::createRanking();
