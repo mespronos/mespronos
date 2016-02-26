@@ -134,14 +134,18 @@ class BetController extends ControllerBase {
   public static function updateBetsForLeague(League $league) {
     $games = $league->getGames();
     $nb_game_updated = 0;
+    $days_to_update = [];
     foreach ($games as $game) {
       if(self::updateBetsFromGame($game)) {
         $nb_game_updated++;
+        if(!isset($days_to_update[$game->getDayId()])) {
+          $days_to_update[$game->getDayId()] = $game->getDay();
+        }
       }
+
     }
-    $days = $league->getDays();
     $nb_updates = 0;
-    foreach($days as $day) {
+    foreach($days_to_update as $day) {
       $nb_updates += RankingDay::createRanking($day);
     }
     RankingLeague::createRanking($league);
@@ -149,7 +153,7 @@ class BetController extends ControllerBase {
     Cache::invalidateTags(array('ranking'));
 
     drupal_set_message(t('Points updated for @nb games',['@nb'=>$nb_game_updated]));
-    drupal_set_message(t('Ranking updated for @nb days',['@nb'=>count($days)]));
+    drupal_set_message(t('Ranking updated for @nb days',['@nb'=>count($days_to_update)]));
     return new RedirectResponse(\Drupal::url('entity.league.collection'));
   }
 
