@@ -30,7 +30,7 @@ class RankingController extends ControllerBase {
     RankingGeneral::createRanking();
     drupal_set_message(t('Ranking updated for @nb betters',array('@nb'=>$nb_updates)));
     Cache::invalidateTags(array('ranking'));
-    return new RedirectResponse(\Drupal::url('entity.day.list'));
+    return new RedirectResponse(\Drupal::url('entity.day.collection'));
   }
 
   public static function sortRankingDataAndDefinedPosition(&$data) {

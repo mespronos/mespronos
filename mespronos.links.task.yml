@@ -48,7 +48,7 @@ entity.sport.collection:
   weight : 10
 
 entity.day.collection:
-  route_name: entity.day.list
+  route_name: entity.day.collection
   title: 'League days'
   description: 'League days listing'
   base_route: mespronos.dashboard

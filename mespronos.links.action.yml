@@ -9,39 +9,33 @@ entity.team.add_form:
   title: 'Add team'
   appears_on:
     - entity.team.collection
-    - entity.team.canonical
 
 entity.league.add_form:
   route_name: entity.league.add_form
   title: 'Add league'
   appears_on:
     - entity.league.collection
-    - entity.league.canonical
 
 entity.sport.add_form:
   route_name: entity.sport.add_form
   title: 'Add sport'
   appears_on:
     - entity.sport.collection
-    - entity.sport.canonical
 
 entity.day.add_form:
   route_name: entity.day.add_form
   title: 'Add league day'
   appears_on:
-    - entity.day.list
-    - entity.day.canonical
+    - entity.day.collection
 
 entity.game.add_form:
   route_name: entity.game.add_form
   title: 'Add Game'
   appears_on:
     - entity.game.collection
-    - entity.game.canonical
 
 entity.bet.add_form:
   route_name: entity.bet.add_form
   title: 'Add Bet'
   appears_on:
     - entity.bet.collection
-    - entity.bet.canonical
