@@ -75,9 +75,9 @@ class LastBetsController extends ControllerBase {
                 $row = [
                     'data' => [
                         'day' => '',
-                        'games_betted' => $ranking->getGameBetted(),
-                        'points' =>  $ranking->getPoints(),
-                        'position' =>  $ranking->getPosition(),
+                        'games_betted' => $ranking ? $ranking->getGameBetted() : ' ',
+                        'points' =>  $ranking ? $ranking->getPoints() : ' ',
+                        'position' =>  $ranking ? $ranking->getPosition() : ' ',
                         'action' =>  Link::fromTextAndUrl(t('Details'),Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])),
                     ]
                 ];
