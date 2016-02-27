@@ -65,8 +65,8 @@ function mespronos_form_user_register_form_alter(&$form, \Drupal\Core\Form\FormS
   $form['contact']['#access'] = false;
 }
 
-
 function mespronos_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  unset($form['name']['#attributes']['autofocus']);
   $form['#submit'][] = 'mespronos_form_user_login_form_submit';
 }
 
