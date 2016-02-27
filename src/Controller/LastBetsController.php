@@ -62,24 +62,12 @@ class LastBetsController extends ControllerBase {
                 $leagues[$league_id] = League::load($league_id);
             }
             $league = $leagues[$league_id];
-
+            $ranking = false;
             if($user->id()>0) {
                 $ranking = RankingDay::getRankingForBetter($user,$day->entity);
                 $action_links = Link::fromTextAndUrl(
                   t('Details'),
                   Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])
-                );
-            }
-            else {
-                $ranking = false;
-                $action_links = Link::fromTextAndUrl(
-                  t('Log in to see your score'),
-                  Url::fromRoute('user.login',[],[
-                      'query' => [
-                        'destination' => Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])->toString(),
-                      ]
-                    ]
-                  )
                 );
             }
             $row = [
@@ -88,7 +76,7 @@ class LastBetsController extends ControllerBase {
                 'games_betted' => $user->id() > 0 && $ranking ? $ranking->getGameBetted() : '/',
                 'points' => $user->id() > 0 && $ranking ? $ranking->getPoints() : '/',
                 'position' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '/',
-                'action' => $action_links,
+                'action' => $ranking ? $action_links : '',
               ]
             ];
             $cell = [];
