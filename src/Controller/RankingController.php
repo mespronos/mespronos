@@ -80,6 +80,7 @@ class RankingController extends ControllerBase {
       $row = [
         'data' => [
           'position' => $ranking->get('position')->value != $old_rank ? $ranking->get('position')->value : '-',
+          'picture' => render(UserController::getUserPictureAsRenderableArray($ranking->getOwner(),'mini_thumbnail')),
           'better' => $ranking->getOwner()->getUsername(),
           'points' => $ranking->get('points')->value,
           'games_betted' => $ranking->get('games_betted')->value,
@@ -99,6 +100,7 @@ class RankingController extends ControllerBase {
     }
     $header = [
       t('Rank',array(),array('context'=>'mespronos-ranking')),
+      '',
       t('Better',array(),array('context'=>'mespronos-ranking')),
       t('Points',array(),array('context'=>'mespronos-ranking')),
       t('Bets',array(),array('context'=>'mespronos-ranking')),

@@ -8,9 +8,9 @@
 namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\mespronos\Controller\UserController;
 use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\user\Entity\User;
-use Drupal\file\Entity\File;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 
@@ -30,7 +30,7 @@ class UserBlock extends BlockBase {
    */
   public function build() {
     $user = User::load(\Drupal::currentUser()->id());
-    $user_picture = $this->getUserPictureRendarableArray();
+    $user_picture = UserController::getUserPictureAsRenderableArray($user);
     $ranking = RankingGeneral::getRankingForBetter($user);
     return [
       '#theme' =>'user-block',
@@ -50,39 +50,4 @@ class UserBlock extends BlockBase {
       ],
     ];
   }
-
-  public function getUserPictureRendarableArray() {
-
-    $user = User::load(\Drupal::currentUser()->id());
-    $user_picture = $user->get("user_picture")->first();
-    if($user_picture && !is_null($user_picture) && $user_picture_file = File::load($user_picture->getValue()['target_id'])) {      ;
-      $variables = array(
-        'style_name' => 'thumbnail',
-        'uri' => $user_picture_file->getFileUri(),
-      );
-      $image = \Drupal::service('image.factory')->get($user_picture_file->getFileUri());
-      if ($image->isValid()) {
-        $variables['width'] = $image->getWidth();
-        $variables['height'] = $image->getHeight();
-      }
-      else {
-        $variables['width'] = $variables['height'] = NULL;
-      }
-
-      $logo_render_array = [
-        '#theme' => 'image_style',
-        '#width' => $variables['width'],
-        '#height' => $variables['height'],
-        '#style_name' => $variables['style_name'],
-        '#uri' => $variables['uri'],
-      ];
-    }
-    else {
-      $logo_render_array = [];
-    }
-    return $logo_render_array;
-
-  }
-
-
 }

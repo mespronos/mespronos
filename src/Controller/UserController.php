@@ -10,6 +10,8 @@ namespace Drupal\mespronos\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\user\Entity\User;
+use Drupal\file\Entity\File;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
@@ -61,5 +63,36 @@ class UserController extends ControllerBase {
       '#weight' => 101,
     ];
     return $login_form;
+  }
+
+  public static function getUserPictureAsRenderableArray(User $user,$style_name = 'thumbnail') {
+    $user_picture = $user->get("user_picture")->first();
+    if($user_picture && !is_null($user_picture) && $user_picture_file = File::load($user_picture->getValue()['target_id'])) {      ;
+      $variables = array(
+          'style_name' => $style_name,
+          'uri' => $user_picture_file->getFileUri(),
+      );
+      $image = \Drupal::service('image.factory')->get($user_picture_file->getFileUri());
+      if ($image->isValid()) {
+        $variables['width'] = $image->getWidth();
+        $variables['height'] = $image->getHeight();
+      }
+      else {
+        $variables['width'] = $variables['height'] = NULL;
+      }
+
+      $logo_render_array = [
+          '#theme' => 'image_style',
+          '#width' => $variables['width'],
+          '#height' => $variables['height'],
+          '#style_name' => $variables['style_name'],
+          '#uri' => $variables['uri'],
+      ];
+    }
+    else {
+      $logo_render_array = [];
+    }
+    return $logo_render_array;
+
   }
 }
