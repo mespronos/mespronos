@@ -4,6 +4,7 @@
   - Refactoring Controller
   - Enhance Importer feedback
   - Add option to recount points for a whole league
+  - Flush cache on mark set.
   
 ## 8.x-1.0alpha2, 2016-02-19
   - Create a league details page with ranking
