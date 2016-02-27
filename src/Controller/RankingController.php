@@ -77,10 +77,12 @@ class RankingController extends ControllerBase {
     $rows = [];
     $old_rank = null;
     foreach ($rankings  as  $ranking) {
+      $better =$ranking->getOwner();
+      $picture = UserController::getUserPictureAsRenderableArray($better,'mini_thumbnail');
       $row = [
         'data' => [
           'position' => $ranking->get('position')->value != $old_rank ? $ranking->get('position')->value : '-',
-          'picture' => render(UserController::getUserPictureAsRenderableArray($ranking->getOwner(),'mini_thumbnail')),
+          'picture' => render($picture),
           'better' => $ranking->getOwner()->getUsername(),
           'points' => $ranking->get('points')->value,
           'games_betted' => $ranking->get('games_betted')->value,
