@@ -42,7 +42,6 @@ use Drupal\mespronos\Controller\BetController;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/admin/game/{game}",
  *     "edit-form" = "/admin/game/{game}/edit",
  *     "delete-form" = "/admin/game/{game}/delete"
  *   }

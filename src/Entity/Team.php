@@ -42,7 +42,6 @@ use Drupal\mespronos\MPNEntityInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/entity.team.canonical",
  *     "edit-form" = "/entity.team.edit_form",
  *     "delete-form" = "/entity.team.delete_form",
  *     "collection" = "/entity.team.collection"

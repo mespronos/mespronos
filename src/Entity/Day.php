@@ -41,11 +41,11 @@ use Drupal\mespronos\MPNEntityInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/entity.day.canonical",
  *     "edit-form" = "/entity.day.edit_form",
  *     "recount_points" = "/entity.day.recount_points",
  *     "recount_ranking" = "/entity.day.recount_ranking",
- *     "delete-form" = "/entity.day.delete_form"
+ *     "delete-form" = "/entity.day.delete_form",
+ *     "collection" = "/entity.sport.collection"
  *   }
  * )
  */

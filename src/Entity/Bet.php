@@ -41,7 +41,6 @@ use Drupal\mespronos\MPNEntityInterface;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/admin/bet/{bet}",
  *     "edit-form" = "/admin/bet/{bet}/edit",
  *     "delete-form" = "/admin/bet/{bet}/delete"
  *   }

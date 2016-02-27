@@ -111,14 +111,6 @@ mespronos.login:
     _permission: 'access content'
 
 # Team routing definition
-entity.team.canonical:
-  path: '/admin/mespronos/team/{team}'
-  defaults:
-    _entity_view: 'team'
-    _title: 'Team Content'
-  requirements:
-    _entity_access: 'team.view'
-
 entity.team.collection:
   path: '/admin/mespronos/team'
   defaults:
@@ -152,14 +144,6 @@ entity.team.delete_form:
     _entity_access: 'team.delete'
 
 # League routing definition
-entity.league.canonical:
-  path: '/admin/mespronos/content/league/{league}'
-  defaults:
-    _entity_view: 'league'
-    _title: 'League Content'
-  requirements:
-    _entity_access: 'league.view'
-
 entity.league.collection:
   path: '/admin/mespronos/content/league'
   defaults:
@@ -201,14 +185,6 @@ entity.league.delete_form:
     _entity_access: 'league.delete'
 
 # Sport routing definition
-entity.sport.canonical:
-  path: '/admin/mespronos/sport/{sport}'
-  defaults:
-    _entity_view: 'sport'
-    _title: 'Sport Content'
-  requirements:
-    _entity_access: 'sport.view'
-
 entity.sport.collection:
   path: '/admin/mespronos/sport'
   defaults:
@@ -242,15 +218,7 @@ entity.sport.delete_form:
     _entity_access: 'sport.delete'
 
 # Day routing definition
-entity.day.canonical:
-  path: '/admin/day/{day}'
-  defaults:
-    _entity_view: 'day'
-    _title: 'Day Content'
-  requirements:
-    _entity_access: 'day.view'
-
-entity.day.list:
+entity.day.collection:
   path: '/admin/mespronos/day'
   defaults:
     _entity_list: 'day'
@@ -308,14 +276,6 @@ mespronos.importer_start:
 
 
 # Game routing definition
-entity.game.canonical:
-  path: '/admin/game/{game}'
-  defaults:
-    _entity_view: 'game'
-    _title: 'Game Content'
-  requirements:
-    _entity_access: 'game.view'
-
 entity.game.collection:
   path: '/admin/game'
   defaults:

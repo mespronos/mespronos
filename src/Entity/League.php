@@ -42,7 +42,6 @@ use Drupal\Core\Database\Database;
  *     "uuid" = "uuid",
  *   },
  *   links = {
- *     "canonical" = "/entity.league.canonical",
  *     "edit-form" = "/entity.league.edit_form",
  *     "recount_points" = "/entity.league.recount_points",
  *     "delete-form" = "/entity.league.delete_form",
