@@ -107,7 +107,7 @@ class NextBetsController extends ControllerBase {
             }
             else {
                 $row['data']['action'] = Link::fromTextAndUrl(
-                  t('Log in and bet'),
+                  t('Log in'),
                   Url::fromRoute('mespronos.login',[],['query' => ['destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day_id])->toString()]])
                 );
             }
