@@ -68,10 +68,16 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
 
   public function label() {
     $league = $this->getLeague();
+    $day = $this->getDay();
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
 
-    return t('@team1 - @team2 (@league)',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'@league'=>$league->label()));
+    return t('@team1 - @team2 (@league - @day)',[
+      '@team1'=> $team1->label(),
+      '@team2'=> $team2->label(),
+      '@league'=>$league->label(),
+      '@day' => $day->label()
+    ]);
   }
 
   public function labelTeams() {
