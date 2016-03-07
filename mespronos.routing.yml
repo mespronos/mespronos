@@ -1,7 +1,7 @@
 mespronos.dashboard:
   path: '/admin/mespronos'
   defaults:
-    _controller: '\Drupal\mespronos\Controller\DefaultController::index'
+    _controller: '\Drupal\mespronos\Controller\DashboardController::index'
     _title: 'Mespronos'
   requirements:
     _permission: 'access administration mespronos'

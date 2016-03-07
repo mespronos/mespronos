@@ -1,0 +1,13 @@
+<fieldset id="dashboard-stats">
+    <legend>{% trans 'Stats' %}</legend>
+    <ul>
+        {% for stat in stats %}
+            <li>{{ stat }}</li>
+        {% endfor %}
+    </ul>
+</fieldset>
+
+<fieldset id="dashboard-marks">
+    <legend>{% trans 'Marks' %}</legend>
+    {{marks_form}}
+</fieldset>

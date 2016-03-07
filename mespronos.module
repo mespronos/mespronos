@@ -46,6 +46,13 @@ function mespronos_theme() {
       'ranking' => NULL,
     ),
   );
+  $theme['dashboard'] = array(
+    'template' => 'dashboard',
+    'variables' => array(
+      'marks_form' => NULL,
+      'stats' => NULL,
+    ),
+  );
 
   return $theme;
 }
