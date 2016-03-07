@@ -6,8 +6,8 @@
 <h3>{% trans 'Points' %}</h3>
 <ul>
     {% if league.betting_type_machine == 'score' %}
-        <li>{% trans %}Exact score found :{{ league.points.points_score_found}}{% endtrans %}</li>
+        <li>{% trans %}Exact score found : {{ league.points.points_score_found}}{% endtrans %}</li>
     {% endif %}
-    <li>{% trans %}Winner found :{{ league.points.points_winner_found}}{% endtrans %}</li>
-    <li>{% trans %}Wrong bet :{{ league.points.points_participation}}{% endtrans %}</li>
+    <li>{% trans %}Winner found : {{ league.points.points_winner_found}}{% endtrans %}</li>
+    <li>{% trans %}Wrong bet : {{ league.points.points_participation}}{% endtrans %}</li>
 </ul>
