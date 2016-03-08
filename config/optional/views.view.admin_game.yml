@@ -7,7 +7,7 @@ dependencies:
     - mespronos
     - user
 _core:
-  default_config_hash: nzA9s6WSLkltWSiW-lt_kdTDeXS0ttHWFON3vFYBBUQ
+  default_config_hash: _1GA_TQ7OJxdm7zRCSQqC-Ad5Kh5q3PlRj9zZ307OBY
 id: admin_game
 label: 'Admin - Game'
 module: views
@@ -83,6 +83,7 @@ display:
           columns:
             sport: sport
             name: name
+            number: number
             name_3: number
             game_date: game_date
             name_2: name_2
@@ -90,7 +91,6 @@ display:
             score_team_2: score_team_1
             name_1: name_1
             operations: operations
-            number: number
           info:
             sport:
               sortable: true
@@ -104,6 +104,13 @@ display:
               default_sort_order: asc
               align: ''
               separator: ''
+              empty_column: false
+              responsive: ''
+            number:
+              sortable: true
+              default_sort_order: asc
+              align: ''
+              separator: ' - '
               empty_column: false
               responsive: ''
             name_3:
@@ -153,13 +160,6 @@ display:
               default_sort_order: asc
               align: ''
               separator: ''
-              empty_column: false
-              responsive: ''
-            number:
-              sortable: false
-              default_sort_order: asc
-              align: ''
-              separator: ' - '
               empty_column: false
               responsive: ''
           default: game_date
@@ -813,7 +813,90 @@ display:
           empty_zero: false
           hide_alter_empty: true
           destination: true
-      filters: {  }
+      filters:
+        name:
+          id: name
+          table: mespronos__league
+          field: name
+          relationship: league
+          group_type: group
+          admin_label: ''
+          operator: contains
+          value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: name_op
+            label: League
+            description: ''
+            use_operator: false
+            operator: name_op
+            identifier: name
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: league
+          entity_field: name
+          plugin_id: string
+        number:
+          id: number
+          table: mespronos__day
+          field: number
+          relationship: day
+          group_type: group
+          admin_label: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
+          group: 1
+          exposed: true
+          expose:
+            operator_id: number_op
+            label: 'Day number'
+            description: ''
+            use_operator: false
+            operator: number_op
+            identifier: number
+            required: false
+            remember: false
+            multiple: false
+            remember_roles:
+              authenticated: authenticated
+              anonymous: '0'
+              administrator: '0'
+          is_grouped: false
+          group_info:
+            label: ''
+            description: ''
+            identifier: ''
+            optional: true
+            widget: select
+            multiple: false
+            remember: false
+            default_group: All
+            default_group_multiple: {  }
+            group_items: {  }
+          entity_type: day
+          entity_field: number
+          plugin_id: numeric
       sorts:
         sport:
           id: sport
@@ -877,6 +960,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - user.permissions
       cacheable: false
@@ -902,6 +986,7 @@ display:
       contexts:
         - 'languages:language_content'
         - 'languages:language_interface'
+        - url
         - url.query_args
         - user.permissions
       cacheable: false
