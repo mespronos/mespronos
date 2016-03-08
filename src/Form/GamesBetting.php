@@ -49,9 +49,8 @@ class GamesBetting extends FormBase {
       $bet = BetController::loadForUser($user,$game);
       $form['games'][$game->id()] = array(
         '#type' => 'fieldset',
-        '#title' => $game->label_full(),
         '#attributes' => array(
-          'class' => array('game'),
+          'class' => array('game','game-wrapper'),
         ),
       );
       $form['games'][$game->id()]['token_id'] = array(
@@ -65,7 +64,7 @@ class GamesBetting extends FormBase {
       if($betting_type == 'score') {
         $form['games'][$game->id()]['score_team_1'] = array(
           '#type' => 'textfield',
-          '#size' => '5',
+          '#size' => '2',
           '#default_value' => $bet->getScoreTeam1(),
           '#title' => $game->get('team_1')->entity->label(true),
           '#attributes' => [
@@ -76,7 +75,7 @@ class GamesBetting extends FormBase {
         );
         $form['games'][$game->id()]['score_team_2'] = array(
           '#type' => 'textfield',
-          '#size' => '5',
+          '#size' => '2',
           '#default_value' => $bet->getScoreTeam2(),
           '#title' => $game->get('team_2')->entity->label(true),
           '#attributes' => [
@@ -90,9 +89,9 @@ class GamesBetting extends FormBase {
         $form['games'][$game->id()]['winner'] = [
           '#type' => 'radios',
           '#options' => [
-            '1' => $game->get('team_1')->entity->label(),
+            '1' => $game->get('team_1')->entity->label(true),
             'N' => t('Draw'),
-            '2' => $game->get('team_2')->entity->label(),
+            '2' => $game->get('team_2')->entity->label(true),
           ],
           '#prefix' => '<div class="game_wrapper_winner">',
           '#suffix' => '</div>',
