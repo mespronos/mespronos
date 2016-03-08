@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
+use Drupal\Core\Url;
 
 /**
  * Defines the Day entity.
@@ -104,6 +105,21 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
 
   public function label() {
     return $this->get('name')->value;
+  }
+  
+  public function getRenderableLabel() {
+    $league = $this->getLeague();
+    return [
+      '#theme' => 'day',
+      '#league' => [
+        'url' => Url::fromRoute('mespronos.league.index',['league'=>$league->id()]),
+        'label' => $league->label(),
+        'logo' => $league->getLogo('mini_logo')
+      ] ,
+      '#day'=> [
+        'label'=> $this->label(),
+      ]
+    ];
   }
   /**
    * {@inheritdoc}

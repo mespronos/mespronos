@@ -62,54 +62,36 @@ class LastBetsController extends ControllerBase {
     }
 
     public static function parseDays($days,User $user,$page_league) {
-        $leagues = [];
         $rows = [];
         foreach ($days  as $day_id => $day) {
-            $league_id = $day->entity->get('league')->first()->getValue()['target_id'];
-            if(!isset($leagues[$league_id])) {
-                $leagues[$league_id] = League::load($league_id);
-            }
-            $league = $leagues[$league_id];
+            $day_renderable = $day->entity->getRenderableLabel();
+
+            $row = [
+              'data' => [
+                'day' => [
+                  'data' => render($day_renderable),
+                  'class' => ['day-cell']
+                ],
+              ]
+            ];
             if($user->id()>0) {
                 $ranking = RankingDay::getRankingForBetter($user,$day->entity);
-                $row = [
-                    'data' => [
-                        'day' =>  [
-                          'data' => "",
-                          'class' => ['day-cell']
-                        ],
-                        'games_betted' => $ranking ? $ranking->getGameBetted() : ' ',
-                        'points' =>  $ranking ? $ranking->getPoints() : ' ',
-                        'position' =>  $ranking ? $ranking->getPosition() : ' ',
-                        'action' =>  Link::fromTextAndUrl(t('Details'),Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])),
-                    ]
-                ];
+                $row['data']['games_betted'] = $ranking ? $ranking->getGameBetted() : ' ';
+                $row['data']['points'] = $ranking ? $ranking->getPoints() : ' ';
+                $row['data']['position'] = $ranking ? $ranking->getPosition() : ' ';
+                $row['data']['action'] = Link::fromTextAndUrl(t('Details'),Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()]));
             }
             else {
-                $row = [
-                    'data' => [
-                        'day' => '',
-                        'action' =>   Link::fromTextAndUrl(
-                            t('Log in to see your score'),
-                            Url::fromRoute('user.login',[],[
-                                    'query' => [
-                                        'destination' => Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])->toString(),
-                                    ]
-                                ]
-                            )
-                        ),
+                $row['data']['action'] = Link::fromTextAndUrl(
+                  t('Log in to see your score'),
+                  Url::fromRoute('user.login',[],[
+                      'query' => [
+                        'destination' => Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])->toString(),
+                      ]
                     ]
-                ];
+                  )
+                );
             }
-            $cell = [];
-            if($page_league == null) {
-                $cell['link'] = Link::fromTextAndUrl($league->label(true),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
-            }
-            $cell['day'] = [
-              '#type' => 'markup',
-              '#markup' => $day->entity->label(),
-            ];
-            $row['data']['day']['data'] = render($cell);
 
             $rows[] = $row;
         }

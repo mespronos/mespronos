@@ -12,6 +12,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\Core\Database\Database;
+use Drupal\file\Entity\File;
 
 /**
  * Defines the League entity.
@@ -226,6 +227,37 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       return $this->get('name')->value;
     }
   }
+
+  public function getLogo($style_name = 'thumbnail') {
+    $logo = $this->get("field_league_logo")->first();
+    if($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {      ;
+      $variables = array(
+        'style_name' => $style_name,
+        'uri' => $logo_file->getFileUri(),
+      );
+      $image = \Drupal::service('image.factory')->get($logo_file->getFileUri());
+      if ($image->isValid()) {
+        $variables['width'] = $image->getWidth();
+        $variables['height'] = $image->getHeight();
+      }
+      else {
+        $variables['width'] = $variables['height'] = NULL;
+      }
+
+      $logo_render_array = [
+        '#theme' => 'image_style',
+        '#width' => $variables['width'],
+        '#height' => $variables['height'],
+        '#style_name' => $variables['style_name'],
+        '#uri' => $variables['uri'],
+      ];
+    }
+    else {
+      $logo_render_array = [];
+    }
+    return $logo_render_array;
+  }
+
 
   public function getPoints() {
     $points = [

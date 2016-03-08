@@ -54,16 +54,9 @@ class NextBetsController extends ControllerBase {
         return [];
     }
 
-    public static function parseDays($days,User $user,$page_league) {        $rows = [];
-        $leagues = [];
-
+    public static function parseDays($days,User $user,$page_league) {
+        $rows = [];
         foreach ($days  as $day_id => $day) {
-            $league_id = $day->entity->get('league')->first()->getValue()['target_id'];
-            if(!isset($leagues[$league_id])) {
-                $leagues[$league_id] = League::load($league_id);
-            }
-            $league = $leagues[$league_id];
-
             $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date,new \DateTimeZone("GMT"));
             $game_date->setTimezone(new \DateTimeZone("Europe/Paris"));
             $now_date = new \DateTime();
@@ -71,10 +64,12 @@ class NextBetsController extends ControllerBase {
             $i = $game_date->diff($now_date);
             $bets_left = BetController::betsLeft($user,$day->entity);
 
+            $day_renderable = $day->entity->getRenderableLabel();
+
             $row = [
               'data' => [
                 'day' => [
-                  'data' => $league->label(true).$day->entity->label(),
+                  'data' => render($day_renderable),
                   'class' => ['day-cell']
                 ],
                 'nb_game' => $day->nb_game,
@@ -83,17 +78,6 @@ class NextBetsController extends ControllerBase {
                 'action' => '',
               ]
             ];
-            $cell = [];
-            if(!$page_league) {
-                $cell['link'] = Link::fromTextAndUrl($league->label(true),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
-            }
-
-            $cell['day'] = [
-              '#type' => 'markup',
-              '#markup' => $day->entity->label(),
-            ];
-
-            $row['data']['day']['data'] = render($cell);
 
             if($user->id()>0) {
                 if($bets_left > 0) {

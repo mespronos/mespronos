@@ -53,6 +53,13 @@ function mespronos_theme() {
       'stats' => NULL,
     ),
   );
+  $theme['day'] = array(
+    'template' => 'day',
+    'variables' => array(
+      'league' => NULL,
+      'day' => NULL,
+    ),
+  );
 
   return $theme;
 }
