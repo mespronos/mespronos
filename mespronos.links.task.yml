@@ -53,3 +53,8 @@ entity.day.collection:
   description: 'League days listing'
   base_route: mespronos.dashboard
   weight : 13
+
+team.settings_tab:
+  route_name: team.settings
+  title: 'Settings'
+  base_route: team.settings

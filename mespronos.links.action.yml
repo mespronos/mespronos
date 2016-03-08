@@ -39,3 +39,10 @@ entity.bet.add_form:
   title: 'Add Bet'
   appears_on:
     - entity.bet.collection
+
+team.admin.structure.settings:
+  title: Team Settings
+  description: 'Configure Team entity'
+  route_name: team.settings
+  appears_on:
+    - mespronos.settings

@@ -143,6 +143,14 @@ entity.team.delete_form:
   requirements:
     _entity_access: 'team.delete'
 
+team.settings:
+  path: '/admin/mespronos/structure/team'
+  defaults:
+   _form: '\Drupal\mespronos\Entity\Form\TeamSettingsForm'
+   _title: 'Team Settings'
+  requirements:
+    _permission: 'administer Team entity'
+
 # League routing definition
 entity.league.collection:
   path: '/admin/mespronos/content/league'

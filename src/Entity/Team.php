@@ -35,7 +35,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *   },
  *   base_table = "mespronos__team",
  *   admin_permission = "administer Team entity",
- *   fieldable = FALSE,
+ *   fieldable = TRUE,
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
