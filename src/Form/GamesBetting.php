@@ -67,7 +67,7 @@ class GamesBetting extends FormBase {
           '#type' => 'textfield',
           '#size' => '5',
           '#default_value' => $bet->getScoreTeam1(),
-          '#title' => $game->get('team_1')->entity->label(),
+          '#title' => $game->get('team_1')->entity->label(true),
           '#attributes' => [
             'class' => ['team_1']
           ],
@@ -78,7 +78,7 @@ class GamesBetting extends FormBase {
           '#type' => 'textfield',
           '#size' => '5',
           '#default_value' => $bet->getScoreTeam2(),
-          '#title' => $game->get('team_2')->entity->label(),
+          '#title' => $game->get('team_2')->entity->label(true),
           '#attributes' => [
             'class' => ['team_2']
           ],

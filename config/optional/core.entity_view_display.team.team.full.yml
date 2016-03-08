@@ -1,0 +1,33 @@
+uuid: da286797-b72b-4c85-a711-179551576a9f
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.team.full
+    - field.field.team.team.field_team_logo
+    - image.style.mini_thumbnail
+  module:
+    - image
+    - mespronos
+id: team.team.full
+targetEntityType: team
+bundle: team
+mode: full
+content:
+  field_team_logo:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: mini_thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  name:
+    label: hidden
+    type: string
+    weight: 1
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  creator: true

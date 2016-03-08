@@ -67,6 +67,17 @@ class Team extends MPNContentEntityBase implements MPNEntityInterface {
     return parent::create($values);
   }
 
+
+  public function label($with_logo = false) {
+    if($with_logo) {
+      $entity = entity_view($this,'full');
+      return render($entity);
+    }
+    else {
+      return $this->get('name')->value;
+    }
+  }
+
   /**
    * {@inheritdoc}
    */
