@@ -67,19 +67,11 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
       'style_name' => $style_name,
       'uri' => $image_file->getFileUri(),
     );
-    $image = \Drupal::service('image.factory')->get($image_file->getFileUri());
-    if ($image->isValid()) {
-      $variables['width'] = $image->getWidth();
-      $variables['height'] = $image->getHeight();
-    }
-    else {
-      $variables['width'] = $variables['height'] = NULL;
-    }
 
     $render_array = [
       '#theme' => 'image_style',
-      '#width' => $variables['width'],
-      '#height' => $variables['height'],
+      '#width' => null,
+      '#height' => null,
       '#style_name' => $variables['style_name'],
       '#uri' => $variables['uri'],
     ];
