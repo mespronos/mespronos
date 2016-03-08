@@ -46,3 +46,10 @@ team.admin.structure.settings:
   route_name: team.settings
   appears_on:
     - mespronos.settings
+
+league.admin.structure.settings:
+  title: League Settings
+  description: 'Configure League entity'
+  route_name: league.settings
+  appears_on:
+    - mespronos.settings

@@ -35,7 +35,7 @@ use Drupal\Core\Database\Database;
  *   },
  *   base_table = "mespronos__league",
  *   admin_permission = "administer League entity",
- *   fieldable = FALSE,
+ *   fieldable = TRUE,
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
@@ -46,7 +46,8 @@ use Drupal\Core\Database\Database;
  *     "recount_points" = "/entity.league.recount_points",
  *     "delete-form" = "/entity.league.delete_form",
  *     "collection" = "/entity.league.collection"
- *   }
+ *   },
+ *   field_ui_base_route = "league.settings"
  * )
  */
 class League extends MPNContentEntityBase implements MPNEntityInterface {
