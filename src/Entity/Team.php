@@ -68,8 +68,8 @@ class Team extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
 
-  public function label($with_logo = false) {
-    if($with_logo) {
+  public function label($as_entity = false) {
+    if($as_entity) {
       $entity = entity_view($this,'full');
       return render($entity);
     }

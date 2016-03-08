@@ -5,4 +5,15 @@ table {
   tr.highlighted {
     font-weight:bold;
   }
+  td.day-cell {
+    a {
+      img {
+        margin: 0;
+      }
+      display: flex;
+      text-decoration: none;
+      border-bottom: none;
+      line-height: 32px;
+    }
+  }
 }

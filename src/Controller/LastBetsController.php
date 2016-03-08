@@ -74,7 +74,10 @@ class LastBetsController extends ControllerBase {
                 $ranking = RankingDay::getRankingForBetter($user,$day->entity);
                 $row = [
                     'data' => [
-                        'day' => '',
+                        'day' =>  [
+                          'data' => "",
+                          'class' => ['day-cell']
+                        ],
                         'games_betted' => $ranking ? $ranking->getGameBetted() : ' ',
                         'points' =>  $ranking ? $ranking->getPoints() : ' ',
                         'position' =>  $ranking ? $ranking->getPosition() : ' ',
@@ -100,14 +103,13 @@ class LastBetsController extends ControllerBase {
             }
             $cell = [];
             if($page_league == null) {
-                $cell['link'] = Link::fromTextAndUrl($league->label(),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
-                $cell['backtoline'] = ['#markup' => '<br />'];
+                $cell['link'] = Link::fromTextAndUrl($league->label(true),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
             }
             $cell['day'] = [
               '#type' => 'markup',
               '#markup' => $day->entity->label(),
             ];
-            $row['data']['day'] = render($cell);
+            $row['data']['day']['data'] = render($cell);
 
             $rows[] = $row;
         }

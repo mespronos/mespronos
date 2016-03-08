@@ -73,7 +73,10 @@ class NextBetsController extends ControllerBase {
 
             $row = [
               'data' => [
-                'day' => $league->label().'<br />'.$day->entity->label(),
+                'day' => [
+                  'data' => $league->label(true).$day->entity->label(),
+                  'class' => ['day-cell']
+                ],
                 'nb_game' => $day->nb_game,
                 'bets_left' => $bets_left,
                 'time_left' => $i->format('%a') >0 ? t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
@@ -82,8 +85,7 @@ class NextBetsController extends ControllerBase {
             ];
             $cell = [];
             if(!$page_league) {
-                $cell['link'] = Link::fromTextAndUrl($league->label(),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
-                $cell['backtoline'] = ['#markup' => '<br />'];
+                $cell['link'] = Link::fromTextAndUrl($league->label(true),Url::fromRoute('mespronos.league.index',['league'=>$league->id()]))->toRenderable();
             }
 
             $cell['day'] = [
@@ -91,7 +93,7 @@ class NextBetsController extends ControllerBase {
               '#markup' => $day->entity->label(),
             ];
 
-            $row['data']['day'] = render($cell);
+            $row['data']['day']['data'] = render($cell);
 
             if($user->id()>0) {
                 if($bets_left > 0) {
