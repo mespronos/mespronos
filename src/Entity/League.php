@@ -230,32 +230,12 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
   public function getLogo($style_name = 'thumbnail') {
     $logo = $this->get("field_league_logo")->first();
-    if($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {      ;
-      $variables = array(
-        'style_name' => $style_name,
-        'uri' => $logo_file->getFileUri(),
-      );
-      $image = \Drupal::service('image.factory')->get($logo_file->getFileUri());
-      if ($image->isValid()) {
-        $variables['width'] = $image->getWidth();
-        $variables['height'] = $image->getHeight();
-      }
-      else {
-        $variables['width'] = $variables['height'] = NULL;
-      }
-
-      $logo_render_array = [
-        '#theme' => 'image_style',
-        '#width' => $variables['width'],
-        '#height' => $variables['height'],
-        '#style_name' => $variables['style_name'],
-        '#uri' => $variables['uri'],
-      ];
+    if($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
+      return parent::getImageAsRenderableArray($logo_file,$style_name);
     }
     else {
-      $logo_render_array = [];
+      return [];
     }
-    return $logo_render_array;
   }
 
 

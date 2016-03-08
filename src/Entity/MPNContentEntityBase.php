@@ -6,6 +6,7 @@ use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\user\UserInterface;
+use Drupal\file\Entity\File;
 
 abstract class MPNContentEntityBase extends ContentEntityBase {
 
@@ -61,6 +62,29 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
     return $this;
   }
 
+  public static function getImageAsRenderableArray($image_file,$style_name= 'thumbnail') {
+    $variables = array(
+      'style_name' => $style_name,
+      'uri' => $image_file->getFileUri(),
+    );
+    $image = \Drupal::service('image.factory')->get($image_file->getFileUri());
+    if ($image->isValid()) {
+      $variables['width'] = $image->getWidth();
+      $variables['height'] = $image->getHeight();
+    }
+    else {
+      $variables['width'] = $variables['height'] = NULL;
+    }
+
+    $render_array = [
+      '#theme' => 'image_style',
+      '#width' => $variables['width'],
+      '#height' => $variables['height'],
+      '#style_name' => $variables['style_name'],
+      '#uri' => $variables['uri'],
+    ];
+    return $render_array;
+  }
 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = [];
