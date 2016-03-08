@@ -63,17 +63,12 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
   }
 
   public static function getImageAsRenderableArray($image_file,$style_name= 'thumbnail') {
-    $variables = array(
-      'style_name' => $style_name,
-      'uri' => $image_file->getFileUri(),
-    );
-
     $render_array = [
       '#theme' => 'image_style',
       '#width' => null,
       '#height' => null,
-      '#style_name' => $variables['style_name'],
-      '#uri' => $variables['uri'],
+      '#style_name' => $style_name,
+      '#uri' => $image_file->getFileUri(),
     ];
     return $render_array;
   }
