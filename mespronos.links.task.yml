@@ -26,13 +26,6 @@ mespronos.settings:
   base_route: mespronos.dashboard
   weight : 100
 
-entity.team.collection:
-  route_name: entity.team.collection
-  title: 'Teams'
-  description: 'Teams listing'
-  base_route: mespronos.dashboard
-  weight : 11
-
 entity.league.collection:
   route_name: entity.league.collection
   title: 'Leagues'
