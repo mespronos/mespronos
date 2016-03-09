@@ -8,8 +8,6 @@ table {
   table {
     td.day-cell,
     td.better-cell  {
-      display: flex;
-      flex-direction: column;
       font-size: 0.9em;
     }
   }
@@ -19,9 +17,9 @@ table {
   table {
     td.day-cell,
     td.better-cell {
-      display: flex;
       font-size: 1em;
       aside {
+        float: left;
         min-width: 40px;
         margin-right: 2px;
       }
