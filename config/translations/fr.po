@@ -1022,131 +1022,131 @@ msgstr ""
 
 #: modules/mespronos/src/Form/FormImport.php:26
 msgid "YAML file to import"
-msgstr ""
+msgstr "Fichier YAML à importer"
 
 #: modules/mespronos/src/Form/FormImport.php:36 modules/mespronos/src/Form/GamesMarks.php:57
 msgid "Send"
-msgstr ""
+msgstr "Envoyer"
 
 #: modules/mespronos/src/Form/GamesBetting.php:115
 msgid "Save my bets"
-msgstr ""
+msgstr "Sauvegarder mes pronostics"
 
 #: modules/mespronos/src/Form/GamesBetting.php:129;132 modules/mespronos/src/Form/GamesMarks.php:67;70
 msgid "Can't be less than 0."
-msgstr ""
+msgstr "Ne peut pas être inférieur à 0"
 
 #: modules/mespronos/src/Form/GamesBetting.php:194
 msgid "@nb_mark bets saved/updated"
-msgstr ""
+msgstr "@nb_mark pronos sauvegardés/mis à jour"
 
 #: modules/mespronos/src/Form/GamesBetting.php:197
 msgid "@nb_mark bet couldn't be saved or updated"
-msgstr ""
+msgstr "@nb_mark pronos n'ont pu être sauvegardés ou mis à jour"
 
 #: modules/mespronos/src/Form/GamesMarks.php:91
 msgid "@nb_mark games updated"
-msgstr ""
+msgstr "@nb_mark matchs mis à jours"
 
 #: modules/mespronos/src/Form/RemoveDataForm.php:18
 msgid "Are you sure you want to delete all data from MesPronos?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer l'ensemble des données MesPronos"
 
 #: modules/mespronos/src/Form/RemoveDataForm.php:32
 msgid "Remove"
-msgstr ""
+msgstr "Supprimer"
 
 #: modules/mespronos/src/Plugin/Block/BetInformationsBlock.php:13
 msgid "Bet informations block"
-msgstr ""
+msgstr "Block d'information sur les pronostics"
 
 #: modules/mespronos/src/Plugin/Block/LastBets.php:31 modules/mespronos/src/Plugin/Block/NextBets.php:37
 msgid "Number of days to display"
-msgstr ""
+msgstr "Nombre de journées à afficher"
 
 #: modules/mespronos/src/Plugin/Block/LastBets.php:15
 msgid "last_bets"
-msgstr ""
+msgstr "derniers_pronostics"
 
 #: modules/mespronos/src/Plugin/Block/LoginBlock.php:13
 msgid "Login Block"
-msgstr ""
+msgstr "Block de connexion"
 
 #: modules/mespronos/src/Plugin/Block/NextBets.php:21
 msgid "next_bets"
-msgstr ""
+msgstr "prochains_pronos"
 
 #: modules/mespronos/src/Plugin/Block/RankingGeneralBlock.php:34
 msgid "General ranking"
-msgstr ""
+msgstr "Classement Général"
 
 #: modules/mespronos/src/Plugin/Block/RankingGeneralBlock.php:13
 msgid "General Ranking Block"
-msgstr ""
+msgstr "Block de classement général"
 
 #: modules/mespronos/src/Plugin/Block/UserBlock.php:43
 msgid "Log out"
-msgstr ""
+msgstr "Déconnexion"
 
 #: modules/mespronos/src/Plugin/Block/UserBlock.php:44
 msgid "My account"
-msgstr ""
+msgstr "Mon compte"
 
 #: modules/mespronos/src/Plugin/Block/UserBlock.php:17
 msgid "User block"
-msgstr ""
+msgstr "Block utilisateur"
 
 #: modules/mespronos/src/Plugin/Block/WelcomeBlock.php:30
 msgid "Welcome Message to display"
-msgstr ""
+msgstr "Message de bienvenue à afficher"
 
 #: modules/mespronos/src/Plugin/Block/WelcomeBlock.php:13
 msgid "Welcome block"
-msgstr ""
+msgstr "Block de bienvenue"
 
 #: modules/mespronos/templates/block_bet_informations.html.twig:3
 msgid "@day.nb_games games"
-msgstr ""
+msgstr "@day.nb_games matchs"
 
 #: modules/mespronos/templates/block_bet_informations.html.twig:4
 msgid "Betting type : @league.betting_type"
-msgstr ""
+msgstr "Type de pronostics : @league.betting_type"
 
 #: modules/mespronos/templates/block_bet_informations.html.twig:9
 msgid "Exact score found : @league.points.points_score_found"
-msgstr ""
+msgstr "Score exact trouvé : @league.points.points_score_found"
 
 #: modules/mespronos/templates/block_bet_informations.html.twig:11
 msgid "Winner found : @league.points.points_winner_found"
-msgstr ""
+msgstr "Vanqueur trouvé : @league.points.points_winner_found"
 
 #: modules/mespronos/templates/block_bet_informations.html.twig:12
 msgid "Wrong bet : @league.points.points_participation"
-msgstr ""
+msgstr "Pronostics faux : @league.points.points_participation"
 
 #: modules/mespronos/templates/dashboard.html.twig:2
 msgid "Stats"
-msgstr ""
+msgstr "Statistiques"
 
 #: modules/mespronos/templates/dashboard.html.twig:11
 msgid "Marks"
-msgstr ""
+msgstr "Scores"
 
 #: modules/mespronos/templates/day_details.html.twig:1
 msgid "Games and bets"
-msgstr ""
+msgstr "Matchs et pronostics"
 
 #: modules/mespronos/templates/day_details.html.twig:4 modules/mespronos/templates/league_details.html.twig:7
 msgid "Ranking"
-msgstr ""
+msgstr "Classement"
 
 #: modules/mespronos/templates/user_block.html.twig:3
 msgid "General ranking : @user.rank"
-msgstr ""
+msgstr "Classemet général : @user.rank"
 
 #: modules/mespronos/templates/user_block.html.twig:4
 msgid "Points : @user.points"
-msgstr ""
+msgstr "Points : @user.points"
 
 #: modules/mespronos/travis-ci/minimal.info.yml:0
 msgid "Minimal"
