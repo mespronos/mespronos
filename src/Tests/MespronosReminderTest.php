@@ -31,5 +31,9 @@ class MespronosReminderTest extends WebTestBase {
   static public $modules = array(
     'mespronos',
   );
+  
+  public function setUp() {
+    parent::setUp();
+  }
 
 }
