@@ -400,11 +400,11 @@ msgstr ""
 #: modules/mespronos/src/Controller/DayController.php:53
 msgctxt "mespronos"
 msgid "Game"
-msgstr ""
+msgstr "Match"
 
 #: modules/mespronos/src/Entity/Bet.php:174 modules/mespronos/src/Entity/ViewsData/GameViewsData.php:25
 msgid "Game"
-msgstr ""
+msgstr "Match"
 
 #: modules/mespronos/src/Controller/DayController.php:54
 msgctxt "mespronos"
@@ -423,41 +423,41 @@ msgstr ""
 #: modules/mespronos/src/Controller/DayController.php:56
 msgctxt "mespronos"
 msgid "Points"
-msgstr ""
+msgstr "Points"
 
 #: modules/mespronos/src/Controller/LastBetsController.php:47
 msgctxt "mespronos-block"
 msgid "Points"
-msgstr ""
+msgstr "Points"
 
 #: modules/mespronos/src/Controller/RankingController.php:107
 msgctxt "mespronos-ranking"
 msgid "Points"
-msgstr ""
+msgstr "Points"
 
 #: modules/mespronos/templates/block_bet_informations.html.twig:6
 msgid "Points"
-msgstr ""
+msgstr "Points"
 
 #: modules/mespronos/src/Controller/DayController.php:83
 msgid "My bets on @day"
-msgstr ""
+msgstr "Mes pronos sur @day"
 
 #: modules/mespronos/src/Controller/DayController.php:86
 msgid "@user's bets on @day"
-msgstr ""
+msgstr "Les pronos de @user sur @day"
 
 #: modules/mespronos/src/Controller/ImporterController.php:87 modules/mespronos/src/Form/GamesMarks.php:99
 msgid "Ranking updated for @nb_ranking days"
-msgstr ""
+msgstr "Classement mis à jour pour @nb_ranking journée"
 
 #: modules/mespronos/src/Controller/ImporterController.php:92
 msgid "@nb games created"
-msgstr ""
+msgstr "@nb matchs créés"
 
 #: modules/mespronos/src/Controller/ImporterController.php:93
 msgid "@nb games updated"
-msgstr ""
+msgstr "@nb matchs mis à jour"
 
 #: modules/mespronos/src/Controller/ImporterController.php:129
 msgid "The league @league_name of @sport_name has been created"
@@ -473,148 +473,148 @@ msgstr ""
 
 #: modules/mespronos/src/Controller/ImporterController.php:165
 msgid "The team @team has been created"
-msgstr ""
+msgstr "L'équipe @team a été créée"
 
 #: modules/mespronos/src/Controller/ImporterController.php:195
 msgid "The game @team1 - @team2 has been created"
-msgstr ""
+msgstr "Le match @team1 - @team2 a été créé"
 
 #: modules/mespronos/src/Controller/LastBetsController.php:45;54 modules/mespronos/src/Controller/NextBetsController.php:45
 msgctxt "mespronos-block"
 msgid "Day"
-msgstr ""
+msgstr "Journée"
 
 #: modules/mespronos/src/Entity/Game.php:250 modules/mespronos/src/Entity/RankingDay.php:145 modules/mespronos/src/Entity/Controller/GameListController.php:27 modules/mespronos/src/Entity/ViewsData/DayViewsData.php:27
 msgid "Day"
-msgstr ""
+msgstr "Journée"
 
 #: modules/mespronos/src/Controller/LastBetsController.php:46
 msgctxt "mespronos-block"
 msgid "Bets"
-msgstr ""
+msgstr "Pronos"
 
 #: modules/mespronos/src/Controller/RankingController.php:108
 msgctxt "mespronos-ranking"
 msgid "Bets"
-msgstr ""
+msgstr "Pronos"
 
 #: modules/mespronos/src/Controller/LastBetsController.php:48 modules/mespronos/src/Controller/LeagueController.php:67
 msgctxt "mespronos-block"
 msgid "Rank"
-msgstr ""
+msgstr "Classement"
 
 #: modules/mespronos/src/Controller/RankingController.php:104
 msgctxt "mespronos-ranking"
 msgid "Rank"
-msgstr ""
+msgstr "Position"
 
 #: modules/mespronos/src/Controller/LastBetsController.php:82
 msgid "Details"
-msgstr ""
+msgstr "Détails"
 
 #: modules/mespronos/src/Controller/LastBetsController.php:86
 msgid "Log in to see your score"
-msgstr ""
+msgstr "Connectez-vous pour voir votre score"
 
 #: modules/mespronos/src/Controller/LeagueController.php:63
 msgctxt "mespronos-block"
 msgid "Sport"
-msgstr ""
+msgstr "Sport"
 
 #: modules/mespronos/src/Entity/League.php:279 modules/mespronos/src/Entity/Sport.php:15 modules/mespronos/src/Entity/Controller/LeagueListController.php:26 modules/mespronos/src/Entity/ViewsData/SportViewsData.php:25
 msgid "Sport"
-msgstr ""
+msgstr "Sport"
 
 #: modules/mespronos/src/Controller/LeagueController.php:64
 msgctxt "mespronos-block"
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: modules/mespronos/src/Entity/Day.php:147 modules/mespronos/src/Entity/Sport.php:115 modules/mespronos/src/Entity/Team.php:114 modules/mespronos/src/Entity/Controller/BetListController.php:26 modules/mespronos/src/Entity/Controller/GameListController.php:29 modules/mespronos/src/Entity/Controller/LeagueListController.php:27 modules/mespronos/src/Entity/Controller/RankingDayListController.php:26 modules/mespronos/src/Entity/Controller/RankingGeneralListController.php:26 modules/mespronos/src/Entity/Controller/RankingLeagueListController.php:26
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: modules/mespronos/src/Controller/LeagueController.php:65
 msgctxt "mespronos-block"
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: modules/mespronos/src/Entity/Controller/LeagueListController.php:28
 msgid "Status"
-msgstr ""
+msgstr "Statut"
 
 #: modules/mespronos/src/Controller/LeagueController.php:66
 msgctxt "mespronos-block"
 msgid "Days"
-msgstr ""
+msgstr "Journée"
 
 #: modules/mespronos/src/Controller/NextBetsController.php:46
 msgctxt "mespronos-block"
 msgid "Games"
-msgstr ""
+msgstr "Matchs"
 
 #: modules/mespronos/src/Controller/NextBetsController.php:47
 msgctxt "mespronos-block"
 msgid "Bets left"
-msgstr ""
+msgstr "Pronos restant"
 
 #: modules/mespronos/src/Controller/NextBetsController.php:48
 msgctxt "mespronos-block"
 msgid "Time left"
-msgstr ""
+msgstr "Temps restant"
 
 #: modules/mespronos/src/Controller/NextBetsController.php:77
 msgid "@d days, @GH@im"
-msgstr ""
+msgstr "@dJ, @GH@i"
 
 #: modules/mespronos/src/Controller/NextBetsController.php:77
 msgid "@GH@im"
-msgstr ""
+msgstr "@GH@i"
 
 #: modules/mespronos/src/Controller/NextBetsController.php:87
 msgid "Edit"
-msgstr ""
+msgstr "Modifier"
 
 #: modules/mespronos/src/Controller/RankingController.php:31
 msgid "Ranking updated for @nb betters"
-msgstr ""
+msgstr "Classement mis à jour pour @nb pronostiqueurs"
 
 #: modules/mespronos/src/Controller/RankingController.php:106
 msgctxt "mespronos-ranking"
 msgid "Better"
-msgstr ""
+msgstr "Pronostiqueur"
 
 #: modules/mespronos/src/Entity/Bet.php:148 modules/mespronos/src/Entity/Ranking.php:75
 msgid "Better"
-msgstr ""
+msgstr "Pronostiqueur"
 
 #: modules/mespronos/src/Controller/StatisticsController.php:21
 msgid "@nb members"
-msgstr ""
+msgstr "@nb membres"
 
 #: modules/mespronos/src/Controller/StatisticsController.php:22
 msgid "@nb leagues"
-msgstr ""
+msgstr "@nb journées"
 
 #: modules/mespronos/src/Controller/StatisticsController.php:23
 msgid "@nb games"
-msgstr ""
+msgstr "@nb matchs"
 
 #: modules/mespronos/src/Controller/StatisticsController.php:24
 msgid "@nb bets"
-msgstr ""
+msgstr "@nb pronos"
 
 #: modules/mespronos/src/Controller/UserController.php:45
 msgid "Send me password reset instructions"
-msgstr ""
+msgstr "Envoyez-moi un lien de réinitialisation de mot de passe"
 
 #: modules/mespronos/src/Controller/UserController.php:56
 msgid "No account ? Register now !"
-msgstr ""
+msgstr "Pas encore de compte ? Inscrivez-vous !"
 
 #: modules/mespronos/src/Controller/UserController.php:62
 msgid "Forget your password ?"
-msgstr ""
+msgstr "Mot de passe oublié ?"
 
 #: modules/mespronos/src/Entity/Bet.php:77 modules/mespronos/src/Entity/Game.php:90
 msgid "@t1 - @t2"
@@ -622,7 +622,7 @@ msgstr ""
 
 #: modules/mespronos/src/Entity/Bet.php:81 modules/mespronos/src/Form/GamesBetting.php:93
 msgid "Draw"
-msgstr ""
+msgstr "Match nul"
 
 #: modules/mespronos/src/Entity/Bet.php:149 modules/mespronos/src/Entity/Ranking.php:76
 msgid "The user ID of the Bet entity author."
