@@ -1,4 +1,10 @@
 # Changelog - Mespronos 
+## 8.x-1.0-alpha4, XXXX-XX-XX
+  - Add logo to teams
+  - Add logo to leagues
+  - New administration dashboard
+  - Enhance code
+  
 ## 8.x-1.0-alpha3, 2016-02-27
   - Add breadcrumbs definition
   - Refactoring Controller
