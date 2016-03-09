@@ -1,5 +1,5 @@
 # Changelog - Mespronos 
-## 8.x-1.0-alpha4, XXXX-XX-XX
+## 8.x-1.0-alpha4, 2016-03-09
   - Add logo to teams
   - Add logo to leagues
   - New administration dashboard
