@@ -247,7 +247,7 @@ msgstr ""
 
 #: modules/mespronos/mespronos.permissions.yml:0
 msgid "make a bet"
-msgstr ""
+msgstr "Faire un pronostic"
 
 #: modules/mespronos/mespronos.permissions.yml:0
 msgid "See league details (days, ranking...)"
@@ -263,11 +263,11 @@ msgstr ""
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Password reset"
-msgstr ""
+msgstr "Réinitialisation du mot de passe"
 
 #: modules/mespronos/mespronos.routing.yml:0 modules/mespronos/src/Controller/NextBetsController.php:96
 msgid "Log in"
-msgstr ""
+msgstr "Connexion"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Team List"
@@ -287,59 +287,59 @@ msgstr ""
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "League List"
-msgstr ""
+msgstr "Liste des compétitions"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Add League"
-msgstr ""
+msgstr "Ajouter une compétition"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Edit League"
-msgstr ""
+msgstr "Modifier la compétition"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Recalculate points and ranking for a league"
-msgstr ""
+msgstr "Recalculer les points et le classement pour une compétition"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Delete League"
-msgstr ""
+msgstr "Supprimer la compétition"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Sport List"
-msgstr ""
+msgstr "Liste des sports"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Add Sport"
-msgstr ""
+msgstr "Ajouter un sport"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Edit Sport"
-msgstr ""
+msgstr "Modifier le sport"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Delete Sport"
-msgstr ""
+msgstr "Supprimer le sport"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Day List"
-msgstr ""
+msgstr "Liste des journées"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Add Day"
-msgstr ""
+msgstr "Ajouter une journée"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Edit Day"
-msgstr ""
+msgstr "Modifier la journée"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Recalculate points and ranking for Day"
-msgstr ""
+msgstr "Recalculer les points et le classement pour une journée"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Recalculate ranking for Day"
-msgstr ""
+msgstr "Recalculer le classement pour une journée"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Delete Day"
@@ -391,11 +391,11 @@ msgstr ""
 
 #: modules/mespronos/src/Controller/BettingController.php:24
 msgid "This day doesn't exist."
-msgstr ""
+msgstr "Cette journée n'existe pas"
 
 #: modules/mespronos/src/Controller/BettingController.php:33
 msgid "Bet on @day"
-msgstr ""
+msgstr "Pronostiquer sur @day"
 
 #: modules/mespronos/src/Controller/DayController.php:53
 msgctxt "mespronos"
@@ -414,11 +414,12 @@ msgstr ""
 #: modules/mespronos/src/Controller/DayController.php:55
 msgctxt "mespronos"
 msgid "Bet"
-msgstr ""
+msgstr "Pronos"
 
 #: modules/mespronos/src/Controller/NextBetsController.php:84 modules/mespronos/src/Entity/ViewsData/BetViewsData.php:25
+msgctxt "mespronos-nextbet"
 msgid "Bet"
-msgstr ""
+msgstr "Pronostiquer"
 
 #: modules/mespronos/src/Controller/DayController.php:56
 msgctxt "mespronos"
@@ -618,7 +619,7 @@ msgstr "Mot de passe oublié ?"
 
 #: modules/mespronos/src/Entity/Bet.php:77 modules/mespronos/src/Entity/Game.php:90
 msgid "@t1 - @t2"
-msgstr ""
+msgstr "@t1 - @t2"
 
 #: modules/mespronos/src/Entity/Bet.php:81 modules/mespronos/src/Form/GamesBetting.php:93
 msgid "Draw"
@@ -658,7 +659,7 @@ msgstr ""
 
 #: modules/mespronos/src/Entity/Day.php:190 modules/mespronos/src/Entity/League.php:17 modules/mespronos/src/Entity/RankingLeague.php:146 modules/mespronos/src/Entity/Controller/DayListController.php:28 modules/mespronos/src/Entity/Controller/GameListController.php:26 modules/mespronos/src/Entity/ViewsData/LeagueViewsData.php:25
 msgid "League"
-msgstr ""
+msgstr "Compétition"
 
 #: modules/mespronos/src/Entity/Day.php:191 modules/mespronos/src/Entity/RankingLeague.php:147
 msgid "League entity reference"
@@ -762,7 +763,7 @@ msgstr ""
 
 #: modules/mespronos/src/Entity/League.php:365 modules/mespronos/src/Entity/Controller/LeagueListController.php:29
 msgid "Betting type"
-msgstr ""
+msgstr "Type de pronostics"
 
 #: modules/mespronos/src/Entity/League.php:383
 msgid "Points when the game's score is found"

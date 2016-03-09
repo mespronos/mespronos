@@ -81,10 +81,10 @@ class NextBetsController extends ControllerBase {
 
             if($user->id()>0) {
                 if($bets_left > 0) {
-                    $text = t('Bet');
+                    $text = t('Bet',[],['context'=>'mespronos-nextbet']);
                 }
                 else {
-                    $text = t('Edit');
+                    $text = t('Edit',[],['context'=>'mespronos-nextbet']);
                 }
                 $row['data']['action'] = Link::fromTextAndUrl(
                   $text,
