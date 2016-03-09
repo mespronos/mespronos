@@ -60,6 +60,12 @@ function mespronos_theme() {
       'day' => NULL,
     ),
   );
+  $theme['user-ranking'] = array(
+    'template' => 'user-ranking',
+    'variables' => array(
+      'user' => NULL,
+    ),
+  );
 
   return $theme;
 }

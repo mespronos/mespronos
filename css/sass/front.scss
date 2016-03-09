@@ -6,7 +6,8 @@ table {
     font-weight:bold;
   }
   table {
-    td.day-cell {
+    td.day-cell,
+    td.better-cell  {
       display: flex;
       flex-direction: column;
       font-size: 0.9em;
@@ -16,7 +17,8 @@ table {
 
 @media screen and (min-width: 640px) {
   table {
-    td.day-cell {
+    td.day-cell,
+    td.better-cell {
       display: flex;
       font-size: 1em;
       aside {

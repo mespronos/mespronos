@@ -77,13 +77,16 @@ class RankingController extends ControllerBase {
     $rows = [];
     $old_rank = null;
     foreach ($rankings  as  $ranking) {
-      $better =$ranking->getOwner();
-      $picture = UserController::getUserPictureAsRenderableArray($better,'mini_thumbnail');
+      $better = \Drupal\user\Entity\User::load($ranking->getOwner()->id());
+      $better = UserController::getRenderableUser($better);
+
       $row = [
         'data' => [
           'position' => $ranking->get('position')->value != $old_rank ? $ranking->get('position')->value : '-',
-          'picture' => render($picture),
-          'better' => $ranking->getOwner()->getUsername(),
+          'better' => [
+            'data' => render($better),
+            'class' => ['better-cell']
+          ],
           'points' => $ranking->get('points')->value,
           'games_betted' => $ranking->get('games_betted')->value,
         ]
@@ -102,7 +105,6 @@ class RankingController extends ControllerBase {
     }
     $header = [
       t('Rank',array(),array('context'=>'mespronos-ranking')),
-      '',
       t('Better',array(),array('context'=>'mespronos-ranking')),
       t('Points',array(),array('context'=>'mespronos-ranking')),
       t('Bets',array(),array('context'=>'mespronos-ranking')),
