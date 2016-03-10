@@ -1148,7 +1148,7 @@ msgstr "Classement"
 
 #: modules/mespronos/templates/user_block.html.twig:3
 msgid "General ranking : @user.rank"
-msgstr "Classemet général : @user.rank"
+msgstr "Classement général : @user.rank"
 
 #: modules/mespronos/templates/user_block.html.twig:4
 msgid "Points : @user.points"
