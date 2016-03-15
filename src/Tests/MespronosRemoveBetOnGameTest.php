@@ -163,6 +163,6 @@ class MespronosRemoveBetOnGameTest extends WebTestBase {
     $this->assertEqual($this->game1->removeBets(),2,t('the method Game::removeBets return the number of bets removed'));
     $this->assertEqual($this->game1->getNbBets(),0,t('Once removed, the method Game::getNbBets return O'));
 
-    $this->assertEqual($this->game1->getNbBets(),1,t('Bets on others games stays unchanged'));
+    $this->assertEqual($this->game2->getNbBets(),1,t('Bets on others games stays unchanged'));
   }
 }
