@@ -133,14 +133,18 @@ class MespronosRemoveBetOnGameTest extends WebTestBase {
   }
 
   public function testSimpleRemoving() {
+    $this->assertEqual($this->game1->removeBets(),0,t('the method Game::removeBets return 0 when there\`s no bet to remove'));
+
     $bet = Bet::create(array(
       'better' => $this->better1->id(),
       'game' => $this->game1->id(),
       'score_team_1' => 1,
       'score_team_2' => 1,
     ));
+    $bet->save();
 
     $this->assertEqual($this->game1->removeBets(),1,t('the method Game::removeBets return the number of bets removed'));
+    $this->assertEqual($this->game1->removeBets(),0,t('the method Game::removeBets return 0 when bets has been removed'));
 
   }
 }
