@@ -130,6 +130,16 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     }
     return count($ids);
   }
+
+  /**
+   * @return integer nb bets for given game
+   */
+  public function getNbBets() {
+    $query = \Drupal::entityQuery('bet');
+    $query->condition('game',$this->id());
+    $ids = $query->execute();
+    return count($ids);
+  }
   /**
    * @return bool
    */
