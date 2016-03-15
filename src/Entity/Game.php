@@ -119,6 +119,17 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return $return;
   }
 
+  public function removeBets() {
+    $storage = \Drupal::entityManager()->getStorage('bet');
+    $query = \Drupal::entityQuery('bet');
+    $query->condition('game',$this->id());
+    $ids = $query->execute();
+    $bets = $storage->loadMultiple($ids);
+    foreach ($bets as $bet) {
+      $bet->delete();
+    }
+    return count($ids);
+  }
   /**
    * @return bool
    */
