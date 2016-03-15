@@ -121,6 +121,11 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return $return;
   }
 
+  /**
+   * Remove bets on current day
+   *
+   * @return integer number of deleted bets
+   */
   public function removeBets() {
     $storage = \Drupal::entityManager()->getStorage('bet');
     $query = \Drupal::entityQuery('bet');
@@ -134,6 +139,8 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   /**
+   * Return number of games on current day
+   *
    * @return integer nb bets for given game
    */
   public function getNbBets() {
