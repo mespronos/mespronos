@@ -123,9 +123,45 @@ class MespronosRemoveBetOnGameTest extends WebTestBase {
     $this->assertEqual($this->game1->getNbBets(),1,t('the method Game::getNbBets return 1 when there\`s one bet'));
 
     $this->assertEqual($this->game1->removeBets(),1,t('the method Game::removeBets return the number of bets removed'));
+
     $this->assertEqual($this->game1->removeBets(),0,t('the method Game::removeBets return 0 when bets has been removed'));
 
-    $this->assertEqual($this->game1->getNbBets(),1,t('Once removed, the method Game::getNbBets return O'));
+    $this->assertEqual($this->game1->getNbBets(),0,t('Once removed, the method Game::getNbBets return O'));
+  }
+  public function testRemovingMoreComplex() {
+    $this->assertEqual($this->game1->getNbBets(),0,t('the method Game::getNbBets return 0 when there\`s no bet'));
+    $this->assertEqual($this->game1->removeBets(),0,t('the method Game::removeBets return 0 when there\`s no bet to remove'));
 
+    $bet1 = Bet::create(array(
+      'better' => $this->better1->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bet1->save();
+
+    $bet2 = Bet::create(array(
+      'better' => $this->better2->id(),
+      'game' => $this->game1->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bet2->save();
+
+    $bet3 = Bet::create(array(
+      'better' => $this->better1->id(),
+      'game' => $this->game2->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+    ));
+    $bet3->save();
+
+    $this->assertEqual($this->game1->getNbBets(),2,t('the method Game::getNbBets return 2 when there\`s two bets'));
+    $this->assertEqual($this->game2->getNbBets(),1,t('the method Game::getNbBets return 1 when there\`s one bet'));
+
+    $this->assertEqual($this->game1->removeBets(),2,t('the method Game::removeBets return the number of bets removed'));
+    $this->assertEqual($this->game1->getNbBets(),0,t('Once removed, the method Game::getNbBets return O'));
+
+    $this->assertEqual($this->game1->getNbBets(),1,t('Bets on others games stays unchanged'));
   }
 }
