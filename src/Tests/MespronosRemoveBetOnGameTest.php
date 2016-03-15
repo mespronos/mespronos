@@ -85,16 +85,8 @@ class MespronosRemoveBetOnGameTest extends WebTestBase {
     ));
     $this->day1->save();
 
-    $this->day2 = Day::create(array(
-      'league' => $this->league->id(),
-      'number' => 2,
-    ));
-    $this->day2->save();
-
     $this->better1 = $this->drupalCreateUser();
     $this->better2 = $this->drupalCreateUser();
-    $this->better3 = $this->drupalCreateUser();
-    $this->better4 = $this->drupalCreateUser();
 
     $dateO = new \DateTime();
     $date = $dateO->format('Y-m-d\TH:i:s');
@@ -114,22 +106,6 @@ class MespronosRemoveBetOnGameTest extends WebTestBase {
       'game_date' => $date,
     ));
     $this->game2->save();
-
-    $this->game3 = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day2->id(),
-      'game_date' => $date,
-    ));
-    $this->game3->save();
-
-    $this->game4 = Game::create(array(
-      'team_1' => $this->team3->id(),
-      'team_2' => $this->team4->id(),
-      'day' => $this->day2->id(),
-      'game_date' => $date,
-    ));
-    $this->game4->save();
   }
 
   public function testSimpleRemoving() {
