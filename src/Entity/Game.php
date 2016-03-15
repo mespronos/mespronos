@@ -31,6 +31,7 @@ use Drupal\mespronos\Controller\BetController;
  *       "add" = "Drupal\mespronos\Entity\Form\GameForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\GameForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
+ *       "remove_bets" = "Drupal\mespronos\Entity\Form\GameRemoveBetsForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\GameAccessControlHandler",
  *   },
@@ -43,7 +44,8 @@ use Drupal\mespronos\Controller\BetController;
  *   },
  *   links = {
  *     "edit-form" = "/admin/game/{game}/edit",
- *     "delete-form" = "/admin/game/{game}/delete"
+ *     "delete-form" = "/admin/game/{game}/delete",
+ *     "remove-bets" = "/admin/game/{game}/remove-bets"
  *   }
  * )
  */

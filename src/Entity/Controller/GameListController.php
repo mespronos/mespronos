@@ -56,4 +56,23 @@ class GameListController extends EntityListBuilder {
     return $row + parent::buildRow($entity);
   }
 
+  protected function getDefaultOperations(EntityInterface $entity) {
+    $operations = parent::getDefaultOperations($entity);
+    $user = \Drupal::currentUser();
+
+    if ($user->hasPermission('remove bets')) {
+      $operations['remove-bets'] = array(
+        'title' => $this->t('Remove bets'),
+        'weight' => 20,
+        'url' =>
+          new Url(
+            'entity.game.remove_bets:', array(
+            'game' => $entity->id(),
+          ))
+      );
+    }
+
+    return $operations;
+  }
+
 }

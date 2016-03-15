@@ -324,6 +324,14 @@ entity.game.delete_form:
   requirements:
     _entity_access: 'game.delete'
 
+entity.game.remove_bets:
+  path: '/admin/game/{game}/remove-bets'
+  defaults:
+    _entity_form: game.remove_bets
+    _title: 'Delete bets on game'
+  requirements:
+    _permission: 'remove bets'
+
 # Bet routing definition
 entity.bet.canonical:
   path: '/admin/bet/{bet}'

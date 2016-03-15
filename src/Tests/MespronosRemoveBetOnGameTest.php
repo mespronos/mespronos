@@ -128,6 +128,7 @@ class MespronosRemoveBetOnGameTest extends WebTestBase {
 
     $this->assertEqual($this->game1->getNbBets(),0,t('Once removed, the method Game::getNbBets return O'));
   }
+  
   public function testRemovingMoreComplex() {
     $this->assertEqual($this->game1->getNbBets(),0,t('the method Game::getNbBets return 0 when there\`s no bet'));
     $this->assertEqual($this->game1->removeBets(),0,t('the method Game::removeBets return 0 when there\`s no bet to remove'));

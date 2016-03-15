@@ -39,3 +39,6 @@ make a bet:
 
 see league details:
   title: 'See league details (days, ranking...)'
+
+remove bets:
+  title: 'Remove bets on given game'
