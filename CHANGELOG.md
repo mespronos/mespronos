@@ -1,6 +1,7 @@
 # Changelog - Mespronos 
 ## 8.x-1.0-alpha5, 2016-XX-XX
   - Enhance betting form
+  - Add ability to remove bets on a given game
   
 ## 8.x-1.0-alpha4, 2016-03-09
   - Add logo to teams
