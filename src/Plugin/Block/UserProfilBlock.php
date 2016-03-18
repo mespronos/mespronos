@@ -14,6 +14,7 @@ use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 
+use Symfony\Component\HttpFoundation\Request;
 /**
  * Provides a 'UserProfilBlock' block.
  *
@@ -23,15 +24,11 @@ use Drupal\Core\Link;
  * )
  */
 class UserProfilBlock extends BlockBase {
-
-
   /**
    * {@inheritdoc}
    */
   public function build() {
-
-    $user = $this->routeMatch->getParameter('user');
-
+    $user = \Drupal::routeMatch()->getParameter('user');
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
     $ranking = RankingGeneral::getRankingForBetter($user);
     return [
