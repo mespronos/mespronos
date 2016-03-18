@@ -66,7 +66,7 @@ class GamesBetting extends FormBase {
           '#type' => 'number',
           '#min' => 0,
           '#step' => 1,
-          '#size' => '2',
+          '#size' => '1',
           '#default_value' => $bet->getScoreTeam1(),
           '#title' => $game->get('team_1')->entity->label(true),
           '#attributes' => [
@@ -79,7 +79,7 @@ class GamesBetting extends FormBase {
           '#type' => 'number',
           '#min' => 0,
           '#step' => 1,
-          '#size' => '2',
+          '#size' => '1',
           '#default_value' => $bet->getScoreTeam2(),
           '#title' => $game->get('team_2')->entity->label(true),
           '#attributes' => [
