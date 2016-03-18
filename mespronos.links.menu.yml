@@ -5,11 +5,19 @@ mespronos.dashboard:
   weight: 9
   parent: system.admin
 
+mespronos.main.ranking:
+  title: General ranking
+  description: 'See general ranking.'
+  route_name: mespronos.ranking
+  weight: 9
+  parent: main
+  menu_name: main
+
 mespronos.main.nextbets:
   title: Next bets
   description: 'See all next bets available.'
   route_name: mespronos.nextbets
-  weight: 9
+  weight: 10
   parent: main
   menu_name: main
 
@@ -17,6 +25,6 @@ mespronos.main.lastbets:
   title: Last bets
   description: 'See all last bets and results.'
   route_name: mespronos.lastbets
-  weight: 10
+  weight: 11
   parent: main
   menu_name: main

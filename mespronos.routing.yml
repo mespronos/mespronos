@@ -46,6 +46,14 @@ mespronos.nextbets:
   requirements:
     _permission: 'view next bets days'
 
+mespronos.ranking:
+  path: 'mespronos/ranking'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\RankingController::getRankingGeneral'
+    _title: 'General ranking'
+  requirements:
+    _permission: 'view ranking'
+
 mespronos.leagues.list:
   path: 'mespronos/leagues'
   defaults:

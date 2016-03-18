@@ -24,7 +24,7 @@ class BetterBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         $breadcrumb->addCacheContexts(['route']);
         $links = [];
         $links[] = Link::createFromRoute(t('Home'), '<front>');
-        $links[] = Link::createFromRoute(t('Betters'), '<front>');
+        $links[] = Link::createFromRoute(t('Betters'), 'mespronos.ranking');
         return $breadcrumb->setLinks($links);
     }
 
