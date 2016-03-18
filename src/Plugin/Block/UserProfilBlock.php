@@ -49,8 +49,8 @@ class UserProfilBlock extends BlockBase {
       '#last_bets' => BetController::getLastUserBetsTable($user,50),
       '#user_picture' => $user_picture,
       '#cache' => [
-        'contexts' => ['user'],
-        'tags' => [ 'user:'.$user->id(),'user_block'],
+        'contexts' => ['route'],
+        'tags' => [ 'user:'.$user->id(),'user_profil_block'],
       ],
     ];
   }

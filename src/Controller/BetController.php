@@ -211,7 +211,7 @@ class BetController extends ControllerBase {
     $ids = \Drupal::entityQuery('bet')
       ->condition('better',$user->id())
       ->condition('points','','IS NOT NULL')
-      ->sort('created')
+      ->sort('created','DESC')
       ->range(0,$nb_bets)
       ->execute();
     if(count($ids)>0) {
