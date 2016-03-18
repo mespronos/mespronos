@@ -72,6 +72,7 @@ class UserController extends ControllerBase {
       '#theme' => 'user-ranking',
       '#user'=> [
         'name'=> $user->getAccountName(),
+        'id'=> $user->id(),
         'avatar'=> $picture,
       ]
     ];
