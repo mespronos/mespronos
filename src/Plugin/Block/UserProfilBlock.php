@@ -31,6 +31,9 @@ class UserProfilBlock extends BlockBase {
    */
   public function build() {
     $user = \Drupal::routeMatch()->getParameter('user');
+    if(!$user) {
+      return [];
+    }
     $user = User::load($user->id());
     $statistics = StatisticsController::getUserStatistics($user);
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
