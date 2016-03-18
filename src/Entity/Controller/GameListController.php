@@ -65,10 +65,7 @@ class GameListController extends EntityListBuilder {
         'title' => $this->t('Remove bets'),
         'weight' => 20,
         'url' =>
-          new Url(
-            'entity.game.remove_bets:', array(
-            'game' => $entity->id(),
-          ))
+          new Url('entity.game.remove_bets', ['game' => $entity->id()])
       );
     }
 
