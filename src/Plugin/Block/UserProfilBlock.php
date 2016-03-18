@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\mespronos\Controller\StatisticsController;
 use Drupal\mespronos\Controller\UserController;
 use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\user\Entity\User;
@@ -29,15 +30,18 @@ class UserProfilBlock extends BlockBase {
    */
   public function build() {
     $user = \Drupal::routeMatch()->getParameter('user');
+    $user = User::load($user->id());
+    $statistics = StatisticsController::getUserStatistics($user);
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
     $ranking = RankingGeneral::getRankingForBetter($user);
     return [
-      '#theme' =>'user-block',
+      '#theme' =>'user-profile-block',
       '#user' => [
         'name' => $user->getAccountName(),
         'rank' => $ranking ? $ranking->getPosition() : '/',
         'points' => $ranking ? $ranking->getPoints() : '/',
       ],
+      '#statistics' => $statistics,
       '#links' => [
         'logout' => Link::fromTextAndUrl(t('Log out'),Url::fromRoute('user.logout',[])),
         'myaccount' => Link::fromTextAndUrl(t('My account'),Url::fromRoute('entity.user.edit_form',['user'=>$user->id()]))

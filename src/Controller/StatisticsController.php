@@ -25,6 +25,10 @@ class StatisticsController extends ControllerBase {
     return $stats;
   }
 
+  public static function getUserStatistics(\Drupal\user\Entity\User $user) {
+    
+  }
+
   private static function getMembersNumber() {
     $query = \Drupal::entityQuery('user');
     $ids = $query->execute();

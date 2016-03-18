@@ -17,9 +17,18 @@ function mespronos_preprocess_page(&$variables) {
 function mespronos_theme() {
   $theme = [];
   $theme['user-block'] = array(
-    'template' => 'user_block',
+    'template' => 'user-block',
     'variables' => array(
       'user' => NULL,
+      'user_picture' => NULL,
+      'links' => NULL,
+    ),
+  );
+  $theme['user-profile-block'] = array(
+    'template' => 'user-profile-block',
+    'variables' => array(
+      'user' => NULL,
+      'statistics' => NULL,
       'user_picture' => NULL,
       'links' => NULL,
     ),
