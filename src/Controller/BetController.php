@@ -163,7 +163,10 @@ class BetController extends ControllerBase {
     $rows = [];
     foreach($bets as $bet) {
       $game = $bet->getGame(true);
+      $day = $game->getDay();
+      $league = $day->getLeague();
       $row = [
+        $league->label().' - '.$day->label(),
         $game->labelTeams(),
         $game->labelScore(),
         $bet->Label(),
@@ -173,6 +176,7 @@ class BetController extends ControllerBase {
     }
 
     $header = [
+      t('League',array(),array('context'=>'mespronos')),
       t('Game',array(),array('context'=>'mespronos')),
       t('Score',array(),array('context'=>'mespronos')),
       t('Bet',array(),array('context'=>'mespronos')),
@@ -202,6 +206,7 @@ class BetController extends ControllerBase {
     $ids = \Drupal::entityQuery('bet')
       ->condition('better',$user->id())
       ->condition('points','','IS NOT NULL')
+      ->sort('created')
       ->range(0,$nb_bets)
       ->execute();
     if(count($ids)>0) {
