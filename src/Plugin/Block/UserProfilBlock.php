@@ -43,7 +43,7 @@ class UserProfilBlock extends BlockBase {
         'points' => $ranking ? $ranking->getPoints() : '/',
       ],
       '#statistics' => $statistics,
-      '#last_bets' => BetController::getLastUserBetsTable($user),
+      '#last_bets' => BetController::getLastUserBetsTable($user,50),
       '#links' => [
         'logout' => Link::fromTextAndUrl(t('Log out'),Url::fromRoute('user.logout',[])),
         'myaccount' => Link::fromTextAndUrl(t('My account'),Url::fromRoute('entity.user.edit_form',['user'=>$user->id()]))

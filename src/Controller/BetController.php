@@ -164,14 +164,19 @@ class BetController extends ControllerBase {
     foreach($bets as $bet) {
       $game = $bet->getGame(true);
       $day = $game->getDay();
-      $league = $day->getLeague();
       $row = [
-        $league->label().' - '.$day->label(),
-        $game->labelTeams(),
-        $game->labelScore(),
-        $bet->Label(),
-        $bet->getPoints(),
+        'data' => [
+          'day' => [
+            'data' => render($day->getRenderableLabel()),
+            'class' => ['day-cell']
+          ],
+          $game->labelTeams(),
+          $game->labelScore(),
+          $bet->Label(),
+          $bet->getPoints(),
+        ]
       ];
+
       $rows[] = $row;
     }
 
