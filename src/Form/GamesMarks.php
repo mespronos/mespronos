@@ -43,11 +43,15 @@ class GamesMarks extends FormBase {
         ),
       );
       $form['games'][$game->id()]['score_team_1'] = array(
-        '#type' => 'textfield',
+        '#type' => 'number',
+        '#min' => 0,
+        '#step' => 1,
         '#size' => '5',
       );
       $form['games'][$game->id()]['score_team_2'] = array(
-        '#type' => 'textfield',
+        '#type' => 'number',
+        '#min' => 0,
+        '#step' => 1,
         '#size' => '5',
       );
     }

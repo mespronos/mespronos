@@ -63,8 +63,10 @@ class GamesBetting extends FormBase {
       );
       if($betting_type == 'score') {
         $form['games'][$game->id()]['score_team_1'] = array(
-          '#type' => 'textfield',
-          '#size' => '2',
+          '#type' => 'number',
+          '#min' => 0,
+          '#step' => 1,
+          '#size' => '1',
           '#default_value' => $bet->getScoreTeam1(),
           '#title' => $game->get('team_1')->entity->label(true),
           '#attributes' => [
@@ -74,8 +76,10 @@ class GamesBetting extends FormBase {
           '#suffix' => '</div>',
         );
         $form['games'][$game->id()]['score_team_2'] = array(
-          '#type' => 'textfield',
-          '#size' => '2',
+          '#type' => 'number',
+          '#min' => 0,
+          '#step' => 1,
+          '#size' => '1',
           '#default_value' => $bet->getScoreTeam2(),
           '#title' => $game->get('team_2')->entity->label(true),
           '#attributes' => [
