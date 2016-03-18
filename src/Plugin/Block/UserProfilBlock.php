@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
+use Drupal\mespronos\Controller\BetController;
 use Drupal\mespronos\Controller\StatisticsController;
 use Drupal\mespronos\Controller\UserController;
 use Drupal\mespronos\Entity\RankingGeneral;
@@ -42,6 +43,7 @@ class UserProfilBlock extends BlockBase {
         'points' => $ranking ? $ranking->getPoints() : '/',
       ],
       '#statistics' => $statistics,
+      '#last_bets' => BetController::getLastUserBetsTable($user),
       '#links' => [
         'logout' => Link::fromTextAndUrl(t('Log out'),Url::fromRoute('user.logout',[])),
         'myaccount' => Link::fromTextAndUrl(t('My account'),Url::fromRoute('entity.user.edit_form',['user'=>$user->id()]))

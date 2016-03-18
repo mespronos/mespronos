@@ -98,6 +98,37 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
     return $this->get('score_team_2')->value;
   }
 
+  public function getTeam1() {
+    $game = $this->getGame(true);
+    return $game->getTeam1();
+  }
+
+  public function getTeam2() {
+    $game = $this->getGame(true);
+    return $game->getTeam2();
+  }
+
+
+  public function label() {
+    $game = $this->getGame(true);
+    $league = $game->getLeague();
+    if($league->getBettingType(true) == 'winner') {
+      if($this->getScoreTeam1() == $this->getScoreTeam2()) {
+        return t('Draw');
+      }
+      elseif($this->getScoreTeam1() > $this->getScoreTeam2()) {
+        $winner = $this->getTeam1();
+      }
+      else {
+        $winner = $this->getTeam2();
+      }
+      return $winner->label();
+    }
+    else {
+      return $this->getScoreTeam1(). ' - '.$this->getScoreTeam2();
+    }
+  }
+
   /**
    * @param bool|FALSE $asEntity
    * @return \Drupal\mespronos\Entity\Game

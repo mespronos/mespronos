@@ -29,6 +29,7 @@ function mespronos_theme() {
     'variables' => array(
       'user' => NULL,
       'statistics' => NULL,
+      'last_bets' => NULL,
       'user_picture' => NULL,
       'links' => NULL,
     ),
