@@ -64,8 +64,13 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
       $query->condition($entity_name, $entity->id());
     }
     $ids = $query->execute();
-    $id = array_pop($ids);
-    $rankings = $storage->load($id);
+    if(count($ids)>0) {
+      $id = array_pop($ids);
+      $rankings = $storage->load($id);
+    }
+    else {
+      $rankings = [];
+    }
     return $rankings;
   }
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
