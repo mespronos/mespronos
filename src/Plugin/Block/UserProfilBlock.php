@@ -9,8 +9,10 @@ namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\mespronos\Controller\BetController;
+use Drupal\mespronos\Controller\RankingController;
 use Drupal\mespronos\Controller\StatisticsController;
 use Drupal\mespronos\Controller\UserController;
+use Drupal\mespronos\Entity\Ranking;
 use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
@@ -35,6 +37,7 @@ class UserProfilBlock extends BlockBase {
       return [];
     }
     $user = User::load($user->id());
+    $palmares = RankingController::getPalmares($user);
     $statistics = StatisticsController::getUserStatistics($user);
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
     $ranking = RankingGeneral::getRankingForBetter($user);
@@ -46,6 +49,7 @@ class UserProfilBlock extends BlockBase {
         'points' => $ranking ? $ranking->getPoints() : '/',
       ],
       '#statistics' => $statistics,
+      '#palmares' => $palmares,
       '#last_bets' => BetController::getLastUserBetsTable($user,50),
       '#user_picture' => $user_picture,
       '#cache' => [

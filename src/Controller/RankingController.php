@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
+use Drupal\Core\Database\Database;
 
 /**
  * Class DefaultController.
@@ -116,5 +117,79 @@ class RankingController extends ControllerBase {
     ];
   }
 
+  /**
+   * @param \Drupal\user\Entity\User $user
+   * @return array
+   */
+  public static function getPalmares(\Drupal\user\Entity\User $user) {
+    $data = self::getPalmaresData($user);
+    dpm($data);
+    if($data) {
+      return [
+        '#theme' => 'table',
+        '#rows' => self::parsePalmares($data),
+        '#header' => self::getPalmaresHeader(),
+        '#footer' => self::getPalmaresFooter(),
+        '#cache' => [
+          'contexts' => ['route'],
+          'tags' => [ 'palmares','user:'.$user->id()],
+        ],
+      ];
+    }
+    else {
+      return false;
+    }
+  }
 
+  private static function getPalmaresData(\Drupal\user\Entity\User $user) {
+
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__league','l');
+    $query->join('mespronos__ranking_league','rl','l.id = rl.league');
+    $query->addField('l','id','league_id');
+    $query->addField('rl','position');
+    $query->orderBy('l.changed','DESC');
+    $query->condition('l.status','archived');
+    $query->condition('rl.better',$user->id());
+    $palmares = [];
+    $results = $query->execute();
+    while($row = $results->fetchObject()) {
+      $row->league = League::load($row->league_id);
+      $row->betters = $row->league->getBettersNumber();
+      $palmares[] = $row;
+    }
+    return $palmares;
+  }
+
+  public static function getPalmaresHeader() {
+    return [
+      t('League', array(), array('context' => 'mespronos-block')),
+      t('Ranking', array(), array('context' => 'mespronos-block')),
+      t('Betters', array(), array('context' => 'mespronos-block')),
+    ];
+  }
+
+  public static function parsePalmares($data) {
+    $rows = [];
+    foreach ($data  as $palmares_line) {
+      $league_renderable = $palmares_line->league->getRenderableLabel();
+
+      $row = [
+        'data' => [
+          'league' => [
+            'data' => render($league_renderable),
+            'class' => ['day-cell']
+          ],
+          'ranking' => $palmares_line->position,
+          'betters' => $palmares_line->betters,
+        ]
+      ];
+      $rows[] = $row;
+    }
+    return $rows;
+  }
+
+  public static function getPalmaresFooter() {
+    return [];
+  }
 }

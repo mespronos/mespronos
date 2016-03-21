@@ -29,6 +29,7 @@ function mespronos_theme() {
     'variables' => array(
       'user' => NULL,
       'statistics' => NULL,
+      'palmares' => NULL,
       'last_bets' => NULL,
       'user_picture' => NULL,
       'links' => NULL,
@@ -74,6 +75,12 @@ function mespronos_theme() {
     'variables' => array(
       'league' => NULL,
       'day' => NULL,
+    ),
+  );
+  $theme['league'] = array(
+    'template' => 'league',
+    'variables' => array(
+      'league' => NULL,
     ),
   );
   $theme['user-ranking'] = array(

@@ -13,6 +13,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\Core\Database\Database;
 use Drupal\file\Entity\File;
+use Drupal\Core\Url;
 use Drupal\mespronos\Entity\RankingGeneral;
 
 /**
@@ -113,7 +114,14 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     return count($ids);
   }
 
-
+  public function getBettersNumber() {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__ranking_league','rl');
+    $query->addExpression('count(rl.better)','nb_better');
+    $query->condition('rl.league',$this->id());
+    $results = $query->execute()->fetchObject();
+    return $results->nb_better;
+  }
   /**
    * Return all days for league
    * @return \Drupal\mespronos\Entity\Day[]
@@ -231,6 +239,18 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     }
   }
 
+  public function getRenderableLabel() {
+
+    return [
+      '#theme' => 'league',
+      '#league' => [
+        'url' => Url::fromRoute('mespronos.league.index',['league'=>$this->id()]),
+        'label' => $this->label(),
+        'logo' => $this->getLogo('mini_logo')
+      ]
+    ];
+  }
+
   public function getLogo($style_name = 'thumbnail') {
     $logo = $this->get("field_league_logo")->first();
     if($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
@@ -240,7 +260,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       return [];
     }
   }
-
 
   public function getPoints() {
     $points = [
