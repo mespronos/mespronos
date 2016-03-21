@@ -171,7 +171,7 @@ class MespronosLeagueCLosingTest extends WebTestBase {
     public function testBasicClosing() {
         $this->assertEqual('active',$this->league1->getStatus(true),'League is active');
         $this->league1->close();
-        $this->assertEqual('over',$this->league1->getStatus(true),'Close() method is closing league');
+        $this->assertEqual('archived',$this->league1->getStatus(true),'Close() method is setting league as "archived"');
     }
 
     public function testSimpleWithOnlyOneDay() {
@@ -179,6 +179,13 @@ class MespronosLeagueCLosingTest extends WebTestBase {
         $ranking_league_1_better_1 = RankingLeague::getRankingForBetter($this->better1,$this->league1);
         $this->assertEqual(2,$ranking_league_1_better_1->getGameBetted(),'Ranking League 1 - Two games betted for better 1');
         $this->assertEqual(2,$ranking_general_better_1->getGameBetted(),'Ranking General - Two games betted for better 1');
+        
+        $this->league1->close();
+        
+        $ranking_general_better_1 = RankingGeneral::getRankingForBetter($this->better1);
+        $ranking_league_1_better_1 = RankingLeague::getRankingForBetter($this->better1,$this->league1);
+        $this->assertEqual(2,$ranking_league_1_better_1->getGameBetted(),'Ranking League 1 - still two games betted for better 1');
+        $this->assertEqual(0,count($ranking_general_better_1),'Ranking General - no data for better 1 after closing');
     }
 }
 
