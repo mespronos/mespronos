@@ -8,8 +8,8 @@
 namespace Drupal\mespronos\Tests;
 
 use Drupal\mespronos\Entity\RankingDay;
-use Drupal\mespronos\Controller\RankingController;
 use Drupal\mespronos\Entity\RankingGeneral;
+use Drupal\mespronos\Entity\RankingLeague;
 use Drupal\simpletest\WebTestBase;
 use Drupal\mespronos\Entity\Sport;
 use Drupal\mespronos\Entity\League;
@@ -19,7 +19,7 @@ use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Bet;
 
 /**
- * Provides automated tests for the mespronos module.
+ * Check if closing a league works properly.
  * @group mespronos
  */
 class MespronosLeagueCLosingTest extends WebTestBase {
@@ -43,8 +43,8 @@ class MespronosLeagueCLosingTest extends WebTestBase {
      */
     public static function getInfo() {
         return array(
-          'name' => "MesPronos RankingDay functionality",
-          'description' => 'Test Unit for user permissions.',
+          'name' => "MesPronos League closing functionality",
+          'description' => 'Check if closing a league works properly.',
           'group' => 'MesPronos',
         );
     }
@@ -139,9 +139,7 @@ class MespronosLeagueCLosingTest extends WebTestBase {
           'game_date' => $date,
         ));
         $this->game4->save();
-    }
 
-    public function testSimpleWithOnlyOneDay() {
         $bets = [];
         $bets[] = Bet::create(array(
           'better' => $this->better1->id(),
@@ -150,32 +148,8 @@ class MespronosLeagueCLosingTest extends WebTestBase {
           'score_team_2' => 1,
         ));
         $bets[] = Bet::create(array(
-          'better' => $this->better2->id(),
-          'game' => $this->game1->id(),
-          'score_team_1' => 1,
-          'score_team_2' => 1,
-        ));
-        $bets[] = Bet::create(array(
-          'better' => $this->better3->id(),
-          'game' => $this->game1->id(),
-          'score_team_1' => 1,
-          'score_team_2' => 1,
-        ));
-        $bets[] = Bet::create(array(
-          'better' => $this->better4->id(),
-          'game' => $this->game1->id(),
-          'score_team_1' => 1,
-          'score_team_2' => 1,
-        ));
-        $bets[] = Bet::create(array(
           'better' => $this->better1->id(),
-          'game' => $this->game3->id(),
-          'score_team_1' => 1,
-          'score_team_2' => 1,
-        ));
-        $bets[] = Bet::create(array(
-          'better' => $this->better2->id(),
-          'game' => $this->game3->id(),
+          'game' => $this->game2->id(),
           'score_team_1' => 1,
           'score_team_2' => 1,
         ));
@@ -185,17 +159,19 @@ class MespronosLeagueCLosingTest extends WebTestBase {
         }
 
         $this->game1->setScore(1,1)->save();
-        $this->game3->setScore(1,1)->save();
-
-
-        foreach($bets as $bet) {
-            $bet = Bet::load($bet->id());
-            $this->assertEqual($bet->getPoints(),10,t('good bets worth 10 points'));
-        }
+        $this->game2->setScore(1,1)->save();
 
         RankingDay::createRanking($this->day1);
         RankingDay::createRanking($this->day2);
-        $ranking_better_1 = RankingGeneral::getRankingForBetter($this->better1);
-        debug($ranking_better_1);
+        RankingLeague::createRanking($this->league1);
+        RankingLeague::createRanking($this->league2);
+        RankingGeneral::createRanking();
+    }
+
+    public function testSimpleWithOnlyOneDay() {
+        $ranking_general_better_1 = RankingGeneral::getRankingForBetter($this->better1);
+        $ranking_league_1_better_1 = RankingLeague::getRankingForBetter($this->better1,$this->league1);
+        $this->assertEqual(2,$ranking_league_1_better_1->getGameBetted(),'Ranking League 1 - Two games betted for better 1');
+        $this->assertEqual(2,$ranking_general_better_1->getGameBetted(),'Ranking General - Two games betted for better 1');
     }
 }
