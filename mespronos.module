@@ -41,6 +41,12 @@ function mespronos_theme() {
       'league' => NULL,
     ),
   );
+  $theme['leagues-list'] = array(
+    'template' => 'leagues-list',
+    'variables' => array(
+      'leagues' => [],
+    ),
+  );
   $theme['league-details'] = array(
     'template' => 'league_details',
     'variables' => array(

@@ -43,26 +43,47 @@ class LeagueController extends ControllerBase {
   }
 
   public function leaguesList() {
-    $leagues = League::loadMultiple();
     $user = User::load(\Drupal::currentUser()->id());
-
+    $leagues_as_status = self::getLeagueSortedFromStatus();
+    $leagues_table = [];
+    foreach ($leagues_as_status as $status => $leagues) {
+      $leagues_table[$status] = [
+        '#theme' => 'table',
+        '#rows' => self::leaguesListParseLeagues($leagues,$user),
+        '#header' => self::leaguesListGetHeader(),
+        '#footer' => self::leaguesListGetFooter(),
+        '#cache' => [
+          'contexts' => ['user'],
+          'tags' => [ 'leagues','user:'.$user->id()],
+        ],
+      ];
+    }
     return [
-      '#theme' => 'table',
-      '#rows' => self::leaguesListParseLeagues($leagues,$user),
-      '#header' => self::leaguesListGetHeader(),
-      '#footer' => self::leaguesListGetFooter(),
-      '#cache' => [
-        'contexts' => ['user'],
-        'tags' => [ 'leagues','user:'.$user->id()],
-      ],
+      '#theme' =>'leagues-list',
+      '#leagues' => $leagues_table,
     ];
+
+  }
+
+  /**
+   * @return array
+   */
+  public static function getLeagueSortedFromStatus() {
+    $leagues = League::loadMultiple();
+    $return_leagues = [];
+    foreach ($leagues as $league) {
+      if(!isset($return_leagues[$league->getStatus(true)])) {
+        $return_leagues[$league->getStatus(true)] = [];
+      }
+      $return_leagues[$league->getStatus(true)][] = $league;
+    }
+    return $return_leagues;
   }
 
   public static function leaguesListGetHeader() {
     return [
       t('Sport',array(),array('context'=>'mespronos-block')),
       t('Name',array(),array('context'=>'mespronos-block')),
-      t('Status',array(),array('context'=>'mespronos-block')),
       t('Days',array(),array('context'=>'mespronos-block')),
       t('Rank',array(),array('context'=>'mespronos-block')),
     ];
@@ -90,7 +111,6 @@ class LeagueController extends ControllerBase {
         'data' => [
           'sport' => $league->getSport()->label(),
           'names' => $league_name,
-          'status' => t($league->getStatus()),
           'days' => $league->getDaysNumber(),
           'rank' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '/',
         ]
