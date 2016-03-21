@@ -6,6 +6,7 @@
   - Add Docs folder
   - Add doc about league
   - Allow to archive league from administration dashboard
+  - Add palmares to profile page
 
 ## 8.x-1.0-alpha4, 2016-03-09
   - Add logo to teams
