@@ -13,6 +13,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\Core\Database\Database;
 use Drupal\file\Entity\File;
+use Drupal\mespronos\Entity\RankingGeneral;
 
 /**
  * Defines the League entity.
@@ -250,6 +251,13 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
   public function isActive() {
     return $this->get('status')->value == 'active';
+  }
+
+  public function close() {
+    $this->set('status','over');
+    $this->save();
+    \Drupal::logger('mespronos')->notice(t('League @league_label as been closed',['@league_label'=>$this->label()]));
+    RankingGeneral::createRanking();
   }
 
   /**
