@@ -95,7 +95,7 @@ class RankingGeneral extends Ranking {
    * @param \Drupal\mespronos\Entity\Ranking $entity
    * @param string $entity_name
    * @param string $storage_name
-   * @return \Drupal\mespronos\Entity\RankingDay
+   * @return \Drupal\mespronos\Entity\RankingGeneral
    */
   public static function getRankingForBetter(\Drupal\user\Entity\User $better,$entity = null,$entity_name=null,$storage_name=null) {
     return parent::getRankingForBetter($better,null,null,'ranking_general');
