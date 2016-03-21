@@ -1,5 +1,9 @@
-<h2>{% trans 'Active leagues' %}</h2>
-{{ leagues.active }}
+{% if leagues.active|length > 0 %}
+    <h2>{% trans 'Active leagues' %}</h2>
+    {{ leagues.active }}
+{% endif %}
 
-<h2>{% trans 'Archived leagues' %}</h2>
-{{ leagues.archived }}
+{% if leagues.archived|length > 0 %}
+    <h2>{% trans 'Archived leagues' %}</h2>
+    {{ leagues.archived }}
+{% endif %}

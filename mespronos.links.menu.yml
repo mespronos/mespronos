@@ -5,6 +5,14 @@ mespronos.dashboard:
   weight: 9
   parent: system.admin
 
+mespronos.main.leagues:
+  title: Leagues
+  description: 'See league list'
+  route_name: mespronos.leagues.list
+  weight: 8
+  parent: main
+  menu_name: main
+
 mespronos.main.ranking:
   title: General ranking
   description: 'See general ranking.'
