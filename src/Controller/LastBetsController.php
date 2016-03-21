@@ -26,6 +26,8 @@ class LastBetsController extends ControllerBase {
         $user = User::load(\Drupal::currentUser()->id());
         $page_league = isset($league);
         $days = DayController::getlastDays($nb,$league);
+        
+        if(count($days) == 0) {return false;}
 
         return [
           '#theme' => 'table',

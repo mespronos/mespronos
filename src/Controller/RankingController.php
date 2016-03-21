@@ -123,7 +123,6 @@ class RankingController extends ControllerBase {
    */
   public static function getPalmares(\Drupal\user\Entity\User $user) {
     $data = self::getPalmaresData($user);
-    dpm($data);
     if($data) {
       return [
         '#theme' => 'table',
@@ -173,7 +172,6 @@ class RankingController extends ControllerBase {
     $rows = [];
     foreach ($data  as $palmares_line) {
       $league_renderable = $palmares_line->league->getRenderableLabel();
-
       $row = [
         'data' => [
           'league' => [

@@ -27,6 +27,8 @@ class NextBetsController extends ControllerBase {
         $days = DayController::getNextDaysToBet($nb,$league);
         $page_league = isset($league);
 
+        if(count($days) == 0) {return false;}
+
         return [
           '#theme' => 'table',
           '#rows' => self::parseDays($days,$user,$page_league),
