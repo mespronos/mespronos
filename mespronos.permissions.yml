@@ -45,3 +45,6 @@ see league details:
 
 remove bets:
   title: 'Remove bets on given game'
+
+archive league:
+  title: 'Set a league as "Archived"'

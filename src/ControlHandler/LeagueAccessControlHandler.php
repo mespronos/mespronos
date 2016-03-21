@@ -36,6 +36,9 @@ class LeagueAccessControlHandler extends EntityAccessControlHandler {
 
       case 'delete':
         return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
+
+      case 'archive':
+        return AccessResult::allowedIfHasPermission($account, 'archive league');
     }
 
     return AccessResult::allowed();

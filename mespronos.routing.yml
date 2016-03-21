@@ -200,6 +200,14 @@ entity.league.delete_form:
   requirements:
     _entity_access: 'league.delete'
 
+entity.league.archive:
+  path: '/admin/mespronos/content/league/{league}/archived'
+  defaults:
+    _entity_form: league.archive
+    _title: 'Archived League'
+  requirements:
+    _entity_access: 'league.archive'
+
 league.settings:
   path: '/admin/mespronos/structure/league'
   defaults:

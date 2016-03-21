@@ -31,6 +31,7 @@ use Drupal\mespronos\Entity\RankingGeneral;
  *       "default" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "add" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\LeagueForm",
+ *       "archive" = "Drupal\mespronos\Entity\Form\LeagueArchiveForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\LeagueAccessControlHandler",
@@ -46,6 +47,7 @@ use Drupal\mespronos\Entity\RankingGeneral;
  *   links = {
  *     "edit-form" = "/entity.league.edit_form",
  *     "recount_points" = "/entity.league.recount_points",
+ *     "archive" = "/entity.league.archive",
  *     "delete-form" = "/entity.league.delete_form",
  *     "collection" = "/entity.league.collection"
  *   },
