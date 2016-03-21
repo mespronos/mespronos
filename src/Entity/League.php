@@ -254,9 +254,9 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public function close() {
-    $this->set('status','over');
+    $this->set('status','archived');
     $this->save();
-    \Drupal::logger('mespronos')->notice(t('League @league_label as been closed',['@league_label'=>$this->label()]));
+    \Drupal::logger('mespronos')->notice(t('League @league_label as been set as archived',['@league_label'=>$this->label()]));
     RankingGeneral::createRanking();
   }
 
