@@ -49,6 +49,7 @@ class GamesBetting extends FormBase {
       $bet = BetController::loadForUser($user,$game);
       $form['games'][$game->id()] = array(
         '#type' => 'fieldset',
+        '#title' => $game->labelDate(),
         '#attributes' => array(
           'class' => array('game','game-wrapper'),
         ),
@@ -61,6 +62,10 @@ class GamesBetting extends FormBase {
         '#type' => 'hidden',
         '#value' => $bet->id(),
       );
+      /*$form['games'][$game->id()]['date'] = array(
+        '#type' => 'markup',
+        '#markup' => $game->labelDate(),
+      );*/
       if($betting_type == 'score') {
         $form['games'][$game->id()]['score_team_1'] = array(
           '#type' => 'number',

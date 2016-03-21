@@ -100,6 +100,13 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return t('@team1 - @team2 - %date',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'%date'=> $date->format('d/m/Y H\hi')));
   }
 
+
+  public function labelDate() {
+    $date =  new \DateTime($this->getGameDate(),new \DateTimeZone('UTC'));
+    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+    return\Drupal::service('date.formatter')->format($date->format('U'), 'long');
+  }
+
   public function isPassed() {
     $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$this->getGameDate(),new \DateTimeZone("GMT"));
     $game_date->setTimezone(new \DateTimeZone("Europe/Paris"));
