@@ -78,9 +78,12 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
     }
     else {
       switch($this->getScoreTeam1() - $this->getScoreTeam2()) {
-        case 0 : return t('Draw');
-        case 1 : return $game->getTeam1()->label();
-        case -1 : return $game->getTeam2()->label();
+        case 0:
+          return t('Draw');
+        case 1:
+          return $game->getTeam1()->label();
+        case -1:
+          return $game->getTeam2()->label();
       }
     }
   }
