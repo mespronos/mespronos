@@ -78,9 +78,12 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
     }
     else {
       switch($this->getScoreTeam1() - $this->getScoreTeam2()) {
-        case 0 : return t('Draw');
-        case 1 : return $game->getTeam1()->label();
-        case -1 : return $game->getTeam2()->label();
+        case 0:
+          return t('Draw');
+        case 1:
+          return $game->getTeam1()->label();
+        case -1:
+          return $game->getTeam2()->label();
       }
     }
   }
@@ -96,6 +99,37 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
 
   public function getScoreTeam2() {
     return $this->get('score_team_2')->value;
+  }
+
+  public function getTeam1() {
+    $game = $this->getGame(true);
+    return $game->getTeam1();
+  }
+
+  public function getTeam2() {
+    $game = $this->getGame(true);
+    return $game->getTeam2();
+  }
+
+
+  public function label() {
+    $game = $this->getGame(true);
+    $league = $game->getLeague();
+    if($league->getBettingType(true) == 'winner') {
+      if($this->getScoreTeam1() == $this->getScoreTeam2()) {
+        return t('Draw');
+      }
+      elseif($this->getScoreTeam1() > $this->getScoreTeam2()) {
+        $winner = $this->getTeam1();
+      }
+      else {
+        $winner = $this->getTeam2();
+      }
+      return $winner->label();
+    }
+    else {
+      return $this->getScoreTeam1(). ' - '.$this->getScoreTeam2();
+    }
   }
 
   /**

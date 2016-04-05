@@ -17,9 +17,20 @@ function mespronos_preprocess_page(&$variables) {
 function mespronos_theme() {
   $theme = [];
   $theme['user-block'] = array(
-    'template' => 'user_block',
+    'template' => 'user-block',
     'variables' => array(
       'user' => NULL,
+      'user_picture' => NULL,
+      'links' => NULL,
+    ),
+  );
+  $theme['user-profile-block'] = array(
+    'template' => 'user-profile-block',
+    'variables' => array(
+      'user' => NULL,
+      'statistics' => NULL,
+      'palmares' => NULL,
+      'last_bets' => NULL,
       'user_picture' => NULL,
       'links' => NULL,
     ),
@@ -29,6 +40,12 @@ function mespronos_theme() {
     'variables' => array(
       'day' => NULL,
       'league' => NULL,
+    ),
+  );
+  $theme['leagues-list'] = array(
+    'template' => 'leagues-list',
+    'variables' => array(
+      'leagues' => [],
     ),
   );
   $theme['league-details'] = array(
@@ -58,6 +75,12 @@ function mespronos_theme() {
     'variables' => array(
       'league' => NULL,
       'day' => NULL,
+    ),
+  );
+  $theme['league'] = array(
+    'template' => 'league',
+    'variables' => array(
+      'league' => NULL,
     ),
   );
   $theme['user-ranking'] = array(

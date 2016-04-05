@@ -31,6 +31,7 @@ use Drupal\mespronos\Controller\BetController;
  *       "add" = "Drupal\mespronos\Entity\Form\GameForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\GameForm",
  *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
+ *       "remove_bets" = "Drupal\mespronos\Entity\Form\GameRemoveBetsForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\GameAccessControlHandler",
  *   },
@@ -43,7 +44,8 @@ use Drupal\mespronos\Controller\BetController;
  *   },
  *   links = {
  *     "edit-form" = "/admin/game/{game}/edit",
- *     "delete-form" = "/admin/game/{game}/delete"
+ *     "delete-form" = "/admin/game/{game}/delete",
+ *     "remove-bets" = "/admin/game/{game}/remove-bets"
  *   }
  * )
  */
@@ -98,6 +100,13 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return t('@team1 - @team2 - %date',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'%date'=> $date->format('d/m/Y H\hi')));
   }
 
+
+  public function labelDate() {
+    $date =  new \DateTime($this->getGameDate(),new \DateTimeZone('UTC'));
+    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+    return\Drupal::service('date.formatter')->format($date->format('U'), 'long');
+  }
+
   public function isPassed() {
     $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$this->getGameDate(),new \DateTimeZone("GMT"));
     $game_date->setTimezone(new \DateTimeZone("Europe/Paris"));
@@ -119,6 +128,39 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return $return;
   }
 
+  /**
+   * Remove bets on current day
+   *
+   * @return integer number of deleted bets
+   */
+  public function removeBets() {
+    $storage = \Drupal::entityManager()->getStorage('bet');
+    $query = \Drupal::entityQuery('bet');
+    $query->condition('game',$this->id());
+    $ids = $query->execute();
+    $bets = $storage->loadMultiple($ids);
+    foreach ($bets as $bet) {
+      $bet->delete();
+    }
+    \Drupal::logger('mespronos')->notice(t('Bets removed on game #@id (@game_label) : @nb_bets removed',[
+      '@id'=>$this->id(),
+      '@game_label'=>$this->label(),
+      '@nb_bets' => count($ids),
+    ]));
+    return count($ids);
+  }
+
+  /**
+   * Return number of games on current day
+   *
+   * @return integer nb bets for given game
+   */
+  public function getNbBets() {
+    $query = \Drupal::entityQuery('bet');
+    $query->condition('game',$this->id());
+    $ids = $query->execute();
+    return count($ids);
+  }
   /**
    * @return bool
    */

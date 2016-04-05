@@ -46,6 +46,14 @@ mespronos.nextbets:
   requirements:
     _permission: 'view next bets days'
 
+mespronos.ranking:
+  path: 'mespronos/ranking'
+  defaults:
+    _controller: '\Drupal\mespronos\Controller\RankingController::getRankingGeneral'
+    _title: 'General ranking'
+  requirements:
+    _permission: 'view ranking'
+
 mespronos.leagues.list:
   path: 'mespronos/leagues'
   defaults:
@@ -192,6 +200,14 @@ entity.league.delete_form:
   requirements:
     _entity_access: 'league.delete'
 
+entity.league.archive:
+  path: '/admin/mespronos/content/league/{league}/archived'
+  defaults:
+    _entity_form: league.archive
+    _title: 'Archived League'
+  requirements:
+    _entity_access: 'league.archive'
+
 league.settings:
   path: '/admin/mespronos/structure/league'
   defaults:
@@ -323,6 +339,14 @@ entity.game.delete_form:
     _title: 'Delete Game'
   requirements:
     _entity_access: 'game.delete'
+
+entity.game.remove_bets:
+  path: '/admin/game/{game}/remove-bets'
+  defaults:
+    _entity_form: game.remove_bets
+    _title: 'Delete bets on game'
+  requirements:
+    _permission: 'remove bets'
 
 # Bet routing definition
 entity.bet.canonical:

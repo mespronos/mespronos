@@ -1,0 +1,31 @@
+league :
+  name : "Champion's league"
+  sport : 'Football'
+  status : 'active'
+  classement : true
+  betting_type : 'winner'
+  days:
+    - number : 8
+      name : "1/4 de final Aller"
+      day_default_date : 2016-04-05t20:45:00
+      games :
+        - game :  FC Barcelone | Atlético de Madrid
+          game_date : 2016-04-05t20:45:00
+        - game : Bayern Munich | Benfica
+          game_date : 2016-04-05t20:45:00
+        - game : VfL Wolfsburg | Real Madrid
+          game_date : 2016-04-06t20:45:00
+        - game : Paris-SG | Manchester City
+          game_date : 2016-04-06t20:45:00
+    - number : 9
+      name : "1/4 de final Retour"
+      day_default_date : 2016-03-12t20:45:00
+      games :
+        - game :  Atlético de Madrid | FC Barcelone
+          game_date : 2016-04-13t20:45:00
+        - game :  Benfica | Bayern Munich
+          game_date : 2016-04-13t20:45:00
+        - game : Real Madrid | VfL Wolfsburg
+          game_date : 2016-04-12t20:45:00
+        - game : Manchester City | Paris-SG
+          game_date : 2016-04-12t20:45:00

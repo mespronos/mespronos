@@ -1,0 +1,40 @@
+league :
+  name : 'Ligue 1 2014/2015'
+  sport : 'Football'
+  status : 'over'
+  classement : true
+  betting_type : 'score'
+  days:
+    - number : 2
+      day_default_date : 2014-08-16t19:00:00
+      games :
+        - game : SM Caen | LOSC Lille
+          mark : 0 | 1
+          game_date : 2014-08-15t20:30:00
+        - game : Paris Saint-Germain | SC Bastia
+          mark : 2 | 0
+          day_date : 2014-08-16t17:00:00
+        - game : RC Lens | EA Guingamp
+          mark : 0 | 1
+          day_date : 2014-08-16t20:00:00
+        - game : FC Lorient | OGC Nice
+          mark : 0 | 0
+          day_date : 2014-08-16t20:00:00
+        - game : FC Metz | FC Nantes
+          mark : 1 | 1
+          day_date : 2014-08-16t20:00:00
+        - game : Stade Rennais FC | Evian TG FC
+          mark : 6 | 2
+          day_date : 2014-08-16t20:00:00
+        - game : Toulouse FC | Olympique Lyonnais
+          mark : 2 | 1
+          day_date : 2014-08-16t20:00:00
+        - game : Olympique de Marseille | Montpellier Hérault SC
+          mark : 0 | 2
+          day_date : 2014-08-17t17:00:00
+        - game : AS Saint-Etienne | Stade de Reims
+          mark : 3 | 1
+          day_date : 2014-08-17t17:00:00
+        - game : Girondins de Bordeaux | AS Monaco
+          mark : 4 | 1
+          day_date : 2014-08-17t21:00:00

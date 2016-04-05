@@ -1,5 +1,7 @@
-<h2>{% trans 'Next bets' %}</h2>
-{{ next_bets }}
+{% if next_bets %}
+    <h2>{% trans 'Next bets' %}</h2>
+    {{ next_bets }}
+{% endif %}
 
 <h2>{% trans 'Last bets' %}</h2>
 {{ last_bets }}

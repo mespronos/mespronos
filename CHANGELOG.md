@@ -1,4 +1,13 @@
 # Changelog - Mespronos 
+## 8.x-1.0-alpha5, 2016-XX-XX
+  - Enhance betting form
+  - Add ability to remove bets on a given game
+  - Add profile page
+  - Add Docs folder
+  - Add doc about league
+  - Allow to archive league from administration dashboard
+  - Add palmares to profile page
+
 ## 8.x-1.0-alpha4, 2016-03-09
   - Add logo to teams
   - Add logo to leagues

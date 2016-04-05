@@ -18,6 +18,7 @@ use Drupal\Core\Database\Database;
 use Drupal\Core\Database\Query\Condition;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Cache\Cache;
+use Drupal\user\Entity\User;
 
 /**
  * Provides a list controller for Game entity.
@@ -155,6 +156,68 @@ class BetController extends ControllerBase {
     drupal_set_message(t('Points updated for @nb games',['@nb'=>$nb_game_updated]));
     drupal_set_message(t('Ranking updated for @nb days',['@nb'=>count($days_to_update)]));
     return new RedirectResponse(\Drupal::url('entity.league.collection'));
+  }
+
+  public static function getLastUserBetsTable(User $user,$nb_bets = 20) {
+    $bets = self::getLastUserBets($user,$nb_bets);
+    $rows = [];
+    foreach($bets as $bet) {
+      $game = $bet->getGame(true);
+      $day = $game->getDay();
+      $row = [
+        'data' => [
+          'day' => [
+            'data' => render($day->getRenderableLabel()),
+            'class' => ['day-cell']
+          ],
+          $game->labelTeams(),
+          $game->labelScore(),
+          $bet->Label(),
+          $bet->getPoints(),
+        ]
+      ];
+
+      $rows[] = $row;
+    }
+
+    $header = [
+      t('League',array(),array('context'=>'mespronos')),
+      t('Game',array(),array('context'=>'mespronos')),
+      t('Score',array(),array('context'=>'mespronos')),
+      t('Bet',array(),array('context'=>'mespronos')),
+      t('Points',array(),array('context'=>'mespronos')),
+    ];
+
+    $table_array = [
+      '#theme' => 'table',
+      '#rows' => $rows,
+      '#header' => $header,
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => [ 'lastbets','user:'.$user->id()],
+      ],
+    ];
+
+    return $table_array;
+  }
+
+  /**
+   * @param \Drupal\user\Entity\User $user
+   * @param int $nb_bets
+   * @return \Drupal\mespronos\Entity\Bet[]
+   */
+  public static function getLastUserBets(User $user,$nb_bets = 20) {
+    $bet_storage = \Drupal::entityManager()->getStorage('bet');
+    $ids = \Drupal::entityQuery('bet')
+      ->condition('better',$user->id())
+      ->condition('points','','IS NOT NULL')
+      ->sort('created','DESC')
+      ->range(0,$nb_bets)
+      ->execute();
+    if(count($ids)>0) {
+      return $bet_storage->loadMultiple($ids);
+    }
+    return [];
   }
 
   /**

@@ -30,6 +30,9 @@ view own last bets:
 view others last bets:
   title: "View passed bets result for another user"
 
+view ranking:
+  title: "View ranking"
+
 subscribe to league:
   title: 'Subscribe to a league'
   description: 'Allow to bet on this league'
@@ -39,3 +42,9 @@ make a bet:
 
 see league details:
   title: 'See league details (days, ranking...)'
+
+remove bets:
+  title: 'Remove bets on given game'
+
+archive league:
+  title: 'Set a league as "Archived"'

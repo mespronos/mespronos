@@ -7,7 +7,8 @@
 
 namespace Drupal\mespronos\Controller;
 
-use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Controller\ControllerBase;;
+use Drupal\user\Entity\User;
 
 /**
  * Class DashboardController.
@@ -22,6 +23,12 @@ class StatisticsController extends ControllerBase {
     $stats['leagues'] = t('@nb leagues',['@nb'=>self::getLeaguesNumber()]);
     $stats['games'] = t('@nb games',['@nb'=>self::getGamesNumber()]);
     $stats['bets'] = t('@nb bets',['@nb'=>self::getBetsNumber()]);
+    return $stats;
+  }
+
+  public static function getUserStatistics(User $user) {
+    $stats = [];
+    $stats['nb_bets'] = self::getBetsNumber($user);
     return $stats;
   }
 
@@ -43,8 +50,11 @@ class StatisticsController extends ControllerBase {
     return count($ids);
   }
 
-  function getBetsNumber() {
+  function getBetsNumber(User $user = null) {
     $query = \Drupal::entityQuery('bet');
+    if($user) {
+      $query->condition('better',$user->id());
+    }
     $ids = $query->execute();
     return count($ids);
   }

@@ -1,6 +1,10 @@
 <aside>
-    {{ user.avatar }}
+    <a href="{{ url('entity.user.canonical', {'user': user.id}) }}">
+        {{ user.avatar }}
+    </a>
 </aside>
 <div>
-    {{ user.name}}
+    <a href="{{ url('entity.user.canonical', {'user': user.id}) }}">
+        {{ user.name }}
+    </a>
 </div>

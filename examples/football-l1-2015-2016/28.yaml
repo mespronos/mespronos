@@ -1,0 +1,30 @@
+league :
+  name : 'Ligue 1 2015/2016'
+  sport : 'Football'
+  status : 'active'
+  classement : true
+  betting_type : 'score'
+  days:
+    - number : 28
+      day_default_date : 2016-02-26t20:30:00
+      games :
+        - game : Nice | Bastia
+          game_date : 2016-02-26t20:30:00
+        - game : Montpellier | Lille
+          game_date : 2016-02-27t17:00:00
+        - game : Troyes | Lorient
+          game_date : 2016-02-27t20:00:00
+        - game : Toulouse | Rennes
+          game_date : 2016-02-27t20:00:00
+        - game : Reims | Bordeaux
+          game_date : 2016-02-27t20:00:00
+        - game : Guingamp | Angers
+          game_date : 2016-02-27t20:00:00
+        - game : Nantes | Monaco
+          game_date : 2016-02-28t14:00:00
+        - game : GFC Ajaccio | Marseille
+          game_date : 2016-02-28t17:00:00
+        - game : Saint-Étienne | Caen
+          game_date : 2016-02-28t17:00:00
+        - game : Lyon | Paris-SG
+          game_date : 2016-02-28t21:00:00
