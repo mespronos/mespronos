@@ -31,10 +31,17 @@ class AdministrationConfigForm extends ConfigFormBase {
       '#default_value' => $this->config('mespronos.reminder')->get('enabled'),
     ];
 
-    $form['reminder']['reminder_hour'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Number of hours for notifications'),
-      '#description' => $this->t(''),
+    $form['reminder']['reminders_hours'] = [
+      '#type' => 'checkboxes',
+      '#title' => $this->t('Reminder to offer to users'),
+      '#description' => $this->t('Note that user will only receive the reminder he choose.'),
+      '#options' => [
+        48 => t('48 hours'),
+        36 => t('36 hours'),
+        24 => t('24 hours'),
+        12 => t('12 hours'),
+        6 => t('6 hours'),
+      ],
       '#default_value' => $this->config('mespronos.reminder')->get('hours'),
       '#states' => [
         'required' => [':input[name="reminder_enabled"]' => ['checked' => true]],
@@ -46,18 +53,27 @@ class AdministrationConfigForm extends ConfigFormBase {
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    if ($form_state->getValue('reminder_hour') <= 0) {
-      $form_state->setErrorByName('reminder_hour', $this->t("Can't be less or equal to 0."));
-    }
-    if (intval($form_state->getValue('reminder_hour')) != $form_state->getValue('reminder_hour')) {
-      $form_state->setErrorByName('reminder_hour', $this->t("Should be a integer"));
+    $hours = self::parseReminderHours($form_state->getValue('reminders_hours'));
+    if ($form_state->getValue('reminder_enabled') && count($hours) == 0) {
+      $form_state->setErrorByName('reminder_hour', $this->t("You have to choose at least one option"));
     }
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
+    $hours = self::parseReminderHours($form_state->getValue('reminders_hours'));
     $this->config('mespronos.reminder')
       ->set('enabled', (string) $form_state->getValue('reminder_enabled'))
-      ->set('hours', (string) $form_state->getValue('reminder_hour'))
+      ->set('hours', $hours)
       ->save(TRUE);
+  }
+
+  public static function parseReminderHours($form_value) {
+    $hours = [];
+    foreach ($form_value as $key => $is_enabled) {
+      if($is_enabled != 0) {
+        $hours[$key] = $key;
+      }
+    }
+    return $hours;
   }
 }
