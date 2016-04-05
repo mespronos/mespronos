@@ -76,7 +76,7 @@ class NextBetsController extends ControllerBase {
                 ],
                 'nb_game' => $day->nb_game,
                 'bets_left' => $bets_left,
-                'time_left' => $i->format('%a') >0 ? t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
+                'time_left' => $i->format('%a') >0 ? t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%I'))) : t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%I'))),
                 'action' => '',
               ]
             ];
