@@ -32,9 +32,15 @@ class GamesBetting extends FormBase {
 
     $betting_type = $league->getBettingType(TRUE);
 
+    if($betting_type == 'score') {
+      $text = 'Enter the score for each team.';
+    }
+    else {
+      $text = 'Click on the winner you want to choose, or draw.';
+    }
     $form['infos'] = array(
-      '#type' => 'container',
-      '#tree' => true,
+      '#type' => '#markup',
+      '#markup' => t($text),
     );
 
     $form['games'] = array(
