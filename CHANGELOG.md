@@ -1,5 +1,5 @@
 # Changelog - Mespronos 
-## 8.x-1.0-alpha5, 2016-XX-XX
+## 8.x-1.0-alpha5, 2016-04-09
   - Enhance betting form
   - Add ability to remove bets on a given game
   - Add profile page
