@@ -82,7 +82,6 @@ class LeagueController extends ControllerBase {
 
   public static function leaguesListGetHeader() {
     return [
-      t('Sport',array(),array('context'=>'mespronos-block')),
       t('Name',array(),array('context'=>'mespronos-block')),
       t('Days',array(),array('context'=>'mespronos-block')),
       t('Rank',array(),array('context'=>'mespronos-block')),
@@ -101,16 +100,12 @@ class LeagueController extends ControllerBase {
   public static function leaguesListParseLeagues($leagues,User $user) {
     $rows = [];
     foreach ($leagues as $league) {
-
       $ranking = RankingLeague::getRankingForBetter($user,$league);
-      $league_name = Link::fromTextAndUrl(
-        $league->label(),
-        Url::fromRoute('mespronos.league.index',['league'=>$league->id()])
-      );
+      $league_renderable = $league->getRenderableLabel();
+
       $row = [
         'data' => [
-          'sport' => $league->getSport()->label(),
-          'names' => $league_name,
+          'names' => render($league_renderable),
           'days' => $league->getDaysNumber(),
           'rank' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '/',
         ]

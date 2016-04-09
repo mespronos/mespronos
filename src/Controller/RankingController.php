@@ -105,7 +105,7 @@ class RankingController extends ControllerBase {
       $rows[] = $row;
     }
     $header = [
-      t('Rank',array(),array('context'=>'mespronos-ranking')),
+      t('#',array(),array('context'=>'mespronos-ranking')),
       t('Better',array(),array('context'=>'mespronos-ranking')),
       t('Points',array(),array('context'=>'mespronos-ranking')),
       t('Bets',array(),array('context'=>'mespronos-ranking')),

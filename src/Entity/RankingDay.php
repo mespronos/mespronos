@@ -136,6 +136,16 @@ class RankingDay extends Ranking {
   }
 
   /**
+   * @param \Drupal\mespronos\Entity\Day $day
+   * @param String $entity_name
+   * @param String $storage_name
+   * @return integer
+   */
+  public static function getNumberOfBetters($day = null,$entity_name='day',$storage_name='ranking_day') {
+    return parent::getNumberOfBetters($day,$entity_name,$storage_name);
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {

@@ -44,11 +44,22 @@ class NextBetsController extends ControllerBase {
 
     public static function getHeader() {
         return [
-            t('Day',array(),array('context'=>'mespronos-block')),
-            t('Games',array(),array('context'=>'mespronos-block')),
-            t('Bets left',array(),array('context'=>'mespronos-block')),
-            t('Time left',array(),array('context'=>'mespronos-block')),
-            '',
+            [
+                'data' => t('Day',array(),array('context'=>'mespronos-block')),
+            ],
+            [
+                'data' => t('Games',array(),array('context'=>'mespronos-block')),
+                'class' => array(RESPONSIVE_PRIORITY_LOW),
+            ],
+            [
+                'data' => t('Bets left',array(),array('context'=>'mespronos-block')),
+            ],
+            [
+                'data' => t('Time left',array(),array('context'=>'mespronos-block')),
+            ],
+            [
+                'data' => '',
+            ]
         ];
     }
 
@@ -76,14 +87,14 @@ class NextBetsController extends ControllerBase {
                 ],
                 'nb_game' => $day->nb_game,
                 'bets_left' => $bets_left,
-                'time_left' => $i->format('%a') >0 ? t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%i'))) : t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%i'))),
+                'time_left' => $i->format('%a') >0 ? t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%I'))) : t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%I'))),
                 'action' => '',
               ]
             ];
 
             if($user->id()>0) {
                 if($bets_left > 0) {
-                    $text = t('Bet',[],['context'=>'mespronos-nextbet']);
+                    $text = t('Go !',[],['context'=>'mespronos-nextbet']);
                 }
                 else {
                     $text = t('Edit',[],['context'=>'mespronos-nextbet']);
