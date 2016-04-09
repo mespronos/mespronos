@@ -44,11 +44,31 @@ class LastBetsController extends ControllerBase {
     public static function getHeader(User $user) {
         if($user->id()>0) {
             return [
-                t('Day', array(), array('context' => 'mespronos-block')),
-                t('Bets', array(), array('context' => 'mespronos-block')),
-                t('Points', array(), array('context' => 'mespronos-block')),
-                t('Rank', array(), array('context' => 'mespronos-block')),
-                ''
+                [
+                  'data'=> t('Day', array(), array('context' => 'mespronos-block')),
+                  'title' => t('Day', array(), array('context' => 'mespronos-block')),
+                ],
+                [
+                  'data'=> t('Bets', array(), array('context' => 'mespronos-block')),
+                  'title' => t('Day', array(), array('context' => 'mespronos-block')),
+                ],
+                [
+                  'data'=> t('Points', array(), array('context' => 'mespronos-block')),
+                  'title' => t('Day', array(), array('context' => 'mespronos-block')),
+                ],
+                [
+                  'data'=> t('Rank.', array(), array('context' => 'mespronos-block')),
+                  'title' => t('Your rank / Number of betters', array(), array('context' => 'mespronos-block')),
+                ],
+                [
+                  'data'=> t('Betters', array(), array('context' => 'mespronos-block')),
+                  'title' => t('Total number of betters on this day', array(), array('context' => 'mespronos-block')),
+                  'class' => array(RESPONSIVE_PRIORITY_LOW),
+                ],
+                [
+                  'data'=> '',
+                  'class' => array(RESPONSIVE_PRIORITY_LOW),
+                ],
             ];
         }
         else{
@@ -77,10 +97,14 @@ class LastBetsController extends ControllerBase {
               ]
             ];
             if($user->id()>0) {
+
                 $ranking = RankingDay::getRankingForBetter($user,$day->entity);
+                $nb_better = RankingDay::getNumberOfBetters($day->entity);
+                $position = $ranking ? $ranking->getPosition() . ' / '.$nb_better : '';
                 $row['data']['games_betted'] = $ranking ? $ranking->getGameBetted() : ' ';
                 $row['data']['points'] = $ranking ? $ranking->getPoints() : ' ';
-                $row['data']['position'] = $ranking ? $ranking->getPosition() : ' ';
+                $row['data']['position'] = $ranking ? Link::fromTextAndUrl(t('@class',['@class'=>$ranking->getPosition()]),Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])) : ' ';
+                $row['data']['nb_betters'] = RankingDay::getNumberOfBetters($day->entity);
                 $row['data']['action'] = Link::fromTextAndUrl(t('Details'),Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()]));
             }
             else {

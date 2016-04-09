@@ -44,11 +44,22 @@ class NextBetsController extends ControllerBase {
 
     public static function getHeader() {
         return [
-            t('Day',array(),array('context'=>'mespronos-block')),
-            t('Games',array(),array('context'=>'mespronos-block')),
-            t('Bets left',array(),array('context'=>'mespronos-block')),
-            t('Time left',array(),array('context'=>'mespronos-block')),
-            '',
+            [
+                'data' => t('Day',array(),array('context'=>'mespronos-block')),
+            ],
+            [
+                'data' => t('Games',array(),array('context'=>'mespronos-block')),
+                'class' => array(RESPONSIVE_PRIORITY_LOW),
+            ],
+            [
+                'data' => t('Bets left',array(),array('context'=>'mespronos-block')),
+            ],
+            [
+                'data' => t('Time left',array(),array('context'=>'mespronos-block')),
+            ],
+            [
+                'data' => '',
+            ]
         ];
     }
 
@@ -83,7 +94,7 @@ class NextBetsController extends ControllerBase {
 
             if($user->id()>0) {
                 if($bets_left > 0) {
-                    $text = t('Bet',[],['context'=>'mespronos-nextbet']);
+                    $text = t('Go !',[],['context'=>'mespronos-nextbet']);
                 }
                 else {
                     $text = t('Edit',[],['context'=>'mespronos-nextbet']);

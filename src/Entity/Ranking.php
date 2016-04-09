@@ -73,6 +73,22 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
     }
     return $rankings;
   }
+
+  /**
+   * @param \Drupal\mespronos\Entity\MPNContentEntityBase $entity
+   * @param String $entity_name
+   * @param String $storage_name
+   * @return integer
+   */
+  public static function getNumberOfBetters($entity = null,$entity_name=null,$storage_name) {
+    $query = \Drupal::entityQuery($storage_name);
+    if(!is_null($entity_name) && !is_null($entity)) {
+      $query->condition($entity_name, $entity->id());
+    }
+    $ids = $query->execute();
+    return count($ids);
+  }
+
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = parent::baseFieldDefinitions($entity_type);
 
