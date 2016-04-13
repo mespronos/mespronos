@@ -36,7 +36,46 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
   }
 
   public function getPosition() {
-    return $this->get('position')->value;
+    $query = "SELECT rank FROM
+                  (
+                    SELECT AA.*,BB.ID,
+                  (@rnk:=@rnk+1) rnk,
+                  (@rank:=IF(@curscore=points,@rank,@rnk)) rank,
+                  (@curscore:=points) newscore
+                  FROM
+                  (
+                    SELECT * FROM
+                    (SELECT COUNT(1) scorecount,points
+                      FROM {".$this->getBaseTable()."} GROUP BY points
+                  ) AAA ORDER BY points DESC
+              ) AA LEFT JOIN {".$this->getBaseTable()."} BB USING (points)) A where id = :id";
+
+    $args = [':id'=>$this->id()];
+
+    switch ($this->getEntityRelated()) {
+      case 'day' :
+        $query .= ' AND day = :day';
+        $args[':day'] = $this->getDayiD();
+        break;
+      case 'league' :
+        $query .= ' AND league = :league';
+        $args[':league'] = $this->getLeagueiD();
+        break;
+    }
+
+
+    db_query('SET @rnk=0;');
+    db_query('SET @rank=0');
+    db_query('SET @curscore=0');
+    $results = db_query($query,$args);
+
+    $res = $results->fetchField();
+    if($res) {
+      return intval($res);
+    }
+    else {
+      return false;
+    }
   }
 
   public static function getRanking($entity = null,$entity_name=null,$storage_name) {
@@ -45,7 +84,7 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
     if(!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
     }
-    $query->sort('position','ASC');
+    $query->sort('points','DESC');
     $ids = $query->execute();
 
     $rankings = $storage->loadMultiple($ids);
@@ -134,20 +173,6 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
 
     $fields['points'] = BaseFieldDefinition::create('integer')
       ->setLabel('Points won')
-      ->setRevisionable(TRUE)
-      ->setSetting('unsigned', TRUE)
-      ->setDisplayOptions('view', array(
-        'label' => 'hidden',
-        'type' => 'integer',
-        'weight' => 6,
-      ))
-      ->setDisplayOptions('form', array(
-        'type' => 'number',
-        'weight' => 6,
-      ));
-
-    $fields['position'] = BaseFieldDefinition::create('integer')
-      ->setLabel('Position')
       ->setRevisionable(TRUE)
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array(

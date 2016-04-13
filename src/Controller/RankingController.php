@@ -76,14 +76,15 @@ class RankingController extends ControllerBase {
   public static function getTableFromRanking($rankings) {
     $user = \Drupal::currentUser();
     $rows = [];
-    $old_rank = null;
+    $old_points = null;
+    $rank = 0;
     foreach ($rankings  as  $ranking) {
       $better = \Drupal\user\Entity\User::load($ranking->getOwner()->id());
       $better = UserController::getRenderableUser($better);
 
       $row = [
         'data' => [
-          'position' => $ranking->get('position')->value != $old_rank ? $ranking->get('position')->value : '-',
+          'position' => $ranking->get('points')->value != $old_points ? ++$rank : '-',
           'better' => [
             'data' => render($better),
             'class' => ['better-cell']
@@ -92,7 +93,7 @@ class RankingController extends ControllerBase {
           'games_betted' => $ranking->get('games_betted')->value,
         ]
       ];
-      $old_rank = $ranking->get('position')->value;
+      $old_points = $ranking->get('points')->value;
       if($ranking instanceof RankingDay) {
         $row['data']['better'] = Link::fromTextAndUrl(
           $ranking->getOwner()->getUsername(),
@@ -146,7 +147,6 @@ class RankingController extends ControllerBase {
     $query = $injected_database->select('mespronos__league','l');
     $query->join('mespronos__ranking_league','rl','l.id = rl.league');
     $query->addField('l','id','league_id');
-    $query->addField('rl','position');
     $query->orderBy('l.changed','DESC');
     $query->condition('l.status','archived');
     $query->condition('rl.better',$user->id());

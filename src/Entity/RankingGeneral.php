@@ -37,6 +37,18 @@ use Drupal\Core\Database\Database;
  */
 class RankingGeneral extends Ranking {
 
+  public function getBaseTable() {
+    return 'mespronos__ranking_general';
+  }
+
+  public function getEntityRelated() {
+    return 'general';
+  }
+
+  public function getStorageName() {
+    return 'ranking_general';
+  }
+  
   public static function createRanking() {
     self::removeRanking();
     $data = self::getData();
@@ -46,7 +58,6 @@ class RankingGeneral extends Ranking {
         'better' => $row->better,
         'games_betted' => $row->nb_bet,
         'points' => $row->points,
-        'position' => $row->position,
       ]);
       $rankingLeague->save();
     }

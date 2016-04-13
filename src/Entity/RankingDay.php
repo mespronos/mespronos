@@ -38,7 +38,19 @@ use Drupal\Core\Database\Database;
  */
 class RankingDay extends Ranking {
 
-  /**
+  public function getBaseTable() {
+    return 'mespronos__ranking_day';
+  }
+  
+  public function getEntityRelated() {
+    return 'day';
+  }
+
+  public function getStorageName() {
+    return 'ranking_day';
+  }
+
+    /**
    * @return mixed
    */
   public function getDayiD() {
@@ -67,7 +79,6 @@ class RankingDay extends Ranking {
         'day' => $day->id(),
         'games_betted' => $row->nb_bet,
         'points' => $row->points,
-        'position' => $row->position,
       ]);
       $rankingDay->save();
       $league = $day->getLeague();
@@ -117,7 +128,7 @@ class RankingDay extends Ranking {
     $storage = \Drupal::entityManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
     $query->condition('day', $day->id());
-    $query->sort('position','ASC');
+    $query->sort('points','DESC');
     $ids = $query->execute();
 
     $rankings = $storage->loadMultiple($ids);
