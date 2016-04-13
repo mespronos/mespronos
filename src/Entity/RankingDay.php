@@ -67,6 +67,22 @@ class RankingDay extends Ranking {
   }
 
   /**
+   * return the position of the user of the user concerned by the ranking instance
+   * @return int
+   */
+  public function getPosition() {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__ranking_day','rd');
+    $query->addField('rd','id');
+    $query->addField('rd','points');
+    $query->condition('rd.day',$this->getDayiD());
+    $query->orderBy('points','DESC');
+    $results = $query->execute()->fetchAllAssoc('id');
+    $ranking = $this->determinePosition($results);
+    return $ranking;
+  }
+
+  /**
    * @return integer
    */
   public static function createRanking(\Drupal\mespronos\Entity\Day $day) {

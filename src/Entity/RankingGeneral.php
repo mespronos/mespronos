@@ -93,6 +93,37 @@ class RankingGeneral extends Ranking {
     return $nb_deleted;
   }
 
+  public function getPosition() {
+    $query = "SELECT rank FROM
+                  (
+                    SELECT AA.*,BB.ID,
+                  (@rnk:=@rnk+1) rnk,
+                  (@rank:=IF(@curscore=points,@rank,@rnk)) rank,
+                  (@curscore:=points) newscore
+                  FROM
+                  (
+                    SELECT * FROM
+                    (SELECT COUNT(1) scorecount,points
+                      FROM {".$this->getBaseTable()."} GROUP BY points
+                  ) AAA ORDER BY points DESC
+              ) AA LEFT JOIN {".$this->getBaseTable()."} BB USING (points)) A where id = :id";
+
+    $args = [':id'=>$this->id()];
+    db_query('SET @rnk=0;');
+    db_query('SET @rank=0');
+    db_query('SET @curscore=0');
+
+    $results = db_query($query,$args);
+
+    $res = $results->fetchField();
+    if($res) {
+      return intval($res);
+    }
+    else {
+      return false;
+    }
+  }
+
   /**
    * @return \Drupal\mespronos\Entity\RankingGeneral
    */

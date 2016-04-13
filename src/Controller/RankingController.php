@@ -77,14 +77,15 @@ class RankingController extends ControllerBase {
     $user = \Drupal::currentUser();
     $rows = [];
     $old_points = null;
-    $rank = 0;
+    $next_rank = 0;
     foreach ($rankings  as  $ranking) {
+      $next_rank++;
       $better = \Drupal\user\Entity\User::load($ranking->getOwner()->id());
       $better = UserController::getRenderableUser($better);
 
       $row = [
         'data' => [
-          'position' => $ranking->get('points')->value != $old_points ? ++$rank : '-',
+          'position' => $ranking->get('points')->value != $old_points ? $next_rank : '-',
           'better' => [
             'data' => render($better),
             'class' => ['better-cell']

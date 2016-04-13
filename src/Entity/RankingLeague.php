@@ -51,6 +51,22 @@ class RankingLeague extends Ranking {
   }
 
   /**
+   * return the position of the user of the user concerned by the ranking instance
+   * @return int
+   */
+  public function getPosition() {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__ranking_league','rl');
+    $query->addField('rl','id');
+    $query->addField('rl','points');
+    $query->condition('rl.league',$this->getLeagueiD());
+    $query->orderBy('points','DESC');
+    $results = $query->execute()->fetchAllAssoc('id');
+    $ranking = $this->determinePosition($results);
+    return $ranking;
+  }
+
+  /**
    * @return integer
    */
   public function getLeagueiD() {

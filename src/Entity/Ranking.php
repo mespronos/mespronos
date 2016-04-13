@@ -17,6 +17,30 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
     );
   }
 
+  public abstract function getBaseTable();
+
+  public abstract function getEntityRelated();
+
+  public abstract function getStorageName();
+
+  public abstract function getPosition();
+
+  public function determinePosition($results) {
+    $position = 0;
+    $next_position= 0;
+    $old_points = null;
+    foreach ($results as $result) {
+      $next_position++;
+      if($old_points != $result->points) {
+        $position = $next_position;
+        $old_points = $result->points;
+      }
+      if($this->id() == $result->id) {
+        return $position;
+      }
+    }
+  }
+
   public function setGameBetted($nb_games_betted) {
     $this->set('games_betted', $nb_games_betted);
     return $this;
@@ -33,49 +57,6 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
 
   public function getPoints() {
     return $this->get('points')->value;
-  }
-
-  public function getPosition() {
-    $query = "SELECT rank FROM
-                  (
-                    SELECT AA.*,BB.ID,
-                  (@rnk:=@rnk+1) rnk,
-                  (@rank:=IF(@curscore=points,@rank,@rnk)) rank,
-                  (@curscore:=points) newscore
-                  FROM
-                  (
-                    SELECT * FROM
-                    (SELECT COUNT(1) scorecount,points
-                      FROM {".$this->getBaseTable()."} GROUP BY points
-                  ) AAA ORDER BY points DESC
-              ) AA LEFT JOIN {".$this->getBaseTable()."} BB USING (points)) A where id = :id";
-
-    $args = [':id'=>$this->id()];
-
-    switch ($this->getEntityRelated()) {
-      case 'day' :
-        $query .= ' AND day = :day';
-        $args[':day'] = $this->getDayiD();
-        break;
-      case 'league' :
-        $query .= ' AND league = :league';
-        $args[':league'] = $this->getLeagueiD();
-        break;
-    }
-
-
-    db_query('SET @rnk=0;');
-    db_query('SET @rank=0');
-    db_query('SET @curscore=0');
-    $results = db_query($query,$args);
-
-    $res = $results->fetchField();
-    if($res) {
-      return intval($res);
-    }
-    else {
-      return false;
-    }
   }
 
   public static function getRanking($entity = null,$entity_name=null,$storage_name) {
