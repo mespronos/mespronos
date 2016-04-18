@@ -1,0 +1,23 @@
+league :
+  name : "Champion's league"
+  sport : 'Football'
+  status : 'active'
+  classement : true
+  betting_type : 'winner'
+  days:
+    - number : 10
+      name : "1/2 de final Aller"
+      day_default_date : 2016-04-26t20:45:00
+      games :
+        - game :  Manchester City | Real Madrid
+          game_date : 2016-04-26t20:45:00
+        - game : Atlético de Madrid | Bayern Munich
+          game_date : 2016-04-27t20:45:00
+    - number : 11
+      name : "1/2 de final Retour"
+      day_default_date : 2016-05-03t20:45:00
+      games :
+        - game :  Real Madrid | Manchester City
+          game_date : 2016-05-04t20:45:00
+        - game : Bayern Munich | Atlético de Madrid
+          game_date : 2016-05-03t20:45:00
