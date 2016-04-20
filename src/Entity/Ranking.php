@@ -17,6 +17,30 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
     );
   }
 
+  public abstract function getBaseTable();
+
+  public abstract function getEntityRelated();
+
+  public abstract function getStorageName();
+
+  public abstract function getPosition();
+
+  public function determinePosition($results) {
+    $position = 0;
+    $next_position= 0;
+    $old_points = null;
+    foreach ($results as $result) {
+      $next_position++;
+      if($old_points != $result->points) {
+        $position = $next_position;
+        $old_points = $result->points;
+      }
+      if($this->id() == $result->id) {
+        return $position;
+      }
+    }
+  }
+
   public function setGameBetted($nb_games_betted) {
     $this->set('games_betted', $nb_games_betted);
     return $this;
@@ -35,17 +59,13 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
     return $this->get('points')->value;
   }
 
-  public function getPosition() {
-    return $this->get('position')->value;
-  }
-
   public static function getRanking($entity = null,$entity_name=null,$storage_name) {
     $storage = \Drupal::entityManager()->getStorage($storage_name);
     $query = \Drupal::entityQuery($storage_name);
     if(!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
     }
-    $query->sort('position','ASC');
+    $query->sort('points','DESC');
     $ids = $query->execute();
 
     $rankings = $storage->loadMultiple($ids);
@@ -134,20 +154,6 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
 
     $fields['points'] = BaseFieldDefinition::create('integer')
       ->setLabel('Points won')
-      ->setRevisionable(TRUE)
-      ->setSetting('unsigned', TRUE)
-      ->setDisplayOptions('view', array(
-        'label' => 'hidden',
-        'type' => 'integer',
-        'weight' => 6,
-      ))
-      ->setDisplayOptions('form', array(
-        'type' => 'number',
-        'weight' => 6,
-      ));
-
-    $fields['position'] = BaseFieldDefinition::create('integer')
-      ->setLabel('Position')
       ->setRevisionable(TRUE)
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array(

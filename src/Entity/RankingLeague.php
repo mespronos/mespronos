@@ -38,6 +38,33 @@ use Drupal\Core\Database\Database;
  */
 class RankingLeague extends Ranking {
 
+  public function getBaseTable() {
+    return 'mespronos__ranking_league';
+  }
+  
+  public function getEntityRelated() {
+    return 'league';
+  }
+  
+  public function getStorageName() {
+    return 'ranking_league';
+  }
+
+  /**
+   * return the position of the user of the user concerned by the ranking instance
+   * @return int
+   */
+  public function getPosition() {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__ranking_league','rl');
+    $query->addField('rl','id');
+    $query->addField('rl','points');
+    $query->condition('rl.league',$this->getLeagueiD());
+    $query->orderBy('points','DESC');
+    $results = $query->execute()->fetchAllAssoc('id');
+    $ranking = $this->determinePosition($results);
+    return $ranking;
+  }
 
   /**
    * @return integer
@@ -65,7 +92,6 @@ class RankingLeague extends Ranking {
         'league' => $league->id(),
         'games_betted' => $row->nb_bet,
         'points' => $row->points,
-        'position' => $row->position,
       ]);
       $rankingLeague->save();
     }
@@ -112,7 +138,7 @@ class RankingLeague extends Ranking {
     $storage = \Drupal::entityManager()->getStorage('ranking_league');
     $query = \Drupal::entityQuery('ranking_league');
     $query->condition('league', $league->id());
-    $query->sort('position','ASC');
+    $query->sort('points','DESC');
     $ids = $query->execute();
     $rankings = $storage->loadMultiple($ids);
     return $rankings;
