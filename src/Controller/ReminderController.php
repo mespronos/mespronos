@@ -21,6 +21,8 @@ class ReminderController extends ControllerBase {
       return false;
     }
     $hours = self::getHoursDefined();
+    $max_hours = max($hours);
+    $days = Day::getUpcomming($max_hours);
     foreach ($hours as $hour) {
 
     }
@@ -38,4 +40,5 @@ class ReminderController extends ControllerBase {
     $hours = $config->get('hours');
     return !is_null($hours) ? $hours : [];
   }
+
 }
