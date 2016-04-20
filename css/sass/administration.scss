@@ -20,3 +20,23 @@ form#games-marks {
     }
   }
 }
+
+@media screen and (min-width: 640px) {
+  #mespronos-dashboard {
+    display: flex;
+    fieldset {
+      box-sizing: border-box;
+      width : 48%;
+      margin : 0 2%;
+      &:first-of-type {
+        margin-left : 0;
+      }
+      &:last-of-type {
+        margin-right : 0;
+      }
+    }
+    fieldset {
+
+    }
+  }
+}
