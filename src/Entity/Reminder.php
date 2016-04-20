@@ -2,34 +2,32 @@
 
 namespace Drupal\mespronos\Entity;
 
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 
+/**
+ * Defines the Reminder entity.
+ *
+ * @ingroup mespronos
+ *
+ * @ContentEntityType(
+ *   id = "mespronos_reminder",
+ *   label = @Translation("Reminder entity"),
+ *   base_table = "mespronos__reminder",
+ *   admin_permission = "administer Reminder entity",
+ *   fieldable = FALSE,
+ *   entity_keys = {
+ *     "id" = "id",
+ *     "label" = "name",
+ *     "uuid" = "uuid"
+ *   },
+ *   handlers = {}
+ * )
+ */
+
 class Reminder extends ContentEntityBase {
 
-  /**
-   * Defines the Reminder entity.
-   *
-   * @ingroup mespronos
-   *
-   * @ContentEntityType(
-   *   id = "mespronos_reminder",
-   *   label = @Translation("Reminder entity"),
-   *   base_table = "mespronos__reminder",
-   *   admin_permission = "administer Reminder entity",
-   *   fieldable = FALSE,
-   *   entity_keys = {
-   *     "id" = "id",
-   *     "label" = "name",
-   *     "uuid" = "uuid"
-   *   }
-   * )
-   */
-  public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
-    parent::preCreate($storage_controller, $values);
-  }
 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = [];
