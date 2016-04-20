@@ -1,0 +1,12 @@
+mespronos.reminder:
+  type: config_object
+  label: 'Mespronos Reminder Config'
+  mapping:
+    enabled:
+      type: boolean
+      label: 'Does the reminder are activated'
+    hours:
+      type: sequence
+      label: 'Activated reminder'
+      sequence:
+        type: integer
