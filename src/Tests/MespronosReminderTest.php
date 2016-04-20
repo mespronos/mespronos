@@ -7,10 +7,9 @@
 
 namespace Drupal\mespronos\Tests;
 
+use Drupal\mespronos\Controller\ReminderController;
 use Drupal\simpletest\WebTestBase;
-use Drupal\mespronos\Entity\Sport;
-use Drupal\mespronos\Entity\League;
-use Drupal\mespronos\Entity\Team;
+use Drupal\mespronos\Entity\Reminder;
 
 /**
  * Provides automated tests for the mespronos module.
@@ -36,7 +35,18 @@ class MespronosReminderTest extends WebTestBase {
     parent::setUp();
   }
 
-  public function testToAvoidFailing() {
-    $this->assertTrue(true,t('Test is no failing'));
+  public function testReminderInitReturnTrue() {
+    $this->assertFalse(ReminderController::init());
+    $this->assertTrue(is_array(ReminderController::getHoursDefined()));
+    $this->assertEqual(count(ReminderController::getHoursDefined()),0);
+
+    \Drupal::configFactory()->getEditable('mespronos.reminder')->set('hours',['48'=>48,'24'=>24])->save();
+
+    \Drupal::configFactory()->getEditable('mespronos.reminder')->set('enabled',TRUE)->save();
+
+    $this->assertTrue(ReminderController::init());
+    $this->assertTrue(is_array(ReminderController::getHoursDefined()));
+    $this->assertEqual(count(ReminderController::getHoursDefined()),2);
   }
+
 }
