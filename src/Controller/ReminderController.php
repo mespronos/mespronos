@@ -77,4 +77,13 @@ class ReminderController extends ControllerBase {
     return $days;
   }
 
+  public static function getUserWithEnabledReminder() {
+    $query = \Drupal::entityQuery('user')
+      ->condition('status', 1)
+      ->condition('field_reminder_enable.value', 1);
+
+    $uids = $query->execute();
+    return $uids;
+  }
+
 }

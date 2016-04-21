@@ -213,4 +213,18 @@ class MespronosReminderTest extends WebTestBase {
     $this->assertEqual(count($days),1,t('The returned array contains one days when there is only one game'));
   }
 
+  public function testGetUserWithEnabledReminder() {
+    $user_ids = ReminderController::getUserWithEnabledReminder();
+    $this->assertTrue(is_array($user_ids),t('The method is returning an array'));
+    $this->assertEqual(count($user_ids),2,t('By default user has reminder activated'));
+  }
+
+  public function testGetUserWithEnabledReminderWithOneEnabledUser() {
+    $this->better1->set("field_reminder_enable", 0);
+    $this->better1->save();
+    $user_ids = ReminderController::getUserWithEnabledReminder();
+    $this->assertEqual(count($user_ids),1,t('The returned array contains one element'));
+    
+  }
+
 }
