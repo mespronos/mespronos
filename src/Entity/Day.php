@@ -121,10 +121,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
       ]
     ];
   }
-
-  public static function getUpcoming($nb_hours) {
-    
-  }
+  
   /**
    * {@inheritdoc}
    */

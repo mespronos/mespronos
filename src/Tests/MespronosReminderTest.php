@@ -10,6 +10,8 @@ namespace Drupal\mespronos\Tests;
 use Drupal\mespronos\Controller\ReminderController;
 use Drupal\simpletest\WebTestBase;
 use Drupal\mespronos\Entity\Reminder;
+use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Controller\DayController;
 
 /**
  * Provides automated tests for the mespronos module.
@@ -45,6 +47,13 @@ class MespronosReminderTest extends WebTestBase {
     \Drupal::configFactory()->getEditable('mespronos.reminder')->set('enabled',TRUE)->save();
 
     $this->assertTrue(ReminderController::init());
+  }
+
+  public function testDayGetUpcommingMethod() {
+    $hours = 10;
+    $days = DayController::getUpcomming($hours);
+    $this->assertTrue(is_array($days));
+    $this->assertEqual(count($days),0);
   }
 
 }

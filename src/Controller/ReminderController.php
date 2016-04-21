@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\mespronos\Controller\DayController;
 
 /**
  * Class ReminderController.
@@ -21,11 +22,8 @@ class ReminderController extends ControllerBase {
       return false;
     }
     $hours = self::getHoursDefined();
-    $max_hours = max($hours);
-    $days = Day::getUpcomming($max_hours);
-    foreach ($hours as $hour) {
+    $days = DayController::getUpcomming($hours);
 
-    }
     
     return true;
   }
