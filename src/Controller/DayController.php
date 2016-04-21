@@ -155,14 +155,5 @@ class DayController extends ControllerBase {
     }
     return $results;
   }
-
-  /**
-   * Return all games that plays between now and $nb_hours;
-   * @param int $nb_hours number of hours
-   * @return \Drupal\mespronos\Entity\Day[]
-   */
-  public static function getUpcomming($nb_hours) {
-    $days = [];
-    return $days;
-  }
+  
 }

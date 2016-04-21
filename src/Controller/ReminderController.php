@@ -22,7 +22,7 @@ class ReminderController extends ControllerBase {
       return false;
     }
     $hours = self::getHoursDefined();
-    $days = DayController::getUpcomming($hours);
+    $days = self::getUpcomming($hours);
 
     
     return true;
@@ -37,6 +37,44 @@ class ReminderController extends ControllerBase {
     $config =  \Drupal::config('mespronos.reminder');
     $hours = $config->get('hours');
     return !is_null($hours) ? $hours : [];
+  }
+
+  /**
+ * Return all days that plays between now and $nb_hours;
+ * @param int $nb_hours number of hours
+ * @return \Drupal\mespronos\Entity\Day[]
+ */
+  public static function getUpcomming($nb_hours) {
+    $date_to = new \DateTime(null,new \DateTimeZone("UTC"));
+    $date_to->add(new \DateInterval('PT'.intval($nb_hours).'H'));
+    $now = new \DateTime(null, new \DateTimeZone("UTC"));
+
+    $days = [];
+
+    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $query = \Drupal::entityQuery('game');
+
+    $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
+    $query->condition('game_date',$date_to->format('Y-m-d\TH:i:s'),'<=');
+
+    $group = $query->orConditionGroup()
+      ->condition('score_team_1',null,'is')
+      ->condition('score_team_2',null,'is');
+
+    $query->sort('game_date','ASC');
+    $query->sort('id','ASC');
+
+    $ids = $query->condition($group)->execute();
+
+    $games = $game_storage->loadMultiple($ids);
+
+    foreach ($games as $game) {
+      $day_id = $game->getDayId();
+      if(!isset($days[$day_id])) {
+        $days[$game->getDayId()] = $game->getDay();
+      }
+    }
+    return $days;
   }
 
 }
