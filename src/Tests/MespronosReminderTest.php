@@ -40,13 +40,11 @@ class MespronosReminderTest extends WebTestBase {
     $this->assertTrue(is_array(ReminderController::getHoursDefined()));
     $this->assertEqual(count(ReminderController::getHoursDefined()),0);
 
-    \Drupal::configFactory()->getEditable('mespronos.reminder')->set('hours',['48'=>48,'24'=>24])->save();
+    \Drupal::configFactory()->getEditable('mespronos.reminder')->set('hours',36)->save();
 
     \Drupal::configFactory()->getEditable('mespronos.reminder')->set('enabled',TRUE)->save();
 
     $this->assertTrue(ReminderController::init());
-    $this->assertTrue(is_array(ReminderController::getHoursDefined()));
-    $this->assertEqual(count(ReminderController::getHoursDefined()),2);
   }
 
 }

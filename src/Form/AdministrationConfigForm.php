@@ -32,16 +32,12 @@ class AdministrationConfigForm extends ConfigFormBase {
     ];
 
     $form['reminder']['reminders_hours'] = [
-      '#type' => 'checkboxes',
       '#title' => $this->t('Reminder to offer to users'),
       '#description' => $this->t('Note that user will only receive the reminder he choose.'),
-      '#options' => [
-        48 => t('48 hours'),
-        36 => t('36 hours'),
-        24 => t('24 hours'),
-        12 => t('12 hours'),
-        6 => t('6 hours'),
-      ],
+      '#type' => 'number',
+      '#min' => 0,
+      '#step' => 1,
+      '#size' => '1',
       '#default_value' => $this->config('mespronos.reminder')->get('hours'),
       '#states' => [
         'required' => [':input[name="reminder_enabled"]' => ['checked' => true]],
@@ -53,27 +49,17 @@ class AdministrationConfigForm extends ConfigFormBase {
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    $hours = self::parseReminderHours($form_state->getValue('reminders_hours'));
-    if ($form_state->getValue('reminder_enabled') && count($hours) == 0) {
-      $form_state->setErrorByName('reminder_hour', $this->t("You have to choose at least one option"));
+    $hours = $form_state->getValue('reminders_hours');
+    if ($form_state->getValue('reminder_enabled') && $hours <= 0) {
+      $form_state->setErrorByName('reminder_hour', $this->t("Hour should be a positive number"));
     }
   }
 
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $hours = self::parseReminderHours($form_state->getValue('reminders_hours'));
     $this->config('mespronos.reminder')
       ->set('enabled', (string) $form_state->getValue('reminder_enabled'))
-      ->set('hours', $hours)
+      ->set('hours',$form_state->getValue('reminders_hours'))
       ->save(TRUE);
   }
 
-  public static function parseReminderHours($form_value) {
-    $hours = [];
-    foreach ($form_value as $key => $is_enabled) {
-      if($is_enabled != 0) {
-        $hours[$key] = $key;
-      }
-    }
-    return $hours;
-  }
 }

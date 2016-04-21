@@ -6,7 +6,5 @@ mespronos.reminder:
       type: boolean
       label: 'Does the reminder are activated'
     hours:
-      type: sequence
-      label: 'Activated reminder'
-      sequence:
-        type: integer
+      type: integer
+      label: 'Hour before the day to send reminder'
