@@ -84,7 +84,7 @@ class MespronosReminderTest extends WebTestBase {
     $this->better2 = $this->drupalCreateUser();
 
   }
-/*
+
   public function testReminderInitReturnTrue() {
     $this->assertFalse(ReminderController::init());
     $this->assertTrue(is_array(ReminderController::getHoursDefined()));
@@ -225,7 +225,7 @@ class MespronosReminderTest extends WebTestBase {
     $user_ids = ReminderController::getUserWithEnabledReminder();
     $this->assertEqual(count($user_ids),1,t('The returned array contains one element'));
   }
-*/
+
   public function testDayGetGamesIdMethod() {
     $this->assertTrue(is_array($this->day1->getGamesId()),t('la Methode Day::getGamesId retourne bien un array'));
     $this->assertEqual(count($this->day1->getGamesId()),0,t('la Methode Day::getGamesId retourne bien un array vide quand pas de match'));
