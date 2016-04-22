@@ -80,6 +80,16 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
    */
   public function getGames() {
     $game_storage = \Drupal::entityManager()->getStorage('game');
+    $ids = $this->getGamesId();
+    $games = $game_storage->loadMultiple($ids);
+    return $games;
+  }
+  /**
+   * Return all games id for day
+   * @return integer[]
+   */
+
+  public function getGamesId() {
     $query = \Drupal::entityQuery('game');
 
     $query->condition('day',$this->id());
@@ -88,10 +98,8 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
     $query->sort('id','ASC');
 
     $ids = $query->execute();
-
-    $games = $game_storage->loadMultiple($ids);
-
-    return $games;
+    debug($ids);
+    return $ids;
   }
 
   public function getNbGameWIthScore() {

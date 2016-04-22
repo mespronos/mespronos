@@ -9,6 +9,7 @@ namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Controller\DayController;
+use Drupal\mespronos\Entity\Day;
 
 /**
  * Class ReminderController.
@@ -81,9 +82,16 @@ class ReminderController extends ControllerBase {
     $query = \Drupal::entityQuery('user')
       ->condition('status', 1)
       ->condition('field_reminder_enable.value', 1);
-
     $uids = $query->execute();
     return $uids;
   }
+
+  public static function doUserHasMissingBets($user_id,Day $day) {
+    $games = $day->getGamesId();
+    
+
+  }
+
+
 
 }

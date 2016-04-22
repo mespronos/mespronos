@@ -84,7 +84,7 @@ class MespronosReminderTest extends WebTestBase {
     $this->better2 = $this->drupalCreateUser();
 
   }
-
+/*
   public function testReminderInitReturnTrue() {
     $this->assertFalse(ReminderController::init());
     $this->assertTrue(is_array(ReminderController::getHoursDefined()));
@@ -224,7 +224,24 @@ class MespronosReminderTest extends WebTestBase {
     $this->better1->save();
     $user_ids = ReminderController::getUserWithEnabledReminder();
     $this->assertEqual(count($user_ids),1,t('The returned array contains one element'));
-    
+  }
+*/
+  public function testDayGetGamesIdMethod() {
+    $this->assertTrue(is_array($this->day1->getGamesId()),t('la Methode Day::getGamesId retourne bien un array'));
+    $this->assertEqual(count($this->day1->getGamesId()),0,t('la Methode Day::getGamesId retourne bien un array vide quand pas de match'));
+
+    $dateO = new \DateTime(null,new \DateTimeZone("UTC"));
+    $dateO->add(new \DateInterval('PT5H'));
+    $date = $dateO->format('Y-m-d\TH:i:s');
+    $game1 = Game::create(array(
+      'team_1' => $this->team1->id(),
+      'team_2' => $this->team2->id(),
+      'day' => $this->day1->id(),
+      'game_date' => $date,
+    ));
+    $game1->save();
+
+    $this->assertEqual(count($this->day1->getGamesId()),1,t('la Methode Day::getGamesId retourne bien un array avec un element quand il y a un match'));
   }
 
 }
