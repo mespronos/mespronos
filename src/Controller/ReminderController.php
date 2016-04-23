@@ -35,10 +35,15 @@ class ReminderController extends ControllerBase {
         $user_to_remind[] = $user_id;
       }
     }
-    $days =
-    self::sendReminder($user_to_remind,$upcommings_games);
-
-    return true;
+    $days = self::getDaysFromGames($upcommings_games);
+    foreach ($days as $day) {
+      $nb_mail = self::sendReminder($user_to_remind,$day);
+      $reminder = Reminder::create(array(
+        'day' => $day->id(),
+        'emails_sended' => $nb_mail,
+      ));
+      $reminder->save();
+    }
   }
 
   public static function isEnabled() {
@@ -52,22 +57,20 @@ class ReminderController extends ControllerBase {
     return !is_null($hours) ? $hours : [];
   }
 
-  public static function sendReminder($users_to_remind,$upcommings_games) {
-    if(count($users_to_remind) == 0 || count($upcommings_games) == 0) {
+  public static function sendReminder($users_to_remind,$day) {
+    if(count($users_to_remind) == 0) {
       return false;
     }
+    $nb_mail = 0;
     foreach ($users_to_remind as $user_to_remind) {
+      $nb_mail++;
       $user = User::load($user_to_remind);
       $mailManager = \Drupal::service('plugin.manager.mail');
-      $params = [
-        'user' => $user,
-        'games' => $upcommings_games,
-      ];
-
+      $params = [];
       $body = \Drupal::service('renderer')->render([
         '#theme' =>'bet-reminder',
         '#user' => $params['user'],
-        '#games' => $params['games'],
+        '#day' => $params['day'],
       ],false);
 
       $params['message'] = $body;
@@ -75,6 +78,7 @@ class ReminderController extends ControllerBase {
 
       $mailManager->mail('mespronos','reminder', $user->getEmail(), $user->getPreferredLangcode(), $params, null, TRUE);
     }
+    return $nb_mail;
   }
 
   /**
@@ -146,6 +150,17 @@ class ReminderController extends ControllerBase {
     $query->condition('b.better', $user_id);
     $results = $query->execute()->fetchAssoc();
     return $results['nb_bets_done']< count($games_id);
+  }
+
+  public static function getDaysFromGames($games) {
+    $days = [];
+    foreach ($games as $game) {
+      $day_id = $game->getDayId();
+      if(!isset($days[$day_id])) {
+        $days[$day_id] = $game->getDay();
+      }
+    }
+    return $days;
   }
 
 

@@ -33,7 +33,6 @@ class Reminder extends ContentEntityBase {
     $query = \Drupal::entityQuery('reminder');
     $query->condition('day',$day_id);
     $ids = $query->execute();
-    debug($ids);
     if(count($ids) == 0) {
       return false;
     }

@@ -93,7 +93,7 @@ function mespronos_theme() {
     'template' => 'bet-reminder',
     'variables' => array(
       'user' => NULL,
-      'games' => NULL,
+      'day' => NULL,
     ),
   );
 
