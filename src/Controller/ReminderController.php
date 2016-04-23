@@ -12,6 +12,7 @@ use Drupal\mespronos\Controller\DayController;
 use Drupal\mespronos\Entity\Day;
 use Drupal\Core\Database\Database;
 use Drupal\mespronos\Entity\Reminder;
+use Drupal\user\Entity\User;
 
 /**
  * Class ReminderController.
@@ -34,6 +35,7 @@ class ReminderController extends ControllerBase {
         $user_to_remind[] = $user_id;
       }
     }
+    $days =
     self::sendReminder($user_to_remind,$upcommings_games);
 
     return true;
@@ -50,9 +52,28 @@ class ReminderController extends ControllerBase {
     return !is_null($hours) ? $hours : [];
   }
 
-  public static function sendReminder($user_to_remind,$upcommings_games) {
-    if(count($user_to_remind) == 0 || count($upcommings_games) == 0) {
+  public static function sendReminder($users_to_remind,$upcommings_games) {
+    if(count($users_to_remind) == 0 || count($upcommings_games) == 0) {
       return false;
+    }
+    foreach ($users_to_remind as $user_to_remind) {
+      $user = User::load($user_to_remind);
+      $mailManager = \Drupal::service('plugin.manager.mail');
+      $params = [
+        'user' => $user,
+        'games' => $upcommings_games,
+      ];
+
+      $body = \Drupal::service('renderer')->render([
+        '#theme' =>'bet-reminder',
+        '#user' => $params['user'],
+        '#games' => $params['games'],
+      ],false);
+
+      $params['message'] = $body;
+      $params['subject'] =  t('@sitename - Bet Reminder',array('@sitename'=>\Drupal::config('system.site')->get('name')));;
+
+      $mailManager->mail('mespronos','reminder', $user->getEmail(), $user->getPreferredLangcode(), $params, null, TRUE);
     }
   }
 
