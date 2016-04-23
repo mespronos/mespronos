@@ -11,6 +11,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Controller\DayController;
 use Drupal\mespronos\Entity\Day;
 use Drupal\Core\Database\Database;
+use Drupal\mespronos\Entity\Reminder;
 
 /**
  * Class ReminderController.
@@ -25,13 +26,16 @@ class ReminderController extends ControllerBase {
     }
     $hours = self::getHoursDefined();
     $upcommings_games = self::getUpcomming($hours);
+
     $users = self::getUserWithEnabledReminder();
+    $user_to_remind = [];
     foreach ($users as $user_id) {
       if(self::doUserHasMissingBets($user_id,$upcommings_games)) {
-        //@todo : send reminder
+        $user_to_remind[] = $user_id;
       }
     }
-    
+    self::sendReminder($user_to_remind,$upcommings_games);
+
     return true;
   }
 
@@ -46,6 +50,12 @@ class ReminderController extends ControllerBase {
     return !is_null($hours) ? $hours : [];
   }
 
+  public static function sendReminder($user_to_remind,$upcommings_games) {
+    if(count($user_to_remind) == 0 || count($upcommings_games) == 0) {
+      return false;
+    }
+  }
+
   /**
  * Return all days that plays between now and $nb_hours;
  * @param int $nb_hours number of hours
@@ -55,8 +65,6 @@ class ReminderController extends ControllerBase {
     $date_to = new \DateTime(null,new \DateTimeZone("UTC"));
     $date_to->add(new \DateInterval('PT'.intval($nb_hours).'H'));
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
-
-    $days = [];
 
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
@@ -75,9 +83,25 @@ class ReminderController extends ControllerBase {
 
     $games = $game_storage->loadMultiple($ids);
 
+    self::checkIfReminderAlreadySended($games);
+
     return $games;
 
    }
+
+  public static function checkIfReminderAlreadySended($games) {
+    $days = [];
+    foreach ($games as $key => $game) {
+      $day_id = $game->getDayId();
+      if(isset($days[$day_id]) && $days[$day_id]) {
+        unset($games[$key]);
+      }
+      elseif(Reminder::loadForDay($day_id)) {
+        $days[$day_id] = true;
+        unset($games[$key]);
+      }
+    }
+  }
 
   public static function getUserWithEnabledReminder() {
     $query = \Drupal::entityQuery('user')

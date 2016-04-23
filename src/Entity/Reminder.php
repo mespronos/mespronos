@@ -12,7 +12,7 @@ use Drupal\Core\Entity\ContentEntityBase;
  * @ingroup mespronos
  *
  * @ContentEntityType(
- *   id = "mespronos_reminder",
+ *   id = "reminder",
  *   label = @Translation("Reminder entity"),
  *   base_table = "mespronos__reminder",
  *   admin_permission = "administer Reminder entity",
@@ -28,6 +28,20 @@ use Drupal\Core\Entity\ContentEntityBase;
 
 class Reminder extends ContentEntityBase {
 
+  public static function loadForDay($day_id) {
+    $reminder_storage = \Drupal::entityManager()->getStorage('reminder');
+    $query = \Drupal::entityQuery('reminder');
+    $query->condition('day',$day_id);
+    $ids = $query->execute();
+    debug($ids);
+    if(count($ids) == 0) {
+      return false;
+    }
+    $id = array_pop($ids);
+    $reminder = $reminder_storage->load($id);
+    return $reminder;
+
+  }
 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = [];
@@ -65,20 +79,6 @@ class Reminder extends ContentEntityBase {
       ))
       ->setDisplayConfigurable('form', false)
       ->setDisplayConfigurable('view', TRUE);
-
-    $fields['hour'] = BaseFieldDefinition::create('integer')
-      ->setLabel('Reminder hour before')
-      ->setRevisionable(TRUE)
-      ->setSetting('unsigned', TRUE)
-      ->setDisplayOptions('view', array(
-        'label' => 'hidden',
-        'type' => 'integer',
-        'weight' => 6,
-      ))
-      ->setDisplayOptions('form', array(
-        'type' => 'number',
-        'weight' => 6,
-      ));
 
     $fields['emails_sended'] = BaseFieldDefinition::create('integer')
       ->setLabel('Number of sended emails')
