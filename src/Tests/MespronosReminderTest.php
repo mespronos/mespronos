@@ -95,6 +95,7 @@ class MespronosReminderTest extends WebTestBase {
       'game_date' => $date,
     ));
     $this->game{$id}->save();
+    return $this->game{$id};
   }
 
   public function testReminderInitReturnTrue() {
@@ -187,12 +188,25 @@ class MespronosReminderTest extends WebTestBase {
     $dateO->add(new \DateInterval('PT5H'));
     $date = $dateO->format('Y-m-d\TH:i:s');
 
-    $this->setUpGame(1,$this->team1,$this->team2,$this->day2,$date);
+    $game = $this->setUpGame(1,$this->team1,$this->team2,$this->day2,$date);
 
     $upcomming = ReminderController::getUpcomming($hours);
 
     $this->assertEqual(count($upcomming),1,t('The returned array contains one game when there is only one game'));
-    $this->assertTrue(is_array(ReminderController::doUserHasMissingBets($this->better1->id(),$upcomming)),t('The static function ReminderController::doUserHasMissingBets return an array'));
+    $this->assertTrue(is_bool(ReminderController::doUserHasMissingBets($this->better1->id(),$upcomming)),t('The static function ReminderController::doUserHasMissingBets return a boolean'));
+    $this->assertTrue(ReminderController::doUserHasMissingBets($this->better1->id(),$upcomming),t('The static function ReminderController::doUserHasMissingBets return true when there is a bet to be done'));
+
+    $bet = Bet::create(array(
+      'better' => $this->better1->id(),
+      'game' => $game->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+      'points' => 10,
+    ));
+
+    $bet->save();
+
+    $this->assertFalse(ReminderController::doUserHasMissingBets($this->better1->id(),$upcomming),t('The static function ReminderController::doUserHasMissingBets return False when there is no bet to be done'));
   }
 
 

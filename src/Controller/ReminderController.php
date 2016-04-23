@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Controller\DayController;
 use Drupal\mespronos\Entity\Day;
+use Drupal\Core\Database\Database;
 
 /**
  * Class ReminderController.
@@ -92,11 +93,14 @@ class ReminderController extends ControllerBase {
    */
   public static function doUserHasMissingBets($user_id,$games) {
     $games_id = array_map(function($a){return $a->id();},$games);
-    debug($games_id);
-    return $games_id;
-    //$games = $day->getGamesId();
-    
+    $injected_database = Database::getConnection();
 
+    $query = $injected_database->select('mespronos__bet','b');
+    $query->addExpression('count(b.id)','nb_bets_done');
+    $query->condition('b.game',$games_id,'IN');
+    $query->condition('b.better', $user_id);
+    $results = $query->execute()->fetchAssoc();
+    return $results['nb_bets_done']< count($games_id);
   }
 
 
