@@ -30,7 +30,8 @@ class MespronosReminderTest extends WebTestBase {
   public $team2;
   public $day1;
   public $day2;
-  public $game;
+  public $game1;
+  public $game2;
   public $better1;
   public $better2;
   /**
@@ -85,6 +86,17 @@ class MespronosReminderTest extends WebTestBase {
 
   }
 
+
+  public function setUpGame($id,$team1,$team2,$day,$date) {
+    $this->game{$id} = Game::create(array(
+      'team_1' => $team1->id(),
+      'team_2' => $team2->id,
+      'day' => $day->id(),
+      'game_date' => $date,
+    ));
+    $this->game{$id}->save();
+  }
+
   public function testReminderInitReturnTrue() {
     $this->assertFalse(ReminderController::init());
     $this->assertTrue(is_array(ReminderController::getHoursDefined()));
@@ -105,13 +117,8 @@ class MespronosReminderTest extends WebTestBase {
     $dateO = new \DateTime(null,new \DateTimeZone("UTC"));
     $dateO->add(new \DateInterval('PT5H'));
     $date = $dateO->format('Y-m-d\TH:i:s');
-    $this->game = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day1->id(),
-      'game_date' => $date,
-    ));
-    $this->game->save();
+
+    $this->setUpGame(1,$this->team1,$this->team2,$this->day1,$date);
 
     $upcomming = ReminderController::getUpcomming($hours);
     $this->assertEqual(count($upcomming),1,t('The returned array contain one game when a game is set'));
@@ -122,13 +129,8 @@ class MespronosReminderTest extends WebTestBase {
     $dateO = new \DateTime(null,new \DateTimeZone("UTC"));
     $dateO->add(new \DateInterval('PT10H'));
     $date = $dateO->format('Y-m-d\TH:i:s');
-    $game = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day1->id(),
-      'game_date' => $date,
-    ));
-    $game->save();
+
+    $this->setUpGame(1,$this->team1,$this->team2,$this->day1,$date);
 
     $upcomming = ReminderController::getUpcomming($hours);
     $this->assertTrue(is_array($upcomming),t('The method is returning an array'));
@@ -140,21 +142,10 @@ class MespronosReminderTest extends WebTestBase {
     $dateO = new \DateTime(null,new \DateTimeZone("UTC"));
     $dateO->add(new \DateInterval('PT5H'));
     $date = $dateO->format('Y-m-d\TH:i:s');
-    $game1 = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day1->id(),
-      'game_date' => $date,
-    ));
-    $game1->save();
 
-    $game2 = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day1->id(),
-      'game_date' => $date,
-    ));
-    $game2->save();
+    $this->setUpGame(1,$this->team1,$this->team2,$this->day1,$date);
+
+    $this->setUpGame(2,$this->team1,$this->team2,$this->day1,$date);
 
     $upcomming = ReminderController::getUpcomming($hours);
     $this->assertEqual(count($upcomming),2,t('The returned array contains two games when two games exists'));
@@ -165,23 +156,13 @@ class MespronosReminderTest extends WebTestBase {
     $dateO = new \DateTime(null,new \DateTimeZone("UTC"));
     $dateO->add(new \DateInterval('PT5H'));
     $date = $dateO->format('Y-m-d\TH:i:s');
-    $game1 = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day1->id(),
-      'game_date' => $date,
-    ));
-    $game1->save();
+
+    $this->setUpGame(1,$this->team1,$this->team2,$this->day1,$date);
 
     $dateO->add(new \DateInterval('PT10H'));
     $date = $dateO->format('Y-m-d\TH:i:s');
-    $game2 = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day2->id(),
-      'game_date' => $date,
-    ));
-    $game2->save();
+
+    $this->setUpGame(1,$this->team1,$this->team2,$this->day2,$date);
 
     $upcomming = ReminderController::getUpcomming($hours);
     $this->assertEqual(count($upcomming),1,t('The returned array contains one days when there is only one game'));
@@ -199,5 +180,20 @@ class MespronosReminderTest extends WebTestBase {
     $user_ids = ReminderController::getUserWithEnabledReminder();
     $this->assertEqual(count($user_ids),1,t('The returned array contains one element'));
   }
+
+  public function testDoUserHasMissingBets() {
+    $hours = 10;
+    $dateO = new \DateTime(null,new \DateTimeZone("UTC"));
+    $dateO->add(new \DateInterval('PT5H'));
+    $date = $dateO->format('Y-m-d\TH:i:s');
+
+    $this->setUpGame(1,$this->team1,$this->team2,$this->day2,$date);
+
+    $upcomming = ReminderController::getUpcomming($hours);
+
+    $this->assertEqual(count($upcomming),1,t('The returned array contains one game when there is only one game'));
+    $this->assertTrue(is_array(ReminderController::doUserHasMissingBets($this->better1->id(),$upcomming)),t('The static function ReminderController::doUserHasMissingBets return an array'));
+  }
+
 
 }

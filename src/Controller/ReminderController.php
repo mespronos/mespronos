@@ -91,6 +91,9 @@ class ReminderController extends ControllerBase {
    * @return \Drupal\mespronos\Entity\Game[]
    */
   public static function doUserHasMissingBets($user_id,$games) {
+    $games_id = array_map(function($a){return $a->id();},$games);
+    debug($games_id);
+    return $games_id;
     //$games = $day->getGamesId();
     
 
