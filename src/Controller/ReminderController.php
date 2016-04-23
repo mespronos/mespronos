@@ -23,8 +23,13 @@ class ReminderController extends ControllerBase {
       return false;
     }
     $hours = self::getHoursDefined();
-    $days = self::getUpcomming($hours);
-
+    $upcommings_games = self::getUpcomming($hours);
+    $users = self::getUserWithEnabledReminder();
+    foreach ($users as $user_id) {
+      if(self::doUserHasMissingBets($user_id,$upcommings_games)) {
+        //@todo : send reminder
+      }
+    }
     
     return true;
   }
@@ -43,7 +48,7 @@ class ReminderController extends ControllerBase {
   /**
  * Return all days that plays between now and $nb_hours;
  * @param int $nb_hours number of hours
- * @return \Drupal\mespronos\Entity\Day[]
+ * @return \Drupal\mespronos\Entity\Game[]
  */
   public static function getUpcomming($nb_hours) {
     $date_to = new \DateTime(null,new \DateTimeZone("UTC"));
@@ -69,14 +74,9 @@ class ReminderController extends ControllerBase {
 
     $games = $game_storage->loadMultiple($ids);
 
-    foreach ($games as $game) {
-      $day_id = $game->getDayId();
-      if(!isset($days[$day_id])) {
-        $days[$game->getDayId()] = $game->getDay();
-      }
-    }
-    return $days;
-  }
+    return $games;
+
+   }
 
   public static function getUserWithEnabledReminder() {
     $query = \Drupal::entityQuery('user')
@@ -86,8 +86,12 @@ class ReminderController extends ControllerBase {
     return $uids;
   }
 
-  public static function doUserHasMissingBets($user_id,Day $day) {
-    $games = $day->getGamesId();
+  /**
+   * @param integer $user_id id of user
+   * @return \Drupal\mespronos\Entity\Game[]
+   */
+  public static function doUserHasMissingBets($user_id,$games) {
+    //$games = $day->getGamesId();
     
 
   }

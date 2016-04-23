@@ -99,10 +99,9 @@ class MespronosReminderTest extends WebTestBase {
 
   public function testDayGetUpcommingMethodWithUpcomingGame() {
     $hours = 10;
-    $days = ReminderController::getUpcomming($hours);
-    $this->assertTrue(is_array($days),t('The method is returning an array'));
-    $this->assertEqual(count($days),0,t('The returned array is empty when no game is set'));
-
+    $upcomming = ReminderController::getUpcomming($hours);
+    $this->assertTrue(is_array($upcomming),t('The method is returning an array'));
+    $this->assertEqual(count($upcomming),0,t('The returned array of games is empty when no game is set'));
     $dateO = new \DateTime(null,new \DateTimeZone("UTC"));
     $dateO->add(new \DateInterval('PT5H'));
     $date = $dateO->format('Y-m-d\TH:i:s');
@@ -114,8 +113,8 @@ class MespronosReminderTest extends WebTestBase {
     ));
     $this->game->save();
 
-    $days = ReminderController::getUpcomming($hours);
-    $this->assertEqual(count($days),1,t('The returned array contain one day when a game is set'));
+    $upcomming = ReminderController::getUpcomming($hours);
+    $this->assertEqual(count($upcomming),1,t('The returned array contain one game when a game is set'));
   }
 
   public function testDayGetUpcommingMethodWithUpcomingGameButUnderNbHours() {
@@ -131,9 +130,9 @@ class MespronosReminderTest extends WebTestBase {
     ));
     $game->save();
 
-    $days = ReminderController::getUpcomming($hours);
-    $this->assertTrue(is_array($days),t('The method is returning an array'));
-    $this->assertEqual(count($days),0,t('The returned array is empty when the game is set later'));
+    $upcomming = ReminderController::getUpcomming($hours);
+    $this->assertTrue(is_array($upcomming),t('The method is returning an array'));
+    $this->assertEqual(count($upcomming),0,t('The returned array is empty when the game is set later'));
   }
 
   public function testDayGetUpcommingMethodWithUpcomingGames() {
@@ -157,33 +156,8 @@ class MespronosReminderTest extends WebTestBase {
     ));
     $game2->save();
 
-    $days = ReminderController::getUpcomming($hours);
-    $this->assertEqual(count($days),1,t('The returned array contain one day even when two games exists'));
-  }
-
-  public function testDayGetUpcommingMethodWithUpcomingGamesFromTwoDays() {
-    $hours = 10;
-    $dateO = new \DateTime(null,new \DateTimeZone("UTC"));
-    $dateO->add(new \DateInterval('PT5H'));
-    $date = $dateO->format('Y-m-d\TH:i:s');
-    $game1 = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day1->id(),
-      'game_date' => $date,
-    ));
-    $game1->save();
-
-    $game2 = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day2->id(),
-      'game_date' => $date,
-    ));
-    $game2->save();
-
-    $days = ReminderController::getUpcomming($hours);
-    $this->assertEqual(count($days),2,t('The returned array contains two days when there is two games from two differents days'));
+    $upcomming = ReminderController::getUpcomming($hours);
+    $this->assertEqual(count($upcomming),2,t('The returned array contains two games when two games exists'));
   }
 
   public function testDayGetUpcommingMethodWithUpcomingGamesFromTwoDaysWithOnlyOneUpcommingGame() {
@@ -209,8 +183,8 @@ class MespronosReminderTest extends WebTestBase {
     ));
     $game2->save();
 
-    $days = ReminderController::getUpcomming($hours);
-    $this->assertEqual(count($days),1,t('The returned array contains one days when there is only one game'));
+    $upcomming = ReminderController::getUpcomming($hours);
+    $this->assertEqual(count($upcomming),1,t('The returned array contains one days when there is only one game'));
   }
 
   public function testGetUserWithEnabledReminder() {
@@ -224,24 +198,6 @@ class MespronosReminderTest extends WebTestBase {
     $this->better1->save();
     $user_ids = ReminderController::getUserWithEnabledReminder();
     $this->assertEqual(count($user_ids),1,t('The returned array contains one element'));
-  }
-
-  public function testDayGetGamesIdMethod() {
-    $this->assertTrue(is_array($this->day1->getGamesId()),t('la Methode Day::getGamesId retourne bien un array'));
-    $this->assertEqual(count($this->day1->getGamesId()),0,t('la Methode Day::getGamesId retourne bien un array vide quand pas de match'));
-
-    $dateO = new \DateTime(null,new \DateTimeZone("UTC"));
-    $dateO->add(new \DateInterval('PT5H'));
-    $date = $dateO->format('Y-m-d\TH:i:s');
-    $game1 = Game::create(array(
-      'team_1' => $this->team1->id(),
-      'team_2' => $this->team2->id(),
-      'day' => $this->day1->id(),
-      'game_date' => $date,
-    ));
-    $game1->save();
-
-    $this->assertEqual(count($this->day1->getGamesId()),1,t('la Methode Day::getGamesId retourne bien un array avec un element quand il y a un match'));
   }
 
 }
