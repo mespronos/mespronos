@@ -43,6 +43,11 @@ class ReminderController extends ControllerBase {
         'emails_sended' => $nb_mail,
       ));
       $reminder->save();
+      \Drupal::logger('mespronos_reminder')->notice(t('Reminder sended for day #@id (@game_label) : @nb_mail mails sended',[
+        '@id'=>$day->id(),
+        '@game_label'=>$day->label(),
+        '@nb_mail' => $nb_mail,
+      ]));
     }
   }
 
