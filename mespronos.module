@@ -143,3 +143,7 @@ function mespronos_mail($key, &$message, $params) {
     }
   }
 }
+
+function mespronos_cron() {
+  \Drupal\mespronos\Controller\ReminderController::init();
+}
