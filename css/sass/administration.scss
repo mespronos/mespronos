@@ -21,10 +21,43 @@ form#games-marks {
   }
 }
 
+#mespronos-dashboard {
+  & > fieldset {
+    fieldset {
+      legend {
+      }
+      .fieldset-wrapper {
+        display: flex;
+        & > div {
+          margin-right : 5px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 639px) {
+  #mespronos-dashboard {
+    & > fieldset {
+      fieldset {
+        legend {
+        }
+        .fieldset-wrapper {
+          margin-top : 25px;
+          & > div {
+            input {
+              width : 60px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 @media screen and (min-width: 640px) {
   #mespronos-dashboard {
     display: flex;
-    fieldset {
+    & > fieldset {
       box-sizing: border-box;
       width : 48%;
       margin : 0 2%;
@@ -34,9 +67,6 @@ form#games-marks {
       &:last-of-type {
         margin-right : 0;
       }
-    }
-    fieldset {
-
     }
   }
 }
