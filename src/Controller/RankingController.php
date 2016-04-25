@@ -155,7 +155,9 @@ class RankingController extends ControllerBase {
     $results = $query->execute();
     while($row = $results->fetchObject()) {
       $row->league = League::load($row->league_id);
+      $ranking = RankingLeague::getRankingForBetter($user,$row->league);
       $row->betters = $row->league->getBettersNumber();
+      $row->position = $ranking ? $ranking->getPosition() : ' ';
       $palmares[] = $row;
     }
     return $palmares;
