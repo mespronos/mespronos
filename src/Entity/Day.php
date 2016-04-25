@@ -98,7 +98,6 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
     $query->sort('id','ASC');
 
     $ids = $query->execute();
-    debug($ids);
     return $ids;
   }
 
