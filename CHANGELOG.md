@@ -1,6 +1,7 @@
 # Changelog - Mespronos 
 ## 8.x-1.0-alpha6, 2016-XX-XX
   - Refactoring ranking management in order to allow groups and domains
+  - Email reminders
 
 # Changelog - Mespronos 
 ## 8.x-1.0-alpha5, 2016-04-09
