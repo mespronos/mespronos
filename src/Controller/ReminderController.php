@@ -57,6 +57,7 @@ class ReminderController extends ControllerBase {
     else {
       \Drupal::logger('mespronos_reminder')->info(t('No user to remind'));
     }
+    return true;
   }
 
   public static function isEnabled() {
