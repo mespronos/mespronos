@@ -41,7 +41,8 @@ class UserBlock extends BlockBase {
       ],
       '#links' => [
         'logout' => Link::fromTextAndUrl(t('Log out'),Url::fromRoute('user.logout',[])),
-        'myaccount' => Link::fromTextAndUrl(t('My account'),Url::fromRoute('entity.user.canonical',['user'=>$user->id()]))
+        'myaccount' => Link::fromTextAndUrl(t('My account'),Url::fromRoute('entity.user.canonical',['user'=>$user->id()])),
+        'editmyaccount' => Link::fromTextAndUrl(t('Edit my account'),Url::fromRoute('entity.user.edit_form',['user'=>$user->id()])),
       ],
       '#user_picture' => $user_picture,
       '#cache' => [
