@@ -81,8 +81,9 @@ class ReminderController extends ControllerBase {
       $user = User::load($user_to_remind);
       $mailManager = \Drupal::service('plugin.manager.mail');
       $params = [];
-      $mail = self::getReminderEmailVariables($params['user'],$params['day']);
-
+      
+      $mail = self::getReminderEmailVariables($user,$day);
+      
       $params['message'] = self::getReminderEmailRendered($mail);
       $params['subject'] =  t('@sitename - Bet Reminder - @league - @day',[
         '@sitename'=>\Drupal::config('system.site')->get('name'),
@@ -101,13 +102,13 @@ class ReminderController extends ControllerBase {
     $emailvars = [];
     $emailvars['#theme'] = 'bet-reminder';
     $emailvars['#user'] = [
-      'firstname' => $user->getAccountName(),
-      'myaccount' => Link::fromTextAndUrl(t('My account'),Url::fromRoute('entity.user.edit',['user'=>$user->id()]))
+      'name' => $user->getAccountName(),
+      'myaccount' => Url::fromRoute('entity.user.edit_form',['user'=>$user->id()],['absolute'=>true])
     ];
     $emailvars['#day'] = [
       'label' => $league->label().' - '.$day->label(),
       'games' => [],
-      'bet_link' => Link::fromTextAndUrl(t('Bet'),Url::fromRoute('mespronos.day.bet',['day'=>$day->id()])),
+      'bet_link' => Url::fromRoute('mespronos.day.bet',['day'=>$day->id()],['absolute'=>true]),
     ];
 
     foreach ($games as $game) {

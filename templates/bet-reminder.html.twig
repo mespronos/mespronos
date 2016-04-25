@@ -1,3 +1,15 @@
-KIKOOO
+<p>{% trans %}Hello {{user.name}},{% endtrans %}</p>
 
-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+<p>{% trans %}You have pending bets on day : {{ day.label}}{% endtrans %}</p>
+
+<p>{% trans %}Games list :{% endtrans %}</p>
+
+<ul>
+    {% for game in day.games %}
+        <li>{{ game }}</li>
+    {% endfor %}
+</ul>
+
+<p>{% trans %}Bet now :{% endtrans %}&nbsp;<a href="{{ day.bet_link}}">{{ day.bet_link}}</a></p>
+
+<p>{% trans %}If you don't wish to receive bet reminders, please edit your profile :{% endtrans %}&nbsp;<a href="{{user.myaccount}}">{{user.myaccount}}</a></p>
