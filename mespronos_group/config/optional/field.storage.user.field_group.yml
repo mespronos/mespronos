@@ -1,0 +1,20 @@
+uuid: cab40e77-bcea-4991-9d01-40e96cf0530e
+langcode: fr
+status: true
+dependencies:
+  module:
+    - mespronos_group
+    - user
+id: user.field_group
+field_name: field_group
+entity_type: user
+type: entity_reference
+settings:
+  target_type: group
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false
