@@ -18,6 +18,7 @@ class GroupForm extends ContentEntityForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /* @var $entity \Drupal\mespronos_group\Entity\Group */
     $form = parent::buildForm($form, $form_state);
+    $form['user_id']['#access'] = false;
     $entity = $this->entity;
 
     return $form;

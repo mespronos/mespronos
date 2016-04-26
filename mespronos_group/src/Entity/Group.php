@@ -34,7 +34,7 @@ use Drupal\user\UserInterface;
  *       "html" = "Drupal\mespronos_group\GroupHtmlRouteProvider",
  *     },
  *   },
- *   base_table = "group",
+ *   base_table = "mespronos__group",
  *   admin_permission = "administer group entities",
  *   entity_keys = {
  *     "id" = "id",
@@ -184,7 +184,8 @@ class Group extends ContentEntityBase implements GroupInterface {
 
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
-      ->setDescription(t('The name of the Group entity.'))
+      ->setDescription(t('The group name'))
+      ->setRequired(true)
       ->setSettings(array(
         'max_length' => 50,
         'text_processing' => 0,
@@ -198,6 +199,22 @@ class Group extends ContentEntityBase implements GroupInterface {
       ->setDisplayOptions('form', array(
         'type' => 'string_textfield',
         'weight' => -4,
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['code'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Access code'))
+      ->setDescription(t('The code to access this group'))
+      ->setRequired(true)
+      ->setSettings(array(
+        'max_length' => 50,
+        'text_processing' => 0,
+      ))
+      ->setDefaultValue('')
+      ->setDisplayOptions('form', array(
+        'type' => 'string_textfield',
+        'weight' => -3,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
