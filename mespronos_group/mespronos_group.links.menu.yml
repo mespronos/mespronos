@@ -1,13 +1,1 @@
 # Group menu items definition
-entity.group.collection:
-  title: 'Group list'
-  route_name: entity.group.collection
-  description: 'List Group entities'
-  parent: system.admin_structure
-  weight: 100
-
-group.admin.structure.settings:
-  title: Group settings
-  description: 'Configure Group entities'
-  route_name: group.settings
-  parent: system.admin_structure

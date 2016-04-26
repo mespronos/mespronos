@@ -3,3 +3,10 @@ entity.group.add_form:
   title: 'Add Group'
   appears_on:
     - entity.group.collection
+
+group.admin.structure.settings:
+  title: Groups Settings
+  description: 'Configure Group entity'
+  route_name: group.settings
+  appears_on:
+    - mespronos.settings

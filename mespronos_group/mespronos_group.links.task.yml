@@ -1,8 +1,16 @@
 # Group routing definition
+entity.group.collection:
+  route_name: entity.group.collection
+  title: 'Groups'
+  description: 'Groups listing'
+  base_route: mespronos.dashboard
+  weight : 15
+
 group.settings_tab:
   route_name: group.settings
   title: 'Settings'
   base_route: group.settings
+
 entity.group.canonical:
   route_name: entity.group.canonical
   base_route: entity.group.canonical
