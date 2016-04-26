@@ -1,3 +1,6 @@
+* {
+  box-sizing: border-box;
+}
 a#toolbar-link-mespronos-dashboard {
   &:before {
     background-image: inline-image('icons/football2.svg');
@@ -66,6 +69,9 @@ form#games-marks {
       }
       &:last-of-type {
         margin-right : 0;
+      }
+      fieldset {
+        width: 100%;
       }
     }
   }
