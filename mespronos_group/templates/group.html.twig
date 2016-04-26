@@ -1,0 +1,22 @@
+{#
+/**
+ * @file group.html.twig
+ * Default theme implementation to present Group data.
+ *
+ * This template is used when viewing Group pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_group()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('group') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

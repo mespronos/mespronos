@@ -1,0 +1,5 @@
+entity.group.add_form:
+  route_name: entity.group.add_form
+  title: 'Add Group'
+  appears_on:
+    - entity.group.collection

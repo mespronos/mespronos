@@ -1,0 +1,19 @@
+add group entities:
+  title: 'Create new Group entities'
+
+administer group entities:
+  title: 'Administer Group entities'
+  description: 'Allow to access the administration form to configure Group entities.'
+  restrict access: true
+
+delete group entities:
+  title: 'Delete Group entities'
+
+edit group entities:
+  title: 'Edit Group entities'
+
+view published group entities:
+  title: 'View published Group entities'
+
+view unpublished group entities:
+  title: 'View unpublished Group entities'

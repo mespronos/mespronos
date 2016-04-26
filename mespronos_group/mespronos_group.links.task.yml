@@ -1,0 +1,21 @@
+# Group routing definition
+group.settings_tab:
+  route_name: group.settings
+  title: 'Settings'
+  base_route: group.settings
+entity.group.canonical:
+  route_name: entity.group.canonical
+  base_route: entity.group.canonical
+  title: 'View'
+
+entity.group.edit_form:
+  route_name: entity.group.edit_form
+  base_route: entity.group.canonical
+  title: Edit
+
+entity.group.delete_form:
+  route_name:  entity.group.delete_form
+  base_route:  entity.group.canonical
+  title: Delete
+  weight: 10
+
