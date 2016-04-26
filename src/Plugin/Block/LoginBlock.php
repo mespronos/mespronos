@@ -8,7 +8,7 @@
 namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\mespronos\Controller\UserController;
+use Drupal\mespronos_tweaks\Controller\UserController;
 
 /**
  * Provides a 'LoginBlock' block.
@@ -25,7 +25,12 @@ class LoginBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $login_form = UserController::getLoginForm();
+    if(\Drupal::moduleHandler()->moduleExists('mespronos_tweaks')) {
+      $login_form = UserController::getLoginForm();
+    }
+    else {
+      $login_form = \Drupal::formBuilder()->getForm('\Drupal\user\Form\UserLoginForm');
+    }
     return $login_form;
   }
 
