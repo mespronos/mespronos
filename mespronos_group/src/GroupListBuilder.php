@@ -35,7 +35,14 @@ class GroupListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos_group\Entity\Group */
     $row['id'] = $entity->id();
-    $row['name'] =  $entity->label();
+    $row['name'] = $this->l(
+      $entity->label(),
+      new Url(
+        'entity.group.canonical', array(
+          'group' => $entity->id(),
+        )
+      )
+    );
     $row['code'] =  $entity->getCode();
     $status = ['#markup' => $entity->isPublished(true)];
     $row['status'] =  render($status);
