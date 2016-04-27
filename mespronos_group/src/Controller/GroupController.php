@@ -66,6 +66,7 @@ class GroupController extends ControllerBase {
     if($onlyActive) {
       $query->condition('status',NODE_PUBLISHED);
     }
+    $query->sort('name');
 
     $ids = $query->execute();
     if(count($ids)>0) {
