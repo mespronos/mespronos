@@ -1,0 +1,7 @@
+mespronos_group.listing:
+  path: 'mespronos/groups'
+  defaults:
+    _controller: '\Drupal\mespronos_group\Controller\GroupController::groupList'
+    _title: 'Groups'
+  requirements:
+    _permission: 'view groups list'

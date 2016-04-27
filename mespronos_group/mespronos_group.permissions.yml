@@ -17,3 +17,6 @@ view published group entities:
 
 view unpublished group entities:
   title: 'View unpublished Group entities'
+
+view group list:
+  title: 'View group listing''

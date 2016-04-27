@@ -1,0 +1,13 @@
+<?php
+use Drupal\user\RoleInterface;
+
+function mespronos_group_install() {
+  mespronos_group_update_8001();
+}
+
+/**
+* Group - add permission to view group list
+*/
+function mespronos_group_update_8001() {
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, array('view groups list'));
+}
