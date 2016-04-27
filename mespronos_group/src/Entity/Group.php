@@ -177,6 +177,14 @@ class Group extends ContentEntityBase implements GroupInterface {
     return false;
   }
 
+  public function getMemberNumber() {
+    $query =  \Drupal::entityQuery('user')
+    ->condition('field_group',$this->id());
+
+    $ids = $query->execute();
+    return count($ids);
+  }
+
   /**
    * {@inheritdoc}
    */

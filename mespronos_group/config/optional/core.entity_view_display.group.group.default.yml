@@ -1,0 +1,33 @@
+uuid: 505cf22b-4de9-44b5-b90e-e6abc4b3c778
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.field.group.group.field_group_logo
+    - image.style.thumbnail
+  module:
+    - image
+    - mespronos_group
+id: group.group.default
+targetEntityType: group
+bundle: group
+mode: default
+content:
+  field_group_logo:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: ''
+    third_party_settings: {  }
+    type: image
+  name:
+    label: hidden
+    type: string
+    weight: 1
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  code: true
+  user_id: true

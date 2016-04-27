@@ -78,7 +78,8 @@ class GroupController extends ControllerBase {
     $groups_return = [];
     foreach ($groups as $group) {
       $groups_return[$group->id()] = [
-        'entity' => $render_controller->view($group),
+        'entity' => $render_controller->view($group,'teaser'),
+        'member' => t('@nb members',['@nb'=>$group->getMemberNumber()]),
         'join_url' => Url::fromRoute('mespronos_group.group.join',['group'=>$group->id()]),
       ];
     }

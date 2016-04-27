@@ -5,6 +5,8 @@ dependencies:
   module:
     - mespronos_group
     - user
+_core:
+  default_config_hash: P9wgPhqJ02VrqhJTSPcwmId44fdIH8wsy109Ou2Y7ro
 id: user.field_group
 field_name: field_group
 entity_type: user

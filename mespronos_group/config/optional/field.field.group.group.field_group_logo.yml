@@ -1,0 +1,38 @@
+uuid: 6c66f305-9e59-4b99-828a-738b3be22d66
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.group.field_group_logo
+  module:
+    - image
+    - mespronos_group
+id: group.group.field_group_logo
+field_name: field_group_logo
+entity_type: group
+bundle: group
+label: Logo
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: groups
+  file_extensions: 'png gif jpg jpeg'
+  max_filesize: ''
+  max_resolution: 500x500
+  min_resolution: 150x150
+  alt_field: false
+  alt_field_required: true
+  title_field: false
+  title_field_required: false
+  default_image:
+    uuid: ''
+    alt: ''
+    title: ''
+    width: null
+    height: null
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: image
