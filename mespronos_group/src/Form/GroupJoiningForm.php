@@ -75,7 +75,7 @@ class GroupJoiningForm extends FormBase {
     $user->save();
     Cache::invalidateTags(array('groups'));
     drupal_set_message(t('You are now part of the group %group_name',['%group_name'=>$group->label()]));
-    $url = new Url('mespronos_group.group',['group'=>$group->id()]);
+    $url = new Url('entity.group.canonical',['group'=>$group->id()]);
     $form_state->setRedirectUrl($url);
   }
   /**
