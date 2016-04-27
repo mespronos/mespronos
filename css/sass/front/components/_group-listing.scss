@@ -1,0 +1,35 @@
+ul.group-listing {
+  list-style: none;
+  padding: 0;
+  li {
+    text-align: center;
+    border-bottom: solid 1px gray;
+    margin-bottom: 1em;
+    &:last-of-type {
+      border-bottom: none;
+    }
+    img {
+      border-radius: 5px;
+      max-width: 100%;
+      height : auto;
+    }
+
+  }
+}
+
+@media screen and (min-width: 640px) {
+  ul.group-listing {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    li {
+      border-bottom: none;
+      width : 30%;
+      text-align: center;
+      img {
+        border-radius: 5px;
+      }
+    }
+  }
+
+}
