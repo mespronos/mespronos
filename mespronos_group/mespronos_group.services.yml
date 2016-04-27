@@ -1,0 +1,5 @@
+services:
+  mespronos_group.breadcrumb.group:
+    class: Drupal\mespronos_group\Breadcrumb\GroupBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }
