@@ -5,3 +5,11 @@ mespronos_group.listing:
     _title: 'Groups'
   requirements:
     _permission: 'view groups list'
+
+mespronos_group.group.join:
+  path: 'mespronos/group/{group}/join'
+  defaults:
+    _controller: '\Drupal\mespronos_group\Controller\GroupController::join'
+    _title: 'Join group'
+  requirements:
+    _permission: 'join group'

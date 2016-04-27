@@ -3,7 +3,8 @@ aaaa
     {% for group in groups %}
         <li>
             <section>
-                <h1>{{ group }}</h1>
+                {{ group.entity }}
+                <p><a href="{{ group.join_url }}">{% trans %}Join{% endtrans %}</a></p>
             </section>
         </li>
     {% endfor %}

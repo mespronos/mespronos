@@ -3,6 +3,7 @@ use Drupal\user\RoleInterface;
 
 function mespronos_group_install() {
   mespronos_group_update_8001();
+  mespronos_group_update_8002();
 }
 
 /**
@@ -10,4 +11,10 @@ function mespronos_group_install() {
 */
 function mespronos_group_update_8001() {
   user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, array('view groups list'));
+}
+/**
+* Group - add permission to join group
+*/
+function mespronos_group_update_8002() {
+  user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, array('join group'));
 }

@@ -6,6 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos_group\Entity\Group;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Render\Renderer;
+use Drupal\Core\Url;
 
 /**
  * Class GroupController.
@@ -76,8 +77,16 @@ class GroupController extends ControllerBase {
     $render_controller = \Drupal::entityManager()->getViewBuilder('group');
     $groups_return = [];
     foreach ($groups as $group) {
-      $groups_return[$group->id()] = $render_controller->view($group);
+      $groups_return[$group->id()] = [
+        'entity' => $render_controller->view($group),
+        'join_url' => Url::fromRoute('mespronos_group.group.join',['group'=>$group->id()]),
+      ];
     }
     return $groups_return;
+  }
+
+  public function join(Group $group) {
+    dpm($group);
+    return ['#markup'=>'loool'];
   }
 }
