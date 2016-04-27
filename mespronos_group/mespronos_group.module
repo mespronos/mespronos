@@ -1,1 +1,12 @@
 <?php
+
+function mespronos_group_theme() {
+  $themes = [];
+  $themes['group-list'] = array(
+    'template' => 'group-list',
+    'variables' => array(
+      'groups' => [],
+    ),
+  );
+  return $themes;
+}

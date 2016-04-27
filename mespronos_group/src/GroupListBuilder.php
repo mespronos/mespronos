@@ -2,6 +2,7 @@
 
 namespace Drupal\mespronos_group;
 
+use Drupal\Core\Entity\Entity;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityListBuilder;
 use Drupal\Core\Routing\LinkGeneratorTrait;
@@ -31,7 +32,7 @@ class GroupListBuilder extends EntityListBuilder {
   /**
    * {@inheritdoc}
    */
-  public function buildRow(Group $entity) {
+  public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos_group\Entity\Group */
     $row['id'] = $entity->id();
     $row['name'] =  $entity->label();

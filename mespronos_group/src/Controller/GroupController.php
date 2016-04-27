@@ -3,6 +3,7 @@
 namespace Drupal\mespronos_group\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\mespronos_group\Entity\Group;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Render\Renderer;
 
@@ -43,10 +44,40 @@ class GroupController extends ControllerBase {
    *   Return Hello string.
    */
   public function groupList() {
+    $groups = self::loadGroups(true);
+    $groups = self::parseGroupsForListing($groups);
     return [
-      '#type' => 'markup',
-      '#markup' => $this->t('Implement method: list')
+      '#theme' => 'group-list',
+      '#groups' => $groups,
     ];
   }
 
+  public static function loadGroups($onlyActive = true) {
+    $storage = \Drupal::entityManager()->getStorage('group');
+    $query =  \Drupal::entityQuery('group');
+    if($onlyActive) {
+      $query->condition('status',NODE_PUBLISHED);
+    }
+
+    $ids = $query->execute();
+    if(count($ids)>0) {
+      return $storage->loadMultiple($ids);
+    }
+    else {
+      return [];
+    }
+  }
+
+  /**
+   * @param Group[] $groups
+   * @return array
+   */
+  public static function parseGroupsForListing(&$groups) {
+    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
+    $groups_return = [];
+    foreach ($groups as $group) {
+      $groups_return[$group->id()] = $render_controller->view($group);
+    }
+    return $groups_return;
+  }
 }
