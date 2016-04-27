@@ -4,7 +4,13 @@
             <section>
                 {{ group.entity }}
                 <p> {{ group.member }}</p>
-                <p><a href="{{ group.join_url }}">{% trans %}Join{% endtrans %}</a></p>
+                {% if group.is_member %}
+                    <p>You are member of this group</p>
+                {% else %}
+                    {% if group.display_join_link %}
+                        <p><a href="{{ group.join_url }}">{% trans %}Join{% endtrans %}</a></p>
+                    {% endif %}
+                {% endif %}
             </section>
         </li>
     {% endfor %}

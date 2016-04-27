@@ -7,6 +7,7 @@ use Drupal\mespronos_group\Entity\Group;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Render\Renderer;
 use Drupal\Core\Url;
+use Drupal\user\Entity\User;
 
 /**
  * Class GroupController.
@@ -47,9 +48,15 @@ class GroupController extends ControllerBase {
   public function groupList() {
     $groups = self::loadGroups(true);
     $groups = self::parseGroupsForListing($groups);
+    $user = \Drupal::currentUser();
     return [
       '#theme' => 'group-list',
       '#groups' => $groups,
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => [ 'user:'.$user->id(),'groups'],
+        'max-age' => '120',
+      ],
     ];
   }
 
@@ -75,11 +82,15 @@ class GroupController extends ControllerBase {
    */
   public static function parseGroupsForListing(&$groups) {
     $render_controller = \Drupal::entityManager()->getViewBuilder('group');
+    $user = \Drupal::currentUser();
+    $user = User::load($user->id());
     $groups_return = [];
     foreach ($groups as $group) {
       $groups_return[$group->id()] = [
         'entity' => $render_controller->view($group,'teaser'),
         'member' => t('@nb members',['@nb'=>$group->getMemberNumber()]),
+        'is_member' => $group->isMemberOf($user),
+        'display_join_link' => $user->id()>0,
         'join_url' => Url::fromRoute('mespronos_group.group.join',['group'=>$group->id()]),
       ];
     }
