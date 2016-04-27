@@ -68,6 +68,10 @@ class Group extends ContentEntityBase implements GroupInterface {
     );
   }
 
+  public function label() {
+    return $this->getName();
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -178,7 +182,7 @@ class Group extends ContentEntityBase implements GroupInterface {
       ->setReadOnly(TRUE);
 
     $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Authored by'))
+      ->setLabel(t('Creator'))
       ->setDescription(t('The user ID of author of the Group entity.'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'user')

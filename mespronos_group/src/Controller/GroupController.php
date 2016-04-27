@@ -85,8 +85,20 @@ class GroupController extends ControllerBase {
     return $groups_return;
   }
 
+  public function joinTitle(Group $group) {
+    return t('Join groupe %group_name',['%group_name'=>$group->label()]);
+  }
+
   public function join(Group $group) {
-    dpm($group);
-    return ['#markup'=>'loool'];
+    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos_group\Form\GroupJoiningForm',$group);
+    return $form;
+  }
+
+  public function indexTitle(Group $group) {
+    return t('Group %group_name',['%group_name'=>$group->label()]);
+  }
+
+  public function index(Group $group) {
+    return ['#markup'=>'iiiiiiih'];
   }
 }
