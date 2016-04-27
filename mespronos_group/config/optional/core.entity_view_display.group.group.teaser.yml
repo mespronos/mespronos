@@ -5,7 +5,7 @@ dependencies:
   config:
     - core.entity_view_mode.group.teaser
     - field.field.group.group.field_group_logo
-    - image.style.thumbnail
+    - image.style.large
   module:
     - image
     - mespronos_group
@@ -18,7 +18,7 @@ content:
     weight: 0
     label: hidden
     settings:
-      image_style: thumbnail
+      image_style: large
       image_link: ''
     third_party_settings: {  }
     type: image
@@ -27,7 +27,7 @@ content:
     type: string
     weight: 1
     settings:
-      link_to_entity: true
+      link_to_entity: false
     third_party_settings: {  }
 hidden:
   code: true
