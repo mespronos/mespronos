@@ -86,6 +86,21 @@ class Group extends ContentEntityBase implements GroupInterface {
   /**
    * {@inheritdoc}
    */
+  public function getCode() {
+    return $this->get('code')->value;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setCode($code) {
+    $this->set('code', $code);
+    return $this;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCreatedTime() {
     return $this->get('created')->value;
   }
@@ -131,8 +146,14 @@ class Group extends ContentEntityBase implements GroupInterface {
   /**
    * {@inheritdoc}
    */
-  public function isPublished() {
-    return (bool) $this->getEntityKey('status');
+  public function isPublished($as_visual = false) {
+    $status = (bool) $this->getEntityKey('status');
+    if($as_visual) {
+      return $status ? '<span class="status status-✔">✔</span>' : '<span class="status status-✖">✖</span>';
+    }
+    else {
+     return $status;
+    }
   }
 
   /**

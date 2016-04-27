@@ -16,7 +16,7 @@ class GroupViewsData extends EntityViewsData implements EntityViewsDataInterface
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['group']['table']['base'] = array(
+    $data['mespronos__group']['table']['base'] = array(
       'field' => 'id',
       'title' => $this->t('Group'),
       'help' => $this->t('The Group ID.'),
