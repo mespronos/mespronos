@@ -76,3 +76,14 @@ form#games-marks {
     }
   }
 }
+
+span.status-✖,
+.views-field.status-✖ {
+  font-size: 1.2em;
+  color : #b73939;
+}
+span.status-✔,
+.views-field .status-✔ {
+  font-size: 1.2em;
+  color: #4d8f46;
+}
