@@ -6,6 +6,7 @@ use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Access\AccessResult;
+use Drupal\user\Entity\User;
 
 /**
  * Access controller for the Group entity.
@@ -21,11 +22,14 @@ class GroupAccessControlHandler extends EntityAccessControlHandler {
     /** @var \Drupal\mespronos_group\GroupInterface $entity */
     switch ($operation) {
       case 'view':
-        if (!$entity->isPublished()) {
+        if (!$entity->isPublished()) {;
           return AccessResult::allowedIfHasPermission($account, 'view unpublished group entities');
         }
-        return AccessResult::allowedIfHasPermission($account, 'view published group entities');
-
+        $user = User::load($account->id());
+        if($entity->isMemberOf($user)) {
+          return AccessResult::allowed();
+        }
+      
       case 'update':
         return AccessResult::allowedIfHasPermission($account, 'edit group entities');
 

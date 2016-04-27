@@ -1,1 +1,9 @@
 # Group menu items definition
+
+mespronos_group.listing:
+  title: Groups
+  description: 'See all groups.'
+  route_name: mespronos_group.listing
+  weight: 20
+  parent: main
+  menu_name: main

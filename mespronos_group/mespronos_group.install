@@ -18,3 +18,9 @@ function mespronos_group_update_8001() {
 function mespronos_group_update_8002() {
   user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, array('join group'));
 }
+/**
+ * Group - add permission to view group list
+ */
+function mespronos_group_update_8003() {
+  user_role_grant_permissions(RoleInterface::ANONYMOUS_ID, array('view groups list'));
+}

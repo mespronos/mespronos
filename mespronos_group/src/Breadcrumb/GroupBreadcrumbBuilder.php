@@ -15,7 +15,7 @@ use Drupal\Core\Breadcrumb\Breadcrumb;
 class GroupBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     public function applies(RouteMatchInterface $route_match) {
-        return $route_match->getCurrentRouteMatch()->getRouteName() == 'mespronos_group.group';
+        return $route_match->getCurrentRouteMatch()->getRouteName() == 'entity.group.canonical';
     }
 
     public function build(RouteMatchInterface $route_match) {

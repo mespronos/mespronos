@@ -13,11 +13,3 @@ mespronos_group.group.join:
     _title_callback: '\Drupal\mespronos_group\Controller\GroupController::joinTitle'
   requirements:
     _permission: 'join group'
-
-mespronos_group.group:
-  path: 'mespronos/group/{group}'
-  defaults:
-    _controller: '\Drupal\mespronos_group\Controller\GroupController::index'
-    _title_callback: '\Drupal\mespronos_group\Controller\GroupController::indexTitle'
-  requirements:
-    _permission: 'join group'

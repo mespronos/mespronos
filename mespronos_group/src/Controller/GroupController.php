@@ -93,12 +93,4 @@ class GroupController extends ControllerBase {
     $form = \Drupal::formBuilder()->getForm('Drupal\mespronos_group\Form\GroupJoiningForm',$group);
     return $form;
   }
-
-  public function indexTitle(Group $group) {
-    return t('Group %group_name',['%group_name'=>$group->label()]);
-  }
-
-  public function index(Group $group) {
-    return ['#markup'=>'iiiiiiih'];
-  }
 }

@@ -9,6 +9,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos_group\GroupInterface;
 use Drupal\user\UserInterface;
+use Drupal\user\Entity\User;
 
 /**
  * Defines the Group entity.
@@ -45,7 +46,7 @@ use Drupal\user\UserInterface;
  *     "status" = "status",
  *   },
  *   links = {
- *     "canonical" = "/admin/mespronos/group/{group}",
+ *     "canonical" = "/mespronos/group/{group}",
  *     "add-form" = "/admin/mespronos/group/add",
  *     "edit-form" = "/admin/mespronos/group/{group}/edit",
  *     "delete-form" = "/admin/mespronos/group/{group}/delete",
@@ -166,6 +167,14 @@ class Group extends ContentEntityBase implements GroupInterface {
   public function setPublished($published) {
     $this->set('status', $published ? NODE_PUBLISHED : NODE_NOT_PUBLISHED);
     return $this;
+  }
+
+  public function isMemberOf(User $user) {
+    if($user->get('field_group')->first()) {
+      $user_group = $user->get('field_group')->first()->getValue();
+      return isset($user_group['target_id']) && $user_group['target_id'] == $this->id();
+    }
+    return false;
   }
 
   /**

@@ -12,9 +12,6 @@ delete group entities:
 edit group entities:
   title: 'Edit Group entities'
 
-view published group entities:
-  title: 'View published Group entities'
-
 view unpublished group entities:
   title: 'View unpublished Group entities'
 
