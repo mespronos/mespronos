@@ -10,6 +10,8 @@ namespace Drupal\mespronos\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\mespronos\Controller\LastBetsController;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
 
 
 /**
@@ -48,7 +50,13 @@ class LastBets extends BlockBase {
    */
   public function build() {
     $lastBetsController = new LastBetsController();
-    return $lastBetsController->lastBets(null,5);
+    $return = [];
+    $return['last-bet'] = $lastBetsController->lastBets(null,5);
+    $return['more-last-bets'] = [
+      '#markup'=> Link::fromTextAndUrl(t('See more'),Url::fromRoute('mespronos.lastbets'))->toString(),
+    ];
+
+    return $return;
   }
 
 }
