@@ -30,7 +30,11 @@ class GroupMembersBlock extends BlockBase {
       $build['group_members_block'] = [
         '#theme' => 'item_list',
         '#items' => $items,
-        '#list_type' => 'ul'
+        '#list_type' => 'ul',
+        '#cache' => [
+          'contexts' => ['group'],
+          'tags' => [ 'group:'.$group->id(),'groups'],
+      ],
       ];
       return $build;
     }
