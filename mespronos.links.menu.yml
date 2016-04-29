@@ -20,19 +20,3 @@ mespronos.main.ranking:
   weight: 9
   parent: main
   menu_name: main
-
-mespronos.main.nextbets:
-  title: Next bets
-  description: 'See all next bets available.'
-  route_name: mespronos.nextbets
-  weight: 10
-  parent: main
-  menu_name: main
-
-mespronos.main.lastbets:
-  title: Last bets
-  description: 'See all last bets and results.'
-  route_name: mespronos.lastbets
-  weight: 11
-  parent: main
-  menu_name: main
