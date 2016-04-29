@@ -4,16 +4,17 @@ namespace Drupal\mespronos_group\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\mespronos_group\Entity\Group;
+use Drupal\mespronos\Controller\RankingController;
 
 /**
  * Provides a 'GroupMembersBlock' block.
  *
  * @Block(
- *  id = "group_members_block",
- *  admin_label = @Translation("Group members block"),
+ *  id = "group_ranking_block",
+ *  admin_label = @Translation("Group Ranking Page block"),
  * )
  */
-class GroupMembersBlock extends BlockBase {
+class GroupRankingBlock extends BlockBase {
 
   /**
    * {@inheritdoc}
@@ -26,11 +27,13 @@ class GroupMembersBlock extends BlockBase {
       foreach ($members as $member) {
         $items[] = $member->label();
       }
-      $build = [];
-      $build['group_members_block'] = [
-        '#theme' => 'item_list',
-        '#items' => $items,
-        '#list_type' => 'ul'
+      $build = [
+        'table' => RankingController::getRankingGeneral($group),
+        '#cache' => [
+          'contexts' => ['user'],
+          'tags' => [ 'user:'.\Drupal::currentUser()->id(),'ranking'],
+        ],
+        '#title' => t('Group ranking')
       ];
       return $build;
     }
