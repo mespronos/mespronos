@@ -7,6 +7,7 @@ use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\mespronos\RankingInterface;
 use Drupal\mespronos\MPNEntityInterface;
+use Drupal\mespronos_group\Entity\Group;
 
 abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterface,RankingInterface {
 
@@ -59,11 +60,15 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
     return $this->get('points')->value;
   }
 
-  public static function getRanking($entity = null,$entity_name=null,$storage_name) {
+  public static function getRanking($entity = null,$entity_name=null,$storage_name,Group $group = null) {
     $storage = \Drupal::entityManager()->getStorage($storage_name);
     $query = \Drupal::entityQuery($storage_name);
     if(!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
+    }
+   if(!is_null($group) ) {
+      $member_ids = $group->getMembers();
+      $query->condition('better',$member_ids,'IN');
     }
     $query->sort('points','DESC');
     $ids = $query->execute();

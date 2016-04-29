@@ -13,6 +13,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
 use Drupal\Core\Database\Database;
+use Drupal\mespronos_group\Entity\Group;
 
 /**
  * Class DefaultController.
@@ -54,11 +55,11 @@ class RankingController extends ControllerBase {
 
   }
 
-  public static function getRankingGeneral() {
-    $ranking = RankingGeneral::getRanking();
+  public static function getRankingGeneral(Group $group = null) {
+    $ranking = RankingGeneral::getRanking(null,'general','ranking_general',$group);
     return self::getTableFromRanking($ranking);
   }
-  
+
   public static function getRankingLeague(League $league) {
     $ranking = RankingLeague::getRanking($league);
     return self::getTableFromRanking($ranking);

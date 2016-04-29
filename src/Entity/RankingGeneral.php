@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
 use Drupal\Core\Database\Database;
+use Drupal\mespronos_group\Entity\Group;
 
 /**
  * Defines the RankingGeneral entity.
@@ -127,8 +128,8 @@ class RankingGeneral extends Ranking {
   /**
    * @return \Drupal\mespronos\Entity\RankingGeneral
    */
-  public static function getRanking($entity = null,$entity_name='general',$storage_name='ranking_general') {
-    return parent::getRanking(null,$entity_name,$storage_name);
+  public static function getRanking($entity = null,$entity_name='general',$storage_name='ranking_general',Group $group = null) {
+    return parent::getRanking(null,$entity_name,$storage_name,$group);
   }
 
   /**
