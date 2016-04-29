@@ -4,6 +4,7 @@
 # Copyright YEAR NAME <EMAIL@ADDRESS>
 # Generated from files:
 #  modules/mespronos/mespronos.info.yml: n/a
+#  modules/mespronos/mespronos_group/mespronos_group.info.yml: n/a
 #  modules/mespronos/mespronos.links.action.yml: n/a
 #  modules/mespronos/mespronos.routing.yml: n/a
 #  modules/mespronos/mespronos.links.menu.yml: n/a
@@ -11,20 +12,54 @@
 #  modules/mespronos/src/Breadcrumb/BetBreadcrumbBuilder.php: n/a
 #  modules/mespronos/src/Breadcrumb/LeagueBreadcrumbBuilder.php: n/a
 #  modules/mespronos/src/Plugin/Block/RankingGeneralBlock.php: n/a
+#  modules/mespronos/mespronos.permissions.yml: n/a
+#  modules/mespronos/mespronos_group/mespronos_group.links.task.yml: n/a
 #  modules/mespronos/templates/league_details.html.twig: n/a
 #  modules/mespronos/templates/user-profile-block.html.twig: n/a
-#  modules/mespronos/mespronos.permissions.yml: n/a
+#  modules/mespronos/config/schema/mespronos.schema.yml: n/a
+#  modules/mespronos/mespronos_group/mespronos_group.links.action.yml: n/a
+#  modules/mespronos/mespronos_group/mespronos_group.links.menu.yml: n/a
+#  modules/mespronos/mespronos_group/mespronos_group.routing.yml: n/a
+#  modules/mespronos/mespronos_group/src/Breadcrumb/GroupBreadcrumbBuilder.php: n/a
+#  modules/mespronos/mespronos_group/src/Controller/GroupController.php: n/a
 #  modules/mespronos/src/Controller/NextBetsController.php: n/a
+#  modules/mespronos/src/Entity/Form/MPNDeleteForm.php: n/a
+#  modules/mespronos/mespronos_group/mespronos_group.permissions.yml: n/a
+#  modules/mespronos/mespronos_group/src/GroupListBuilder.php: n/a
+#  modules/mespronos/src/Entity/Day.php: n/a
+#  modules/mespronos/src/Entity/Sport.php: n/a
+#  modules/mespronos/src/Entity/Team.php: n/a
+#  modules/mespronos/src/Entity/Controller/BetListController.php: n/a
+#  modules/mespronos/src/Entity/Controller/GameListController.php: n/a
+#  modules/mespronos/src/Entity/Controller/LeagueListController.php: n/a
+#  modules/mespronos/src/Entity/Controller/RankingDayListController.php: n/a
+#  modules/mespronos/src/Entity/Controller/RankingGeneralListController.php: n/a
+#  modules/mespronos/src/Entity/Controller/RankingLeagueListController.php: n/a
+#  modules/mespronos/src/Controller/LeagueController.php: n/a
+#  modules/mespronos/mespronos_group/src/Entity/Group.php: n/a
+#  modules/mespronos/mespronos_group/src/Form/GroupJoiningForm.php: n/a
 #  modules/mespronos/src/Breadcrumb/BetterBreadcrumbBuilder.php: n/a
+#  modules/mespronos/src/Controller/StatisticsController.php: n/a
+#  modules/mespronos/src/Entity/MPNContentEntityBase.php: n/a
+#  modules/mespronos/src/Entity/Reminder.php: n/a
+#  modules/mespronos/src/Entity/Controller/SportListController.php: n/a
+#  modules/mespronos/src/Entity/Controller/TeamListController.php: n/a
+#  modules/mespronos/mespronos_group/src/Entity/GroupViewsData.php: n/a
+#  modules/mespronos/mespronos_group/src/Form/GroupForm.php: n/a
+#  modules/mespronos/mespronos_group/src/Plugin/Block/GroupMembersBlock.php: n/a
+#  modules/mespronos/mespronos_group/src/Plugin/Block/GroupRankingBlock.php: n/a
+#  modules/mespronos/mespronos_group/src/Plugin/Block/GroupsDescription.php: n/a
+#  modules/mespronos/mespronos_group/src/Plugin/Block/RankingGroupBlock.php: n/a
+#  modules/mespronos/mespronos_group/templates/group-description.html.twig: n/a
+#  modules/mespronos/mespronos_group/templates/group-form-warning.html.twig: n/a
+#  modules/mespronos/mespronos_group/templates/group-list.html.twig: n/a
 #  modules/mespronos/src/Controller/LastBetsController.php: n/a
 #  modules/mespronos/src/Controller/RankingController.php: n/a
 #  modules/mespronos/src/Controller/AdministrationController.php: n/a
 #  modules/mespronos/src/Controller/BetController.php: n/a
-#  modules/mespronos/src/Entity/Day.php: n/a
 #  modules/mespronos/src/Entity/League.php: n/a
 #  modules/mespronos/src/Entity/RankingLeague.php: n/a
 #  modules/mespronos/src/Entity/Controller/DayListController.php: n/a
-#  modules/mespronos/src/Entity/Controller/GameListController.php: n/a
 #  modules/mespronos/src/Entity/ViewsData/LeagueViewsData.php: n/a
 #  modules/mespronos/src/Controller/DayController.php: n/a
 #  modules/mespronos/src/Entity/Bet.php: n/a
@@ -37,23 +72,11 @@
 #  modules/mespronos/src/Entity/Game.php: n/a
 #  modules/mespronos/src/Entity/RankingDay.php: n/a
 #  modules/mespronos/src/Entity/ViewsData/DayViewsData.php: n/a
-#  modules/mespronos/src/Controller/LeagueController.php: n/a
-#  modules/mespronos/src/Entity/Sport.php: n/a
-#  modules/mespronos/src/Entity/Team.php: n/a
-#  modules/mespronos/src/Entity/Controller/BetListController.php: n/a
-#  modules/mespronos/src/Entity/Controller/LeagueListController.php: n/a
-#  modules/mespronos/src/Entity/Controller/RankingDayListController.php: n/a
-#  modules/mespronos/src/Entity/Controller/RankingGeneralListController.php: n/a
-#  modules/mespronos/src/Entity/Controller/RankingLeagueListController.php: n/a
 #  modules/mespronos/src/Entity/Ranking.php: n/a
 #  modules/mespronos/templates/day_details.html.twig: n/a
-#  modules/mespronos/src/Controller/StatisticsController.php: n/a
-#  modules/mespronos/src/Controller/UserController.php: n/a
+#  modules/mespronos/src/Controller/ReminderController.php: n/a
 #  modules/mespronos/src/Form/GamesBetting.php: n/a
 #  modules/mespronos/src/Entity/ViewsData/SportViewsData.php: n/a
-#  modules/mespronos/src/Entity/MPNContentEntityBase.php: n/a
-#  modules/mespronos/src/Entity/Controller/SportListController.php: n/a
-#  modules/mespronos/src/Entity/Controller/TeamListController.php: n/a
 #  modules/mespronos/src/Entity/RankingGeneral.php: n/a
 #  modules/mespronos/src/Entity/ViewsData/TeamViewsData.php: n/a
 #  modules/mespronos/src/Entity/Form/BetForm.php: n/a
@@ -62,12 +85,12 @@
 #  modules/mespronos/src/Entity/Form/GameRemoveBetsForm.php: n/a
 #  modules/mespronos/src/Entity/Form/LeagueArchiveForm.php: n/a
 #  modules/mespronos/src/Entity/Form/LeagueForm.php: n/a
-#  modules/mespronos/src/Entity/Form/MPNDeleteForm.php: n/a
 #  modules/mespronos/src/Entity/Form/SportForm.php: n/a
 #  modules/mespronos/src/Entity/Form/TeamForm.php: n/a
 #  modules/mespronos/src/Entity/ViewsData/RankingDayViewsData.php: n/a
 #  modules/mespronos/src/Entity/ViewsData/RankingGeneralViewsData.php: n/a
 #  modules/mespronos/src/Entity/ViewsData/RankingLeagueViewsData.php: n/a
+#  modules/mespronos/src/Form/AdministrationConfigForm.php: n/a
 #  modules/mespronos/src/Form/FormImport.php: n/a
 #  modules/mespronos/src/Form/RemoveDataForm.php: n/a
 #  modules/mespronos/src/Plugin/Block/BetInformationsBlock.php: n/a
@@ -77,6 +100,7 @@
 #  modules/mespronos/src/Plugin/Block/UserBlock.php: n/a
 #  modules/mespronos/src/Plugin/Block/UserProfilBlock.php: n/a
 #  modules/mespronos/src/Plugin/Block/WelcomeBlock.php: n/a
+#  modules/mespronos/templates/bet-reminder.html.twig: n/a
 #  modules/mespronos/templates/dashboard.html.twig: n/a
 #  modules/mespronos/templates/leagues-list.html.twig: n/a
 #  modules/mespronos/templates/user-block.html.twig: n/a
@@ -86,7 +110,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
-"POT-Creation-Date: 2016-04-20 19:35+0200\n"
+"POT-Creation-Date: 2016-04-29 15:29+0200\n"
 "PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
 "Last-Translator: NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
@@ -95,7 +119,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
-#: modules/mespronos/mespronos.info.yml:0;0
+#: modules/mespronos/mespronos.info.yml:0;0 modules/mespronos/mespronos_group/mespronos_group.info.yml:0
 msgid "MesPronos"
 msgstr "MesPronos"
 
@@ -151,33 +175,17 @@ msgstr "Compétitions"
 msgid "General ranking"
 msgstr "Classement général"
 
-#: modules/mespronos/mespronos.links.menu.yml:0 modules/mespronos/mespronos.routing.yml:0 modules/mespronos/templates/league_details.html.twig:2
-msgid "Next bets"
-msgstr "Prochains pronostics"
-
-#: modules/mespronos/mespronos.links.menu.yml:0 modules/mespronos/mespronos.routing.yml:0 modules/mespronos/templates/league_details.html.twig:6 modules/mespronos/templates/user-profile-block.html.twig:8
-msgid "Last bets"
-msgstr "Pronostics récents"
-
 #: modules/mespronos/mespronos.links.menu.yml:0
 msgid "Reference for usage, configuration, and modules."
 msgstr ""
 
 #: modules/mespronos/mespronos.links.menu.yml:0
 msgid "See league list"
-msgstr ""
+msgstr "Voir la liste des compétitions"
 
 #: modules/mespronos/mespronos.links.menu.yml:0
 msgid "See general ranking."
-msgstr ""
-
-#: modules/mespronos/mespronos.links.menu.yml:0
-msgid "See all next bets available."
-msgstr "Voir les prochains pronostics"
-
-#: modules/mespronos/mespronos.links.menu.yml:0
-msgid "See all last bets and results."
-msgstr "Voir les pronostics passés ainsi que les résultats"
+msgstr "Voir le Classement général"
 
 #: modules/mespronos/mespronos.links.task.yml:0
 msgid "Dashboard"
@@ -191,7 +199,7 @@ msgstr "Définir les scores"
 msgid "Import"
 msgstr "Importer"
 
-#: modules/mespronos/mespronos.links.task.yml:0;0;0 modules/mespronos/mespronos.routing.yml:0
+#: modules/mespronos/mespronos.links.task.yml:0;0;0 modules/mespronos/mespronos.routing.yml:0 modules/mespronos/mespronos_group/mespronos_group.links.task.yml:0
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -221,11 +229,11 @@ msgstr "Comme la gestion des points"
 
 #: modules/mespronos/mespronos.permissions.yml:0
 msgid "Access to Mespronos configuration and content"
-msgstr ""
+msgstr "Accèder à la configuration du module MesPronos"
 
 #: modules/mespronos/mespronos.permissions.yml:0
 msgid "All entity settings, change content..."
-msgstr ""
+msgstr "Paramètres des entitées..."
 
 #: modules/mespronos/mespronos.permissions.yml:0
 msgid "Import league to MesPronos"
@@ -291,13 +299,13 @@ msgstr ""
 msgid "remove data"
 msgstr ""
 
-#: modules/mespronos/mespronos.routing.yml:0
-msgid "Password reset"
-msgstr "Réinitialisation du mot de passe"
+#: modules/mespronos/mespronos.routing.yml:0 modules/mespronos/templates/league_details.html.twig:2
+msgid "Next bets"
+msgstr "Prochains pronostics"
 
-#: modules/mespronos/mespronos.routing.yml:0 modules/mespronos/src/Controller/NextBetsController.php:109
-msgid "Log in"
-msgstr "Connexion"
+#: modules/mespronos/mespronos.routing.yml:0 modules/mespronos/templates/league_details.html.twig:6 modules/mespronos/templates/user-profile-block.html.twig:8
+msgid "Last bets"
+msgstr "Pronostics récents"
 
 #: modules/mespronos/mespronos.routing.yml:0
 msgid "Team List"
@@ -411,15 +419,313 @@ msgstr "Modifier le pronostic"
 msgid "Delete Bet"
 msgstr "Supprimer le pronostic"
 
-#: modules/mespronos/src/Breadcrumb/BetBreadcrumbBuilder.php:28 modules/mespronos/src/Breadcrumb/BetterBreadcrumbBuilder.php:26 modules/mespronos/src/Breadcrumb/LeagueBreadcrumbBuilder.php:26
+#: modules/mespronos/config/schema/mespronos.schema.yml:0
+msgid "Mespronos Reminder Config"
+msgstr ""
+
+#: modules/mespronos/config/schema/mespronos.schema.yml:0
+msgid "Does the reminder are activated"
+msgstr ""
+
+#: modules/mespronos/config/schema/mespronos.schema.yml:0
+msgid "Hour before the day to send reminder"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.info.yml:0
+msgid "MesPronos Group"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.info.yml:0
+msgid "Group integration for MesPronos"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.links.action.yml:0
+msgid "Add Group"
+msgstr "Créer un groupe"
+
+#: modules/mespronos/mespronos_group/mespronos_group.links.action.yml:0
+msgid "Groups Settings"
+msgstr "Paramètres des groupes"
+
+#: modules/mespronos/mespronos_group/mespronos_group.links.menu.yml:0 modules/mespronos/mespronos_group/mespronos_group.links.task.yml:0 modules/mespronos/mespronos_group/mespronos_group.routing.yml:0 modules/mespronos/mespronos_group/src/Breadcrumb/GroupBreadcrumbBuilder.php:27 modules/mespronos/mespronos_group/src/Controller/GroupController.php:124
+msgid "Groups"
+msgstr "Groupes"
+
+#: modules/mespronos/mespronos_group/mespronos_group.links.menu.yml:0
+msgid "See all groups."
+msgstr "Voir les groupes"
+
+#: modules/mespronos/mespronos_group/mespronos_group.links.task.yml:0
+msgid "View"
+msgstr "Voir"
+
+#: modules/mespronos/mespronos_group/mespronos_group.links.task.yml:0
+msgid "Edit"
+msgstr "Modifier"
+
+#: modules/mespronos/src/Controller/NextBetsController.php:100
+msgctxt "mespronos-nextbet"
+msgid "Edit"
+msgstr "Modifier"
+
+#: modules/mespronos/mespronos_group/mespronos_group.links.task.yml:0 modules/mespronos/src/Entity/Form/MPNDeleteForm.php:38
+msgid "Delete"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.permissions.yml:0
+msgid "Create new Group entities"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.permissions.yml:0
+msgid "Administer Group entities"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.permissions.yml:0
+msgid "Allow to access the administration form to configure Group entities."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.permissions.yml:0
+msgid "Choose to join a group or not during creation"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.permissions.yml:0
+msgid "Delete Group entities"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.permissions.yml:0
+msgid "Edit Group entities"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.permissions.yml:0
+msgid "View unpublished Group entities"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/mespronos_group.permissions.yml:0
+msgid "View group listing"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/GroupListBuilder.php:25
+msgid "Group ID"
+msgstr "ID du groupe"
+
+#: modules/mespronos/mespronos_group/src/GroupListBuilder.php:26 modules/mespronos/src/Entity/Day.php:155 modules/mespronos/src/Entity/Sport.php:115 modules/mespronos/src/Entity/Team.php:114 modules/mespronos/src/Entity/Controller/BetListController.php:26 modules/mespronos/src/Entity/Controller/GameListController.php:29 modules/mespronos/src/Entity/Controller/LeagueListController.php:27 modules/mespronos/src/Entity/Controller/RankingDayListController.php:26 modules/mespronos/src/Entity/Controller/RankingGeneralListController.php:26 modules/mespronos/src/Entity/Controller/RankingLeagueListController.php:26
+msgid "Name"
+msgstr "Nom"
+
+#: modules/mespronos/src/Controller/LeagueController.php:85
+msgctxt "mespronos-block"
+msgid "Name"
+msgstr "Nom"
+
+#: modules/mespronos/mespronos_group/src/GroupListBuilder.php:27 modules/mespronos/mespronos_group/src/Entity/Group.php:276 modules/mespronos/mespronos_group/src/Form/GroupJoiningForm.php:50
+msgid "Access code"
+msgstr "Code d'accès"
+
+#: modules/mespronos/mespronos_group/src/GroupListBuilder.php:28 modules/mespronos/src/Entity/Controller/LeagueListController.php:28
+msgid "Status"
+msgstr "Statut"
+
+#: modules/mespronos/mespronos_group/src/Breadcrumb/GroupBreadcrumbBuilder.php:26 modules/mespronos/src/Breadcrumb/BetBreadcrumbBuilder.php:28 modules/mespronos/src/Breadcrumb/BetterBreadcrumbBuilder.php:26 modules/mespronos/src/Breadcrumb/LeagueBreadcrumbBuilder.php:26
 msgid "Home"
 msgstr "Accueil"
+
+#: modules/mespronos/mespronos_group/src/Controller/GroupController.php:93 modules/mespronos/src/Controller/StatisticsController.php:22
+msgid "@nb members"
+msgstr "@nb membres"
+
+#: modules/mespronos/mespronos_group/src/Controller/GroupController.php:103
+msgid "Join groupe %group_name"
+msgstr "Rejoindre le groupe %group_name"
+
+#: modules/mespronos/mespronos_group/src/Controller/GroupController.php:127
+msgid "My group"
+msgstr "Mon groupe"
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:220 modules/mespronos/src/Entity/MPNContentEntityBase.php:79 modules/mespronos/src/Entity/Reminder.php:49 modules/mespronos/src/Entity/Controller/LeagueListController.php:25 modules/mespronos/src/Entity/Controller/SportListController.php:25 modules/mespronos/src/Entity/Controller/TeamListController.php:25
+msgid "ID"
+msgstr "ID"
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:221
+msgid "The ID of the Group entity."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:224 modules/mespronos/src/Entity/MPNContentEntityBase.php:84 modules/mespronos/src/Entity/Reminder.php:54
+msgid "UUID"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:225
+msgid "The UUID of the Group entity."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:229
+msgid "Creator"
+msgstr "Créateur"
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:230
+msgid "The user ID of author of the Group entity."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:255
+msgid "Group name"
+msgstr "Nom du groupe"
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:256
+msgid "The public name of the group"
+msgstr "Le nom public du groupe"
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:277
+msgid "The code required to join this group"
+msgstr "Le code qui sera demandé pour rejoindre le groupe"
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:292
+msgid "Publishing status"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:293
+msgid "A boolean indicating whether the Group is published."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:297
+msgid "Language code"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:298
+msgid "The language code for the Group entity."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:306 modules/mespronos/src/Entity/MPNContentEntityBase.php:89 modules/mespronos/src/Entity/Reminder.php:59
+msgid "Created"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:307 modules/mespronos/src/Entity/MPNContentEntityBase.php:90 modules/mespronos/src/Entity/Reminder.php:60
+msgid "The time that the entity was created."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:310 modules/mespronos/src/Entity/MPNContentEntityBase.php:93
+msgid "Changed"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:311 modules/mespronos/src/Entity/MPNContentEntityBase.php:94
+msgid "The time that the entity was last edited."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Entity/Group.php:14 modules/mespronos/mespronos_group/src/Entity/GroupViewsData.php:21
+msgid "Group"
+msgstr "Groupe"
+
+#: modules/mespronos/mespronos_group/src/Entity/GroupViewsData.php:22
+msgid "The Group ID."
+msgstr "ID du groupe"
+
+#: modules/mespronos/mespronos_group/src/Form/GroupForm.php:39
+msgid "join the group"
+msgstr "Rejoindre le groupe"
+
+#: modules/mespronos/mespronos_group/src/Form/GroupForm.php:52
+msgid "Create my group !"
+msgstr "Créer mon groupe !"
+
+#: modules/mespronos/mespronos_group/src/Form/GroupForm.php:72
+msgid "You've just created the %label Group."
+msgstr "Vous venez de créer le groupe %label."
+
+#: modules/mespronos/mespronos_group/src/Form/GroupForm.php:78
+msgid "Saved the %label Group."
+msgstr "Le groupe %label a été sauvegardé"
+
+#: modules/mespronos/mespronos_group/src/Form/GroupJoiningForm.php:39
+msgid "You are already part of %group_name group"
+msgstr "Vous êtes déjà membre du groupe %group_name"
+
+#: modules/mespronos/mespronos_group/src/Form/GroupJoiningForm.php:43
+msgid "You are already part of group %old_group_name, by joining a new group, you will leave the other."
+msgstr "Vous faites déjà parti du groupe %old_group_name, en rejoingnant un nouveau groupe, vous quitterez l'autre"
+
+#: modules/mespronos/mespronos_group/src/Form/GroupJoiningForm.php:52
+msgid "This group is private, you need an access code to get in."
+msgstr "Ce groupe est privé, vous avez besoin d'un code afin de le rejoindre"
+
+#: modules/mespronos/mespronos_group/src/Form/GroupJoiningForm.php:56
+msgid "Join group"
+msgstr "Rejoindre le groupe"
+
+#: modules/mespronos/mespronos_group/src/Form/GroupJoiningForm.php:67
+msgid "The access code is wrong"
+msgstr "Le code d'accès n'est pas correct"
+
+#: modules/mespronos/mespronos_group/src/Form/GroupJoiningForm.php:77
+msgid "You are now part of the group %group_name"
+msgstr "Vous faites maintenant parti du groupe %group_name"
+
+#: modules/mespronos/mespronos_group/src/Plugin/Block/GroupMembersBlock.php:8
+msgid "Group members block"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/src/Plugin/Block/GroupRankingBlock.php:36
+msgid "Group ranking"
+msgstr "Classement du groupe"
+
+#: modules/mespronos/mespronos_group/src/Plugin/Block/GroupRankingBlock.php:9
+msgid "Group Ranking Page block"
+msgstr "Classement groupe - Page groupe"
+
+#: modules/mespronos/mespronos_group/src/Plugin/Block/GroupsDescription.php:7
+msgid "Groups description"
+msgstr "Description des groupes"
+
+#: modules/mespronos/mespronos_group/src/Plugin/Block/RankingGroupBlock.php:38
+msgid "See group"
+msgstr "Voir le groupe"
+
+#: modules/mespronos/mespronos_group/src/Plugin/Block/RankingGroupBlock.php:44
+msgid "Group @group_label - General ranking"
+msgstr "Classement général du groupe @group_label"
+
+#: modules/mespronos/mespronos_group/src/Plugin/Block/RankingGroupBlock.php:16
+msgid "Group Ranking Block"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/templates/group-description.html.twig:1 modules/mespronos/mespronos_group/templates/group-form-warning.html.twig:1
+msgid "Les groupes vous permettent de faire un classement juste au sein d'une communauté (amis, entreprise...)"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/templates/group-description.html.twig:2
+msgid "Les groupes sont privés et nécessite un code d'accès pour être rejoint."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/templates/group-description.html.twig:3
+msgid "Vous ne pouvez être membre d'un groupe et d'un seul."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/templates/group-description.html.twig:4
+msgid "Vous voulez créer votre groupe ?"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/templates/group-description.html.twig:4
+msgid "C'est par là !"
+msgstr ""
+
+#: modules/mespronos/mespronos_group/templates/group-form-warning.html.twig:2
+msgid "Les groupes sont privés et nécessitent un code d'accès pour être rejoint, veuillez le noter, vous devrez le faire passer aux membres que vous souhaitez inviter dans votre groupe."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/templates/group-form-warning.html.twig:3
+msgid "Vous ne pouvez être membre d'un groupe et d'un seul, si vous êtes déjà membre d'un groupe, alors la création d'un nouveau entrainera de facto la sortie de l'ancien."
+msgstr ""
+
+#: modules/mespronos/mespronos_group/templates/group-list.html.twig:1
+msgid "Groups list"
+msgstr "Liste des groupes"
+
+#: modules/mespronos/mespronos_group/templates/group-list.html.twig:12
+msgid "Join"
+msgstr "Rejoindre"
 
 #: modules/mespronos/src/Breadcrumb/BetterBreadcrumbBuilder.php:27
 msgid "Betters"
 msgstr "Pronostiqueurs"
 
-#: modules/mespronos/src/Controller/RankingController.php:167
+#: modules/mespronos/src/Controller/LastBetsController.php:64 modules/mespronos/src/Controller/RankingController.php:171
 msgctxt "mespronos-block"
 msgid "Betters"
 msgstr "Pronostiqueurs"
@@ -441,12 +747,12 @@ msgctxt "mespronos"
 msgid "League"
 msgstr "Compétition"
 
-#: modules/mespronos/src/Controller/RankingController.php:166
+#: modules/mespronos/src/Controller/RankingController.php:169
 msgctxt "mespronos-block"
 msgid "League"
 msgstr "Compétition"
 
-#: modules/mespronos/src/Entity/Day.php:190 modules/mespronos/src/Entity/League.php:19 modules/mespronos/src/Entity/RankingLeague.php:172 modules/mespronos/src/Entity/Controller/DayListController.php:28 modules/mespronos/src/Entity/Controller/GameListController.php:26 modules/mespronos/src/Entity/ViewsData/LeagueViewsData.php:25
+#: modules/mespronos/src/Entity/Day.php:198 modules/mespronos/src/Entity/League.php:19 modules/mespronos/src/Entity/RankingLeague.php:173 modules/mespronos/src/Entity/Controller/DayListController.php:28 modules/mespronos/src/Entity/Controller/GameListController.php:26 modules/mespronos/src/Entity/ViewsData/LeagueViewsData.php:25
 msgid "League"
 msgstr "Compétition"
 
@@ -483,7 +789,7 @@ msgctxt "mespronos-block"
 msgid "Points"
 msgstr "Points"
 
-#: modules/mespronos/src/Controller/RankingController.php:110
+#: modules/mespronos/src/Controller/RankingController.php:113
 msgctxt "mespronos-ranking"
 msgid "Points"
 msgstr "Points"
@@ -545,7 +851,7 @@ msgctxt "mespronos-block"
 msgid "Day"
 msgstr "Journée"
 
-#: modules/mespronos/src/Entity/Game.php:292 modules/mespronos/src/Entity/RankingDay.php:182 modules/mespronos/src/Entity/Controller/GameListController.php:27 modules/mespronos/src/Entity/ViewsData/DayViewsData.php:27
+#: modules/mespronos/src/Entity/Game.php:292 modules/mespronos/src/Entity/RankingDay.php:182 modules/mespronos/src/Entity/Reminder.php:63 modules/mespronos/src/Entity/Controller/GameListController.php:27 modules/mespronos/src/Entity/ViewsData/DayViewsData.php:27
 msgid "Day"
 msgstr "Journée"
 
@@ -554,7 +860,7 @@ msgctxt "mespronos-block"
 msgid "Bets"
 msgstr "Pronos"
 
-#: modules/mespronos/src/Controller/RankingController.php:113
+#: modules/mespronos/src/Controller/RankingController.php:114
 msgctxt "mespronos-ranking"
 msgid "Bets"
 msgstr "Pronos"
@@ -585,15 +891,6 @@ msgstr "Détails"
 #: modules/mespronos/src/Controller/LastBetsController.php:111
 msgid "Log in to see your score"
 msgstr "Connectez-vous pour voir votre score"
-
-#: modules/mespronos/src/Controller/LeagueController.php:85
-msgctxt "mespronos-block"
-msgid "Name"
-msgstr "Nom"
-
-#: modules/mespronos/src/Entity/Day.php:147 modules/mespronos/src/Entity/Sport.php:115 modules/mespronos/src/Entity/Team.php:114 modules/mespronos/src/Entity/Controller/BetListController.php:26 modules/mespronos/src/Entity/Controller/GameListController.php:29 modules/mespronos/src/Entity/Controller/LeagueListController.php:27 modules/mespronos/src/Entity/Controller/RankingDayListController.php:26 modules/mespronos/src/Entity/Controller/RankingGeneralListController.php:26 modules/mespronos/src/Entity/Controller/RankingLeagueListController.php:26
-msgid "Name"
-msgstr "Nom"
 
 #: modules/mespronos/src/Controller/LeagueController.php:86
 msgctxt "mespronos-block"
@@ -633,30 +930,29 @@ msgctxt "mespronos-nextbet"
 msgid "Go !"
 msgstr "Go !"
 
-#: modules/mespronos/src/Controller/NextBetsController.php:100
-msgctxt "mespronos-nextbet"
-msgid "Edit"
-msgstr "Modifier"
+#: modules/mespronos/src/Controller/NextBetsController.php:109
+msgid "Log in"
+msgstr "Connexion"
 
-#: modules/mespronos/src/Controller/RankingController.php:32
+#: modules/mespronos/src/Controller/RankingController.php:33
 msgid "Ranking updated for @nb betters"
 msgstr "Classement mis à jour pour @nb pronostiqueurs"
 
-#: modules/mespronos/src/Controller/RankingController.php:110
+#: modules/mespronos/src/Controller/RankingController.php:111
 msgctxt "mespronos-ranking"
 msgid "#"
 msgstr "#"
 
-#: modules/mespronos/src/Controller/RankingController.php:111
+#: modules/mespronos/src/Controller/RankingController.php:112
 msgctxt "mespronos-ranking"
 msgid "Better"
 msgstr "Pronostiqueur"
 
-#: modules/mespronos/src/Entity/Bet.php:182 modules/mespronos/src/Entity/Ranking.php:116
+#: modules/mespronos/src/Entity/Bet.php:182 modules/mespronos/src/Entity/Ranking.php:121
 msgid "Better"
 msgstr "Pronostiqueur"
 
-#: modules/mespronos/src/Controller/RankingController.php:167
+#: modules/mespronos/src/Controller/RankingController.php:170
 msgctxt "mespronos-block"
 msgid "Ranking"
 msgstr "Classement"
@@ -665,9 +961,29 @@ msgstr "Classement"
 msgid "Ranking"
 msgstr "Classement"
 
-#: modules/mespronos/src/Controller/StatisticsController.php:22
-msgid "@nb members"
-msgstr "@nb membres"
+#: modules/mespronos/src/Controller/ReminderController.php:50
+msgid "Reminder sended for day #@id (@game_label) : @nb_mail mails sended"
+msgstr "Rappel envoyé pour la journée #@id (@game_label) : @nb_mail emails envoyés"
+
+#: modules/mespronos/src/Controller/ReminderController.php:58
+msgid "No user to remind"
+msgstr "Aucun utilisateur à qui envoyer un rappel"
+
+#: modules/mespronos/src/Controller/ReminderController.php:89
+msgid "@sitename - Bet Reminder - @league - @day"
+msgstr " @sitename - Rappel de pronostics à faire - @league - @day "
+
+#: modules/mespronos/src/Controller/ReminderController.php:161
+msgid "@nb_games games upcomming in the next @hour hours"
+msgstr "@nb_games matchs se jouent dans les prochaines @hour heures"
+
+#: modules/mespronos/src/Controller/ReminderController.php:190
+msgid "@nb_users users with reminder enabled"
+msgstr "@nb_users utilisateurs avec le rappel activé"
+
+#: modules/mespronos/src/Controller/ReminderController.php:211
+msgid "User #@uid: nb_bets_done : @nb_bets_done, nb_games : @nb_games"
+msgstr ""
 
 #: modules/mespronos/src/Controller/StatisticsController.php:23
 msgid "@nb leagues"
@@ -681,18 +997,6 @@ msgstr "@nb matchs"
 msgid "@nb bets"
 msgstr "@nb pronos"
 
-#: modules/mespronos/src/Controller/UserController.php:45
-msgid "Send me password reset instructions"
-msgstr "Envoyez-moi un lien de réinitialisation de mot de passe"
-
-#: modules/mespronos/src/Controller/UserController.php:56
-msgid "No account ? Register now !"
-msgstr "Pas encore de compte ? Inscrivez-vous !"
-
-#: modules/mespronos/src/Controller/UserController.php:62
-msgid "Forget your password ?"
-msgstr "Mot de passe oublié ?"
-
 #: modules/mespronos/src/Entity/Bet.php:77 modules/mespronos/src/Entity/Game.php:92
 msgid "@t1 - @t2"
 msgstr "@t1 - @t2"
@@ -701,7 +1005,7 @@ msgstr "@t1 - @t2"
 msgid "Draw"
 msgstr "Match nul"
 
-#: modules/mespronos/src/Entity/Bet.php:183 modules/mespronos/src/Entity/Ranking.php:117
+#: modules/mespronos/src/Entity/Bet.php:183 modules/mespronos/src/Entity/Ranking.php:122
 msgid "The user ID of the Bet entity author."
 msgstr ""
 
@@ -713,27 +1017,27 @@ msgstr ""
 msgid "Bet entity"
 msgstr ""
 
-#: modules/mespronos/src/Entity/Day.php:131 modules/mespronos/src/Entity/Game.php:276 modules/mespronos/src/Entity/League.php:291 modules/mespronos/src/Entity/Sport.php:89 modules/mespronos/src/Entity/Team.php:88
+#: modules/mespronos/src/Entity/Day.php:139 modules/mespronos/src/Entity/Game.php:276 modules/mespronos/src/Entity/League.php:291 modules/mespronos/src/Entity/Sport.php:89 modules/mespronos/src/Entity/Team.php:88
 msgid "Authored by"
 msgstr ""
 
-#: modules/mespronos/src/Entity/Day.php:132
+#: modules/mespronos/src/Entity/Day.php:140
 msgid "The user ID of the Day entity author."
 msgstr ""
 
-#: modules/mespronos/src/Entity/Day.php:148
+#: modules/mespronos/src/Entity/Day.php:156
 msgid "The name of the Day entity."
 msgstr ""
 
-#: modules/mespronos/src/Entity/Day.php:167 modules/mespronos/src/Entity/Game.php:380 modules/mespronos/src/Entity/Controller/GameListController.php:28
+#: modules/mespronos/src/Entity/Day.php:175 modules/mespronos/src/Entity/Game.php:380 modules/mespronos/src/Entity/Controller/GameListController.php:28
 msgid "Date"
 msgstr ""
 
-#: modules/mespronos/src/Entity/Day.php:168
+#: modules/mespronos/src/Entity/Day.php:176
 msgid "The day's date"
 msgstr ""
 
-#: modules/mespronos/src/Entity/Day.php:191 modules/mespronos/src/Entity/RankingLeague.php:173
+#: modules/mespronos/src/Entity/Day.php:199 modules/mespronos/src/Entity/RankingLeague.php:174
 msgid "League entity reference"
 msgstr ""
 
@@ -750,7 +1054,7 @@ msgid "@team1 - @team2"
 msgstr ""
 
 #: modules/mespronos/src/Entity/Game.php:100
-msgid "@team1 - @team2 - %date"
+msgid "@team1 - @team2 - @date"
 msgstr ""
 
 #: modules/mespronos/src/Entity/Game.php:145
@@ -761,7 +1065,7 @@ msgstr ""
 msgid "The user ID of the Game entity author."
 msgstr ""
 
-#: modules/mespronos/src/Entity/Game.php:293 modules/mespronos/src/Entity/RankingDay.php:183
+#: modules/mespronos/src/Entity/Game.php:293 modules/mespronos/src/Entity/RankingDay.php:183 modules/mespronos/src/Entity/Reminder.php:64
 msgid "Day entity reference"
 msgstr ""
 
@@ -854,55 +1158,35 @@ msgid "Points when the game's score is found"
 msgstr "Points quand le score du match est juste"
 
 #: modules/mespronos/src/Entity/League.php:422
-msgid "Points quand le vainqueur du match est juste""
-msgstr ""
+msgid "Points when the game's winner is found"
+msgstr "Points quand le vainqueur du match est juste"
 
 #: modules/mespronos/src/Entity/League.php:432
 msgid "Points when nothing is right."
 msgstr "Points quand rien n'est juste"
 
-#: modules/mespronos/src/Entity/MPNContentEntityBase.php:79 modules/mespronos/src/Entity/Controller/LeagueListController.php:25 modules/mespronos/src/Entity/Controller/SportListController.php:25 modules/mespronos/src/Entity/Controller/TeamListController.php:25
-msgid "ID"
-msgstr ""
-
-#: modules/mespronos/src/Entity/MPNContentEntityBase.php:80
+#: modules/mespronos/src/Entity/MPNContentEntityBase.php:80 modules/mespronos/src/Entity/Reminder.php:50
 msgid "The ID of the entity."
 msgstr ""
 
-#: modules/mespronos/src/Entity/MPNContentEntityBase.php:84
-msgid "UUID"
-msgstr ""
-
-#: modules/mespronos/src/Entity/MPNContentEntityBase.php:85
+#: modules/mespronos/src/Entity/MPNContentEntityBase.php:85 modules/mespronos/src/Entity/Reminder.php:55
 msgid "The UUID of the entity."
-msgstr ""
-
-#: modules/mespronos/src/Entity/MPNContentEntityBase.php:89
-msgid "Created"
-msgstr ""
-
-#: modules/mespronos/src/Entity/MPNContentEntityBase.php:90
-msgid "The time that the entity was created."
-msgstr ""
-
-#: modules/mespronos/src/Entity/MPNContentEntityBase.php:93
-msgid "Changed"
-msgstr ""
-
-#: modules/mespronos/src/Entity/MPNContentEntityBase.php:94
-msgid "The time that the entity was last edited."
 msgstr ""
 
 #: modules/mespronos/src/Entity/RankingDay.php:15
 msgid "RankingDay entity"
 msgstr ""
 
-#: modules/mespronos/src/Entity/RankingGeneral.php:14
+#: modules/mespronos/src/Entity/RankingGeneral.php:15
 msgid "RankingGeneral entity"
 msgstr ""
 
-#: modules/mespronos/src/Entity/RankingLeague.php:15
+#: modules/mespronos/src/Entity/RankingLeague.php:16
 msgid "RankingLeague entity"
+msgstr ""
+
+#: modules/mespronos/src/Entity/Reminder.php:9
+msgid "Reminder entity"
 msgstr ""
 
 #: modules/mespronos/src/Entity/Sport.php:69
@@ -963,15 +1247,11 @@ msgstr ""
 
 #: modules/mespronos/src/Entity/Controller/GameListController.php:30
 msgid "Mark"
-msgstr ""
+msgstr "Score"
 
 #: modules/mespronos/src/Entity/Controller/GameListController.php:65
 msgid "Remove bets"
 msgstr "Supprimer les pronostics"
-
-#: modules/mespronos/src/Entity/Controller/LeagueListController.php:28
-msgid "Status"
-msgstr "Statut"
 
 #: modules/mespronos/src/Entity/Controller/LeagueListController.php:30
 msgid "Classement activé ?"
@@ -1065,10 +1345,6 @@ msgstr ""
 msgid "Are you sure you want to delete entity %name?"
 msgstr ""
 
-#: modules/mespronos/src/Entity/Form/MPNDeleteForm.php:38
-msgid "Delete"
-msgstr ""
-
 #: modules/mespronos/src/Entity/Form/MPNDeleteForm.php:48
 msgid "content @type: deleted @label."
 msgstr ""
@@ -1141,6 +1417,26 @@ msgstr ""
 msgid "The team entity ID."
 msgstr ""
 
+#: modules/mespronos/src/Form/AdministrationConfigForm.php:24
+msgid "Reminder"
+msgstr "Rappel de pronostics"
+
+#: modules/mespronos/src/Form/AdministrationConfigForm.php:29
+msgid "Enable reminder notifications"
+msgstr "Activer les rappels de pronostics"
+
+#: modules/mespronos/src/Form/AdministrationConfigForm.php:35
+msgid "Reminder to offer to users"
+msgstr ""
+
+#: modules/mespronos/src/Form/AdministrationConfigForm.php:36
+msgid "Note that user will only receive the reminder he choose."
+msgstr ""
+
+#: modules/mespronos/src/Form/AdministrationConfigForm.php:54
+msgid "Hour should be a positive number"
+msgstr ""
+
 #: modules/mespronos/src/Form/FormImport.php:26
 msgid "YAML file to import"
 msgstr "Fichier YAML à importer"
@@ -1181,11 +1477,15 @@ msgstr "Supprimer"
 msgid "Bet informations block"
 msgstr "Block d'information sur les pronostics"
 
-#: modules/mespronos/src/Plugin/Block/LastBets.php:31 modules/mespronos/src/Plugin/Block/NextBets.php:37
+#: modules/mespronos/src/Plugin/Block/LastBets.php:33 modules/mespronos/src/Plugin/Block/NextBets.php:37
 msgid "Number of days to display"
 msgstr "Nombre de journées à afficher"
 
-#: modules/mespronos/src/Plugin/Block/LastBets.php:15
+#: modules/mespronos/src/Plugin/Block/LastBets.php:56 modules/mespronos/src/Plugin/Block/NextBets.php:60
+msgid "See more"
+msgstr "Voir plus"
+
+#: modules/mespronos/src/Plugin/Block/LastBets.php:17
 msgid "last_bets"
 msgstr "derniers_pronostics"
 
@@ -1209,6 +1509,10 @@ msgstr "Déconnexion"
 msgid "My account"
 msgstr "Mon compte"
 
+#: modules/mespronos/src/Plugin/Block/UserBlock.php:45
+msgid "Edit my account"
+msgstr "Modifier mon profil"
+
 #: modules/mespronos/src/Plugin/Block/UserBlock.php:17
 msgid "User block"
 msgstr "Block utilisateur"
@@ -1224,6 +1528,26 @@ msgstr "Message de bienvenue à afficher"
 #: modules/mespronos/src/Plugin/Block/WelcomeBlock.php:13
 msgid "Welcome block"
 msgstr "Block de bienvenue"
+
+#: modules/mespronos/templates/bet-reminder.html.twig:1
+msgid "Hello @user.name,"
+msgstr "Bonjour @user.name,"
+
+#: modules/mespronos/templates/bet-reminder.html.twig:3
+msgid "You have pending bets on day : @day.label"
+msgstr "Vous avez des pronostics à faire sur la journée : @day.label"
+
+#: modules/mespronos/templates/bet-reminder.html.twig:5
+msgid "Games list :"
+msgstr "Liste des matchs : "
+
+#: modules/mespronos/templates/bet-reminder.html.twig:13
+msgid "Bet now :"
+msgstr "Pour pronostiquer : "
+
+#: modules/mespronos/templates/bet-reminder.html.twig:15
+msgid "If you don't wish to receive bet reminders, please edit your profile :"
+msgstr "Pour ne plus recevoir de rappel de pronostics, veuillez modifier votre profil :"
 
 #: modules/mespronos/templates/block_bet_informations.html.twig:3
 msgid "@day.nb_games games"
