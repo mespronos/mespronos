@@ -6,6 +6,14 @@ mespronos_group.listing:
   requirements:
     _permission: 'view groups list'
 
+mespronos_group.mygroup:
+  path: 'mespronos/mygroup'
+  defaults:
+    _controller: '\Drupal\mespronos_group\Controller\GroupController::myGroup'
+    _title_callback: '\Drupal\mespronos_group\Controller\GroupController::myGroupTitle'
+  requirements:
+    _permission: 'view groups list'
+
 mespronos_group.group.join:
   path: 'mespronos/group/{group}/join'
   defaults:

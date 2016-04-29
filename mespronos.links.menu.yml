@@ -9,7 +9,7 @@ mespronos.main.leagues:
   title: Leagues
   description: 'See league list'
   route_name: mespronos.leagues.list
-  weight: 8
+  weight: 5
   parent: main
   menu_name: main
 
@@ -17,6 +17,6 @@ mespronos.main.ranking:
   title: General ranking
   description: 'See general ranking.'
   route_name: mespronos.ranking
-  weight: 9
+  weight: 6
   parent: main
   menu_name: main

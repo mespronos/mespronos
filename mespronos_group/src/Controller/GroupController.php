@@ -8,6 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Render\Renderer;
 use Drupal\Core\Url;
 use Drupal\user\Entity\User;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class GroupController.
@@ -105,5 +106,25 @@ class GroupController extends ControllerBase {
   public function join(Group $group) {
     $form = \Drupal::formBuilder()->getForm('Drupal\mespronos_group\Form\GroupJoiningForm',$group);
     return $form;
+  }
+
+  public function myGroup() {
+    $group = Group::getUserGroup();
+    if(!$group){
+      return new RedirectResponse(\Drupal::url('mespronos_group.listing'));
+    }
+    else {
+      return new RedirectResponse(\Drupal::url('entity.group.canonical',['group'=>$group->id()]));
+    }
+  }
+
+  public function myGroupTitle() {
+    $group = Group::getUserGroup();
+    if(!$group){
+      return t('Groups');
+    }
+    else {
+      return t('My group');
+    }
   }
 }
