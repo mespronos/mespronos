@@ -225,8 +225,8 @@ class Group extends ContentEntityBase implements GroupInterface {
       ->setDisplayConfigurable('view', TRUE);
 
     $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setDescription(t('The group name'))
+      ->setLabel(t('Group name'))
+      ->setDescription(t('The public name of the group'))
       ->setRequired(true)
       ->setSettings(array(
         'max_length' => 50,
@@ -247,7 +247,7 @@ class Group extends ContentEntityBase implements GroupInterface {
 
     $fields['code'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Access code'))
-      ->setDescription(t('The code to access this group'))
+      ->setDescription(t('The code required to join this group'))
       ->setRequired(true)
       ->setSettings(array(
         'max_length' => 50,

@@ -6,6 +6,10 @@ administer group entities:
   description: 'Allow to access the administration form to configure Group entities.'
   restrict access: true
 
+choose to join group:
+  title: 'Choose to join a group or not during creation'
+  restrict access: true
+
 delete group entities:
   title: 'Delete Group entities'
 

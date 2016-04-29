@@ -4,6 +4,11 @@ namespace Drupal\mespronos_group\Form;
 
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\mespronos_group\Entity\Group;
+use Drupal\Core\Url;
+use Drupal\Core\Cache\Cache;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\user\Entity\User;
 
 /**
  * Form controller for Group edit forms.
@@ -18,8 +23,33 @@ class GroupForm extends ContentEntityForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /* @var $entity \Drupal\mespronos_group\Entity\Group */
     $form = parent::buildForm($form, $form_state);
+
+    $rederer = \Drupal::service('renderer');
+
+    $warning_vars = ['#theme' => 'group-form-warning'];
+
+    $form['warning'] = [
+      '#type' => 'markup',
+      '#markup' => $rederer->renderPlain($warning_vars),
+      '#weight' => -10,
+    ];
+
+    $form['autojoin'] = [
+      '#type' => 'checkbox',
+      '#title' => t('join the group'),
+      '#weight' => 20,
+    ];
+
+    if(!\Drupal::currentUser()->hasPermission('choose to join group')) {
+      $form['autojoin']['#default_value'] = true;
+      $form['autojoin']['#access'] = false;
+    }
+
     $form['user_id']['#access'] = false;
+    $form['field_group_logo']['widget'][0]['#description'] = null;
     $entity = $this->entity;
+
+    $form['actions']['submit']['#value'] = t('Create my group !');
 
     return $form;
   }
@@ -33,7 +63,13 @@ class GroupForm extends ContentEntityForm {
 
     switch ($status) {
       case SAVED_NEW:
-        drupal_set_message($this->t('Created the %label Group.', [
+        if($form_state->getValue('autojoin')) {
+          $user = \Drupal::currentUser();
+          $user = User::load($user->id());
+          $user->set("field_group", $entity->id());
+          $user->save();
+        }
+        drupal_set_message($this->t('You\'ve just created the %label Group.', [
           '%label' => $entity->label(),
         ]));
         break;
@@ -43,7 +79,8 @@ class GroupForm extends ContentEntityForm {
           '%label' => $entity->label(),
         ]));
     }
-    $form_state->setRedirect('entity.group.canonical', ['group' => $entity->id()]);
+    $url = new Url('entity.group.canonical',['group'=>$entity->id()]);
+    $form_state->setRedirectUrl($url);
   }
 
 }
