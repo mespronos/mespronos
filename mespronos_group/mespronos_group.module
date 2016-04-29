@@ -8,5 +8,9 @@ function mespronos_group_theme() {
       'groups' => [],
     ),
   );
+  $themes['group-description'] = array(
+    'template' => 'group-description',
+    'variables' => [],
+  );
   return $themes;
 }
