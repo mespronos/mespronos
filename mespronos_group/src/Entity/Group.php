@@ -185,10 +185,18 @@ class Group extends ContentEntityBase implements GroupInterface {
     return count($ids);
   }
 
-  public function getMembers() {
+  public function getMembers($asEntity = false) {
     $query =  \Drupal::entityQuery('user')
     ->condition('field_group',$this->id());
     $ids = $query->execute();
+    if($asEntity) {
+      $users = [];
+      foreach ($ids as $id) {
+        $user = User::load($id);
+        $users[] = $user;
+      }
+      return $users;
+    }
     return $ids;
   }
 
