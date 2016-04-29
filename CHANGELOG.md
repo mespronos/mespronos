@@ -1,4 +1,8 @@
 # Changelog - Mespronos 
+## 8.x-1.0-alpha7, 2016-XX-XX
+  - Email reminders - fix problem in url when not logged in to avoid 403 (issue #76)
+  
+# Changelog - Mespronos 
 ## 8.x-1.0-alpha6, 2016-04-25
   - Refactoring ranking management in order to allow groups and domains
   - Email reminders

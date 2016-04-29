@@ -102,14 +102,18 @@ class ReminderController extends ControllerBase {
     $games = $day->getGames();
     $emailvars = [];
     $emailvars['#theme'] = 'bet-reminder';
+    $destination_my_account = Url::fromRoute('entity.user.edit_form',['user'=>$user->id()]);
+
     $emailvars['#user'] = [
       'name' => $user->getAccountName(),
-      'myaccount' => Url::fromRoute('entity.user.edit_form',['user'=>$user->id()],['absolute'=>true])
+      'myaccount' => Url::fromRoute('user.login',[],['absolute'=>true,'query'=>['destination'=>$destination_my_account->toString()]]),
     ];
+    $destination = Url::fromRoute('mespronos.day.bet',['day'=>$day->id()]);
+
     $emailvars['#day'] = [
       'label' => $league->label().' - '.$day->label(),
       'games' => [],
-      'bet_link' => Url::fromRoute('mespronos.day.bet',['day'=>$day->id()],['absolute'=>true]),
+      'bet_link' => Url::fromRoute('user.login',[],['absolute'=>true,'query'=>['destination'=>$destination->toString()]]),
     ];
 
     foreach ($games as $game) {

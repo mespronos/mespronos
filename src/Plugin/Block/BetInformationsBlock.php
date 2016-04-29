@@ -25,25 +25,27 @@ class BetInformationsBlock extends BlockBase {
    */
   public function build() {
     $day = \Drupal::routeMatch()->getParameter('day');
-    $league = $day->getLeague();
+    if($day) {
+      $league = $day->getLeague();
 
-    return [
-      '#theme' =>'block-bet-informations',
-      '#day' => [
-        'label' => $day->label(),
-        'nb_games' => $day->getNbGame(),
-      ],
-      '#league' => [
-        'label' => $league->label(),
-        'points' => $league->getPoints(),
-        'betting_type' => $league->getBettingType(),
-        'betting_type_machine' => $league->getBettingType(true),
-      ],
-      '#cache' => [
-        'contexts' => [ 'url'],
-      ],
-      "#title" => $league->label(),
-    ];
+      return [
+        '#theme' =>'block-bet-informations',
+        '#day' => [
+          'label' => $day->label(),
+          'nb_games' => $day->getNbGame(),
+        ],
+        '#league' => [
+          'label' => $league->label(),
+          'points' => $league->getPoints(),
+          'betting_type' => $league->getBettingType(),
+          'betting_type_machine' => $league->getBettingType(true),
+        ],
+        '#cache' => [
+          'contexts' => [ 'url'],
+        ],
+        "#title" => $league->label(),
+      ];
+    }
   }
 
 }
