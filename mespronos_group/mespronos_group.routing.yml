@@ -1,5 +1,5 @@
 mespronos_group.listing:
-  path: 'mespronos/groups'
+  path: 'mespronos/group'
   defaults:
     _controller: '\Drupal\mespronos_group\Controller\GroupController::groupList'
     _title: 'Groups'
