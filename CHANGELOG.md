@@ -1,5 +1,5 @@
 # Changelog - Mespronos 
-## 8.x-1.0-alpha7, 2016-XX-XX
+## 8.x-1.0-alpha7, 2016-04-29
   - Email reminders - fix problem in url when not logged in to avoid 403 (issue #76)
   - Add mespronos_group submodule
   
