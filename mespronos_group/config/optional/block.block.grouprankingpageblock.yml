@@ -1,0 +1,26 @@
+uuid: b8c1bfb5-6d36-4442-9202-9d8411c88188
+langcode: fr
+status: true
+dependencies:
+  module:
+    - mespronos_group
+    - system
+  theme:
+    - mespronos_front
+id: grouprankingpageblock
+theme: mespronos_front
+region: content
+weight: -8
+provider: null
+plugin: group_ranking_block
+settings:
+  id: group_ranking_block
+  label: 'Group Ranking Page block'
+  provider: mespronos_group
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '/mespronos/group/*'
+    negate: false
+    context_mapping: {  }
