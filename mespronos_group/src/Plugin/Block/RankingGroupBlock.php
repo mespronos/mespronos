@@ -10,6 +10,8 @@ namespace Drupal\mespronos_group\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\mespronos\Controller\RankingController;
 use Drupal\mespronos_group\Entity\Group;
+use Drupal\Core\Url;
+use Drupal\Core\Link;
 
 /**
  * Provides a 'RankingGeneralBlock' block.
@@ -32,6 +34,9 @@ class RankingGroupBlock extends BlockBase {
     }
     $build = [
       'table' => RankingController::getRankingGeneral($group),
+      'more-info' => [
+        '#markup' => Link::fromTextAndUrl(t('See group'),Url::fromRoute('entity.group.canonical',['group'=>$group->id()]))->toString(),
+      ],
       '#cache' => [
         'contexts' => ['user'],
         'tags' => [ 'user:'.\Drupal::currentUser()->id(),'ranking'],
