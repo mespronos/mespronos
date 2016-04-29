@@ -9,6 +9,8 @@ dependencies:
   module:
     - image
     - mespronos_group
+_core:
+  default_config_hash: 3gsdhl7fxtJE98-yyMNopAT-pMR3RiOzHAs__d5KfTQ
 id: group.group.teaser
 targetEntityType: group
 bundle: group
@@ -27,7 +29,7 @@ content:
     type: string
     weight: 1
     settings:
-      link_to_entity: false
+      link_to_entity: true
     third_party_settings: {  }
 hidden:
   code: true
