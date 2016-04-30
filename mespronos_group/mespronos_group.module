@@ -2,7 +2,8 @@
 use Drupal\mespronos_group\Entity\Group;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplayInterface;
-use Drupal\block\Entity\Block;
+use Drupal\Core\Render\Element;
+
 
 function mespronos_group_theme() {
   $themes = [];
