@@ -32,7 +32,7 @@ class GroupMembersBlock extends BlockBase {
         '#items' => $items,
         '#list_type' => 'ul',
         '#cache' => [
-          'contexts' => ['group'],
+          'contexts' => ['user'],
           'tags' => [ 'group:'.$group->id(),'groups'],
       ],
       ];
