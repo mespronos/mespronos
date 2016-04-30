@@ -3,6 +3,7 @@ use Drupal\mespronos_group\Entity\Group;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\Core\Entity\Entity\EntityViewDisplayInterface;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Cache\Cache;
 
 
 function mespronos_group_theme() {
@@ -46,5 +47,32 @@ function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisp
       '#type' => 'container',
       "element-content" => $render,
     ];
+  }
+}
+
+function mespronos_group_form_user_register_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  $form['group_access_code'] = [
+    '#type' => 'textfield',
+    '#title' => t('Group access code'),
+    '#description' => t('If you want to join a group, please fill the access code the group owner gave you.')
+  ];
+  $form['#validate'][] = 'mespronos_group_form_user_register_form_validate';
+}
+
+function mespronos_group_form_user_register_form_validate(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+
+  $code = $form_state->getValue('group_access_code');
+  if($code != null) {
+    $group = Group::loadByCode($code);
+    if(!$group) {
+      $form_state->setErrorByName('group_access_code', t("The access code to join a group is wrong"));
+    }
+    else {
+      $formO = $form_state->getFormObject();
+      $user = $formO->getEntity();
+      $user->set("field_group", $group->id());
+      Cache::invalidateTags(array('groups','ranking'));
+      drupal_set_message(t('You are now part of the group %group_name',['%group_name'=>$group->label()]));
+    }
   }
 }
