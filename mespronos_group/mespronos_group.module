@@ -1,4 +1,8 @@
 <?php
+use Drupal\mespronos_group\Entity\Group;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\Core\Entity\Entity\EntityViewDisplayInterface;
+use Drupal\block\Entity\Block;
 
 function mespronos_group_theme() {
   $themes = [];
@@ -17,4 +21,29 @@ function mespronos_group_theme() {
     'variables' => [],
   );
   return $themes;
+}
+
+function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisplay $display, $view_mode, $langcode) {
+  if($view_mode == 'full') {
+    $block_manager = \Drupal::service('plugin.manager.block');
+    $plugin_block = $block_manager->createInstance('group_members_block', []);
+    $render = $plugin_block->build();
+    $build['block_members_title'] = [
+      '#markup' => '<h2>'.t('Members').'</h2>'
+    ];
+    $build['block_members'] = [
+      '#type' => 'container',
+      "element-content" => $render,
+    ];
+
+    $plugin_block = $block_manager->createInstance('group_ranking_block', []);
+    $render = $plugin_block->build();
+    $build['block_ranking_title'] = [
+      '#markup' => '<h2>'.t('Group ranking').'</h2>'
+    ];
+    $build['block_ranking'] = [
+      '#type' => 'container',
+      "element-content" => $render,
+    ];
+  }
 }
