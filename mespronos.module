@@ -6,6 +6,7 @@
  */
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\Core\Entity\Entity\EntityViewDisplay;
 
 function mespronos_preprocess_page(&$variables) {
   if($variables['is_admin']) {
@@ -145,4 +146,30 @@ function mespronos_mail($key, &$message, $params) {
 
 function mespronos_cron() {
   \Drupal\mespronos\Controller\ReminderController::init();
+}
+
+
+function mespronos_entity_extra_field_info() {
+  $extra['user']['user']['display']['hall_of_flame'] = array(
+    'label' => t('Hall of flame'),
+    'weight' => 100,
+    'visible' => TRUE,
+  );
+  return $extra;
+}
+
+function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, EntityViewDisplay $display, $view_mode, $langcode) {
+  if($view_mode == 'full') {
+    $block_manager = \Drupal::service('plugin.manager.block');
+    if ($display->getComponent('hall_of_flame')) {
+      $plugin_block = $block_manager->createInstance('user_profil_block', []);
+      $render = $plugin_block->build();
+      $build['hall_of_flame'] = [];
+      $build['hall_of_flame']['content'] = [
+        '#type' => 'container',
+        "element-content" => $render,
+      ];
+    }
+
+  }
 }
