@@ -164,10 +164,11 @@ class BetController extends ControllerBase {
     foreach($bets as $bet) {
       $game = $bet->getGame(true);
       $day = $game->getDay();
+      $day_renderable = $day->getRenderableLabel();
       $row = [
         'data' => [
           'day' => [
-            'data' => render($day->getRenderableLabel()),
+            'data' => render($day_renderable),
             'class' => ['day-cell']
           ],
           $game->labelTeams(),
