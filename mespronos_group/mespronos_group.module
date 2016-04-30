@@ -25,28 +25,48 @@ function mespronos_group_theme() {
   return $themes;
 }
 
+function mespronos_group_entity_extra_field_info() {
+  $extra['group']['group']['display']['block_members'] = array(
+    'label' => t('Member list'),
+    'weight' => 100,
+    'visible' => TRUE,
+  );
+  $extra['group']['group']['display']['block_ranking'] = array(
+    'label' => t('Group ranking'),
+    'weight' => 102,
+    'visible' => TRUE,
+  );
+  return $extra;
+}
+
 function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisplay $display, $view_mode, $langcode) {
   if($view_mode == 'full') {
     $block_manager = \Drupal::service('plugin.manager.block');
-    $plugin_block = $block_manager->createInstance('group_members_block', []);
-    $render = $plugin_block->build();
-    $build['block_members_title'] = [
-      '#markup' => '<h2>'.t('Members').'</h2>'
-    ];
-    $build['block_members'] = [
-      '#type' => 'container',
-      "element-content" => $render,
-    ];
+    if ($display->getComponent('block_members')) {
+      $plugin_block = $block_manager->createInstance('group_members_block', []);
+      $render = $plugin_block->build();
+      $build['block_members'] = [];
+      $build['block_members']['title'] = [
+        '#markup' => '<h2>' . t('Members') . '</h2>'
+      ];
+      $build['block_members']['content'] = [
+        '#type' => 'container',
+        "element-content" => $render,
+      ];
+    }
 
-    $plugin_block = $block_manager->createInstance('group_ranking_block', []);
-    $render = $plugin_block->build();
-    $build['block_ranking_title'] = [
-      '#markup' => '<h2>'.t('Group ranking').'</h2>'
-    ];
-    $build['block_ranking'] = [
-      '#type' => 'container',
-      "element-content" => $render,
-    ];
+    if ($display->getComponent('block_ranking')) {
+      $plugin_block = $block_manager->createInstance('group_ranking_block', []);
+      $render = $plugin_block->build();
+      $build['block_ranking'] = [];
+      $build['block_ranking']['title'] = [
+        '#markup' => '<h2>'.t('Group ranking').'</h2>'
+      ];
+      $build['block_ranking']['content']= [
+        '#type' => 'container',
+        "element-content" => $render,
+      ];
+    }
   }
 }
 
