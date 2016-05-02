@@ -143,7 +143,7 @@ function mespronos_entity_extra_field_info() {
   return $extra;
 }
 
-function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, EntityViewDisplay $display, $view_mode, $langcode) {
+function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, EntityViewDisplay $display, $view_mode) {
   if($view_mode == 'full') {
     $block_manager = \Drupal::service('plugin.manager.block');
     if ($display->getComponent('hall_of_flame')) {
