@@ -62,6 +62,9 @@ function mespronos_theme() {
     'variables' => array(
       'last_bets' => NULL,
       'ranking' => NULL,
+      'has_group' => false,
+      'group_name' => NULL,
+      'ranking_group' => NULL,
     ),
   );
   $theme['dashboard'] = array(

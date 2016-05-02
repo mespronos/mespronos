@@ -65,8 +65,8 @@ class RankingController extends ControllerBase {
     return self::getTableFromRanking($ranking);
   }
 
-  public static function getRankingTableForDay(Day $day) {
-    $rankingDays = RankingDay::getRankingForDay($day);
+  public static function getRankingTableForDay(Day $day,Group $group = null) {
+    $rankingDays = RankingDay::getRankingForDay($day,$group);
     return self::getTableFromRanking($rankingDays);
   }
 

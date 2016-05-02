@@ -11,6 +11,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
 use Drupal\Core\Database\Database;
+use Drupal\mespronos_group\Entity\Group;
 
 /**
  * Defines the RankingDay entity.
@@ -140,10 +141,14 @@ class RankingDay extends Ranking {
    * @param \Drupal\mespronos\Entity\Day $day
    * @return \Drupal\mespronos\Entity\RankingDay[]
    */
-  public static function getRankingForDay(Day $day) {
+  public static function getRankingForDay(Day $day,Group $group = null) {
     $storage = \Drupal::entityManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
     $query->condition('day', $day->id());
+    if(!is_null($group) ) {
+      $member_ids = $group->getMembers();
+      $query->condition('better',$member_ids,'IN');
+    }
     $query->sort('points','DESC');
     $ids = $query->execute();
 

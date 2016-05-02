@@ -1,5 +1,12 @@
 <h2>{% trans 'Games and bets' %}</h2>
 {{ last_bets }}
 
+{% if has_group == true %}
+
+    <h2>{% trans %}{{ group_name }} group ranking{% endtrans %}</h2>
+    {{ ranking_group }}
+
+{% endif %}
+
 <h2>{% trans 'Ranking' %}</h2>
 {{ ranking }}

@@ -12,6 +12,7 @@ use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Bet;
 use Drupal\mespronos\Entity\League;
+use Drupal\mespronos_group\Entity\Group;
 use Drupal\user\Entity\User;
 use Drupal\Core\Database\Database;
 
@@ -26,6 +27,13 @@ class DayController extends ControllerBase {
 
     if($user == null) {
       $user = User::load(\Drupal::currentUser()->id());
+    }
+    if(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+      /* @var $group Group */
+      $group = Group::getUserGroup($user);
+    }
+    else {
+      $group = false;
     }
     $league = $day->getLeague();
     $league_points = $league->getPoints();
@@ -90,6 +98,9 @@ class DayController extends ControllerBase {
       '#theme' =>'day-details',
       '#last_bets' => $table_array,
       '#ranking' => RankingController::getRankingTableForDay($day),
+      '#has_group' => $group ? true : false,
+      '#group_name' => $group ? $group->getName() : false,
+      '#ranking_group' => $group ? RankingController::getRankingTableForDay($day,$group) : null,
       '#cache' => [
         'contexts' => ['user'],
         'tags' => [ 'user:'.\Drupal::currentUser()->id().'_'.$user->id(),'lastbets'],
