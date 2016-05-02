@@ -50,7 +50,7 @@ class StatisticsController extends ControllerBase {
     return count($ids);
   }
 
-  function getBetsNumber(User $user = null) {
+  private static function getBetsNumber(User $user = null) {
     $query = \Drupal::entityQuery('bet');
     if($user) {
       $query->condition('better',$user->id());
