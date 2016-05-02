@@ -25,15 +25,16 @@ class DayController extends ControllerBase {
 
   public function index(Day $day, User $user = null) {
 
-    if($user == null) {
-      $user = User::load(\Drupal::currentUser()->id());
-    }
-    if(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+    if($user != null && \Drupal::moduleHandler()->moduleExists('mespronos_group')) {
       /* @var $group Group */
       $group = Group::getUserGroup($user);
     }
     else {
       $group = false;
+    }
+    
+    if($user == null) {
+      $user = User::load(\Drupal::currentUser()->id());
     }
     $league = $day->getLeague();
     $league_points = $league->getPoints();
