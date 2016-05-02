@@ -22,6 +22,12 @@ function mespronos_group_theme() {
     'template' => 'group-form-warning',
     'variables' => [],
   );
+  $themes['group-administration'] = array(
+    'template' => 'group-administration',
+    'variables' => [
+      'group' => [],
+    ],
+  );
   return $themes;
 }
 
