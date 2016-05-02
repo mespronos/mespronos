@@ -82,6 +82,8 @@ mespronos.lastbets:
   path: 'mespronos/last-bets'
   defaults:
     _controller: '\Drupal\mespronos\Controller\LastBetsController::lastbets'
+    league : null
+    nb : 100
     _title: 'Last bets'
   requirements:
     _permission: 'view last bets days'
