@@ -27,6 +27,8 @@ class DayController extends ControllerBase {
     if($user == null) {
       $user = User::load(\Drupal::currentUser()->id());
     }
+    $league = $day->getLeague();
+    $league_points = $league->getPoints();
     $games = Game::getGamesForDay($day);
     $games_ids = $games['ids'];
     $games_entity = $games['entities'];
@@ -40,12 +42,30 @@ class DayController extends ControllerBase {
         $bet = isset($bets[$gid]) ? $bets[$gid]->labelBet() : '/';
       }
       $points = isset($bets[$gid]) ? $bets[$gid]->get('points')->value : '/';
+      
       $row = [
-        $game->labelTeams(),
-        $game->labelScore(),
-        $bet,
-        $points,
+        'data' => [
+          $game->labelTeams(),
+          $game->labelScore(),
+          $bet,
+          $points,
+        ],
       ];
+
+      switch ($points) {
+        case $league_points['points_score_found'] :
+          $class='score_found';
+          break;
+        case $league_points['points_winner_found'] :
+          $class='winner_found';
+          break;
+        case $league_points['points_participation'] :
+          $class='participation';
+          break;
+        default :
+          $class = '';
+      }
+      $row['class'] = [$class];
       $rows[] = $row;
     }
 

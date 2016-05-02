@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Symfony\Component\HttpFoundation\Request;
 use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\League;
 /**
  * Provides a 'BetInformationsBlock' block.
  *
@@ -24,8 +25,10 @@ class BetInformationsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
+    /* @var $day Day */
     $day = \Drupal::routeMatch()->getParameter('day');
     if($day) {
+      /* @var $league League */
       $league = $day->getLeague();
 
       return [
