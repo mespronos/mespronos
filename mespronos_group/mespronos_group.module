@@ -45,7 +45,7 @@ function mespronos_group_entity_extra_field_info() {
   return $extra;
 }
 
-function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisplay $display, $view_mode, $langcode) {
+function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisplay $display, $view_mode) {
   if($view_mode == 'full') {
     $block_manager = \Drupal::service('plugin.manager.block');
     if ($display->getComponent('block_members')) {
