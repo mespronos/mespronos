@@ -21,7 +21,7 @@ interface GroupInterface extends ContentEntityInterface, EntityChangedInterface,
    * @return string
    *   Name of the Group.
    */
-  public function getName();
+  public function getTheName();
 
   /**
    * Sets the Group name.

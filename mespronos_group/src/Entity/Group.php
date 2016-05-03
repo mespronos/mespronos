@@ -70,7 +70,7 @@ class Group extends ContentEntityBase implements GroupInterface {
   }
 
   public function label() {
-    return $this->getName();
+    return $this->getTheName();
   }
 
   public static function loadByCode($code) {
@@ -91,7 +91,7 @@ class Group extends ContentEntityBase implements GroupInterface {
   /**
    * {@inheritdoc}
    */
-  public function getName() {
+  public function getTheName() {
     return $this->get('name')->value;
   }
 

@@ -26,7 +26,7 @@ class GroupAdministrationBlock extends BlockBase {
       $group = \Drupal::routeMatch()->getParameter('group');
       $group_data = [];
       $group_data['nb_members'] = $group->getMemberNumber();
-      $group_data['name'] = $group->getName();
+      $group_data['name'] = $group->label();
       $group_data['access_code'] = $group->getCode();
       $group_data['url_join'] = Link::fromTextAndUrl(Url::fromRoute('mespronos_group.group.join',['group'=>$group->id()],['absolute'=>true])->toString(),Url::fromRoute('mespronos_group.group.join',['group'=>$group->id()]));
 
