@@ -215,6 +215,10 @@ class Group extends ContentEntityBase implements GroupInterface {
     return $ids;
   }
 
+  /**
+   * @param \Drupal\user\Entity\User|NULL $user
+   * @return bool|Group
+   */
   public static function getUserGroup(User $user = null) {
     if($user == null) {
       $user = \Drupal::currentUser();
