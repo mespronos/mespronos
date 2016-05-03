@@ -108,6 +108,7 @@ class GamesBetting extends FormBase {
           '#suffix' => '</div>',
         ];
         if(!is_null($bet->getScoreTeam1()) && !is_null($bet->getScoreTeam2())) {
+          $winner = null;
           if($bet->getScoreTeam1() == $bet->getScoreTeam2()) {
             $winner = 'N';
           }
