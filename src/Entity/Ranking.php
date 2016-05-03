@@ -18,13 +18,13 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
     );
   }
 
-  public abstract function getBaseTable();
+  abstract public function getBaseTable();
 
-  public abstract function getEntityRelated();
+  abstract public function getEntityRelated();
 
-  public abstract function getStorageName();
+  abstract public function getStorageName();
 
-  public abstract function getPosition();
+  abstract public function getPosition();
 
   public function determinePosition($results) {
     $position = 0;
