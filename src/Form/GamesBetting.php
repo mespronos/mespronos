@@ -68,10 +68,6 @@ class GamesBetting extends FormBase {
         '#type' => 'hidden',
         '#value' => $bet->id(),
       );
-      /*$form['games'][$game->id()]['date'] = array(
-        '#type' => 'markup',
-        '#markup' => $game->labelDate(),
-      );*/
       if($betting_type == 'score') {
         $form['games'][$game->id()]['score_team_1'] = array(
           '#type' => 'number',
@@ -113,14 +109,15 @@ class GamesBetting extends FormBase {
         ];
         if(!is_null($bet->getScoreTeam1()) && !is_null($bet->getScoreTeam2())) {
           if($bet->getScoreTeam1() == $bet->getScoreTeam2()) {
-            $form['games'][$game->id()]['winner']['#default_value'] = 'N';
+            $winner = 'N';
           }
           elseif($bet->getScoreTeam1() > $bet->getScoreTeam2()) {
-            $form['games'][$game->id()]['winner']['#default_value'] = '1';
+            $winner = '1';
           }
           elseif($bet->getScoreTeam1() < $bet->getScoreTeam2()) {
-            $form['games'][$game->id()]['winner']['#default_value'] = '2';
+            $winner = '2';
           }
+          $form['games'][$game->id()]['winner']['#default_value'] = $winner;
         }
       }
     }
