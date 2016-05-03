@@ -29,47 +29,7 @@ class DayController extends ControllerBase {
     if($user == null) {
       $user = User::load(\Drupal::currentUser()->id());
     }
-    $league = $day->getLeague();
-    $league_points = $league->getPoints();
-    $games = Game::getGamesForDay($day);
-    $games_ids = $games['ids'];
-    $games_entity = $games['entities'];
-    $bets = Bet::getUserBetsForGames($games_ids,$user);
-    $rows = [];
-    foreach($games_entity as $gid => $game) {
-      if($user->id() !== \Drupal::currentUser()->id() && !$game->isPassed()) {
-        $bet = '?';
-      }
-      else {
-        $bet = isset($bets[$gid]) ? $bets[$gid]->labelBet() : '/';
-      }
-      $points = isset($bets[$gid]) ? $bets[$gid]->get('points')->value : '/';
-      
-      $row = [
-        'data' => [
-          $game->labelTeams(),
-          $game->labelScore(),
-          $bet,
-          $points,
-        ],
-      ];
-
-      switch ($points) {
-        case $league_points['points_score_found'] :
-          $class='score_found';
-          break;
-        case $league_points['points_winner_found'] :
-          $class='winner_found';
-          break;
-        case $league_points['points_participation'] :
-          $class='participation';
-          break;
-        default :
-          $class = '';
-      }
-      $row['class'] = [$class];
-      $rows[] = $row;
-    }
+    $rows = $this->getDayRows($day,$user);
 
     $header = [
       $this->t('Game',array(),array('context'=>'mespronos')),
@@ -106,7 +66,7 @@ class DayController extends ControllerBase {
    * @param \Drupal\user\Entity\User|NULL $user
    * @return bool|\Drupal\mespronos_group\Entity\Group
    */
-  private static function getGroup(User $user = null) {
+  private function getGroup(User $user = null) {
     if($user != null && \Drupal::moduleHandler()->moduleExists('mespronos_group')) {
       /* @var $group Group */
       $group = Group::getUserGroup($user);
@@ -116,7 +76,52 @@ class DayController extends ControllerBase {
     }
     return $group;
   }
-  
+
+  private function getDayRows(Day $day, User $user) {
+    $games = Game::getGamesForDay($day);
+    $games_ids = $games['ids'];
+    $games_entity = $games['entities'];
+    $bets = Bet::getUserBetsForGames($games_ids,$user);
+    $league = $day->getLeague();
+    $league_points = $league->getPoints();
+    $rows = [];
+    foreach($games_entity as $gid => $game) {
+      if($user->id() !== \Drupal::currentUser()->id() && !$game->isPassed()) {
+        $bet = '?';
+      }
+      else {
+        $bet = isset($bets[$gid]) ? $bets[$gid]->labelBet() : '/';
+      }
+      $points = isset($bets[$gid]) ? $bets[$gid]->get('points')->value : '/';
+
+      $row = [
+        'data' => [
+          $game->labelTeams(),
+          $game->labelScore(),
+          $bet,
+          $points,
+        ],
+      ];
+
+      switch ($points) {
+        case $league_points['points_score_found'] :
+          $class='score_found';
+          break;
+        case $league_points['points_winner_found'] :
+          $class='winner_found';
+          break;
+        case $league_points['points_participation'] :
+          $class='participation';
+          break;
+        default :
+          $class = '';
+      }
+      $row['class'] = [$class];
+      $rows[] = $row;
+    }
+    return $rows;
+  }
+
   public function indexTitle(Day $day, \Drupal\user\Entity\User $user = null) {
     $league = $day->getLeague();
     if($user == null) {
