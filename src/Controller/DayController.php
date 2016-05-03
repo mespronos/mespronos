@@ -24,14 +24,7 @@ use Drupal\Core\Database\Database;
 class DayController extends ControllerBase {
 
   public function index(Day $day, User $user = null) {
-
-    if($user != null && \Drupal::moduleHandler()->moduleExists('mespronos_group')) {
-      /* @var $group Group */
-      $group = Group::getUserGroup($user);
-    }
-    else {
-      $group = false;
-    }
+    $group = $this->getGroup($user);
     
     if($user == null) {
       $user = User::load(\Drupal::currentUser()->id());
@@ -107,6 +100,21 @@ class DayController extends ControllerBase {
         'tags' => [ 'user:'.\Drupal::currentUser()->id().'_'.$user->id(),'lastbets'],
       ],
     ];
+  }
+
+  /**
+   * @param \Drupal\user\Entity\User|NULL $user
+   * @return bool|\Drupal\mespronos_group\Entity\Group
+   */
+  private static function getGroup(User $user = null) {
+    if($user != null && \Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+      /* @var $group Group */
+      $group = Group::getUserGroup($user);
+    }
+    else {
+      $group = false;
+    }
+    return $group;
   }
   
   public function indexTitle(Day $day, \Drupal\user\Entity\User $user = null) {
