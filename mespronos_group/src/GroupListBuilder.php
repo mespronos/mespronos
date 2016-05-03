@@ -22,10 +22,12 @@ class GroupListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildHeader() {
-    $header['id'] = $this->t('Group ID');
-    $header['name'] = $this->t('Name');
-    $header['code'] = $this->t('Access code');
-    $header['status'] = $this->t('Status');
+    $header = [
+      'id' => $this->t('Group ID'),
+      'name' => $this->t('Name'),
+      'code' => $this->t('Access code'),
+      'status' => $this->t('Status'),
+    ];
     return $header + parent::buildHeader();
   }
 
@@ -33,6 +35,7 @@ class GroupListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
+    $row = [];
     /* @var $entity \Drupal\mespronos_group\Entity\Group */
     $row['id'] = $entity->id();
     $row['name'] = $this->l(
