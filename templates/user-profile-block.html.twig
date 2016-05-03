@@ -3,7 +3,9 @@
 <p>{% trans %}General ranking : {{ user.rank}}{% endtrans %}</p>
 <p>{% trans %}Points : {{user.points}}{% endtrans %}</p>
 <p>{% trans %}Total of bets : {{statistics.nb_bets}}{% endtrans %}</p>
-<h2>{% trans %}Palmares{% endtrans %}</h2>
-<p> {{ palmares }} </p>
+{% if palmares %}
+    <h2>{% trans %}Palmares{% endtrans %}</h2>
+    {{ palmares }}
+{% endif %}
 <h2>{% trans %}Last bets{% endtrans %}</h2>
 {{ last_bets }}
