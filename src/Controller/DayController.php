@@ -101,22 +101,9 @@ class DayController extends ControllerBase {
           $bet,
           $points,
         ],
+        'class' => $league->getPointsCssClass($points),
       ];
 
-      switch ($points) {
-        case $league_points['points_score_found'] :
-          $class='score_found';
-          break;
-        case $league_points['points_winner_found'] :
-          $class='winner_found';
-          break;
-        case $league_points['points_participation'] :
-          $class='participation';
-          break;
-        default :
-          $class = '';
-      }
-      $row['class'] = [$class];
       $rows[] = $row;
     }
     return $rows;
