@@ -47,7 +47,6 @@ class GroupForm extends ContentEntityForm {
 
     $form['user_id']['#access'] = false;
     $form['field_group_logo']['widget'][0]['#description'] = null;
-    $entity = $this->entity;
 
     $form['actions']['submit']['#value'] = t('Create my group !');
 
