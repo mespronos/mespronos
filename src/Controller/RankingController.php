@@ -126,7 +126,7 @@ class RankingController extends ControllerBase {
    */
   public static function getPalmares(\Drupal\user\Entity\User $user) {
     $data = self::getPalmaresData($user);
-    if($data) {
+    if(!empty($data)) {
       return [
         '#theme' => 'table',
         '#rows' => self::parsePalmares($data),
