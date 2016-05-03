@@ -8,13 +8,11 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\mespronos\Controller\DayController;
 use Drupal\mespronos\Entity\Day;
 use Drupal\Core\Database\Database;
 use Drupal\mespronos\Entity\Reminder;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
-use Drupal\Core\Link;
 
 /**
  * Class ReminderController.
