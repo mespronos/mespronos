@@ -166,14 +166,15 @@ class Group extends ContentEntityBase implements GroupInterface {
   /**
    * {@inheritdoc}
    */
-  public function isPublished($as_visual = false) {
+  public function isPublished() {
     $status = (bool) $this->getEntityKey('status');
-    if($as_visual) {
-      return $status ? '<span class="status status-✔">✔</span>' : '<span class="status status-✖">✖</span>';
-    }
-    else {
-     return $status;
-    }
+    return $status;
+  }
+
+  public function isPublishedAsVisual() {
+    $status = (bool) $this->getEntityKey('status');
+    return $status ? '<span class="status status-✔">✔</span>' : '<span class="status status-✖">✖</span>';
+
   }
 
   /**

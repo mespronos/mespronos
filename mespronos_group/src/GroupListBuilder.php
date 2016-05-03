@@ -44,7 +44,7 @@ class GroupListBuilder extends EntityListBuilder {
       )
     );
     $row['code'] =  $entity->getCode();
-    $status = ['#markup' => $entity->isPublished(true)];
+    $status = ['#markup' => $entity->isPublishedAsVisual()];
     $row['status'] =  render($status);
     return $row + parent::buildRow($entity);
   }
