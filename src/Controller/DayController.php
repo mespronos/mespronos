@@ -53,7 +53,7 @@ class DayController extends ControllerBase {
       '#last_bets' => $table_array,
       '#ranking' => RankingController::getRankingTableForDay($day),
       '#has_group' => $group ? true : false,
-      '#group_name' => $group ? $group->getName() : false,
+      '#group_name' => $group ? $group->label() : false,
       '#ranking_group' => $group ? RankingController::getRankingTableForDay($day,$group) : null,
       '#cache' => [
         'contexts' => ['user'],
