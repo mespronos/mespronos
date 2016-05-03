@@ -83,7 +83,6 @@ class DayController extends ControllerBase {
     $games_entity = $games['entities'];
     $bets = Bet::getUserBetsForGames($games_ids,$user);
     $league = $day->getLeague();
-    $league_points = $league->getPoints();
     $rows = [];
     foreach($games_entity as $gid => $game) {
       if($user->id() !== \Drupal::currentUser()->id() && !$game->isPassed()) {
