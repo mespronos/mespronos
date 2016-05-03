@@ -11,7 +11,7 @@ use Drupal\Core\Controller\ControllerBase;;
 use Drupal\user\Entity\User;
 
 /**
- * Class DashboardController.
+ * Class StatisticsController.
  *
  * @package Drupal\mespronos\Controller
  */
