@@ -1,5 +1,5 @@
 # Changelog - Mespronos 
-## 8.x-1.0-alpha8, 2016-XX-XX
+## 8.x-1.0-alpha8, 2016-05-05
   - Group enhancements  (see #84 #80 #77 #79 #81)
   - Refactoring - code cleaning
   - Fix issue on last bet page #83
