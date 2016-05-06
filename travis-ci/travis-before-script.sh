@@ -16,4 +16,4 @@ ls $DRUPAL_TI_DRUPAL_DIR/modules/mespronos
 cp $DRUPAL_TI_DRUPAL_DIR/modules/mespronos/travis-ci/minimal.info.yml $DRUPAL_TI_DRUPAL_DIR/core/profiles/minimal
 
 # Enable main module and submodules.
-drush en -y mespronos
+drush en -y mespronos mespronos_group
