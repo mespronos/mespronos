@@ -169,24 +169,26 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     );
   }
 
-  /**
-   * @param array $values
-   * @return League
-   * @throws \Exception
-   */
-  public static function create(array $values = array()) {
+
+  public static function validateBettingType($values) {
     if(!isset($values['betting_type']) || empty($values['betting_type'])) {
       $values['betting_type'] = self::$betting_type_default_value;
     }
+    elseif(!in_array($values['betting_type'],array_keys(self::$betting_types))) {
+      throw new \Exception(t('The choosen betting type is not valid'));
+    }
+  }
+
+  public static function validateStatus($values) {
     if(!isset($values['status']) || empty($values['status'])) {
       $values['status'] = self::$status_default_value;
-    }
-    if(!in_array($values['betting_type'],array_keys(self::$betting_types))) {
-      throw new \Exception(t('The choosen betting type is not valid'));
     }
     if(!in_array($values['status'],array_keys(self::$status_allowed_value))) {
       throw new \Exception(t('The choosen status is not valid'));
     }
+  }
+
+  public static function validateSport($values) {
     if(!isset($values['sport']) || empty($values['sport'])) {
       throw new \Exception(t('The sport for the league should be set'));
     }
@@ -196,9 +198,14 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
         throw new \Exception(t('The sport for the league is not valid'));
       }
     }
+  }
+  public static function validateName($values) {
     if(!isset($values['name']) || empty(trim($values['name']))) {
       throw new \Exception(t('The league\'s name should be set'));
     }
+  }
+
+  public static function validatePoints($values) {
     foreach(self::$points_default as $type => $points) {
       if(!isset($values[$type]) || empty(trim($values[$type]))) {
         $values[$type] = $points;
@@ -207,6 +214,19 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     if($values['betting_type'] == 'winner') {
       $values['points_score_found'] = $values['points_winner_found'];
     }
+  }
+  /**
+   * @param array $values
+   * @return League
+   * @throws \Exception
+   */
+  public static function create(array $values = array()) {
+    self::validateBettingType($values);
+    self::validateStatus($values);
+    self::validateSport($values);
+    self::validateName($values);
+    self::validatePoints($values);
+
     return parent::create($values);
   }
 
