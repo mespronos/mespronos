@@ -21,6 +21,3 @@ After this three months test I aim to release the **8.x-1.0 beta** that will be 
 The **8.x-1.0 Final** should be released during summer.
 
 **[ALPHA TEST IS OPEN !](https://mespronos.net?utm_source=github&utm_medium=link&utm_campaign=github-readme)**
-
-##Crédits
-Icons from [Freepik](http://www.freepik.com/) 
