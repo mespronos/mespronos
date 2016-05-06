@@ -48,6 +48,15 @@ class MespronosGroupCreationTest extends WebTestBase {
     $this->drupalLogin($this->user);
     $this->drupalGet('/mespronos/group/add');
     $this->assertResponse(200);
+
+    $this->assertFieldByName('name[0][value]', '', 'Form - name input is empty');
+    $this->assertFieldByName('code[0][value]', '', 'Form - code input is empty');
+
+    $this->drupalPostForm('mespronos/group/add', array(
+      'name[0][value]' => 'TestNomGroup',
+      'code[0][value]' => 'testCode',
+    ), t('Create my group !'));
+    
   }
 
 
