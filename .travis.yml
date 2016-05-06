@@ -65,6 +65,7 @@ install:
 before_script:
   - drupal-ti --include "./travis-ci/travis-before-script.sh"
   - drupal-ti before_script
+  - phpenv config-rm xdebug.ini
 
 script:
   - drupal-ti --include "./travis-ci/travis-script.sh"
