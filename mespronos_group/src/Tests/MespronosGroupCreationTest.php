@@ -16,7 +16,9 @@ use Drupal\simpletest\WebTestBase;
  */
 class MespronosGroupCreationTest extends WebTestBase {
   public $group;
+  public $user;
 
+  public static $modules = ['mespronos_group'];
   /**
    * {@inheritdoc}
    */
@@ -28,12 +30,10 @@ class MespronosGroupCreationTest extends WebTestBase {
     );
   }
 
-  static public $modules = array(
-    'mespronos','mespronos_group'
-  );
 
   public function setUp() {
     parent::setUp();
+    $this->user = $this->drupalCreateUser();
   }
 
   public function testCreationGroup() {
@@ -42,6 +42,12 @@ class MespronosGroupCreationTest extends WebTestBase {
         'code'=> 'test',
     ]);
     $this->assertTrue($group->save(),t('Group saving return true'));
+  }
+
+  public function testUserCanAccessGroupCreationForm() {
+    $this->drupalLogin($this->user);
+    $this->drupalGet('/mespronos/group/add');
+    $this->assertResponse(200);
   }
 
 

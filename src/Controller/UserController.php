@@ -35,7 +35,10 @@ class UserController extends ControllerBase {
   }
 
   public static function getUserPictureAsRenderableArray(User $user,$style_name = 'thumbnail') {
-    $user_picture = $user->get("user_picture")->first();
+    $user_picture = false;
+    if($user->hasField('user_picture')) {
+      $user_picture = $user->get("user_picture")->first();
+    }
     if($user_picture && !is_null($user_picture) && $user_picture_file = File::load($user_picture->getValue()['target_id'])) {
       return MPNContentEntityBase::getImageAsRenderableArray($user_picture_file,$style_name);
     }
