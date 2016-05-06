@@ -170,7 +170,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
 
-  public static function validateBettingType($values) {
+  public static function validateBettingType(&$values) {
     if(!isset($values['betting_type']) || empty($values['betting_type'])) {
       $values['betting_type'] = self::$betting_type_default_value;
     }
@@ -179,7 +179,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     }
   }
 
-  public static function validateStatus($values) {
+  public static function validateStatus(&$values) {
     if(!isset($values['status']) || empty($values['status'])) {
       $values['status'] = self::$status_default_value;
     }
@@ -188,7 +188,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     }
   }
 
-  public static function validateSport($values) {
+  public static function validateSport(&$values) {
     if(!isset($values['sport']) || empty($values['sport'])) {
       throw new \Exception(t('The sport for the league should be set'));
     }
@@ -199,13 +199,13 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       }
     }
   }
-  public static function validateName($values) {
+  public static function validateName(&$values) {
     if(!isset($values['name']) || empty(trim($values['name']))) {
       throw new \Exception(t('The league\'s name should be set'));
     }
   }
 
-  public static function validatePoints($values) {
+  public static function validatePoints(&$values) {
     foreach(self::$points_default as $type => $points) {
       if(!isset($values[$type]) || empty(trim($values[$type]))) {
         $values[$type] = $points;
