@@ -228,11 +228,11 @@ class BetController extends ControllerBase {
   }
 
   /**
-   * @param \Drupal\Core\Session\AccountProxy $user
+   * @param \Drupal\user\Entity\User $user
    * @param \Drupal\mespronos\Entity\Game $game
    * @return \Drupal\mespronos\Entity\Bet
    */
-  public static function loadForUser(\Drupal\Core\Session\AccountProxy $user,Game $game) {
+  public static function loadForUser(User $user,Game $game) {
 
     $bet_storage = \Drupal::entityManager()->getStorage('bet');
 

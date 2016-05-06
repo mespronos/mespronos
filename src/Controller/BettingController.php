@@ -9,6 +9,7 @@ namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Entity\Day;
+use Drupal\user\Entity\User;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 /**
@@ -20,6 +21,7 @@ class BettingController extends ControllerBase {
 
   public function bet(Day $day) {
     $user = \Drupal::currentUser();
+    $user = User::load($user->id());
     if($day === NULL) {
       drupal_set_message($this->t('This day doesn\'t exist.'),'error');
       throw new AccessDeniedHttpException();

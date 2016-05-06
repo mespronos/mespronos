@@ -6,6 +6,8 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\Element;
 use Drupal\Core\Cache\Cache;
+use Drupal\user\Entity\User;
+use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Controller\BetController;
 use Drupal\mespronos\Controller\GameController;
 
@@ -52,75 +54,7 @@ class GamesBetting extends FormBase {
       '#value' => $user->id(),
     );
     foreach($games as $game) {
-      $bet = BetController::loadForUser($user,$game);
-      $form['games'][$game->id()] = array(
-        '#type' => 'fieldset',
-        '#title' => $game->labelDate(),
-        '#attributes' => array(
-          'class' => array('game','game-wrapper'),
-        ),
-      );
-      $form['games'][$game->id()]['token_id'] = array(
-        '#type' => 'hidden',
-        '#value' =>$game->id(),
-      );
-      $form['games'][$game->id()]['bet_id'] = array(
-        '#type' => 'hidden',
-        '#value' => $bet->id(),
-      );
-      if($betting_type == 'score') {
-        $form['games'][$game->id()]['score_team_1'] = array(
-          '#type' => 'number',
-          '#min' => 0,
-          '#step' => 1,
-          '#size' => '1',
-          '#default_value' => $bet->getScoreTeam1(),
-          '#title' => $game->get('team_1')->entity->label(true),
-          '#attributes' => [
-            'class' => ['team_1']
-          ],
-          '#prefix' => '<div class="score_team_wrapper score_team_1_wrapper">',
-          '#suffix' => '</div>',
-        );
-        $form['games'][$game->id()]['score_team_2'] = array(
-          '#type' => 'number',
-          '#min' => 0,
-          '#step' => 1,
-          '#size' => '1',
-          '#default_value' => $bet->getScoreTeam2(),
-          '#title' => $game->get('team_2')->entity->label(true),
-          '#attributes' => [
-            'class' => ['team_2']
-          ],
-          '#prefix' => '<div class="score_team_wrapper score_team_2_wrapper">',
-          '#suffix' => '</div>',
-        );
-      }
-      else {
-        $form['games'][$game->id()]['winner'] = [
-          '#type' => 'radios',
-          '#options' => [
-            '1' => $game->get('team_1')->entity->label(true),
-            'N' => t('Draw'),
-            '2' => $game->get('team_2')->entity->label(true),
-          ],
-          '#prefix' => '<div class="game_wrapper_winner">',
-          '#suffix' => '</div>',
-        ];
-        if(!is_null($bet->getScoreTeam1()) && !is_null($bet->getScoreTeam2())) {
-          $winner = null;
-          if($bet->getScoreTeam1() == $bet->getScoreTeam2()) {
-            $winner = 'N';
-          }
-          elseif($bet->getScoreTeam1() > $bet->getScoreTeam2()) {
-            $winner = '1';
-          }
-          elseif($bet->getScoreTeam1() < $bet->getScoreTeam2()) {
-            $winner = '2';
-          }
-          $form['games'][$game->id()]['winner']['#default_value'] = $winner;
-        }
-      }
+      $form['games'][$game->id()] = $this->getGameFormInput($user,$game,$betting_type);
     }
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = array(
@@ -129,6 +63,80 @@ class GamesBetting extends FormBase {
       '#button_type' => 'primary',
     );
     return $form;
+  }
+
+  protected function getGameFormInput(User $user, Game $game,$betting_type) {
+
+    $bet = BetController::loadForUser($user,$game);
+    $item = array(
+      '#type' => 'fieldset',
+      '#title' => $game->labelDate(),
+      '#attributes' => array(
+        'class' => array('game','game-wrapper'),
+      ),
+    );
+    $item['token_id'] = array(
+      '#type' => 'hidden',
+      '#value' =>$game->id(),
+    );
+    $item['bet_id'] = array(
+      '#type' => 'hidden',
+      '#value' => $bet->id(),
+    );
+    if($betting_type == 'score') {
+      $item['score_team_1'] = array(
+        '#type' => 'number',
+        '#min' => 0,
+        '#step' => 1,
+        '#size' => '1',
+        '#default_value' => $bet->getScoreTeam1(),
+        '#title' => $game->get('team_1')->entity->label(true),
+        '#attributes' => [
+          'class' => ['team_1']
+        ],
+        '#prefix' => '<div class="score_team_wrapper score_team_1_wrapper">',
+        '#suffix' => '</div>',
+      );
+      $item['score_team_2'] = array(
+        '#type' => 'number',
+        '#min' => 0,
+        '#step' => 1,
+        '#size' => '1',
+        '#default_value' => $bet->getScoreTeam2(),
+        '#title' => $game->get('team_2')->entity->label(true),
+        '#attributes' => [
+          'class' => ['team_2']
+        ],
+        '#prefix' => '<div class="score_team_wrapper score_team_2_wrapper">',
+        '#suffix' => '</div>',
+      );
+    }
+    else {
+      $item['winner'] = [
+        '#type' => 'radios',
+        '#options' => [
+          '1' => $game->get('team_1')->entity->label(true),
+          'N' => t('Draw'),
+          '2' => $game->get('team_2')->entity->label(true),
+        ],
+        '#prefix' => '<div class="game_wrapper_winner">',
+        '#suffix' => '</div>',
+      ];
+      if(!is_null($bet->getScoreTeam1()) && !is_null($bet->getScoreTeam2())) {
+        $winner = null;
+        if($bet->getScoreTeam1() == $bet->getScoreTeam2()) {
+          $winner = 'N';
+        }
+        elseif($bet->getScoreTeam1() > $bet->getScoreTeam2()) {
+          $winner = '1';
+        }
+        elseif($bet->getScoreTeam1() < $bet->getScoreTeam2()) {
+          $winner = '2';
+        }
+        $item['winner']['#default_value'] = $winner;
+      }
+    }
+    return $item;
   }
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
@@ -222,7 +230,7 @@ class GamesBetting extends FormBase {
 
   /**
    * @param $form_state
-   * @return \Drupal\User
+   * @return \Drupal\user\Entity\User
    */
   protected function extractUser(FormStateInterface $form_state) {
     return $form_state->getBuildInfo()['args'][1];
