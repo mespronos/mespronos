@@ -34,6 +34,7 @@ class MespronosGroupCreationTest extends WebTestBase {
   public function setUp() {
     parent::setUp();
     $this->user = $this->drupalCreateUser();
+    $this->drupalLogin($this->user);
   }
 
   public function testCreationGroup() {
@@ -45,7 +46,6 @@ class MespronosGroupCreationTest extends WebTestBase {
   }
 
   public function testUserCanAccessGroupCreationForm() {
-    $this->drupalLogin($this->user);
     $this->drupalGet('/mespronos/group/add');
     $this->assertResponse(200);
 
@@ -56,7 +56,16 @@ class MespronosGroupCreationTest extends WebTestBase {
       'name[0][value]' => 'TestNomGroup',
       'code[0][value]' => 'testCode',
     ), t('Create my group !'));
-    
+
+  }
+
+  public function testCreationFormErrors() {
+    $this->drupalPostForm('mespronos/group/add', array(
+      'name[0][value]' => '',
+      'code[0][value]' => '',
+    ), t('Create my group !'));
+    $this->assertText('Group name field is required.', 'The form validation correctly failed.');
+    $this->assertText('Access code field is required.', 'The form validation correctly failed.');
   }
 
 
