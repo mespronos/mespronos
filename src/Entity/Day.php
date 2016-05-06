@@ -68,6 +68,14 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
     return $league;
   }
 
+  /**
+   * @return integer
+   */
+  public function getLeagueID() {
+    $league = $this->get('league')->target_id;
+    return $league;
+  }
+
   public function getNbGame() {
     $query = \Drupal::entityQuery('game')->condition('day', $this->id());
     $ids = $query->execute();

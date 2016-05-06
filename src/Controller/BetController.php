@@ -158,12 +158,17 @@ class BetController extends ControllerBase {
     return new RedirectResponse(\Drupal::url('entity.league.collection'));
   }
 
-  public static function getLastUserBetsTable(User $user,$nb_bets = 20) {
+  public static function getLastUserBetsTable(User $user,$nb_bets = 20, Day $day = null) {
     $bets = self::getLastUserBets($user,$nb_bets);
     $rows = [];
+    $leagues = [];
     foreach($bets as $bet) {
       $game = $bet->getGame(true);
       $day = $game->getDay();
+      if(!isset($leagues[$day->getLeagueID()])) {
+        $leagues[$day->getLeagueID()] = $day->getLeague();
+      }
+
       $day_renderable = $day->getRenderableLabel();
       $row = [
         'data' => [
@@ -175,7 +180,8 @@ class BetController extends ControllerBase {
           $game->labelScore(),
           $bet->Label(),
           $bet->getPoints(),
-        ]
+        ],
+        'class' => $leagues[$day->getLeagueID()]->getPointsCssClass($bet->getPoints()),
       ];
 
       $rows[] = $row;
