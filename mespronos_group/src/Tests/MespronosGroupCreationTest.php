@@ -45,34 +45,26 @@ class MespronosGroupCreationTest extends WebTestBase {
     $this->assertTrue($group->save(),t('Group saving return true'));
   }
 
-  public function testUserCanAccessGroupCreationForm() {
+  public function testCreationFormErrors() {
     $this->drupalGet('/mespronos/group/add');
     $this->assertResponse(200);
 
     $this->assertFieldByName('name[0][value]', '', 'Form - name input is empty');
     $this->assertFieldByName('code[0][value]', '', 'Form - code input is empty');
-
-    $this->drupalPostForm('mespronos/group/add', array(
-      'name[0][value]' => 'TestNomGroup',
-      'code[0][value]' => 'testCode',
-    ), t('Create my group !'));
-
-  }
-
-  public function testCreationFormErrors() {
+    
     $this->drupalPostForm('mespronos/group/add', array(
       'name[0][value]' => '',
       'code[0][value]' => '',
     ), t('Create my group !'));
     $this->assertText('Group name field is required.', 'The form validation correctly failed.');
     $this->assertText('Access code field is required.', 'The form validation correctly failed.');
-    
+
     $this->drupalPostForm('mespronos/group/add', array(
       'name[0][value]' => '',
       'code[0][value]' => 'test',
     ), t('Create my group !'));
     $this->assertText('Group name field is required.', 'The form validation correctly failed.');
-    
+
     $this->drupalPostForm('mespronos/group/add', array(
       'name[0][value]' => 'test',
       'code[0][value]' => '',
@@ -80,12 +72,14 @@ class MespronosGroupCreationTest extends WebTestBase {
     $this->assertText('Access code field is required.', 'The form validation correctly failed.');
   }
 
-  public function testUserCreateGroupRedirectedToItsPage() {
+  public function testUserCreateGroupGoodBeahvior() {
     $this->drupalPostForm('mespronos/group/add', array(
       'name[0][value]' => 'TestNomGroup',
       'code[0][value]' => 'testCode',
     ), t('Create my group !'));
     $this->assertUrl('mespronos/group/1');
+    $group = Group::load(1);
+    //$this->assertEqual($group->get('user_id'),$this->user->id(),t('Group creator is correctly set'));
   }
 
 }
