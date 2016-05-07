@@ -87,6 +87,21 @@ class MespronosGroupCreationTest extends WebTestBase {
     $members = $group->getMembers(false);
     $this->assertTrue(in_array($this->user->id(),$members),t('The method GetMembers is working properly'));
 
+
+    $this->drupalPostForm('mespronos/group/add', array(
+      'name[0][value]' => 'TestNomGroup2',
+      'code[0][value]' => 'testCode2',
+    ), t('Create my group !'));
+    $this->assertUrl('mespronos/group/2');
+
+    $group1 = Group::load(1);
+    $members_group_1 = $group1->getMembers(false);
+    $this->assertFalse(in_array($this->user->id(),$members_group_1),t('When a user create a new group he leave the old one'));
+
+    $group2 = Group::load(2);
+    $members_group_2 = $group2->getMembers(false);
+    $this->assertTrue(in_array($this->user->id(),$members_group_2),t('When a user create a new group he leave the old one... but join the new one'));
+
   }
 
 }
