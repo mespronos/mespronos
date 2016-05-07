@@ -8,6 +8,7 @@
 namespace Drupal\mespronos_group\Tests;
 
 use Drupal\mespronos_group\Entity\Group;
+use Drupal\user\Entity\User;
 use Drupal\simpletest\WebTestBase;
 
 /**
@@ -80,6 +81,9 @@ class MespronosGroupCreationTest extends WebTestBase {
     $this->assertUrl('mespronos/group/1');
     $group = Group::load(1);
     $this->assertEqual($group->getOwnerId(),$this->user->id(),t('Group creator is correctly set'));
+    $u = User::load($this->user->id());
+    $user_group = Group::getUserGroup($u);
+    $this->assertEqual($user_group->id(),$group->id(),t('Group creator automatically join the group'));
   }
 
 }
