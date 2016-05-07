@@ -79,7 +79,7 @@ class MespronosGroupCreationTest extends WebTestBase {
     ), t('Create my group !'));
     $this->assertUrl('mespronos/group/1');
     $group = Group::load(1);
-    //$this->assertEqual($group->get('user_id'),$this->user->id(),t('Group creator is correctly set'));
+    $this->assertEqual($group->getOwnerId(),$this->user->id(),t('Group creator is correctly set'));
   }
 
 }
