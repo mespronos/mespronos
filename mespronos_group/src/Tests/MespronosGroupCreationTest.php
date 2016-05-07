@@ -84,6 +84,9 @@ class MespronosGroupCreationTest extends WebTestBase {
     $u = User::load($this->user->id());
     $user_group = Group::getUserGroup($u);
     $this->assertEqual($user_group->id(),$group->id(),t('Group creator automatically join the group'));
+    $members = $group->getMembers(false);
+    $this->assertTrue(in_array($this->user->id(),$members),t('The method GetMembers is working properly'));
+
   }
 
 }
