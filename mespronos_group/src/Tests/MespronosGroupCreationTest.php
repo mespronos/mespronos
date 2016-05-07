@@ -80,6 +80,12 @@ class MespronosGroupCreationTest extends WebTestBase {
     $this->assertText('Access code field is required.', 'The form validation correctly failed.');
   }
 
-
+  public function testUserCreateGroupRedirectedToItsPage() {
+    $this->drupalPostForm('mespronos/group/add', array(
+      'name[0][value]' => 'TestNomGroup',
+      'code[0][value]' => 'testCode',
+    ), t('Create my group !'));
+    $this->assertUrl('mespronos/group/1');
+  }
 
 }
