@@ -309,6 +309,20 @@ class Group extends ContentEntityBase implements GroupInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    $fields['hidden'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Groupe caché'))
+      ->setDescription(t('Le groupe sera invisible sur les listes et ne pourra être joint qu\'en ayant son adresse'))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDefaultValue(TRUE)
+      ->setDisplayOptions('form', array(
+        'type' => 'boolean_checkbox',
+        'settings' => array(
+          'display_label' => TRUE,
+        )
+      ))
+      ->setDisplayOptions('view', array('type' => 'hidden'));
+
     $fields['status'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Publishing status'))
       ->setDescription(t('A boolean indicating whether the Group is published.'))
