@@ -174,7 +174,11 @@ class Group extends ContentEntityBase implements GroupInterface {
   public function isPublishedAsVisual() {
     $status = (bool) $this->getEntityKey('status');
     return $status ? '<span class="status status-✔">✔</span>' : '<span class="status status-✖">✖</span>';
+  }
 
+  public function isVisibleAsVisual() {
+    $status = (bool) !$this->get('hidden');
+    return $status ? '<span class="status status-✔">✔</span>' : '<span class="status status-✖">✖</span>';
   }
 
   /**

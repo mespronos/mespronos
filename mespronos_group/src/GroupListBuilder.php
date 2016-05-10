@@ -27,6 +27,7 @@ class GroupListBuilder extends EntityListBuilder {
       'name' => $this->t('Name'),
       'code' => $this->t('Access code'),
       'status' => $this->t('Status'),
+      'visible' => $this->t('Visible'),
     ];
     return $header + parent::buildHeader();
   }
@@ -49,6 +50,8 @@ class GroupListBuilder extends EntityListBuilder {
     $row['code'] =  $entity->getCode();
     $status = ['#markup' => $entity->isPublishedAsVisual()];
     $row['status'] =  render($status);
+    $visible = ['#markup' => $entity->isVisibleAsVisual()];
+    $row['visible'] =  render($visible);
     return $row + parent::buildRow($entity);
   }
 
