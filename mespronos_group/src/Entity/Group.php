@@ -177,8 +177,8 @@ class Group extends ContentEntityBase implements GroupInterface {
   }
 
   public function isVisibleAsVisual() {
-    $status = (bool) !$this->get('hidden');
-    return $status ? '<span class="status status-✔">✔</span>' : '<span class="status status-✖">✖</span>';
+    $status = (bool) $this->get('hidden')->value;
+    return !$status ? '<span class="status status-✔">✔</span>' : '<span class="status status-✖">✖</span>';
   }
 
   /**
