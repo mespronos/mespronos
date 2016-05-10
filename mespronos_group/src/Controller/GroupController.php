@@ -38,11 +38,14 @@ class GroupController extends ControllerBase {
     ];
   }
 
-  public static function loadGroups($onlyActive = true) {
+  public static function loadGroups($onlyActive = true,$onlyVisible=true) {
     $storage = \Drupal::entityManager()->getStorage('group');
     $query =  \Drupal::entityQuery('group');
     if($onlyActive) {
       $query->condition('status',NODE_PUBLISHED);
+    }
+    if($onlyVisible) {
+      $query->condition('hidden',FALSE);
     }
     $query->sort('name');
 

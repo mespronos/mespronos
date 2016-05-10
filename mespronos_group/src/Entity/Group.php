@@ -314,9 +314,10 @@ class Group extends ContentEntityBase implements GroupInterface {
       ->setDescription(t('Le groupe sera invisible sur les listes et ne pourra être joint qu\'en ayant son adresse'))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE)
-      ->setDefaultValue(TRUE)
+      ->setDefaultValue(FALSE)
       ->setDisplayOptions('form', array(
         'type' => 'boolean_checkbox',
+        'weight' => -2,
         'settings' => array(
           'display_label' => TRUE,
         )
