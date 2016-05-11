@@ -31,15 +31,9 @@ class GroupJoiningForm extends FormBase {
 
     $user = \Drupal::currentUser();
     $user = User::load($user->id());
-    if($user->get('field_group')->first()) {
-      $user_group = $user->get('field_group')->first()->getValue();
-      if(isset($user_group) && isset($user_group['target_id'])) {
-        $user_group = Group::load($user_group['target_id']);
-        if($user_group->id() == $group->id()) {
-          drupal_set_message(t('You are already part of %group_name group',['%group_name'=>$group->label()]));
-          return new RedirectResponse(\Drupal::url('entity.group.canonical',['group'=>$group->id()]));
-        }
-      }
+    if($group->isMemberOf($user)) {
+      drupal_set_message(t('You are already part of %group_name group',['%group_name'=>$group->label()]));
+      return new RedirectResponse(\Drupal::url('entity.group.canonical',['group'=>$group->id()]));
     }
     $form['access_code'] = [
       '#title' => t('Access code'),
