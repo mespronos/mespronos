@@ -65,7 +65,11 @@ class GroupForm extends ContentEntityForm {
         if($form_state->getValue('autojoin')) {
           $user = \Drupal::currentUser();
           $user = User::load($user->id());
-          $user->set("field_group", $entity->id());
+          $usergroups = $user->get("field_group")->getValue();
+          $usergroups[] = [
+            'target_id' => $entity->id()
+          ];
+          $user->set("field_group", $usergroups);
           $user->save();
         }
         drupal_set_message($this->t('You\'ve just created the %label Group.', [

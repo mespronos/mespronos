@@ -71,7 +71,11 @@ class GroupJoiningForm extends FormBase {
     $group = $this->extractGroup($form_state);
     $user = \Drupal::currentUser();
     $user = User::load($user->id());
-    $user->set("field_group", $group->id());
+    $usergroups = $user->get("field_group")->getValue();
+    $usergroups[] = [
+      'target_id' => $group->id()
+    ];
+    $user->set("field_group", $usergroups);
     $user->save();
     Cache::invalidateTags(array('groups','ranking'));
     drupal_set_message(t('You are now part of the group %group_name',['%group_name'=>$group->label()]));

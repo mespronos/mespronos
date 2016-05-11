@@ -191,8 +191,9 @@ class Group extends ContentEntityBase implements GroupInterface {
 
   public function isMemberOf(User $user) {
     if($user->get('field_group')->first()) {
-      $user_group = $user->get('field_group')->first()->getValue();
-      return isset($user_group['target_id']) && $user_group['target_id'] == $this->id();
+      $user_groups = $user->get("field_group")->getValue();
+      $user_groups = array_map(function($a){return $a['target_id'];},$user_groups);
+      return in_array($this->id(),$user_groups);
     }
     return false;
   }
