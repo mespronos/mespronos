@@ -231,9 +231,13 @@ class Group extends ContentEntityBase implements GroupInterface {
       $user = User::load($user->id());
     }
     if($user->get('field_group')->first()) {
-      $user_group = $user->get('field_group')->first()->getValue();
-      $user_group = Group::load($user_group['target_id']);
-      return $user_group;
+      $groups = [];
+      $user_groups = $user->get("field_group")->getValue();
+      foreach ($user_groups as $group) {
+        $group = Group::load($group['target_id']);
+        $groups[] = $group;
+      }
+      return $groups;
     }
     return false;
   }
