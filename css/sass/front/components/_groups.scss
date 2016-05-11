@@ -33,12 +33,16 @@ ul.group-listing {
   }
 
 }
+
+.field--name-field-group-logo {
+  img {
+    border-radius: 5px;
+  }
+}
+
 ul.group-listing {
   .field--name-field-group-logo {
     text-align: center;
-    img {
-      border-radius: 5px;
-    }
   }
 }
 #block-grouprankingblock {
@@ -50,5 +54,10 @@ ul.group-listing {
     margin-top : 0;
     text-align: center;
   }
+}
 
+form#group-joining {
+  .field--name-name {
+    display: none;
+  }
 }

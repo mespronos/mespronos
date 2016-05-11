@@ -1,0 +1,33 @@
+uuid: 553d8b38-b5c4-4ad4-bf94-1ecb4107987a
+langcode: fr
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.group.logo
+    - field.field.group.group.field_group_logo
+    - image.style.thumbnail
+  module:
+    - image
+    - mespronos_group
+_core:
+  default_config_hash: InWUjUuKIcfk49-KqF793R9d8AvxvsOIXJc5B6X-CcA
+id: group.group.logo
+targetEntityType: group
+bundle: group
+mode: logo
+content:
+  field_group_logo:
+    weight: 0
+    label: hidden
+    settings:
+      image_style: thumbnail
+      image_link: content
+    third_party_settings: {  }
+    type: image
+hidden:
+  block_members: true
+  block_ranking: true
+  code: true
+  hidden: true
+  name: true
+  user_id: true

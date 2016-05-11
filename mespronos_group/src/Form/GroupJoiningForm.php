@@ -26,7 +26,7 @@ class GroupJoiningForm extends FormBase {
     $group = $this->extractGroup($form_state);
     $render_controller = \Drupal::entityManager()->getViewBuilder('group');
     $form['group'] = [
-      '#markup' => render($render_controller->view($group)),
+      '#markup' => render($render_controller->view($group,'teaser')),
     ];
 
     $user = \Drupal::currentUser();
@@ -39,11 +39,6 @@ class GroupJoiningForm extends FormBase {
           drupal_set_message(t('You are already part of %group_name group',['%group_name'=>$group->label()]));
           return new RedirectResponse(\Drupal::url('entity.group.canonical',['group'=>$group->id()]));
         }
-        $form['group_exist'] = [
-          '#markup' => t('You are already part of group %old_group_name, by joining a new group, you will leave the other.',
-            ['%old_group_name'=>$user_group->label()]
-          ),
-        ];
       }
     }
     $form['access_code'] = [
