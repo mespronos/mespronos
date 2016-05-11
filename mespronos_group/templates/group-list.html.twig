@@ -1,4 +1,18 @@
-<h2>{% trans %}Groups list{% endtrans %}</h2>
+<h2>{% trans %}My groups{% endtrans %}</h2>
+<ul class="group-listing">
+    {% for group in groups %}
+        {% if group.is_member %}
+            <li>
+                <section>
+                    {{ group.entity }}
+                    <p> {{ group.member }}</p>
+                </section>
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>
+
+<h2>{% trans %}All the groups{% endtrans %}</h2>
 <ul class="group-listing">
     {% for group in groups %}
         <li>

@@ -3,7 +3,7 @@
 mespronos_group.mygroup:
   title: Groups
   description: 'See all groups.'
-  route_name: mespronos_group.mygroup
+  route_name: mespronos_group.listing
   weight: 7
   parent: main
   menu_name: main
