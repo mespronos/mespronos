@@ -12,6 +12,7 @@ function mespronos_group_theme() {
     'template' => 'group-list',
     'variables' => array(
       'groups' => [],
+      'user_groups' => [],
     ),
   );
   $themes['group-description'] = array(
