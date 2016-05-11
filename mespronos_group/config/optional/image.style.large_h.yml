@@ -1,0 +1,15 @@
+uuid: 98455dd7-5a5b-4401-af4c-bb757c677e04
+langcode: fr
+status: true
+dependencies: {  }
+name: large_h
+label: Large_h
+effects:
+  7bb1aaff-86ea-40d6-bef9-6d1463a19112:
+    uuid: 7bb1aaff-86ea-40d6-bef9-6d1463a19112
+    id: image_scale
+    weight: 1
+    data:
+      width: null
+      height: 150
+      upscale: false

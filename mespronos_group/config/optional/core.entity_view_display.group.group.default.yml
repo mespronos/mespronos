@@ -9,12 +9,20 @@ dependencies:
     - image
     - mespronos_group
 _core:
-  default_config_hash: yv6tqt3QH9YYbDr8egxqQYnqrHpW4v2S4KfQPR1jH90
+  default_config_hash: InWUjUuKIcfk49-KqF793R9d8AvxvsOIXJc5B6X-CcA
 id: group.group.default
 targetEntityType: group
 bundle: group
 mode: default
 content:
+  block_members:
+    weight: 100
+    settings: {  }
+    third_party_settings: {  }
+  block_ranking:
+    weight: 102
+    settings: {  }
+    third_party_settings: {  }
   field_group_logo:
     weight: 0
     label: hidden
@@ -32,4 +40,5 @@ content:
     third_party_settings: {  }
 hidden:
   code: true
+  hidden: true
   user_id: true

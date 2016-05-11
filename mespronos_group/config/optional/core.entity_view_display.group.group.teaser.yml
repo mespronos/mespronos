@@ -5,22 +5,26 @@ dependencies:
   config:
     - core.entity_view_mode.group.teaser
     - field.field.group.group.field_group_logo
-    - image.style.large
+    - image.style.large_h
   module:
     - image
     - mespronos_group
 _core:
-  default_config_hash: 3gsdhl7fxtJE98-yyMNopAT-pMR3RiOzHAs__d5KfTQ
+  default_config_hash: jzUG1khl9JSN57tQKZU2Q_FOeHJBjypRoJpTbZD5Rq4
 id: group.group.teaser
 targetEntityType: group
 bundle: group
 mode: teaser
 content:
+  block_ranking:
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
   field_group_logo:
     weight: 0
     label: hidden
     settings:
-      image_style: large
+      image_style: large_h
       image_link: ''
     third_party_settings: {  }
     type: image
@@ -32,5 +36,7 @@ content:
       link_to_entity: true
     third_party_settings: {  }
 hidden:
+  block_members: true
   code: true
+  hidden: true
   user_id: true
