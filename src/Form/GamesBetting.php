@@ -146,6 +146,12 @@ class GamesBetting extends FormBase {
     $betting_type = $league->getBettingType(TRUE);
     foreach($games as $game_id => $game_data) {
       if($betting_type == 'score') {
+        if ($game_data['score_team_1'] == '' && $game_data['score_team_2'] != '') {
+          $form_state->setErrorByName('games][' . $game_id . '][score_team_1', $this->t("Incomplete bet"));
+        }
+        if ($game_data['score_team_2'] == '' && $game_data['score_team_1'] != '') {
+          $form_state->setErrorByName('games][' . $game_id . '][score_team_2', $this->t("Incomplete bet"));
+        }
         if ($game_data['score_team_1'] != '' && $game_data['score_team_1'] < 0) {
           $form_state->setErrorByName('games][' . $game_id . '][score_team_1', $this->t("Can't be less than 0."));
         }
