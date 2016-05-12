@@ -83,6 +83,7 @@ class MespronosGroupCreationTest extends WebTestBase {
     $this->assertEqual($group->getOwnerId(),$this->user->id(),t('Group creator is correctly set'));
     $u = User::load($this->user->id());
     $user_group = Group::getUserGroup($u);
+    $user_group = array_pop($user_group);
     $this->assertEqual($user_group->id(),$group->id(),t('Group creator automatically join the group'));
     $members = $group->getMembers(false);
     $this->assertTrue(in_array($this->user->id(),$members),t('The method GetMembers is working properly'));
@@ -96,11 +97,17 @@ class MespronosGroupCreationTest extends WebTestBase {
 
     $group1 = Group::load(1);
     $members_group_1 = $group1->getMembers(false);
-    $this->assertFalse(in_array($this->user->id(),$members_group_1),t('When a user create a new group he leave the old one'));
+    $this->assertTrue(in_array($this->user->id(),$members_group_1),t('When a user create a new group he doesn\'t leave the old one now :)'));
 
     $group2 = Group::load(2);
     $members_group_2 = $group2->getMembers(false);
     $this->assertTrue(in_array($this->user->id(),$members_group_2),t('When a user create a new group he leave the old one... but join the new one'));
+
+    $u = User::load($this->user->id());
+    $user_groups = Group::getUserGroup($u);
+    $user_groups = array_map(function($g) {return $g->id();},$user_groups);
+    $this->assertTrue(in_array($group1->id(),$user_groups),t('The method Group::getUserGroup contain group 1'));
+    $this->assertTrue(in_array($group2->id(),$user_groups),t('The method Group::getUserGroup contain group 2'));
 
   }
 
