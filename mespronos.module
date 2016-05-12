@@ -7,6 +7,8 @@
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\mespronos\Entity\Game;
+use Drupal\mespronos\Controller\BetController;
 
 function mespronos_preprocess_page(&$variables) {
   if($variables['is_admin']) {
@@ -136,7 +138,6 @@ function mespronos_cron() {
   \Drupal\mespronos\Controller\ReminderController::init();
 }
 
-
 function mespronos_entity_extra_field_info() {
   $extra['user']['user']['display']['hall_of_flame'] = array(
     'label' => t('Hall of flame'),
@@ -160,4 +161,9 @@ function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, Ent
     }
 
   }
+}
+
+function mespronos_update_games_points(Game $game) {
+  dd('iii');
+  //BetController::updateBetsFromGame($game);
 }
