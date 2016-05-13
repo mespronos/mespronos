@@ -66,7 +66,7 @@ class GroupJoiningForm extends FormBase {
     ];
     $user->set("field_group", $usergroups);
     $user->save();
-    Cache::invalidateTags(array('groups','ranking'));
+    Cache::invalidateTags(array('group:'.$group->id(),'groups','ranking'));
     drupal_set_message(t('You are now part of the group %group_name',['%group_name'=>$group->label()]));
     $url = new Url('entity.group.canonical',['group'=>$group->id()]);
     $form_state->setRedirectUrl($url);

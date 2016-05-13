@@ -92,4 +92,13 @@ class GroupController extends ControllerBase {
     return $form;
   }
 
+  public function leaveTitle(Group $group) {
+    return t('Leave groupe %group_name',['%group_name'=>$group->label()]);
+  }
+
+  public function leave(Group $group) {
+    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos_group\Form\GroupLeavingForm',$group);
+    return $form;
+  }
+
 }

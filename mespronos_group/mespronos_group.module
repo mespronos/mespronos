@@ -33,6 +33,11 @@ function mespronos_group_theme() {
 }
 
 function mespronos_group_entity_extra_field_info() {
+  $extra['group']['group']['display']['block_administration'] = array(
+    'label' => t('Group information'),
+    'weight' => 100,
+    'visible' => TRUE,
+  );
   $extra['group']['group']['display']['block_members'] = array(
     'label' => t('Member list'),
     'weight' => 100,
@@ -49,6 +54,18 @@ function mespronos_group_entity_extra_field_info() {
 function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisplay $display, $view_mode) {
   if($view_mode == 'full') {
     $block_manager = \Drupal::service('plugin.manager.block');
+    if ($display->getComponent('block_administration')) {
+      $plugin_block = $block_manager->createInstance('group_administration_block', []);
+      $render = $plugin_block->build();
+      $build['group_administration'] = [];
+      $build['group_administration']['title'] = [
+        '#markup' => '<h2>' . t('Informations du groupe') . '</h2>'
+      ];
+      $build['group_administration']['content'] = [
+        '#type' => 'container',
+        "element-content" => $render,
+      ];
+    }
     if ($display->getComponent('block_members')) {
       $plugin_block = $block_manager->createInstance('group_members_block', []);
       $render = $plugin_block->build();
