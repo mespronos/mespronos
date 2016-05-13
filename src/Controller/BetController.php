@@ -33,7 +33,6 @@ class BetController extends ControllerBase {
    * @return boolean
    */
   public static function updateBetsFromGame(Game $game) {
-    dd('laaa');
     $injected_database = Database::getConnection();
     if(!$game->isScoreSetted()) {
       $query = $injected_database->update('mespronos__bet');
@@ -134,7 +133,6 @@ class BetController extends ControllerBase {
   }
 
   public static function updateBetsForLeague(League $league) {
-    dd('debut');
     $games = $league->getGames();
     $nb_game_updated = 0;
     $days_to_update = [];
@@ -142,37 +140,34 @@ class BetController extends ControllerBase {
     $batch = [
       'title' => t('Recount League Points'),
       'operations' => [],
-      'finished' => 'BetController::updateBetsForLeagueOver',
-      //'file' => drupal_get_path('module', 'mespronos') .'/src/Controller/BetController.php',
+      'finished' => '\Drupal\mespronos\Controller\BetController::updateBetsForLeagueOver',
     ];
 
     foreach ($games as $game) {
-      $batch['operations'][] = ['mespronos_update_games_points',[$game]];
-      $batch['operations'][] = ['self::updateBetsFromGame',[$game]];
+      $batch['operations'][] = ['\Drupal\mespronos\Controller\BetController::updateBetsFromGame',[$game]];
         $nb_game_updated++;
         if(!isset($days_to_update[$game->getDayId()])) {
           $days_to_update[$game->getDayId()] = $game->getDay();
         }
     }
     foreach($days_to_update as $day) {
-      $batch['operations'][] = ['RankingDay::createRanking',[$day]];
+      $batch['operations'][] = ['\Drupal\mespronos\Entity\RankingDay::createRanking',[$day]];
     }
 
-    $batch['operations'][] = ['RankingLeague::createRanking',[$league]];
-    $batch['operations'][] = ['RankingGeneral::createRanking'];
+    $batch['operations'][] = ['\Drupal\mespronos\Entity\RankingLeague::createRanking',[$league]];
+    $batch['operations'][] = ['\Drupal\mespronos\Entity\RankingGeneral::createRanking',[]];
     batch_set($batch);
     return batch_process(\Drupal::url('entity.league.collection'));
   }
 
   public static function updateBetsForLeagueOver($success, $results, $operations) {
     if ($success) {
-      $message = \Drupal::translation()->formatPlural(count($results), 'One post processed.', '@count posts processed.');
+      $message = t('Ranking recalculate');
     }
     else {
       $message = t('Finished with an error.');
     }
     drupal_set_message($message);
-    dpm($results);
     Cache::invalidateTags(array('ranking'));
     return new RedirectResponse(\Drupal::url('entity.league.collection'));
   }

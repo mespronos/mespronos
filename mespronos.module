@@ -162,8 +162,3 @@ function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, Ent
 
   }
 }
-
-function mespronos_update_games_points(Game $game) {
-  dd('iii');
-  //BetController::updateBetsFromGame($game);
-}
