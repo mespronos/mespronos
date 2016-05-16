@@ -35,25 +35,28 @@ class RankingGroupBlock extends BlockBase {
     $build = [];
     $render_controller = \Drupal::entityManager()->getViewBuilder('group');
     foreach ($groups as $group) {
-      $group_build = [
-        'title' => [
-          '#markup' => '<h3>'.$group->label().'</h3>'
-        ],
-        'group_logo' => $render_controller->view($group,'logo'),
-        'table' => RankingController::getRankingGeneral($group),
-        'more-info' => [
-          '#markup' => Link::fromTextAndUrl(t('See group'),Url::fromRoute('entity.group.canonical',['group'=>$group->id()]))->toString(),
-        ]
-      ];
-      $build[$group->id()] = $group_build;
+      if($ranking = RankingController::getRankingGeneral($group)) {
+        $group_build = [
+          'title' => [
+            '#markup' => '<h3>'.$group->label().'</h3>'
+          ],
+          'group_logo' => $render_controller->view($group,'logo'),
+          'table' => $ranking,
+          'more-info' => [
+            '#markup' => Link::fromTextAndUrl(t('See group'),Url::fromRoute('entity.group.canonical',['group'=>$group->id()]))->toString(),
+          ]
+        ];
+        $build[$group->id()] = $group_build;
+      }
     }
 
-    $build['#cache'] = [
-      'contexts' => ['user'],
-      'tags' => [ 'user:'.\Drupal::currentUser()->id(),'ranking'],
-    ];
-
-    $build['#title'] = t('Groups ranking');
+    if(count($build)) {
+      $build['#cache'] = [
+        'contexts' => ['user'],
+        'tags' => ['user:' . \Drupal::currentUser()->id(), 'ranking'],
+      ];
+      $build['#title'] = t('Groups ranking');
+    }
     return $build;
   }
 

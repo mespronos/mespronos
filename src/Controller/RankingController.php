@@ -55,9 +55,22 @@ class RankingController extends ControllerBase {
 
   }
 
+  public static function rankingPage() {
+    if(!$ranking = self::getRankingGeneral()) {
+      return ['#markup'=>t('No ranking for now'),];
+    }
+    else {
+      return $ranking;
+    }
+  }
+
   public static function getRankingGeneral(Group $group = null) {
     $ranking = RankingGeneral::getRanking(null,'general','ranking_general',$group);
+    if(count($ranking) == 0) {
+      return false;
+    }
     return self::getTableFromRanking($ranking);
+
   }
 
   public static function getRankingLeague(League $league) {

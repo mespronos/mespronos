@@ -25,14 +25,27 @@ class RankingGeneralBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $build = [
-      'table' => RankingController::getRankingGeneral(),
-      '#cache' => [
-        'contexts' => ['user'],
-        'tags' => [ 'user:'.\Drupal::currentUser()->id(),'ranking'],
-      ],
-      '#title' => t('General ranking')
-    ];
+    $table_data = RankingController::getRankingGeneral();
+    if($table_data) {
+      $build = [
+        'table' => $table_data,
+        '#cache' => [
+          'contexts' => ['user'],
+          'tags' => [ 'user:'.\Drupal::currentUser()->id(),'ranking'],
+        ],
+        '#title' => t('General ranking')
+      ];
+    }
+    else {
+      $build = [
+        '#markup' => t('No ranking for now'),
+        '#cache' => [
+          'contexts' => ['user'],
+          'tags' => [ 'user:'.\Drupal::currentUser()->id(),'ranking'],
+        ],
+        '#title' => t('General ranking')
+      ];
+    }
 
     return $build;
   }
