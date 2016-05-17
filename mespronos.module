@@ -144,6 +144,11 @@ function mespronos_entity_extra_field_info() {
     'weight' => 100,
     'visible' => TRUE,
   );
+  $extra['user']['user']['display']['pseudo'] = array(
+    'label' => t('Pseudo'),
+    'weight' => 100,
+    'visible' => false,
+  );
   return $extra;
 }
 
@@ -159,6 +164,10 @@ function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, Ent
         "element-content" => $render,
       ];
     }
-
+  }
+  if ($display->getComponent('pseudo')) {
+    $build['username'] = [
+      '#markup' => '<h3>'.$entity->label().'</h3>',
+    ];
   }
 }

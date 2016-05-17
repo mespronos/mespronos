@@ -23,14 +23,18 @@ class GroupMembersBlock extends BlockBase {
       $group = \Drupal::routeMatch()->getParameter('group');
       $members = $group->getMembers(true);
       $items = [];
+      $render_controller = \Drupal::entityManager()->getViewBuilder('user');
       foreach ($members as $member) {
-        $items[] = $member->label();
+        $items[] = $render_controller->view($member,'compact');
       }
       $build = [];
       $build['group_members_block'] = [
         '#theme' => 'item_list',
         '#items' => $items,
         '#list_type' => 'ul',
+        '#attributes' => [
+          'id' => 'group-members-list'
+        ],
         '#cache' => [
           'contexts' => ['user'],
           'tags' => [ 'group:'.$group->id(),'groups'],

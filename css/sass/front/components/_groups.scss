@@ -61,3 +61,21 @@ form#group-joining {
     display: none;
   }
 }
+
+#block-mespronos-front-content {
+  ul#group-members-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    li {
+      text-align: center;
+      .field--name-user-picture {
+        height : 100px;
+      }
+      h3 {
+        text-align: center;
+        margin-top : 0;
+      }
+    }
+  }
+}
