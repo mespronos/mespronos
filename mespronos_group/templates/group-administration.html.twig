@@ -1,6 +1,6 @@
-<p>{% trans %}Joining URL (to invite others members) {% endtrans %} : {{ group.url_join }}</p>
-<p>{% trans %}Access code {% endtrans %} : {{ group.access_code }}</p>
-<p>{% trans %}Creator {% endtrans %} :
+<p>{% trans %}Joining URL (to invite others members) {% endtrans %} : {{ group.url_join }}<br />
+{% trans %}Access code {% endtrans %} : {{ group.access_code }}<br />
+{% trans %}Creator {% endtrans %} :
     <a href="{{ url('entity.user.canonical', {'user': group.creator.id}) }}">
         {{ group.creator.name }}
     </a>
