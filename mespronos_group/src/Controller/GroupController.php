@@ -29,7 +29,12 @@ class GroupController extends ControllerBase {
     $user = \Drupal::currentUser();
     $user = User::load($user->id());
     $user_groups = Group::getUserGroup($user);
-    $user_groups = self::parseGroupsForListing($user_groups);
+    if($user_groups && count($user_groups)>0) {
+      $user_groups = self::parseGroupsForListing($user_groups);
+    }
+    else {
+      $user_groups = [];
+    }
     return [
       '#theme' => 'group-list',
       '#groups' => $groups,
