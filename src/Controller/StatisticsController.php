@@ -50,6 +50,12 @@ class StatisticsController extends ControllerBase {
     return count($ids);
   }
 
+  private static function getGroupsNumber() {
+    $query = \Drupal::entityQuery('group');
+    $ids = $query->execute();
+    return count($ids);
+  }
+
   private static function getBetsNumber(User $user = null) {
     $query = \Drupal::entityQuery('bet');
     if($user) {
