@@ -23,6 +23,7 @@ class StatisticsController extends ControllerBase {
     $stats['leagues'] = t('@nb leagues',['@nb'=>self::getLeaguesNumber()]);
     $stats['games'] = t('@nb games',['@nb'=>self::getGamesNumber()]);
     $stats['bets'] = t('@nb bets',['@nb'=>self::getBetsNumber()]);
+    $stats['groups'] = t('@nb groups',['@nb'=>self::getGroupsNumber()]);
     return $stats;
   }
 
@@ -64,4 +65,5 @@ class StatisticsController extends ControllerBase {
     $ids = $query->execute();
     return count($ids);
   }
+
 }
