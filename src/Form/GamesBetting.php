@@ -34,16 +34,11 @@ class GamesBetting extends FormBase {
 
     $betting_type = $league->getBettingType(TRUE);
 
-    if($betting_type == 'score') {
-      $text = 'Enter the score for each team.';
-    }
-    else {
-      $text = 'Click on the winner you want to choose, or draw.';
-    }
-    $form['infos'] = array(
-      '#type' => '#markup',
-      '#markup' => t($text),
-    );
+    $block_manager = \Drupal::service('plugin.manager.block');
+    $plugin_block = $block_manager->createInstance('bet_help_block', []);
+    $render = $plugin_block->build();
+    
+    $form['infos'] = $render;
 
     $form['games'] = array(
       '#type' => 'container',
