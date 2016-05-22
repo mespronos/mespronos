@@ -55,11 +55,6 @@ mysql:
   encoding: utf8
 
 before_install:
-  # Restore home directory from cache.
-  - mkdir -p "$DRUPAL_TI_CACHE_DIR"/HOME
-  - if [ "$DRUPAL_TI_LOAD_CACHE" = "1" ]; then rsync -a "$DRUPAL_TI_CACHE_DIR"/HOME/ "$HOME/"; fi
-
-  # Update composer.
   - composer self-update
   - composer global require LionsAd/drupal_ti:dev-master
   - drupal-ti before_install
