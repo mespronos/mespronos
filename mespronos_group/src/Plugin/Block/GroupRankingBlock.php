@@ -22,19 +22,14 @@ class GroupRankingBlock extends BlockBase {
   public function build() {
     if (\Drupal::routeMatch()->getRouteName() == 'entity.group.canonical') {
       $group = \Drupal::routeMatch()->getParameter('group');
-      $members = $group->getMembers(true);
-      $items = [];
-      foreach ($members as $member) {
-        $items[] = $member->label();
-      }
-      $build = [
-        'table' => RankingController::getRankingGeneral($group),
-        '#cache' => [
-          'contexts' => ['user'],
-          'tags' => [ 'user:'.\Drupal::currentUser()->id(),'ranking'],
-        ],
-        '#title' => t('Group ranking')
+      $build = RankingController::getRankingGeneral($group);
+
+      $build['#cache'] = [
+        'contexts' => ['user'],
+        'tags' => [ 'user:'.\Drupal::currentUser()->id(),'ranking'],
       ];
+
+      $build['#title'] = t('Group ranking');
       return $build;
     }
     return [];
