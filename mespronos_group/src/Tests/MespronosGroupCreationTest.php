@@ -101,7 +101,7 @@ class MespronosGroupCreationTest extends WebTestBase {
 
     $group2 = Group::load(2);
     $members_group_2 = $group2->getMembers(false);
-    $this->assertTrue(in_array($this->user->id(),$members_group_2),t('When a user create a new group he leave the old one... but join the new one'));
+    $this->assertTrue(in_array($this->user->id(),$members_group_2),t('When a user create a new group he join the new one too'));
 
     $u = User::load($this->user->id());
     $user_groups = Group::getUserGroup($u);
