@@ -24,11 +24,13 @@ class GroupListBuilder extends EntityListBuilder {
   public function buildHeader() {
     $header = [
       'id' => $this->t('Group ID'),
+      'logo' => $this->t('Logo'),
       'name' => $this->t('Name'),
       'code' => $this->t('Access code'),
       'members' => $this->t('Members'),
       'status' => $this->t('Status'),
       'visible' => $this->t('Visible'),
+      'created' => $this->t('Created'),
     ];
     return $header + parent::buildHeader();
   }
@@ -38,8 +40,11 @@ class GroupListBuilder extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     $row = [];
+    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
     /* @var $entity \Drupal\mespronos_group\Entity\Group */
     $row['id'] = $entity->id();
+    $logo = $render_controller->view($entity,'logo');
+    $row['logo'] = render($logo);
     $row['name'] = $this->l(
       $entity->label(),
       new Url(
@@ -54,6 +59,7 @@ class GroupListBuilder extends EntityListBuilder {
     $row['status'] =  render($status);
     $visible = ['#markup' => $entity->isVisibleAsVisual()];
     $row['visible'] =  render($visible);
+    $row['created'] =  date('d/m/Y H:i:s',$entity->getCreatedTime());
     return $row + parent::buildRow($entity);
   }
 
