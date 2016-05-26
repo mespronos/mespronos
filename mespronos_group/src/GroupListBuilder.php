@@ -26,6 +26,7 @@ class GroupListBuilder extends EntityListBuilder {
       'id' => $this->t('Group ID'),
       'name' => $this->t('Name'),
       'code' => $this->t('Access code'),
+      'members' => $this->t('Members'),
       'status' => $this->t('Status'),
       'visible' => $this->t('Visible'),
     ];
@@ -48,6 +49,7 @@ class GroupListBuilder extends EntityListBuilder {
       )
     );
     $row['code'] =  $entity->getCode();
+    $row['members'] =  $entity->getMemberNumber();
     $status = ['#markup' => $entity->isPublishedAsVisual()];
     $row['status'] =  render($status);
     $visible = ['#markup' => $entity->isVisibleAsVisual()];
