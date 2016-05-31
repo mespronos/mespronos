@@ -1,4 +1,12 @@
 # Changelog - Mespronos 
+## 8.x-1.0-alpha9, 2016-05-31
+  - Add tests to group module #89
+  - Add redirection when user want to access group he's not in #101
+  - Add option to leave a group #95
+  - Refactoring points calculation #97
+  - User ca now join more than one group #90 #88
+  - Allow a group to be hidden  
+
 ## 8.x-1.0-alpha8, 2016-05-05
   - Group enhancements  (see #84 #80 #77 #79 #81)
   - Refactoring - code cleaning
