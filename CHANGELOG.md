@@ -9,12 +9,10 @@
   - Email reminders - fix problem in url when not logged in to avoid 403 (issue #76)
   - Add mespronos_group submodule
   
-# Changelog - Mespronos 
 ## 8.x-1.0-alpha6, 2016-04-25
   - Refactoring ranking management in order to allow groups and domains
   - Email reminders
 
-# Changelog - Mespronos 
 ## 8.x-1.0-alpha5, 2016-04-09
   - Enhance betting form
   - Add ability to remove bets on a given game
