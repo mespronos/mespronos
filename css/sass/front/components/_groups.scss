@@ -21,13 +21,20 @@ ul.group-listing {
   ul.group-listing {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: left;
     li {
+      margin-top: 20px;
       border-bottom: none;
-      width : 30%;
+      width : 33%;
       text-align: center;
-      img {
-        border-radius: 5px;
+      section {
+        min-height: 280px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        img {
+          border-radius: 5px;
+        }
       }
     }
   }
