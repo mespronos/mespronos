@@ -48,7 +48,7 @@ use Drupal\user\Entity\User;
  *   links = {
  *     "canonical" = "/mespronos/group/{group}",
  *     "add-form" = "/mespronos/group/add",
- *     "edit-form" = "/admin/mespronos/group/{group}/edit",
+ *     "edit-form" = "/mespronos/group/{group}/edit",
  *     "delete-form" = "/admin/mespronos/group/{group}/delete",
  *     "collection" = "/admin/mespronos/group",
  *   },

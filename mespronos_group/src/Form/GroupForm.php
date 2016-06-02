@@ -23,7 +23,6 @@ class GroupForm extends ContentEntityForm {
   public function buildForm(array $form, FormStateInterface $form_state) {
     /* @var $entity \Drupal\mespronos_group\Entity\Group */
     $form = parent::buildForm($form, $form_state);
-
     $rederer = \Drupal::service('renderer');
 
     $warning_vars = ['#theme' => 'group-form-warning'];
@@ -47,8 +46,14 @@ class GroupForm extends ContentEntityForm {
 
     $form['user_id']['#access'] = false;
     $form['field_group_logo']['widget'][0]['#description'] = null;
+    $id = $this->entity->id();
+    if(isset($id) && $id>0) {
+      $form['actions']['submit']['#value'] = t('Edit my group');
 
-    $form['actions']['submit']['#value'] = t('Create my group !');
+    }
+    else {
+      $form['actions']['submit']['#value'] = t('Create my group !');
+    }
 
     return $form;
   }
