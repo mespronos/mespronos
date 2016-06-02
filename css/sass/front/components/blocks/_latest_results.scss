@@ -1,0 +1,29 @@
+div#block-latestresults {
+ ul {
+   li{
+     text-decoration: none;
+     a {
+       display: flex;
+       justify-content: space-around;
+       text-decoration: none;
+       border-bottom: 1px solid transparent;
+       &:hover {
+         border-bottom: 1px dotted;
+       }
+       span {
+         width:33%;
+         display: block;
+         &.score {
+           text-align: center;
+         }
+         &.team-1 {
+           text-align: left;
+         }
+         &.team-2 {
+           text-align: right;
+         }
+       }
+     }
+   }
+ }
+}

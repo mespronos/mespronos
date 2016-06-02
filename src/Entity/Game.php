@@ -92,6 +92,12 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return t('@t1 - @t2',array('@t1'=> $this->get('score_team_1')->value,'@t2'=> $this->get('score_team_2')->value));
   }
 
+  public function labelWithScore() {
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+    return t('<span class="team team-1">@team1</span> <span class="score">@s1 - @s2</span> <span class="team team-2">@team2</span>',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'@s1'=> $this->get('score_team_1')->value,'@s2'=> $this->get('score_team_2')->value));
+  }
+
   public function label_full() {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
@@ -128,6 +134,23 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return $return;
   }
 
+  /**
+   * @param $number
+   * @return \Drupal\mespronos\Entity\Game[]
+   */
+  public static function getLastestGamesWithMark($number) {
+    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $query = \Drupal::entityQuery('game');
+    $query->condition('score_team_1',0,'>=');
+    $query->condition('score_team_2',0,'>=');
+    $query->sort('game_date','DESC');
+    $query->sort('id','ASC');
+    $query->range(0,$number);
+    $ids = $query->execute();
+    $return = $game_storage->loadMultiple($ids);
+    return $return;
+
+  }
   /**
    * Remove bets on current day
    *
