@@ -96,7 +96,6 @@ class RankingController extends ControllerBase {
       $next_rank++;
       $better = \Drupal\user\Entity\User::load($ranking->getOwner()->id());
       $better = UserController::getRenderableUser($better);
-
       $row = [
         'data' => [
           'position' => $ranking->get('points')->value != $old_points ? $next_rank : '-',
@@ -109,14 +108,16 @@ class RankingController extends ControllerBase {
         ]
       ];
       $old_points = $ranking->get('points')->value;
-      if($ranking instanceof RankingDay) {
-        $row['data']['better'] = Link::fromTextAndUrl(
-          $ranking->getOwner()->getUsername(),
-          Url::fromRoute('mespronos.lastbetsdetailsforuser',['day'=>$ranking->getDayiD(),'user'=>$ranking->getOwner()->id()])
-        );
-      }
       if($ranking->getOwner()->id() == $user->id()) {
         $row['class'] = ['highlighted','bold'];
+      }
+      if($ranking instanceof RankingDay) {
+        $row['data']['details'] = [
+          'data' => Link::fromTextAndUrl(
+            t('See his bets'),
+            Url::fromRoute('mespronos.lastbetsdetailsforuser',['day'=>$ranking->getDayiD(),'user'=>$ranking->getOwner()->id()])
+          ),
+        ];
       }
       $rows[] = $row;
     }
@@ -126,6 +127,12 @@ class RankingController extends ControllerBase {
       t('Points',array(),array('context'=>'mespronos-ranking')),
       t('Bets',array(),array('context'=>'mespronos-ranking')),
     ];
+    if(isset($ranking) && $ranking instanceof RankingDay) {
+      $header[] = [
+        'data' =>  t('Details',array(),array('context'=>'mespronos-ranking')),
+        'class' => array(RESPONSIVE_PRIORITY_LOW),
+      ];
+    }
     return [
       '#theme' => 'table',
       '#rows' => $rows,
