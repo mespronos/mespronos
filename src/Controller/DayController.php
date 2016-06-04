@@ -24,12 +24,22 @@ use Drupal\Core\Database\Database;
 class DayController extends ControllerBase {
 
   public function index(Day $day, User $user = null) {
-    $group = $this->getGroup($user);
-    
-    if($user == null) {
+    $groups = false;
+    if($user == null || $user->id() == \Drupal::currentUser()->id()) {
       $user = User::load(\Drupal::currentUser()->id());
+      $groups = $this->getGroup($user);
     }
     $rows = $this->getDayRows($day,$user);
+
+    $groups_ranking = [];
+    if($groups) {
+      foreach ($groups as $group) {
+        $groups_ranking[] = [
+          'label' => $group->label(),
+          'group_ranking' => RankingController::getRankingTableForDay($day,$group),
+        ];
+      }
+    }
 
     $header = [
       $this->t('Game',array(),array('context'=>'mespronos')),
@@ -47,14 +57,11 @@ class DayController extends ControllerBase {
         'tags' => [ 'lastbets','user:'.$user->id()],
       ],
     ];
-
     return [
       '#theme' =>'day-details',
       '#last_bets' => $table_array,
       '#ranking' => RankingController::getRankingTableForDay($day),
-      '#has_group' => $group ? true : false,
-      '#group_name' => $group ? $group->label() : false,
-      '#ranking_group' => $group ? RankingController::getRankingTableForDay($day,$group) : null,
+      '#groups' => $groups_ranking,
       '#cache' => [
         'contexts' => ['user'],
         'tags' => [ 'user:'.\Drupal::currentUser()->id().'_'.$user->id(),'lastbets'],
@@ -64,17 +71,16 @@ class DayController extends ControllerBase {
 
   /**
    * @param \Drupal\user\Entity\User|NULL $user
-   * @return bool|\Drupal\mespronos_group\Entity\Group
+   * @return bool|\Drupal\mespronos_group\Entity\Group[]
    */
   private function getGroup(User $user = null) {
     if($user != null && \Drupal::moduleHandler()->moduleExists('mespronos_group')) {
-      /* @var $group Group */
-      $group = Group::getUserGroup($user);
+      $groups = Group::getUserGroup($user);
     }
     else {
-      $group = false;
+      $groups = false;
     }
-    return $group;
+    return $groups;
   }
 
   private function getDayRows(Day $day, User $user) {
@@ -110,7 +116,7 @@ class DayController extends ControllerBase {
 
   public function indexTitle(Day $day, \Drupal\user\Entity\User $user = null) {
     $league = $day->getLeague();
-    if($user == null) {
+    if($user == null || $user->id() == \Drupal::currentUser()->id()) {
       return t('My bets on @day',array('@day'=>$league->label().' - '.$day->label()));
     }
     else {
