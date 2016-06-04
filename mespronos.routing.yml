@@ -94,7 +94,7 @@ mespronos.lastbetsdetails:
     _controller: '\Drupal\mespronos\Controller\DayController::index'
     _title_callback: '\Drupal\mespronos\Controller\DayController::indexTitle'
   requirements:
-    _permission: 'view own last bets'
+    _permission: 'view day results'
 
 mespronos.lastbetsdetailsforuser:
   path: 'mespronos/day/{day}/results/user/{user}'

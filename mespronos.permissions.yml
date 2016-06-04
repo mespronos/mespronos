@@ -30,6 +30,9 @@ view own last bets:
 view others last bets:
   title: "View passed bets result for another user"
 
+view day results:
+  title: "View day results"
+
 view ranking:
   title: "View ranking"
 
