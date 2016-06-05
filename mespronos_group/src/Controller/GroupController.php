@@ -83,6 +83,7 @@ class GroupController extends ControllerBase {
         'is_member' => $group->isMemberOf($user),
         'display_join_link' => $user->id()>0,
         'join_url' => Url::fromRoute('mespronos_group.group.join',['group'=>$group->id()]),
+        'leave_url' => Url::fromRoute('mespronos_group.group.leave',['group'=>$group->id()]),
       ];
     }
     return $groups_return;

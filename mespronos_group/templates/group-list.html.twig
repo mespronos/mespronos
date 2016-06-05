@@ -18,7 +18,7 @@
                 {{ group.entity }}
                 <p> {{ group.member }}</p>
                 {% if group.is_member %}
-                    <p>{% trans %}You are member of this group{% endtrans %}</p>
+                    <p><a href="{{ group.leave_url }}">{% trans %}Leave{% endtrans %}</a></p>
                 {% else %}
                     {% if group.display_join_link %}
                         <p><a href="{{ group.join_url }}">{% trans %}Join{% endtrans %}</a></p>
