@@ -3,8 +3,12 @@
     {{ next_bets }}
 {% endif %}
 
-<h2>{% trans 'Last bets' %}</h2>
-{{ last_bets }}
+{%  if last_bets %}
+    <h2>{% trans 'Last bets' %}</h2>
+    {{ last_bets }}
+{%  endif %}
 
-<h2>{% trans 'Ranking' %}</h2>
-{{ ranking }}
+{%  if ranking %}
+    <h2>{% trans 'Ranking' %}</h2>
+    {{ ranking }}
+{%  endif %}
