@@ -1,4 +1,10 @@
 # Changelog - Mespronos 
+## 8.x-1.0-alpha10, 2016-06-05
+  - Add "Latest results" block #103
+  - Enhance group page #98
+  - Allow to edit a group #103
+  - Fix a bug on day's details page concerning groups ranking.
+  
 ## 8.x-1.0-alpha9, 2016-05-31
   - Add tests to group module #89
   - Add redirection when user want to access group he's not in #101
