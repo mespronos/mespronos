@@ -7,29 +7,29 @@ league :
   days:
     - number : 2
       name : 'Seconde journée de poule'
-      day_default_date : 2016-06-15t15:00:00
+      day_default_date : 2016-06-15t15:00:00+02:00
       games :
         - game : Russie | Slovaquie
-          game_date : 2016-06-15t15:00:00
+          game_date : 2016-06-15t15:00:00+02:00
         - game : Roumanie | Suisse
-          game_date : 2016-06-15t18:00:00
+          game_date : 2016-06-15t18:00:00+02:00
         - game : France | Albanie
-          game_date : 2016-06-15t21:00:00
+          game_date : 2016-06-15t21:00:00+02:00
         - game : Angleterre | Galles
-          game_date : 2016-06-16t15:00:00
+          game_date : 2016-06-16t15:00:00+02:00
         - game : Ukraine | Irlande Du Nord
-          game_date : 2016-06-16t18:00:00
+          game_date : 2016-06-16t18:00:00+02:00
         - game : Allemagne | Pologne
-          game_date : 2016-06-16t21:00:00
+          game_date : 2016-06-16t21:00:00+02:00
         - game : Italie | Suede
-          game_date : 2016-06-17t15:00:00
+          game_date : 2016-06-17t15:00:00+02:00
         - game : Rep. Tcheque | Croatie
-          game_date : 2016-06-17t18:00:00
+          game_date : 2016-06-17t18:00:00+02:00
         - game : Espagne | Turquie
-          game_date : 2016-06-17t21:00:00
+          game_date : 2016-06-17t21:00:00+02:00
         - game : Belgique | Irlande
-          game_date : 2016-06-18t15:00:00
+          game_date : 2016-06-18t15:00:00+02:00
         - game : Islande | Hongrie
-          game_date : 2016-06-18t18:00:00
+          game_date : 2016-06-18t18:00:00+02:00
         - game : Portugal | Autriche
-          game_date : 2016-06-18t21:00:00
+          game_date : 2016-06-18t21:00:00+02:00
