@@ -98,8 +98,6 @@ class RankingDay extends Ranking {
         'points' => $row->points,
       ]);
       $rankingDay->save();
-      $league = $day->getLeague();
-      RankingLeague::createRanking($league);
     }
     return count($data);
   }

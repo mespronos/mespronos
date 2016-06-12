@@ -94,14 +94,21 @@ class GamesMarks extends FormBase {
     }
     drupal_set_message($this->t('@nb_mark games updated',array('@nb_mark'=>$i)));
     $i = 0;
+    $leagues = [];
     foreach($days_to_update as $day_id) {
       $i++;
       $day = Day::load($day_id);
       RankingDay::createRanking($day);
-      RankingLeague::createRanking($day->getLeague());
-      RankingGeneral::createRanking();
-      drupal_set_message($this->t('Ranking updated for @nb_ranking days',array('@nb_ranking'=>$i)));
+      $leagues[] = $day->getLeague();
     }
+    foreach ($leagues as $league) {
+      RankingLeague::createRanking($league);
+    }
+    RankingGeneral::createRanking();
+    drupal_set_message($this->t('Ranking updated for @nb_ranking days and @nb_leagues leagues',[
+      '@nb_ranking'=>count($days_to_update),
+      '@nb_leagues'=>count($leagues),
+    ]));
     drupal_flush_all_caches();
     Cache::invalidateTags(array('nextbets','lastbets','ranking'));
   }
