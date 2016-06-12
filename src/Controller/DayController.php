@@ -31,11 +31,13 @@ class DayController extends ControllerBase {
     }
     $rows = $this->getDayRows($day,$user);
 
+    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
     $groups_ranking = [];
     if($groups) {
       foreach ($groups as $group) {
         $groups_ranking[] = [
           'label' => $group->label(),
+          'group_logo' => $render_controller->view($group,'logo'),
           'group_ranking' => RankingController::getRankingTableForDay($day,$group),
         ];
       }
@@ -66,6 +68,7 @@ class DayController extends ControllerBase {
         'contexts' => ['user'],
         'tags' => [ 'user:'.\Drupal::currentUser()->id().'_'.$user->id(),'lastbets'],
       ],
+      '#attributes' => array('class' => array('day-details')),
     ];
   }
 

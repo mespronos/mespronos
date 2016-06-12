@@ -44,7 +44,9 @@ class RankingGroupBlock extends BlockBase {
           'table' => $ranking,
           'more-info' => [
             '#markup' => Link::fromTextAndUrl(t('See group'),Url::fromRoute('entity.group.canonical',['group'=>$group->id()]))->toString(),
-          ]
+          ],
+          '#theme_wrappers' => array('container'),
+          '#attributes' => array('class' => array('group-ranking')),
         ];
         $build[$group->id()] = $group_build;
       }

@@ -2,13 +2,15 @@
 {{ last_bets }}
 
 {% if groups|length > 0 %}
-
-    {% for group in groups %}
-        <h2>{% trans %}{{ group.label }} group ranking{% endtrans %}</h2>
-        <section>
-            {{ group.group_ranking }}
-        </section>
-    {% endfor %}
+    <section class="group-ranking">
+        {% for group in groups %}
+            <h2>{% trans %}{{ group.label }} group ranking{% endtrans %}</h2>
+            {{ group.group_logo }}
+            <section>
+                {{ group.group_ranking }}
+            </section>
+        {% endfor %}
+    </section>
 
 {% endif %}
 

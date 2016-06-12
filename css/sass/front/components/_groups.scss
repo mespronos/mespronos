@@ -56,13 +56,26 @@ ul.group-listing {
     text-align: center;
   }
 }
-#block-grouprankingblock {
-  .field--name-field-group-logo {
-    margin-top : 1em;
-    text-align: center;
+.block-ranking-group-block{
+  div.group-ranking {
+    .field--name-field-group-logo {
+      //margin-top : 1em;
+      text-align: center;
+    }
+    h3 {
+      margin-top : 0;
+      margin-bottom : 0;
+      text-align: center;
+    }
   }
-  h3 {
-    margin-top : 0;
+}
+
+section.group-ranking {
+  h2 {
+    margin-bottom: 0;
+  }
+  .field--name-field-group-logo {
+    //margin-top : 1em;
     text-align: center;
   }
 }
