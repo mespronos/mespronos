@@ -14,8 +14,8 @@ mespronos.main.leagues:
   menu_name: main
 
 mespronos.main.ranking:
-  title: General ranking
-  description: 'See general ranking.'
+  title: Ranking(s)
+  description: 'See general ranking and by group.'
   route_name: mespronos.ranking
   weight: 6
   parent: main
