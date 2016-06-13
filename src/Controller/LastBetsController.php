@@ -22,17 +22,18 @@ use Drupal\user\Entity\User;
  */
 class LastBetsController extends ControllerBase {
 
-    public function lastBets(League $league = null,$nb = 10) {
+    public function lastBets(League $league = null,$nb = 10,$mode = 'PAGE') {
         $user = User::load(\Drupal::currentUser()->id());
         $page_league = isset($league);
         $days = DayController::getlastDays($nb,$league);
         $return = [];
 
-        $page_competition_link = Url::fromRoute('mespronos.leagues');
-
-        $return['help'] = [
-            '#markup' => '<p>'.t('You can see past results of archived competitions on the <a href="@competition_url">leagues</a> page.',['@competition_url'=>$page_competition_link]).'</p>',
-        ];
+        if('BLOCK' != $mode) {
+            $page_competition_link = Url::fromRoute('mespronos.leagues');
+            $return['help'] = [
+              '#markup' => '<p>'.t('You can see past results of archived competitions on the <a href="@competition_url">leagues</a> page.',['@competition_url'=>$page_competition_link]).'</p>',
+            ];
+        }
 
         if(count($days) == 0) {return $return;}
 
