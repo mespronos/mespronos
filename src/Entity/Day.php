@@ -127,7 +127,6 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
     return [
       '#theme' => 'day',
       '#league' => [
-        'url' => Url::fromRoute('mespronos.league.index',['league'=>$league->id()]),
         'label' => $league->label(),
         'logo' => $league->getLogo('mini_logo')
       ] ,
