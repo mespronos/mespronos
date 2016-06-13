@@ -31,13 +31,11 @@ class DayController extends ControllerBase {
     }
     $rows = $this->getDayRows($day,$user);
 
-    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
     $groups_ranking = [];
     if($groups) {
       foreach ($groups as $group) {
         $groups_ranking[] = [
           'label' => $group->label(),
-          'group_logo' => $render_controller->view($group,'logo'),
           'group_ranking' => RankingController::getRankingTableForDay($day,$group),
         ];
       }
@@ -68,7 +66,6 @@ class DayController extends ControllerBase {
         'contexts' => ['user'],
         'tags' => [ 'user:'.\Drupal::currentUser()->id().'_'.$user->id(),'lastbets'],
       ],
-      '#attributes' => array('class' => array('day-details')),
     ];
   }
 
@@ -177,9 +174,14 @@ class DayController extends ControllerBase {
     $query->addExpression('count(g.id)','nb_game_over');
     $query->groupBy('day');
     $query->fields('g',array('day'));
+    $query->join('mespronos__day','d','d.id = g.day');
     if($league) {
-      $query->join('mespronos__day','d','d.id = g.day');
       $query->condition('d.league',$league->id());
+    }
+    else {
+      $query->join('mespronos__league','l','l.id = d.league');
+      $query->condition('l.status','active');
+      
     }
     $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'<');
     $query->orderBy('day_date','DESC');
