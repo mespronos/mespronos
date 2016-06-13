@@ -8,3 +8,5 @@ front-style :
   css:
     theme :
       css/front.css : {}
+  js:
+     js/front.js: {}

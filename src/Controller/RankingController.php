@@ -117,12 +117,9 @@ class RankingController extends ControllerBase {
         $row['class'] = ['highlighted','bold'];
       }
       if($ranking instanceof RankingDay) {
-        $row['data']['details'] = [
-          'data' => Link::fromTextAndUrl(
-            t('See his bets'),
-            Url::fromRoute('mespronos.lastbetsdetailsforuser',['day'=>$ranking->getDayiD(),'user'=>$ranking->getOwner()->id()])
-          ),
-        ];
+
+        $row['class'] = ['clickabeul'];
+        $row['data-href'] = Url::fromRoute('mespronos.lastbetsdetailsforuser',['day'=>$ranking->getDayiD(),'user'=>$ranking->getOwner()->id()])->toString();
       }
       $rows[] = $row;
     }
@@ -132,12 +129,6 @@ class RankingController extends ControllerBase {
       t('Points',array(),array('context'=>'mespronos-ranking')),
       t('Bets',array(),array('context'=>'mespronos-ranking')),
     ];
-    if(isset($ranking) && $ranking instanceof RankingDay) {
-      $header[] = [
-        'data' =>  t('Details',array(),array('context'=>'mespronos-ranking')),
-        'class' => array(RESPONSIVE_PRIORITY_LOW),
-      ];
-    }
     return [
       '#theme' => 'table',
       '#rows' => $rows,

@@ -9,11 +9,8 @@ table {
   tr.highlighted {
     font-weight:bold;
   }
-  table {
-    td.day-cell,
-    td.better-cell  {
-      font-size: 0.9em;
-    }
+  tr.clickabeul {
+    cursor: pointer;
   }
 }
 
