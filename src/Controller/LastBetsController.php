@@ -26,10 +26,17 @@ class LastBetsController extends ControllerBase {
         $user = User::load(\Drupal::currentUser()->id());
         $page_league = isset($league);
         $days = DayController::getlastDays($nb,$league);
-        
-        if(count($days) == 0) {return false;}
+        $return = [];
 
-        return [
+        $page_competition_link = Url::fromRoute('mespronos.leagues');
+
+        $return['help'] = [
+            '#markup' => '<p>'.t('You can see past results of archived competitions on the <a href="@competition_url">leagues</a> page.',['@competition_url'=>$page_competition_link]).'</p>',
+        ];
+
+        if(count($days) == 0) {return $return;}
+
+        $return['table'] = [
           '#theme' => 'table',
           '#rows' => self::parseDays($days,$user,$page_league),
           '#header' => self::getHeader($user),
@@ -39,6 +46,7 @@ class LastBetsController extends ControllerBase {
             'tags' => [ 'lastbets','user:'.$user->id()],
           ],
         ];
+        return $return;
     }
 
     public static function getHeader(User $user) {

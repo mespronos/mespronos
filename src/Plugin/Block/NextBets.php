@@ -56,9 +56,9 @@ class NextBets extends BlockBase {
     $next_bet_controller = new NextBetsController();
     $return = [];
     $return['next-bet'] = $next_bet_controller->nextBets(null,5);
-    $return['more-next-bets'] = [
+    /*$return['more-next-bets'] = [
       '#markup'=> Link::fromTextAndUrl(t('See more'),Url::fromRoute('mespronos.nextbets'))->toString(),
-    ];
+    ];*/
     return $return;
   }
 

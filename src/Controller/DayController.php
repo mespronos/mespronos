@@ -181,7 +181,6 @@ class DayController extends ControllerBase {
     else {
       $query->join('mespronos__league','l','l.id = d.league');
       $query->condition('l.status','active');
-      
     }
     $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'<');
     $query->orderBy('day_date','DESC');
