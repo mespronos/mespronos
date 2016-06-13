@@ -55,7 +55,6 @@ class GameController extends ControllerBase{
 
     $query->condition('day',$day->id());
     $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
-    $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
 
     $group = $query->orConditionGroup()
       ->condition('score_team_1',null,'is')
