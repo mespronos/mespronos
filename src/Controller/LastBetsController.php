@@ -76,7 +76,7 @@ class LastBetsController extends ControllerBase {
                 ],
                 [
                   'data'=> '',
-                  'class' => array(RESPONSIVE_PRIORITY_LOW),
+                  //'class' => array(RESPONSIVE_PRIORITY_LOW),
                 ],
             ];
         }
@@ -112,7 +112,10 @@ class LastBetsController extends ControllerBase {
                 $row['data']['points'] = $ranking ? $ranking->getPoints() : ' ';
                 $row['data']['position'] = $ranking ? Link::fromTextAndUrl(t('@class',['@class'=>$ranking->getPosition()]),Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])) : ' ';
                 $row['data']['nb_betters'] = RankingDay::getNumberOfBetters($day->entity);
-                $row['data']['action'] = Link::fromTextAndUrl(t('Details'),Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()]));
+
+                $link_details = Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])->toString();
+                $cell_details = ['#markup'=>'<a href="'.$link_details.'" title="'.t('see details').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+                $row['data']['action'] = render($cell_details);
             }
             else {
                 $row['data']['action'] = Link::fromTextAndUrl(

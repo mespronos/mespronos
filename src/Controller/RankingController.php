@@ -116,10 +116,13 @@ class RankingController extends ControllerBase {
       if($ranking->getOwner()->id() == $user->id()) {
         $row['class'] = ['highlighted','bold'];
       }
+      $link_user = Url::fromRoute('entity.user.canonical',['user'=>$ranking->getOwner()->id()])->toString();
+      $cell = ['#markup'=>'<a href="'.$link_user.'" title="'.t('see user\'s profile').'"><i class="fa fa-user" aria-hidden="true"></i></a>'];
+      $row['data']['user'] = render($cell);
       if($ranking instanceof RankingDay) {
-
-        $row['class'] = ['clickabeul'];
-        $row['data-href'] = Url::fromRoute('mespronos.lastbetsdetailsforuser',['day'=>$ranking->getDayiD(),'user'=>$ranking->getOwner()->id()])->toString();
+        $link_details_user = Url::fromRoute('mespronos.lastbetsdetailsforuser',['day'=>$ranking->getDayiD(),'user'=>$ranking->getOwner()->id()])->toString();
+        $cell = ['#markup'=>'<a href="'.$link_details_user.'" title="'.t('see user\'s bets').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+        $row['data']['details'] = render($cell);
       }
       $rows[] = $row;
     }
@@ -129,6 +132,11 @@ class RankingController extends ControllerBase {
       t('Points',array(),array('context'=>'mespronos-ranking')),
       t('Bets',array(),array('context'=>'mespronos-ranking')),
     ];
+
+    $header[] = '';
+    if(isset($ranking) && $ranking instanceof RankingDay) {
+      $header[] = '';
+    }
     return [
       '#theme' => 'table',
       '#rows' => $rows,
