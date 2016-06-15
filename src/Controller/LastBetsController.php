@@ -110,7 +110,7 @@ class LastBetsController extends ControllerBase {
                 $ranking = RankingDay::getRankingForBetter($user,$day->entity);
                 $row['data']['games_betted'] = $ranking ? $ranking->getGameBetted() : ' ';
                 $row['data']['points'] = $ranking ? $ranking->getPoints() : ' ';
-                $row['data']['position'] = $ranking ? Link::fromTextAndUrl(t('@class',['@class'=>$ranking->getPosition()]),Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])) : ' ';
+                $row['data']['position'] = $ranking ? t('@class',['@class'=>$ranking->getPosition()]) : ' ';
                 $row['data']['nb_betters'] = RankingDay::getNumberOfBetters($day->entity);
 
                 $link_details = Url::fromRoute('mespronos.lastbetsdetails',['day'=>$day->entity->id()])->toString();
