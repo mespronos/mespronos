@@ -3,8 +3,9 @@
 
 {% if groups|length > 0 %}
     <section class="group-ranking">
+        <h2>{% trans %}Groups rankings for day{% endtrans %}</h2>
         {% for group in groups %}
-            <h2>{% trans %}{{ group.label }} group ranking for the day{% endtrans %}</h2>
+            <h3>{{ group.label }}</h3>
             {{ group.group_logo }}
             <section>
                 {{ group.group_ranking }}
