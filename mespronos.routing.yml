@@ -292,8 +292,15 @@ mespronos.importer_start:
   requirements:
     _permission: 'import league content'
 
-
 # Game routing definition
+entity.game.canonical:
+  path: '/mespronos/game/{game}'
+  defaults:
+    _entity_view: 'game'
+    _title: 'Game details'
+  requirements:
+    _permission: 'view game entity'
+
 entity.game.collection:
   path: '/admin/game'
   defaults:

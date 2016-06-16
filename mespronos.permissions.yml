@@ -36,6 +36,9 @@ view day results:
 view ranking:
   title: "View ranking"
 
+view game entity:
+  title: "View game entity page"
+
 subscribe to league:
   title: 'Subscribe to a league'
   description: 'Allow to bet on this league'

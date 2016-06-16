@@ -29,7 +29,7 @@ class GameAccessControlHandler extends EntityAccessControlHandler {
 
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
+        return AccessResult::allowedIfHasPermission($account, 'view game entity');
 
       case 'update':
         return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');

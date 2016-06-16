@@ -15,6 +15,7 @@ use Drupal\mespronos\Entity\League;
 use Drupal\mespronos_group\Entity\Group;
 use Drupal\user\Entity\User;
 use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
 
 /**
  * Class DayController.
@@ -48,6 +49,7 @@ class DayController extends ControllerBase {
       $this->t('Score',array(),array('context'=>'mespronos')),
       $this->t('Bet',array(),array('context'=>'mespronos')),
       $this->t('Points',array(),array('context'=>'mespronos')),
+      '',
     ];
 
     $table_array = [
@@ -101,12 +103,16 @@ class DayController extends ControllerBase {
       }
       $points = isset($bets[$gid]) ? $bets[$gid]->get('points')->value : '/';
 
+      $link_details = Url::fromRoute('entity.game.canonical',['game'=>$game->id()])->toString();
+      $cell_details = ['#markup'=>'<a href="'.$link_details.'" title="'.t('see details').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+
       $row = [
         'data' => [
           $game->labelTeams(),
           $game->labelScore(),
           $bet,
           $points,
+          render($cell_details),
         ],
         'class' => $league->getPointsCssClass($points),
       ];
