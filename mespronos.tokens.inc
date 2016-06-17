@@ -20,7 +20,7 @@ function mespronos_token_info() {
     'needs-data' => 'node',
   );
 
-  $tokens['lid'] = array(
+  $tokens['id'] = array(
     'name' => t("League ID"),
     'description' => t('The League ID.'),
   );
@@ -29,15 +29,13 @@ function mespronos_token_info() {
     'name' => t("League name"),
   );
 
-  $tokens['created'] = array(
-    'name' => t("Date created"),
-    'type' => 'date',
+  $tokens['sport'] = array(
+    'name' => t("Sport name"),
   );
 
-  $tokens['changed'] = array(
-    'name' => t("Date changed"),
-    'description' => t("The date the league was most recently updated."),
-    'type' => 'date',
+  $tokens['creator'] = array(
+    'name' => t("group creator"),
+    'type' => 'user',
   );
 
   return array(
@@ -60,12 +58,16 @@ function mespronos_tokens($type, $tokens, array $data, array $options, Bubbleabl
     foreach ($tokens as $name => $original) {
       switch ($name) {
         // Simple key values on the node.
-        case 'nid':
+        case 'id':
           $replacements[$original] = $league->id();
           break;
 
         case 'name':
           $replacements[$original] = $league->getTheName();
+          break;
+
+        case 'sport':
+          $replacements[$original] = $league->getSport()->label();
           break;
 
         // Default values for the chained tokens handled below.
