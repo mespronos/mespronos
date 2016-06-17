@@ -14,34 +14,36 @@ use Drupal\user\Entity\User;
  * Implements hook_token_info().
  */
 function mespronos_token_info() {
-  $type = array(
-    'name' => t('League'),
-    'description' => t('Tokens related to a league.'),
-    'needs-data' => 'node',
-  );
-
-  $tokens['id'] = array(
+  $league_tokens['id'] = array(
     'name' => t("League ID"),
     'description' => t('The League ID.'),
   );
 
-  $tokens['name'] = array(
+  $league_tokens['name'] = array(
     'name' => t("League name"),
   );
 
-  $tokens['sport'] = array(
+  $league_tokens['sport'] = array(
     'name' => t("Sport name"),
   );
 
-  $tokens['creator'] = array(
+  $league_tokens['creator'] = array(
     'name' => t("group creator"),
     'type' => 'user',
   );
 
-  return array(
-    'types' => array('league' => $type),
-    'tokens' => array('league' => $tokens),
-  );
+  return [
+    'types' => [
+      'league' => [
+        'name' => t('League'),
+        'description' => t('Tokens related to a league.'),
+        'needs-data' => 'node',
+      ]
+    ],
+    'tokens' => [
+      'league' => $league_tokens
+    ],
+  ];
 }
 
 /**
