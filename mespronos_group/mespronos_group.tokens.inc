@@ -65,7 +65,7 @@ function mespronos_group_tokens($type, $tokens, array $data, array $options, Bub
     foreach ($tokens as $name => $original) {
       switch ($name) {
         // Simple key values on the node.
-        case 'nid':
+        case 'gid':
           $replacements[$original] = $group->id();
           break;
 
