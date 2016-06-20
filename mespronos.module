@@ -8,7 +8,7 @@
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\mespronos\Entity\Game;
-use Drupal\mespronos\Controller\BetController;
+use Drupal\mespronos\Controller\GameController;
 
 function mespronos_preprocess_page(&$variables) {
   if($variables['is_admin']) {
@@ -26,6 +26,11 @@ function mespronos_theme() {
       'user_picture' => NULL,
       'links' => NULL,
     ),
+  );
+  $theme['game'] = array(
+    'render element' => 'elements',
+    'template' => 'game',
+    'file' => 'templates-preprocess/game.page.inc',
   );
   $theme['user-profile-block'] = array(
     'template' => 'user-profile-block',
@@ -147,6 +152,16 @@ function mespronos_entity_extra_field_info() {
     'weight' => 100,
     'visible' => false,
   );
+  $extra['game']['game']['display']['better_bets'] = array(
+    'label' => t('Betters\' bets'),
+    'weight' => 100,
+    'visible' => true,
+  );
+  $extra['game']['game']['display']['flags'] = array(
+    'label' => t('Teamss\' logos'),
+    'weight' => 101,
+    'visible' => true,
+  );
   return $extra;
 }
 
@@ -167,5 +182,14 @@ function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, Ent
     $build['username'] = [
       '#markup' => '<h3>'.$entity->label().'</h3>',
     ];
+  }
+}
+
+function mespronos_game_view(array &$build, Game $entity, EntityViewDisplay $display, $view_mode) {
+  if ($display->getComponent('better_bets')) {
+    $build['betters_bets'] = GameController::getBettersBets($entity);
+  }
+  if ($display->getComponent('flags')) {
+    $build['flags'] = GameController::getTeamFlags($entity);
   }
 }

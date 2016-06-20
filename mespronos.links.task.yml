@@ -56,3 +56,8 @@ league.settings_tab:
   route_name: league.settings
   title: 'Settings'
   base_route: league.settings
+
+game.settings_tab:
+  route_name: game.settings
+  title: 'Settings'
+  base_route: game.settings

@@ -53,3 +53,10 @@ league.admin.structure.settings:
   route_name: league.settings
   appears_on:
     - mespronos.settings
+
+game.admin.structure.settings:
+  title: Game Settings
+  description: 'Configure Game entity'
+  route_name: game.settings
+  appears_on:
+    - mespronos.settings

@@ -1,0 +1,15 @@
+section.game {
+  div.field--name-game-date {
+    text-align: center;
+  }
+  section.score,
+  section.flags {
+    display: flex;
+    justify-content: space-around;
+    div.team {
+      font-weight: bold;
+      width : 100px;
+      text-align: center;
+    }
+  }
+}

@@ -297,9 +297,9 @@ entity.game.canonical:
   path: '/mespronos/game/{game}'
   defaults:
     _entity_view: 'game'
-    _title: 'Game details'
+    _title_callback : 'Drupal\mespronos\Controller\GameController::gameTitle'
   requirements:
-    _permission: 'view game entity'
+    _entity_access: 'game.view'
 
 entity.game.collection:
   path: '/admin/game'
@@ -308,6 +308,14 @@ entity.game.collection:
     _title: 'Game List'
   requirements:
     _permission: 'view Game entity'
+
+game.settings:
+  path: '/admin/mespronos/structure/game'
+  defaults:
+   _form: '\Drupal\mespronos\Entity\Form\GameSettingsForm'
+   _title: 'Game Settings'
+  requirements:
+    _permission: 'administer Game entity'
 
 entity.game.add_form:
   path: '/admin/game/add'

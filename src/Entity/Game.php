@@ -43,11 +43,11 @@ use Drupal\mespronos\Controller\BetController;
  *     "uuid" = "uuid"
  *   },
  *   links = {
- *     "canonical" = "/mespronos/game/{game}",
  *     "edit-form" = "/admin/game/{game}/edit",
  *     "delete-form" = "/admin/game/{game}/delete",
  *     "remove-bets" = "/admin/game/{game}/remove-bets"
- *   }
+ *   },
+ *   field_ui_base_route = "game.settings"
  * )
  */
 class Game extends MPNContentEntityBase implements MPNEntityInterface {
@@ -378,7 +378,6 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array(
         'label' => 'hidden',
-        'type' => 'integer',
         'weight' => 4,
       ))
       ->setDisplayOptions('form', array(
@@ -392,7 +391,6 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array(
         'label' => 'hidden',
-        'type' => 'integer',
         'weight' => 5,
       ))
       ->setDisplayOptions('form', array(
@@ -413,6 +411,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
         'default_date' => 'now',
       )))
       ->setDisplayOptions('view', array(
+        'label' => 'hidden',
         'type' => 'datetime_default',
         'weight' => 0,
       ))

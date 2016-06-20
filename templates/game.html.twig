@@ -1,0 +1,25 @@
+<section class="game">
+    {{ elements.game_date }}
+    <section class="flags">
+        <div class="team team1">
+            {{ elements.flags.team1 }}
+        </div>
+        <div class="separator"> - </div>
+        <div class="team team2">
+            {{ elements.flags.team2 }}
+        </div>
+    </section>
+    {% if is_score_setted %}
+        <section class="score">
+            <div class="team team1">
+                {{ elements.score_team_1 }}
+            </div>
+            <div class="separator"> - </div>
+            <div class="team team2">
+                {{ elements.score_team_2 }}
+            </div>
+        </section>
+    {% endif %}
+    <br />
+    {{ elements.betters_bets }}
+</section>
