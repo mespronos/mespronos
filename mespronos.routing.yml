@@ -351,7 +351,7 @@ entity.bet.canonical:
     _entity_access: 'bet.view'
 
 entity.bet.collection:
-  path: '/admin/bet'
+  path: '/admin/mespronos/bet'
   defaults:
     _entity_list: 'bet'
     _title: 'Bet List'
