@@ -11,3 +11,7 @@ services:
     class: Drupal\mespronos\Breadcrumb\BetterBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+  mespronos.breadcrumb.game:
+    class: Drupal\mespronos\Breadcrumb\GameBreadcrumbBuilder
+    tags:
+      - { name: breadcrumb_builder, priority: 100 }
