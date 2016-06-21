@@ -43,6 +43,7 @@ use Drupal\mespronos\Controller\BetController;
  *     "uuid" = "uuid"
  *   },
  *   links = {
+ *     "canonical" = "/mespronos/game/{group}",
  *     "edit-form" = "/admin/game/{game}/edit",
  *     "delete-form" = "/admin/game/{game}/delete",
  *     "remove-bets" = "/admin/game/{game}/remove-bets"
