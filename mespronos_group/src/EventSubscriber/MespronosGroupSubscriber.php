@@ -8,15 +8,11 @@
 namespace Drupal\mespronos_group\EventSubscriber;
 
 use Drupal\Core\Routing\CurrentRouteMatch;
-use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Routing\RedirectDestinationInterface;
-use Drupal\Core\Url;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Drupal\Component\Utility\Xss;
 
 /**
  * Redirect 403 to User Login event subscriber.
@@ -34,10 +30,8 @@ class MespronosGroupSubscriber implements EventSubscriberInterface {
   /**
    * Constructs a new R4032LoginSubscriber.
    *
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *   The current user.
-   * @param \Drupal\Core\Routing\RedirectDestinationInterface $redirect_destination
-   *   The redirect destination service.
+   * @param \Drupal\Core\Routing\CurrentRouteMatch $route_match
+   *
    */
   public function __construct(CurrentRouteMatch $route_match) {
     $this->route_match = $route_match;
