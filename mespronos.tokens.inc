@@ -5,73 +5,20 @@
  * Builds placeholder replacement tokens for node-related data.
  */
 
-use Drupal\Core\Datetime\Entity\DateFormat;
-use Drupal\Core\Language\LanguageInterface;
 use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\user\Entity\User;
+use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\Game;
+use Drupal\mespronos\Entity\League;
 
 /**
  * Implements hook_token_info().
  */
 function mespronos_token_info() {
-  $league_tokens['id'] = array(
-    'name' => t("League ID"),
-    'description' => t('The League ID.'),
-  );
-
-  $league_tokens['name'] = array(
-    'name' => t("League name"),
-  );
-
-  $league_tokens['sport'] = array(
-    'name' => t("Sport name"),
-  );
-
-  $league_tokens['creator'] = array(
-    'name' => t("group creator"),
-    'type' => 'user',
-  );
-
-  $game_tokens['id'] = array(
-    'name' => t("Game ID"),
-  );
-
-  $game_tokens['name'] = array(
-    'name' => t("Game label"),
-    'description' => t('Example : "team a - team b".'),
-  );
-
-  $game_tokens['creator'] = array(
-    'name' => t("game creator"),
-    'type' => 'user',
-  );
-
-  $game_tokens['league'] = array(
-    'name' => t("Games' league entity"),
-  );
-
-  $game_tokens['day'] = array(
-    'name' => t("Games' Day entity"),
-  );
-
-  $day_tokens['id'] = array(
-    'name' => t("Day ID"),
-  );
-
-  $day_tokens['name'] = array(
-    'name' => t("Day label"),
-  );
-
-  $day_tokens['league'] = array(
-    'name' => t("day's league entity label"),
-  );
-
   return [
     'types' => [
       'league' => [
         'name' => t('League'),
         'description' => t('Tokens related to a league.'),
-        'needs-data' => 'node',
       ],
       'game' => [
         'name' => t('Game'),
@@ -83,100 +30,133 @@ function mespronos_token_info() {
       ],
     ],
     'tokens' => [
-      'league' => $league_tokens,
-      'game' => $game_tokens,
-      'day' => $day_tokens,
+      'league' => _mespronos_token_info_league(),
+      'game' => _mespronos_token_info_game(),
+      'day' => _mespronos_token_info_day(),
     ],
   ];
+}
+
+function _mespronos_token_info_league() {
+  $tokens = [
+    'id' => [
+      'name' => t("League ID"),
+      'description' => t('The League ID.'),
+    ],
+    'name' => [
+      'name' => t("League name"),
+    ],
+    'sport' => [
+      'name' => t("Sport name"),
+    ],
+  ];
+  return $tokens;
+}
+
+function _mespronos_token_info_game() {
+  $tokens = [
+    'id' => [
+      'name' => t("League ID"),
+    ],
+    'name' => [
+      'name' => t("Game label"),
+    ],
+    'league' => [
+      'name' => t("League label"),
+    ],
+    'day' => [
+      'name' => t("Day label"),
+    ],
+  ];
+  return $tokens;
+}
+
+function _mespronos_token_info_day() {
+  $tokens = [
+    'id' => [
+      'name' => t("Day ID"),
+    ],
+    'name' => [
+      'name' => t("Day label"),
+    ],
+    'league' => [
+      'name' => t("League label"),
+    ],
+  ];
+  return $tokens;
 }
 
 /**
  * Implements hook_tokens().
  */
 function mespronos_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
-  $token_service = \Drupal::token();
-  
-  $replacements = array();
-  if ($type == 'entity' && isset($data['entity_type']) && $data['entity_type'] == 'league') {
-    /** @var \Drupal\mespronos\Entity\League $league */
-    $league = $data['entity'];
-
-    foreach ($tokens as $name => $original) {
-      switch ($name) {
-        // Simple key values on the node.
-        case 'id':
-          $replacements[$original] = $league->id();
-          break;
-        case 'name':
-          $replacements[$original] = $league->getTheName();
-          break;
-        case 'sport':
-          $replacements[$original] = $league->getSport()->label();
-          break;
-        // Default values for the chained tokens handled below.
-        case 'creator':
-          $account = $league->getOwner() ? $league->getOwner() : User::load(0);
-          $bubbleable_metadata->addCacheableDependency($account);
-          $replacements[$original] = $account->label();
-          break;
-      }
-    }
-    if ($author_tokens = $token_service->findWithPrefix($tokens, 'author')) {
-      $replacements += $token_service->generate('user', $author_tokens, array('user' => $league->getOwner()), $options, $bubbleable_metadata);
+  $replacements = [];
+  if ($type == 'entity' && isset($data['entity_type'])) {
+    switch ($data['entity_type']) {
+      case 'league' :
+        _mespronos_tokens_league($tokens, $data['entity'],$replacements);
+        break;
+      case 'game' :
+        _mespronos_tokens_game($tokens, $data['entity'],$replacements);
+        break;
+      case 'day' :
+        _mespronos_tokens_day($tokens, $data['entity'],$replacements);
+        break;
     }
   }
-  if ($type == 'entity' && isset($data['entity_type']) && $data['entity_type'] == 'game') {
-    /** @var \Drupal\mespronos\Entity\Game $game */
-    $game = $data['entity'];
-
-    foreach ($tokens as $name => $original) {
-      switch ($name) {
-        // Simple key values on the node.
-        case 'id':
-          $replacements[$original] = $game->id();
-          break;
-        case 'name':
-          $replacements[$original] = $game->labelTeams();
-          break;
-        case 'day':
-          $day = $game->getDay();
-          $replacements[$original] = $day->label();
-          break;
-        case 'league':
-          $league = $game->getLeague();
-          $replacements[$original] = $league->label();
-          break;
-        case 'creator':
-          $account = $game->getOwner() ? $game->getOwner() : User::load(0);
-          $bubbleable_metadata->addCacheableDependency($account);
-          $replacements[$original] = $account->label();
-          break;
-      }
-    }
-    if ($author_tokens = $token_service->findWithPrefix($tokens, 'author')) {
-      $replacements += $token_service->generate('user', $author_tokens, array('user' => $game->getOwner()), $options, $bubbleable_metadata);
-    }
-  }
-
-  if ($type == 'entity' && isset($data['entity_type']) && $data['entity_type'] == 'day') {
-    /** @var \Drupal\mespronos\Entity\day $day */
-    $day = $data['entity'];
-
-    foreach ($tokens as $name => $original) {
-      switch ($name) {
-        case 'id':
-          $replacements[$original] = $day->id();
-          break;
-        case 'name':
-          $replacements[$original] = $day->label();
-          break;
-        case 'league':
-          $league = $day->getLeague();
-          $replacements[$original] = $league->label();
-          break;
-      }
-    }
-  }
-
   return $replacements;
+}
+
+function _mespronos_tokens_league($tokens, League $league,&$replacements) {
+  foreach ($tokens as $name => $original) {
+    switch ($name) {
+      case 'id':
+        $replacements[$original] = $league->id();
+        break;
+      case 'name':
+        $replacements[$original] = $league->getTheName();
+        break;
+      case 'sport':
+        $replacements[$original] = $league->getSport()->label();
+        break;
+    }
+  }
+}
+
+function _mespronos_tokens_game($tokens, Game $game,&$replacements) {
+  foreach ($tokens as $name => $original) {
+    switch ($name) {
+      case 'id':
+        $replacements[$original] = $game->id();
+        break;
+      case 'name':
+        $replacements[$original] = $game->labelTeams();
+        break;
+      case 'day':
+        $day = $game->getDay();
+        $replacements[$original] = $day->label();
+        break;
+      case 'league':
+        $league = $game->getLeague();
+        $replacements[$original] = $league->label();
+        break;
+    }
+  }
+}
+
+function _mespronos_tokens_day($tokens, Day $day,&$replacements) {
+  foreach ($tokens as $name => $original) {
+    switch ($name) {
+      case 'id':
+        $replacements[$original] = $day->id();
+        break;
+      case 'name':
+        $replacements[$original] = $day->label();
+        break;
+      case 'league':
+        $league = $day->getLeague();
+        $replacements[$original] = $league->label();
+        break;
+    }
+  }
 }
