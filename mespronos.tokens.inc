@@ -89,7 +89,7 @@ function _mespronos_token_info_day() {
 /**
  * Implements hook_tokens().
  */
-function mespronos_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
+function mespronos_tokens($type, $tokens, array $data) {
   $replacements = [];
   if ($type == 'entity' && isset($data['entity_type'])) {
     switch ($data['entity_type']) {
