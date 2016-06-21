@@ -21,7 +21,7 @@ class BetHelpBlock extends BlockBase implements ContainerFactoryPluginInterface 
   /**
    * Drupal\Core\Routing\CurrentRouteMatch definition.
    *
-   * @var Drupal\Core\Routing\CurrentRouteMatch
+   * @var \Drupal\Core\Routing\CurrentRouteMatch
    */
   protected $current_route_match;
   /**
@@ -33,13 +33,10 @@ class BetHelpBlock extends BlockBase implements ContainerFactoryPluginInterface 
    *   The plugin_id for the plugin instance.
    * @param string $plugin_definition
    *   The plugin implementation definition.
+   * @param \Drupal\Core\Routing\CurrentRouteMatch $current_route_match
+   *   The current root match service
    */
-  public function __construct(
-        array $configuration,
-        $plugin_id,
-        $plugin_definition,
-        CurrentRouteMatch $current_route_match
-  ) {
+  public function __construct(array $configuration,$plugin_id,$plugin_definition,CurrentRouteMatch $current_route_match) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->current_route_match = $current_route_match;
   }
@@ -47,12 +44,9 @@ class BetHelpBlock extends BlockBase implements ContainerFactoryPluginInterface 
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static(
-      $configuration,
-      $plugin_id,
-      $plugin_definition,
-      $container->get('current_route_match')
-    );
+    /** @var \Drupal\Core\Routing\CurrentRouteMatch $crm */
+    $crm = $container->get('current_route_match');
+    return new static($configuration,$plugin_id,$plugin_definition,$crm);
   }
   /**
    * {@inheritdoc}
