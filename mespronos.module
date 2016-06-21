@@ -8,6 +8,7 @@
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\mespronos\Entity\Game;
+use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Controller\GameController;
 
 function mespronos_preprocess_page(&$variables) {
@@ -31,6 +32,11 @@ function mespronos_theme() {
     'render element' => 'elements',
     'template' => 'game',
     'file' => 'templates-preprocess/game.page.inc',
+  );
+  $theme['day'] = array(
+    'render element' => 'elements',
+    'template' => 'day',
+    'file' => 'templates-preprocess/day.page.inc',
   );
   $theme['user-profile-block'] = array(
     'template' => 'user-profile-block',
@@ -79,8 +85,8 @@ function mespronos_theme() {
       'stats' => NULL,
     ),
   );
-  $theme['day'] = array(
-    'template' => 'day',
+  $theme['day-small'] = array(
+    'template' => 'day-small',
     'variables' => array(
       'league' => NULL,
       'day' => NULL,
@@ -162,6 +168,11 @@ function mespronos_entity_extra_field_info() {
     'weight' => 101,
     'visible' => true,
   );
+  $extra['day']['day']['display']['results_and_ranking'] = array(
+    'label' => t('Day results and rankings'),
+    'weight' => 101,
+    'visible' => true,
+  );
   return $extra;
 }
 
@@ -191,5 +202,11 @@ function mespronos_game_view(array &$build, Game $entity, EntityViewDisplay $dis
   }
   if ($display->getComponent('flags')) {
     $build['flags'] = GameController::getTeamFlags($entity);
+  }
+}
+
+function mespronos_day_view(array &$build, Day $entity, EntityViewDisplay $display, $view_mode) {
+  if ($display->getComponent('results_and_ranking')) {
+    $build['results_and_ranking'] = \Drupal\mespronos\Controller\DayController::getResultsAndRankings($entity);
   }
 }

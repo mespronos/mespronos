@@ -12,16 +12,15 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\Core\Link;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 
-class GameBreadcrumbBuilder implements BreadcrumbBuilderInterface {
+class DayBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     public function applies(RouteMatchInterface $route_match) {
-        return $route_match->getCurrentRouteMatch()->getRouteName() == 'entity.game.canonical';
+        return $route_match->getCurrentRouteMatch()->getRouteName() == 'entity.day.canonical';
     }
 
     public function build(RouteMatchInterface $route_match) {
-        /** @var \Drupal\mespronos\Entity\Game $game */
-        $game = $route_match->getParameter('game');
-        $day = $game->getDay();
+        /** @var \Drupal\mespronos\Entity\day $day */
+        $day = $route_match->getParameter('day');
         $league = $day->getLeague();
         $breadcrumb = new Breadcrumb();
         $breadcrumb->addCacheContexts(['route']);
@@ -29,7 +28,6 @@ class GameBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         $links[] = Link::createFromRoute(t('Home'), '<front>');
         $links[] = Link::createFromRoute(t('Leagues'), 'mespronos.leagues.list');
         $links[] = Link::createFromRoute($league->label(), 'mespronos.league.index',['league'=>$league->id()]);
-        $links[] = Link::createFromRoute($day->label(), 'entity.day.canonical',['day'=>$day->id()]);
         return $breadcrumb->setLinks($links);
     }
 

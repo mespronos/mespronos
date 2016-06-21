@@ -44,23 +44,20 @@ class LatestResultsBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    $build = [];
     $games = Game::getLastestGamesWithMark($this->configuration['number_of_results_to_display']);
     $items = [];
     foreach ($games as $game) {
       $day_id = $game->getDayId();
       $items[] = Link::fromTextAndUrl(
         $game->labelWithScore(),
-        new Url('mespronos.lastbetsdetails', ['day' => $day_id])
+        new Url('entity.day.canonical', ['day' => $day_id])
       );
     }
-    //dpm($games);
     $build = [
       '#theme' => 'item_list',
       '#items' => $items,
       '#list_type' => 'ul',
     ];
-
     return $build;
   }
 

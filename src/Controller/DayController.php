@@ -25,13 +25,62 @@ use Drupal\Core\Url;
 class DayController extends ControllerBase {
 
   public function index(Day $day, User $user = null) {
+    return self::getResultsAndRankings($day,$user);
+  }
+
+  public static function getResultsAndRankings(Day $day, User $user = null) {
+    if ($user == NULL || $user->id() == \Drupal::currentUser()->id()) {
+      $user = User::load(\Drupal::currentUser()->id());
+    }
+    return [
+      '#theme' => 'day-details',
+      '#last_bets' => self::getResults($day, $user),
+      '#ranking' => RankingController::getRankingTableForDay($day),
+      '#groups' => self::getDayRankings($day, $user),
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => [
+          'user:' . \Drupal::currentUser()->id() . '_' . $user->id(),
+          'lastbets'
+        ],
+      ],
+    ];
+}
+
+  public static function getResults(Day $day, User $user = null) {
+    if($user == null || $user->id() == \Drupal::currentUser()->id()) {
+      $user = User::load(\Drupal::currentUser()->id());
+    }
+    $rows = self::getDayRows($day,$user);
+    $header = [
+      t('Game',array(),array('context'=>'mespronos')),
+      t('Score',array(),array('context'=>'mespronos')),
+      t('Bet',array(),array('context'=>'mespronos')),
+      t('Points',array(),array('context'=>'mespronos')),
+      '',
+    ];
+    if($user->id() == \Drupal::currentUser()->id()) {
+      $header[] = '';
+    }
+
+    $table_array = [
+      '#theme' => 'table',
+      '#rows' => $rows,
+      '#header' => $header,
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => [ 'lastbets','user:'.$user->id()],
+      ],
+    ];
+    return $table_array;
+  }
+
+  public static function getDayRankings(Day $day, User $user = null) {
     $groups = false;
     if($user == null || $user->id() == \Drupal::currentUser()->id()) {
       $user = User::load(\Drupal::currentUser()->id());
-      $groups = $this->getGroup($user);
+      $groups = self::getGroup($user);
     }
-    $rows = $this->getDayRows($day,$user);
-
     $render_controller = \Drupal::entityManager()->getViewBuilder('group');
     $groups_ranking = [];
     if($groups) {
@@ -43,41 +92,13 @@ class DayController extends ControllerBase {
         ];
       }
     }
-
-    $header = [
-      $this->t('Game',array(),array('context'=>'mespronos')),
-      $this->t('Score',array(),array('context'=>'mespronos')),
-      $this->t('Bet',array(),array('context'=>'mespronos')),
-      $this->t('Points',array(),array('context'=>'mespronos')),
-      '',
-    ];
-
-    $table_array = [
-      '#theme' => 'table',
-      '#rows' => $rows,
-      '#header' => $header,
-      '#cache' => [
-        'contexts' => ['user'],
-        'tags' => [ 'lastbets','user:'.$user->id()],
-      ],
-    ];
-    return [
-      '#theme' =>'day-details',
-      '#last_bets' => $table_array,
-      '#ranking' => RankingController::getRankingTableForDay($day),
-      '#groups' => $groups_ranking,
-      '#cache' => [
-        'contexts' => ['user'],
-        'tags' => [ 'user:'.\Drupal::currentUser()->id().'_'.$user->id(),'lastbets'],
-      ],
-    ];
   }
 
   /**
    * @param \Drupal\user\Entity\User|NULL $user
    * @return bool|\Drupal\mespronos_group\Entity\Group[]
    */
-  private function getGroup(User $user = null) {
+  private static function getGroup(User $user = null) {
     if($user != null && \Drupal::moduleHandler()->moduleExists('mespronos_group')) {
       $groups = Group::getUserGroup($user);
     }
@@ -87,7 +108,7 @@ class DayController extends ControllerBase {
     return $groups;
   }
 
-  private function getDayRows(Day $day, User $user) {
+  private static function getDayRows(Day $day, User $user) {
     $games = Game::getGamesForDay($day);
     $games_ids = $games['ids'];
     $games_entity = $games['entities'];
@@ -105,6 +126,13 @@ class DayController extends ControllerBase {
 
       $link_details = Url::fromRoute('entity.game.canonical',['game'=>$game->id()])->toString();
       $cell_details = ['#markup'=>'<a href="'.$link_details.'" title="'.t('see details').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+      if(!$game->isPassed()) {
+        $link_details = Url::fromRoute('mespronos.day.bet',['day'=>$game->getDay()->id()])->toString();
+        $cell_edit = ['#markup'=>'<a href="'.$link_details.'" title="'.t('Edit my bet').'"><i class="fa fa-edit" aria-hidden="true"></i></a>'];
+      }
+      else {
+        $cell_edit = '';
+      }
 
       $row = [
         'data' => [
@@ -116,6 +144,9 @@ class DayController extends ControllerBase {
         ],
         'class' => $league->getPointsCssClass($points),
       ];
+      if($user->id() == \Drupal::currentUser()->id()) {
+        $row['data'][] = render($cell_edit);
+      }
 
       $rows[] = $row;
     }
@@ -125,12 +156,11 @@ class DayController extends ControllerBase {
   public function indexTitle(Day $day, \Drupal\user\Entity\User $user = null) {
     $league = $day->getLeague();
     if($user == null || $user->id() == \Drupal::currentUser()->id()) {
-      return t('My bets on @day',array('@day'=>$league->label().' - '.$day->label()));
+      return t('my bets on @day',array('@day'=>$league->label().' - '.$day->label()));
     }
     else {
       return t('@user\'s bets on @day',array('@day'=>$league->label().' - '.$day->label(),'@user'=>$user->getUsername()));
     }
-
   }
 
   /**

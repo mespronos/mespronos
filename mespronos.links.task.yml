@@ -61,3 +61,8 @@ game.settings_tab:
   route_name: game.settings
   title: 'Settings'
   base_route: game.settings
+
+day.settings_tab:
+  route_name: day.settings
+  title: 'Settings'
+  base_route: day.settings

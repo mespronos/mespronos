@@ -88,14 +88,6 @@ mespronos.lastbets:
   requirements:
     _permission: 'view last bets days'
 
-mespronos.lastbetsdetails:
-  path: 'mespronos/day/{day}/results'
-  defaults:
-    _controller: '\Drupal\mespronos\Controller\DayController::index'
-    _title_callback: '\Drupal\mespronos\Controller\DayController::indexTitle'
-  requirements:
-    _permission: 'view day results'
-
 mespronos.lastbetsdetailsforuser:
   path: 'mespronos/day/{day}/results/user/{user}'
   defaults:
@@ -236,6 +228,22 @@ entity.sport.delete_form:
     _entity_access: 'sport.delete'
 
 # Day routing definition
+entity.day.canonical:
+  path: '/mespronos/day/{day}'
+  defaults:
+    _entity_view: 'day'
+    _title_callback : 'Drupal\mespronos\Controller\DayController::indexTitle'
+  requirements:
+    _entity_access: 'day.view'
+
+day.settings:
+  path: '/admin/mespronos/structure/day'
+  defaults:
+   _form: '\Drupal\mespronos\Entity\Form\DaySettingsForm'
+   _title: 'Day Settings'
+  requirements:
+    _permission: 'administer Day entity'
+
 entity.day.collection:
   path: '/admin/mespronos/day'
   defaults:

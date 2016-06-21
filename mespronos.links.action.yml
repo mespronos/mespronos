@@ -60,3 +60,10 @@ game.admin.structure.settings:
   route_name: game.settings
   appears_on:
     - mespronos.settings
+
+day.admin.structure.settings:
+  title: Day Settings
+  description: 'Configure Day entity'
+  route_name: day.settings
+  appears_on:
+    - mespronos.settings

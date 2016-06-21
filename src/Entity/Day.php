@@ -42,12 +42,14 @@ use Drupal\Core\Url;
  *     "uuid" = "uuid"
  *   },
  *   links = {
+ *     "canonical" = "/mespronos/day/{day}",
  *     "edit-form" = "/entity.day.edit_form",
  *     "recount_points" = "/entity.day.recount_points",
  *     "recount_ranking" = "/entity.day.recount_ranking",
  *     "delete-form" = "/entity.day.delete_form",
  *     "collection" = "/entity.sport.collection"
- *   }
+ *   },
+ *   field_ui_base_route = "day.settings"
  * )
  */
 class Day extends MPNContentEntityBase implements MPNEntityInterface
@@ -125,7 +127,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
   public function getRenderableLabel() {
     $league = $this->getLeague();
     return [
-      '#theme' => 'day',
+      '#theme' => 'day-small',
       '#league' => [
         'label' => $league->label(),
         'logo' => $league->getLogo('mini_logo')
@@ -223,11 +225,6 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
       ->setLabel('Day number')
       ->setRevisionable(TRUE)
       ->setSetting('unsigned', TRUE)
-      ->setDisplayOptions('view', array(
-        'label' => 'hidden',
-        'type' => 'integer',
-        'weight' => 0,
-      ))
       ->setDisplayOptions('form', array(
         'type' => 'number',
       ));

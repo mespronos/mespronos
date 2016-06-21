@@ -30,7 +30,7 @@ class DayAccessControlHandler extends EntityAccessControlHandler
     }
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
+        return AccessResult::allowedIfHasPermission($account, 'view day results');
 
       case 'edit':
         return AccessResult::allowedIfHasPermission($account, 'manage mespronos content');
