@@ -33,6 +33,7 @@ function mespronos_group_theme() {
 }
 
 function mespronos_group_entity_extra_field_info() {
+  $extra = [];
   $extra['group']['group']['display']['block_members'] = array(
     'label' => t('Member list'),
     'weight' => 100,
