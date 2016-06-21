@@ -1,0 +1,11 @@
+league :
+  name : 'Euro 2016'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 6
+      name : '1/2 de finale'
+      day_default_date : 2016-07-06t21:00:00+02:00
+      games :

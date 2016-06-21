@@ -1,0 +1,11 @@
+league :
+  name : 'Euro 2016'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 4
+      name : '1/8e de finale'
+      day_default_date : 2016-06-25t15:00:00+02:00
+      games :

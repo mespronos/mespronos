@@ -60,22 +60,24 @@ class ImporterController extends ControllerBase {
     ];
     foreach($data['league']['days'] as $_day) {
       $day = self::importDay($_day,$league);
-      foreach($_day['games'] as $_game) {
-        $teams = explode('|',$_game['game']);
-        $team_1 = self::importTeam(trim(array_shift($teams)));
-        $team_2 = self::importTeam(trim(array_shift($teams)));
-        $date = isset($_game['game_date']) ? trim($_game['game_date']) : trim($_day['day_default_date']);
-        $date = \DateTime::createFromFormat('U',$date,new \DateTimeZone(drupal_get_user_timezone()));
-        $date->setTimezone(new \DateTimeZone('UTC'));
-        $date = $date->format('Y-m-d\TH:i:s');
-        $result = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
-        switch($result) {
-          case 'CREATED': 
-            $games['created']++;
-            break;
-          case 'UPDATED': 
-            $games['updated']++;
-            break;
+      if(count($_day['games']) > 0) {
+        foreach($_day['games'] as $_game) {
+          $teams = explode('|',$_game['game']);
+          $team_1 = self::importTeam(trim(array_shift($teams)));
+          $team_2 = self::importTeam(trim(array_shift($teams)));
+          $date = isset($_game['game_date']) ? trim($_game['game_date']) : trim($_day['day_default_date']);
+          $date = \DateTime::createFromFormat('U',$date,new \DateTimeZone(drupal_get_user_timezone()));
+          $date->setTimezone(new \DateTimeZone('UTC'));
+          $date = $date->format('Y-m-d\TH:i:s');
+          $result = self::importGame($_game,$date,$team_1,$team_2,$day,$league);
+          switch($result) {
+            case 'CREATED':
+              $games['created']++;
+              break;
+            case 'UPDATED':
+              $games['updated']++;
+              break;
+          }
         }
       }
     }
