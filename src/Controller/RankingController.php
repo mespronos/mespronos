@@ -117,12 +117,12 @@ class RankingController extends ControllerBase {
         $row['class'] = ['highlighted','bold'];
       }
       $link_user = Url::fromRoute('entity.user.canonical',['user'=>$ranking->getOwner()->id()])->toString();
-      $cell = ['#markup'=>'<a href="'.$link_user.'" title="'.t('see user\'s profile').'"><i class="fa fa-user" aria-hidden="true"></i></a>'];
-      $row['data']['user'] = render($cell);
+      $cell = ['#markup'=>'<a class="picto" href="'.$link_user.'" title="'.t('see user\'s profile').'"><i class="fa fa-user" aria-hidden="true"></i></a>'];
+      $row['data']['user'] = ['data'=>render($cell),'class'=>'picto'];
       if($ranking instanceof RankingDay) {
         $link_details_user = Url::fromRoute('mespronos.lastbetsdetailsforuser',['day'=>$ranking->getDayiD(),'user'=>$ranking->getOwner()->id()])->toString();
-        $cell = ['#markup'=>'<a href="'.$link_details_user.'" title="'.t('see user\'s bets').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
-        $row['data']['details'] = render($cell);
+        $cell = ['#markup'=>'<a class="picto" href="'.$link_details_user.'" title="'.t('see user\'s bets').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+        $row['data']['details'] = ['data'=>render($cell),'class'=>'picto'];
       }
       $rows[] = $row;
     }

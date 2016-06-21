@@ -93,8 +93,8 @@ class NextBetsController extends ControllerBase {
             ];
 
             $link_details = Url::fromRoute('mespronos.day.bet',['day'=>$day_id])->toString();
-            $cell_edit = ['#markup'=>'<a href="'.$link_details.'" title="'.t('Edit my bet').'"><i class="fa fa-edit" aria-hidden="true"></i></a>'];
-            $row['data']['action'] = render($cell_edit);
+            $cell_edit = ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('Edit my bet').'"><i class="fa fa-edit" aria-hidden="true"></i></a>'];
+            $row['data']['action'] = ['data'=>render($cell_edit),'class'=>'picto'];
 
             $rows[] = $row;
         }

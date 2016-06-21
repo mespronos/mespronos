@@ -114,8 +114,8 @@ class LastBetsController extends ControllerBase {
                 $row['data']['nb_betters'] = RankingDay::getNumberOfBetters($day->entity);
 
                 $link_details = Url::fromRoute('entity.day.canonical',['day'=>$day->entity->id()])->toString();
-                $cell_details = ['#markup'=>'<a href="'.$link_details.'" title="'.t('see details').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
-                $row['data']['action'] = render($cell_details);
+                $cell_details = ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('see details').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+                $row['data']['action'] = ['data'=>render($cell_details),'class'=>'picto'];
             }
             else {
                 $row['data']['action'] = Link::fromTextAndUrl(

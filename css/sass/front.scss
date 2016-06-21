@@ -13,18 +13,23 @@ table {
   tr.clickabeul {
     cursor: pointer;
   }
+  td.picto {
+    padding : 0;
+    a.picto {
+      font-size: 1.5em;
+      padding : 5px;
+    }
+  }
 }
 
-@media screen and (min-width: 640px) {
-  table {
-    td.day-cell,
-    td.better-cell {
-      font-size: 1em;
-      aside {
-        float: left;
-        min-width: 40px;
-        margin-right: 2px;
-      }
+table {
+  td.day-cell,
+  td.better-cell {
+    font-size: 1em;
+    aside {
+      float: left;
+      min-width: 40px;
+      margin-right: 2px;
     }
   }
 }
