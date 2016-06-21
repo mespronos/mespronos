@@ -67,6 +67,7 @@ class MespronosGroupSubscriber implements EventSubscriberInterface {
    * to respond with AccessDeniedHttpException.
    */
   public static function getSubscribedEvents() {
+    $events = [];
     $events[KernelEvents::EXCEPTION][] = array('onKernelException');
     return $events;
   }
