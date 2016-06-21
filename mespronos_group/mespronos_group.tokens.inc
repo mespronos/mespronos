@@ -29,22 +29,6 @@ function mespronos_group_token_info() {
     'name' => t("Group name"),
   );
 
-  $group['created'] = array(
-    'name' => t("Date created"),
-    'type' => 'date',
-  );
-
-  $group['changed'] = array(
-    'name' => t("Date changed"),
-    'description' => t("The date the group was most recently updated."),
-    'type' => 'date',
-  );
-
-  $group['creator'] = array(
-    'name' => t("group creator"),
-    'type' => 'user',
-  );
-
   return array(
     'types' => array('group' => $type),
     'tokens' => array('group' => $group),
@@ -54,38 +38,27 @@ function mespronos_group_token_info() {
 /**
  * Implements hook_tokens().
  */
-function mespronos_group_tokens($type, $tokens, array $data, array $options, BubbleableMetadata $bubbleable_metadata) {
-  $token_service = \Drupal::token();
-  
+function mespronos_group_tokens($type, $tokens, array $data) {
   $replacements = array();
-  if ($type == 'entity' && isset($data['entity_type']) && $data['entity_type'] == 'group') {
-    /** @var \Drupal\mespronos_group\Entity\Group $group */
-    $group = $data['entity'];
-
-    foreach ($tokens as $name => $original) {
-      switch ($name) {
-        // Simple key values on the node.
-        case 'gid':
-          $replacements[$original] = $group->id();
-          break;
-
-        case 'name':
-          $replacements[$original] = $group->getTheName();
-          break;
-
-        // Default values for the chained tokens handled below.
-        case 'creator':
-          $account = $group->getOwner() ? $group->getOwner() : User::load(0);
-          $bubbleable_metadata->addCacheableDependency($account);
-          $replacements[$original] = $account->label();
-          break;
-      }
-    }
-
-    if ($author_tokens = $token_service->findWithPrefix($tokens, 'author')) {
-      $replacements += $token_service->generate('user', $author_tokens, array('user' => $group->getOwner()), $options, $bubbleable_metadata);
+  if ($type == 'entity' && isset($data['entity_type'])) {
+    switch ($data['entity_type']) {
+      case 'group' :
+        _mespronos_group_tokens_group($tokens, $data['entity'],$replacements);
+        break;
     }
   }
-
   return $replacements;
+}
+
+function _mespronos_group_tokens_group($tokens, Group $group,&$replacements) {
+  foreach ($tokens as $name => $original) {
+    switch ($name) {
+      case 'gid':
+        $replacements[$original] = $group->id();
+        break;
+      case 'name':
+        $replacements[$original] = $group->getTheName();
+        break;
+    }
+  }
 }
