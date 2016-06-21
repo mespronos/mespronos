@@ -92,6 +92,7 @@ class DayController extends ControllerBase {
         ];
       }
     }
+    return $groups_ranking;
   }
 
   /**
