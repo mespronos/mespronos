@@ -92,24 +92,10 @@ class NextBetsController extends ControllerBase {
               ]
             ];
 
-            if($user->id()>0) {
-                if($bets_left > 0) {
-                    $text = t('Go !',[],['context'=>'mespronos-nextbet']);
-                }
-                else {
-                    $text = t('Edit',[],['context'=>'mespronos-nextbet']);
-                }
-                $row['data']['action'] = Link::fromTextAndUrl(
-                  $text,
-                  new Url('mespronos.day.bet', ['day' => $day_id],['query' => ['destination' => \Drupal::service('path.current')->getPath()]])
-                );
-            }
-            else {
-                $row['data']['action'] = Link::fromTextAndUrl(
-                  t('Log in'),
-                  Url::fromRoute('mespronos.login',[],['query' => ['destination' => Url::fromRoute('mespronos.day.bet', ['day' => $day_id])->toString()]])
-                );
-            }
+            $link_details = Url::fromRoute('mespronos.day.bet',['day'=>$day_id])->toString();
+            $cell_edit = ['#markup'=>'<a href="'.$link_details.'" title="'.t('Edit my bet').'"><i class="fa fa-edit" aria-hidden="true"></i></a>'];
+            $row['data']['action'] = render($cell_edit);
+
             $rows[] = $row;
         }
         return $rows;
