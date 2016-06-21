@@ -22,7 +22,7 @@ class MespronosGroupSubscriber implements EventSubscriberInterface {
   /**
    * The configuration factory.
    *
-   * @var Drupal\Core\Routing\CurrentRouteMatch
+   * @var \Drupal\Core\Routing\CurrentRouteMatch $route_match
    */
   protected $route_match;
 
