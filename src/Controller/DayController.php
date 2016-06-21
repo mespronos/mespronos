@@ -136,7 +136,7 @@ class DayController extends ControllerBase {
 
       $row = [
         'data' => [
-          $game->labelTeams(),
+          $game->labelTeamsAndHour(),
           $game->labelScore(),
           $bet,
           $points,

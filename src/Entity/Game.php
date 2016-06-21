@@ -90,6 +90,19 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return t('@team1 - @team2',array('@team1'=> $team1->label(),'@team2'=> $team2->label()));
   }
 
+  public function labelTeamsAndHour() {
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+    $date =  new \DateTime($this->getGameDate(),new \DateTimeZone('UTC'));
+    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+    return t('<strong>@team1 - @team2</strong><br />%hour',array(
+      '@team1'=> $team1->label(),
+      '@team2'=> $team2->label(),
+      '%hour' => $date->format('d/m/Y H\hi')
+      )
+    );
+  }
+
   public function labelScore() {
     return t('@t1 - @t2',array('@t1'=> $this->get('score_team_1')->value,'@t2'=> $this->get('score_team_2')->value));
   }
