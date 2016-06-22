@@ -2,11 +2,11 @@ administration-style :
   version: VERSION
   css:
     theme :
-      css/administration.css : {}
+      assets/css/administration.css : {}
 front-style :
   version: VERSION
   css:
     theme :
-      css/front.css : {}
+      assets/css/front.css : {}
   js:
-     js/front.js: {}
+     asssets/js/front.js: {}
