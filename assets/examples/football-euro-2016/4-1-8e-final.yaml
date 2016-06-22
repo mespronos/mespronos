@@ -11,15 +11,15 @@ league :
       games :
         - game : Suisse | Pologne
           game_date : 2016-06-25t15:00:00+02:00
-        - game : Galles |
+        - game : Galles | Irlande Du Nord
           game_date : 2016-06-25t18:00:00+02:00
-        - game : Croatie |
+        - game : Croatie | Portugal
           game_date : 2016-06-25t21:00:00+02:00
-        - game : France |
+        - game : France | Irlande
           game_date : 2016-06-26t15:00:00+02:00
-        - game : Allemagne |
+        - game : Allemagne | Slovaquie
           game_date : 2016-06-26t18:00:00+02:00
-        - game : Hongrie |
+        - game : Hongrie | Belgique
           game_date : 2016-06-26t21:00:00+02:00
         - game : Italie | Espagne
           game_date : 2016-06-27t18:00:00+02:00
