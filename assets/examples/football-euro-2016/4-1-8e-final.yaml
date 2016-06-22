@@ -9,3 +9,19 @@ league :
       name : '1/8e de finale'
       day_default_date : 2016-06-25t15:00:00+02:00
       games :
+        - game : Suisse | Pologne
+          game_date : 2016-06-25t15:00:00+02:00
+        - game : Galles |
+          game_date : 2016-06-25t18:00:00+02:00
+        - game : Croatie |
+          game_date : 2016-06-25t21:00:00+02:00
+        - game : France |
+          game_date : 2016-06-26t15:00:00+02:00
+        - game : Allemagne |
+          game_date : 2016-06-26t18:00:00+02:00
+        - game : Hongrie |
+          game_date : 2016-06-26t21:00:00+02:00
+        - game : Italie | Espagne
+          game_date : 2016-06-27t18:00:00+02:00
+        - game : Angleterre | Islande
+          game_date : 2016-06-27t21:00:00+02:00
