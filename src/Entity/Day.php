@@ -248,6 +248,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
       ->setDisplayOptions('form', array(
         'type' => 'options_select',
         'settings' => array(),
+        'weight' => 3,
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
@@ -257,6 +258,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('form', array(
         'type' => 'number',
+        'weight' => 4,
       ));
 
     return $fields;
