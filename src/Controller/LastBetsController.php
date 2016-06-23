@@ -29,7 +29,7 @@ class LastBetsController extends ControllerBase {
         $return = [];
 
         if('BLOCK' != $mode) {
-            $page_competition_link = Url::fromRoute('mespronos.leagues');
+            $page_competition_link = Url::fromRoute('mespronos.leagues.list')->toString();
             $return['help'] = [
               '#markup' => '<p>'.t('You can see past results of archived competitions on the <a href="@competition_url">leagues</a> page.',['@competition_url'=>$page_competition_link]).'</p>',
             ];
