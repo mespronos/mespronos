@@ -85,6 +85,9 @@ class RankingController extends ControllerBase {
 
   public static function getRankingTableForDay(Day $day,Group $group = null) {
     $rankingDays = RankingDay::getRankingForDay($day,$group);
+    if(count($rankingDays) == 0) {
+      return false;
+    }
     return self::getTableFromRanking($rankingDays);
   }
 

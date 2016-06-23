@@ -15,7 +15,9 @@
 
 {% endif %}
 
-<h2>{% trans 'Day General Ranking' %}</h2>
-<section>
-    {{ ranking }}
-</section>
+{% if ranking %}
+    <h2>{% trans 'Day General Ranking' %}</h2>
+    <section>
+        {{ ranking }}
+    </section>
+{% endif %}
