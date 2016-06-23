@@ -222,3 +222,23 @@ function mespronos_league_view(array &$build, League $entity, EntityViewDisplay 
     $build['results_and_ranking'] = \Drupal\mespronos\Controller\LeagueController::getResultsAndRanking($entity);
   }
 }
+
+function mespronos_user_update(\Drupal\user\Entity\User $user) {
+  $query = \Drupal::entityQuery('day');
+  $ids = $query->execute();
+  $days = \Drupal::entityManager()->getStorage("day")->loadMultiple($ids);
+
+  $trans = \Drupal::service('transliteration');
+  $alias_manager = \Drupal::service('path.alias_manager');
+  $alias_storage = \Drupal::service('path.alias_storage');
+
+  foreach ($days as $day) {
+    $alias_day = $alias_manager->getAliasByPath('/mespronos/day/'.$day->id());
+    $system_path = '/mespronos/day/'.$day->id().'/results/user/'.$user->id();
+    $path_alias = str_replace('.html','',$alias_day).'/les-pronos-de-'.$trans->transliterate($user->label()).'.html';
+    $urlAlias = $alias_manager->getAliasByPath($system_path);
+    if($urlAlias && $urlAlias != $path_alias) {
+      $alias_storage->save($system_path, $path_alias);
+    }
+  }
+}
