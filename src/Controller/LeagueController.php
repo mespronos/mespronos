@@ -85,6 +85,7 @@ class LeagueController extends ControllerBase {
       t('Name',array(),array('context'=>'mespronos-block')),
       t('Days',array(),array('context'=>'mespronos-block')),
       t('Rank',array(),array('context'=>'mespronos-block')),
+      '',
     ];
   }
 
@@ -108,8 +109,16 @@ class LeagueController extends ControllerBase {
           'names' => render($league_renderable),
           'days' => $league->getDaysNumber(),
           'rank' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '/',
+          'rank' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '/',
         ]
       ];
+
+      $link_details = Url::fromRoute('entity.league.canonical',['league'=>$league->id()])->toString();
+      $cell = ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('See league detailed results').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+      $row['data']['details'] = ['data'=>render($cell),'class'=>'picto'];
+
+
+
       $rows[] = $row;
     }
     return $rows;

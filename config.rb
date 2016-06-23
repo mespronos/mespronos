@@ -5,7 +5,7 @@ require 'compass/import-once/activate'
 http_path = "/"
 css_dir = "assets/css"
 sass_dir = "assets/css/sass"
-images_dir = "images"
+images_dir = "assets/images"
 javascripts_dir = "javascripts"
 output_style = :compressed
 relative_assets = true
