@@ -15,7 +15,7 @@ use Drupal\Core\Breadcrumb\Breadcrumb;
 class LeagueBreadcrumbBuilder implements BreadcrumbBuilderInterface {
 
     public function applies(RouteMatchInterface $route_match) {
-        return $route_match->getCurrentRouteMatch()->getRouteName() == 'mespronos.league.index';
+        return $route_match->getCurrentRouteMatch()->getRouteName() == 'entity.league.canonical';
     }
 
     public function build(RouteMatchInterface $route_match) {
