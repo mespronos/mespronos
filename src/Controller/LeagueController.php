@@ -21,10 +21,10 @@ use Drupal\Core\Link;
  */
 class LeagueController extends ControllerBase {
 
-  public function index(League $league) {
+  public static function getResultsAndRanking(League $league) {
     $last_bets_controller = new LastBetsController();
     $next_bets_controller = new NextBetsController();
-    $last_bets = $last_bets_controller->lastBets($league,100);
+    $last_bets = $last_bets_controller->lastBets($league,100,'BLOCK');
     $next_bets = $next_bets_controller->nextBets($league,100);
     $ranking = RankingController::getRankingLeague($league);
     return [

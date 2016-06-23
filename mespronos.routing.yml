@@ -62,13 +62,13 @@ mespronos.leagues.list:
   requirements:
     _permission: 'see league details'
 
-mespronos.league.index:
+entity.league.canonical:
   path: 'mespronos/leagues/{league}'
   defaults:
-    _controller: '\Drupal\mespronos\Controller\LeagueController::index'
-    _title_callback: '\Drupal\mespronos\Controller\LeagueController::indexTitle'
+    _entity_view: 'league'
+    _title_callback : 'Drupal\mespronos\Controller\LeagueController::indexTitle'
   requirements:
-    _permission: 'see league details'
+    _entity_access: 'league.view'
 
 mespronos.day.bet:
   path: 'mespronos/day/{day}/bet'

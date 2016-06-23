@@ -1,6 +1,22 @@
-<aside>
-    {{ league.logo }}
-</aside>
-<div>
-    <a href="{{ league.url }}"> {{ league.label }}</a>
+{#
+/**
+* @file note.html.twig
+* Default theme implementation to present note data.
+*
+* This template is used when viewing a note entity's page,
+*
+*
+* Available variables:
+* - content: A list of content items. Use 'content' to print all content, or
+* - attributes: HTML attributes for the container element.
+*
+* @see template_preprocess_note()
+*
+* @ingroup themeable
+*/
+#}
+<div {{ attributes.addClass("note") }}>
+    {% if content %}
+        {{- content -}}
+    {% endif %}
 </div>

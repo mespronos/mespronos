@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Controller\GameController;
 
 function mespronos_preprocess_page(&$variables) {
@@ -92,8 +93,8 @@ function mespronos_theme() {
       'day' => NULL,
     ),
   );
-  $theme['league'] = array(
-    'template' => 'league',
+  $theme['league-small'] = array(
+    'template' => 'league-small',
     'variables' => array(
       'league' => NULL,
     ),
@@ -173,6 +174,11 @@ function mespronos_entity_extra_field_info() {
     'weight' => 101,
     'visible' => true,
   );
+  $extra['league']['league']['display']['results_and_ranking'] = array(
+    'label' => t('Day results and rankings'),
+    'weight' => 100,
+    'visible' => true,
+  );
   return $extra;
 }
 
@@ -208,5 +214,11 @@ function mespronos_game_view(array &$build, Game $entity, EntityViewDisplay $dis
 function mespronos_day_view(array &$build, Day $entity, EntityViewDisplay $display, $view_mode) {
   if ($display->getComponent('results_and_ranking')) {
     $build['results_and_ranking'] = \Drupal\mespronos\Controller\DayController::getResultsAndRankings($entity);
+  }
+}
+
+function mespronos_league_view(array &$build, League $entity, EntityViewDisplay $display, $view_mode) {
+  if ($display->getComponent('results_and_ranking')) {
+    $build['results_and_ranking'] = \Drupal\mespronos\Controller\LeagueController::getResultsAndRanking($entity);
   }
 }
