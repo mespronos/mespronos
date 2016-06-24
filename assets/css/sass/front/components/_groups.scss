@@ -96,12 +96,17 @@ ul#group-members-list {
     padding: 0;
     list-style: none;
     text-align: center;
+    min-width: 110px;
     .field--name-user-picture {
       height : 100px;
     }
     h3 {
       text-align: center;
       margin-top : 0;
+      font-size: 0.9em;
+      font-weight: normal;
+      line-height: 1.4em;
+
     }
   }
 }
