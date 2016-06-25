@@ -21,24 +21,35 @@ ul.group-listing {
   }
 }
 
+ul.group-listing {
+  margin: 0;
+  li {
+    margin : 0;
+    margin-bottom: 20px;
+    text-align: center;
+    padding-bottom: 20px;
+    section {
+      img {
+        border-radius: 5px;
+      }
+    }
+  }
+}
 @media screen and (min-width: 640px) {
   ul.group-listing {
     display: flex;
     flex-wrap: wrap;
     justify-content: left;
+    margin: 0;
     li {
-      margin-top: 20px;
-      border-bottom: none;
       width : 33%;
-      text-align: center;
+      border-bottom: none;
+      padding-bottom : 0;
       section {
-        min-height: 280px;
+        min-height: 230px;
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        img {
-          border-radius: 5px;
-        }
       }
     }
   }

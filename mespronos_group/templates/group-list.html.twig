@@ -1,30 +1,39 @@
-<h2>{% trans %}My groups{% endtrans %}</h2>
-<ul class="group-listing">
-    {% for group in user_groups %}
-        <li>
-            <section>
-                {{ group.entity }}
-                <p> {{ group.member }}</p>
-            </section>
-        </li>
-    {% endfor %}
-</ul>
 
-<h2>{% trans %}All the groups{% endtrans %}</h2>
-<ul class="group-listing">
-    {% for group in groups %}
-        <li>
-            <section>
-                {{ group.entity }}
-                <p> {{ group.member }}</p>
-                {% if group.is_member %}
-                    <p><a href="{{ group.leave_url }}">{% trans %}Leave{% endtrans %}</a></p>
-                {% else %}
-                    {% if group.display_join_link %}
-                        <p><a href="{{ group.join_url }}">{% trans %}Join{% endtrans %}</a></p>
+{% if user_groups %}
+    {% if display_titles %}
+        <h2>{% trans %}My groups{% endtrans %}</h2>
+    {% endif %}
+    <ul class="group-listing">
+        {% for group in user_groups %}
+            <li>
+                <section>
+                    {{ group.entity }}
+                    <p> {{ group.member }}</p>
+                </section>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+{% if groups %}
+    {% if display_titles %}
+        <h2>{% trans %}All the groups{% endtrans %}</h2>
+    {% endif %}
+    <ul class="group-listing">
+        {% for group in groups %}
+            <li>
+                <section>
+                    {{ group.entity }}
+                    <p> {{ group.member }}</p>
+                    {% if group.is_member %}
+                        <p><a href="{{ group.leave_url }}">{% trans %}Leave{% endtrans %}</a></p>
+                    {% else %}
+                        {% if group.display_join_link %}
+                            <p><a href="{{ group.join_url }}">{% trans %}Join{% endtrans %}</a></p>
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-            </section>
-        </li>
-    {% endfor %}
-</ul>
+                </section>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

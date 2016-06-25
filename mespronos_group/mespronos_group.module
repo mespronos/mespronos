@@ -12,6 +12,7 @@ function mespronos_group_theme() {
     'template' => 'group-list',
     'variables' => array(
       'groups' => [],
+      'display_titles' => TRUE,
       'user_groups' => [],
     ),
   );
