@@ -51,12 +51,19 @@ class GamesBetting extends FormBase {
     foreach($games as $game) {
       $form['games'][$game->id()] = $this->getGameFormInput($user,$game,$betting_type);
     }
-    $form['actions']['#type'] = 'actions';
-    $form['actions']['submit'] = array(
-      '#type' => 'submit',
-      '#value' => $this->t('Save my bets'),
-      '#button_type' => 'primary',
-    );
+    if(count($games) > 0) {
+      $form['actions']['#type'] = 'actions';
+      $form['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => $this->t('Save my bets'),
+        '#button_type' => 'primary',
+      );
+    }
+    else {
+      $form['no-bet'] = [
+        '#markup' => '<p>'.t('There is no game to bet on').'</p>'
+      ];
+    }
     return $form;
   }
 
