@@ -55,12 +55,19 @@ class GamesMarks extends FormBase {
         '#size' => '5',
       );
     }
-    $form['actions']['#type'] = 'actions';
-    $form['actions']['submit'] = array(
-      '#type' => 'submit',
-      '#value' => $this->t('Send'),
-      '#button_type' => 'primary',
-    );
+    if(count($games) > 0) {
+      $form['actions']['#type'] = 'actions';
+      $form['actions']['submit'] = array(
+        '#type' => 'submit',
+        '#value' => $this->t('Send'),
+        '#button_type' => 'primary',
+      );
+    }
+    else {
+      $form['no-bet'] = [
+        '#markup' => '<p>'.t('There is no game without mark').'</p>'
+      ];
+    }
     return $form;
   }
 
