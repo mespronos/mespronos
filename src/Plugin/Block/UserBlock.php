@@ -36,7 +36,8 @@ class UserBlock extends BlockBase {
       '#theme' =>'user-block',
       '#user' => [
         'name' => $user->getAccountName(),
-        'rank' => $ranking ? $ranking->getPosition() : '/',
+        'rank' => $ranking ? $ranking->getPosition() : '-',
+        'nb_betters' => RankingGeneral::getNumberOfBetters(),
         'points' => $ranking ? $ranking->getPoints() : '/',
       ],
       '#links' => [

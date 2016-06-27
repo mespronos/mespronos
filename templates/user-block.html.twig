@@ -3,7 +3,7 @@
     {{ user_picture }}
 </section>
 <section class="infos">
-    <p>{% trans %}General ranking : {{ user.rank}}{% endtrans %}</p>
+    <p>{% trans %}General ranking : {{ user.rank}} / {{ user.nb_betters}}{% endtrans %}</p>
     <p>{% trans %}Points : {{user.points}}{% endtrans %}</p>
 </section>
 <section class="links">
