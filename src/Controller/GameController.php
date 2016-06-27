@@ -93,6 +93,7 @@ class GameController extends ControllerBase{
       t('bet',array(),array('context'=>'mespronos')),
       t('Points',array(),array('context'=>'mespronos')),
     ];
+    $league = $game->getLeague();
     foreach($data as $better => $bet) {
       $better_entity = \Drupal\user\Entity\User::load($better);
       $better_renderable = UserController::getRenderableUser($better_entity);
@@ -103,8 +104,9 @@ class GameController extends ControllerBase{
             'class' => ['better-cell']
           ],
           $bet->score_team_1. ' - '.$bet->score_team_2,
-          $bet->points,
+          ['data' => $bet->points,'class'=>'points'],
         ],
+        'class' => $league->getPointsCssClass($bet->points),
       ];
       $rows[] = $row;
     }

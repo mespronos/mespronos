@@ -1,0 +1,20 @@
+table {
+  tr.participation {
+    td.points {
+      font-weight: bold;
+      color : red;
+    }
+  }
+  tr.winner_found {
+    td.points {
+      font-weight: bold;
+      color : orange;
+    }
+  }
+  tr.score_found {
+    td.points {
+      font-weight: bold;
+      color : green;
+    }
+  }
+}

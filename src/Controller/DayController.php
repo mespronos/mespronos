@@ -137,13 +137,12 @@ class DayController extends ControllerBase {
       else {
         $cell_edit = '';
       }
-
       $row = [
         'data' => [
           $game->labelTeamsAndHour(),
           $game->labelScore(),
           $bet,
-          $points,
+          ['data' => $points,'class'=>'points'],
           ['data' => render($cell_details),'class'=>'picto'],
         ],
         'class' => $league->getPointsCssClass($points),
