@@ -22,10 +22,12 @@ use Drupal\user\Entity\User;
  */
 class LastBetsController extends ControllerBase {
 
-    public function lastBets(League $league = null,$nb = 10,$mode = 'PAGE') {
-        $user = User::load(\Drupal::currentUser()->id());
+    public function lastBets(League $league = null,$nb = 10,$mode = 'PAGE',User $user = null,$include_archived = false) {
+        if(!$user) {
+            $user = User::load(\Drupal::currentUser()->id());
+        }
         $page_league = isset($league);
-        $days = DayController::getlastDays($nb,$league);
+        $days = DayController::getlastDays($nb,$league,$include_archived);
         $return = [];
 
         if('BLOCK' != $mode) {
@@ -112,8 +114,12 @@ class LastBetsController extends ControllerBase {
                 $row['data']['points'] = $ranking ? $ranking->getPoints() : ' ';
                 $row['data']['position'] = $ranking ? t('@class',['@class'=>$ranking->getPosition()]) : ' ';
                 $row['data']['nb_betters'] = RankingDay::getNumberOfBetters($day->entity);
-
-                $link_details = Url::fromRoute('entity.day.canonical',['day'=>$day->entity->id()])->toString();
+                if($user->id() == \Drupal::currentUser()->id()) {
+                    $link_details = Url::fromRoute('entity.day.canonical',['day'=>$day->entity->id()])->toString();
+                }
+                else {
+                    $link_details = Url::fromRoute('mespronos.lastbetsdetailsforuser',['user'=> $user->id(),'day'=>$day->entity->id()])->toString();
+                }
                 $cell_details = ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('see details').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
                 $row['data']['action'] = ['data'=>render($cell_details),'class'=>'picto'];
             }

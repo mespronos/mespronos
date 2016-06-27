@@ -50,7 +50,7 @@ class UserProfilBlock extends BlockBase {
       ],
       '#statistics' => $statistics,
       '#palmares' => $palmares,
-      '#last_bets' => BetController::getLastUserBetsTable($user,50),
+      //'#last_bets' => BetController::getLastUserBetsTable($user,50),
       '#user_picture' => $user_picture,
       '#cache' => [
         'contexts' => ['route'],

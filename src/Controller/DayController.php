@@ -137,12 +137,13 @@ class DayController extends ControllerBase {
       else {
         $cell_edit = '';
       }
+
       $row = [
         'data' => [
           $game->labelTeamsAndHour(),
           $game->labelScore(),
           $bet,
-          ['data' => $points,'class'=>'points'],
+          $points,
           ['data' => render($cell_details),'class'=>'picto'],
         ],
         'class' => $league->getPointsCssClass($points),
@@ -205,7 +206,7 @@ class DayController extends ControllerBase {
    * @param \Drupal\mespronos\Entity\League|NULL $league
    * @return mixed
    */
-  public static function getlastDays($nb = 5,League $league = null) {
+  public static function getlastDays($nb = 5,League $league = null,$include_archived = false) {
     $day_storage = \Drupal::entityManager()->getStorage('day');
     $injected_database = Database::getConnection();
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
@@ -221,7 +222,9 @@ class DayController extends ControllerBase {
     }
     else {
       $query->join('mespronos__league','l','l.id = d.league');
-      $query->condition('l.status','active');
+      if(!$include_archived) {
+        $query->condition('l.status','active');
+      }
     }
     $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'<');
     $query->orderBy('day_date','DESC');

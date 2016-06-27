@@ -7,6 +7,7 @@
 
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
+use Drupal\mespronos\Controller\LastBetsController;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\League;
@@ -154,6 +155,11 @@ function mespronos_entity_extra_field_info() {
     'weight' => 100,
     'visible' => TRUE,
   );
+  $extra['user']['user']['display']['last_results'] = array(
+    'label' => t('Last Results'),
+    'weight' => 100,
+    'visible' => TRUE,
+  );
   $extra['user']['user']['display']['pseudo'] = array(
     'label' => t('Pseudo'),
     'weight' => 100,
@@ -199,6 +205,11 @@ function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, Ent
     $build['username'] = [
       '#markup' => '<h3>'.$entity->label().'</h3>',
     ];
+  }
+  if ($display->getComponent('last_results')) {
+    $lastBetController = new LastBetsController();
+    $user = \Drupal\user\Entity\User::load($entity->id());
+    $build['last_results'] = $lastBetController->lastBets(null,50,'BLOCK',$user,true);
   }
 }
 
