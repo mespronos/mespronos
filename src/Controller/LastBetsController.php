@@ -72,11 +72,6 @@ class LastBetsController extends ControllerBase {
                   'title' => t('Your rank / Number of betters', array(), array('context' => 'mespronos-block')),
                 ],
                 [
-                  'data'=> t('Betters', array(), array('context' => 'mespronos-block')),
-                  'title' => t('Total number of betters on this day', array(), array('context' => 'mespronos-block')),
-                  'class' => array(RESPONSIVE_PRIORITY_LOW),
-                ],
-                [
                   'data'=> '',
                   //'class' => array(RESPONSIVE_PRIORITY_LOW),
                 ],
@@ -108,12 +103,10 @@ class LastBetsController extends ControllerBase {
               ]
             ];
             if($user->id()>0) {
-
                 $ranking = RankingDay::getRankingForBetter($user,$day->entity);
                 $row['data']['games_betted'] = $ranking ? $ranking->getGameBetted() : ' ';
                 $row['data']['points'] = $ranking ? $ranking->getPoints() : ' ';
-                $row['data']['position'] = $ranking ? t('@class',['@class'=>$ranking->getPosition()]) : ' ';
-                $row['data']['nb_betters'] = RankingDay::getNumberOfBetters($day->entity);
+                $row['data']['position'] = $ranking ? t('<strong>@class</strong> / @nb_better',['@class'=>$ranking->getPosition(),'@nb_better'=>RankingDay::getNumberOfBetters($day->entity)]) : ' ';
                 if($user->id() == \Drupal::currentUser()->id()) {
                     $link_details = Url::fromRoute('entity.day.canonical',['day'=>$day->entity->id()])->toString();
                 }
