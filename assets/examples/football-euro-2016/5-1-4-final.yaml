@@ -15,5 +15,5 @@ league :
           game_date : 2016-07-01t21:00:00+02:00
         - game : Allemagne | Italie
           game_date : 2016-07-02t21:00:00+02:00
-        - game : France | Angleterre Islande
+        - game : France | Islande
           game_date : 2016-07-03t21:00:00+02:00
