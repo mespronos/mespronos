@@ -38,7 +38,7 @@ class UserBlock extends BlockBase {
         'name' => $user->getAccountName(),
         'rank' => $ranking ? $ranking->getPosition() : '-',
         'nb_betters' => RankingGeneral::getNumberOfBetters(),
-        'points' => $ranking ? $ranking->getPoints() : '/',
+        'points' => $ranking ? $ranking->getPoints() : '-',
       ],
       '#links' => [
         'logout' => Link::fromTextAndUrl(t('Log out'),Url::fromRoute('user.logout',[])),

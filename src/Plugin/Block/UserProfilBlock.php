@@ -45,8 +45,8 @@ class UserProfilBlock extends BlockBase {
       '#theme' =>'user-profile-block',
       '#user' => [
         'name' => $user->getAccountName(),
-        'rank' => $ranking ? $ranking->getPosition() : '/',
-        'points' => $ranking ? $ranking->getPoints() : '/',
+        'rank' => $ranking ? $ranking->getPosition() : '-',
+        'points' => $ranking ? $ranking->getPoints() : '-',
       ],
       '#statistics' => $statistics,
       '#palmares' => $palmares,
