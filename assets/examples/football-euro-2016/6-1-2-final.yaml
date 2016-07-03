@@ -9,3 +9,7 @@ league :
       name : '1/2 de finale'
       day_default_date : 2016-07-06t21:00:00+02:00
       games :
+        - game : Portugal | Galles
+          game_date : 2016-07-06t21:00:00+02:00
+        - game : Allemagne | France Islande
+          game_date : 2016-07-07t21:00:00+02:00
