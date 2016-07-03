@@ -6,10 +6,10 @@ league :
   betting_type : 'score'
   days:
     - number : 6
-      name : '1/2 de finale'
+      name : '1/2 finale'
       day_default_date : 2016-07-06t21:00:00+02:00
       games :
         - game : Portugal | Galles
           game_date : 2016-07-06t21:00:00+02:00
-        - game : Allemagne | France Islande
+        - game : Allemagne | France
           game_date : 2016-07-07t21:00:00+02:00
