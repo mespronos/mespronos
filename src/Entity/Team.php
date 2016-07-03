@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\file\Entity\File;
 use Drupal\mespronos\MPNEntityInterface;
 
 /**
@@ -75,6 +76,16 @@ class Team extends MPNContentEntityBase implements MPNEntityInterface {
     }
     else {
       return $this->get('name')->value;
+    }
+  }
+
+  public function getLogo($style_name = 'thumbnail') {
+    $logo = $this->get("field_team_logo")->first();
+    if($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
+      return self::getImageAsRenderableArray($logo_file,$style_name);
+    }
+    else {
+      return [];
     }
   }
 

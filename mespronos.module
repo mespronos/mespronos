@@ -35,6 +35,14 @@ function mespronos_theme() {
     'template' => 'game',
     'file' => 'templates-preprocess/game.page.inc',
   );
+  $theme['game-with-flag'] = array(
+    'template' => 'game-with-flag',
+    'variables' => array(
+      'game' => NULL,
+      'team_1' => NULL,
+      'team_2' => NULL,
+    ),
+  );
   $theme['day'] = array(
     'render element' => 'elements',
     'template' => 'day',

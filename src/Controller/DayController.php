@@ -125,10 +125,10 @@ class DayController extends ControllerBase {
       }
       $points = isset($bets[$gid]) ? $bets[$gid]->get('points')->value : '/';
 
-
+      $game_label = $game->labelTeamsAndHour();
       $row = [
         'data' => [
-          $game->labelTeamsAndHour(),
+          ['data'=> render($game_label),'class'=>'game'],
           $game->labelScore(),
           $bet,
           ['data' => $points,'class'=>'points'],

@@ -1,6 +1,29 @@
 table {
   tr {
-
+    td.game {
+      display: flex;
+      justify-content: space-between;
+      section.team {
+        display: none;
+        &.team1 {
+          text-align: left;
+        }
+        &.team2 {
+          text-align: right;
+        }
+      }
+      section.game {
+        line-height: 1.2em;
+        text-align: center;
+        margin: 0 auto;
+        .game__label {
+          font-weight: bold;
+        }
+        .game__date {
+          font-style: italic;
+        }
+      }
+    }
     td.points {
       font-weight: bold;
       font-size: 1.4em;
@@ -20,6 +43,19 @@ table {
   tr.score_found {
     td.points {
       color : green;
+    }
+  }
+}
+
+
+@media screen and (min-width: 640px) {
+  table {
+    tr {
+      td.game {
+        section.team {
+          display: block;
+        }
+      }
     }
   }
 }

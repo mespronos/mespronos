@@ -95,12 +95,23 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     $team2 = $this->getTeam2();
     $date =  new \DateTime($this->getGameDate(),new \DateTimeZone('UTC'));
     $date->setTimezone(new \DateTimeZone("Europe/Paris"));
-    return t('<strong>@team1 - @team2</strong><br />%hour',array(
-      '@team1'=> $team1->label(),
-      '@team2'=> $team2->label(),
-      '%hour' => $date->format('d/m/Y H\hi')
-      )
-    );
+
+
+    return [
+      '#theme' => 'game-with-flag',
+      '#team_1' => [
+        'label' => $team1->label(),
+        'logo' => $team1->getLogo('mini_logo'),
+      ],
+      '#team_2' => [
+        'label' => $team2->label(),
+        'logo' => $team2->getLogo('mini_logo'),
+      ],
+      '#game' => [
+        'date' => $date->format('d/m/Y H\hi'),
+      ],
+    ];
+
   }
 
   public function labelScore() {
