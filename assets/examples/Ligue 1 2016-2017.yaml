@@ -1,0 +1,881 @@
+league :
+  name : 'Ligue 1 2016/2017'
+  sport : 'Football'
+  status : 'active'
+  classement : true
+  betting_type : 'score'
+  days:
+    - number : 1
+      day_default_date : 2016-08-12T20:00:00+02:00
+      games :
+        - game : Bastia | Paris-SG
+          game_date : 2016-08-12T20:00:00+02:00
+        - game : Bordeaux | Saint-Étienne
+          game_date : 2016-08-13T17:00:00+02:00
+        - game : Caen | Lorient
+          game_date : 2016-08-13T20:00:00+02:00
+        - game : Dijon | Nantes
+          game_date : 2016-08-13T20:00:00+02:00
+        - game : Marseille | Toulouse
+          game_date : 2016-08-14T00:00:00+02:00
+        - game : Metz | Lille
+          game_date : 2016-08-13T20:00:00+02:00
+        - game : Monaco | Guingamp
+          game_date : 2016-08-12T20:30:00+02:00
+        - game : Montpellier | Angers
+          game_date : 2016-08-13T20:00:00+02:00
+        - game : Nancy | Lyon
+          game_date : 2016-08-14T15:00:00+02:00
+        - game : Nice | Rennes
+          game_date : 2016-08-14T17:00:00+02:00
+    - number : 2
+      day_default_date : 2016-08-20T20:00:00+02:00
+      games :
+        - game : Angers | Nice
+          game_date : 2016-08-20T20:00:00+02:00
+        - game : Guingamp | Marseille
+          game_date : 2016-08-20T00:00:00+02:00
+        - game : Lille | Dijon
+          game_date : 2016-08-20T00:00:00+02:00
+        - game : Lorient | Bastia
+          game_date : 2016-08-20T20:00:00+02:00
+        - game : Lyon | Caen
+          game_date : 2016-08-19T20:45:00+02:00
+        - game : Nantes | Monaco
+          game_date : 2016-08-20T00:00:00+02:00
+        - game : Paris-SG | Metz
+          game_date : 2016-08-21T00:00:00+02:00
+        - game : Rennes | Nancy
+          game_date : 2016-08-20T20:00:00+02:00
+        - game : Saint-Étienne | Montpellier
+          game_date : 2016-08-20T00:00:00+02:00
+        - game : Toulouse | Bordeaux
+          game_date : 2016-08-20T20:00:00+02:00
+    - number : 3
+      day_default_date : 2016-08-27T00:00:00+02:00
+      games :
+        - game : Bordeaux | Nantes
+          game_date : 2016-08-27T00:00:00+02:00
+        - game : Caen | Bastia
+          game_date : 2016-08-27T00:00:00+02:00
+        - game : Dijon | Lyon
+          game_date : 2016-08-27T00:00:00+02:00
+        - game : Marseille | Lorient
+          game_date : 2016-08-27T00:00:00+02:00
+        - game : Metz | Angers
+          game_date : 2016-08-27T00:00:00+02:00
+        - game : Monaco | Paris-SG
+          game_date : 2016-08-27T00:00:00+02:00
+        - game : Montpellier | Rennes
+          game_date : 2016-08-27T00:00:00+02:00
+        - game : Nancy | Guingamp
+          game_date : 2016-08-27T00:00:00+02:00
+        - game : Nice | Lille
+          game_date : 2016-08-27T00:00:00+02:00
+        - game : Saint-Étienne | Toulouse
+          game_date : 2016-08-27T00:00:00+02:00
+    - number : 4
+      day_default_date : 2016-09-10T00:00:00+02:00
+      games :
+        - game : Angers | Dijon
+          game_date : 2016-09-10T00:00:00+02:00
+        - game : Bastia | Toulouse
+          game_date : 2016-09-10T00:00:00+02:00
+        - game : Guingamp | Montpellier
+          game_date : 2016-09-10T00:00:00+02:00
+        - game : Lille | Monaco
+          game_date : 2016-09-10T00:00:00+02:00
+        - game : Lorient | Nancy
+          game_date : 2016-09-10T00:00:00+02:00
+        - game : Lyon | Bordeaux
+          game_date : 2016-09-10T00:00:00+02:00
+        - game : Nantes | Metz
+          game_date : 2016-09-10T00:00:00+02:00
+        - game : Nice | Marseille
+          game_date : 2016-09-10T00:00:00+02:00
+        - game : Paris-SG | Saint-Étienne
+          game_date : 2016-09-10T00:00:00+02:00
+        - game : Rennes | Caen
+          game_date : 2016-09-10T00:00:00+02:00
+    - number : 5
+      day_default_date : 2016-09-17T00:00:00+02:00
+      games :
+        - game : Bordeaux | Angers
+          game_date : 2016-09-17T00:00:00+02:00
+        - game : Caen | Paris-SG
+          game_date : 2016-09-17T00:00:00+02:00
+        - game : Dijon | Metz
+          game_date : 2016-09-17T00:00:00+02:00
+        - game : Lorient | Lille
+          game_date : 2016-09-17T00:00:00+02:00
+        - game : Marseille | Lyon
+          game_date : 2016-09-17T00:00:00+02:00
+        - game : Monaco | Rennes
+          game_date : 2016-09-17T00:00:00+02:00
+        - game : Montpellier | Nice
+          game_date : 2016-09-17T00:00:00+02:00
+        - game : Nancy | Nantes
+          game_date : 2016-09-17T00:00:00+02:00
+        - game : Saint-Étienne | Bastia
+          game_date : 2016-09-17T00:00:00+02:00
+        - game : Toulouse | Guingamp
+          game_date : 2016-09-17T00:00:00+02:00
+    - number : 6
+      day_default_date : 2016-09-21T00:00:00+02:00
+      games :
+        - game : Angers | Caen
+          game_date : 2016-09-21T00:00:00+02:00
+        - game : Bastia | Nancy
+          game_date : 2016-09-21T00:00:00+02:00
+        - game : Guingamp | Lorient
+          game_date : 2016-09-21T00:00:00+02:00
+        - game : Lille | Toulouse
+          game_date : 2016-09-21T00:00:00+02:00
+        - game : Lyon | Montpellier
+          game_date : 2016-09-21T00:00:00+02:00
+        - game : Metz | Bordeaux
+          game_date : 2016-09-21T00:00:00+02:00
+        - game : Nantes | Saint-Étienne
+          game_date : 2016-09-21T00:00:00+02:00
+        - game : Nice | Monaco
+          game_date : 2016-09-21T00:00:00+02:00
+        - game : Paris-SG | Dijon
+          game_date : 2016-09-21T00:00:00+02:00
+        - game : Rennes | Marseille
+          game_date : 2016-09-21T00:00:00+02:00
+    - number : 7
+      day_default_date : 2016-09-24T00:00:00+02:00
+      games :
+        - game : Bastia | Guingamp
+          game_date : 2016-09-24T00:00:00+02:00
+        - game : Bordeaux | Caen
+          game_date : 2016-09-24T00:00:00+02:00
+        - game : Dijon | Rennes
+          game_date : 2016-09-24T00:00:00+02:00
+        - game : Lorient | Lyon
+          game_date : 2016-09-24T00:00:00+02:00
+        - game : Marseille | Nantes
+          game_date : 2016-09-24T00:00:00+02:00
+        - game : Monaco | Angers
+          game_date : 2016-09-24T00:00:00+02:00
+        - game : Montpellier | Metz
+          game_date : 2016-09-24T00:00:00+02:00
+        - game : Nancy | Nice
+          game_date : 2016-09-24T00:00:00+02:00
+        - game : Saint-Étienne | Lille
+          game_date : 2016-09-24T00:00:00+02:00
+        - game : Toulouse | Paris-SG
+          game_date : 2016-09-24T00:00:00+02:00
+    - number : 8
+      day_default_date : 2016-10-01T00:00:00+02:00
+      games :
+        - game : Angers | Marseille
+          game_date : 2016-10-01T00:00:00+02:00
+        - game : Caen | Toulouse
+          game_date : 2016-10-01T00:00:00+02:00
+        - game : Dijon | Montpellier
+          game_date : 2016-10-01T00:00:00+02:00
+        - game : Lille | Nancy
+          game_date : 2016-10-01T00:00:00+02:00
+        - game : Lyon | Saint-Étienne
+          game_date : 2016-10-01T00:00:00+02:00
+        - game : Metz | Monaco
+          game_date : 2016-10-01T00:00:00+02:00
+        - game : Nantes | Bastia
+          game_date : 2016-10-01T00:00:00+02:00
+        - game : Nice | Lorient
+          game_date : 2016-10-01T00:00:00+02:00
+        - game : Paris-SG | Bordeaux
+          game_date : 2016-10-01T00:00:00+02:00
+        - game : Rennes | Guingamp
+          game_date : 2016-10-01T00:00:00+02:00
+    - number : 9
+      day_default_date : 2016-10-15T00:00:00+02:00
+      games :
+        - game : Bastia | Angers
+          game_date : 2016-10-15T00:00:00+02:00
+        - game : Guingamp | Lille
+          game_date : 2016-10-15T00:00:00+02:00
+        - game : Lorient | Nantes
+          game_date : 2016-10-15T00:00:00+02:00
+        - game : Marseille | Metz
+          game_date : 2016-10-15T00:00:00+02:00
+        - game : Montpellier | Caen
+          game_date : 2016-10-15T00:00:00+02:00
+        - game : Nancy | Paris-SG
+          game_date : 2016-10-15T00:00:00+02:00
+        - game : Nice | Lyon
+          game_date : 2016-10-15T00:00:00+02:00
+        - game : Rennes | Bordeaux
+          game_date : 2016-10-15T00:00:00+02:00
+        - game : Saint-Étienne | Dijon
+          game_date : 2016-10-15T00:00:00+02:00
+        - game : Toulouse | Monaco
+          game_date : 2016-10-15T00:00:00+02:00
+    - number : 10
+      day_default_date : 2016-10-22T00:00:00+02:00
+      games :
+        - game : Angers | Toulouse
+          game_date : 2016-10-22T00:00:00+02:00
+        - game : Bordeaux | Nancy
+          game_date : 2016-10-22T00:00:00+02:00
+        - game : Caen | Saint-Étienne
+          game_date : 2016-10-22T00:00:00+02:00
+        - game : Dijon | Lorient
+          game_date : 2016-10-22T00:00:00+02:00
+        - game : Lille | Bastia
+          game_date : 2016-10-22T00:00:00+02:00
+        - game : Lyon | Guingamp
+          game_date : 2016-10-22T00:00:00+02:00
+        - game : Metz | Nice
+          game_date : 2016-10-22T00:00:00+02:00
+        - game : Monaco | Montpellier
+          game_date : 2016-10-22T00:00:00+02:00
+        - game : Nantes | Rennes
+          game_date : 2016-10-22T00:00:00+02:00
+        - game : Paris-SG | Marseille
+          game_date : 2016-10-22T00:00:00+02:00
+    - number : 11
+      day_default_date : 2016-10-29T00:00:00+02:00
+      games :
+        - game : Bastia | Dijon
+          game_date : 2016-10-29T00:00:00+02:00
+        - game : Guingamp | Angers
+          game_date : 2016-10-29T00:00:00+02:00
+        - game : Lille | Paris-SG
+          game_date : 2016-10-29T00:00:00+02:00
+        - game : Lorient | Montpellier
+          game_date : 2016-10-29T00:00:00+02:00
+        - game : Marseille | Bordeaux
+          game_date : 2016-10-29T00:00:00+02:00
+        - game : Nancy | Caen
+          game_date : 2016-10-29T00:00:00+02:00
+        - game : Nice | Nantes
+          game_date : 2016-10-29T00:00:00+02:00
+        - game : Rennes | Metz
+          game_date : 2016-10-29T00:00:00+02:00
+        - game : Saint-Étienne | Monaco
+          game_date : 2016-10-29T00:00:00+02:00
+        - game : Toulouse | Lyon
+          game_date : 2016-10-29T00:00:00+02:00
+    - number : 12
+      day_default_date : 2016-11-05T00:00:00+01:00
+      games :
+        - game : Angers | Lille
+          game_date : 2016-11-05T00:00:00+01:00
+        - game : Bordeaux | Lorient
+          game_date : 2016-11-05T00:00:00+01:00
+        - game : Caen | Nice
+          game_date : 2016-11-05T00:00:00+01:00
+        - game : Dijon | Guingamp
+          game_date : 2016-11-05T00:00:00+01:00
+        - game : Lyon | Bastia
+          game_date : 2016-11-05T00:00:00+01:00
+        - game : Metz | Saint-Étienne
+          game_date : 2016-11-05T00:00:00+01:00
+        - game : Monaco | Nancy
+          game_date : 2016-11-05T00:00:00+01:00
+        - game : Montpellier | Marseille
+          game_date : 2016-11-05T00:00:00+01:00
+        - game : Nantes | Toulouse
+          game_date : 2016-11-05T00:00:00+01:00
+        - game : Paris-SG | Rennes
+          game_date : 2016-11-05T00:00:00+01:00
+    - number : 13
+      day_default_date : 2016-11-19T00:00:00+01:00
+      games :
+        - game : Bastia | Montpellier
+          game_date : 2016-11-19T00:00:00+01:00
+        - game : Guingamp | Bordeaux
+          game_date : 2016-11-19T00:00:00+01:00
+        - game : Lille | Lyon
+          game_date : 2016-11-19T00:00:00+01:00
+        - game : Lorient | Monaco
+          game_date : 2016-11-19T00:00:00+01:00
+        - game : Marseille | Caen
+          game_date : 2016-11-19T00:00:00+01:00
+        - game : Nancy | Dijon
+          game_date : 2016-11-19T00:00:00+01:00
+        - game : Paris-SG | Nantes
+          game_date : 2016-11-19T00:00:00+01:00
+        - game : Rennes | Angers
+          game_date : 2016-11-19T00:00:00+01:00
+        - game : Saint-Étienne | Nice
+          game_date : 2016-11-19T00:00:00+01:00
+        - game : Toulouse | Metz
+          game_date : 2016-11-19T00:00:00+01:00
+    - number : 14
+      day_default_date : 2016-11-26T00:00:00+01:00
+      games :
+        - game : Angers | Saint-Étienne
+          game_date : 2016-11-26T00:00:00+01:00
+        - game : Bordeaux | Dijon
+          game_date : 2016-11-26T00:00:00+01:00
+        - game : Caen | Guingamp
+          game_date : 2016-11-26T00:00:00+01:00
+        - game : Lyon | Paris-SG
+          game_date : 2016-11-26T00:00:00+01:00
+        - game : Metz | Lorient
+          game_date : 2016-11-26T00:00:00+01:00
+        - game : Monaco | Marseille
+          game_date : 2016-11-26T00:00:00+01:00
+        - game : Montpellier | Nancy
+          game_date : 2016-11-26T00:00:00+01:00
+        - game : Nantes | Lille
+          game_date : 2016-11-26T00:00:00+01:00
+        - game : Nice | Bastia
+          game_date : 2016-11-26T00:00:00+01:00
+        - game : Rennes | Toulouse
+          game_date : 2016-11-26T00:00:00+01:00
+    - number : 15
+      day_default_date : 2016-11-30T00:00:00+01:00
+      games :
+        - game : Bastia | Bordeaux
+          game_date : 2016-11-30T00:00:00+01:00
+        - game : Dijon | Monaco
+          game_date : 2016-11-30T00:00:00+01:00
+        - game : Guingamp | Nice
+          game_date : 2016-11-30T00:00:00+01:00
+        - game : Lille | Caen
+          game_date : 2016-11-30T00:00:00+01:00
+        - game : Lorient | Rennes
+          game_date : 2016-11-30T00:00:00+01:00
+        - game : Nancy | Metz
+          game_date : 2016-11-30T00:00:00+01:00
+        - game : Nantes | Lyon
+          game_date : 2016-11-30T00:00:00+01:00
+        - game : Paris-SG | Angers
+          game_date : 2016-11-30T00:00:00+01:00
+        - game : Saint-Étienne | Marseille
+          game_date : 2016-11-30T00:00:00+01:00
+        - game : Toulouse | Montpellier
+          game_date : 2016-11-30T00:00:00+01:00
+    - number : 16
+      day_default_date : 2016-12-03T00:00:00+01:00
+      games :
+        - game : Angers | Lorient
+          game_date : 2016-12-03T00:00:00+01:00
+        - game : Bordeaux | Lille
+          game_date : 2016-12-03T00:00:00+01:00
+        - game : Caen | Dijon
+          game_date : 2016-12-03T00:00:00+01:00
+        - game : Guingamp | Nantes
+          game_date : 2016-12-03T00:00:00+01:00
+        - game : Marseille | Nancy
+          game_date : 2016-12-03T00:00:00+01:00
+        - game : Metz | Lyon
+          game_date : 2016-12-03T00:00:00+01:00
+        - game : Monaco | Bastia
+          game_date : 2016-12-03T00:00:00+01:00
+        - game : Montpellier | Paris-SG
+          game_date : 2016-12-03T00:00:00+01:00
+        - game : Nice | Toulouse
+          game_date : 2016-12-03T00:00:00+01:00
+        - game : Rennes | Saint-Étienne
+          game_date : 2016-12-03T00:00:00+01:00
+    - number : 17
+      day_default_date : 2016-12-10T00:00:00+01:00
+      games :
+        - game : Bastia | Metz
+          game_date : 2016-12-10T00:00:00+01:00
+        - game : Bordeaux | Monaco
+          game_date : 2016-12-10T00:00:00+01:00
+        - game : Dijon | Marseille
+          game_date : 2016-12-10T00:00:00+01:00
+        - game : Lille | Montpellier
+          game_date : 2016-12-10T00:00:00+01:00
+        - game : Lyon | Rennes
+          game_date : 2016-12-10T00:00:00+01:00
+        - game : Nancy | Angers
+          game_date : 2016-12-10T00:00:00+01:00
+        - game : Nantes | Caen
+          game_date : 2016-12-10T00:00:00+01:00
+        - game : Paris-SG | Nice
+          game_date : 2016-12-10T00:00:00+01:00
+        - game : Saint-Étienne | Guingamp
+          game_date : 2016-12-10T00:00:00+01:00
+        - game : Toulouse | Lorient
+          game_date : 2016-12-10T00:00:00+01:00
+    - number : 18
+      day_default_date : 2016-12-17T00:00:00+01:00
+      games :
+        - game : Angers | Nantes
+          game_date : 2016-12-17T00:00:00+01:00
+        - game : Caen | Metz
+          game_date : 2016-12-17T00:00:00+01:00
+        - game : Guingamp | Paris-SG
+          game_date : 2016-12-17T00:00:00+01:00
+        - game : Lorient | Saint-Étienne
+          game_date : 2016-12-17T00:00:00+01:00
+        - game : Marseille | Lille
+          game_date : 2016-12-17T00:00:00+01:00
+        - game : Monaco | Lyon
+          game_date : 2016-12-17T00:00:00+01:00
+        - game : Montpellier | Bordeaux
+          game_date : 2016-12-17T00:00:00+01:00
+        - game : Nice | Dijon
+          game_date : 2016-12-17T00:00:00+01:00
+        - game : Rennes | Bastia
+          game_date : 2016-12-17T00:00:00+01:00
+        - game : Toulouse | Nancy
+          game_date : 2016-12-17T00:00:00+01:00
+    - number : 19
+      day_default_date : 2016-12-21T00:00:00+01:00
+      games :
+        - game : Bastia | Marseille
+          game_date : 2016-12-21T00:00:00+01:00
+        - game : Bordeaux | Nice
+          game_date : 2016-12-21T00:00:00+01:00
+        - game : Dijon | Toulouse
+          game_date : 2016-12-21T00:00:00+01:00
+        - game : Lille | Rennes
+          game_date : 2016-12-21T00:00:00+01:00
+        - game : Lyon | Angers
+          game_date : 2016-12-21T00:00:00+01:00
+        - game : Metz | Guingamp
+          game_date : 2016-12-21T00:00:00+01:00
+        - game : Monaco | Caen
+          game_date : 2016-12-21T00:00:00+01:00
+        - game : Nantes | Montpellier
+          game_date : 2016-12-21T00:00:00+01:00
+        - game : Paris-SG | Lorient
+          game_date : 2016-12-21T00:00:00+01:00
+        - game : Saint-Étienne | Nancy
+          game_date : 2016-12-21T00:00:00+01:00
+    - number : 20
+      day_default_date : 2017-01-14T00:00:00+01:00
+      games :
+        - game : Angers | Bordeaux
+          game_date : 2017-01-14T00:00:00+01:00
+        - game : Caen | Lyon
+          game_date : 2017-01-14T00:00:00+01:00
+        - game : Lille | Saint-Étienne
+          game_date : 2017-01-14T00:00:00+01:00
+        - game : Lorient | Guingamp
+          game_date : 2017-01-14T00:00:00+01:00
+        - game : Marseille | Monaco
+          game_date : 2017-01-14T00:00:00+01:00
+        - game : Montpellier | Dijon
+          game_date : 2017-01-14T00:00:00+01:00
+        - game : Nancy | Bastia
+          game_date : 2017-01-14T00:00:00+01:00
+        - game : Nice | Metz
+          game_date : 2017-01-14T00:00:00+01:00
+        - game : Rennes | Paris-SG
+          game_date : 2017-01-14T00:00:00+01:00
+        - game : Toulouse | Nantes
+          game_date : 2017-01-14T00:00:00+01:00
+    - number : 21
+      day_default_date : 2017-01-21T00:00:00+01:00
+      games :
+        - game : Bastia | Nice
+          game_date : 2017-01-21T00:00:00+01:00
+        - game : Bordeaux | Toulouse
+          game_date : 2017-01-21T00:00:00+01:00
+        - game : Caen | Nancy
+          game_date : 2017-01-21T00:00:00+01:00
+        - game : Dijon | Lille
+          game_date : 2017-01-21T00:00:00+01:00
+        - game : Guingamp | Rennes
+          game_date : 2017-01-21T00:00:00+01:00
+        - game : Lyon | Marseille
+          game_date : 2017-01-21T00:00:00+01:00
+        - game : Metz | Montpellier
+          game_date : 2017-01-21T00:00:00+01:00
+        - game : Monaco | Lorient
+          game_date : 2017-01-21T00:00:00+01:00
+        - game : Nantes | Paris-SG
+          game_date : 2017-01-21T00:00:00+01:00
+        - game : Saint-Étienne | Angers
+          game_date : 2017-01-21T00:00:00+01:00
+    - number : 22
+      day_default_date : 2017-01-28T00:00:00+01:00
+      games :
+        - game : Angers | Metz
+          game_date : 2017-01-28T00:00:00+01:00
+        - game : Bastia | Caen
+          game_date : 2017-01-28T00:00:00+01:00
+        - game : Lorient | Dijon
+          game_date : 2017-01-28T00:00:00+01:00
+        - game : Lyon | Lille
+          game_date : 2017-01-28T00:00:00+01:00
+        - game : Marseille | Montpellier
+          game_date : 2017-01-28T00:00:00+01:00
+        - game : Nancy | Bordeaux
+          game_date : 2017-01-28T00:00:00+01:00
+        - game : Nice | Guingamp
+          game_date : 2017-01-28T00:00:00+01:00
+        - game : Paris-SG | Monaco
+          game_date : 2017-01-28T00:00:00+01:00
+        - game : Rennes | Nantes
+          game_date : 2017-01-28T00:00:00+01:00
+        - game : Toulouse | Saint-Étienne
+          game_date : 2017-01-28T00:00:00+01:00
+    - number : 23
+      day_default_date : 2017-02-04T00:00:00+01:00
+      games :
+        - game : Bordeaux | Rennes
+          game_date : 2017-02-04T00:00:00+01:00
+        - game : Dijon | Paris-SG
+          game_date : 2017-02-04T00:00:00+01:00
+        - game : Guingamp | Caen
+          game_date : 2017-02-04T00:00:00+01:00
+        - game : Lille | Lorient
+          game_date : 2017-02-04T00:00:00+01:00
+        - game : Metz | Marseille
+          game_date : 2017-02-04T00:00:00+01:00
+        - game : Monaco | Nice
+          game_date : 2017-02-04T00:00:00+01:00
+        - game : Montpellier | Bastia
+          game_date : 2017-02-04T00:00:00+01:00
+        - game : Nantes | Nancy
+          game_date : 2017-02-04T00:00:00+01:00
+        - game : Saint-Étienne | Lyon
+          game_date : 2017-02-04T00:00:00+01:00
+        - game : Toulouse | Angers
+          game_date : 2017-02-04T00:00:00+01:00
+    - number : 24
+      day_default_date : 2017-02-08T00:00:00+01:00
+      games :
+        - game : Angers | Rennes
+          game_date : 2017-02-08T00:00:00+01:00
+        - game : Bastia | Nantes
+          game_date : 2017-02-08T00:00:00+01:00
+        - game : Caen | Bordeaux
+          game_date : 2017-02-08T00:00:00+01:00
+        - game : Lorient | Toulouse
+          game_date : 2017-02-08T00:00:00+01:00
+        - game : Lyon | Nancy
+          game_date : 2017-02-08T00:00:00+01:00
+        - game : Marseille | Guingamp
+          game_date : 2017-02-08T00:00:00+01:00
+        - game : Metz | Dijon
+          game_date : 2017-02-08T00:00:00+01:00
+        - game : Montpellier | Monaco
+          game_date : 2017-02-08T00:00:00+01:00
+        - game : Nice | Saint-Étienne
+          game_date : 2017-02-08T00:00:00+01:00
+        - game : Paris-SG | Lille
+          game_date : 2017-02-08T00:00:00+01:00
+    - number : 25
+      day_default_date : 2017-02-11T00:00:00+01:00
+      games :
+        - game : Bordeaux | Paris-SG
+          game_date : 2017-02-11T00:00:00+01:00
+        - game : Dijon | Caen
+          game_date : 2017-02-11T00:00:00+01:00
+        - game : Guingamp | Lyon
+          game_date : 2017-02-11T00:00:00+01:00
+        - game : Lille | Angers
+          game_date : 2017-02-11T00:00:00+01:00
+        - game : Monaco | Metz
+          game_date : 2017-02-11T00:00:00+01:00
+        - game : Nancy | Montpellier
+          game_date : 2017-02-11T00:00:00+01:00
+        - game : Nantes | Marseille
+          game_date : 2017-02-11T00:00:00+01:00
+        - game : Rennes | Nice
+          game_date : 2017-02-11T00:00:00+01:00
+        - game : Saint-Étienne | Lorient
+          game_date : 2017-02-11T00:00:00+01:00
+        - game : Toulouse | Bastia
+          game_date : 2017-02-11T00:00:00+01:00
+    - number : 26
+      day_default_date : 2017-02-18T00:00:00+01:00
+      games :
+        - game : Angers | Nancy
+          game_date : 2017-02-18T00:00:00+01:00
+        - game : Bastia | Monaco
+          game_date : 2017-02-18T00:00:00+01:00
+        - game : Bordeaux | Guingamp
+          game_date : 2017-02-18T00:00:00+01:00
+        - game : Caen | Lille
+          game_date : 2017-02-18T00:00:00+01:00
+        - game : Lorient | Nice
+          game_date : 2017-02-18T00:00:00+01:00
+        - game : Lyon | Dijon
+          game_date : 2017-02-18T00:00:00+01:00
+        - game : Marseille | Rennes
+          game_date : 2017-02-18T00:00:00+01:00
+        - game : Metz | Nantes
+          game_date : 2017-02-18T00:00:00+01:00
+        - game : Montpellier | Saint-Étienne
+          game_date : 2017-02-18T00:00:00+01:00
+        - game : Paris-SG | Toulouse
+          game_date : 2017-02-18T00:00:00+01:00
+    - number : 27
+      day_default_date : 2017-02-25T00:00:00+01:00
+      games :
+        - game : Angers | Bastia
+          game_date : 2017-02-25T00:00:00+01:00
+        - game : Guingamp | Monaco
+          game_date : 2017-02-25T00:00:00+01:00
+        - game : Lille | Bordeaux
+          game_date : 2017-02-25T00:00:00+01:00
+        - game : Lyon | Metz
+          game_date : 2017-02-25T00:00:00+01:00
+        - game : Marseille | Paris-SG
+          game_date : 2017-02-25T00:00:00+01:00
+        - game : Nancy | Toulouse
+          game_date : 2017-02-25T00:00:00+01:00
+        - game : Nantes | Dijon
+          game_date : 2017-02-25T00:00:00+01:00
+        - game : Nice | Montpellier
+          game_date : 2017-02-25T00:00:00+01:00
+        - game : Rennes | Lorient
+          game_date : 2017-02-25T00:00:00+01:00
+        - game : Saint-Étienne | Caen
+          game_date : 2017-02-25T00:00:00+01:00
+    - number : 28
+      day_default_date : 2017-03-04T00:00:00+01:00
+      games :
+        - game : Bastia | Saint-Étienne
+          game_date : 2017-03-04T00:00:00+01:00
+        - game : Bordeaux | Lyon
+          game_date : 2017-03-04T00:00:00+01:00
+        - game : Caen | Angers
+          game_date : 2017-03-04T00:00:00+01:00
+        - game : Dijon | Nice
+          game_date : 2017-03-04T00:00:00+01:00
+        - game : Lorient | Marseille
+          game_date : 2017-03-04T00:00:00+01:00
+        - game : Metz | Rennes
+          game_date : 2017-03-04T00:00:00+01:00
+        - game : Monaco | Nantes
+          game_date : 2017-03-04T00:00:00+01:00
+        - game : Montpellier | Guingamp
+          game_date : 2017-03-04T00:00:00+01:00
+        - game : Paris-SG | Nancy
+          game_date : 2017-03-04T00:00:00+01:00
+        - game : Toulouse | Lille
+          game_date : 2017-03-04T00:00:00+01:00
+    - number : 29
+      day_default_date : 2017-03-11T00:00:00+01:00
+      games :
+        - game : Guingamp | Bastia
+          game_date : 2017-03-11T00:00:00+01:00
+        - game : Lorient | Paris-SG
+          game_date : 2017-03-11T00:00:00+01:00
+        - game : Lyon | Toulouse
+          game_date : 2017-03-11T00:00:00+01:00
+        - game : Marseille | Angers
+          game_date : 2017-03-11T00:00:00+01:00
+        - game : Monaco | Bordeaux
+          game_date : 2017-03-11T00:00:00+01:00
+        - game : Montpellier | Nantes
+          game_date : 2017-03-11T00:00:00+01:00
+        - game : Nancy | Lille
+          game_date : 2017-03-11T00:00:00+01:00
+        - game : Nice | Caen
+          game_date : 2017-03-11T00:00:00+01:00
+        - game : Rennes | Dijon
+          game_date : 2017-03-11T00:00:00+01:00
+        - game : Saint-Étienne | Metz
+          game_date : 2017-03-11T00:00:00+01:00
+    - number : 30
+      day_default_date : 2017-03-18T00:00:00+01:00
+      games :
+        - game : Angers | Guingamp
+          game_date : 2017-03-18T00:00:00+01:00
+        - game : Bordeaux | Montpellier
+          game_date : 2017-03-18T00:00:00+01:00
+        - game : Caen | Monaco
+          game_date : 2017-03-18T00:00:00+01:00
+        - game : Dijon | Saint-Étienne
+          game_date : 2017-03-18T00:00:00+01:00
+        - game : Lille | Marseille
+          game_date : 2017-03-18T00:00:00+01:00
+        - game : Metz | Bastia
+          game_date : 2017-03-18T00:00:00+01:00
+        - game : Nancy | Lorient
+          game_date : 2017-03-18T00:00:00+01:00
+        - game : Nantes | Nice
+          game_date : 2017-03-18T00:00:00+01:00
+        - game : Paris-SG | Lyon
+          game_date : 2017-03-18T00:00:00+01:00
+        - game : Toulouse | Rennes
+          game_date : 2017-03-18T00:00:00+01:00
+    - number : 31
+      day_default_date : 2017-04-02T00:00:00+02:00
+      games :
+        - game : Bastia | Lille
+          game_date : 2017-04-02T00:00:00+02:00
+        - game : Guingamp | Nancy
+          game_date : 2017-04-02T00:00:00+02:00
+        - game : Lorient | Caen
+          game_date : 2017-04-02T00:00:00+02:00
+        - game : Marseille | Dijon
+          game_date : 2017-04-02T00:00:00+02:00
+        - game : Metz | Paris-SG
+          game_date : 2017-04-02T00:00:00+02:00
+        - game : Monaco | Saint-Étienne
+          game_date : 2017-04-02T00:00:00+02:00
+        - game : Montpellier | Toulouse
+          game_date : 2017-04-02T00:00:00+02:00
+        - game : Nantes | Angers
+          game_date : 2017-04-02T00:00:00+02:00
+        - game : Nice | Bordeaux
+          game_date : 2017-04-02T00:00:00+02:00
+        - game : Rennes | Lyon
+          game_date : 2017-04-02T00:00:00+02:00
+    - number : 32
+      day_default_date : 2017-04-08T00:00:00+02:00
+      games :
+        - game : Angers | Monaco
+          game_date : 2017-04-08T00:00:00+02:00
+        - game : Bordeaux | Metz
+          game_date : 2017-04-08T00:00:00+02:00
+        - game : Caen | Montpellier
+          game_date : 2017-04-08T00:00:00+02:00
+        - game : Dijon | Bastia
+          game_date : 2017-04-08T00:00:00+02:00
+        - game : Lille | Nice
+          game_date : 2017-04-08T00:00:00+02:00
+        - game : Lyon | Lorient
+          game_date : 2017-04-08T00:00:00+02:00
+        - game : Nancy | Rennes
+          game_date : 2017-04-08T00:00:00+02:00
+        - game : Paris-SG | Guingamp
+          game_date : 2017-04-08T00:00:00+02:00
+        - game : Saint-Étienne | Nantes
+          game_date : 2017-04-08T00:00:00+02:00
+        - game : Toulouse | Marseille
+          game_date : 2017-04-08T00:00:00+02:00
+    - number : 33
+      day_default_date : 2017-04-15T00:00:00+02:00
+      games :
+        - game : Angers | Paris-SG
+          game_date : 2017-04-15T00:00:00+02:00
+        - game : Bastia | Lyon
+          game_date : 2017-04-15T00:00:00+02:00
+        - game : Guingamp | Toulouse
+          game_date : 2017-04-15T00:00:00+02:00
+        - game : Marseille | Saint-Étienne
+          game_date : 2017-04-15T00:00:00+02:00
+        - game : Metz | Caen
+          game_date : 2017-04-15T00:00:00+02:00
+        - game : Monaco | Dijon
+          game_date : 2017-04-15T00:00:00+02:00
+        - game : Montpellier | Lorient
+          game_date : 2017-04-15T00:00:00+02:00
+        - game : Nantes | Bordeaux
+          game_date : 2017-04-15T00:00:00+02:00
+        - game : Nice | Nancy
+          game_date : 2017-04-15T00:00:00+02:00
+        - game : Rennes | Lille
+          game_date : 2017-04-15T00:00:00+02:00
+    - number : 34
+      day_default_date : 2017-04-22T00:00:00+02:00
+      games :
+        - game : Bordeaux | Bastia
+          game_date : 2017-04-22T00:00:00+02:00
+        - game : Caen | Nantes
+          game_date : 2017-04-22T00:00:00+02:00
+        - game : Dijon | Angers
+          game_date : 2017-04-22T00:00:00+02:00
+        - game : Lille | Guingamp
+          game_date : 2017-04-22T00:00:00+02:00
+        - game : Lorient | Metz
+          game_date : 2017-04-22T00:00:00+02:00
+        - game : Lyon | Monaco
+          game_date : 2017-04-22T00:00:00+02:00
+        - game : Nancy | Marseille
+          game_date : 2017-04-22T00:00:00+02:00
+        - game : Paris-SG | Montpellier
+          game_date : 2017-04-22T00:00:00+02:00
+        - game : Saint-Étienne | Rennes
+          game_date : 2017-04-22T00:00:00+02:00
+        - game : Toulouse | Nice
+          game_date : 2017-04-22T00:00:00+02:00
+    - number : 35
+      day_default_date : 2017-04-29T00:00:00+02:00
+      games :
+        - game : Angers | Lyon
+          game_date : 2017-04-29T00:00:00+02:00
+        - game : Bastia | Rennes
+          game_date : 2017-04-29T00:00:00+02:00
+        - game : Caen | Marseille
+          game_date : 2017-04-29T00:00:00+02:00
+        - game : Dijon | Bordeaux
+          game_date : 2017-04-29T00:00:00+02:00
+        - game : Guingamp | Saint-Étienne
+          game_date : 2017-04-29T00:00:00+02:00
+        - game : Metz | Nancy
+          game_date : 2017-04-29T00:00:00+02:00
+        - game : Monaco | Toulouse
+          game_date : 2017-04-29T00:00:00+02:00
+        - game : Montpellier | Lille
+          game_date : 2017-04-29T00:00:00+02:00
+        - game : Nantes | Lorient
+          game_date : 2017-04-29T00:00:00+02:00
+        - game : Nice | Paris-SG
+          game_date : 2017-04-29T00:00:00+02:00
+    - number : 36
+      day_default_date : 2017-05-06T00:00:00+02:00
+      games :
+        - game : Guingamp | Dijon
+          game_date : 2017-05-06T00:00:00+02:00
+        - game : Lille | Metz
+          game_date : 2017-05-06T00:00:00+02:00
+        - game : Lorient | Angers
+          game_date : 2017-05-06T00:00:00+02:00
+        - game : Lyon | Nantes
+          game_date : 2017-05-06T00:00:00+02:00
+        - game : Marseille | Nice
+          game_date : 2017-05-06T00:00:00+02:00
+        - game : Nancy | Monaco
+          game_date : 2017-05-06T00:00:00+02:00
+        - game : Paris-SG | Bastia
+          game_date : 2017-05-06T00:00:00+02:00
+        - game : Rennes | Montpellier
+          game_date : 2017-05-06T00:00:00+02:00
+        - game : Saint-Étienne | Bordeaux
+          game_date : 2017-05-06T00:00:00+02:00
+        - game : Toulouse | Caen
+          game_date : 2017-05-06T00:00:00+02:00
+    - number : 37
+      day_default_date : 2017-05-13T00:00:00+02:00
+      games :
+        - game : Bastia | Lorient
+          game_date : 2017-05-13T00:00:00+02:00
+        - game : Bordeaux | Marseille
+          game_date : 2017-05-13T00:00:00+02:00
+        - game : Caen | Rennes
+          game_date : 2017-05-13T00:00:00+02:00
+        - game : Dijon | Nancy
+          game_date : 2017-05-13T00:00:00+02:00
+        - game : Metz | Toulouse
+          game_date : 2017-05-13T00:00:00+02:00
+        - game : Monaco | Lille
+          game_date : 2017-05-13T00:00:00+02:00
+        - game : Montpellier | Lyon
+          game_date : 2017-05-13T00:00:00+02:00
+        - game : Nantes | Guingamp
+          game_date : 2017-05-13T00:00:00+02:00
+        - game : Nice | Angers
+          game_date : 2017-05-13T00:00:00+02:00
+        - game : Saint-Étienne | Paris-SG
+          game_date : 2017-05-13T00:00:00+02:00
+    - number : 38
+      day_default_date : 2017-05-20T00:00:00+02:00
+      games :
+        - game : Angers | Montpellier
+          game_date : 2017-05-20T00:00:00+02:00
+        - game : Guingamp | Metz
+          game_date : 2017-05-20T00:00:00+02:00
+        - game : Lille | Nantes
+          game_date : 2017-05-20T00:00:00+02:00
+        - game : Lorient | Bordeaux
+          game_date : 2017-05-20T00:00:00+02:00
+        - game : Lyon | Nice
+          game_date : 2017-05-20T00:00:00+02:00
+        - game : Marseille | Bastia
+          game_date : 2017-05-20T00:00:00+02:00
+        - game : Nancy | Saint-Étienne
+          game_date : 2017-05-20T00:00:00+02:00
+        - game : Paris-SG | Caen
+          game_date : 2017-05-20T00:00:00+02:00
+        - game : Rennes | Monaco
+          game_date : 2017-05-20T00:00:00+02:00
+        - game : Toulouse | Dijon
+          game_date : 2017-05-20T00:00:00+02:00

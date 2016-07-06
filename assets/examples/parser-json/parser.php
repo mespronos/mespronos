@@ -27,7 +27,31 @@ foreach ($games as $game) {
 
   $dt->setTimeZone( new DateTimezone('Europe/Berlin') );
   $game->date = $dt->format('c');
+  unset($game->URL);
+  unset($game->DTEND);
+  unset($game->DTEND);
+  unset($game->DESCRIPTION);
+  unset($game->LOCATION);
+  unset($game->TRANSP);
+  unset($game->DTSTART);
 
   $output_games[$journee][] = $game;
 }
-var_dump($output_games);
+
+//$trans = \Drupal::service('transliteration');
+
+$fp = fopen('../'.str_replace('/','-',$league_name).'.yaml', 'w+');
+
+ob_start();
+$ligue_content =  "league :\n  name : '$league_name'\n  sport : '$sport'\n  status : '$status'\n  classement : true\n  betting_type : '$betting_type'\n  days:\n";
+fwrite($fp, $ligue_content);
+
+foreach ($output_games as $num_journee => $matchs) {
+  ob_start();
+  echo "    - number : $num_journee\n      day_default_date : ".$matchs[0]->date."\n      games :\n";
+  foreach ($matchs as $match) {
+    echo "        - game : ".$match->SUMMARY."\n          game_date : ".$match->date."\n";
+  }
+  $journee_content = ob_get_contents();
+  fwrite($fp, $journee_content);
+}
