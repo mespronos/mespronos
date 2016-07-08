@@ -140,6 +140,8 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
   public function postSave(EntityStorageInterface $storage, $update = TRUE) {
     parent::postSave($storage, $update);
 
+    \Drupal::service('pathauto.generator')->updateEntityAlias($this, 'update');
+
     $trans = \Drupal::service('transliteration');
     $alias_manager = \Drupal::service('path.alias_manager');
     $alias_storage = \Drupal::service('path.alias_storage');
