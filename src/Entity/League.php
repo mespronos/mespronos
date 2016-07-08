@@ -70,8 +70,8 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   ];
 
   protected static $points_default = [
-    'points_score_found' => 10,
-    'points_winner_found' => 5,
+    'points_score_found' => 5,
+    'points_winner_found' => 3,
     'points_participation' => 1,
   ];
 
