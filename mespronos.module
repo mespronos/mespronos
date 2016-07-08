@@ -78,6 +78,7 @@ function mespronos_theme() {
       'last_bets' => NULL,
       'next_bets' => NULL,
       'ranking' => NULL,
+      'groups' => [],
     ),
   );
   $theme['day-details'] = array(

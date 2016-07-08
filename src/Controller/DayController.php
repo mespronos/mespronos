@@ -12,7 +12,6 @@ use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Bet;
 use Drupal\mespronos\Entity\League;
-use Drupal\mespronos_group\Entity\Group;
 use Drupal\user\Entity\User;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Url;
@@ -76,7 +75,7 @@ class DayController extends ControllerBase {
     $groups = false;
     if($user == null || $user->id() == \Drupal::currentUser()->id()) {
       $user = User::load(\Drupal::currentUser()->id());
-      $groups = self::getGroup($user);
+      $groups = UserController::getGroup($user);
     }
     $render_controller = \Drupal::entityManager()->getViewBuilder('group');
     $groups_ranking = [];
@@ -93,20 +92,6 @@ class DayController extends ControllerBase {
       }
     }
     return $groups_ranking;
-  }
-
-  /**
-   * @param \Drupal\user\Entity\User|NULL $user
-   * @return bool|\Drupal\mespronos_group\Entity\Group[]
-   */
-  private static function getGroup(User $user = null) {
-    if($user != null && \Drupal::moduleHandler()->moduleExists('mespronos_group')) {
-      $groups = Group::getUserGroup($user);
-    }
-    else {
-      $groups = false;
-    }
-    return $groups;
   }
 
   private static function getDayRows(Day $day, User $user) {

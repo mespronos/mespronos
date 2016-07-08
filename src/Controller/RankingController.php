@@ -73,8 +73,8 @@ class RankingController extends ControllerBase {
 
   }
 
-  public static function getRankingLeague(League $league) {
-    $ranking = RankingLeague::getRanking($league);
+  public static function getRankingLeague(League $league,Group $group = null) {
+    $ranking = RankingLeague::getRanking($league,'league','ranking_league',$group);
     if($ranking) {
       return self::getTableFromRanking($ranking);
     }

@@ -32,6 +32,7 @@ class LeagueController extends ControllerBase {
       '#last_bets' => $last_bets,
       '#next_bets' => $next_bets,
       '#ranking' => $ranking,
+      '#groups' => self::getGroupRankings($league),
       '#cache' => [
         'contexts' => ['user'],
         'tags' => [ 'user:'.\Drupal::currentUser()->id(),'league:'.$league->id()],
@@ -65,6 +66,28 @@ class LeagueController extends ControllerBase {
 
   }
 
+
+  public static function getGroupRankings(League $league) {
+
+    $user = User::load(\Drupal::currentUser()->id());
+    $groups = UserController::getGroup($user);
+
+    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
+    $groups_ranking = [];
+    if($groups) {
+      foreach ($groups as $group) {
+        $ranking = RankingController::getRankingLeague($league,$group);
+        if($ranking) {
+          $groups_ranking[] = [
+            'label' => $group->label(),
+            'group_logo' => $render_controller->view($group,'logo'),
+            'group_ranking' => RankingController::getRankingLeague($league,$group),
+          ];
+        }
+      }
+    }
+    return $groups_ranking;
+  }
   /**
    * @return array
    */

@@ -162,9 +162,6 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
         $alias_storage->save($system_path, $path_alias);
       }
     }
-
-
-
   }
 
 

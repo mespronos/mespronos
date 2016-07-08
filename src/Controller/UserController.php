@@ -14,6 +14,7 @@ use Drupal\mespronos\Entity\MPNContentEntityBase;
 use Drupal\user\Entity\User;
 use Drupal\file\Entity\File;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Drupal\mespronos_group\Entity\Group;
 
 /**
  * Class DefaultController.
@@ -45,5 +46,19 @@ class UserController extends ControllerBase {
     else {
       return [];
     }
+  }
+
+  /**
+   * @param \Drupal\user\Entity\User|NULL $user
+   * @return bool|\Drupal\mespronos_group\Entity\Group[]
+   */
+  public static function getGroup(User $user = null) {
+    if($user != null && \Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+      $groups = Group::getUserGroup($user);
+    }
+    else {
+      $groups = false;
+    }
+    return $groups;
   }
 }
