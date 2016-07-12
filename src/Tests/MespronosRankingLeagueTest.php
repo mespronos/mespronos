@@ -194,9 +194,10 @@ class MespronosRankingLeagueTest extends WebTestBase {
 
     $this->assertTrue($this->l1d1game1->isScoreSetted(),t('Game1 score is setted'));
 
+    $points = $this->league1->getPoints();
     foreach($betsDay1 as $bet) {
       $bet = Bet::load($bet->id());
-      $this->assertEqual($bet->getPoints(),10,t('good bets worth 10 points'));
+      $this->assertEqual($bet->getPoints(),$points['points_score_found'],t('good bets worth 10 points'));
     }
 
     RankingDay::createRanking($this->league1day1);
@@ -239,7 +240,6 @@ class MespronosRankingLeagueTest extends WebTestBase {
     $this->assertTrue($this->l1d2game2->isScoreSetted(),t('Game1 score is setted'));
 
 
-    $points = $this->league1->getPoints();
     foreach($betsDay2 as $bet) {
       $bet = Bet::load($bet->id());
       $this->assertEqual($bet->getPoints(),$points['points_score_found'],t('good bets worth 10 points'));
