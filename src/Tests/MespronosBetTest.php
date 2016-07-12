@@ -181,7 +181,9 @@ class MespronosBetTest extends WebTestBase {
 
     $bet_reloaded = Bet::load($bet_id);
 
-    $this->assertEqual($bet_reloaded->getPoints(),10,t('Setting a game score update bets points'));
+    $points = $this->league->getPoints();
+
+    $this->assertEqual($bet_reloaded->getPoints(),$points['points_score_found'],t('Setting a game score update bets points'));
 
   }
 
