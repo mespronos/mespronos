@@ -18,5 +18,11 @@
   "extra": {
     "installer-name": "mespronos"
   },
-  "type":"drupal-module"
+  "type":"drupal-module",
+  "repositories": [
+    {
+      "type": "composer",
+      "url":  "https://packages.drupal.org/8"
+    }
+  ]
 }
