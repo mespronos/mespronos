@@ -136,10 +136,12 @@ class MespronosBetPointsTest extends WebTestBase {
 
     $this->assertTrue($this->game->isScoreSetted(),t('Game score is setted'));
 
-    $this->assertEqual($betTooGood->getPoints(),10,'On a draw, perfect bet worth 10 points');
-    $this->assertEqual($betABitGood->getPoints(),5,'On a draw, betting a draw worth 5 points');
-    $this->assertEqual($betswrong1->getPoints(),1,'On a draw, betting on team 1 worth 1 points');
-    $this->assertEqual($betswrong2->getPoints(),1,'On a draw, betting on team 2 worth 1 points');
+    $points = $this->league->getPoints();
+
+    $this->assertEqual($betTooGood->getPoints(),$points['points_score_found'],'On a draw, perfect bet worth the defined points');
+    $this->assertEqual($betABitGood->getPoints(),$points['points_winner_found'],'On a draw, betting a draw worth the defined points');
+    $this->assertEqual($betswrong1->getPoints(),$points['points_participation'],'On a draw, betting on team 1 worth the defined points');
+    $this->assertEqual($betswrong2->getPoints(),$points['points_participation'],'On a draw, betting on team 2 worth the defined points');
 
 
   }
@@ -189,10 +191,13 @@ class MespronosBetPointsTest extends WebTestBase {
 
     $this->assertTrue($this->game->isScoreSetted(),t('Game score is setted'));
 
-    $this->assertEqual($betTooGood->getPoints(),10,'On a team1 winning, perfect bet worth 10 points');
-    $this->assertEqual($betABitGood->getPoints(),5,'On a team1 winning, betting on team1 worth 5 points');
-    $this->assertEqual($betswrong1->getPoints(),1,'On a team1 winning, betting on draw worth 1 points');
-    $this->assertEqual($betswrong2->getPoints(),1,'On a team1 winning, betting on team 2 worth 1 points');
+    $points = $this->league->getPoints();
+
+    $this->assertEqual($betTooGood->getPoints(),$points['points_score_found'],'On a draw, perfect bet worth the defined points');
+    $this->assertEqual($betABitGood->getPoints(),$points['points_winner_found'],'On a draw, betting a draw worth the defined points');
+    $this->assertEqual($betswrong1->getPoints(),$points['points_participation'],'On a draw, betting on team 1 worth the defined points');
+    $this->assertEqual($betswrong2->getPoints(),$points['points_participation'],'On a draw, betting on team 2 worth the defined points');
+
   }
 
 
@@ -240,9 +245,11 @@ class MespronosBetPointsTest extends WebTestBase {
 
     $this->assertTrue($this->game->isScoreSetted(),t('Game score is setted'));
 
-    $this->assertEqual($betTooGood->getPoints(),10,'On a team2 winning, perfect bet worth 10 points');
-    $this->assertEqual($betABitGood->getPoints(),5,'On a team2 winning, betting on team2 worth 5 points');
-    $this->assertEqual($betswrong1->getPoints(),1,'On a team2 winning, betting on draw worth 1 points');
-    $this->assertEqual($betswrong2->getPoints(),1,'On a team2 winning, betting on team 1 worth 1 points');
+    $points = $this->league->getPoints();
+
+    $this->assertEqual($betTooGood->getPoints(),$points['points_score_found'],'On a draw, perfect bet worth the defined points');
+    $this->assertEqual($betABitGood->getPoints(),$points['points_winner_found'],'On a draw, betting a draw worth the defined points');
+    $this->assertEqual($betswrong1->getPoints(),$points['points_participation'],'On a draw, betting on team 1 worth the defined points');
+    $this->assertEqual($betswrong2->getPoints(),$points['points_participation'],'On a draw, betting on team 2 worth the defined points');
   }
 }
