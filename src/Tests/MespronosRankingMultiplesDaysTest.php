@@ -181,9 +181,10 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     $this->assertTrue($this->game1->isScoreSetted(),t('Game1 score is setted'));
     $this->assertTrue($this->game3->isScoreSetted(),t('Game2 score is setted'));
 
+    $points = $this->league->getPoints();
     foreach($bets as $bet) {
       $bet = Bet::load($bet->id());
-      $this->assertEqual($bet->getPoints(),10,t('good bets worth 10 points'));
+      $this->assertEqual($bet->getPoints(),$points['points_score_found'],t('good bets worth 10 points'));
     }
 
     RankingDay::createRanking($this->day1);
@@ -226,11 +227,15 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     foreach($bets as $bet) {
       $bet->save();
     }
+
+
+    $league_points = $this->league->getPoints();
+
     $points = [];
-    $points[1] = 10;
-    $points[2] = 10;
-    $points[3] = 5;
-    $points[4] = 1;
+    $points[1] = $league_points['points_score_found'];
+    $points[2] = $league_points['points_score_found'];
+    $points[3] = $league_points['points_winner_found'];
+    $points[4] = $league_points['points_participation'];
 
     $this->game1->setScore(1,1)->save();
 
@@ -249,10 +254,10 @@ class MespronosRankingMultiplesDaysTest extends WebTestBase {
     $ranking_3 = array_shift($ranking_day_1);
     $ranking_4 = array_shift($ranking_day_1);
 
-    $this->assertEqual($ranking_1->getPoints(),10,t('First ranking has 10 points'));
-    $this->assertEqual($ranking_2->getPoints(),10,t('Second ranking has 10 points'));
-    $this->assertEqual($ranking_3->getPoints(),5,t('Third ranking has 5 points'));
-    $this->assertEqual($ranking_4->getPoints(),1,t('Fourth ranking has 1 points'));
+    $this->assertEqual($ranking_1->getPoints(),$league_points['points_score_found'],t('First ranking has 10 points'));
+    $this->assertEqual($ranking_2->getPoints(),$league_points['points_score_found'],t('Second ranking has 10 points'));
+    $this->assertEqual($ranking_3->getPoints(),$league_points['points_winner_found'],t('Third ranking has 5 points'));
+    $this->assertEqual($ranking_4->getPoints(),$league_points['points_participation'],t('Fourth ranking has 1 points'));
 
     $this->assertEqual($ranking_1->getPosition(),1,t('First ranking is first'));
     $this->assertEqual($ranking_2->getPosition(),1,t('Second ranking is first'));
