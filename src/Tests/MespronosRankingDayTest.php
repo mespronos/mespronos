@@ -183,8 +183,11 @@ class MespronosRankingDayTest extends WebTestBase {
     $betGood = Bet::load($betGood->id());
     $betWrong = Bet::load($betWrong->id());
 
-    $this->assertEqual($betGood->getPoints(),10,t('A good bet worth 10 points'));
-    $this->assertEqual($betWrong->getPoints(),1,t('A bad bet worth 1 points'));
+
+    $points = $this->league->getPoints();
+
+    $this->assertEqual($betGood->getPoints(),$points['points_score_found'],t('A good bet worth 10 points'));
+    $this->assertEqual($betWrong->getPoints(),$points['points_participation'],t('A bad bet worth 1 points'));
 
     RankingDay::createRanking($day);
 
@@ -238,8 +241,8 @@ class MespronosRankingDayTest extends WebTestBase {
     $bet2Good = Bet::load($bet2Good->id());
     $bet2Wrong = Bet::load($bet2Wrong->id());
 
-    $this->assertEqual($bet2Good->getPoints(),10,t('A good bet worth 10 points'));
-    $this->assertEqual($bet2Wrong->getPoints(),1,t('A bad bet worth 1 points'));
+    $this->assertEqual($bet2Good->getPoints(),$points['points_score_found'],t('A good bet worth 10 points'));
+    $this->assertEqual($bet2Wrong->getPoints(),$points['points_participation'],t('A bad bet worth 1 points'));
 
     RankingDay::createRanking($day);
     $ranking = RankingDay::getRankingForDay($day);

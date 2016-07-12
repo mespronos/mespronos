@@ -260,8 +260,8 @@ class MespronosRankingLeagueTest extends WebTestBase {
     $this->assertEqual($rankingBetter1League1->getPosition(),1,t('Better 1 is first'));
 
     $rankingBetter4League1 = RankingLeague::getRankingForBetter($this->better4,$this->league1);
-    $this->assertEqual($rankingBetter4League1->getGameBetted(),1,t('Better 1 has betted on two games'));
-    $this->assertEqual($rankingBetter4League1->getPoints(),$points['points_score_found']*2,t('Better 1 has 20 points'));
+    $this->assertEqual($rankingBetter4League1->getGameBetted(),1,t('Better 1 has betted on 1 games'));
+    $this->assertEqual($rankingBetter4League1->getPoints(),($points['points_score_found']),t('Better 1 has 5 points'));
     $this->assertEqual($rankingBetter4League1->getPosition(),4,t('Better 4 is fourth'));
 
     //DAY 3
@@ -318,7 +318,7 @@ class MespronosRankingLeagueTest extends WebTestBase {
 
     $rankingBetter1League2 = RankingLeague::getRankingForBetter($this->better1,$this->league2);
     $this->assertEqual($rankingBetter1League2->getGameBetted(),1,t('Better 1 has betted on one game on league 2'));
-    $this->assertEqual($rankingBetter1League2->getPoints(),$points['points_score_found']*2,t('Better 1 has 20 points'));
+    $this->assertEqual($rankingBetter1League2->getPoints(),$points['points_score_found'],t('Better 1 has 5 points'));
     $this->assertEqual($rankingBetter1League2->getPosition(),1,t('Better 1 is first'));
 
 
