@@ -814,24 +814,27 @@ display:
           hide_alter_empty: true
           destination: true
       filters:
-        name:
-          id: name
+        id:
+          id: id
           table: mespronos__league
-          field: name
+          field: id
           relationship: league
           group_type: group
           admin_label: ''
-          operator: contains
-          value: ''
+          operator: '='
+          value:
+            min: ''
+            max: ''
+            value: ''
           group: 1
           exposed: true
           expose:
-            operator_id: name_op
+            operator_id: id_op
             label: League
             description: ''
             use_operator: false
-            operator: name_op
-            identifier: name
+            operator: id_op
+            identifier: league_id
             required: false
             remember: false
             multiple: false
@@ -852,12 +855,12 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           entity_type: league
-          entity_field: name
-          plugin_id: string
-        number:
-          id: number
+          entity_field: id
+          plugin_id: numeric
+        id_1:
+          id: id_1
           table: mespronos__day
-          field: number
+          field: id
           relationship: day
           group_type: group
           admin_label: ''
@@ -869,12 +872,12 @@ display:
           group: 1
           exposed: true
           expose:
-            operator_id: number_op
-            label: 'Day number'
+            operator_id: id_1_op
+            label: Day
             description: ''
             use_operator: false
-            operator: number_op
-            identifier: number
+            operator: id_1_op
+            identifier: day_id
             required: false
             remember: false
             multiple: false
@@ -895,7 +898,7 @@ display:
             default_group_multiple: {  }
             group_items: {  }
           entity_type: day
-          entity_field: number
+          entity_field: id
           plugin_id: numeric
       sorts:
         sport:
@@ -982,6 +985,8 @@ display:
         weight: 14
         context: '0'
         menu_name: admin
+        enabled: true
+        expanded: false
     cache_metadata:
       contexts:
         - 'languages:language_content'

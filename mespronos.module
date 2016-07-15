@@ -126,6 +126,46 @@ function mespronos_theme() {
   return $theme;
 }
 
+/**
+ * Implements hook_form_alter().
+ */
+function mespronos_form_views_exposed_form_alter(&$form,\Drupal\Core\Form\FormStateInterface $form_state,$form_id) {
+  if($form['#id'] == 'views-exposed-form-admin-game-admin-games') {
+    $input = $form_state->getUserInput();
+    $leagues = League::loadMultiple();
+    $form['league_id']['#type'] = 'select';
+    $form['league_id']['#size'] = 1;
+    $form['league_id']['#empty_option'] = t('All');
+    $form['league_id']['#empty_value'] = null;
+    unset($form['league_id']['#default_value']);
+    $form['league_id']['#options'] = [];
+    foreach ($leagues as $league) {
+      $form['league_id']['#options'][$league->id()] = $league->label();
+    }
+
+    /** @var Day[] $days */
+    $days = Day::loadMultiple();
+    $form['day_id']['#type'] = 'select';
+    $form['day_id']['#size'] = 1;
+    $form['day_id']['#empty_option'] = t('All');
+    $form['day_id']['#empty_value'] = null;
+    unset($form['day_id']['#default_value']);
+    $form['day_id']['#options'] = [];
+    $league_id = isset($input['league_id']) && is_numeric($input['league_id']) ? $input['league_id'] : null;
+    foreach ($days as $day) {
+      $league = $day->getLeagueID();
+      if($league_id && $league_id != $league) {
+        continue;
+      }
+      $form['day_id']['#options'][$day->id()] = $form['league_id']['#options'][$league]. ' - ' .$day->label();
+    }
+  }
+}
+
+function _mespronos_games_form_ajax_callback($form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  return $form;
+}
+
 function mespronos_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   unset($form['name']['#attributes']['autofocus']);
   $form['#submit'][] = 'mespronos_form_user_login_form_submit';
