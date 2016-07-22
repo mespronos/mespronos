@@ -42,6 +42,8 @@ mespronos.nextbets:
   path: 'mespronos/next-bets'
   defaults:
     _controller: '\Drupal\mespronos\Controller\NextBetsController::nextBets'
+    league : null
+    nb : 100
     _title: 'Next bets'
   requirements:
     _permission: 'view next bets days'
