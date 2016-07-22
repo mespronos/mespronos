@@ -1,4 +1,16 @@
 # Changelog - Mespronos 
+## 8.x-1.0-alpha11, 2016-07-22
+  - Group - add link to leave a group
+  - Create a proper Game page
+  - Create a proper League page
+  - Create a proper Day page
+  - Create a timezone issue during import
+  - Add tokens for Games, Leagues, Days, Groups
+  - Optimize way that rancking are calculated
+  - Make use of fontawesome
+  - Refactoring code
+  - integrate with pathauto #105
+
 ## 8.x-1.0-alpha10, 2016-06-05
   - Add "Latest results" block #103
   - Enhance group page #98
