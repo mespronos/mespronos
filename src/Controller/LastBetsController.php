@@ -80,7 +80,8 @@ class LastBetsController extends ControllerBase {
         else{
             return [
                 t('Day', array(), array('context' => 'mespronos-block')),
-                ''
+                t('Your results'),
+                '',
             ];
         }
     }
@@ -92,41 +93,41 @@ class LastBetsController extends ControllerBase {
     public static function parseDays($days,User $user,$page_league) {
         $rows = [];
         foreach ($days  as $day_id => $day) {
-            $day_renderable = $day->entity->getRenderableLabel();
+          $day_renderable = $day->entity->getRenderableLabel();
 
-            $row = [
-              'data' => [
-                'day' => [
-                  'data' => render($day_renderable),
-                  'class' => ['day-cell']
-                ],
-              ]
-            ];
-            if($user->id()>0) {
-                $ranking = RankingDay::getRankingForBetter($user,$day->entity);
-                $row['data']['games_betted'] = $ranking ? $ranking->getGameBetted() : ' ';
-                $row['data']['points'] = $ranking ? $ranking->getPoints() : ' ';
-                $row['data']['position'] = $ranking ? t('<strong>@class</strong> / @nb_better',['@class'=>$ranking->getPosition(),'@nb_better'=>RankingDay::getNumberOfBetters($day->entity)]) : ' ';
-                if($user->id() == \Drupal::currentUser()->id()) {
-                    $link_details = Url::fromRoute('entity.day.canonical',['day'=>$day->entity->id()])->toString();
-                }
-                else {
-                    $link_details = Url::fromRoute('mespronos.lastbetsdetailsforuser',['user'=> $user->id(),'day'=>$day->entity->id()])->toString();
-                }
-                $cell_details = ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('see details').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
-                $row['data']['action'] = ['data'=>render($cell_details),'class'=>'picto'];
-            }
-            else {
-                $row['data']['action'] = Link::fromTextAndUrl(
-                  t('Log in to see your score'),
-                  Url::fromRoute('user.login',[],[
-                      'query' => [
-                        'destination' => Url::fromRoute('entity.day.canonical',['day'=>$day->entity->id()])->toString(),
-                      ]
+          $row = [
+            'data' => [
+              'day' => [
+                'data' => render($day_renderable),
+                'class' => ['day-cell']
+              ],
+            ]
+          ];
+          if($user->id()>0) {
+              $ranking = RankingDay::getRankingForBetter($user,$day->entity);
+              $row['data']['games_betted'] = $ranking ? $ranking->getGameBetted() : ' ';
+              $row['data']['points'] = $ranking ? $ranking->getPoints() : ' ';
+              $row['data']['position'] = $ranking ? t('<strong>@class</strong> / @nb_better',['@class'=>$ranking->getPosition(),'@nb_better'=>RankingDay::getNumberOfBetters($day->entity)]) : ' ';
+          }
+          else {
+              $row['data']['action_login'] = Link::fromTextAndUrl(
+                t('Log in to see your score'),
+                Url::fromRoute('user.login',[],[
+                    'query' => [
+                      'destination' => Url::fromRoute('entity.day.canonical',['day'=>$day->entity->id()])->toString(),
                     ]
-                  )
-                );
-            }
+                  ]
+                )
+              );
+          }
+          if($user->id() == \Drupal::currentUser()->id()) {
+            $link_details = Url::fromRoute('entity.day.canonical',['day'=>$day->entity->id()])->toString();
+          }
+          else {
+            $link_details = Url::fromRoute('mespronos.lastbetsdetailsforuser',['user'=> $user->id(),'day'=>$day->entity->id()])->toString();
+          }
+          $cell_details = ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('See games and results').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+          $row['data']['action'] = ['data'=>render($cell_details),'class'=>'picto'];
 
             $rows[] = $row;
         }
