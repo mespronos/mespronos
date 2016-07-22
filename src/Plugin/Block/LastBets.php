@@ -52,9 +52,11 @@ class LastBets extends BlockBase {
     $lastBetsController = new LastBetsController();
     $return = [];
     $return['last-bet'] = $lastBetsController->lastBets(null,10,'BLOCK');
-    /*$return['more-last-bets'] = [
-      '#markup'=> Link::fromTextAndUrl(t('See more'),Url::fromRoute('mespronos.lastbets'))->toString(),
-    ];*/
+    if(!$return['last-bet']) {
+      $return['more-last-bets'] = [
+        '#markup'=> Link::fromTextAndUrl(t('You can see past results on leagues page'),Url::fromRoute('mespronos.leagues.list'))->toString(),
+      ];
+    }
 
     return $return;
   }
