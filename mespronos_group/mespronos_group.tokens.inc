@@ -50,7 +50,7 @@ function mespronos_group_tokens($type, $tokens, array $data) {
   return $replacements;
 }
 
-function _mespronos_group_tokens_group($tokens, Group $group,&$replacements) {
+function _mespronos_group_tokens_group($tokens, Drupal\mespronos_group\Entity\Group $group,&$replacements) {
   foreach ($tokens as $name => $original) {
     switch ($name) {
       case 'gid':
