@@ -87,7 +87,7 @@ class GroupHtmlRouteProvider extends AdminHtmlRouteProvider {
       $route
         ->setDefaults([
           '_entity_form' => "{$entity_type_id}.{$operation}",
-          '_title' => "Add {$entity_type->getLabel()}",
+          '_title' => "Create my group",
         ])
         ->setRequirement('_entity_create_access', $entity_type_id);
 

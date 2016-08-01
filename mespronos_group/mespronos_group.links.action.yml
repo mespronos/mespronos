@@ -1,6 +1,6 @@
 entity.group.add_form:
   route_name: entity.group.add_form
-  title: 'Add Group'
+  title: 'Create my group'
   appears_on:
     - entity.group.collection
 
