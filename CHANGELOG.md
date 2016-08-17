@@ -1,4 +1,7 @@
 # Changelog - Mespronos 
+## 8.x-1.0-alpha12, 2016-XX-XX
+  - Reminder - Send reminder only to those who already bet on the current league
+
 ## 8.x-1.0-alpha11, 2016-07-22
   - Group - add link to leave a group
   - Create a proper Game page

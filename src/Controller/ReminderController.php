@@ -39,17 +39,33 @@ class ReminderController extends ControllerBase {
     if(count($user_to_remind)>0) {
       $days = self::getDaysFromGames($upcommings_games);
       foreach ($days as $day) {
-        $nb_mail = self::sendReminder($user_to_remind,$day);
-        $reminder = Reminder::create(array(
-          'day' => $day->id(),
-          'emails_sended' => $nb_mail,
-        ));
-        $reminder->save();
-        \Drupal::logger('mespronos_reminder')->info(t('Reminder sended for day #@id (@game_label) : @nb_mail mails sended',[
-          '@id'=>$day->id(),
-          '@game_label'=>$day->label(),
-          '@nb_mail' => $nb_mail,
-        ]));
+        /** @var Day $day */
+        $betters_on_league = self::getBetterOnLeague($day->getLeagueID());
+        $user_to_remind_on_this_day = [];
+        foreach ($user_to_remind as $user) {
+          if(in_array($user,$betters_on_league)) {
+            $user_to_remind_on_this_day[] = $user;
+          }
+        }
+        $nb_mail = self::sendReminder($user_to_remind_on_this_day,$day);
+        if(is_null($nb_mail) || $nb_mail ==0) {
+          \Drupal::logger('mespronos_reminder')->info(t('No reminder sended for day #@id (@game_label)',[
+            '@id'=>$day->id(),
+            '@game_label'=>$day->label(),
+          ]));
+        }
+        else {
+          $reminder = Reminder::create(array(
+            'day' => $day->id(),
+            'emails_sended' => $nb_mail,
+          ));
+          $reminder->save();
+          \Drupal::logger('mespronos_reminder')->info(t('Reminder sended for day #@id (@game_label) : @nb_mail mails sended',[
+            '@id'=>$day->id(),
+            '@game_label'=>$day->label(),
+            '@nb_mail' => $nb_mail,
+          ]));
+        }
       }
     }
     else {
@@ -223,6 +239,15 @@ class ReminderController extends ControllerBase {
       }
     }
     return $days;
+  }
+
+  public static function getBetterOnLeague($league_id) {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__ranking_league','rl');
+    $query->fields('rl',['better']);
+    $query->condition('rl.league',$league_id);
+    $results = $query->execute()->fetchAllKeyed(0,0);
+    return array_values($results);
   }
 
 
