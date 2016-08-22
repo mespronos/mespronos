@@ -217,6 +217,21 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return !is_null($this->getScoreTeam1()) && !is_null($this->getScoreTeam1());
   }
 
+  public function getWinner() {
+    if(!$this->isScoreSetted()) {
+      return false;
+    }
+    if($this->getScoreTeam1() > $this->getScoreTeam2()) {
+      return 1;
+    }
+    elseif($this->getScoreTeam1() < $this->getScoreTeam2()) {
+      return 2;
+    }
+    else {
+      return 'N';
+    }
+  }
+
   /**
    * @return integer
    */

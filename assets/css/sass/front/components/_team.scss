@@ -1,0 +1,33 @@
+article.team {
+  ol.team-last-results {
+    margin : 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    li {
+      list-style: none;
+      margin : 0;
+      padding: 0;
+      span.result {
+        display: block;
+        font-size: 10px;
+        width : 14px;
+        border-radius: 7px;
+        height : 14px;
+        line-height: 14px;
+        text-align: center;
+        font-weight: bold;
+        color : white;
+        &.result-V {
+          background-color: green;
+        }
+        &.result-D {
+          background-color: red;
+        }
+        &.result-N {
+          background-color: orange;
+        }
+      }
+    }
+  }
+}

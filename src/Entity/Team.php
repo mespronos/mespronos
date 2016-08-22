@@ -90,6 +90,31 @@ class Team extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   /**
+   * @param int $nb number of games to return
+   * @return \Drupal\mespronos\Entity\Game[]
+   */
+  public function getLastGames($nb = 5) {
+    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $query = \Drupal::entityQuery('game');
+
+    $query->condition('score_team_1',null,'is not');
+    $query->condition('score_team_2',null,'is not');
+
+    $group = $query->orConditionGroup()
+      ->condition('team_1',$this->id())
+      ->condition('team_2',$this->id());
+
+    $query->sort('game_date','DESC');
+    $query->range(0,$nb);
+
+    $ids = $query->condition($group)->execute();
+
+    $games = $game_storage->loadMultiple($ids);
+
+    return $games;
+  }
+
+  /**
    * {@inheritdoc}
    */
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {

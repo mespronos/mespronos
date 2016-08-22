@@ -11,6 +11,7 @@ use Drupal\mespronos\Controller\LastBetsController;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\League;
+use Drupal\mespronos\Entity\Team;
 use Drupal\mespronos\Controller\GameController;
 
 function mespronos_preprocess_page(&$variables) {
@@ -239,6 +240,11 @@ function mespronos_entity_extra_field_info() {
     'weight' => 100,
     'visible' => true,
   );
+  $extra['team']['team']['display']['last_results'] = array(
+    'label' => t('Team last results'),
+    'weight' => 100,
+    'visible' => true,
+  );
   return $extra;
 }
 
@@ -285,6 +291,12 @@ function mespronos_day_view(array &$build, Day $entity, EntityViewDisplay $displ
 function mespronos_league_view(array &$build, League $entity, EntityViewDisplay $display, $view_mode) {
   if ($display->getComponent('results_and_ranking')) {
     $build['results_and_ranking'] = \Drupal\mespronos\Controller\LeagueController::getResultsAndRanking($entity);
+  }
+}
+
+function mespronos_team_view(array &$build, Team $entity, EntityViewDisplay $display, $view_mode) {
+  if ($display->getComponent('last_results')) {
+    $build['last_results'] = \Drupal\mespronos\Controller\TeamController::getLastResults($entity);
   }
 }
 
