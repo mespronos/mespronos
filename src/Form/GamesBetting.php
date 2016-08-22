@@ -92,7 +92,7 @@ class GamesBetting extends FormBase {
         '#step' => 1,
         '#size' => '1',
         '#default_value' => $bet->getScoreTeam1(),
-        '#title' => $game->get('team_1')->entity->label(true),
+        '#title' => $game->get('team_1')->entity->label(true,'full_with_insight'),
         '#attributes' => [
           'class' => ['team_1']
         ],
@@ -105,7 +105,7 @@ class GamesBetting extends FormBase {
         '#step' => 1,
         '#size' => '1',
         '#default_value' => $bet->getScoreTeam2(),
-        '#title' => $game->get('team_2')->entity->label(true),
+        '#title' => $game->get('team_2')->entity->label(true,'full_with_insight'),
         '#attributes' => [
           'class' => ['team_2']
         ],
