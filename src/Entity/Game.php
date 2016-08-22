@@ -124,6 +124,23 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return t('<span class="team team-1">@team1</span> <span class="score">@s1 - @s2</span> <span class="team team-2">@team2</span>',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'@s1'=> $this->get('score_team_1')->value,'@s2'=> $this->get('score_team_2')->value));
   }
 
+  public function labelForInsight() {
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+    $league = $this->getLeague();
+    $date =  new \DateTime($this->getGameDate(),new \DateTimeZone('UTC'));
+    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+    return t('@team1 @s1 - @s2 @team2 (@league - @date)',array(
+      '@team1'=> $team1->label(),
+      '@team2'=> $team2->label(),
+      '@s1'=> $this->get('score_team_1')->value,
+      '@s2'=> $this->get('score_team_2')->value,
+      '@league'=> $league->getTheName(),
+      '@date'=> $date->format('d/m/Y'),
+      )
+    );
+  }
+
   public function label_full() {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();

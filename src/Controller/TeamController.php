@@ -39,7 +39,7 @@ class TeamController extends ControllerBase {
           }
         }
         $last_games[] = [
-          '#markup' => '<span class="result result-'.$result.'" title="'.strip_tags($game->labelWithScore()).'">'.$result.'</span>'
+          '#markup' => '<span class="result result-'.$result.'" title="'.$game->labelForInsight().'">'.$result.'</span>'
         ];
       }
     }
