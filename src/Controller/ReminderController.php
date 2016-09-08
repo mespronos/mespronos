@@ -48,28 +48,20 @@ class ReminderController extends ControllerBase {
           }
         }
         $nb_mail = self::sendReminder($user_to_remind_on_this_day,$day);
-        if(is_null($nb_mail) || $nb_mail ==0) {
-          \Drupal::logger('mespronos_reminder')->info(t('No reminder sended for day #@id (@game_label)',[
-            '@id'=>$day->id(),
-            '@game_label'=>$day->label(),
-          ]));
-        }
-        else {
+        if($nb_mail > 0) {
           $reminder = Reminder::create(array(
             'day' => $day->id(),
             'emails_sended' => $nb_mail,
           ));
           $reminder->save();
-          \Drupal::logger('mespronos_reminder')->info(t('Reminder sended for day #@id (@game_label) : @nb_mail mails sended',[
+          \Drupal::logger('mespronos_reminder')->info(t('Reminder sended for day #@id (@game_label) : @nb_mail mails sended (total of @nb_user member with reminder enabled)',[
             '@id'=>$day->id(),
             '@game_label'=>$day->label(),
             '@nb_mail' => $nb_mail,
+            '@nb_user' => count($users),
           ]));
         }
       }
-    }
-    else {
-      \Drupal::logger('mespronos_reminder')->info(t('No user to remind'));
     }
     return true;
   }
@@ -171,12 +163,13 @@ class ReminderController extends ControllerBase {
     $games = $game_storage->loadMultiple($ids);
 
     self::checkIfReminderAlreadySended($games);
+    if(count($games) > 0) {
+      \Drupal::logger('mespronos_reminder')->debug(t('@nb_games games upcomming in the next @hour hours',[
+        '@nb_games'=>count($games),
+        '@hour'=>$nb_hours,
+      ]));
+    }
 
-    \Drupal::logger('mespronos_reminder')->debug(t('@nb_games games upcomming in the next @hour hours',[
-      '@nb_games'=>count($games),
-      '@hour'=>$nb_hours,
-    ]));
-    
     return $games;
 
    }
@@ -200,10 +193,6 @@ class ReminderController extends ControllerBase {
       ->condition('status', 1)
       ->condition('field_reminder_enable.value', 1);
     $uids = $query->execute();
-
-    \Drupal::logger('mespronos_reminder')->debug(t('@nb_users users with reminder enabled',[
-      '@nb_users'=>count($uids),
-    ]));
     return $uids;
   }
 
@@ -222,11 +211,6 @@ class ReminderController extends ControllerBase {
     $query->condition('b.better', $user_id);
     $results = $query->execute()->fetchAssoc();
 
-    \Drupal::logger('mespronos_reminder')->debug(t('User #@uid: nb_bets_done : @nb_bets_done, nb_games : @nb_games',[
-      '@uid'=>$user_id,
-      '@nb_bets_done'=>$results['nb_bets_done'],
-      '@nb_games'=>count($games_id),
-    ]));
     return $results['nb_bets_done'] < count($games_id);
   }
 
