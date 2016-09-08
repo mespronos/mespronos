@@ -25,8 +25,9 @@ class GroupJoiningForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $group = $this->extractGroup($form_state);
     $render_controller = \Drupal::entityManager()->getViewBuilder('group');
+    $group_ra = $render_controller->view($group,'teaser');
     $form['group'] = [
-      '#markup' => render($render_controller->view($group,'teaser')),
+      '#markup' => render($group_ra),
     ];
 
     $user = \Drupal::currentUser();
