@@ -92,7 +92,8 @@ class ReminderController extends ControllerBase {
       $mail = self::getReminderEmailVariables($user,$day);
       
       $params['message'] = self::getReminderEmailRendered($mail);
-      $params['subject'] =  t('Mespronos - Bet Reminder - @league - @day',[
+      $params['subject'] =  t('@sitename - Bet Reminder - @league - @day',[
+        '@sitename'=>\Drupal::config('system.site')->get('name'),
         '@league'=>$league->label(),
         '@day'=>$day->label(),
       ]);
