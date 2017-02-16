@@ -1,8 +1,7 @@
 {
   "name": "mespronos/mespronos",
-  "description": " Betting module build on Drupal 8",
+  "description": "Sport betting module for Drupal 8",
   "keywords": ["mespronos","drupal8","drupal"],
-  "license": "GNU GPL V2",
   "homepage": "https://mespronos.net",
   "authors": [
     {
@@ -11,15 +10,12 @@
       "homepage": "https://kgaut.net",
       "role": "Developer"
     }
-  ]
-  "extra": {
-    "installer-name": "mespronos"
+  ],
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/2424721",
+    "source": "http://cgit.drupalcode.org/ckeditor_responsive_plugin"
   },
-  "type":"drupal-module",
-  "repositories": [
-    {
-      "type": "composer",
-      "url":  "https://packages.drupal.org/8"
-    }
-  ]
+  "license": "GPL-2.0+",
+  "minimum-stability": "dev",
+  "require": { }
 }
