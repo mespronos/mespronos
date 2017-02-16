@@ -64,6 +64,11 @@ class NextBets extends BlockBase {
         '#markup' => '<p>'.t('No bet for now').'</p>'
       ];
     }
+    $return['#cache'] = [
+      'contexts' => ['user'],
+      'tags' => [ 'user:'.\Drupal::currentUser()->id(),'nextbets'],
+      'max-age' => '600',
+    ];
     return $return;
   }
 

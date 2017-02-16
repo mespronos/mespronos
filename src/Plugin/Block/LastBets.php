@@ -58,6 +58,12 @@ class LastBets extends BlockBase {
       ];
     }
 
+    $return['#cache'] = [
+      'contexts' => ['user'],
+      'tags' => [ 'user:'.\Drupal::currentUser()->id(),'nextbets'],
+      'max-age' => '600',
+    ];
+
     return $return;
   }
 
