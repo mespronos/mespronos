@@ -15,6 +15,9 @@
     "issues": "https://www.drupal.org/project/issues/2424721",
     "source": "http://cgit.drupalcode.org/ckeditor_responsive_plugin"
   },
+  "extra" : {
+    "installer-name": "mespronos"
+  },  
   "license": "GPL-2.0+",
   "minimum-stability": "dev",
   "require": { }
