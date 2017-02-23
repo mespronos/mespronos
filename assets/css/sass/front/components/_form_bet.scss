@@ -8,15 +8,13 @@ form#games-betting {
         width: 100%;
         margin: 0 5px;
         div.form-item {
+          margin : 0;
           width: 100%;
           display: flex;
           justify-content: flex-end;
           label {
             min-width: 80px;
             margin: 0 5px;
-            position: relative;
-            top: 6px;
-
             text-align: center;
             div.field--name-field-team-logo {
               text-align: center;
@@ -27,6 +25,7 @@ form#games-betting {
           }
           input {
             width: 50px;
+            margin-top: 20px;
             height : 40px;
             font-size:0.9em;
           }
