@@ -30,23 +30,13 @@ class ReminderController extends ControllerBase {
 
     $users = self::getUserWithEnabledReminder();
 
-    $user_to_remind = [];
-    foreach ($users as $user_id) {
-      if(self::doUserHasMissingBets($user_id,$upcommings_games)) {
-        $user_to_remind[] = $user_id;
-      }
-    }
+    $user_to_remind = self::getUsersToRemind($users,$upcommings_games);
     if(count($user_to_remind)>0) {
       $days = self::getDaysFromGames($upcommings_games);
       foreach ($days as $day) {
         /** @var Day $day */
         $betters_on_league = self::getBetterOnLeague($day->getLeagueID());
-        $user_to_remind_on_this_day = [];
-        foreach ($user_to_remind as $user) {
-          if(in_array($user,$betters_on_league)) {
-            $user_to_remind_on_this_day[] = $user;
-          }
-        }
+        $user_to_remind_on_this_day = self::getUsersToRemindOnThisDay($user_to_remind, $betters_on_league);
         $nb_mail = self::sendReminder($user_to_remind_on_this_day,$day);
         if($nb_mail > 0) {
           $reminder = Reminder::create(array(
@@ -194,6 +184,26 @@ class ReminderController extends ControllerBase {
       ->condition('field_reminder_enable.value', 1);
     $uids = $query->execute();
     return $uids;
+  }
+
+  public static function getUsersToRemind($users,$upcommings_games) {
+    $user_to_remind = [];
+    foreach ($users as $user_id) {
+      if(self::doUserHasMissingBets($user_id,$upcommings_games)) {
+        $user_to_remind[] = $user_id;
+      }
+    }
+    return $user_to_remind;
+  }
+
+  public static function getUsersToRemindOnThisDay($user_to_remind, $betters_on_league) {
+    $user_to_remind_on_this_day = [];
+    foreach ($user_to_remind as $user) {
+      if(in_array($user,$betters_on_league)) {
+        $user_to_remind_on_this_day[] = $user;
+      }
+    }
+    return $user_to_remind_on_this_day;
   }
 
   /**
