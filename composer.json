@@ -24,5 +24,8 @@
       "type": "composer",
       "url":  "https://packages.drupal.org/8"
     }
-  ]
+  ],
+  "require-dev": {
+    "phpro/grumphp": "^0.11.3"
+  }
 }
