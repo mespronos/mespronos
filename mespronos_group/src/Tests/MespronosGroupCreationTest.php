@@ -78,16 +78,21 @@ class MespronosGroupCreationTest extends WebTestBase {
       'name[0][value]' => 'TestNomGroup',
       'code[0][value]' => 'testCode',
     ), t('Create my group !'));
+
     $this->assertUrl('mespronos/group/1');
+
     $group = Group::load(1);
+
     $this->assertEqual($group->getOwnerId(),$this->user->id(),t('Group creator is correctly set'));
     $u = User::load($this->user->id());
     $user_group = Group::getUserGroup($u);
     $user_group = array_pop($user_group);
     $this->assertEqual($user_group->id(),$group->id(),t('Group creator automatically join the group'));
+
     $members = $group->getMembers(false);
     $this->assertTrue(in_array($this->user->id(),$members),t('The method GetMembers is working properly'));
-    
+    $this->assertEqual(count($members),1,t('The method getMembers is returning the correct number of member'));
+
   }
 
 }
