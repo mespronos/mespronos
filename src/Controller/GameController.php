@@ -16,7 +16,7 @@ use Drupal\mespronos\Entity\Game;
  *
  * @ingroup mespronos
  */
-class GameController extends ControllerBase{
+class GameController extends ControllerBase {
 
   /**
    * Return array of games that has no marks setted
@@ -27,15 +27,15 @@ class GameController extends ControllerBase{
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
 
-    if($only_past) {
+    if ($only_past) {
       $now = new \DateTime(null, new \DateTimeZone("UTC"));
-      $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'<');
+      $query->condition('game_date', $now->format('Y-m-d\TH:i:s'), '<');
     }
 
     $group = $query->orConditionGroup()
-      ->condition('score_team_1',null,'is')
-      ->condition('score_team_2',null,'is');
-    $query->sort('game_date','ASC');
+      ->condition('score_team_1', null, 'is')
+      ->condition('score_team_2', null, 'is');
+    $query->sort('game_date', 'ASC');
     $ids = $query->condition($group)->execute();
 
     $games = $game_storage->loadMultiple($ids);
@@ -54,15 +54,15 @@ class GameController extends ControllerBase{
 
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
 
-    $query->condition('day',$day->id());
-    $query->condition('game_date',$now->format('Y-m-d\TH:i:s'),'>');
+    $query->condition('day', $day->id());
+    $query->condition('game_date', $now->format('Y-m-d\TH:i:s'), '>');
 
     $group = $query->orConditionGroup()
-      ->condition('score_team_1',null,'is')
-      ->condition('score_team_2',null,'is');
+      ->condition('score_team_1', null, 'is')
+      ->condition('score_team_2', null, 'is');
 
-    $query->sort('game_date','ASC');
-    $query->sort('id','ASC');
+    $query->sort('game_date', 'ASC');
+    $query->sort('id', 'ASC');
 
     $ids = $query->condition($group)->execute();
 
@@ -85,16 +85,16 @@ class GameController extends ControllerBase{
   }
 
   public static function getBettersBets(Game $game) {
-    if(!$game->isPassed()) {return ["#markup"=> t('Bets will be visible once the game is started')];}
+    if (!$game->isPassed()) {return ["#markup"=> t('Bets will be visible once the game is started')]; }
     $data = self::getBettersBetsData($game);
     $rows = [];
     $header = [
-      t('Better',array(),array('context'=>'mespronos')),
-      t('bet',array(),array('context'=>'mespronos')),
-      t('Points',array(),array('context'=>'mespronos')),
+      t('Better', array(), array('context'=>'mespronos')),
+      t('bet', array(), array('context'=>'mespronos')),
+      t('Points', array(), array('context'=>'mespronos')),
     ];
     $league = $game->getLeague();
-    foreach($data as $better => $bet) {
+    foreach ($data as $better => $bet) {
       $better_entity = \Drupal\user\Entity\User::load($better);
       $better_renderable = UserController::getRenderableUser($better_entity);
       $row = [
@@ -103,8 +103,8 @@ class GameController extends ControllerBase{
             'data' => render($better_renderable),
             'class' => ['better-cell']
           ],
-          $bet->score_team_1. ' - '.$bet->score_team_2,
-          ['data' => $bet->points,'class'=>'points'],
+          $bet->score_team_1.' - '.$bet->score_team_2,
+          ['data' => $bet->points, 'class'=>'points'],
         ],
         'class' => $league->getPointsCssClass($bet->points),
       ];
@@ -126,11 +126,11 @@ class GameController extends ControllerBase{
   }
 
   public static function getBettersBetsData(Game $game) {
-    $query = db_select('mespronos__bet','b');
-    $query->join('users','u','b.better = u.uid');
-    $query->join('users_field_data','ufd','ufd.uid = u.uid');
-    $query->fields('b',['better','score_team_1','score_team_2','points']);
-    $query->condition('b.game',$game->id());
+    $query = db_select('mespronos__bet', 'b');
+    $query->join('users', 'u', 'b.better = u.uid');
+    $query->join('users_field_data', 'ufd', 'ufd.uid = u.uid');
+    $query->fields('b', ['better', 'score_team_1', 'score_team_2', 'points']);
+    $query->condition('b.game', $game->id());
     $query->orderBy('ufd.name');
     $results = $query->execute()->fetchAllAssoc('better');
     return $results;

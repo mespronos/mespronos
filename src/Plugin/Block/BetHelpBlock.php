@@ -36,7 +36,7 @@ class BetHelpBlock extends BlockBase implements ContainerFactoryPluginInterface 
    * @param \Drupal\Core\Routing\CurrentRouteMatch $current_route_match
    *   The current root match service
    */
-  public function __construct(array $configuration,$plugin_id,$plugin_definition,CurrentRouteMatch $current_route_match) {
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, CurrentRouteMatch $current_route_match) {
     parent::__construct($configuration, $plugin_id, $plugin_definition);
     $this->current_route_match = $current_route_match;
   }
@@ -46,7 +46,7 @@ class BetHelpBlock extends BlockBase implements ContainerFactoryPluginInterface 
   public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
     /** @var \Drupal\Core\Routing\CurrentRouteMatch $crm */
     $crm = $container->get('current_route_match');
-    return new static($configuration,$plugin_id,$plugin_definition,$crm);
+    return new static($configuration, $plugin_id, $plugin_definition, $crm);
   }
   /**
    * {@inheritdoc}
@@ -55,10 +55,9 @@ class BetHelpBlock extends BlockBase implements ContainerFactoryPluginInterface 
     $day = $this->current_route_match->getParameter('day');
     $league = $day->getLeague();
     $betting_type = $league->getBettingType(TRUE);
-    if($betting_type == 'score') {
+    if ($betting_type == 'score') {
       $text = t('You have to enter the final score');
-    }
-    else {
+    } else {
       $text = t('You have to choose the winner, or draw');
     }
     $text .= ' '.t('at the end of the legal time (no kicks).');

@@ -22,10 +22,9 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
    * @return UserInterface
    */
   public function getOwner() {
-    if(static::hasField('better')) {
+    if (static::hasField('better')) {
       return $this->get('better')->entity;
-    }
-    else {
+    } else {
       return $this->get('creator')->entity;
     }
   }
@@ -34,35 +33,32 @@ abstract class MPNContentEntityBase extends ContentEntityBase {
    * @return integer
    */
   public function getOwnerId() {
-    if(static::hasField('better')) {
+    if (static::hasField('better')) {
       return $this->get('better')->target_id;
-    }
-    else {
+    } else {
       return $this->get('creator')->target_id;
     }
   }
 
   public function setOwner(UserInterface $account) {
-    if(static::hasField('better')) {
+    if (static::hasField('better')) {
       $this->set('better', $account->id());
-    }
-    else {
+    } else {
       $this->set('creator', $account->id());
     }
     return $this;
   }
 
   public function setOwnerId($uid) {
-    if(static::hasField('better')) {
+    if (static::hasField('better')) {
       $this->set('better', $uid);
-    }
-    else {
+    } else {
       $this->set('creator', $uid);
     }
     return $this;
   }
 
-  public static function getImageAsRenderableArray($image_file,$style_name= 'thumbnail') {
+  public static function getImageAsRenderableArray($image_file, $style_name = 'thumbnail') {
     $render_array = [
       '#theme' => 'image_style',
       '#width' => null,

@@ -62,27 +62,26 @@ class Team extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public static function create(array $values = array()) {
-    if(!isset($values['name']) || empty(trim($values['name']))) {
+    if (!isset($values['name']) || empty(trim($values['name']))) {
       throw new \Exception(t('The team\'s name should be set and should not be empty'));
     }
     return parent::create($values);
   }
 
 
-  public function label($as_entity = false,$view_mode = 'full') {
-    if($as_entity) {
-      $entity = entity_view($this,$view_mode);
+  public function label($as_entity = false, $view_mode = 'full') {
+    if ($as_entity) {
+      $entity = entity_view($this, $view_mode);
       return render($entity);
-    }
-    else {
+    } else {
       return $this->get('name')->value;
     }
   }
 
   public function getLogo($style_name = 'thumbnail') {
     $logo = $this->get("field_team_logo")->first();
-    if($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
-      return self::getImageAsRenderableArray($logo_file,$style_name);
+    if ($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
+      return self::getImageAsRenderableArray($logo_file, $style_name);
     }
     else {
       return [];
@@ -97,15 +96,15 @@ class Team extends MPNContentEntityBase implements MPNEntityInterface {
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
 
-    $query->condition('score_team_1',null,'is not');
-    $query->condition('score_team_2',null,'is not');
+    $query->condition('score_team_1', null, 'is not');
+    $query->condition('score_team_2', null, 'is not');
 
     $group = $query->orConditionGroup()
-      ->condition('team_1',$this->id())
-      ->condition('team_2',$this->id());
+      ->condition('team_1', $this->id())
+      ->condition('team_2', $this->id());
 
-    $query->sort('game_date','DESC');
-    $query->range(0,$nb);
+    $query->sort('game_date', 'DESC');
+    $query->range(0, $nb);
 
     $ids = $query->condition($group)->execute();
 

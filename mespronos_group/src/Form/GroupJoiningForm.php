@@ -25,16 +25,16 @@ class GroupJoiningForm extends FormBase {
   public function buildForm(array $form, FormStateInterface $form_state) {
     $group = $this->extractGroup($form_state);
     $render_controller = \Drupal::entityManager()->getViewBuilder('group');
-    $group_ra = $render_controller->view($group,'teaser');
+    $group_ra = $render_controller->view($group, 'teaser');
     $form['group'] = [
       '#markup' => render($group_ra),
     ];
 
     $user = \Drupal::currentUser();
     $user = User::load($user->id());
-    if($group->isMemberOf($user)) {
-      drupal_set_message(t('You are already part of %group_name group',['%group_name'=>$group->label()]));
-      return new RedirectResponse(\Drupal::url('entity.group.canonical',['group'=>$group->id()]));
+    if ($group->isMemberOf($user)) {
+      drupal_set_message(t('You are already part of %group_name group', ['%group_name'=>$group->label()]));
+      return new RedirectResponse(\Drupal::url('entity.group.canonical', ['group'=>$group->id()]));
     }
     $form['access_code'] = [
       '#title' => t('Access code'),
@@ -53,7 +53,7 @@ class GroupJoiningForm extends FormBase {
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $code = $form_state->getValue('access_code');
     $group = $this->extractGroup($form_state);
-    if($code != $group->getCode()) {
+    if ($code != $group->getCode()) {
       $form_state->setErrorByName('access_code', $this->t("The access code is wrong"));
     }
   }
@@ -67,9 +67,9 @@ class GroupJoiningForm extends FormBase {
     ];
     $user->set("field_group", $usergroups);
     $user->save();
-    Cache::invalidateTags(array('group:'.$group->id(),'groups','ranking'));
-    drupal_set_message(t('You are now part of the group %group_name',['%group_name'=>$group->label()]));
-    $url = new Url('entity.group.canonical',['group'=>$group->id()]);
+    Cache::invalidateTags(array('group:'.$group->id(), 'groups', 'ranking'));
+    drupal_set_message(t('You are now part of the group %group_name', ['%group_name'=>$group->label()]));
+    $url = new Url('entity.group.canonical', ['group'=>$group->id()]);
     $form_state->setRedirectUrl($url);
   }
   /**

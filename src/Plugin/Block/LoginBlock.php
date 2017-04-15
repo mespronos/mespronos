@@ -25,10 +25,9 @@ class LoginBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    if(\Drupal::moduleHandler()->moduleExists('mespronos_tweaks')) {
+    if (\Drupal::moduleHandler()->moduleExists('mespronos_tweaks')) {
       $login_form = UserController::getLoginForm();
-    }
-    else {
+    } else {
       $login_form = \Drupal::formBuilder()->getForm('\Drupal\user\Form\UserLoginForm');
     }
     return $login_form;

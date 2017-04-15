@@ -7,7 +7,7 @@
 
 namespace Drupal\mespronos\Controller;
 
-use Drupal\Core\Controller\ControllerBase;;
+use Drupal\Core\Controller\ControllerBase; ;
 use Drupal\user\Entity\User;
 
 /**
@@ -19,11 +19,11 @@ class StatisticsController extends ControllerBase {
 
   public static function getStatistics() {
     $stats = [];
-    $stats['members'] = t('@nb members',['@nb'=>self::getMembersNumber()]);
-    $stats['leagues'] = t('@nb leagues',['@nb'=>self::getLeaguesNumber()]);
-    $stats['games'] = t('@nb games',['@nb'=>self::getGamesNumber()]);
-    $stats['bets'] = t('@nb bets',['@nb'=>self::getBetsNumber()]);
-    $stats['groups'] = t('@nb groups',['@nb'=>self::getGroupsNumber()]);
+    $stats['members'] = t('@nb members', ['@nb'=>self::getMembersNumber()]);
+    $stats['leagues'] = t('@nb leagues', ['@nb'=>self::getLeaguesNumber()]);
+    $stats['games'] = t('@nb games', ['@nb'=>self::getGamesNumber()]);
+    $stats['bets'] = t('@nb bets', ['@nb'=>self::getBetsNumber()]);
+    $stats['groups'] = t('@nb groups', ['@nb'=>self::getGroupsNumber()]);
     return $stats;
   }
 
@@ -59,8 +59,8 @@ class StatisticsController extends ControllerBase {
 
   private static function getBetsNumber(User $user = null) {
     $query = \Drupal::entityQuery('bet');
-    if($user) {
-      $query->condition('better',$user->id());
+    if ($user) {
+      $query->condition('better', $user->id());
     }
     $ids = $query->execute();
     return count($ids);

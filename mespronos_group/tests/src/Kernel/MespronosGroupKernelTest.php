@@ -23,7 +23,7 @@ class MespronosGroupKernelTest extends KernelTestBase {
   }
 
   public function testBasic() {
-    $this->assertEquals(2, 1 + 1,'1 + 1 = 2');
+    $this->assertEquals(2, 1 + 1, '1 + 1 = 2');
   }
 
   public function testGroupSavingReturnTrue() {

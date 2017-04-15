@@ -55,15 +55,15 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
     );
   }
 
-  public static function getUserBetsForGames($games_ids, \Drupal\user\Entity\User $user){
+  public static function getUserBetsForGames($games_ids, \Drupal\user\Entity\User $user) {
     $bet_storage = \Drupal::entityManager()->getStorage('bet');
     $query = \Drupal::entityQuery('bet');
-    $query->condition('game',$games_ids,'IN');
-    $query->condition('better',$user->id());
+    $query->condition('game', $games_ids, 'IN');
+    $query->condition('better', $user->id());
     $ids = $query->execute();
     $bets = $bet_storage->loadMultiple($ids);
     $bets_keyed_as_game = [];
-    foreach($bets as $b) {
+    foreach ($bets as $b) {
       $bets_keyed_as_game[$b->getGame()] = $b;
     }
     return $bets_keyed_as_game;
@@ -73,11 +73,11 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
     $game = $this->getGame(true);
     $day = $game->getDay();
     $league = $day->getLeague();
-    if($league->getBettingType(true) == 'score') {
-      return t('@t1 - @t2',array('@t1'=> $this->getScoreTeam1(),'@t2'=> $this->getScoreTeam2()));
+    if ($league->getBettingType(true) == 'score') {
+      return t('@t1 - @t2', array('@t1'=> $this->getScoreTeam1(), '@t2'=> $this->getScoreTeam2()));
     }
     else {
-      switch($this->getScoreTeam1() - $this->getScoreTeam2()) {
+      switch ($this->getScoreTeam1() - $this->getScoreTeam2()) {
         case 0:
           return t('Draw');
         case 1:
@@ -115,11 +115,11 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
   public function label() {
     $game = $this->getGame(true);
     $league = $game->getLeague();
-    if($league->getBettingType(true) == 'winner') {
-      if($this->getScoreTeam1() == $this->getScoreTeam2()) {
+    if ($league->getBettingType(true) == 'winner') {
+      if ($this->getScoreTeam1() == $this->getScoreTeam2()) {
         return t('Draw');
       }
-      elseif($this->getScoreTeam1() > $this->getScoreTeam2()) {
+      elseif ($this->getScoreTeam1() > $this->getScoreTeam2()) {
         $winner = $this->getTeam1();
       }
       else {
@@ -128,7 +128,7 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
       return $winner->label();
     }
     else {
-      return $this->getScoreTeam1(). ' - '.$this->getScoreTeam2();
+      return $this->getScoreTeam1().' - '.$this->getScoreTeam2();
     }
   }
 
@@ -137,8 +137,8 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
    * @return \Drupal\mespronos\Entity\Game
    */
   public function getGame($asEntity = false) {
-    $game =  $this->get('game')->target_id;
-    if($asEntity) {
+    $game = $this->get('game')->target_id;
+    if ($asEntity) {
       $game = Game::load($game);
     }
     return $game;
@@ -149,14 +149,14 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
    */
   public function isAllowed() {
     $game = $this->getGame(true);
-    if($game->isPassed()) {
+    if ($game->isPassed()) {
       return false;
     }
     $league = $game->getLeague();
-    if(!$league->isActive()) {
+    if (!$league->isActive()) {
       return false;
     }
-    if($this->getOwnerId() == 0) {
+    if ($this->getOwnerId() == 0) {
       return false;
     }
 

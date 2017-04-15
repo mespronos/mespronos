@@ -109,10 +109,10 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
   public function getGamesId() {
     $query = \Drupal::entityQuery('game');
 
-    $query->condition('day',$this->id());
+    $query->condition('day', $this->id());
 
-    $query->sort('game_date','ASC');
-    $query->sort('id','ASC');
+    $query->sort('game_date', 'ASC');
+    $query->sort('id', 'ASC');
 
     $ids = $query->execute();
 
@@ -128,8 +128,8 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
   public function getNbGameWIthScore() {
     $query = \Drupal::entityQuery('game')
       ->condition('day', $this->id())
-      ->condition('score_team_1',NULL,'IS NOT')
-      ->condition('score_team_2',NULL,'IS NOT');
+      ->condition('score_team_1', NULL, 'IS NOT')
+      ->condition('score_team_2', NULL, 'IS NOT');
     $ids = $query->execute();
     return count($ids);
   }
@@ -145,7 +145,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
       '#league' => [
         'label' => $league->label(),
         'logo' => $league->getLogo('mini_logo')
-      ] ,
+      ],
       '#day'=> [
         'label'=> $this->label(),
       ]
@@ -159,7 +159,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
    */
   public function postSave(EntityStorageInterface $storage, $update = TRUE) {
     parent::postSave($storage, $update);
-    if(\Drupal::moduleHandler()->moduleExists('pathauto')) {
+    if (\Drupal::moduleHandler()->moduleExists('pathauto')) {
       \Drupal::service('pathauto.generator')->updateEntityAlias($this, 'update');
 
       $trans = \Drupal::service('transliteration');
@@ -168,9 +168,9 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
 
       $system_path = '/mespronos/day/'.$this->id().'/bet';
       $alias_day = $alias_manager->getAliasByPath('/mespronos/day/'.$this->id());
-      $path_alias = str_replace('.html','',$alias_day).'/pronostiquer.html';
+      $path_alias = str_replace('.html', '', $alias_day).'/pronostiquer.html';
       $urlAlias = $alias_manager->getAliasByPath($system_path);
-      if($urlAlias && $urlAlias != $path_alias) {
+      if ($urlAlias && $urlAlias != $path_alias) {
         $alias_storage->save($system_path, $path_alias);
       }
 
@@ -178,9 +178,9 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
       $users = \Drupal::entityManager()->getStorage("user")->loadMultiple($user_ids);
       foreach ($users as $user) {
         $system_path = '/mespronos/day/'.$this->id().'/results/user/'.$user->id();
-        $path_alias = str_replace('.html','',$alias_day).'/les-pronos-de-'.$trans->transliterate($user->label()).'.html';
+        $path_alias = str_replace('.html', '', $alias_day).'/les-pronos-de-'.$trans->transliterate($user->label()).'.html';
         $urlAlias = $alias_manager->getAliasByPath($system_path);
-        if($urlAlias && $urlAlias != $path_alias) {
+        if ($urlAlias && $urlAlias != $path_alias) {
           $alias_storage->save($system_path, $path_alias);
         }
       }

@@ -94,20 +94,20 @@ function mespronos_tokens($type, $tokens, array $data) {
   if ($type == 'entity' && isset($data['entity_type'])) {
     switch ($data['entity_type']) {
       case 'league' :
-        _mespronos_tokens_league($tokens, $data['entity'],$replacements);
+        _mespronos_tokens_league($tokens, $data['entity'], $replacements);
         break;
       case 'game' :
-        _mespronos_tokens_game($tokens, $data['entity'],$replacements);
+        _mespronos_tokens_game($tokens, $data['entity'], $replacements);
         break;
       case 'day' :
-        _mespronos_tokens_day($tokens, $data['entity'],$replacements);
+        _mespronos_tokens_day($tokens, $data['entity'], $replacements);
         break;
     }
   }
   return $replacements;
 }
 
-function _mespronos_tokens_league($tokens, League $league,&$replacements) {
+function _mespronos_tokens_league($tokens, League $league, &$replacements) {
   foreach ($tokens as $name => $original) {
     switch ($name) {
       case 'id':
@@ -123,7 +123,7 @@ function _mespronos_tokens_league($tokens, League $league,&$replacements) {
   }
 }
 
-function _mespronos_tokens_game($tokens, Game $game,&$replacements) {
+function _mespronos_tokens_game($tokens, Game $game, &$replacements) {
   foreach ($tokens as $name => $original) {
     switch ($name) {
       case 'id':
@@ -144,7 +144,7 @@ function _mespronos_tokens_game($tokens, Game $game,&$replacements) {
   }
 }
 
-function _mespronos_tokens_day($tokens, Day $day,&$replacements) {
+function _mespronos_tokens_day($tokens, Day $day, &$replacements) {
   foreach ($tokens as $name => $original) {
     switch ($name) {
       case 'id':

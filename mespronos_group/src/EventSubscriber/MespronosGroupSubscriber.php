@@ -51,12 +51,12 @@ class MespronosGroupSubscriber implements EventSubscriberInterface {
     if (!($exception instanceof AccessDeniedHttpException)) {
       return;
     }
-    if($this->route_match->getRouteName() != 'entity.group.canonical') {
+    if ($this->route_match->getRouteName() != 'entity.group.canonical') {
       return;
     }
-    drupal_set_message(t('You are not a member of this group'),'warning');
+    drupal_set_message(t('You are not a member of this group'), 'warning');
     $group = $this->route_match->getParameter('group');
-    $response =  new RedirectResponse(\Drupal::url('mespronos_group.group.join',['group'=>$group->id()]));
+    $response = new RedirectResponse(\Drupal::url('mespronos_group.group.join', ['group'=>$group->id()]));
     $event->setResponse($response);
   }
 

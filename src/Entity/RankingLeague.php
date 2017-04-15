@@ -57,11 +57,11 @@ class RankingLeague extends Ranking {
    */
   public function getPosition() {
     $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__ranking_league','rl');
-    $query->addField('rl','id');
-    $query->addField('rl','points');
-    $query->condition('rl.league',$this->getLeagueiD());
-    $query->orderBy('points','DESC');
+    $query = $injected_database->select('mespronos__ranking_league', 'rl');
+    $query->addField('rl', 'id');
+    $query->addField('rl', 'points');
+    $query->condition('rl.league', $this->getLeagueiD());
+    $query->orderBy('points', 'DESC');
     $results = $query->execute()->fetchAllAssoc('id');
     $ranking = $this->determinePosition($results);
     return $ranking;
@@ -87,7 +87,7 @@ class RankingLeague extends Ranking {
     self::removeRanking($league);
     $data = self::getData($league);
     RankingController::sortRankingDataAndDefinedPosition($data);
-    foreach($data as $row) {
+    foreach ($data as $row) {
       $rankingLeague = self::create([
         'better' => $row->better,
         'league' => $league->id(),
@@ -101,15 +101,15 @@ class RankingLeague extends Ranking {
 
   public static function getData(League $league) {
     $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__ranking_day','rd');
-    $query->addField('rd','better');
-    $query->addExpression('sum(rd.points)','points');
-    $query->addExpression('sum(rd.games_betted)','nb_bet');
-    $query->join('mespronos__day','d','d.id = rd.day');
+    $query = $injected_database->select('mespronos__ranking_day', 'rd');
+    $query->addField('rd', 'better');
+    $query->addExpression('sum(rd.points)', 'points');
+    $query->addExpression('sum(rd.games_betted)', 'nb_bet');
+    $query->join('mespronos__day', 'd', 'd.id = rd.day');
     $query->groupBy('rd.better');
-    $query->orderBy('points','DESC');
-    $query->orderBy('nb_bet','DESC');
-    $query->condition('d.league',$league->id());
+    $query->orderBy('points', 'DESC');
+    $query->orderBy('nb_bet', 'DESC');
+    $query->condition('d.league', $league->id());
     $results = $query->execute()->fetchAllAssoc('better');
 
     return $results;
@@ -119,7 +119,7 @@ class RankingLeague extends Ranking {
 
     $storage = \Drupal::entityManager()->getStorage('ranking_league');
     $query = \Drupal::entityQuery('ranking_league');
-    $query->condition('league',$league->id());
+    $query->condition('league', $league->id());
     $ids = $query->execute();
 
     $rankings = $storage->loadMultiple($ids);
@@ -139,7 +139,7 @@ class RankingLeague extends Ranking {
     $storage = \Drupal::entityManager()->getStorage('ranking_league');
     $query = \Drupal::entityQuery('ranking_league');
     $query->condition('league', $league->id());
-    $query->sort('points','DESC');
+    $query->sort('points', 'DESC');
     $ids = $query->execute();
     $rankings = $storage->loadMultiple($ids);
     return $rankings;
@@ -148,8 +148,8 @@ class RankingLeague extends Ranking {
   /**
    * @return \Drupal\mespronos\Entity\RankingLeague[]
    */
-  public static function getRanking($entity = null,$entity_name='league',$storage_name='ranking_league',Group $group = null) {
-    return parent::getRanking($entity,$entity_name,$storage_name,$group);
+  public static function getRanking($entity = null, $entity_name = 'league', $storage_name = 'ranking_league', Group $group = null) {
+    return parent::getRanking($entity, $entity_name, $storage_name, $group);
   }
 
   /**
@@ -159,8 +159,8 @@ class RankingLeague extends Ranking {
    * @param String $storage_name
    * @return \Drupal\mespronos\Entity\RankingDay
    */
-  public static function getRankingForBetter(\Drupal\user\Entity\User $better,$league = null,$entity_name='league',$storage_name='ranking_league') {
-    return parent::getRankingForBetter($better,$league,$entity_name,$storage_name);
+  public static function getRankingForBetter(\Drupal\user\Entity\User $better, $league = null, $entity_name = 'league', $storage_name = 'ranking_league') {
+    return parent::getRankingForBetter($better, $league, $entity_name, $storage_name);
   }
 
   /**

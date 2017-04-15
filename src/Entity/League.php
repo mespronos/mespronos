@@ -86,10 +86,9 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
   public function getStatus($asMachineName = false) {
     $s = $this->get('status')->value;
-    if($asMachineName) {
+    if ($asMachineName) {
       return $s;
-    }
-    else {
+    } else {
       return self::$status_allowed_value[$s];
     }
   }
@@ -103,10 +102,9 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
   public function getBettingType($asMachineName = false) {
     $s = $this->get('betting_type')->value;
-    if($asMachineName) {
+    if ($asMachineName) {
       return $s;
-    }
-    else {
+    } else {
       return self::$betting_types[$s];
     }
   }
@@ -124,9 +122,9 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
   public function getBettersNumber() {
     $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__ranking_league','rl');
-    $query->addExpression('count(rl.better)','nb_better');
-    $query->condition('rl.league',$this->id());
+    $query = $injected_database->select('mespronos__ranking_league', 'rl');
+    $query->addExpression('count(rl.better)', 'nb_better');
+    $query->condition('rl.league', $this->id());
     $results = $query->execute()->fetchObject();
     return $results->nb_better;
   }
@@ -138,9 +136,9 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     $storage = \Drupal::entityManager()->getStorage('day');
     $query = \Drupal::entityQuery('day');
 
-    $query->condition('league',$this->id());
+    $query->condition('league', $this->id());
 
-    $query->sort('id','ASC');
+    $query->sort('id', 'ASC');
 
     $ids = $query->execute();
 
@@ -156,13 +154,13 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   public function getGames() {
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__game','g');
-    $query->join('mespronos__day','d','d.id = g.day');
-    $query->addField('g','id');
-    $query->condition('d.league',$this->id());
+    $query = $injected_database->select('mespronos__game', 'g');
+    $query->join('mespronos__day', 'd', 'd.id = g.day');
+    $query->addField('g', 'id');
+    $query->condition('d.league', $this->id());
     $results = $query->execute()->fetchAllAssoc('id');
 
-    $results = array_map(function($v) {return $v->id;},$results);
+    $results = array_map(function($v) {return $v->id; },$results);
     $games = $game_storage->loadMultiple($results);
     return $games;
   }
@@ -179,47 +177,47 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
 
   public static function validateBettingType(&$values) {
-    if(!isset($values['betting_type']) || empty($values['betting_type'])) {
+    if (!isset($values['betting_type']) || empty($values['betting_type'])) {
       $values['betting_type'] = self::$betting_type_default_value;
     }
-    elseif(!in_array($values['betting_type'],array_keys(self::$betting_types))) {
+    elseif (!in_array($values['betting_type'], array_keys(self::$betting_types))) {
       throw new \Exception(t('The choosen betting type is not valid'));
     }
   }
 
   public static function validateStatus(&$values) {
-    if(!isset($values['status']) || empty($values['status'])) {
+    if (!isset($values['status']) || empty($values['status'])) {
       $values['status'] = self::$status_default_value;
     }
-    if(!in_array($values['status'],array_keys(self::$status_allowed_value))) {
+    if (!in_array($values['status'], array_keys(self::$status_allowed_value))) {
       throw new \Exception(t('The choosen status is not valid'));
     }
   }
 
   public static function validateSport(&$values) {
-    if(!isset($values['sport']) || empty($values['sport'])) {
+    if (!isset($values['sport']) || empty($values['sport'])) {
       throw new \Exception(t('The sport for the league should be set'));
     }
     else {
-      $sport = entity_load('sport',$values['sport']);
-      if(!$sport) {
+      $sport = entity_load('sport', $values['sport']);
+      if (!$sport) {
         throw new \Exception(t('The sport for the league is not valid'));
       }
     }
   }
   public static function validateName(&$values) {
-    if(!isset($values['name']) || empty(trim($values['name']))) {
+    if (!isset($values['name']) || empty(trim($values['name']))) {
       throw new \Exception(t('The league\'s name should be set'));
     }
   }
 
   public static function validatePoints(&$values) {
-    foreach(self::$points_default as $type => $points) {
-      if(!isset($values[$type]) || empty(trim($values[$type]))) {
+    foreach (self::$points_default as $type => $points) {
+      if (!isset($values[$type]) || empty(trim($values[$type]))) {
         $values[$type] = $points;
       }
     }
-    if($values['betting_type'] == 'winner') {
+    if ($values['betting_type'] == 'winner') {
       $values['points_score_found'] = $values['points_winner_found'];
     }
   }
@@ -258,11 +256,10 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public function label($as_entity = false) {
-    if($as_entity) {
-      $entity = entity_view($this,'full');
+    if ($as_entity) {
+      $entity = entity_view($this, 'full');
       return render($entity);
-    }
-    else {
+    } else {
       return $this->get('name')->value;
     }
   }
@@ -272,7 +269,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     return [
       '#theme' => 'league-small',
       '#league' => [
-        'url' => Url::fromRoute('entity.league.canonical',['league'=>$this->id()]),
+        'url' => Url::fromRoute('entity.league.canonical', ['league'=>$this->id()]),
         'label' => $this->label(),
         'logo' => $this->getLogo('mini_logo')
       ]
@@ -281,8 +278,8 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
   public function getLogo($style_name = 'thumbnail') {
     $logo = $this->get("field_league_logo")->first();
-    if($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
-      return self::getImageAsRenderableArray($logo_file,$style_name);
+    if ($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
+      return self::getImageAsRenderableArray($logo_file, $style_name);
     }
     else {
       return [];
@@ -305,13 +302,13 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   public function getPointsCssClass($points) {
     switch ($points) {
       case $this->get('points_score_found')->value:
-        $class='score_found';
+        $class = 'score_found';
         break;
       case $this->get('points_winner_found')->value:
-        $class='winner_found';
+        $class = 'winner_found';
         break;
       case $this->get('points_participation')->value:
-        $class='participation';
+        $class = 'participation';
         break;
       default:
         $class = '';
@@ -323,9 +320,9 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public function close() {
-    $this->set('status','archived');
+    $this->set('status', 'archived');
     $this->save();
-    \Drupal::logger('mespronos')->notice(t('League @league_label as been set as archived',['@league_label'=>$this->label()]));
+    \Drupal::logger('mespronos')->notice(t('League @league_label as been set as archived', ['@league_label'=>$this->label()]));
     RankingGeneral::createRanking();
   }
 
@@ -411,7 +408,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       ->setDisplayOptions('form', array(
         //on veut une checkbox
         'type' => 'boolean_checkbox',
-        'weight' => - 4,
+        'weight' => -4,
         'settings' => array(
           'display_label' => TRUE,
         )

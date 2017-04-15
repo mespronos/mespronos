@@ -21,22 +21,22 @@ use Drupal\user\Entity\User;
  */
 class NextBetsController extends ControllerBase {
 
-    public function nextBets(League $league = null,$nb=10) {
+    public function nextBets(League $league = null, $nb = 10) {
         $user = User::load(\Drupal::currentUser()->id());
-        $user_uid =  $user->id();
-        $days = DayController::getNextDaysToBet($nb,$league);
+        $user_uid = $user->id();
+        $days = DayController::getNextDaysToBet($nb, $league);
         $page_league = isset($league);
 
-        if(count($days) == 0) {return false;}
+        if (count($days) == 0) {return false; }
 
         return [
           '#theme' => 'table',
-          '#rows' => self::parseDays($days,$user,$page_league),
+          '#rows' => self::parseDays($days, $user, $page_league),
           '#header' => self::getHeader(),
           '#footer' => self::getFooter(),
           '#cache' => [
             'contexts' => ['user'],
-            'tags' => [ 'user:'.$user_uid,'nextbets'],
+            'tags' => ['user:'.$user_uid, 'nextbets'],
             'max-age' => '600',
           ],
         ];
@@ -45,17 +45,17 @@ class NextBetsController extends ControllerBase {
     public static function getHeader() {
         return [
             [
-                'data' => t('Day',array(),array('context'=>'mespronos-block')),
+                'data' => t('Day', array(), array('context'=>'mespronos-block')),
             ],
             [
-                'data' => t('Games',array(),array('context'=>'mespronos-block')),
+                'data' => t('Games', array(), array('context'=>'mespronos-block')),
                 'class' => array(RESPONSIVE_PRIORITY_LOW),
             ],
             [
-                'data' => t('Bets left',array(),array('context'=>'mespronos-block')),
+                'data' => t('Bets left', array(), array('context'=>'mespronos-block')),
             ],
             [
-                'data' => t('Time left',array(),array('context'=>'mespronos-block')),
+                'data' => t('Time left', array(), array('context'=>'mespronos-block')),
             ],
             [
                 'data' => '',
@@ -67,15 +67,15 @@ class NextBetsController extends ControllerBase {
         return [];
     }
 
-    public static function parseDays($days,User $user,$page_league) {
+    public static function parseDays($days, User $user, $page_league) {
         $rows = [];
         foreach ($days  as $day_id => $day) {
-            $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$day->day_date,new \DateTimeZone("GMT"));
+            $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s', $day->day_date, new \DateTimeZone("GMT"));
             $game_date->setTimezone(new \DateTimeZone("Europe/Paris"));
             $now_date = new \DateTime();
 
             $i = $game_date->diff($now_date);
-            $bets_left = BetController::betsLeft($user,$day->entity);
+            $bets_left = BetController::betsLeft($user, $day->entity);
 
             $day_renderable = $day->entity->getRenderableLabel();
 
@@ -87,20 +87,20 @@ class NextBetsController extends ControllerBase {
                 ],
                 'nb_game' => $day->nb_game,
                 'bets_left' => $bets_left,
-                'time_left' => $i->format('%a') >0 ? t('@d days, @GH@im',array('@d'=>$i->format('%a'),'@G'=>$i->format('%H'),'@i'=>$i->format('%I'))) : t('@GH@im',array('@G'=>$i->format('%H'),'@i'=>$i->format('%I'))),
+                'time_left' => $i->format('%a') > 0 ? t('@d days, @GH@im', array('@d'=>$i->format('%a'), '@G'=>$i->format('%H'), '@i'=>$i->format('%I'))) : t('@GH@im', array('@G'=>$i->format('%H'), '@i'=>$i->format('%I'))),
                 'action' => '',
               ]
             ];
 
-            $link_details = Url::fromRoute('entity.day.canonical',['day'=>$day_id])->toString();
-            $link_bet = Url::fromRoute('mespronos.day.bet',['day'=>$day_id])->toString();
+            $link_details = Url::fromRoute('entity.day.canonical', ['day'=>$day_id])->toString();
+            $link_bet = Url::fromRoute('mespronos.day.bet', ['day'=>$day_id])->toString();
 
             $links = [
               'details' => ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('See games and results').'"><i class="fa fa-list" aria-hidden="true"></i></a>'],
               'bets' => ['#markup'=>'<a class="picto" href="'.$link_bet.'" title="'.t('Bet').'"><i class="fa fa-edit" aria-hidden="true"></i></a>'],
             ];
 
-            $row['data']['action'] = ['data'=>render($links),'class'=>'picto'];
+            $row['data']['action'] = ['data'=>render($links), 'class'=>'picto'];
 
             $rows[] = $row;
         }

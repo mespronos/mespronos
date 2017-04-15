@@ -33,7 +33,7 @@ class UserProfilBlock extends BlockBase {
    */
   public function build() {
     $user = \Drupal::routeMatch()->getParameter('user');
-    if(!$user) {
+    if (!$user) {
       return [];
     }
     $user = User::load($user->id());
@@ -54,7 +54,7 @@ class UserProfilBlock extends BlockBase {
       '#user_picture' => $user_picture,
       '#cache' => [
         'contexts' => ['route'],
-        'tags' => [ 'user:'.$user->id(),'user_profil_block'],
+        'tags' => ['user:'.$user->id(), 'user_profil_block'],
       ],
     ];
   }

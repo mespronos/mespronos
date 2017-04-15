@@ -39,7 +39,7 @@ class GroupForm extends ContentEntityForm {
       '#weight' => 20,
     ];
 
-    if(!\Drupal::currentUser()->hasPermission('choose to join group')) {
+    if (!\Drupal::currentUser()->hasPermission('choose to join group')) {
       $form['autojoin']['#default_value'] = true;
       $form['autojoin']['#access'] = false;
     }
@@ -47,11 +47,10 @@ class GroupForm extends ContentEntityForm {
     $form['user_id']['#access'] = false;
     $form['field_group_logo']['widget'][0]['#description'] = null;
     $id = $this->entity->id();
-    if(isset($id) && $id>0) {
+    if (isset($id) && $id > 0) {
       $form['actions']['submit']['#value'] = t('Edit my group');
 
-    }
-    else {
+    } else {
       $form['actions']['submit']['#value'] = t('Create my group !');
     }
 
@@ -67,7 +66,7 @@ class GroupForm extends ContentEntityForm {
 
     switch ($status) {
       case SAVED_NEW:
-        if($form_state->getValue('autojoin')) {
+        if ($form_state->getValue('autojoin')) {
           $user = \Drupal::currentUser();
           $user = User::load($user->id());
           $usergroups = $user->get("field_group")->getValue();
@@ -87,7 +86,7 @@ class GroupForm extends ContentEntityForm {
           '%label' => $entity->label(),
         ]));
     }
-    $url = new Url('entity.group.canonical',['group'=>$entity->id()]);
+    $url = new Url('entity.group.canonical', ['group'=>$entity->id()]);
     $form_state->setRedirectUrl($url);
   }
 

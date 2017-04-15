@@ -37,8 +37,7 @@ class LeagueForm extends ContentEntityForm {
       drupal_set_message($this->t('La compétition "%label" a été enregistrée.', array(
         '%label' => $entity->label(),
       )));
-    }
-    else {
+    } else {
       drupal_set_message($this->t('The %label League was not saved.', array(
         '%label' => $entity->label(),
       )));

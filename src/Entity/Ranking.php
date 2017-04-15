@@ -28,15 +28,15 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
 
   public function determinePosition($results) {
     $position = 0;
-    $next_position= 0;
+    $next_position = 0;
     $old_points = null;
     foreach ($results as $result) {
       $next_position++;
-      if($old_points != $result->points) {
+      if ($old_points != $result->points) {
         $position = $next_position;
         $old_points = $result->points;
       }
-      if($this->id() == $result->id) {
+      if ($this->id() == $result->id) {
         return $position;
       }
     }
@@ -66,7 +66,7 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
     if(!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
     }
-   if(!is_null($group) ) {
+    if(!is_null($group) ) {
       $member_ids = $group->getMembers();
       $query->condition('better',$member_ids,'IN');
     }
@@ -81,19 +81,18 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
    * @param \Drupal\user\Entity\User $better
    * @return \Drupal\mespronos\Entity\RankingDay
    */
-  public static function getRankingForBetter(\Drupal\user\Entity\User $better,$entity = null,$entity_name=null,$storage_name) {
+  public static function getRankingForBetter(\Drupal\user\Entity\User $better, $entity = null, $entity_name = null, $storage_name) {
     $storage = \Drupal::entityManager()->getStorage($storage_name);
     $query = \Drupal::entityQuery($storage_name);
     $query->condition('better', $better->id());
-    if(!is_null($entity_name) && !is_null($entity)) {
+    if (!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
     }
     $ids = $query->execute();
-    if(count($ids)>0) {
+    if (count($ids) > 0) {
       $id = array_pop($ids);
       $rankings = $storage->load($id);
-    }
-    else {
+    } else {
       $rankings = [];
     }
     return $rankings;
@@ -105,9 +104,9 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
    * @param String $storage_name
    * @return integer
    */
-  public static function getNumberOfBetters($entity = null,$entity_name=null,$storage_name) {
+  public static function getNumberOfBetters($entity = null, $entity_name = null, $storage_name) {
     $query = \Drupal::entityQuery($storage_name);
-    if(!is_null($entity_name) && !is_null($entity)) {
+    if (!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
     }
     $ids = $query->execute();

@@ -40,14 +40,12 @@ class SportForm extends ContentEntityForm {
         drupal_set_message($this->t('Saved the %label Sport.', array(
           '%label' => $entity->label(),
         )));
-      }
-      else {
+      } else {
         drupal_set_message($this->t('The %label Sport was not saved.', array(
           '%label' => $entity->label(),
         )));
       }
-    }
-    else {
+    } else {
       drupal_set_message($this->t('The %label Sport was not saved as it already exist.', array(
         '%label' => $entity->label(),
       )));

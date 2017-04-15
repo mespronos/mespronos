@@ -36,8 +36,7 @@ class GameForm extends ContentEntityForm {
       drupal_set_message($this->t('Saved the %label Game.', array(
         '%label' => $entity->label(),
       )));
-    }
-    else {
+    } else {
       drupal_set_message($this->t('The %label Game was not saved.', array(
         '%label' => $entity->label(),
       )));

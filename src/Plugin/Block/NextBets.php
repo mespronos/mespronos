@@ -58,8 +58,7 @@ class NextBets extends BlockBase {
     $next_bet = $next_bet_controller->nextBets(null, 5);
     if ($next_bet) {
       $return['next-bet'] = $next_bet;
-    }
-    else {
+    } else {
       $return['next-bet'] = [
         '#markup' => '<p>'.t('No bet for now').'</p>'
       ];

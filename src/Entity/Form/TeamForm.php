@@ -37,8 +37,7 @@ class TeamForm extends ContentEntityForm {
       drupal_set_message($this->t('Saved the %label Team.', array(
         '%label' => $entity->label(),
       )));
-    }
-    else {
+    } else {
       drupal_set_message($this->t('The %label Team was not saved.', array(
         '%label' => $entity->label(),
       )));

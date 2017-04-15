@@ -23,7 +23,7 @@ class DashboardController extends ControllerBase {
    */
   public function index() {
     $games = GameController::getGameWithoutMarks();
-    $marks_form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesMarks',$games);
+    $marks_form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesMarks', $games);
     $stats = StatisticsController::getStatistics();
     return [
       '#theme' =>'dashboard',

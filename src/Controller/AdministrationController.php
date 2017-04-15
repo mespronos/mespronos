@@ -26,10 +26,10 @@ class AdministrationController extends ControllerBase {
 
   public function setMarks() {
     $games = GameController::getGameWithoutMarks();
-    if(count($games) == 0) {
+    if (count($games) == 0) {
       drupal_set_message($this->t('There\'s no game for which mark is not set'));
     }
-    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesMarks',$games);
+    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesMarks', $games);
     return $form;
   }
 

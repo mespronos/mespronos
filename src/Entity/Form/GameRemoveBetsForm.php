@@ -45,7 +45,7 @@ class GameRemoveBetsForm extends ContentEntityConfirmFormBase {
     $nb_bets_deleted = $this->entity->removeBets();
 
     drupal_set_message(
-      $this->t('@nb_bets bets deleted',['@nb_bets' => $nb_bets_deleted])
+      $this->t('@nb_bets bets deleted', ['@nb_bets' => $nb_bets_deleted])
     );
 
     $form_state->setRedirectUrl($this->getCancelUrl());

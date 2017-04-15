@@ -28,7 +28,7 @@ class MespronosGroupTest extends UnitTestCase {
   }
 
   public function testBasic() {
-    $this->assertEquals(2, 1 + 1,'1 + 1 = 2');
+    $this->assertEquals(2, 1 + 1, '1 + 1 = 2');
   }
 
 }

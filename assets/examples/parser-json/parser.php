@@ -18,14 +18,14 @@ $output_games = [];
 
 foreach ($games as $game) {
   $nb_game++;
-  if($nb_game%10 == 1) {
+  if ($nb_game % 10 == 1) {
     $journee++;
     $output_games[$journee] = [];
   }
-  $game->SUMMARY = str_replace(' - ',' | ',$game->SUMMARY);
+  $game->SUMMARY = str_replace(' - ', ' | ', $game->SUMMARY);
   $dt = new DateTime($game->DTSTART);
 
-  $dt->setTimeZone( new DateTimezone('Europe/Berlin') );
+  $dt->setTimeZone(new DateTimezone('Europe/Berlin'));
   $game->date = $dt->format('c');
   unset($game->URL);
   unset($game->DTEND);
@@ -40,10 +40,10 @@ foreach ($games as $game) {
 
 //$trans = \Drupal::service('transliteration');
 
-$fp = fopen('../'.str_replace('/','-',$league_name).'.yaml', 'w+');
+$fp = fopen('../'.str_replace('/', '-', $league_name).'.yaml', 'w+');
 
 ob_start();
-$ligue_content =  "league :\n  name : '$league_name'\n  sport : '$sport'\n  status : '$status'\n  classement : true\n  betting_type : '$betting_type'\n  days:\n";
+$ligue_content = "league :\n  name : '$league_name'\n  sport : '$sport'\n  status : '$status'\n  classement : true\n  betting_type : '$betting_type'\n  days:\n";
 fwrite($fp, $ligue_content);
 
 foreach ($output_games as $num_journee => $matchs) {

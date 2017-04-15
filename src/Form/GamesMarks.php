@@ -34,7 +34,7 @@ class GamesMarks extends FormBase {
       '#type' => 'container',
       '#tree' => true,
     );
-    foreach($games as $game) {
+    foreach ($games as $game) {
       $form['games'][$game->id()] = array(
         '#type' => 'fieldset',
         '#title' => $game->label(),
@@ -55,15 +55,14 @@ class GamesMarks extends FormBase {
         '#size' => '5',
       );
     }
-    if(count($games) > 0) {
+    if (count($games) > 0) {
       $form['actions']['#type'] = 'actions';
       $form['actions']['submit'] = array(
         '#type' => 'submit',
         '#value' => $this->t('Send'),
         '#button_type' => 'primary',
       );
-    }
-    else {
+    } else {
       $form['no-bet'] = [
         '#markup' => '<p>'.t('There is no game without mark').'</p>'
       ];
@@ -73,12 +72,12 @@ class GamesMarks extends FormBase {
 
   public function validateForm(array &$form, FormStateInterface $form_state) {
     $games = $form_state->getValue('games');
-    foreach($games as $game_id => $game_data) {
+    foreach ($games as $game_id => $game_data) {
       if ($game_data['score_team_1'] != '' && $game_data['score_team_1'] < 0) {
-        $form_state->setErrorByName('games][' . $game_id . '][score_team_1', $this->t("Can't be less than 0."));
+        $form_state->setErrorByName('games]['.$game_id.'][score_team_1', $this->t("Can't be less than 0."));
       }
       if ($game_data['score_team_2'] != '' && $game_data['score_team_2'] < 0) {
-        $form_state->setErrorByName('games][' . $game_id . '][score_team_2', $this->t("Can't be less than 0."));
+        $form_state->setErrorByName('games]['.$game_id.'][score_team_2', $this->t("Can't be less than 0."));
       }
     }
   }
@@ -90,19 +89,19 @@ class GamesMarks extends FormBase {
     $games = $form_state->getValue('games');
     $i = 0;
     $days_to_update = [];
-    foreach($games as $game_id => $game_data) {
-      if($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '') {
+    foreach ($games as $game_id => $game_data) {
+      if ($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '') {
         $i++;
         $game = Game::load($game_id);
-        $game->setScore($game_data['score_team_1'],$game_data['score_team_2']);
+        $game->setScore($game_data['score_team_1'], $game_data['score_team_2']);
         $game->save();
         $days_to_update[$game->getDayId()] = $game->getDayId();
       }
     }
-    drupal_set_message($this->t('@nb_mark games updated',array('@nb_mark'=>$i)));
+    drupal_set_message($this->t('@nb_mark games updated', array('@nb_mark'=>$i)));
     $i = 0;
     $leagues = [];
-    foreach($days_to_update as $day_id) {
+    foreach ($days_to_update as $day_id) {
       $i++;
       $day = Day::load($day_id);
       RankingDay::createRanking($day);
@@ -112,11 +111,11 @@ class GamesMarks extends FormBase {
       RankingLeague::createRanking($league);
     }
     RankingGeneral::createRanking();
-    drupal_set_message($this->t('Ranking updated for @nb_ranking days and @nb_leagues leagues',[
+    drupal_set_message($this->t('Ranking updated for @nb_ranking days and @nb_leagues leagues', [
       '@nb_ranking'=>count($days_to_update),
       '@nb_leagues'=>count($leagues),
     ]));
     drupal_flush_all_caches();
-    Cache::invalidateTags(array('nextbets','lastbets','ranking'));
+    Cache::invalidateTags(array('nextbets', 'lastbets', 'ranking'));
   }
 }

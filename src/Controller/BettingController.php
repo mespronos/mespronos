@@ -22,17 +22,17 @@ class BettingController extends ControllerBase {
   public function bet(Day $day) {
     $user = \Drupal::currentUser();
     $user = User::load($user->id());
-    if($day === NULL) {
-      drupal_set_message($this->t('This day doesn\'t exist.'),'error');
+    if ($day === NULL) {
+      drupal_set_message($this->t('This day doesn\'t exist.'), 'error');
       throw new AccessDeniedHttpException();
     }
-    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesBetting',$day,$user);
+    $form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesBetting', $day, $user);
     return $form;
   }
 
   public function betTitle(Day $day) {
     $league = $day->getLeague();
-    return t('Bet on @day',array('@day'=>$league->label().' - '.$day->label()));
+    return t('Bet on @day', array('@day'=>$league->label().' - '.$day->label()));
   }
   
 }

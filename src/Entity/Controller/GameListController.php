@@ -36,14 +36,14 @@ class GameListController extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     /* @var $entity \Drupal\mespronos\Entity\Game */
-    $date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$entity->get('game_date')->value);
+    $date = \DateTime::createFromFormat('Y-m-d\TH:i:s', $entity->get('game_date')->value);
     $league = $entity->getLeague();
     $day = $entity->getDay();
     $row = [];
     $row['id'] = $entity->id();
     $row['league'] = $league->label();
     $row['day'] = $day->label();
-    $row['game_date'] = format_date($date->format('U'),'short');
+    $row['game_date'] = format_date($date->format('U'), 'short');
     $row['name'] = \Drupal::l(
       $this->getLabel($entity),
       new Url(
@@ -52,7 +52,7 @@ class GameListController extends EntityListBuilder {
         )
       )
     );
-    $row['score'] = $entity->get('score_team_1')->value . ' - ' . $entity->get('score_team_2')->value;
+    $row['score'] = $entity->get('score_team_1')->value.' - '.$entity->get('score_team_2')->value;
     return $row + parent::buildRow($entity);
   }
 

@@ -31,9 +31,9 @@ class Reminder extends ContentEntityBase {
   public static function loadForDay($day_id) {
     $reminder_storage = \Drupal::entityManager()->getStorage('reminder');
     $query = \Drupal::entityQuery('reminder');
-    $query->condition('day',$day_id);
+    $query->condition('day', $day_id);
     $ids = $query->execute();
-    if(count($ids) == 0) {
+    if (count($ids) == 0) {
       return false;
     }
     $id = array_pop($ids);
