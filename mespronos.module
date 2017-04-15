@@ -14,13 +14,19 @@ use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Team;
 use Drupal\mespronos\Controller\GameController;
 
+/**
+ * Implements hook_preprocess_page().
+ */
 function mespronos_preprocess_page(&$variables) {
-  if($variables['is_admin']) {
+  if ($variables['is_admin']) {
     $variables['#attached']['library'][] = 'mespronos/administration-style';
   }
   $variables['#attached']['library'][] = 'mespronos/front-style';
 }
 
+/**
+ * Implements hook_theme().
+ */
 function mespronos_theme() {
   $theme = [];
   $theme['user-block'] = array(
@@ -145,7 +151,7 @@ function mespronos_theme() {
 /**
  * Implements hook_form_alter().
  */
-function mespronos_form_views_exposed_form_alter(&$form,\Drupal\Core\Form\FormStateInterface $form_state,$form_id) {
+function mespronos_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
   if($form['#id'] == 'views-exposed-form-admin-game-admin-games') {
     $input = $form_state->getUserInput();
     $leagues = League::loadMultiple();
