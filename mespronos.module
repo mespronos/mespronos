@@ -316,6 +316,9 @@ function mespronos_team_view(array &$build, Team $entity, EntityViewDisplay $dis
   }
 }
 
+/**
+ * Implements hook_user_update().
+ */
 function mespronos_user_update(\Drupal\user\Entity\User $user) {
   $query = \Drupal::entityQuery('day');
   $ids = $query->execute();
@@ -326,11 +329,11 @@ function mespronos_user_update(\Drupal\user\Entity\User $user) {
   $alias_storage = \Drupal::service('path.alias_storage');
 
   foreach ($days as $day) {
-    $alias_day = $alias_manager->getAliasByPath('/mespronos/day/'.$day->id());
-    $system_path = '/mespronos/day/'.$day->id().'/results/user/'.$user->id();
-    $path_alias = str_replace('.html','',$alias_day).'/les-pronos-de-'.$trans->transliterate($user->label()).'.html';
+    $alias_day = $alias_manager->getAliasByPath('/mespronos/day/' . $day->id());
+    $system_path = '/mespronos/day/' . $day->id() . '/results/user/' . $user->id();
+    $path_alias = str_replace('.html', '', $alias_day) . '/les-pronos-de-' . $trans->transliterate($user->label()) . '.html';
     $urlAlias = $alias_manager->getAliasByPath($system_path);
-    if($urlAlias && $urlAlias != $path_alias) {
+    if ($urlAlias && $urlAlias != $path_alias) {
       $alias_storage->save($system_path, $path_alias);
     }
   }
