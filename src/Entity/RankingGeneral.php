@@ -54,7 +54,7 @@ class RankingGeneral extends Ranking {
     self::removeRanking();
     $data = self::getData();
     RankingController::sortRankingDataAndDefinedPosition($data);
-    foreach($data as $row) {
+    foreach ($data as $row) {
       $rankingLeague = self::create([
         'better' => $row->better,
         'games_betted' => $row->nb_bet,
@@ -67,15 +67,15 @@ class RankingGeneral extends Ranking {
 
   public static function getData() {
     $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__ranking_league','rl');
-    $query->addField('rl','better');
-    $query->addExpression('sum(rl.points)','points');
-    $query->addExpression('sum(rl.games_betted)','nb_bet');
-    $query->join('mespronos__league','l','l.id = rl.league');
+    $query = $injected_database->select('mespronos__ranking_league', 'rl');
+    $query->addField('rl', 'better');
+    $query->addExpression('sum(rl.points)', 'points');
+    $query->addExpression('sum(rl.games_betted)', 'nb_bet');
+    $query->join('mespronos__league', 'l', 'l.id = rl.league');
     $query->groupBy('rl.better');
-    $query->orderBy('points','DESC');
-    $query->orderBy('nb_bet','DESC');
-    $query->condition('l.status',array('active','over'),'IN');
+    $query->orderBy('points', 'DESC');
+    $query->orderBy('nb_bet', 'DESC');
+    $query->condition('l.status', array('active', 'over'), 'IN');
     $results = $query->execute()->fetchAllAssoc('better');
 
     return $results;
@@ -114,13 +114,12 @@ class RankingGeneral extends Ranking {
     db_query('SET @rank=0');
     db_query('SET @curscore=0');
 
-    $results = db_query($query,$args);
+    $results = db_query($query, $args);
 
     $res = $results->fetchField();
-    if($res) {
+    if ($res) {
       return intval($res);
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -128,8 +127,8 @@ class RankingGeneral extends Ranking {
   /**
    * @return \Drupal\mespronos\Entity\RankingGeneral
    */
-  public static function getRanking($entity = null,$entity_name='general',$storage_name='ranking_general',Group $group = null) {
-    return parent::getRanking(null,$entity_name,$storage_name,$group);
+  public static function getRanking($entity = null, $entity_name = 'general', $storage_name = 'ranking_general', Group $group = null) {
+    return parent::getRanking(null, $entity_name, $storage_name, $group);
   }
 
   /**
@@ -140,12 +139,12 @@ class RankingGeneral extends Ranking {
    * @param string $storage_name
    * @return \Drupal\mespronos\Entity\RankingGeneral
    */
-  public static function getRankingForBetter(\Drupal\user\Entity\User $better,$entity = null,$entity_name=null,$storage_name=null) {
-    return parent::getRankingForBetter($better,null,null,'ranking_general');
+  public static function getRankingForBetter(\Drupal\user\Entity\User $better, $entity = null, $entity_name = null, $storage_name = null) {
+    return parent::getRankingForBetter($better, null, null, 'ranking_general');
   }
 
-  public static function getNumberOfBetters($entity = null,$entity_name=null,$storage_name=null) {
-    return parent::getNumberOfBetters(null,null,'ranking_general');
+  public static function getNumberOfBetters($entity = null, $entity_name = null, $storage_name = null) {
+    return parent::getNumberOfBetters(null, null, 'ranking_general');
   }
 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {

@@ -26,7 +26,7 @@ class GroupRankingBlock extends BlockBase {
 
       $build['#cache'] = [
         'contexts' => ['user'],
-        'tags' => [ 'user:'.\Drupal::currentUser()->id(),'ranking'],
+        'tags' => ['user:'.\Drupal::currentUser()->id(), 'ranking'],
       ];
 
       $build['#title'] = t('Group ranking');

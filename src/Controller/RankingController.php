@@ -11,7 +11,6 @@ use Drupal\mespronos\Entity\Day;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Url;
-use Drupal\Core\Link;
 use Drupal\Core\Database\Database;
 use Drupal\mespronos_group\Entity\Group;
 
@@ -30,19 +29,19 @@ class RankingController extends ControllerBase {
     $nb_updates = RankingDay::createRanking($day);
     RankingLeague::createRanking($day->getLeague());
     RankingGeneral::createRanking();
-    drupal_set_message(t('Ranking updated for @nb betters',array('@nb'=>$nb_updates)));
+    drupal_set_message(t('Ranking updated for @nb betters', array('@nb'=>$nb_updates)));
     Cache::invalidateTags(array('ranking'));
     return new RedirectResponse(\Drupal::url('entity.day.collection'));
   }
 
   public static function sortRankingDataAndDefinedPosition(&$data) {
-    usort($data,function($item1, $item2) {
+    usort($data, function($item1, $item2) {
       if (intval($item1->points) == intval($item2->points)) return 0;
       return intval($item1->points) > intval($item2->points) ? -1 : 1;
     });
     $next_position = 1;
-    foreach($data as &$value) {
-      if(isset($old_object) && $old_object->points == $value->points) {
+    foreach ($data as &$value) {
+      if (isset($old_object) && $old_object->points == $value->points) {
         $value->position = $old_object->position;
       }
       else {
@@ -56,8 +55,8 @@ class RankingController extends ControllerBase {
   }
 
   public static function rankingPage() {
-    if(!$ranking = self::getRankingGeneral()) {
-      return ['#markup'=>t('No ranking for now'),];
+    if (!$ranking = self::getRankingGeneral()) {
+      return ['#markup'=>t('No ranking for now'), ];
     }
     else {
       return $ranking;
@@ -65,27 +64,26 @@ class RankingController extends ControllerBase {
   }
 
   public static function getRankingGeneral(Group $group = null) {
-    $ranking = RankingGeneral::getRanking(null,'general','ranking_general',$group);
-    if(count($ranking) == 0) {
+    $ranking = RankingGeneral::getRanking(null, 'general', 'ranking_general', $group);
+    if (count($ranking) == 0) {
       return false;
     }
     return self::getTableFromRanking($ranking);
 
   }
 
-  public static function getRankingLeague(League $league,Group $group = null) {
-    $ranking = RankingLeague::getRanking($league,'league','ranking_league',$group);
-    if($ranking) {
+  public static function getRankingLeague(League $league, Group $group = null) {
+    $ranking = RankingLeague::getRanking($league, 'league', 'ranking_league', $group);
+    if ($ranking) {
       return self::getTableFromRanking($ranking);
-    }
-    else {
+    } else {
       return false;
     }
   }
 
-  public static function getRankingTableForDay(Day $day,Group $group = null) {
-    $rankingDays = RankingDay::getRankingForDay($day,$group);
-    if(count($rankingDays) == 0) {
+  public static function getRankingTableForDay(Day $day, Group $group = null) {
+    $rankingDays = RankingDay::getRankingForDay($day, $group);
+    if (count($rankingDays) == 0) {
       return false;
     }
     return self::getTableFromRanking($rankingDays);
@@ -116,28 +114,28 @@ class RankingController extends ControllerBase {
         ]
       ];
       $old_points = $ranking->get('points')->value;
-      if($ranking->getOwner()->id() == $user->id()) {
-        $row['class'] = ['highlighted','bold'];
+      if ($ranking->getOwner()->id() == $user->id()) {
+        $row['class'] = ['highlighted', 'bold'];
       }
-      $link_user = Url::fromRoute('entity.user.canonical',['user'=>$ranking->getOwner()->id()])->toString();
+      $link_user = Url::fromRoute('entity.user.canonical', ['user'=>$ranking->getOwner()->id()])->toString();
       $cell = ['#markup'=>'<a class="picto" href="'.$link_user.'" title="'.t('see user\'s profile').'"><i class="fa fa-user" aria-hidden="true"></i></a>'];
-      $row['data']['user'] = ['data'=>render($cell),'class'=>'picto'];
-      if($ranking instanceof RankingDay) {
-        $link_details_user = Url::fromRoute('mespronos.lastbetsdetailsforuser',['day'=>$ranking->getDayiD(),'user'=>$ranking->getOwner()->id()])->toString();
+      $row['data']['user'] = ['data'=>render($cell), 'class'=>'picto'];
+      if ($ranking instanceof RankingDay) {
+        $link_details_user = Url::fromRoute('mespronos.lastbetsdetailsforuser', ['day'=>$ranking->getDayiD(), 'user'=>$ranking->getOwner()->id()])->toString();
         $cell = ['#markup'=>'<a class="picto" href="'.$link_details_user.'" title="'.t('see user\'s bets').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
-        $row['data']['details'] = ['data'=>render($cell),'class'=>'picto'];
+        $row['data']['details'] = ['data'=>render($cell), 'class'=>'picto'];
       }
       $rows[] = $row;
     }
     $header = [
-      t('#',array(),array('context'=>'mespronos-ranking')),
-      t('Better',array(),array('context'=>'mespronos-ranking')),
-      t('Points',array(),array('context'=>'mespronos-ranking')),
-      t('Bets',array(),array('context'=>'mespronos-ranking')),
+      t('#', array(), array('context'=>'mespronos-ranking')),
+      t('Better', array(), array('context'=>'mespronos-ranking')),
+      t('Points', array(), array('context'=>'mespronos-ranking')),
+      t('Bets', array(), array('context'=>'mespronos-ranking')),
     ];
 
     $header[] = '';
-    if(isset($ranking) && $ranking instanceof RankingDay) {
+    if (isset($ranking) && $ranking instanceof RankingDay) {
       $header[] = '';
     }
     return [
@@ -153,7 +151,7 @@ class RankingController extends ControllerBase {
    */
   public static function getPalmares(\Drupal\user\Entity\User $user) {
     $data = self::getPalmaresData($user);
-    if(!empty($data)) {
+    if (!empty($data)) {
       return [
         '#theme' => 'table',
         '#rows' => self::parsePalmares($data),
@@ -161,11 +159,10 @@ class RankingController extends ControllerBase {
         '#footer' => self::getPalmaresFooter(),
         '#cache' => [
           'contexts' => ['route'],
-          'tags' => [ 'palmares','user:'.$user->id()],
+          'tags' => ['palmares', 'user:'.$user->id()],
         ],
       ];
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -173,17 +170,17 @@ class RankingController extends ControllerBase {
   private static function getPalmaresData(\Drupal\user\Entity\User $user) {
 
     $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__league','l');
-    $query->join('mespronos__ranking_league','rl','l.id = rl.league');
-    $query->addField('l','id','league_id');
-    $query->orderBy('l.changed','DESC');
-    $query->condition('l.status','archived');
-    $query->condition('rl.better',$user->id());
+    $query = $injected_database->select('mespronos__league', 'l');
+    $query->join('mespronos__ranking_league', 'rl', 'l.id = rl.league');
+    $query->addField('l', 'id', 'league_id');
+    $query->orderBy('l.changed', 'DESC');
+    $query->condition('l.status', 'archived');
+    $query->condition('rl.better', $user->id());
     $palmares = [];
     $results = $query->execute();
-    while($row = $results->fetchObject()) {
+    while ($row = $results->fetchObject()) {
       $row->league = League::load($row->league_id);
-      $ranking = RankingLeague::getRankingForBetter($user,$row->league);
+      $ranking = RankingLeague::getRankingForBetter($user, $row->league);
       $row->betters = $row->league->getBettersNumber();
       $row->position = $ranking ? $ranking->getPosition() : ' ';
       $palmares[] = $row;

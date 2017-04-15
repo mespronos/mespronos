@@ -52,8 +52,8 @@ class GroupLeavingForm extends ConfirmFormBase {
     $group = $form_state->getBuildInfo()['args'][0];
     $user = \Drupal::currentUser();
     $user = User::load($user->id());
-    if(!$group->isMemberOf($user)) {
-      drupal_set_message(t('You are not a member of of %group_name group',['%group_name'=>$group->label()]));
+    if (!$group->isMemberOf($user)) {
+      drupal_set_message(t('You are not a member of of %group_name group', ['%group_name'=>$group->label()]));
       return new RedirectResponse($this->getCancelUrl());
     }
     return parent::buildForm($form, $form_state);
@@ -70,13 +70,13 @@ class GroupLeavingForm extends ConfirmFormBase {
     $user = User::load($user->id());
     $usergroups = $user->get("field_group")->getValue();
     foreach ($usergroups as $key => $value) {
-      if($value['target_id'] == $group->id()) {
+      if ($value['target_id'] == $group->id()) {
         unset($usergroups[$key]);
       }
     }
     $user->set("field_group", $usergroups);
     $user->save();
-    Cache::invalidateTags(array('group:'.$group->id(),'groups','ranking'));
+    Cache::invalidateTags(array('group:'.$group->id(), 'groups', 'ranking'));
     $form_state->setRedirectUrl($this->getCancelUrl());
   }
 

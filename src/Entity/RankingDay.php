@@ -52,8 +52,8 @@ class RankingDay extends Ranking {
   }
 
     /**
-   * @return mixed
-   */
+     * @return mixed
+     */
   public function getDayiD() {
     return $this->get('day')->target_id;
   }
@@ -73,11 +73,11 @@ class RankingDay extends Ranking {
    */
   public function getPosition() {
     $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__ranking_day','rd');
-    $query->addField('rd','id');
-    $query->addField('rd','points');
-    $query->condition('rd.day',$this->getDayiD());
-    $query->orderBy('points','DESC');
+    $query = $injected_database->select('mespronos__ranking_day', 'rd');
+    $query->addField('rd', 'id');
+    $query->addField('rd', 'points');
+    $query->condition('rd.day', $this->getDayiD());
+    $query->orderBy('points', 'DESC');
     $results = $query->execute()->fetchAllAssoc('id');
     $ranking = $this->determinePosition($results);
     return $ranking;
@@ -90,7 +90,7 @@ class RankingDay extends Ranking {
     self::removeRanking($day);
     $data = self::getData($day);
     RankingController::sortRankingDataAndDefinedPosition($data);
-    foreach($data as $row) {
+    foreach ($data as $row) {
       $rankingDay = RankingDay::create([
         'better' => $row->better,
         'day' => $day->id(),
@@ -104,15 +104,15 @@ class RankingDay extends Ranking {
 
   public static function getData(Day $day) {
     $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__bet','b');
-    $query->addField('b','better');
-    $query->addExpression('sum(b.points)','points');
-    $query->addExpression('count(b.id)','nb_bet');
-    $query->join('mespronos__game','g','b.game = g.id');
+    $query = $injected_database->select('mespronos__bet', 'b');
+    $query->addField('b', 'better');
+    $query->addExpression('sum(b.points)', 'points');
+    $query->addExpression('count(b.id)', 'nb_bet');
+    $query->join('mespronos__game', 'g', 'b.game = g.id');
     $query->groupBy('b.better');
-    $query->orderBy('points','DESC');
-    $query->orderBy('nb_bet','DESC');
-    $query->condition('g.day',$day->id());
+    $query->orderBy('points', 'DESC');
+    $query->orderBy('nb_bet', 'DESC');
+    $query->condition('g.day', $day->id());
     $query->isNotNull('b.points');
     $results = $query->execute()->fetchAllAssoc('better');
 
@@ -123,7 +123,7 @@ class RankingDay extends Ranking {
 
     $storage = \Drupal::entityManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
-    $query->condition('day',$day->id());
+    $query->condition('day', $day->id());
     $ids = $query->execute();
 
     $rankings = $storage->loadMultiple($ids);
@@ -139,15 +139,15 @@ class RankingDay extends Ranking {
    * @param \Drupal\mespronos\Entity\Day $day
    * @return \Drupal\mespronos\Entity\RankingDay[]
    */
-  public static function getRankingForDay(Day $day,Group $group = null) {
+  public static function getRankingForDay(Day $day, Group $group = null) {
     $storage = \Drupal::entityManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
     $query->condition('day', $day->id());
-    if(!is_null($group) ) {
+    if (!is_null($group)) {
       $member_ids = $group->getMembers();
-      $query->condition('better',$member_ids,'IN');
+      $query->condition('better', $member_ids, 'IN');
     }
-    $query->sort('points','DESC');
+    $query->sort('points', 'DESC');
     $ids = $query->execute();
 
     $rankings = $storage->loadMultiple($ids);
@@ -161,8 +161,8 @@ class RankingDay extends Ranking {
    * @param String $storage_name
    * @return \Drupal\mespronos\Entity\RankingDay
    */
-  public static function getRankingForBetter(\Drupal\user\Entity\User $better,$day = null,$entity_name='day',$storage_name='ranking_day') {
-    return parent::getRankingForBetter($better,$day,$entity_name,$storage_name);
+  public static function getRankingForBetter(\Drupal\user\Entity\User $better, $day = null, $entity_name = 'day', $storage_name = 'ranking_day') {
+    return parent::getRankingForBetter($better, $day, $entity_name, $storage_name);
   }
 
   /**
@@ -171,8 +171,8 @@ class RankingDay extends Ranking {
    * @param String $storage_name
    * @return integer
    */
-  public static function getNumberOfBetters($day = null,$entity_name='day',$storage_name='ranking_day') {
-    return parent::getNumberOfBetters($day,$entity_name,$storage_name);
+  public static function getNumberOfBetters($day = null, $entity_name = 'day', $storage_name = 'ranking_day') {
+    return parent::getNumberOfBetters($day, $entity_name, $storage_name);
   }
 
   /**

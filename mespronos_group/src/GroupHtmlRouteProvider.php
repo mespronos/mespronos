@@ -75,7 +75,7 @@ class GroupHtmlRouteProvider extends AdminHtmlRouteProvider {
     if ($entity_type->hasLinkTemplate('add-form')) {
       $entity_type_id = $entity_type->id();
       $parameters = [
-        $entity_type_id => ['type' => 'entity:' . $entity_type_id],
+        $entity_type_id => ['type' => 'entity:'.$entity_type_id],
       ];
 
       $route = new Route($entity_type->getLinkTemplate('add-form'));

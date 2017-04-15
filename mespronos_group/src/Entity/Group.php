@@ -78,12 +78,11 @@ class Group extends ContentEntityBase implements GroupInterface {
     $query = \Drupal::entityQuery('group');
     $query->condition('code', $code);
     $id = $query->execute();
-    if(count($id)>0) {
+    if (count($id) > 0) {
       $id = array_pop($id);
       $group = $storage->load($id);
       return $group;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -190,28 +189,28 @@ class Group extends ContentEntityBase implements GroupInterface {
   }
 
   public function isMemberOf(User $user) {
-    if($user->get('field_group')->first()) {
+    if ($user->get('field_group')->first()) {
       $user_groups = $user->get("field_group")->getValue();
-      $user_groups = array_map(function($a){return $a['target_id'];},$user_groups);
-      return in_array($this->id(),$user_groups);
+      $user_groups = array_map(function($a) {return $a['target_id']; },$user_groups);
+      return in_array($this->id(), $user_groups);
     }
     return false;
   }
 
   public function getMemberNumber() {
-    $query =  \Drupal::entityQuery('user')
-    ->condition('field_group',$this->id());
+    $query = \Drupal::entityQuery('user')
+    ->condition('field_group', $this->id());
 
     $ids = $query->execute();
     return count($ids);
   }
 
   public function getMembers($asEntity = false) {
-    $query =  \Drupal::entityQuery('user')
-    ->condition('field_group',$this->id())
-    ->sort('name','ASC');
+    $query = \Drupal::entityQuery('user')
+    ->condition('field_group', $this->id())
+    ->sort('name', 'ASC');
     $ids = $query->execute();
-    if($asEntity) {
+    if ($asEntity) {
       $users = [];
       foreach ($ids as $id) {
         $user = User::load($id);
@@ -227,11 +226,11 @@ class Group extends ContentEntityBase implements GroupInterface {
    * @return bool|Group[]
    */
   public static function getUserGroup(User $user = null) {
-    if($user == null) {
+    if ($user == null) {
       $user = \Drupal::currentUser();
       $user = User::load($user->id());
     }
-    if($user->get('field_group')->first()) {
+    if ($user->get('field_group')->first()) {
       $groups = [];
       $user_groups = $user->get("field_group")->getValue();
       foreach ($user_groups as $group) {

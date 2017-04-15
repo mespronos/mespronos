@@ -28,8 +28,7 @@ class BetForm extends ContentEntityForm {
       drupal_set_message($this->t('Saved the %label Bet.', array(
         '%label' => $entity->label(),
       )));
-    }
-    else {
+    } else {
       drupal_set_message($this->t('The %label Bet was not saved.', array(
         '%label' => $entity->label(),
       )));

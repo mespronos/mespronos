@@ -27,7 +27,7 @@ class DayBreadcrumbBuilder implements BreadcrumbBuilderInterface {
         $links = [];
         $links[] = Link::createFromRoute(t('Home'), '<front>');
         $links[] = Link::createFromRoute(t('Leagues'), 'mespronos.leagues.list');
-        $links[] = Link::createFromRoute($league->label(), 'entity.league.canonical',['league'=>$league->id()]);
+        $links[] = Link::createFromRoute($league->label(), 'entity.league.canonical', ['league'=>$league->id()]);
         return $breadcrumb->setLinks($links);
     }
 

@@ -37,8 +37,7 @@ class DayForm extends ContentEntityForm {
       drupal_set_message($this->t('Saved the %label Day.', array(
         '%label' => $entity->label(),
       )));
-    }
-    else {
+    } else {
       drupal_set_message($this->t('The %label Day was not saved.', array(
         '%label' => $entity->label(),
       )));

@@ -1,8 +1,6 @@
 <?php
 use Drupal\mespronos_group\Entity\Group;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
-use Drupal\Core\Entity\Entity\EntityViewDisplayInterface;
-use Drupal\Core\Render\Element;
 use Drupal\Core\Cache\Cache;
 
 
@@ -49,14 +47,14 @@ function mespronos_group_entity_extra_field_info() {
 }
 
 function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisplay $display, $view_mode) {
-  if($view_mode == 'full') {
+  if ($view_mode == 'full') {
     $block_manager = \Drupal::service('plugin.manager.block');
     if ($display->getComponent('block_members')) {
       $plugin_block = $block_manager->createInstance('group_members_block', []);
       $render = $plugin_block->build();
       $build['block_members'] = [];
       $build['block_members']['title'] = [
-        '#markup' => '<h2>' . t('Members') . '</h2>'
+        '#markup' => '<h2>'.t('Members').'</h2>'
       ];
       $build['block_members']['content'] = [
         '#type' => 'container',
@@ -71,7 +69,7 @@ function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisp
       $build['block_ranking']['title'] = [
         '#markup' => '<h2>'.t('Group ranking').'</h2>'
       ];
-      $build['block_ranking']['content']= [
+      $build['block_ranking']['content'] = [
         '#type' => 'container',
         "element-content" => $render,
       ];
@@ -95,17 +93,16 @@ function mespronos_group_form_user_register_form_alter(&$form, \Drupal\Core\Form
 function mespronos_group_form_user_register_form_validate(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
 
   $code = $form_state->getValue('group_access_code');
-  if($code != null) {
+  if ($code != null) {
     $group = Group::loadByCode($code);
-    if(!$group) {
+    if (!$group) {
       $form_state->setErrorByName('group_access_code', t("The access code to join a group is wrong"));
-    }
-    else {
+    } else {
       $formO = $form_state->getFormObject();
       $user = $formO->getEntity();
       $user->set("field_group", $group->id());
-      Cache::invalidateTags(array('groups','ranking'));
-      drupal_set_message(t('You are now part of the group %group_name',['%group_name'=>$group->label()]));
+      Cache::invalidateTags(array('groups', 'ranking'));
+      drupal_set_message(t('You are now part of the group %group_name', ['%group_name'=>$group->label()]));
     }
   }
 }

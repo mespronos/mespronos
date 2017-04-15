@@ -43,7 +43,7 @@ class MespronosGroupCreationTest extends WebTestBase {
         'name'=> 'test',
         'code'=> 'test',
     ]);
-    $this->assertTrue($group->save(),t('Group saving return true'));
+    $this->assertTrue($group->save(), t('Group saving return true'));
   }
 
   public function testCreationFormErrors() {
@@ -83,15 +83,15 @@ class MespronosGroupCreationTest extends WebTestBase {
 
     $group = Group::load(1);
 
-    $this->assertEqual($group->getOwnerId(),$this->user->id(),t('Group creator is correctly set'));
+    $this->assertEqual($group->getOwnerId(), $this->user->id(), t('Group creator is correctly set'));
     $u = User::load($this->user->id());
     $user_group = Group::getUserGroup($u);
     $user_group = array_pop($user_group);
-    $this->assertEqual($user_group->id(),$group->id(),t('Group creator automatically join the group'));
+    $this->assertEqual($user_group->id(), $group->id(), t('Group creator automatically join the group'));
 
     $members = $group->getMembers(false);
-    $this->assertTrue(in_array($this->user->id(),$members),t('The method GetMembers is working properly'));
-    $this->assertEqual(count($members),1,t('The method getMembers is returning the correct number of member'));
+    $this->assertTrue(in_array($this->user->id(), $members), t('The method GetMembers is working properly'));
+    $this->assertEqual(count($members), 1, t('The method getMembers is returning the correct number of member'));
 
   }
 

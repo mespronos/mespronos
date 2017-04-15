@@ -34,10 +34,10 @@ class BetController extends ControllerBase {
    */
   public static function updateBetsFromGame(Game $game) {
     $injected_database = Database::getConnection();
-    if(!$game->isScoreSetted()) {
+    if (!$game->isScoreSetted()) {
       $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points'=>null,'changed'=>time()]);
-      $query->condition('game',$game->id());
+      $query->fields(['points'=>null, 'changed'=>time()]);
+      $query->condition('game', $game->id());
       $query->execute();
       unset($query);
       return false;
@@ -48,72 +48,71 @@ class BetController extends ControllerBase {
 
     //perfect bet
     $query = $injected_database->update('mespronos__bet');
-    $query->fields(['points'=>$points['points_score_found'],'changed'=>time()]);
-    $query->condition('score_team_1',$st1);
-    $query->condition('score_team_2',$st2);
-    $query->condition('game',$game->id());
+    $query->fields(['points'=>$points['points_score_found'], 'changed'=>time()]);
+    $query->condition('score_team_1', $st1);
+    $query->condition('score_team_2', $st2);
+    $query->condition('game', $game->id());
     $query->execute();
     unset($query);
 
-    if($st1 == $st2) {
+    if ($st1 == $st2) {
       $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points'=>$points['points_winner_found'],'changed'=>time()]);
+      $query->fields(['points'=>$points['points_winner_found'], 'changed'=>time()]);
       $query->where('score_team_1 = score_team_2');
-      $query->condition('score_team_2',$st2,'!=');
-      $query->condition('score_team_1',$st1,'!=');
-      $query->condition('game',$game->id());
+      $query->condition('score_team_2', $st2, '!=');
+      $query->condition('score_team_1', $st1, '!=');
+      $query->condition('game', $game->id());
       $query->execute();
       unset($query);
 
       $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points'=>$points['points_participation'],'changed'=>time()]);
+      $query->fields(['points'=>$points['points_participation'], 'changed'=>time()]);
       $query->where('score_team_1 <> score_team_2');
-      $query->condition('game',$game->id());
+      $query->condition('game', $game->id());
       $query->execute();
       unset($query);
-    }
-    else {
+    } else {
       $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points'=>$points['points_participation'],'changed'=>time()]);
+      $query->fields(['points'=>$points['points_participation'], 'changed'=>time()]);
       $query->where('score_team_1 = score_team_2');
-      $query->condition('game',$game->id());
+      $query->condition('game', $game->id());
       $query->execute();
       unset($query);
 
       $notExactScore = new Condition('OR');
-      $notExactScore->condition('score_team_2',$st2,'!=');
-      $notExactScore->condition('score_team_1',$st1,'!=');
+      $notExactScore->condition('score_team_2', $st2, '!=');
+      $notExactScore->condition('score_team_1', $st1, '!=');
 
-      if($st1 > $st2) {
+      if ($st1 > $st2) {
         $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points'=>$points['points_winner_found'],'changed'=>time()]);
+        $query->fields(['points'=>$points['points_winner_found'], 'changed'=>time()]);
         $query->where('score_team_1 > score_team_2');
         $query->condition($notExactScore);
-        $query->condition('game',$game->id());
+        $query->condition('game', $game->id());
         $query->execute();
         unset($query);
 
         $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points'=>$points['points_participation'],'changed'=>time()]);
+        $query->fields(['points'=>$points['points_participation'], 'changed'=>time()]);
         $query->where('score_team_1 < score_team_2');
-        $query->condition('game',$game->id());
+        $query->condition('game', $game->id());
         $query->execute();
         unset($query);
       }
 
-      if($st1 < $st2) {
+      if ($st1 < $st2) {
         $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points'=>$points['points_winner_found'],'changed'=>time()]);
+        $query->fields(['points'=>$points['points_winner_found'], 'changed'=>time()]);
         $query->where('score_team_1 < score_team_2');
         $query->condition($notExactScore);
-        $query->condition('game',$game->id());
+        $query->condition('game', $game->id());
         $query->execute();
         unset($query);
 
         $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points'=>$points['points_participation'],'changed'=>time()]);
+        $query->fields(['points'=>$points['points_participation'], 'changed'=>time()]);
         $query->where('score_team_1 > score_team_2');
-        $query->condition('game',$game->id());
+        $query->condition('game', $game->id());
         $query->execute();
         unset($query);
       }
@@ -127,7 +126,7 @@ class BetController extends ControllerBase {
     foreach ($games as $game) {
       self::updateBetsFromGame($game);
     }
-    drupal_set_message(t('Points updated for @nb games',['@nb'=>count($games)]));
+    drupal_set_message(t('Points updated for @nb games', ['@nb'=>count($games)]));
     $response = RankingController::recalculateDay($day);
     return $response;
   }
@@ -144,18 +143,18 @@ class BetController extends ControllerBase {
     ];
 
     foreach ($games as $game) {
-      $batch['operations'][] = ['\Drupal\mespronos\Controller\BetController::updateBetsFromGame',[$game]];
+      $batch['operations'][] = ['\Drupal\mespronos\Controller\BetController::updateBetsFromGame', [$game]];
         $nb_game_updated++;
-        if(!isset($days_to_update[$game->getDayId()])) {
+        if (!isset($days_to_update[$game->getDayId()])) {
           $days_to_update[$game->getDayId()] = $game->getDay();
         }
     }
-    foreach($days_to_update as $day) {
-      $batch['operations'][] = ['\Drupal\mespronos\Entity\RankingDay::createRanking',[$day]];
+    foreach ($days_to_update as $day) {
+      $batch['operations'][] = ['\Drupal\mespronos\Entity\RankingDay::createRanking', [$day]];
     }
 
-    $batch['operations'][] = ['\Drupal\mespronos\Entity\RankingLeague::createRanking',[$league]];
-    $batch['operations'][] = ['\Drupal\mespronos\Entity\RankingGeneral::createRanking',[]];
+    $batch['operations'][] = ['\Drupal\mespronos\Entity\RankingLeague::createRanking', [$league]];
+    $batch['operations'][] = ['\Drupal\mespronos\Entity\RankingGeneral::createRanking', []];
     batch_set($batch);
     return batch_process(\Drupal::url('entity.league.collection'));
   }
@@ -163,8 +162,7 @@ class BetController extends ControllerBase {
   public static function updateBetsForLeagueOver($success, $results, $operations) {
     if ($success) {
       $message = t('Ranking recalculate');
-    }
-    else {
+    } else {
       $message = t('Finished with an error.');
     }
     drupal_set_message($message);
@@ -172,14 +170,14 @@ class BetController extends ControllerBase {
     return new RedirectResponse(\Drupal::url('entity.league.collection'));
   }
 
-  public static function getLastUserBetsTable(User $user,$nb_bets = 20, Day $day = null) {
-    $bets = self::getLastUserBets($user,$nb_bets);
+  public static function getLastUserBetsTable(User $user, $nb_bets = 20, Day $day = null) {
+    $bets = self::getLastUserBets($user, $nb_bets);
     $rows = [];
     $leagues = [];
-    foreach($bets as $bet) {
+    foreach ($bets as $bet) {
       $game = $bet->getGame(true);
       $day = $game->getDay();
-      if(!isset($leagues[$day->getLeagueID()])) {
+      if (!isset($leagues[$day->getLeagueID()])) {
         $leagues[$day->getLeagueID()] = $day->getLeague();
       }
 
@@ -202,11 +200,11 @@ class BetController extends ControllerBase {
     }
 
     $header = [
-      t('League',array(),array('context'=>'mespronos')),
-      t('Game',array(),array('context'=>'mespronos')),
-      t('Score',array(),array('context'=>'mespronos')),
-      t('Bet',array(),array('context'=>'mespronos')),
-      t('Points',array(),array('context'=>'mespronos')),
+      t('League', array(), array('context'=>'mespronos')),
+      t('Game', array(), array('context'=>'mespronos')),
+      t('Score', array(), array('context'=>'mespronos')),
+      t('Bet', array(), array('context'=>'mespronos')),
+      t('Points', array(), array('context'=>'mespronos')),
     ];
 
     $table_array = [
@@ -215,7 +213,7 @@ class BetController extends ControllerBase {
       '#header' => $header,
       '#cache' => [
         'contexts' => ['user'],
-        'tags' => [ 'lastbets','user:'.$user->id()],
+        'tags' => ['lastbets', 'user:'.$user->id()],
       ],
     ];
 
@@ -227,15 +225,15 @@ class BetController extends ControllerBase {
    * @param int $nb_bets
    * @return \Drupal\mespronos\Entity\Bet[]
    */
-  public static function getLastUserBets(User $user,$nb_bets = 20) {
+  public static function getLastUserBets(User $user, $nb_bets = 20) {
     $bet_storage = \Drupal::entityManager()->getStorage('bet');
     $ids = \Drupal::entityQuery('bet')
-      ->condition('better',$user->id())
-      ->condition('points','','IS NOT NULL')
-      ->sort('created','DESC')
-      ->range(0,$nb_bets)
+      ->condition('better', $user->id())
+      ->condition('points', '', 'IS NOT NULL')
+      ->sort('created', 'DESC')
+      ->range(0, $nb_bets)
       ->execute();
-    if(count($ids)>0) {
+    if (count($ids) > 0) {
       return $bet_storage->loadMultiple($ids);
     }
     return [];
@@ -246,18 +244,17 @@ class BetController extends ControllerBase {
    * @param \Drupal\mespronos\Entity\Game $game
    * @return \Drupal\mespronos\Entity\Bet
    */
-  public static function loadForUser(User $user,Game $game) {
+  public static function loadForUser(User $user, Game $game) {
 
     $bet_storage = \Drupal::entityManager()->getStorage('bet');
 
     $ids = \Drupal::entityQuery('bet')
-      ->condition('game',$game->id())
-      ->condition('better',$user->id())
+      ->condition('game', $game->id())
+      ->condition('better', $user->id())
       ->execute();
-    if(count($ids)>0) {
+    if (count($ids) > 0) {
       return $bet_storage->load(array_pop($ids));
-    }
-    else {
+    } else {
       return $bet_storage->create(array());
     }
   }
@@ -268,22 +265,22 @@ class BetController extends ControllerBase {
    * @param \Drupal\mespronos\Entity\Day $day
    * @return integer number of game left to bet
    */
-  public static function betsLeft(\Drupal\user\Entity\User $user,Day $day) {
+  public static function betsLeft(\Drupal\user\Entity\User $user, Day $day) {
     $now_date = new \DateTime();
     $now_date->setTimezone(new \DateTimeZone("GMT"));
 
     $injected_database = Database::getConnection();
 
-    $subquery = $injected_database->select('mespronos__bet','b');
-    $subquery->leftJoin('mespronos__game','g','b.game = g.id');
-    $subquery->fields('g',['id']);
-    $subquery->condition('g.day',$day->id());
-    $subquery->condition('b.better',$user->id());
+    $subquery = $injected_database->select('mespronos__bet', 'b');
+    $subquery->leftJoin('mespronos__game', 'g', 'b.game = g.id');
+    $subquery->fields('g', ['id']);
+    $subquery->condition('g.day', $day->id());
+    $subquery->condition('b.better', $user->id());
 
-    $query = $injected_database->select('mespronos__game','g');
-    $query->addExpression('count(g.id)','nb_bet_left');
-    $query->condition('g.day',$day->id());
-    $query->condition('g.game_date',$now_date->format('Y-m-d\TH:i:s'),'>');
+    $query = $injected_database->select('mespronos__game', 'g');
+    $query->addExpression('count(g.id)', 'nb_bet_left');
+    $query->condition('g.day', $day->id());
+    $query->condition('g.game_date', $now_date->format('Y-m-d\TH:i:s'), '>');
     $query->condition('g.id', $subquery, 'NOT IN');
 
     $results = $query->execute()->fetchAssoc();

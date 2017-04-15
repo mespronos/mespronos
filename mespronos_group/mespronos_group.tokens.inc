@@ -5,11 +5,6 @@
  * Builds placeholder replacement tokens for node-related data.
  */
 
-use Drupal\Core\Datetime\Entity\DateFormat;
-use Drupal\Core\Language\LanguageInterface;
-use Drupal\Core\Render\BubbleableMetadata;
-use Drupal\user\Entity\User;
-
 /**
  * Implements hook_token_info().
  */
@@ -43,14 +38,14 @@ function mespronos_group_tokens($type, $tokens, array $data) {
   if ($type == 'entity' && isset($data['entity_type'])) {
     switch ($data['entity_type']) {
       case 'group' :
-        _mespronos_group_tokens_group($tokens, $data['entity'],$replacements);
+        _mespronos_group_tokens_group($tokens, $data['entity'], $replacements);
         break;
     }
   }
   return $replacements;
 }
 
-function _mespronos_group_tokens_group($tokens, Drupal\mespronos_group\Entity\Group $group,&$replacements) {
+function _mespronos_group_tokens_group($tokens, Drupal\mespronos_group\Entity\Group $group, &$replacements) {
   foreach ($tokens as $name => $original) {
     switch ($name) {
       case 'gid':

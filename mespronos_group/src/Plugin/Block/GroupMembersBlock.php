@@ -25,7 +25,7 @@ class GroupMembersBlock extends BlockBase {
       $items = [];
       $render_controller = \Drupal::entityManager()->getViewBuilder('user');
       foreach ($members as $member) {
-        $items[] = $render_controller->view($member,'compact');
+        $items[] = $render_controller->view($member, 'compact');
       }
       $build = [];
       $build['group_members_block'] = [
@@ -37,7 +37,7 @@ class GroupMembersBlock extends BlockBase {
         ],
         '#cache' => [
           'contexts' => ['user'],
-          'tags' => [ 'group:'.$group->id(),'groups'],
+          'tags' => ['group:'.$group->id(), 'groups'],
       ],
       ];
       return $build;

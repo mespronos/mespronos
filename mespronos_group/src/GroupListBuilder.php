@@ -43,7 +43,7 @@ class GroupListBuilder extends EntityListBuilder {
     $render_controller = \Drupal::entityManager()->getViewBuilder('group');
     /* @var $entity \Drupal\mespronos_group\Entity\Group */
     $row['id'] = $entity->id();
-    $logo = $render_controller->view($entity,'logo');
+    $logo = $render_controller->view($entity, 'logo');
     $row['logo'] = render($logo);
     $row['name'] = $this->l(
       $entity->label(),
@@ -53,13 +53,13 @@ class GroupListBuilder extends EntityListBuilder {
         )
       )
     );
-    $row['code'] =  $entity->getCode();
-    $row['members'] =  $entity->getMemberNumber();
+    $row['code'] = $entity->getCode();
+    $row['members'] = $entity->getMemberNumber();
     $status = ['#markup' => $entity->isPublishedAsVisual()];
-    $row['status'] =  render($status);
+    $row['status'] = render($status);
     $visible = ['#markup' => $entity->isVisibleAsVisual()];
-    $row['visible'] =  render($visible);
-    $row['created'] =  date('d/m/Y H:i:s',$entity->getCreatedTime());
+    $row['visible'] = render($visible);
+    $row['created'] = date('d/m/Y H:i:s', $entity->getCreatedTime());
     return $row + parent::buildRow($entity);
   }
 

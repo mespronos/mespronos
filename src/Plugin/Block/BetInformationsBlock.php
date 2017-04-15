@@ -27,7 +27,7 @@ class BetInformationsBlock extends BlockBase {
   public function build() {
     /* @var $day Day */
     $day = \Drupal::routeMatch()->getParameter('day');
-    if($day) {
+    if ($day) {
       /* @var $league League */
       $league = $day->getLeague();
 
@@ -44,7 +44,7 @@ class BetInformationsBlock extends BlockBase {
           'betting_type_machine' => $league->getBettingType(true),
         ],
         '#cache' => [
-          'contexts' => [ 'url'],
+          'contexts' => ['url'],
         ],
         "#title" => $league->label(),
       ];

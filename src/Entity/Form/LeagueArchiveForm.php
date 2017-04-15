@@ -45,7 +45,7 @@ class LeagueArchiveForm extends ContentEntityConfirmFormBase {
     $this->entity->close();
 
     drupal_set_message(
-      $this->t('League %name has been archived',['%name' => $this->entity->label()])
+      $this->t('League %name has been archived', ['%name' => $this->entity->label()])
     );
 
     $form_state->setRedirectUrl($this->getCancelUrl());

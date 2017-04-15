@@ -58,7 +58,7 @@ class AdministrationConfigForm extends ConfigFormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $this->config('mespronos.reminder')
       ->set('enabled', (string) $form_state->getValue('reminder_enabled'))
-      ->set('hours',$form_state->getValue('reminders_hours'))
+      ->set('hours', $form_state->getValue('reminders_hours'))
       ->save(TRUE);
   }
 

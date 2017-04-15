@@ -71,7 +71,7 @@ class LeagueListController extends EntityListBuilder {
       $operations['archive'] = array(
         'title' => $this->t('Archive'),
         'weight' => 30,
-        'url' => new Url('entity.league.archive',['league' => $entity->id()])
+        'url' => new Url('entity.league.archive', ['league' => $entity->id()])
       );
     }
 

@@ -44,7 +44,7 @@ class FormImport extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $fid = $form_state->getValue('imported_file')[0];
-    $form_state->setRedirect('mespronos.importer_start',['fid'=>$fid]);
+    $form_state->setRedirect('mespronos.importer_start', ['fid'=>$fid]);
   }
 
 }

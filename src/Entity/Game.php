@@ -64,7 +64,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
 
   public function save() {
     $return = parent::save();
-    if($this->isScoreSetted()) {
+    if ($this->isScoreSetted()) {
       BetController::updateBetsFromGame($this);
     }
     return $return;
@@ -76,7 +76,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
 
-    return t('@team1 - @team2 (@league - @day)',[
+    return t('@team1 - @team2 (@league - @day)', [
       '@team1'=> $team1->label(),
       '@team2'=> $team2->label(),
       '@league'=>$league->label(),
@@ -87,13 +87,13 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   public function labelTeams() {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
-    return t('@team1 - @team2',array('@team1'=> $team1->label(),'@team2'=> $team2->label()));
+    return t('@team1 - @team2', array('@team1'=> $team1->label(), '@team2'=> $team2->label()));
   }
 
   public function labelTeamsAndHour() {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
-    $date =  new \DateTime($this->getGameDate(),new \DateTimeZone('UTC'));
+    $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
     $date->setTimezone(new \DateTimeZone("Europe/Paris"));
 
 
@@ -115,22 +115,22 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public function labelScore() {
-    return t('@t1 - @t2',array('@t1'=> $this->get('score_team_1')->value,'@t2'=> $this->get('score_team_2')->value));
+    return t('@t1 - @t2', array('@t1'=> $this->get('score_team_1')->value, '@t2'=> $this->get('score_team_2')->value));
   }
 
   public function labelWithScore() {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
-    return t('<span class="team team-1">@team1</span> <span class="score">@s1 - @s2</span> <span class="team team-2">@team2</span>',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'@s1'=> $this->get('score_team_1')->value,'@s2'=> $this->get('score_team_2')->value));
+    return t('<span class="team team-1">@team1</span> <span class="score">@s1 - @s2</span> <span class="team team-2">@team2</span>', array('@team1'=> $team1->label(), '@team2'=> $team2->label(), '@s1'=> $this->get('score_team_1')->value, '@s2'=> $this->get('score_team_2')->value));
   }
 
   public function labelForInsight() {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
     $league = $this->getLeague();
-    $date =  new \DateTime($this->getGameDate(),new \DateTimeZone('UTC'));
+    $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
     $date->setTimezone(new \DateTimeZone("Europe/Paris"));
-    return t('@team1 @s1 - @s2 @team2 (@league - @date)',array(
+    return t('@team1 @s1 - @s2 @team2 (@league - @date)', array(
       '@team1'=> $team1->label(),
       '@team2'=> $team2->label(),
       '@s1'=> $this->get('score_team_1')->value,
@@ -144,31 +144,31 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   public function label_full() {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
-    $date =  new \DateTime($this->getGameDate(),new \DateTimeZone('UTC'));
+    $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
     $date->setTimezone(new \DateTimeZone("Europe/Paris"));
-    return t('@team1 - @team2 - @date',array('@team1'=> $team1->label(),'@team2'=> $team2->label(),'@date'=> $date->format('d/m/Y H\hi')));
+    return t('@team1 - @team2 - @date', array('@team1'=> $team1->label(), '@team2'=> $team2->label(), '@date'=> $date->format('d/m/Y H\hi')));
   }
 
 
   public function labelDate() {
-    $date =  new \DateTime($this->getGameDate(),new \DateTimeZone('UTC'));
+    $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
     $date->setTimezone(new \DateTimeZone("Europe/Paris"));
     return\Drupal::service('date.formatter')->format($date->format('U'), 'long');
   }
 
   public function isPassed() {
-    $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s',$this->getGameDate(),new \DateTimeZone("GMT"));
+    $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s', $this->getGameDate(), new \DateTimeZone("GMT"));
     $game_date->setTimezone(new \DateTimeZone("Europe/Paris"));
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
-    return($game_date<$now);
+    return($game_date < $now);
   }
 
   public static function getGamesForDay(Day $day) {
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
-    $query->condition('day',$day->id());
-    $query->sort('game_date','ASC');
-    $query->sort('id','ASC');
+    $query->condition('day', $day->id());
+    $query->sort('game_date', 'ASC');
+    $query->sort('id', 'ASC');
     $ids = $query->execute();
     $return = [
       'ids' => $ids,
@@ -184,11 +184,11 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   public static function getLastestGamesWithMark($number) {
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
-    $query->condition('score_team_1',0,'>=');
-    $query->condition('score_team_2',0,'>=');
-    $query->sort('game_date','DESC');
-    $query->sort('id','ASC');
-    $query->range(0,$number);
+    $query->condition('score_team_1', 0, '>=');
+    $query->condition('score_team_2', 0, '>=');
+    $query->sort('game_date', 'DESC');
+    $query->sort('id', 'ASC');
+    $query->range(0, $number);
     $ids = $query->execute();
     $return = $game_storage->loadMultiple($ids);
     return $return;
@@ -202,13 +202,13 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   public function removeBets() {
     $storage = \Drupal::entityManager()->getStorage('bet');
     $query = \Drupal::entityQuery('bet');
-    $query->condition('game',$this->id());
+    $query->condition('game', $this->id());
     $ids = $query->execute();
     $bets = $storage->loadMultiple($ids);
     foreach ($bets as $bet) {
       $bet->delete();
     }
-    \Drupal::logger('mespronos')->notice(t('Bets removed on game #@id (@game_label) : @nb_bets removed',[
+    \Drupal::logger('mespronos')->notice(t('Bets removed on game #@id (@game_label) : @nb_bets removed', [
       '@id'=>$this->id(),
       '@game_label'=>$this->label(),
       '@nb_bets' => count($ids),
@@ -223,7 +223,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
    */
   public function getNbBets() {
     $query = \Drupal::entityQuery('bet');
-    $query->condition('game',$this->id());
+    $query->condition('game', $this->id());
     $ids = $query->execute();
     return count($ids);
   }
@@ -240,11 +240,9 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     }
     if($this->getScoreTeam1() > $this->getScoreTeam2()) {
       return 1;
-    }
-    elseif($this->getScoreTeam1() < $this->getScoreTeam2()) {
+    } elseif($this->getScoreTeam1() < $this->getScoreTeam2()) {
       return 2;
-    }
-    else {
+    } else {
       return 'N';
     }
   }
@@ -333,9 +331,9 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return $this->get('day')->target_id;
   }
 
-  public function setScore($score_team_1,$score_team_2) {
-    $this->set('score_team_1',$score_team_1);
-    $this->set('score_team_2',$score_team_2);
+  public function setScore($score_team_1, $score_team_2) {
+    $this->set('score_team_1', $score_team_1);
+    $this->set('score_team_2', $score_team_2);
     return $this;
   }
 
