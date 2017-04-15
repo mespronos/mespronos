@@ -4,7 +4,7 @@ entity.group.collection:
   title: 'Groups'
   description: 'Groups listing'
   base_route: mespronos.dashboard
-  weight : 15
+  weight : 6
 
 group.settings_tab:
   route_name: group.settings

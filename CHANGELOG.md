@@ -1,5 +1,6 @@
 # Changelog - Mespronos 
 ## 8.x-1.0-alpha12, 2017-XX-XX
+  - Administration menu enhancement
   - Refactoring - lint - cleaning
   - Reminder - Send reminder only to those who already bet on the current league
   - Betting form - add last five results for each teams

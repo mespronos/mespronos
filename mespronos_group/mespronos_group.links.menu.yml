@@ -7,3 +7,11 @@ mespronos_group.mygroup:
   weight: 7
   parent: main
   menu_name: main
+
+
+mespronos.groups:
+  route_name: entity.group.collection
+  title: 'Groups'
+  description: 'Goups list'
+  parent: mespronos.dashboard
+  weight : 6
