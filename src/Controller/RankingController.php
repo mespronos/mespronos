@@ -35,7 +35,7 @@ class RankingController extends ControllerBase {
   }
 
   public static function sortRankingDataAndDefinedPosition(&$data) {
-    usort($data, function($item1, $item2) {
+    usort($data, function ($item1, $item2) {
       if (intval($item1->points) == intval($item2->points)) return 0;
       return intval($item1->points) > intval($item2->points) ? -1 : 1;
     });
@@ -56,14 +56,14 @@ class RankingController extends ControllerBase {
 
   public static function rankingPage() {
     if (!$ranking = self::getRankingGeneral()) {
-      return ['#markup'=>t('No ranking for now'), ];
+      return ['#markup' => t('No ranking for now')];
     }
     else {
       return $ranking;
     }
   }
 
-  public static function getRankingGeneral(Group $group = null) {
+  public static function getRankingGeneral(Group $group = NULL) {
     $ranking = RankingGeneral::getRanking(null, 'general', 'ranking_general', $group);
     if (count($ranking) == 0) {
       return false;
@@ -72,19 +72,18 @@ class RankingController extends ControllerBase {
 
   }
 
-  public static function getRankingLeague(League $league, Group $group = null) {
+  public static function getRankingLeague(League $league, Group $group = NULL) {
     $ranking = RankingLeague::getRanking($league, 'league', 'ranking_league', $group);
-    if ($ranking) {
-      return self::getTableFromRanking($ranking);
-    } else {
-      return false;
+    if (count($ranking) == 0) {
+      return FALSE;
     }
+    return self::getTableFromRanking($ranking);
   }
 
-  public static function getRankingTableForDay(Day $day, Group $group = null) {
+  public static function getRankingTableForDay(Day $day, Group $group = NULL) {
     $rankingDays = RankingDay::getRankingForDay($day, $group);
     if (count($rankingDays) == 0) {
-      return false;
+      return FALSE;
     }
     return self::getTableFromRanking($rankingDays);
   }
@@ -96,9 +95,9 @@ class RankingController extends ControllerBase {
   public static function getTableFromRanking($rankings) {
     $user = \Drupal::currentUser();
     $rows = [];
-    $old_points = null;
+    $old_points = NULL;
     $next_rank = 0;
-    foreach ($rankings  as  $ranking) {
+    foreach ($rankings as $ranking) {
       $next_rank++;
       $better = \Drupal\user\Entity\User::load($ranking->getOwner()->id());
       $better = UserController::getRenderableUser($better);
@@ -107,23 +106,23 @@ class RankingController extends ControllerBase {
           'position' => $ranking->get('points')->value != $old_points ? $next_rank : '-',
           'better' => [
             'data' => render($better),
-            'class' => ['better-cell']
+            'class' => ['better-cell'],
           ],
           'points' => $ranking->get('points')->value,
           'games_betted' => $ranking->get('games_betted')->value,
-        ]
+        ],
       ];
       $old_points = $ranking->get('points')->value;
       if ($ranking->getOwner()->id() == $user->id()) {
         $row['class'] = ['highlighted', 'bold'];
       }
       $link_user = Url::fromRoute('entity.user.canonical', ['user'=>$ranking->getOwner()->id()])->toString();
-      $cell = ['#markup'=>'<a class="picto" href="'.$link_user.'" title="'.t('see user\'s profile').'"><i class="fa fa-user" aria-hidden="true"></i></a>'];
+      $cell = ['#markup'=>'<a class="picto" href="' . $link_user . '" title="' . t('see user\'s profile') . '"><i class="fa fa-user" aria-hidden="true"></i></a>'];
       $row['data']['user'] = ['data'=>render($cell), 'class'=>'picto'];
       if ($ranking instanceof RankingDay) {
         $link_details_user = Url::fromRoute('mespronos.lastbetsdetailsforuser', ['day'=>$ranking->getDayiD(), 'user'=>$ranking->getOwner()->id()])->toString();
-        $cell = ['#markup'=>'<a class="picto" href="'.$link_details_user.'" title="'.t('see user\'s bets').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
-        $row['data']['details'] = ['data'=>render($cell), 'class'=>'picto'];
+        $cell = ['#markup'=>'<a class="picto" href="' . $link_details_user . '" title="' . t('see user\'s bets') . '"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+        $row['data']['details'] = ['data' => render($cell), 'class'=>'picto'];
       }
       $rows[] = $row;
     }
