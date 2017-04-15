@@ -77,6 +77,12 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
     return $league;
   }
 
+  /**
+   * Return the number of games of the day
+   *
+   * @return int
+   *   Number of games for the day
+   */
   public function getNbGame() {
     $query = \Drupal::entityQuery('game')->condition('day', $this->id());
     $ids = $query->execute();
@@ -85,19 +91,21 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
 
   /**
    * Return all games for day
+   *
    * @return \Drupal\mespronos\Entity\Game[]
    */
   public function getGames() {
     $game_storage = \Drupal::entityManager()->getStorage('game');
     $ids = $this->getGamesId();
     $games = $game_storage->loadMultiple($ids);
+
     return $games;
   }
+
   /**
    * Return all games id for day
    * @return integer[]
    */
-
   public function getGamesId() {
     $query = \Drupal::entityQuery('game');
 
@@ -107,9 +115,16 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
     $query->sort('id','ASC');
 
     $ids = $query->execute();
+
     return $ids;
   }
 
+  /**
+   * Return the number of games of the day with score setted
+   *
+   * @return int
+   *   Number of games with score setted
+   */
   public function getNbGameWIthScore() {
     $query = \Drupal::entityQuery('game')
       ->condition('day', $this->id())
@@ -137,6 +152,11 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
     ];
   }
 
+  /**
+   * Create pathauto aliases for the day
+   * @param \Drupal\Core\Entity\EntityStorageInterface $storage
+   * @param bool $update
+   */
   public function postSave(EntityStorageInterface $storage, $update = TRUE) {
     parent::postSave($storage, $update);
     if(\Drupal::moduleHandler()->moduleExists('pathauto')) {
