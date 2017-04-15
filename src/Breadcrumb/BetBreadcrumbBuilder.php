@@ -8,11 +8,6 @@ use Drupal\Core\Link;
 use Drupal\Core\Breadcrumb\Breadcrumb;
 
 /**
- * @file
- * Contains Drupal\mespronos\Breadcrumb\BetBreadcrumbBuilder.
- */
-
-/**
  * Class BetBreadcrumbBuilder.
  *
  * @package Drupal\mespronos\Breadcrumb
