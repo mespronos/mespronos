@@ -30,8 +30,7 @@ class SportForm extends ContentEntityForm {
    */
   public function save(array $form, FormStateInterface $form_state) {
     $entity = $this->entity;
-
-    $query = \Drupal::entityQuery('sport')->condition('name', '%'.$entity->get('name').'%', 'LIKE');
+    $query = \Drupal::entityQuery('sport')->condition('name', '%'.$entity->get('name')->value.'%', 'LIKE');
     $id = $query->execute();
 
     if (count($id) == 0) {
