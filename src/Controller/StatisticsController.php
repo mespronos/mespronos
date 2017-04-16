@@ -23,7 +23,10 @@ class StatisticsController extends ControllerBase {
     $stats['leagues'] = t('@nb leagues', ['@nb'=>self::getLeaguesNumber()]);
     $stats['games'] = t('@nb games', ['@nb'=>self::getGamesNumber()]);
     $stats['bets'] = t('@nb bets', ['@nb'=>self::getBetsNumber()]);
-    $stats['groups'] = t('@nb groups', ['@nb'=>self::getGroupsNumber()]);
+
+    if (\Drupal::moduleHandler()->moduleExists('mespronos_groups')) {
+      $stats['groups'] = t('@nb groups', ['@nb'=>self::getGroupsNumber()]);
+    }
     return $stats;
   }
 
