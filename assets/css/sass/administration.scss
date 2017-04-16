@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
 }
-a#toolbar-link-mespronos-dashboard {
+a.toolbar-icon-mespronos-dashboard {
   &:before {
     background-image: inline-image('icons/football2.svg');
     background-size: contain;
@@ -12,13 +12,16 @@ a#toolbar-link-mespronos-dashboard {
 
 form#games-marks {
   fieldset.game {
-    .form-type-textfield {
-      float: left;
-      &:first-of-type {
-        margin-right: 5px;
-      }
-      &:last-of-type {
-        margin-left: 5px;
+    .fieldset-wrapper {
+      display: flex;
+
+      .form-type-number {
+        &:first-of-type {
+          margin-right: 5px;
+        }
+        &:last-of-type {
+          margin-left: 5px;
+        }
       }
     }
   }
