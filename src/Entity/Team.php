@@ -30,7 +30,7 @@ use Drupal\mespronos\MPNEntityInterface;
  *       "default" = "Drupal\mespronos\Entity\Form\TeamForm",
  *       "add" = "Drupal\mespronos\Entity\Form\TeamForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\TeamForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\MPNEntityDeleteForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\TeamAccessControlHandler",
  *   },

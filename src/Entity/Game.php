@@ -30,7 +30,7 @@ use Drupal\mespronos\Controller\BetController;
  *       "default" = "Drupal\mespronos\Entity\Form\GameForm",
  *       "add" = "Drupal\mespronos\Entity\Form\GameForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\GameForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\MPNEntityDeleteForm",
  *       "remove_bets" = "Drupal\mespronos\Entity\Form\GameRemoveBetsForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\GameAccessControlHandler",

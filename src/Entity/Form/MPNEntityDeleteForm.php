@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains Drupal\mespronos\Entity\Form\BetDeleteForm.
+ * Contains Drupal\mespronos\Entity\Form\MPNEntityDeleteForm.
  */
 
 namespace Drupal\mespronos\Entity\Form;
@@ -16,7 +16,7 @@ use Drupal\Core\Url;
  *
  * @ingroup mespronos
  */
-class MPNContentEntityConfirmFormBase extends ContentEntityConfirmFormBase {
+class MPNEntityDeleteForm extends ContentEntityConfirmFormBase {
   /**
    * {@inheritdoc}
    */

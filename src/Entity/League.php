@@ -33,7 +33,7 @@ use Drupal\mespronos\Entity\RankingGeneral;
  *       "add" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "edit" = "Drupal\mespronos\Entity\Form\LeagueForm",
  *       "archive" = "Drupal\mespronos\Entity\Form\LeagueArchiveForm",
- *       "delete" = "Drupal\mespronos\Entity\Form\MPNDeleteForm",
+ *       "delete" = "Drupal\mespronos\Entity\Form\MPNEntityDeleteForm",
  *     },
  *     "access" = "Drupal\mespronos\ControlHandler\LeagueAccessControlHandler",
  *   },
@@ -351,7 +351,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
     $fields['sport'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Sport'))
-      ->setDescription(t('Sport entity reference'))
       ->setRevisionable(TRUE)
       ->setSetting('target_type', 'sport')
       ->setSetting('handler', 'default')
@@ -362,13 +361,9 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
         'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
-        'settings' => array(
-          'match_operator' => 'CONTAINS',
-          'size' => 60,
-          'placeholder' => '',
-        ),
+        'type' => 'options_select',
         'weight' => -3,
+        'settings' => array(),
       ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
@@ -459,7 +454,10 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       ->setDefaultValue(self::$points_default['points_score_found'])
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array('type' => 'hidden'))
-      ->setDisplayOptions('form', array('type' => 'number'))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 10,
+      ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -469,7 +467,10 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       ->setDefaultValue(self::$points_default['points_winner_found'])
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array('type' => 'hidden'))
-      ->setDisplayOptions('form', array('type' => 'number'))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 11,
+      ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -479,7 +480,10 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       ->setDefaultValue(self::$points_default['points_participation'])
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array('type' => 'hidden'))
-      ->setDisplayOptions('form', array('type' => 'number'))
+      ->setDisplayOptions('form', array(
+        'type' => 'number',
+        'weight' => 12,
+      ))
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 

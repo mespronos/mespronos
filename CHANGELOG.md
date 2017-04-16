@@ -1,5 +1,6 @@
 # Changelog - Mespronos 
 ## 8.x-1.0-alpha12, 2017-XX-XX
+  - Fix entity deletion form
   - Fix sport creation
   - Fix error on Statistics controller when mespronos_groups is not enabled
   - Administration menu enhancement
