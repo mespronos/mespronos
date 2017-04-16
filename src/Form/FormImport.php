@@ -24,11 +24,12 @@ class FormImport extends FormBase {
     $form['imported_file'] = array(
       '#type' => 'managed_file',
       '#title' => t('YAML file to import'),
-      '#required' => true,
-      '#upload_location' => 'public://imports/'.date('U'),
+      '#description' => t('A yaml file that will import sport, league, days and games to bet on. <br />You can use files from <em>assets/examples/</em> as models.'),
+      '#required' => TRUE,
+      '#upload_location' => 'public://imports/' . date('U'),
       '#upload_validators' => [
-        'file_validate_extensions' => ['yaml']
-      ]
+        'file_validate_extensions' => ['yaml'],
+      ],
     );
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = array(
