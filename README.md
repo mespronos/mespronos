@@ -1,8 +1,7 @@
 Mespronos
 =========
 
-[![Build Status](https://travis-ci.org/mespronos/mespronos.svg?branch=8.x-1.x)](https://travis-ci.org/mespronos/mespronos)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mespronos/mespronos/badges/quality-score.png?b=8.x-1.x)](https://scrutinizer-ci.com/g/mespronos/mespronos/?branch=8.x-1.x)
+[![Build Status](https://travis-ci.org/mespronos/mespronos.svg?branch=master)](https://travis-ci.org/mespronos/mespronos)[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mespronos/mespronos/badges/quality-score.png?b=8.x-1.x)](https://scrutinizer-ci.com/g/mespronos/mespronos/?branch=8.x-1.x)
 
 ## About
 
