@@ -1,4 +1,7 @@
 # Changelog - Mespronos 
+## 8.x-1.0-alpha13, 2017-XX-XX
+  - Remove useless "Welcome block"
+
 ## 8.x-1.0-alpha12, 2017-04-16
   - Fix entity deletion form
   - Fix sport creation
