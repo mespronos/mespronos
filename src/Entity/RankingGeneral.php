@@ -110,11 +110,11 @@ class RankingGeneral extends Ranking {
               ) AA LEFT JOIN {".$this->getBaseTable()."} BB USING (points)) A where id = :id";
 
     $args = [':id'=>$this->id()];
-    db_query('SET @rnk=0;');
-    db_query('SET @rank=0');
-    db_query('SET @curscore=0');
+    \Drupal::database()->query('SET @rnk=0;');
+    \Drupal::database()->query('SET @rank=0');
+    \Drupal::database()->query('SET @curscore=0');
 
-    $results = db_query($query, $args);
+    $results = \Drupal::database()->query($query, $args);
 
     $res = $results->fetchField();
     if ($res) {

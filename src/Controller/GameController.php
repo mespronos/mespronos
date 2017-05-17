@@ -126,7 +126,7 @@ class GameController extends ControllerBase {
   }
 
   public static function getBettersBetsData(Game $game) {
-    $query = db_select('mespronos__bet', 'b');
+    $query = \Drupal::database()->select('mespronos__bet', 'b');
     $query->join('users', 'u', 'b.better = u.uid');
     $query->join('users_field_data', 'ufd', 'ufd.uid = u.uid');
     $query->fields('b', ['better', 'score_team_1', 'score_team_2', 'points']);

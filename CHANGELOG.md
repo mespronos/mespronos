@@ -1,6 +1,7 @@
 # Changelog - Mespronos 
 ## 8.x-1.0-alpha13, 2017-XX-XX
   - Remove useless "Welcome block"
+  - Replace all calls to db_(), which is deprecated #2878983
 
 ## 8.x-1.0-alpha12, 2017-04-16
   - Fix entity deletion form
