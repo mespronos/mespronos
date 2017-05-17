@@ -77,7 +77,7 @@ class DayController extends ControllerBase {
       $user = User::load(\Drupal::currentUser()->id());
       $groups = UserController::getGroup($user);
     }
-    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
+    $render_controller = \Drupal::entityTypeManager()->getViewBuilder('group');
     $groups_ranking = [];
     if ($groups) {
       foreach ($groups as $group) {
@@ -160,7 +160,7 @@ class DayController extends ControllerBase {
    * @return array of day
    */
   public static function getNextDaysToBet($nb = 5, League $league = null) {
-    $day_storage = \Drupal::entityManager()->getStorage('day');
+    $day_storage = \Drupal::entityTypeManager()->getStorage('day');
     $injected_database = Database::getConnection();
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
 
@@ -193,7 +193,7 @@ class DayController extends ControllerBase {
    * @return mixed
    */
   public static function getlastDays($nb = 5, League $league = null, $include_archived = false) {
-    $day_storage = \Drupal::entityManager()->getStorage('day');
+    $day_storage = \Drupal::entityTypeManager()->getStorage('day');
     $injected_database = Database::getConnection();
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
 

@@ -47,7 +47,7 @@ class GroupController extends ControllerBase {
   }
 
   public static function loadGroups($onlyActive = true, $onlyVisible = true) {
-    $storage = \Drupal::entityManager()->getStorage('group');
+    $storage = \Drupal::entityTypeManager()->getStorage('group');
     $query = \Drupal::entityQuery('group');
     if ($onlyActive) {
       $query->condition('status', NODE_PUBLISHED);
@@ -70,7 +70,7 @@ class GroupController extends ControllerBase {
    * @return array
    */
   public static function parseGroupsForListing(&$groups) {
-    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
+    $render_controller = \Drupal::entityTypeManager()->getViewBuilder('group');
     $user = \Drupal::currentUser();
     $user = User::load($user->id());
     $groups_return = [];

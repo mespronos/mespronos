@@ -33,7 +33,7 @@ class RankingGroupBlock extends BlockBase {
       return [];
     }
     $build = [];
-    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
+    $render_controller = \Drupal::entityTypeManager()->getViewBuilder('group');
     foreach ($groups as $group) {
       if ($ranking = RankingController::getRankingGeneral($group)) {
         $group_build = [

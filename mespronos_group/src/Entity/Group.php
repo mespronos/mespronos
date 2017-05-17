@@ -74,7 +74,7 @@ class Group extends ContentEntityBase implements GroupInterface {
   }
 
   public static function loadByCode($code) {
-    $storage = \Drupal::entityManager()->getStorage('group');
+    $storage = \Drupal::entityTypeManager()->getStorage('group');
     $query = \Drupal::entityQuery('group');
     $query->condition('code', $code);
     $id = $query->execute();

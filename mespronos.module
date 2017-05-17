@@ -322,7 +322,7 @@ function mespronos_team_view(array &$build, Team $entity, EntityViewDisplay $dis
 function mespronos_user_update(\Drupal\user\Entity\User $user) {
   $query = \Drupal::entityQuery('day');
   $ids = $query->execute();
-  $days = \Drupal::entityManager()->getStorage("day")->loadMultiple($ids);
+  $days = \Drupal::entityTypeManager()->getStorage("day")->loadMultiple($ids);
 
   $trans = \Drupal::service('transliteration');
   $alias_manager = \Drupal::service('path.alias_manager');

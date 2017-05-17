@@ -24,7 +24,7 @@ class GameController extends ControllerBase {
    * @return \Drupal\mespronos\Entity\Game[]
    */
   public static function getGameWithoutMarks($only_past = true) {
-    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
 
     if ($only_past) {
@@ -49,7 +49,7 @@ class GameController extends ControllerBase {
    * @return \Drupal\mespronos\Entity\Game[]
    */
   public static function getGamesToBet(Day $day) {
-    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
 
     $now = new \DateTime(null, new \DateTimeZone("UTC"));

@@ -72,7 +72,7 @@ function mespronos_update_8004() {
 function mespronos_update_8005() {
   $query = \Drupal::entityQuery('day');
   $ids = $query->execute();
-  $days = \Drupal::entityManager()->getStorage("day")->loadMultiple($ids);
+  $days = \Drupal::entityTypeManager()->getStorage("day")->loadMultiple($ids);
   foreach ($days as $day) {
     $day->save();
   }

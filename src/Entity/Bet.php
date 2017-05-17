@@ -56,7 +56,7 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public static function getUserBetsForGames($games_ids, \Drupal\user\Entity\User $user) {
-    $bet_storage = \Drupal::entityManager()->getStorage('bet');
+    $bet_storage = \Drupal::entityTypeManager()->getStorage('bet');
     $query = \Drupal::entityQuery('bet');
     $query->condition('game', $games_ids, 'IN');
     $query->condition('better', $user->id());

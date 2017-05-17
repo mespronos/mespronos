@@ -61,7 +61,7 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
   }
 
   public static function getRanking($entity = null,$entity_name=null,$storage_name,Group $group = null) {
-    $storage = \Drupal::entityManager()->getStorage($storage_name);
+    $storage = \Drupal::entityTypeManager()->getStorage($storage_name);
     $query = \Drupal::entityQuery($storage_name);
     if(!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
@@ -82,7 +82,7 @@ abstract class Ranking extends MPNContentEntityBase implements MPNEntityInterfac
    * @return \Drupal\mespronos\Entity\RankingDay
    */
   public static function getRankingForBetter(\Drupal\user\Entity\User $better, $entity = null, $entity_name = null, $storage_name) {
-    $storage = \Drupal::entityManager()->getStorage($storage_name);
+    $storage = \Drupal::entityTypeManager()->getStorage($storage_name);
     $query = \Drupal::entityQuery($storage_name);
     $query->condition('better', $better->id());
     if (!is_null($entity_name) && !is_null($entity)) {

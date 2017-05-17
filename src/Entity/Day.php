@@ -95,7 +95,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
    * @return \Drupal\mespronos\Entity\Game[]
    */
   public function getGames() {
-    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
     $ids = $this->getGamesId();
     $games = $game_storage->loadMultiple($ids);
 
@@ -175,7 +175,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
       }
 
       $user_ids = \Drupal::entityQuery('user')->execute();
-      $users = \Drupal::entityManager()->getStorage("user")->loadMultiple($user_ids);
+      $users = \Drupal::entityTypeManager()->getStorage("user")->loadMultiple($user_ids);
       foreach ($users as $user) {
         $system_path = '/mespronos/day/'.$this->id().'/results/user/'.$user->id();
         $path_alias = str_replace('.html', '', $alias_day).'/les-pronos-de-'.$trans->transliterate($user->label()).'.html';

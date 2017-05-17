@@ -29,7 +29,7 @@ use Drupal\Core\Entity\ContentEntityBase;
 class Reminder extends ContentEntityBase {
 
   public static function loadForDay($day_id) {
-    $reminder_storage = \Drupal::entityManager()->getStorage('reminder');
+    $reminder_storage = \Drupal::entityTypeManager()->getStorage('reminder');
     $query = \Drupal::entityQuery('reminder');
     $query->condition('day', $day_id);
     $ids = $query->execute();

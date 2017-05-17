@@ -72,7 +72,7 @@ class LeagueController extends ControllerBase {
     $user = User::load(\Drupal::currentUser()->id());
     $groups = UserController::getGroup($user);
 
-    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
+    $render_controller = \Drupal::entityTypeManager()->getViewBuilder('group');
     $groups_ranking = [];
     if ($groups) {
       foreach ($groups as $group) {

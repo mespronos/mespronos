@@ -135,7 +135,7 @@ class ReminderController extends ControllerBase {
     $date_to->add(new \DateInterval('PT'.intval($nb_hours).'H'));
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
 
-    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
 
     $query->condition('game_date', $now->format('Y-m-d\TH:i:s'), '>');

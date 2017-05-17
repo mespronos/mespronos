@@ -168,7 +168,7 @@ class GamesBetting extends FormBase {
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $games = $form_state->getValue('games');
     $user_id = $form_state->getValue('user');
-    $user_storage = \Drupal::entityManager()->getStorage('user');
+    $user_storage = \Drupal::entityTypeManager()->getStorage('user');
     $user = $user_storage->load($user_id);
     $day = $this->extractDay($form_state);
     $league = $day->getLeague();
@@ -176,7 +176,7 @@ class GamesBetting extends FormBase {
     $i = 0;
     $j = 0;
     foreach ($games as $game_id => &$game_data) {
-      $bet_storage = \Drupal::entityManager()->getStorage('bet');
+      $bet_storage = \Drupal::entityTypeManager()->getStorage('bet');
       if ($game_id == $game_data['token_id']) {
         if ($betting_type == 'winner') {
           if ($game_data['winner'] != '' && in_array($game_data['winner'], array('1', 'N', '2'))) {

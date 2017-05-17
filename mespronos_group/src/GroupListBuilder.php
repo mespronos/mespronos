@@ -40,7 +40,7 @@ class GroupListBuilder extends EntityListBuilder {
    */
   public function buildRow(EntityInterface $entity) {
     $row = [];
-    $render_controller = \Drupal::entityManager()->getViewBuilder('group');
+    $render_controller = \Drupal::entityTypeManager()->getViewBuilder('group');
     /* @var $entity \Drupal\mespronos_group\Entity\Group */
     $row['id'] = $entity->id();
     $logo = $render_controller->view($entity, 'logo');

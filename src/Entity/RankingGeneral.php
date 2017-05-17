@@ -82,7 +82,7 @@ class RankingGeneral extends Ranking {
   }
 
   public static function removeRanking() {
-    $storage = \Drupal::entityManager()->getStorage('ranking_general');
+    $storage = \Drupal::entityTypeManager()->getStorage('ranking_general');
     $query = \Drupal::entityQuery('ranking_general');
     $ids = $query->execute();
 

@@ -62,7 +62,7 @@ class RankingDay extends Ranking {
    * @return Day
    */
   public function getDay() {
-    $day_storage = \Drupal::entityManager()->getStorage('day');
+    $day_storage = \Drupal::entityTypeManager()->getStorage('day');
     $day = $day_storage->load($this->get('day')->target_id);
     return $day;
   }
@@ -121,7 +121,7 @@ class RankingDay extends Ranking {
 
   public static function removeRanking(\Drupal\mespronos\Entity\Day $day) {
 
-    $storage = \Drupal::entityManager()->getStorage('ranking_day');
+    $storage = \Drupal::entityTypeManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
     $query->condition('day', $day->id());
     $ids = $query->execute();
@@ -140,7 +140,7 @@ class RankingDay extends Ranking {
    * @return \Drupal\mespronos\Entity\RankingDay[]
    */
   public static function getRankingForDay(Day $day, Group $group = null) {
-    $storage = \Drupal::entityManager()->getStorage('ranking_day');
+    $storage = \Drupal::entityTypeManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
     $query->condition('day', $day->id());
     if (!is_null($group)) {

@@ -164,7 +164,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public static function getGamesForDay(Day $day) {
-    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
     $query->condition('day', $day->id());
     $query->sort('game_date', 'ASC');
@@ -182,7 +182,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
    * @return \Drupal\mespronos\Entity\Game[]
    */
   public static function getLastestGamesWithMark($number) {
-    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
     $query->condition('score_team_1', 0, '>=');
     $query->condition('score_team_2', 0, '>=');
@@ -200,7 +200,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
    * @return integer number of deleted bets
    */
   public function removeBets() {
-    $storage = \Drupal::entityManager()->getStorage('bet');
+    $storage = \Drupal::entityTypeManager()->getStorage('bet');
     $query = \Drupal::entityQuery('bet');
     $query->condition('game', $this->id());
     $ids = $query->execute();
@@ -278,7 +278,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
    * @return Team
    */
   public function getTeam1() {
-    $team_storage = \Drupal::entityManager()->getStorage('team');
+    $team_storage = \Drupal::entityTypeManager()->getStorage('team');
     $team = $team_storage->load($this->getTeam1Id());
     return $team;
   }
@@ -296,7 +296,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
    * @return Team
    */
   public function getTeam2() {
-    $team_storage = \Drupal::entityManager()->getStorage('team');
+    $team_storage = \Drupal::entityTypeManager()->getStorage('team');
     $team = $team_storage->load($this->getTeam2Id());
     return $team;
   }
@@ -306,8 +306,8 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
    * @return League
    */
   public function getLeague() {
-    $day_storage = \Drupal::entityManager()->getStorage('day');
-    $league_storage = \Drupal::entityManager()->getStorage('league');
+    $day_storage = \Drupal::entityTypeManager()->getStorage('day');
+    $league_storage = \Drupal::entityTypeManager()->getStorage('league');
     $day = $day_storage->load($this->get('day')->target_id);
     $league = $league_storage->load($day->get('league')->target_id);
     return $league;
@@ -318,7 +318,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
    * @return Day
    */
   public function getDay() {
-    $day_storage = \Drupal::entityManager()->getStorage('day');
+    $day_storage = \Drupal::entityTypeManager()->getStorage('day');
     $day = $day_storage->load($this->get('day')->target_id);
     return $day;
   }

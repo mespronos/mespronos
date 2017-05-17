@@ -78,7 +78,7 @@ class RankingLeague extends Ranking {
    * @return League
    */
   public function getLeague() {
-    $day_storage = \Drupal::entityManager()->getStorage('league');
+    $day_storage = \Drupal::entityTypeManager()->getStorage('league');
     $day = $day_storage->load($this->get('league')->target_id);
     return $day;
   }
@@ -117,7 +117,7 @@ class RankingLeague extends Ranking {
 
   public static function removeRanking(League $league) {
 
-    $storage = \Drupal::entityManager()->getStorage('ranking_league');
+    $storage = \Drupal::entityTypeManager()->getStorage('ranking_league');
     $query = \Drupal::entityQuery('ranking_league');
     $query->condition('league', $league->id());
     $ids = $query->execute();
@@ -136,7 +136,7 @@ class RankingLeague extends Ranking {
    * @return \Drupal\mespronos\Entity\RankingLeague[]
    */
   public static function getRankingForLeague(League $league) {
-    $storage = \Drupal::entityManager()->getStorage('ranking_league');
+    $storage = \Drupal::entityTypeManager()->getStorage('ranking_league');
     $query = \Drupal::entityQuery('ranking_league');
     $query->condition('league', $league->id());
     $query->sort('points', 'DESC');

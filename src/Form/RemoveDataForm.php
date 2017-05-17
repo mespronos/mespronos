@@ -57,7 +57,7 @@ class RemoveDataForm extends ConfirmFormBase {
     foreach ($entities_types as $entity_type) {
       $query = \Drupal::entityQuery($entity_type);
       $ids = $query->execute();
-      $controller = \Drupal::entityManager()->getStorage($entity_type);
+      $controller = \Drupal::entityTypeManager()->getStorage($entity_type);
       $entities = $controller->loadMultiple($ids);
       $controller->delete($entities);
     }

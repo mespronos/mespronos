@@ -93,7 +93,7 @@ class Team extends MPNContentEntityBase implements MPNEntityInterface {
    * @return \Drupal\mespronos\Entity\Game[]
    */
   public function getLastGames($nb = 5) {
-    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
 
     $query->condition('score_team_1', null, 'is not');

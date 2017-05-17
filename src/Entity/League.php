@@ -79,7 +79,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   public static $betting_type_default_value = 'score';
 
   public static function load($id) {
-    $storage = \Drupal::entityManager()->getStorage('league');
+    $storage = \Drupal::entityTypeManager()->getStorage('league');
     $entity = $storage->loadMultiple(array($id));
     return array_pop($entity);
   }
@@ -133,7 +133,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
    * @return \Drupal\mespronos\Entity\Day[]
    */
   public function getDays() {
-    $storage = \Drupal::entityManager()->getStorage('day');
+    $storage = \Drupal::entityTypeManager()->getStorage('day');
     $query = \Drupal::entityQuery('day');
 
     $query->condition('league', $this->id());
@@ -152,7 +152,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
    * @return \Drupal\mespronos\Entity\Game[]
    */
   public function getGames() {
-    $game_storage = \Drupal::entityManager()->getStorage('game');
+    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
     $injected_database = Database::getConnection();
     $query = $injected_database->select('mespronos__game', 'g');
     $query->join('mespronos__day', 'd', 'd.id = g.day');
