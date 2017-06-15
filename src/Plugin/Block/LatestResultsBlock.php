@@ -49,7 +49,7 @@ class LatestResultsBlock extends BlockBase {
     foreach ($games as $game) {
       $day_id = $game->getDayId();
       $items[] = Link::fromTextAndUrl(
-        $game->labelWithScore(),
+        $game->labelWithScoreAndLogo(),
         new Url('entity.day.canonical', ['day' => $day_id])
       );
     }

@@ -124,6 +124,12 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return t('<span class="team team-1">@team1</span> <span class="score">@s1 - @s2</span> <span class="team team-2">@team2</span>', array('@team1'=> $team1->label(), '@team2'=> $team2->label(), '@s1'=> $this->get('score_team_1')->value, '@s2'=> $this->get('score_team_2')->value));
   }
 
+  public function labelWithScoreAndLogo() {
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+    return t('<span class="team team-1">@team1</span> <span class="score">@s1 - @s2</span> <span class="team team-2">@team2</span>', array('@team1'=> render($team1->getLogo('mini_thumbnail')), '@team2'=> render($team2->getLogo('mini_thumbnail')), '@s1'=> $this->get('score_team_1')->value, '@s2'=> $this->get('score_team_2')->value));
+  }
+
   public function labelForInsight() {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
