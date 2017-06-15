@@ -7,7 +7,7 @@ $json_data = json_decode($json_source);
 echo '<pre>';
 $nb_game = 0;
 $journee = 0;
-$league_name = 'Ligue 1 2016/2017';
+$league_name = 'Ligue 1 2017/2018';
 $sport = 'Football';
 $status = 'active';
 $betting_type = 'score';
@@ -41,7 +41,6 @@ foreach ($games as $game) {
 //$trans = \Drupal::service('transliteration');
 
 $fp = fopen('../'.str_replace('/', '-', $league_name).'.yaml', 'w+');
-
 ob_start();
 $ligue_content = "league :\n  name : '$league_name'\n  sport : '$sport'\n  status : '$status'\n  classement : true\n  betting_type : '$betting_type'\n  days:\n";
 fwrite($fp, $ligue_content);
@@ -50,7 +49,9 @@ foreach ($output_games as $num_journee => $matchs) {
   ob_start();
   echo "    - number : $num_journee\n      day_default_date : ".$matchs[0]->date."\n      games :\n";
   foreach ($matchs as $match) {
-    echo "        - game : ".$match->SUMMARY."\n          game_date : ".$match->date."\n";
+    $date = DateTime::createFromFormat('Y-m-d\TH:i:sP', $match->date);
+    $date->setTime(20,0);
+    echo "        - game : ".$match->SUMMARY."\n          game_date : ".$date->format('Y-m-d\TH:i:sP')."\n";
   }
   $journee_content = ob_get_contents();
   fwrite($fp, $journee_content);
