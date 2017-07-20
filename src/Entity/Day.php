@@ -224,7 +224,7 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
         'weight' => -4,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'string',
+        'type' => 'string_textfield',
         'weight' => -4,
       ))
       ->setDisplayConfigurable('form', TRUE)
