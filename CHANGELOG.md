@@ -1,5 +1,5 @@
 # Changelog - Mespronos 
-## 8.x-1.0-alpha13, 2017-XX-XX
+## 8.x-1.0-alpha13, 2017-08-05
   - Remove useless "Welcome block"
   - Replace all calls to db_(), which is deprecated #2878983
   - Replace all usages of deprecated EntityManager #2878982
