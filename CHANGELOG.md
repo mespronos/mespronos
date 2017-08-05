@@ -4,6 +4,7 @@
   - Replace all calls to db_(), which is deprecated #2878983
   - Replace all usages of deprecated EntityManager #2878982
   - Entity Day - fix form plugin « string » to « string_textfield »
+  - Fix cache error on games_marks form submit
 
 ## 8.x-1.0-alpha12, 2017-04-16
   - Fix entity deletion form
