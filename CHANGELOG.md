@@ -1,4 +1,8 @@
-# Changelog - Mespronos 
+# Changelog - Mespronos
+## 8.x-1.0-alpha14, XXXX-XX-XX
+  - Refactoring
+  - Change User block
+
 ## 8.x-1.0-alpha13, 2017-08-05
   - Remove useless "Welcome block"
   - Replace all calls to db_(), which is deprecated #2878983

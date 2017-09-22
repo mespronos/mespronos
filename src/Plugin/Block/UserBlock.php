@@ -10,6 +10,8 @@ namespace Drupal\mespronos\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 use Drupal\mespronos\Controller\UserController;
 use Drupal\mespronos\Entity\RankingGeneral;
+use Drupal\mespronos_group\Controller\GroupController;
+use Drupal\mespronos_group\Entity\Group;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
@@ -38,6 +40,18 @@ class UserBlock extends BlockBase {
     }
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
     $ranking = RankingGeneral::getRankingForBetter($user);
+    $groups = [];
+    if(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+      $user_groups = Group::getUserGroup($user);
+      if ($user_groups && count($user_groups) > 0) {
+        foreach ($user_groups as $user_group) {
+          $groups[] = [
+            'url' => Url::fromRoute('entity.group.canonical', ['group' => $user_group->id()]),
+            'name' => $user_group->getTheName(),
+          ];
+        }
+      }
+    }
     return [
       '#theme' => 'user-block',
       '#user' => [
@@ -45,11 +59,12 @@ class UserBlock extends BlockBase {
         'rank' => $ranking ? $ranking->getPosition() : '-',
         'nb_betters' => RankingGeneral::getNumberOfBetters(),
         'points' => $ranking ? $ranking->getPoints() : '-',
+        'groups' => $groups,
       ],
       '#links' => [
         'logout' => Link::fromTextAndUrl(t('Log out'),
           Url::fromRoute('user.logout')),
-        'myaccount' => Link::fromTextAndUrl(t('My account'),
+        'myaccount' => Link::fromTextAndUrl(t('See my profile'),
           Url::fromRoute('entity.user.canonical', ['user' => $user->id()])),
         'editmyaccount' => Link::fromTextAndUrl(t('Edit my account'),
           Url::fromRoute('entity.user.edit_form', ['user' => $user->id()])),
