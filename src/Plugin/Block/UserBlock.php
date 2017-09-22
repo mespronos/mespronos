@@ -24,7 +24,6 @@ use Drupal\Core\Link;
  */
 class UserBlock extends BlockBase {
 
-
   /**
    * {@inheritdoc}
    */
@@ -62,4 +61,5 @@ class UserBlock extends BlockBase {
       ],
     ];
   }
+
 }
