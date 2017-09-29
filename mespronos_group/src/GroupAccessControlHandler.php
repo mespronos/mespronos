@@ -30,15 +30,17 @@ class GroupAccessControlHandler extends EntityAccessControlHandler {
           return AccessResult::allowed();
         }
       break;
-      
+
       case 'update':
-        if ($entity->getOwnerId() == $account->id()) {
+        if ($entity->getOwnerId() === $account->id()) {
           return AccessResult::allowedIfHasPermission($account, 'edit own group entities');
-        } else {
-          return AccessResult::allowedIfHasPermission($account, 'edit group entities');
         }
+        return AccessResult::allowedIfHasPermission($account, 'edit group entities');
 
       case 'delete':
+        if ($entity->getOwnerId() === $account->id()) {
+          return AccessResult::allowedIfHasPermission($account, 'delete own group entities');
+        }
         return AccessResult::allowedIfHasPermission($account, 'delete group entities');
     }
 

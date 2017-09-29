@@ -14,16 +14,16 @@ group.settings_tab:
 entity.group.canonical:
   route_name: entity.group.canonical
   base_route: entity.group.canonical
-  title: 'View'
+  title: 'Page de mon groupe'
 
 entity.group.edit_form:
   route_name: entity.group.edit_form
   base_route: entity.group.canonical
-  title: Edit
+  title: Modifier mon groupe
 
 entity.group.delete_form:
   route_name:  entity.group.delete_form
   base_route:  entity.group.canonical
-  title: Delete
+  title: Supprimer mon groupe
   weight: 10
 

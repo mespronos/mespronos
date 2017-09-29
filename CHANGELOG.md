@@ -1,5 +1,6 @@
 # Changelog - Mespronos
 ## 8.x-1.0-alpha14, XXXX-XX-XX
+  - Group - Allow to delete group
   - Group - add email alert
   - Bet reminder - set up html version
   - Refactoring
