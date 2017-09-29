@@ -9,6 +9,7 @@ namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\Core\Datetime\DateFormatter;
+use Drupal\image\Entity\ImageStyle;
 use Drupal\mespronos\Entity\Day;
 use Drupal\Core\Database\Database;
 use Drupal\mespronos\Entity\Reminder;
@@ -112,15 +113,22 @@ class ReminderController extends ControllerBase {
       'games' => [],
       'bet_link' => Url::fromRoute('user.login', [], ['absolute'=>true, 'query'=>['destination'=>$destination->toString()]]),
     ];
+    $style = ImageStyle::load('mini_thumbnail');
+
 
     foreach ($games as $game) {
       $date = new \DateTime($game->getGameDate(), new \DateTimeZone('UTC'));
       $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+      $team1 = $game->getTeam1();
+      $team2 = $game->getTeam2();
+      $logo_team1 = $team1->getLogoAsFile();
+      $logo_team2 = $team2->getLogoAsFile();
+
       $emailvars['#day']['games'][] = [
-        'team1' => $game->getTeam1()->label(),
-        'team1_logo' => $game->getTeam1()->getLogo('mini_thumbnail'),
-        'team2' => $game->getTeam2()->label(),
-        'team2_logo' => $game->getTeam1()->getLogo('mini_thumbnail'),
+        'team1' => $team1->label(),
+        'team1_logo' => $style->buildUrl($logo_team1->getFileUri()),
+        'team2' => $team2->label(),
+        'team2_logo' => $style->buildUrl($logo_team2->getFileUri()),
         'date' => \Drupal::service('date.formatter')->format($date->format('U'), 'date_longue_sans_annee'),
       ];
     };

@@ -88,6 +88,14 @@ class Team extends MPNContentEntityBase implements MPNEntityInterface {
     }
   }
 
+  public function getLogoAsFile() {
+    $logo = $this->get("field_team_logo")->first();
+    if ($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
+      return $logo_file;
+    }
+    return NULL;
+  }
+
   /**
    * @param int $nb number of games to return
    * @return \Drupal\mespronos\Entity\Game[]
