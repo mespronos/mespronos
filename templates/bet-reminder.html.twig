@@ -1,14 +1,21 @@
-<p>{% trans %}Hello {{user.name}},{% endtrans %}</p>
+<p><strong>{% trans %}Hello {{user.name}},{% endtrans %}</strong></p>
 
 <p>{% trans %}You have pending bets on day : {{ day.label}}{% endtrans %}</p>
 
 <p>{% trans %}Games list :{% endtrans %}</p>
 
-<ul>
+<table width="100%" align="center">
     {% for game in day.games %}
-        <li>{{ game }}</li>
+        <tr>
+                <th colspan="3">{{game.date}}</th>
+        </tr>
+        <tr>
+                <td width="40%" align="center">{{- game.team1_logo -}}<br />{{ game.team1 }}</td>
+                <td width="20%" align="center">vs</td>
+                <td width="40%" align="center">{{- game.team2_logo -}}<br />{{ game.team2 }}</td>
+        </tr>
     {% endfor %}
-</ul>
+</table>
 
 <p>{% trans %}Bet now :{% endtrans %}&nbsp;<a href="{{ day.bet_link}}">{{ day.bet_link}}</a></p>
 

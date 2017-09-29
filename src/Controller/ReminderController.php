@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Datetime\DateFormatter;
 use Drupal\mespronos\Entity\Day;
 use Drupal\Core\Database\Database;
 use Drupal\mespronos\Entity\Reminder;
@@ -78,9 +79,9 @@ class ReminderController extends ControllerBase {
       $user = User::load($user_to_remind);
       $mailManager = \Drupal::service('plugin.manager.mail');
       $params = [];
-      
+
       $mail = self::getReminderEmailVariables($user, $day);
-      
+
       $params['message'] = self::getReminderEmailRendered($mail);
       $params['subject'] = t('@sitename - Bet Reminder - @league - @day', [
         '@sitename'=>\Drupal::config('system.site')->get('name'),
@@ -98,11 +99,11 @@ class ReminderController extends ControllerBase {
     $games = $day->getGames();
     $emailvars = [];
     $emailvars['#theme'] = 'bet-reminder';
-    $destination_my_account = Url::fromRoute('entity.user.edit_form', ['user'=>$user->id()]);
+    $destination_my_account = Url::fromRoute('entity.user.edit_form', ['user' => $user->id()]);
 
     $emailvars['#user'] = [
       'name' => $user->getAccountName(),
-      'myaccount' => Url::fromRoute('user.login', [], ['absolute'=>true, 'query'=>['destination'=>$destination_my_account->toString()]]),
+      'myaccount' => Url::fromRoute('user.login', [], ['absolute'=>true, 'query'=>['destination' => $destination_my_account->toString()]]),
     ];
     $destination = Url::fromRoute('mespronos.day.bet', ['day'=>$day->id()]);
 
@@ -113,7 +114,15 @@ class ReminderController extends ControllerBase {
     ];
 
     foreach ($games as $game) {
-      $emailvars['#day']['games'][] = $game->label_full();
+      $date = new \DateTime($game->getGameDate(), new \DateTimeZone('UTC'));
+      $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+      $emailvars['#day']['games'][] = [
+        'team1' => $game->getTeam1()->label(),
+        'team1_logo' => $game->getTeam1()->getLogo('mini_thumbnail'),
+        'team2' => $game->getTeam2()->label(),
+        'team2_logo' => $game->getTeam1()->getLogo('mini_thumbnail'),
+        'date' => \Drupal::service('date.formatter')->format($date->format('U'), 'date_longue_sans_annee'),
+      ];
     };
 
     return $emailvars;
