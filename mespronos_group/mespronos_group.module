@@ -28,6 +28,13 @@ function mespronos_group_theme() {
       'group' => [],
     ],
   );
+  $themes['email-new-group'] = array(
+    'template' => 'email-new-group',
+    'variables' => [
+      'group' => [],
+      'user' => [],
+    ],
+  );
   return $themes;
 }
 
@@ -87,6 +94,9 @@ function mespronos_group_form_user_register_form_alter(&$form, \Drupal\Core\Form
     '#title' => t('Group access code'),
     '#description' => t('If you want to join a group, please fill the access code the group owner gave you.')
   ];
+  if ($code = \Drupal::request()->query->get('group_code')) {
+    $form['group_info']['group_access_code']['#default_value'] = $code;
+  }
   $form['#validate'][] = 'mespronos_group_form_user_register_form_validate';
 }
 

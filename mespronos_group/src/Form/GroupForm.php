@@ -48,7 +48,7 @@ class GroupForm extends ContentEntityForm {
     $form['field_group_logo']['widget'][0]['#description'] = null;
     $id = $this->entity->id();
     if (isset($id) && $id > 0) {
-      $form['actions']['submit']['#value'] = t('Edit my group');
+      $form['actions']['submit']['#value'] = t('Modifier mon groupe');
 
     } else {
       $form['actions']['submit']['#value'] = t('Create my group !');
@@ -61,14 +61,15 @@ class GroupForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function save(array $form, FormStateInterface $form_state) {
+    /** @var Group $entity */
     $entity = $this->entity;
     $status = parent::save($form, $form_state);
 
+    $user = \Drupal::currentUser();
+    $user = User::load($user->id());
     switch ($status) {
       case SAVED_NEW:
         if ($form_state->getValue('autojoin')) {
-          $user = \Drupal::currentUser();
-          $user = User::load($user->id());
           $usergroups = $user->get("field_group")->getValue();
           $usergroups[] = [
             'target_id' => $entity->id()
@@ -79,6 +80,10 @@ class GroupForm extends ContentEntityForm {
         drupal_set_message($this->t('You\'ve just created the %label Group.', [
           '%label' => $entity->label(),
         ]));
+
+        $url = new Url('entity.group.canonical', ['group' => $entity->id()]);
+        $form_state->setRedirectUrl($url);
+
         break;
 
       default:
@@ -86,8 +91,41 @@ class GroupForm extends ContentEntityForm {
           '%label' => $entity->label(),
         ]));
     }
-    $url = new Url('entity.group.canonical', ['group'=>$entity->id()]);
-    $form_state->setRedirectUrl($url);
+
+    $this->sendMail($user, $entity, $status);
+
+  }
+
+  private function sendMail(User $user, Group $group, $status) {
+    $mailManager = \Drupal::service('plugin.manager.mail');
+
+    $build['#theme'] = 'email-new-group';
+    $build['#group'] = [
+      'name' => $group->label(),
+      'id' => $group->id(),
+      'code' => $group->getCode(),
+    ];
+    $build['#user'] = [
+      'name' => $user->getDisplayName()
+    ];
+    $rederer = \Drupal::service('renderer');
+
+    $params['message'] = $rederer->renderPlain($build);
+    if ($status === SAVED_NEW) {
+      $params['subject'] = t('MesPronos - Groupe @group créé !', [
+        '@group' => $group->label()
+      ]);
+    }
+    else {
+      $params['subject'] = t('MesPronos - Groupe @group modifié !', [
+        '@group' => $group->label()
+      ]);
+    }
+
+    $mailManager->mail('mespronos', 'group', $user->getEmail(), $user->getPreferredLangcode(), $params, NULL, TRUE);
+  }
+
+  private function getEmail(Group $group) {
   }
 
 }

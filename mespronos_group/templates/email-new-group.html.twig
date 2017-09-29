@@ -1,0 +1,15 @@
+<h2>{% trans %}Hello {{user.name}},{% endtrans %}</strong></h2>
+
+<p>{% trans %}Vous venez de créer (ou de modifier) le groupe « <em>{{ group.name }}</em> »{% endtrans %}.</p>
+
+<h2>Inviter des membres à rejoindre votre groupe</h2>
+
+<p>S'ils sont déjà inscrit, ils peuvent rejoindre le groupe sur la page : <a href="{{ url('entity.group.canonical', {'group':group.id }) }}">{{ url('entity.group.canonical', {'group':group.id }) }}</a> en renseignant le code : <pre>{{ group.code }}</pre></p>
+
+<p>S'ils ne sont pas membre il peuvent s'inscrire sur le site et rejoindre automatiquement le groupe via le lien suivant : <a href="{{ url('mespronos.registration') }}?group_code={{ group.code }}">{{ url('mespronos.registration') }}?group_code={{ group.code }}</a></p>
+
+<h2>À propos de votre groupe</h2>
+
+<p>Pour consulter les membres de votre groupe : <a href="{{ url('entity.group.canonical', {'group':group.id }) }}">{{ url('entity.group.canonical', {'group':group.id }) }}}</a>.</p>
+
+<p>À bientôt sur MesPronos !</p>
