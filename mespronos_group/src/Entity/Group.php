@@ -234,8 +234,9 @@ class Group extends ContentEntityBase implements GroupInterface {
       $groups = [];
       $user_groups = $user->get("field_group")->getValue();
       foreach ($user_groups as $group) {
-        $group = Group::load($group['target_id']);
-        $groups[] = $group;
+        if ($group = Group::load($group['target_id'])) {
+          $groups[] = $group;
+        }
       }
       return $groups;
     }
