@@ -5,6 +5,10 @@ namespace Drupal\mespronos\Entity\Traits;
 
 trait ScoreTeamTrait {
 
+  abstract public function get($name);
+
+  abstract public function id();
+
   /**
    * @return int|null
    */

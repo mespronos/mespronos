@@ -8,6 +8,10 @@ use Drupal\mespronos\Entity\Team;
 
 trait GameGettersTrait {
 
+  abstract public function get($name);
+
+  abstract public function id();
+
   /**
    * Return number of games on current day
    *
