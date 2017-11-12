@@ -10,6 +10,8 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\mespronos\Entity\Getters\GameGettersTrait;
+use Drupal\mespronos\Entity\Traits\ScoreTeamTrait;
 use Drupal\mespronos\MPNEntityInterface;
 use Drupal\mespronos\Controller\BetController;
 
@@ -52,6 +54,10 @@ use Drupal\mespronos\Controller\BetController;
  * )
  */
 class Game extends MPNContentEntityBase implements MPNEntityInterface {
+
+  use GameGettersTrait;
+  use ScoreTeamTrait;
+
   /**
    * {@inheritdoc}
    */
@@ -157,7 +163,6 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return t('@team1 - @team2 - @date', array('@team1'=> $team1->label(), '@team2'=> $team2->label(), '@date'=> $date->format('d/m/Y H\hi')));
   }
 
-
   public function labelDate() {
     $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
     $date->setTimezone(new \DateTimeZone("Europe/Paris"));
@@ -222,121 +227,6 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
       '@nb_bets' => count($ids),
     ]));
     return count($ids);
-  }
-
-  /**
-   * Return number of games on current day
-   *
-   * @return integer nb bets for given game
-   */
-  public function getNbBets() {
-    $query = \Drupal::entityQuery('bet');
-    $query->condition('game', $this->id());
-    $ids = $query->execute();
-    return count($ids);
-  }
-  /**
-   * @return bool
-   */
-  public function isScoreSetted() {
-    return !is_null($this->getScoreTeam1()) && !is_null($this->getScoreTeam1());
-  }
-
-  public function getWinner() {
-    if(!$this->isScoreSetted()) {
-      return false;
-    }
-    if($this->getScoreTeam1() > $this->getScoreTeam2()) {
-      return 1;
-    } elseif($this->getScoreTeam1() < $this->getScoreTeam2()) {
-      return 2;
-    } else {
-      return 'N';
-    }
-  }
-
-  /**
-   * @return integer
-   */
-  public function getScoreTeam1() {
-    return $this->get('score_team_1')->value;
-  }
-
-  /**
-   * @return integer
-   */
-  public function getScoreTeam2() {
-    return $this->get('score_team_2')->value;
-  }
-
-  public function getGameDate() {
-    return $this->get('game_date')->value;
-  }
-
-  /**
-   * Return Team1 id
-   * @return integer
-   */
-  public function getTeam1Id() {
-    return $this->get('team_1')->target_id;
-  }
-
-  /**
-   * Return Team1 entity
-   * @return Team
-   */
-  public function getTeam1() {
-    $team_storage = \Drupal::entityTypeManager()->getStorage('team');
-    $team = $team_storage->load($this->getTeam1Id());
-    return $team;
-  }
-
-  /**
-   * Return Team2 id
-   * @return integer
-   */
-  public function getTeam2Id() {
-    return $this->get('team_2')->target_id;
-  }
-
-  /**
-   * Return Team2 entity
-   * @return Team
-   */
-  public function getTeam2() {
-    $team_storage = \Drupal::entityTypeManager()->getStorage('team');
-    $team = $team_storage->load($this->getTeam2Id());
-    return $team;
-  }
-
-
-  /**
-   * @return League
-   */
-  public function getLeague() {
-    $day_storage = \Drupal::entityTypeManager()->getStorage('day');
-    $league_storage = \Drupal::entityTypeManager()->getStorage('league');
-    $day = $day_storage->load($this->get('day')->target_id);
-    $league = $league_storage->load($day->get('league')->target_id);
-    return $league;
-  }
-
-  /**
-   * Return game's day entity
-   * @return Day
-   */
-  public function getDay() {
-    $day_storage = \Drupal::entityTypeManager()->getStorage('day');
-    $day = $day_storage->load($this->get('day')->target_id);
-    return $day;
-  }
-
-  /**
-   * Return game's day id
-   * @return integer
-   */
-  public function getDayId() {
-    return $this->get('day')->target_id;
   }
 
   public function setScore($score_team_1, $score_team_2) {

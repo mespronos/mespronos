@@ -10,6 +10,8 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\mespronos\Entity\Getters\BetGettersTrait;
+use Drupal\mespronos\Entity\Traits\ScoreTeamTrait;
 use Drupal\mespronos\MPNEntityInterface;
 
 /**
@@ -47,6 +49,8 @@ use Drupal\mespronos\MPNEntityInterface;
  * )
  */
 class Bet extends MPNContentEntityBase implements MPNEntityInterface {
+  use BetGettersTrait;
+  use ScoreTeamTrait;
 
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
@@ -88,29 +92,10 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
     }
   }
 
-  public function setOwnerId($uid) {
+  public function setOwnerId($uid) : Bet {
     $this->set('better', $uid);
     return $this;
   }
-
-  public function getScoreTeam1() {
-    return $this->get('score_team_1')->value;
-  }
-
-  public function getScoreTeam2() {
-    return $this->get('score_team_2')->value;
-  }
-
-  public function getTeam1() {
-    $game = $this->getGame(true);
-    return $game->getTeam1();
-  }
-
-  public function getTeam2() {
-    $game = $this->getGame(true);
-    return $game->getTeam2();
-  }
-
 
   public function label() {
     $game = $this->getGame(true);
@@ -133,18 +118,6 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   /**
-   * @param bool|FALSE $asEntity
-   * @return \Drupal\mespronos\Entity\Game
-   */
-  public function getGame($asEntity = false) {
-    $game = $this->get('game')->target_id;
-    if ($asEntity) {
-      $game = Game::load($game);
-    }
-    return $game;
-  }
-
-  /**
    * @return bool
    */
   public function isAllowed() {
@@ -161,10 +134,6 @@ class Bet extends MPNContentEntityBase implements MPNEntityInterface {
     }
 
     return true;
-  }
-
-  public function getPoints() {
-    return $this->get('points')->value;
   }
 
   public function setPoints($points) {
