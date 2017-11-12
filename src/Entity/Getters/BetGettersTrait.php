@@ -2,6 +2,7 @@
 
 namespace Drupal\mespronos\Entity\Getters;
 
+use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Team;
 
 trait BetGettersTrait {

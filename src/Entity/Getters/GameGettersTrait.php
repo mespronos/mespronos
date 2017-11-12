@@ -56,9 +56,7 @@ trait GameGettersTrait {
    * @return Team
    */
   public function getTeam1() : Team {
-    $team_storage = \Drupal::entityTypeManager()->getStorage('team');
-    $team = $team_storage->load($this->getTeam1Id());
-    return $team;
+    return Team::load($this->getTeam1Id());
   }
 
   /**
@@ -74,33 +72,23 @@ trait GameGettersTrait {
    * @return Team
    */
   public function getTeam2() : Team {
-    $team_storage = \Drupal::entityTypeManager()->getStorage('team');
-    $team = $team_storage->load($this->getTeam2Id());
-    return $team;
+    return Team::load($this->getTeam2Id());
   }
-
 
   /**
    * @return League
    */
   public function getLeague() : League {
-    $day_storage = \Drupal::entityTypeManager()->getStorage('day');
-    $league_storage = \Drupal::entityTypeManager()->getStorage('league');
-    $day = $day_storage->load($this->get('day')->target_id);
-    $league = $league_storage->load($day->get('league')->target_id);
-    return $league;
+    $day = Day::load($this->get('day')->target_id);
+    return League::load($day->get('league')->target_id);
   }
-
-
 
   /**
    * Return game's day entity
    * @return Day
    */
   public function getDay() : Day {
-    $day_storage = \Drupal::entityTypeManager()->getStorage('day');
-    $day = $day_storage->load($this->get('day')->target_id);
-    return $day;
+    return Day::load($this->get('day')->target_id);
   }
 
   /**
