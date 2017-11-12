@@ -10,9 +10,10 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\mespronos\Entity\Base\MPNContentEntityBase;
 use Drupal\mespronos\Entity\Getters\GameGettersTrait;
 use Drupal\mespronos\Entity\Traits\ScoreTeamTrait;
-use Drupal\mespronos\MPNEntityInterface;
+use Drupal\mespronos\Entity\Interfaces\MPNEntityInterface;
 use Drupal\mespronos\Controller\BetController;
 
 /**

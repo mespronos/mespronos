@@ -12,8 +12,8 @@ use Drupal\mespronos\Controller\BetController;
 use Drupal\mespronos\Controller\RankingController;
 use Drupal\mespronos\Controller\StatisticsController;
 use Drupal\mespronos\Controller\UserController;
-use Drupal\mespronos\Entity\Ranking;
-use Drupal\mespronos\Entity\RankingGeneral;
+use Drupal\mespronos\Entity\RankingBase;
+use Drupal\mespronos\Entity\RankingBaseGeneral;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 use Drupal\Core\Link;
@@ -40,7 +40,7 @@ class UserProfilBlock extends BlockBase {
     $palmares = RankingController::getPalmares($user);
     $statistics = StatisticsController::getUserStatistics($user);
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
-    $ranking = RankingGeneral::getRankingForBetter($user);
+    $ranking = RankingBaseGeneral::getRankingForBetter($user);
     return [
       '#theme' =>'user-profile-block',
       '#user' => [

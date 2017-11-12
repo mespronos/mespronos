@@ -9,7 +9,7 @@ namespace Drupal\mespronos\Tests;
 
 use Drupal\mespronos\Entity\RankingDay;
 use Drupal\mespronos\Controller\RankingController;
-use Drupal\mespronos\Entity\RankingGeneral;
+use Drupal\mespronos\Entity\RankingBaseGeneral;
 use Drupal\mespronos\Entity\RankingLeague;
 use Drupal\simpletest\WebTestBase;
 use Drupal\mespronos\Entity\Sport;

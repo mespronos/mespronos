@@ -12,7 +12,7 @@ use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\RankingDay;
 use Drupal\mespronos\Entity\RankingLeague;
-use Drupal\mespronos\Entity\RankingGeneral;
+use Drupal\mespronos\Entity\RankingBaseGeneral;
 use Drupal\mespronos\Entity\Game;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Database\Query\Condition;

@@ -9,7 +9,7 @@ namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\mespronos\Controller\UserController;
-use Drupal\mespronos\Entity\RankingGeneral;
+use Drupal\mespronos\Entity\RankingBaseGeneral;
 use Drupal\mespronos_group\Controller\GroupController;
 use Drupal\mespronos_group\Entity\Group;
 use Drupal\user\Entity\User;
@@ -39,7 +39,7 @@ class UserBlock extends BlockBase {
       ];
     }
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
-    $ranking = RankingGeneral::getRankingForBetter($user);
+    $ranking = RankingBaseGeneral::getRankingForBetter($user);
     $groups = [];
     if(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
       $user_groups = Group::getUserGroup($user);
@@ -57,7 +57,7 @@ class UserBlock extends BlockBase {
       '#user' => [
         'name' => $user->getAccountName(),
         'rank' => $ranking ? $ranking->getPosition() : '-',
-        'nb_betters' => RankingGeneral::getNumberOfBetters(),
+        'nb_betters' => RankingBaseGeneral::getNumberOfBetters(),
         'points' => $ranking ? $ranking->getPoints() : '-',
         'groups' => $groups,
       ],

@@ -1,5 +1,6 @@
 <?php
-namespace Drupal\mespronos;
+
+namespace Drupal\mespronos\Entity\Interfaces;
 
 use Drupal\Core\Entity\ContentEntityInterface;
 use Drupal\user\EntityOwnerInterface;

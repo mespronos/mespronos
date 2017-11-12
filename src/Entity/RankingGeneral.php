@@ -10,6 +10,7 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
 use Drupal\Core\Database\Database;
+use Drupal\mespronos\Entity\Base\RankingBase;
 use Drupal\mespronos_group\Entity\Group;
 
 /**
@@ -36,7 +37,7 @@ use Drupal\mespronos_group\Entity\Group;
  *   }
  * )
  */
-class RankingGeneral extends Ranking {
+class RankingGeneral extends RankingBase {
 
   public function getBaseTable() {
     return 'mespronos__ranking_general';
@@ -125,7 +126,7 @@ class RankingGeneral extends Ranking {
   }
 
   /**
-   * @return \Drupal\mespronos\Entity\RankingGeneral
+   * @return \Drupal\mespronos\Entity\RankingBaseGeneral
    */
   public static function getRanking($entity = null, $entity_name = 'general', $storage_name = 'ranking_general', Group $group = null) {
     return parent::getRanking(null, $entity_name, $storage_name, $group);
@@ -134,10 +135,10 @@ class RankingGeneral extends Ranking {
   /**
    * Get General ranking for user
    * @param \Drupal\user\Entity\User $better
-   * @param \Drupal\mespronos\Entity\Ranking $entity
+   * @param \Drupal\mespronos\Entity\RankingBase $entity
    * @param string $entity_name
    * @param string $storage_name
-   * @return \Drupal\mespronos\Entity\RankingGeneral
+   * @return \Drupal\mespronos\Entity\RankingBaseGeneral
    */
   public static function getRankingForBetter(\Drupal\user\Entity\User $better, $entity = null, $entity_name = null, $storage_name = null) {
     return parent::getRankingForBetter($better, null, null, 'ranking_general');

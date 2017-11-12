@@ -3,10 +3,10 @@ namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Entity\League;
-use Drupal\mespronos\Entity\Ranking;
+use Drupal\mespronos\Entity\RankingBase;
 use Drupal\mespronos\Entity\RankingDay;
 use Drupal\mespronos\Entity\RankingLeague;
-use Drupal\mespronos\Entity\RankingGeneral;
+use Drupal\mespronos\Entity\RankingBaseGeneral;
 use Drupal\mespronos\Entity\Day;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Cache\Cache;
@@ -28,7 +28,7 @@ class RankingController extends ControllerBase {
   public static function recalculateDay(Day $day) {
     $nb_updates = RankingDay::createRanking($day);
     RankingLeague::createRanking($day->getLeague());
-    RankingGeneral::createRanking();
+    RankingBaseGeneral::createRanking();
     drupal_set_message(t('Ranking updated for @nb betters', array('@nb'=>$nb_updates)));
     Cache::invalidateTags(array('ranking'));
     return new RedirectResponse(\Drupal::url('entity.day.collection'));
@@ -64,7 +64,7 @@ class RankingController extends ControllerBase {
   }
 
   public static function getRankingGeneral(Group $group = NULL) {
-    $ranking = RankingGeneral::getRanking(null, 'general', 'ranking_general', $group);
+    $ranking = RankingBaseGeneral::getRanking(null, 'general', 'ranking_general', $group);
     if (count($ranking) == 0) {
       return false;
     }
@@ -89,7 +89,7 @@ class RankingController extends ControllerBase {
   }
 
   /**
-   * @param Ranking[] $rankings
+   * @param RankingBase[] $rankings
    * @return array
    */
   public static function getTableFromRanking($rankings) {

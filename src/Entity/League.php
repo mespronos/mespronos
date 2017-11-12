@@ -10,11 +10,11 @@ namespace Drupal\mespronos\Entity;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
-use Drupal\mespronos\MPNEntityInterface;
+use Drupal\mespronos\Entity\Base\MPNContentEntityBase;
+use Drupal\mespronos\Entity\Interfaces\MPNEntityInterface;
 use Drupal\Core\Database\Database;
 use Drupal\file\Entity\File;
 use Drupal\Core\Url;
-use Drupal\mespronos\Entity\RankingGeneral;
 
 /**
  * Defines the League entity.
@@ -323,7 +323,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     $this->set('status', 'archived');
     $this->save();
     \Drupal::logger('mespronos')->notice(t('League @league_label as been set as archived', ['@league_label'=>$this->label()]));
-    RankingGeneral::createRanking();
+    RankingBaseGeneral::createRanking();
   }
 
   /**

@@ -11,6 +11,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Controller\RankingController;
 use Drupal\Core\Database\Database;
+use Drupal\mespronos\Entity\Base\RankingBase;
 use Drupal\mespronos_group\Entity\Group;
 
 /**
@@ -37,7 +38,7 @@ use Drupal\mespronos_group\Entity\Group;
  *   }
  * )
  */
-class RankingDay extends Ranking {
+class RankingDay extends RankingBase {
 
   public function getBaseTable() {
     return 'mespronos__ranking_day';

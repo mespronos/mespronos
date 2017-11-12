@@ -19,7 +19,7 @@ use Drupal\file\Entity\File;
 use Drupal\mespronos\Entity\RankingDay;
 use Drupal\Core\Cache\Cache;
 use Drupal\mespronos\Entity\RankingLeague;
-use Drupal\mespronos\Entity\RankingGeneral;
+use Drupal\mespronos\Entity\RankingBaseGeneral;
 
 /**
  * Class ImporterController.
@@ -88,7 +88,7 @@ class ImporterController extends ControllerBase {
       $day = Day::load($day_id);
       RankingDay::createRanking($day);
       RankingLeague::createRanking($day->getLeague());
-      RankingGeneral::createRanking();
+      RankingBaseGeneral::createRanking();
       Cache::invalidateTags(array('ranking'));
       $messages[] = t('Ranking updated for @nb_ranking days', array('@nb_ranking'=>$i));
     }

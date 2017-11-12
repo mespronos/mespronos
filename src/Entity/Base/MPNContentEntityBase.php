@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\mespronos\Entity;
+namespace Drupal\mespronos\Entity\Base;
 
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityTypeInterface;
