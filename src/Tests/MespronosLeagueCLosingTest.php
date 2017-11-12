@@ -8,7 +8,6 @@
 namespace Drupal\mespronos\Tests;
 
 use Drupal\mespronos\Entity\RankingDay;
-use Drupal\mespronos\Entity\Base\RankingBaseGeneral;
 use Drupal\mespronos\Entity\RankingLeague;
 use Drupal\simpletest\WebTestBase;
 use Drupal\mespronos\Entity\Sport;
