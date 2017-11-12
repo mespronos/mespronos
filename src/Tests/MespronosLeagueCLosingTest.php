@@ -164,7 +164,7 @@ class MespronosLeagueCLosingTest extends WebTestBase {
         RankingDay::createRanking($this->day2);
         RankingLeague::createRanking($this->league1);
         RankingLeague::createRanking($this->league2);
-        RankingBaseGeneral::createRanking();
+        RankingGeneral::createRanking();
     }
 
     public function testBasicClosing() {
@@ -174,14 +174,14 @@ class MespronosLeagueCLosingTest extends WebTestBase {
     }
 
     public function testSimpleWithOnlyOneDay() {
-        $ranking_general_better_1 = RankingBaseGeneral::getRankingForBetter($this->better1);
+        $ranking_general_better_1 = RankingGeneral::getRankingForBetter($this->better1);
         $ranking_league_1_better_1 = RankingLeague::getRankingForBetter($this->better1,$this->league1);
         $this->assertEqual(2,$ranking_league_1_better_1->getGameBetted(),'Ranking League 1 - Two games betted for better 1');
         $this->assertEqual(2,$ranking_general_better_1->getGameBetted(),'Ranking General - Two games betted for better 1');
         
         $this->league1->close();
         
-        $ranking_general_better_1 = RankingBaseGeneral::getRankingForBetter($this->better1);
+        $ranking_general_better_1 = RankingGeneral::getRankingForBetter($this->better1);
         $ranking_league_1_better_1 = RankingLeague::getRankingForBetter($this->better1,$this->league1);
         $this->assertEqual(2,$ranking_league_1_better_1->getGameBetted(),'Ranking League 1 - still two games betted for better 1');
         $this->assertEqual(0,count($ranking_general_better_1),'Ranking General - no data for better 1 after closing');

@@ -31,7 +31,7 @@ class RankingGeneralListController extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\mespronos\Entity\RankingBaseGeneral */
+    /* @var $entity \Drupal\mespronos\Entity\RankingGeneral */
     $row = [];
     $row['id'] = $entity->id();
     $row['name'] = \Drupal::l(

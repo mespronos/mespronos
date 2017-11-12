@@ -323,7 +323,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     $this->set('status', 'archived');
     $this->save();
     \Drupal::logger('mespronos')->notice(t('League @league_label as been set as archived', ['@league_label'=>$this->label()]));
-    RankingBaseGeneral::createRanking();
+    RankingGeneral::createRanking();
   }
 
   /**

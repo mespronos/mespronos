@@ -126,7 +126,7 @@ class RankingGeneral extends RankingBase {
   }
 
   /**
-   * @return \Drupal\mespronos\Entity\RankingBaseGeneral
+   * @return \Drupal\mespronos\Entity\RankingGeneral
    */
   public static function getRanking($entity = null, $entity_name = 'general', $storage_name = 'ranking_general', Group $group = null) {
     return parent::getRanking(null, $entity_name, $storage_name, $group);
@@ -135,10 +135,10 @@ class RankingGeneral extends RankingBase {
   /**
    * Get General ranking for user
    * @param \Drupal\user\Entity\User $better
-   * @param \Drupal\mespronos\Entity\RankingBase $entity
+   * @param \Drupal\mespronos\Entity\Base\RankingBase $entity
    * @param string $entity_name
    * @param string $storage_name
-   * @return \Drupal\mespronos\Entity\RankingBaseGeneral
+   * @return \Drupal\mespronos\Entity\RankingGeneral
    */
   public static function getRankingForBetter(\Drupal\user\Entity\User $better, $entity = null, $entity_name = null, $storage_name = null) {
     return parent::getRankingForBetter($better, null, null, 'ranking_general');

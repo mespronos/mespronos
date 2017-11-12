@@ -4,13 +4,12 @@ namespace Drupal\mespronos\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\RankingDay;
 use Drupal\Core\Cache\Cache;
 use Drupal\mespronos\Entity\RankingLeague;
-use Drupal\mespronos\Entity\RankingBaseGeneral;
+use Drupal\mespronos\Entity\RankingGeneral;
 
 /**
  * Implements an example form.
@@ -110,7 +109,7 @@ class GamesMarks extends FormBase {
     foreach ($leagues as $league) {
       RankingLeague::createRanking($league);
     }
-    RankingBaseGeneral::createRanking();
+    RankingGeneral::createRanking();
     drupal_set_message($this->t('Ranking updated for @nb_ranking days and @nb_leagues leagues', [
       '@nb_ranking'=>count($days_to_update),
       '@nb_leagues'=>count($leagues),

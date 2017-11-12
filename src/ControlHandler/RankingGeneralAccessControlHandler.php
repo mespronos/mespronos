@@ -16,7 +16,7 @@ use Drupal\user\Entity\User;
 /**
  * Access controller for the RankingGeneral entity.
  *
- * @see \Drupal\mespronos\Entity\RankingBaseGeneral.
+ * @see \Drupal\mespronos\Entity\RankingGeneral.
  */
 class RankingGeneralAccessControlHandler extends EntityAccessControlHandler {
   /**

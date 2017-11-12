@@ -8,17 +8,12 @@
 namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\mespronos\Controller\BetController;
 use Drupal\mespronos\Controller\RankingController;
 use Drupal\mespronos\Controller\StatisticsController;
 use Drupal\mespronos\Controller\UserController;
-use Drupal\mespronos\Entity\RankingBase;
-use Drupal\mespronos\Entity\RankingBaseGeneral;
+use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\user\Entity\User;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
 
-use Symfony\Component\HttpFoundation\Request;
 /**
  * Provides a 'UserProfilBlock' block.
  *
@@ -40,7 +35,7 @@ class UserProfilBlock extends BlockBase {
     $palmares = RankingController::getPalmares($user);
     $statistics = StatisticsController::getUserStatistics($user);
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
-    $ranking = RankingBaseGeneral::getRankingForBetter($user);
+    $ranking = RankingGeneral::getRankingForBetter($user);
     return [
       '#theme' =>'user-profile-block',
       '#user' => [
