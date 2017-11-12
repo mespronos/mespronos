@@ -5,6 +5,7 @@
   - Bet reminder - set up html version
   - Refactoring
   - Change User block
+  - Drop support for PHP < 7 
 
 ## 8.x-1.0-alpha13, 2017-08-05
   - Remove useless "Welcome block"
