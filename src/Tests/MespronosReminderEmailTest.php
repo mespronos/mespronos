@@ -46,6 +46,7 @@ class MespronosReminderEmailTest extends WebTestBase {
 
   static public $modules = array(
     'mespronos',
+    'image',
   );
   
   public function setUp() {

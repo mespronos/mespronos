@@ -113,7 +113,7 @@ class ReminderController extends ControllerBase {
       'games' => [],
       'bet_link' => Url::fromRoute('user.login', [], ['absolute' => TRUE, 'query' => ['destination' => $destination->toString()]]),
     ];
-    $style = ImageStyle::load('mini_thumbnail');
+    $style = ImageStyle::load('thumbnail');
 
 
     foreach ($games as $game) {
@@ -126,9 +126,9 @@ class ReminderController extends ControllerBase {
 
       $emailvars['#day']['games'][] = [
         'team1' => $team1->label(),
-        'team1_logo' => $style->buildUrl($logo_team1->getFileUri()),
+        'team1_logo' => $logo_team1 ? $style->buildUrl($logo_team1->getFileUri()) : FALSE,
         'team2' => $team2->label(),
-        'team2_logo' => $style->buildUrl($logo_team2->getFileUri()),
+        'team2_logo' => $logo_team2 ? $style->buildUrl($logo_team2->getFileUri()) : FALSE,
         'date' => \Drupal::service('date.formatter')->format($date->format('U'), 'date_longue_sans_annee'),
       ];
     };
