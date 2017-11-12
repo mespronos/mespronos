@@ -8,12 +8,9 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Url;
-use Drupal\Core\Link;
-use Drupal\mespronos\Entity\MPNContentEntityBase;
+use Drupal\mespronos\Entity\Base\MPNContentEntityBase;
 use Drupal\user\Entity\User;
 use Drupal\file\Entity\File;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\mespronos_group\Entity\Group;
 
 /**
