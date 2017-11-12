@@ -5,12 +5,11 @@ namespace Drupal\mespronos\Entity\Base;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
-use Drupal\mespronos\Entity\Base\MPNContentEntityBase;
-use Drupal\mespronos\RankingInterface;
-use Drupal\mespronos\MPNEntityInterface;
+use Drupal\mespronos\Entity\Interfaces\RankingInterface;
+use Drupal\mespronos\Entity\Interfaces\MPNEntityInterface;
 use Drupal\mespronos_group\Entity\Group;
 
-abstract class RankingBase extends MPNContentEntityBase implements MPNEntityInterfa, RankingInterface {
+abstract class RankingBase extends MPNContentEntityBase implements MPNEntityInterface, RankingInterface {
 
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
