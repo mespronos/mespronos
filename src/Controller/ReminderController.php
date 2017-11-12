@@ -69,10 +69,10 @@ class ReminderController extends ControllerBase {
     return !is_null($hours) ? $hours : [];
   }
 
-  public static function sendReminder($users_to_remind, $day) {
+  public static function sendReminder(array $users_to_remind, Day $day) {
     $league = $day->getLeague();
-    if (count($users_to_remind) == 0) {
-      return false;
+    if (empty($users_to_remind)) {
+      return FALSE;
     }
     $nb_mail = 0;
     foreach ($users_to_remind as $user_to_remind) {
@@ -90,7 +90,7 @@ class ReminderController extends ControllerBase {
         '@day'=>$day->label(),
       ]);
 
-      $mailManager->mail('mespronos', 'reminder', $user->getEmail(), $user->getPreferredLangcode(), $params, null, TRUE);
+      $mailManager->mail('mespronos', 'reminder', $user->getEmail(), $user->getPreferredLangcode(), $params, NULL, TRUE);
     }
     return $nb_mail;
   }
@@ -104,21 +104,21 @@ class ReminderController extends ControllerBase {
 
     $emailvars['#user'] = [
       'name' => $user->getAccountName(),
-      'myaccount' => Url::fromRoute('user.login', [], ['absolute'=>true, 'query'=>['destination' => $destination_my_account->toString()]]),
+      'myaccount' => Url::fromRoute('user.login', [], ['absolute' => TRUE, 'query' => ['destination' => $destination_my_account->toString()]]),
     ];
-    $destination = Url::fromRoute('mespronos.day.bet', ['day'=>$day->id()]);
+    $destination = Url::fromRoute('mespronos.day.bet', ['day' => $day->id()]);
 
     $emailvars['#day'] = [
-      'label' => $league->label().' - '.$day->label(),
+      'label' => $league->label() . ' - ' . $day->label(),
       'games' => [],
-      'bet_link' => Url::fromRoute('user.login', [], ['absolute'=>true, 'query'=>['destination'=>$destination->toString()]]),
+      'bet_link' => Url::fromRoute('user.login', [], ['absolute' => TRUE, 'query' => ['destination' => $destination->toString()]]),
     ];
     $style = ImageStyle::load('mini_thumbnail');
 
 
     foreach ($games as $game) {
       $date = new \DateTime($game->getGameDate(), new \DateTimeZone('UTC'));
-      $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+      $date->setTimezone(new \DateTimeZone('Europe/Paris'));
       $team1 = $game->getTeam1();
       $team2 = $game->getTeam2();
       $logo_team1 = $team1->getLogoAsFile();
