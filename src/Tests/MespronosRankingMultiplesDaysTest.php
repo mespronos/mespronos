@@ -8,7 +8,6 @@
 namespace Drupal\mespronos\Tests;
 
 use Drupal\mespronos\Entity\RankingDay;
-use Drupal\mespronos\Controller\RankingController;
 use Drupal\simpletest\WebTestBase;
 use Drupal\mespronos\Entity\Sport;
 use Drupal\mespronos\Entity\League;
@@ -16,7 +15,7 @@ use Drupal\mespronos\Entity\Team;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\Bet;
-use MyProject\Proxies\__CG__\OtherProject\Proxies\__CG__\stdClass;
+use stdClass;
 
 /**
  * Provides automated tests for the mespronos module.
