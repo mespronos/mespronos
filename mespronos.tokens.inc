@@ -49,6 +49,9 @@ function _mespronos_token_info_league() {
     'sport' => [
       'name' => t('Sport name'),
     ],
+    'logo' => [
+      'name' => t('League logo'),
+    ],
   ];
   return $tokens;
 }
@@ -67,6 +70,9 @@ function _mespronos_token_info_game() {
     'day' => [
       'name' => t('Day label'),
     ],
+    'league_logo' => [
+      'name' => t('League logo'),
+    ],
   ];
   return $tokens;
 }
@@ -81,6 +87,9 @@ function _mespronos_token_info_day() {
     ],
     'league' => [
       'name' => t('League label'),
+    ],
+    'league_logo' => [
+      'name' => t('League logo'),
     ],
   ];
   return $tokens;
@@ -123,6 +132,13 @@ function _mespronos_tokens_league($tokens, League $league, &$replacements) {
       case 'sport':
         $replacements[$original] = $league->getSport()->label();
         break;
+
+      case 'logo':
+        if($league->get('field_league_logo')->referencedEntities()[0]) {
+          $logo = $league->get('field_league_logo')->referencedEntities()[0];
+          $replacements[$original] = file_create_url($logo->getFileUri());
+        }
+        break;
     }
   }
 }
@@ -147,6 +163,14 @@ function _mespronos_tokens_game($tokens, Game $game, &$replacements) {
         $league = $game->getLeague();
         $replacements[$original] = $league->label();
         break;
+
+      case 'league_logo':
+        $league = $day->getLeague();
+        if($league->get('field_league_logo')->referencedEntities()[0]) {
+          $logo = $league->get('field_league_logo')->referencedEntities()[0];
+          $replacements[$original] = file_create_url($logo->getFileUri());
+        }
+        break;
     }
   }
 }
@@ -165,6 +189,14 @@ function _mespronos_tokens_day($tokens, Day $day, &$replacements) {
       case 'league':
         $league = $day->getLeague();
         $replacements[$original] = $league->label();
+        break;
+
+      case 'league_logo':
+        $league = $day->getLeague();
+        if($league->get('field_league_logo')->referencedEntities()[0]) {
+          $logo = $league->get('field_league_logo')->referencedEntities()[0];
+          $replacements[$original] = file_create_url($logo->getFileUri());
+        }
         break;
     }
   }
