@@ -74,13 +74,13 @@ function _mespronos_token_info_game() {
 function _mespronos_token_info_day() {
   $tokens = [
     'id' => [
-      'name' => t("Day ID"),
+      'name' => t('Day ID'),
     ],
     'name' => [
-      'name' => t("Day label"),
+      'name' => t('Day label'),
     ],
     'league' => [
-      'name' => t("League label"),
+      'name' => t('League label'),
     ],
   ];
   return $tokens;
@@ -91,15 +91,17 @@ function _mespronos_token_info_day() {
  */
 function mespronos_tokens($type, $tokens, array $data) {
   $replacements = [];
-  if ($type == 'entity' && isset($data['entity_type'])) {
+  if ($type === 'entity' && isset($data['entity_type'])) {
     switch ($data['entity_type']) {
-      case 'league' :
+      case 'league':
         _mespronos_tokens_league($tokens, $data['entity'], $replacements);
         break;
-      case 'game' :
+
+      case 'game':
         _mespronos_tokens_game($tokens, $data['entity'], $replacements);
         break;
-      case 'day' :
+
+      case 'day':
         _mespronos_tokens_day($tokens, $data['entity'], $replacements);
         break;
     }
