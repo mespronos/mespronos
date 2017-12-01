@@ -56,16 +56,16 @@ function _mespronos_token_info_league() {
 function _mespronos_token_info_game() {
   $tokens = [
     'id' => [
-      'name' => t("League ID"),
+      'name' => t('League ID'),
     ],
     'name' => [
-      'name' => t("Game label"),
+      'name' => t('Game label'),
     ],
     'league' => [
-      'name' => t("League label"),
+      'name' => t('League label'),
     ],
     'day' => [
-      'name' => t("Day label"),
+      'name' => t('Day label'),
     ],
   ];
   return $tokens;
@@ -115,9 +115,11 @@ function _mespronos_tokens_league($tokens, League $league, &$replacements) {
       case 'id':
         $replacements[$original] = $league->id();
         break;
+
       case 'name':
         $replacements[$original] = $league->getTheName();
         break;
+
       case 'sport':
         $replacements[$original] = $league->getSport()->label();
         break;
@@ -131,13 +133,16 @@ function _mespronos_tokens_game($tokens, Game $game, &$replacements) {
       case 'id':
         $replacements[$original] = $game->id();
         break;
+
       case 'name':
         $replacements[$original] = $game->labelTeams();
         break;
+
       case 'day':
         $day = $game->getDay();
         $replacements[$original] = $day->label();
         break;
+
       case 'league':
         $league = $game->getLeague();
         $replacements[$original] = $league->label();
