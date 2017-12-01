@@ -40,14 +40,14 @@ function mespronos_token_info() {
 function _mespronos_token_info_league() {
   $tokens = [
     'id' => [
-      'name' => t("League ID"),
+      'name' => t('League ID'),
       'description' => t('The League ID.'),
     ],
     'name' => [
-      'name' => t("League name"),
+      'name' => t('League name'),
     ],
     'sport' => [
-      'name' => t("Sport name"),
+      'name' => t('Sport name'),
     ],
   ];
   return $tokens;
