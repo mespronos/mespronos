@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Entity\Base\MPNContentEntityBase;
+use Drupal\mespronos\Entity\Getters\DayGettersTrait;
 use Drupal\mespronos\Entity\Interfaces\MPNEntityInterface;
 
 /**
@@ -52,105 +53,15 @@ use Drupal\mespronos\Entity\Interfaces\MPNEntityInterface;
  *   field_ui_base_route = "day.settings"
  * )
  */
-class Day extends MPNContentEntityBase implements MPNEntityInterface
-{
+class Day extends MPNContentEntityBase implements MPNEntityInterface {
+
+  use DayGettersTrait;
 
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {
     parent::preCreate($storage_controller, $values);
     $values += array(
       'user_id' => \Drupal::currentUser()->id(),
     );
-  }
-
-  /**
-   * @return \Drupal\mespronos\Entity\League
-   */
-  public function getLeague() {
-    $league = League::load($this->get('league')->target_id);
-    return $league;
-  }
-
-  /**
-   * @return integer
-   */
-  public function getLeagueID() {
-    $league = $this->get('league')->target_id;
-    return $league;
-  }
-
-  /**
-   * Return the number of games of the day
-   *
-   * @return int
-   *   Number of games for the day
-   */
-  public function getNbGame() {
-    $query = \Drupal::entityQuery('game')->condition('day', $this->id());
-    $ids = $query->execute();
-    return count($ids);
-  }
-
-  /**
-   * Return all games for day
-   *
-   * @return \Drupal\mespronos\Entity\Game[]
-   */
-  public function getGames() {
-    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
-    $ids = $this->getGamesId();
-    $games = $game_storage->loadMultiple($ids);
-
-    return $games;
-  }
-
-  /**
-   * Return all games id for day
-   * @return integer[]
-   */
-  public function getGamesId() {
-    $query = \Drupal::entityQuery('game');
-
-    $query->condition('day', $this->id());
-
-    $query->sort('game_date', 'ASC');
-    $query->sort('id', 'ASC');
-
-    $ids = $query->execute();
-
-    return $ids;
-  }
-
-  /**
-   * Return the number of games of the day with score setted
-   *
-   * @return int
-   *   Number of games with score setted
-   */
-  public function getNbGameWIthScore() {
-    $query = \Drupal::entityQuery('game')
-      ->condition('day', $this->id())
-      ->condition('score_team_1', NULL, 'IS NOT')
-      ->condition('score_team_2', NULL, 'IS NOT');
-    $ids = $query->execute();
-    return count($ids);
-  }
-
-  public function label() {
-    return $this->get('name')->value;
-  }
-  
-  public function getRenderableLabel() {
-    $league = $this->getLeague();
-    return [
-      '#theme' => 'day-small',
-      '#league' => [
-        'label' => $league->label(),
-        'logo' => $league->getLogo('mini_logo')
-      ],
-      '#day'=> [
-        'label'=> $this->label(),
-      ]
-    ];
   }
 
   /**
@@ -187,7 +98,6 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface
       }
     }
   }
-
 
   /**
    * {@inheritdoc}
