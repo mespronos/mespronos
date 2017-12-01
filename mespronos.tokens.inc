@@ -152,9 +152,11 @@ function _mespronos_tokens_day($tokens, Day $day, &$replacements) {
       case 'id':
         $replacements[$original] = $day->id();
         break;
+
       case 'name':
         $replacements[$original] = $day->label();
         break;
+
       case 'league':
         $league = $day->getLeague();
         $replacements[$original] = $league->label();
