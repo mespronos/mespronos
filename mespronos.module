@@ -188,15 +188,6 @@ function _mespronos_games_form_ajax_callback($form, \Drupal\Core\Form\FormStateI
   return $form;
 }
 
-function mespronos_form_user_login_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-  unset($form['name']['#attributes']['autofocus']);
-  $form['#submit'][] = 'mespronos_form_user_login_form_submit';
-}
-
-function mespronos_form_user_login_form_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-  $form_state->setRedirect('<front>');
-}
-
 function mespronos_user_login($account) {
   $destination = \Drupal::destination()->getAsArray();
   if(isset($destination['destination'])) {
