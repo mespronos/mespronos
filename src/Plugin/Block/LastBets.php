@@ -51,17 +51,18 @@ class LastBets extends BlockBase {
   public function build() {
     $lastBetsController = new LastBetsController();
     $return = [];
-    $return['last-bet'] = $lastBetsController->lastBets(null, 10, 'BLOCK');
+    $return['last-bet'] = $lastBetsController->lastBets(NULL, 10, 'BLOCK');
     if (!$return['last-bet']) {
       $return['more-last-bets'] = [
-        '#markup'=> t('You can see past results on <a href="@url">leagues page</a>.',['@url' => Url::fromRoute('mespronos.leagues.list')->toString()]),
+        '#markup'=> t('You can see past results on <a href="@url">leagues page</a>.', [
+          '@url' => Url::fromRoute('mespronos.leagues.list')->toString()
+        ]),
       ];
     }
 
     $return['#cache'] = [
       'contexts' => ['user'],
-      'tags' => ['user:'.\Drupal::currentUser()->id(), 'nextbets'],
-      'max-age' => '600',
+      'tags' => ['lastbets'],
     ];
 
     return $return;
