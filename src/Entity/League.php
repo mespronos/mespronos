@@ -286,7 +286,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public function isActive() {
-    return $this->get('status')->value == 'active';
+    return $this->get('status')->value === 'active';
   }
 
   public function close() {
