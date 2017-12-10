@@ -167,7 +167,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   public function labelDate() {
     $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
     $date->setTimezone(new \DateTimeZone("Europe/Paris"));
-    return\Drupal::service('date.formatter')->format($date->format('U'), 'long');
+    return \Drupal::service('date.formatter')->format($date->format('U'), 'long');
   }
 
   public function isPassed() {
