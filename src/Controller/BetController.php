@@ -238,7 +238,6 @@ class BetController extends ControllerBase {
    * @return \Drupal\mespronos\Entity\Bet[]
    */
   public static function getLastUserBets(User $user, $nb_bets = 20) {
-    $bet_storage = \Drupal::entityTypeManager()->getStorage('bet');
     $ids = \Drupal::entityQuery('bet')
       ->condition('better', $user->id())
       ->condition('points', '', 'IS NOT NULL')
@@ -246,7 +245,7 @@ class BetController extends ControllerBase {
       ->range(0, $nb_bets)
       ->execute();
     if (count($ids) > 0) {
-      return $bet_storage->loadMultiple($ids);
+      return Bet::loadMultiple($ids);
     }
     return [];
   }
