@@ -196,7 +196,6 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
    * @return \Drupal\mespronos\Entity\Game[]
    */
   public static function getLastestGamesWithMark($number) {
-    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
     $query = \Drupal::entityQuery('game');
     $query->condition('score_team_1', 0, '>=');
     $query->condition('score_team_2', 0, '>=');
@@ -204,7 +203,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     $query->sort('id', 'ASC');
     $query->range(0, $number);
     $ids = $query->execute();
-    return $game_storage->loadMultiple($ids);
+    return Game::loadMultiple($ids);
 
   }
 
