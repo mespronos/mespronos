@@ -34,11 +34,11 @@ class BetController extends ControllerBase {
     $injected_database = Database::getConnection();
     if (!$game->isScoreSetted()) {
       $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points'=>null, 'changed'=>time()]);
+      $query->fields(['points' => NULL, 'changed' => time()]);
       $query->condition('game', $game->id());
       $query->execute();
       unset($query);
-      return false;
+      return FALSE;
     }
     $st1 = $game->getScoreTeam1();
     $st2 = $game->getScoreTeam2();
@@ -46,16 +46,16 @@ class BetController extends ControllerBase {
 
     //perfect bet
     $query = $injected_database->update('mespronos__bet');
-    $query->fields(['points'=>$points['points_score_found'], 'changed'=>time()]);
+    $query->fields(['points' => $points['points_score_found'], 'changed' => time()]);
     $query->condition('score_team_1', $st1);
     $query->condition('score_team_2', $st2);
     $query->condition('game', $game->id());
     $query->execute();
     unset($query);
 
-    if ($st1 == $st2) {
+    if ($st1 === $st2) {
       $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points'=>$points['points_winner_found'], 'changed'=>time()]);
+      $query->fields(['points' => $points['points_winner_found'], 'changed' => time()]);
       $query->where('score_team_1 = score_team_2');
       $query->condition('score_team_2', $st2, '!=');
       $query->condition('score_team_1', $st1, '!=');
@@ -64,14 +64,15 @@ class BetController extends ControllerBase {
       unset($query);
 
       $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points'=>$points['points_participation'], 'changed'=>time()]);
+      $query->fields(['points' => $points['points_participation'], 'changed' => time()]);
       $query->where('score_team_1 <> score_team_2');
       $query->condition('game', $game->id());
       $query->execute();
       unset($query);
-    } else {
+    }
+    else {
       $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points'=>$points['points_participation'], 'changed'=>time()]);
+      $query->fields(['points' => $points['points_participation'], 'changed' => time()]);
       $query->where('score_team_1 = score_team_2');
       $query->condition('game', $game->id());
       $query->execute();
@@ -83,7 +84,7 @@ class BetController extends ControllerBase {
 
       if ($st1 > $st2) {
         $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points'=>$points['points_winner_found'], 'changed'=>time()]);
+        $query->fields(['points' => $points['points_winner_found'], 'changed' => time()]);
         $query->where('score_team_1 > score_team_2');
         $query->condition($notExactScore);
         $query->condition('game', $game->id());
@@ -91,7 +92,7 @@ class BetController extends ControllerBase {
         unset($query);
 
         $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points'=>$points['points_participation'], 'changed'=>time()]);
+        $query->fields(['points' => $points['points_participation'], 'changed' => time()]);
         $query->where('score_team_1 < score_team_2');
         $query->condition('game', $game->id());
         $query->execute();
@@ -100,7 +101,7 @@ class BetController extends ControllerBase {
 
       if ($st1 < $st2) {
         $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points'=>$points['points_winner_found'], 'changed'=>time()]);
+        $query->fields(['points' => $points['points_winner_found'], 'changed' => time()]);
         $query->where('score_team_1 < score_team_2');
         $query->condition($notExactScore);
         $query->condition('game', $game->id());
@@ -108,14 +109,26 @@ class BetController extends ControllerBase {
         unset($query);
 
         $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points'=>$points['points_participation'], 'changed'=>time()]);
+        $query->fields(['points' => $points['points_participation'], 'changed' => time()]);
         $query->where('score_team_1 > score_team_2');
         $query->condition('game', $game->id());
         $query->execute();
         unset($query);
       }
     }
-    return true;
+    //cache invalidation
+
+    $query = $injected_database->select('mespronos__bet', 'bet');
+    $query->addField('bet', 'id');
+    $query->condition('game', $game->id());
+    $ids = $query->execute()->fetchAllKeyed(0, 0);
+    $caches = [];
+    foreach ($ids as $id) {
+      $caches[] = 'bet:' . $id;
+    }
+    Cache::invalidateTags($caches);
+
+    return TRUE;
   }
 
   public static function updateBetsForDay(Day $day) {

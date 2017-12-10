@@ -114,6 +114,6 @@ class GamesMarks extends FormBase {
       '@nb_ranking'=>count($days_to_update),
       '@nb_leagues'=>count($leagues),
     ]));
-    Cache::invalidateTags(array('nextbets', 'lastbets', 'ranking'));
+    Cache::invalidateTags(array('nextbets', 'lastbets', 'ranking', 'bet'));
   }
 }

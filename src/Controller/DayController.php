@@ -64,7 +64,7 @@ class DayController extends ControllerBase {
       '#header' => $header,
       '#cache' => [
         'contexts' => ['user'],
-        'tags' => ['lastbets', 'user:'.$user->id()],
+        'tags' => ['lastbets'],
       ],
     ];
     return $table_array;
@@ -107,36 +107,32 @@ class DayController extends ControllerBase {
         $bet = isset($bets[$gid]) ? $bets[$gid]->labelBet() : '/';
       }
       $points = isset($bets[$gid]) ? $bets[$gid]->get('points')->value : '/';
-
       $game_label = $game->labelTeamsAndHour();
       $row = [
         'data' => [
-          ['data'=> render($game_label), 'class'=>'game'],
+          ['data' => render($game_label), 'class' => 'game'],
           $game->labelScore(),
           $bet,
-          ['data' => $points, 'class'=>'points'],
+          ['data' => $points, 'class' => 'points'],
         ],
         'class' => $league->getPointsCssClass($points),
       ];
 
       if (!$game->isPassed()) {
-        if ($user->id() == \Drupal::currentUser()->id()) {
+        if ($user->id() === \Drupal::currentUser()->id()) {
           $link_details = Url::fromRoute('mespronos.day.bet', ['day' => $game->getDay()->id()])->toString();
-          $cell_edit = ['#markup' => '<a class="picto" href="'.$link_details.'" title="'.t('Edit my bet').'"><i class="fa fa-edit" aria-hidden="true"></i></a>'];
+          $cell_edit = ['#markup' => '<a class="picto" href="' . $link_details . '" title="' . t('Edit my bet') . '"><i class="fa fa-edit" aria-hidden="true"></i></a>'];
           $row['data'][] = ['data' => render($cell_edit), 'class' => 'picto'];
         }
         else {
-
           $row['data'][] = ['data' => ''];
         }
       }
       else {
-        $link_details = Url::fromRoute('entity.game.canonical', ['game'=>$game->id()])->toString();
-        $cell_details = ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('see details').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
-        $row['data'][] = ['data' => render($cell_details), 'class'=>'picto'];
+        $link_details = Url::fromRoute('entity.game.canonical', ['game' => $game->id()])->toString();
+        $cell_details = ['#markup' => '<a class="picto" href="' . $link_details . '" title="' . t('see details') . '"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+        $row['data'][] = ['data' => render($cell_details), 'class' => 'picto'];
       }
-
-
       $rows[] = $row;
     }
     return $rows;
