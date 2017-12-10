@@ -132,24 +132,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     $results = $query->execute()->fetchObject();
     return $results->nb_better;
   }
-  /**
-   * Return all days for league
-   * @return \Drupal\mespronos\Entity\Day[]
-   */
-  public function getDays() {
-    $storage = \Drupal::entityTypeManager()->getStorage('day');
-    $query = \Drupal::entityQuery('day');
-
-    $query->condition('league', $this->id());
-
-    $query->sort('id', 'ASC');
-
-    $ids = $query->execute();
-
-    $days = $storage->loadMultiple($ids);
-
-    return $days;
-  }
 
   /**
    * Return all games for day
