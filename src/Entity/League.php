@@ -205,25 +205,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     return parent::create($values);
   }
 
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getupdatedTime() {
-    return $this->get('updated')->value;
-  }
-
-  public function getSport() {
-    $sport = entity_load('sport', $this->get('sport')->target_id);
-    return $sport;
-  }
-
   public function label($as_entity = FALSE) {
     if ($as_entity) {
       $entity = entity_view($this, 'full');

@@ -10,6 +10,18 @@ trait LeagueGettersTrait {
 
   public abstract function get($name);
 
+  public function getSport() {
+    return $this->get('sport')->entity;
+  }
+
+  public function getCreatedTime() {
+    return $this->get('created')->value;
+  }
+
+  public function getupdatedTime() {
+    return $this->get('updated')->value;
+  }
+
   /**
    * Return all days for league
    * @return \Drupal\mespronos\Entity\Day[]
