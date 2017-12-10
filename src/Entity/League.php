@@ -224,13 +224,12 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     return $sport;
   }
 
-  public function label($as_entity = false) {
+  public function label($as_entity = FALSE) {
     if ($as_entity) {
       $entity = entity_view($this, 'full');
       return render($entity);
-    } else {
-      return $this->get('name')->value;
     }
+    return $this->get('name')->value;
   }
 
   public function getRenderableLabel() {
