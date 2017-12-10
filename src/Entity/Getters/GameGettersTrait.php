@@ -110,9 +110,9 @@ trait GameGettersTrait {
     $team2 = $this->getTeam2();
 
     return t('@team1 - @team2 (@league - @day)', [
-      '@team1'=> $team1->label(),
-      '@team2'=> $team2->label(),
-      '@league'=>$league->label(),
+      '@team1' => $team1->label(),
+      '@team2' => $team2->label(),
+      '@league' => $league->label(),
       '@day' => $day->label()
     ]);
   }
