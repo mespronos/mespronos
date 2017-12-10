@@ -127,8 +127,8 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
       $bet->delete();
     }
     \Drupal::logger('mespronos')->notice(t('Bets removed on game #@id (@game_label) : @nb_bets removed', [
-      '@id'=>$this->id(),
-      '@game_label'=>$this->label(),
+      '@id' => $this->id(),
+      '@game_label' => $this->label(),
       '@nb_bets' => \count($ids),
     ]));
     return \count($ids);
