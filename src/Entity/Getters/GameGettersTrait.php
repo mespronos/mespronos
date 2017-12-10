@@ -103,4 +103,97 @@ trait GameGettersTrait {
     return $this->get('day')->target_id;
   }
 
+  public function label() {
+    $league = $this->getLeague();
+    $day = $this->getDay();
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+
+    return t('@team1 - @team2 (@league - @day)', [
+      '@team1'=> $team1->label(),
+      '@team2'=> $team2->label(),
+      '@league'=>$league->label(),
+      '@day' => $day->label()
+    ]);
+  }
+
+  public function labelTeams() {
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+    return t('@team1 - @team2', array('@team1'=> $team1->label(), '@team2'=> $team2->label()));
+  }
+
+  public function labelTeamsAndHour() {
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+    $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
+    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+
+
+    return [
+      '#theme' => 'game-with-flag',
+      '#team_1' => [
+        'label' => $team1->label(),
+        'logo' => $team1->getLogo('mini_logo'),
+      ],
+      '#team_2' => [
+        'label' => $team2->label(),
+        'logo' => $team2->getLogo('mini_logo'),
+      ],
+      '#game' => [
+        'date' => $date->format('d/m/Y H\hi'),
+      ],
+    ];
+
+  }
+
+  public function labelScore() {
+    return t('@t1 - @t2', array('@t1'=> $this->get('score_team_1')->value, '@t2'=> $this->get('score_team_2')->value));
+  }
+
+  public function labelWithScore() {
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+    return t('<span class="team team-1">@team1</span> <span class="score">@s1 - @s2</span> <span class="team team-2">@team2</span>', array('@team1'=> $team1->label(), '@team2'=> $team2->label(), '@s1'=> $this->get('score_team_1')->value, '@s2'=> $this->get('score_team_2')->value));
+  }
+
+  public function labelWithScoreAndLogo() {
+    $team1 = $this->getTeam1();
+    $logo_team_1 = $team1->getLogo('mini_thumbnail');
+    $team2 = $this->getTeam2();
+    $logo_team_2 = $team2->getLogo('mini_thumbnail');
+    return t('<span class="team team-1">@team1</span> <span class="score">@s1 - @s2</span> <span class="team team-2">@team2</span>', array('@team1'=> render($logo_team_1), '@team2'=> render($logo_team_2), '@s1'=> $this->get('score_team_1')->value, '@s2'=> $this->get('score_team_2')->value));
+  }
+
+  public function labelForInsight() {
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+    $league = $this->getLeague();
+    $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
+    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+    return t('@team1 @s1 - @s2 @team2 (@league - @date)', array(
+        '@team1'=> $team1->label(),
+        '@team2'=> $team2->label(),
+        '@s1'=> $this->get('score_team_1')->value,
+        '@s2'=> $this->get('score_team_2')->value,
+        '@league'=> $league->getTheName(),
+        '@date'=> $date->format('d/m/Y'),
+      )
+    );
+  }
+
+  public function label_full() {
+    $team1 = $this->getTeam1();
+    $team2 = $this->getTeam2();
+    $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
+    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+    return t('@team1 - @team2 - @date', array('@team1'=> $team1->label(), '@team2'=> $team2->label(), '@date'=> $date->format('d/m/Y H\hi')));
+  }
+
+  public function labelDate() {
+    $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
+    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+    return \Drupal::service('date.formatter')->format($date->format('U'), 'long');
+  }
+
 }
