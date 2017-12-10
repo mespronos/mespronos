@@ -11,7 +11,6 @@ use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Entity\Bet;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\League;
-use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\mespronos\Entity\Game;
 use Drupal\Core\Database\Database;
 use Drupal\Core\Database\Query\Condition;
@@ -274,7 +273,7 @@ class BetController extends ControllerBase {
    */
   public static function betsLeft(\Drupal\user\Entity\User $user, Day $day) {
     $now_date = new \DateTime();
-    $now_date->setTimezone(new \DateTimeZone("GMT"));
+    $now_date->setTimezone(new \DateTimeZone('GMT'));
 
     $injected_database = Database::getConnection();
 
