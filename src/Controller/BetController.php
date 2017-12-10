@@ -201,7 +201,7 @@ class BetController extends ControllerBase {
           ],
           $game->labelTeams(),
           $game->labelScore(),
-          $bet->Label(),
+          $bet->label(),
           $bet->getPoints(),
         ],
         'class' => $leagues[$day->getLeagueID()]->getPointsCssClass($bet->getPoints()),
@@ -211,11 +211,11 @@ class BetController extends ControllerBase {
     }
 
     $header = [
-      t('League', array(), array('context'=>'mespronos')),
-      t('Game', array(), array('context'=>'mespronos')),
-      t('Score', array(), array('context'=>'mespronos')),
-      t('Bet', array(), array('context'=>'mespronos')),
-      t('Points', array(), array('context'=>'mespronos')),
+      t('League', array(), array('context' => 'mespronos')),
+      t('Game', array(), array('context' => 'mespronos')),
+      t('Score', array(), array('context' => 'mespronos')),
+      t('Bet', array(), array('context' => 'mespronos')),
+      t('Points', array(), array('context' => 'mespronos')),
     ];
 
     $table_array = [
