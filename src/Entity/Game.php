@@ -204,8 +204,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     $query->sort('id', 'ASC');
     $query->range(0, $number);
     $ids = $query->execute();
-    $return = $game_storage->loadMultiple($ids);
-    return $return;
+    return $game_storage->loadMultiple($ids);
 
   }
 
