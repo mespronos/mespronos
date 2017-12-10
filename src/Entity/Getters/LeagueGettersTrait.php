@@ -8,6 +8,8 @@ use Drupal\mespronos\Entity\Game;
 
 trait LeagueGettersTrait {
 
+  public abstract function get($name);
+
   /**
    * Return all days for league
    * @return \Drupal\mespronos\Entity\Day[]
