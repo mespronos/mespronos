@@ -234,11 +234,10 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public function getRenderableLabel() {
-
     return [
       '#theme' => 'league-small',
       '#league' => [
-        'url' => Url::fromRoute('entity.league.canonical', ['league'=>$this->id()]),
+        'url' => Url::fromRoute('entity.league.canonical', ['league' => $this->id()]),
         'label' => $this->label(),
         'logo' => $this->getLogo('mini_logo')
       ]
