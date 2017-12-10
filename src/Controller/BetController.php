@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\mespronos\Entity\Bet;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\RankingGeneral;
@@ -256,17 +257,14 @@ class BetController extends ControllerBase {
    * @return \Drupal\mespronos\Entity\Bet
    */
   public static function loadForUser(User $user, Game $game) {
-
-    $bet_storage = \Drupal::entityTypeManager()->getStorage('bet');
-
     $ids = \Drupal::entityQuery('bet')
       ->condition('game', $game->id())
       ->condition('better', $user->id())
       ->execute();
-    if (count($ids) > 0) {
-      return $bet_storage->load(array_pop($ids));
+    if (\count($ids) > 0) {
+      return Bet::load(array_pop($ids));
     } else {
-      return $bet_storage->create(array());
+      return Bet::create([]);
     }
   }
 
