@@ -245,16 +245,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     ];
   }
 
-  public function getLogo($style_name = 'thumbnail') {
-    $logo = $this->get("field_league_logo")->first();
-    if ($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
-      return self::getImageAsRenderableArray($logo_file, $style_name);
-    }
-    else {
-      return [];
-    }
-  }
-
   public function getPoints() {
     $points = [
       'points_score_found' => $this->get('points_score_found')->value,
