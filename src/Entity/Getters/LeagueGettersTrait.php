@@ -3,6 +3,7 @@
 namespace Drupal\mespronos\Entity\Getters;
 
 use Drupal\Core\Database\Database;
+use Drupal\file\Entity\File;
 use Drupal\mespronos\Entity\Day;
 use Drupal\mespronos\Entity\Game;
 
