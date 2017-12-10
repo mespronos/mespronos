@@ -208,6 +208,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return $return;
 
   }
+
   /**
    * Remove bets on current day
    *
