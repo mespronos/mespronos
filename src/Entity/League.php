@@ -11,6 +11,7 @@ use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\mespronos\Entity\Base\MPNContentEntityBase;
+use Drupal\mespronos\Entity\Getters\LeagueGettersTrait;
 use Drupal\mespronos\Entity\Interfaces\MPNEntityInterface;
 use Drupal\Core\Database\Database;
 use Drupal\file\Entity\File;
@@ -57,6 +58,9 @@ use Drupal\Core\Url;
  * )
  */
 class League extends MPNContentEntityBase implements MPNEntityInterface {
+
+  use LeagueGettersTrait;
+
   protected static $status_allowed_value = [
     'future' => 'À venir',
     'active' => 'En cours',

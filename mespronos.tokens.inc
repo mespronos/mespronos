@@ -193,10 +193,7 @@ function _mespronos_tokens_day($tokens, Day $day, &$replacements) {
 
       case 'league_logo':
         $league = $day->getLeague();
-        if($league->get('field_league_logo')->referencedEntities()[0]) {
-          $logo = $league->get('field_league_logo')->referencedEntities()[0];
-          $replacements[$original] = file_create_url($logo->getFileUri());
-        }
+        $replacements[$original] = $league->getLogoUrl();
         break;
     }
   }
