@@ -39,7 +39,6 @@ class DayController extends ControllerBase {
       '#cache' => [
         'contexts' => ['user'],
         'tags' => [
-          'user:'.\Drupal::currentUser()->id().'_'.$user->id(),
           'lastbets'
         ],
       ],
