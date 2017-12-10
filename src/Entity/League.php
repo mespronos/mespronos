@@ -134,24 +134,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   /**
-   * Return all games for day
-   * @return \Drupal\mespronos\Entity\Game[]
-   */
-  public function getGames() {
-    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
-    $injected_database = Database::getConnection();
-    $query = $injected_database->select('mespronos__game', 'g');
-    $query->join('mespronos__day', 'd', 'd.id = g.day');
-    $query->addField('g', 'id');
-    $query->condition('d.league', $this->id());
-    $results = $query->execute()->fetchAllAssoc('id');
-
-    $results = array_map(function($v) {return $v->id; },$results);
-    $games = $game_storage->loadMultiple($results);
-    return $games;
-  }
-
-  /**
    * {@inheritdoc}
    */
   public static function preCreate(EntityStorageInterface $storage_controller, array &$values) {

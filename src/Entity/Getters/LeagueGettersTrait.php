@@ -2,7 +2,9 @@
 
 namespace Drupal\mespronos\Entity\Getters;
 
+use Drupal\Core\Database\Database;
 use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\Game;
 
 trait LeagueGettersTrait {
 
@@ -17,6 +19,22 @@ trait LeagueGettersTrait {
     $ids = $query->execute();
 
     return Day::loadMultiple($ids);
+  }
+
+  /**
+   * Return all games for day
+   * @return \Drupal\mespronos\Entity\Game[]
+   */
+  public function getGames() {
+    $injected_database = Database::getConnection();
+    $query = $injected_database->select('mespronos__game', 'g');
+    $query->join('mespronos__day', 'd', 'd.id = g.day');
+    $query->addField('g', 'id');
+    $query->condition('d.league', $this->id());
+    $results = $query->execute()->fetchAllAssoc('id');
+
+    $results = array_map(function ($v) {return $v->id;}, $results);
+    return Game::loadMultiple($results);
   }
 
   public function getLogoUrl() {
