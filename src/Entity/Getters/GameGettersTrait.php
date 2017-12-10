@@ -186,13 +186,17 @@ trait GameGettersTrait {
     $team1 = $this->getTeam1();
     $team2 = $this->getTeam2();
     $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
-    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
-    return t('@team1 - @team2 - @date', array('@team1'=> $team1->label(), '@team2'=> $team2->label(), '@date'=> $date->format('d/m/Y H\hi')));
+    $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+    return t('@team1 - @team2 - @date', [
+      '@team1' => $team1->label(),
+      '@team2' => $team2->label(),
+      '@date' => $date->format('d/m/Y H\hi'),
+    ]);
   }
 
   public function labelDate() {
     $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
-    $date->setTimezone(new \DateTimeZone("Europe/Paris"));
+    $date->setTimezone(new \DateTimeZone('Europe/Paris'));
     return \Drupal::service('date.formatter')->format($date->format('U'), 'long');
   }
 
