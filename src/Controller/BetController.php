@@ -244,7 +244,7 @@ class BetController extends ControllerBase {
       ->sort('created', 'DESC')
       ->range(0, $nb_bets)
       ->execute();
-    if (count($ids) > 0) {
+    if (\count($ids) > 0) {
       return Bet::loadMultiple($ids);
     }
     return [];
@@ -262,9 +262,8 @@ class BetController extends ControllerBase {
       ->execute();
     if (\count($ids) > 0) {
       return Bet::load(array_pop($ids));
-    } else {
-      return Bet::create([]);
     }
+    return Bet::create([]);
   }
 
   /**
