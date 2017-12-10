@@ -273,12 +273,15 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       case $this->get('points_score_found')->value:
         $class = 'score_found';
         break;
+
       case $this->get('points_winner_found')->value:
         $class = 'winner_found';
         break;
+
       case $this->get('points_participation')->value:
         $class = 'participation';
         break;
+
       default:
         $class = '';
     }
