@@ -92,7 +92,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     $ids = $query->execute();
     $return = [
       'ids' => $ids,
-      'entities' => Game::loadMultiple($ids),
+      'entities' => self::loadMultiple($ids),
     ];
     return $return;
   }
@@ -109,7 +109,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     $query->sort('id', 'ASC');
     $query->range(0, $number);
     $ids = $query->execute();
-    return Game::loadMultiple($ids);
+    return self::loadMultiple($ids);
 
   }
 
