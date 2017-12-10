@@ -165,11 +165,8 @@ function _mespronos_tokens_game($tokens, Game $game, &$replacements) {
         break;
 
       case 'league_logo':
-        $league = $day->getLeague();
-        if($league->get('field_league_logo')->referencedEntities()[0]) {
-          $logo = $league->get('field_league_logo')->referencedEntities()[0];
-          $replacements[$original] = file_create_url($logo->getFileUri());
-        }
+        $league = $game->getLeague();
+        $replacements[$original] = $league->getLogoUrl();
         break;
     }
   }
