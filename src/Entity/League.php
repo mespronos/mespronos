@@ -143,7 +143,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     );
   }
 
-
   public static function validateBettingType(&$values) {
     if (!isset($values['betting_type']) || empty($values['betting_type'])) {
       $values['betting_type'] = self::$betting_type_default_value;
@@ -173,6 +172,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       }
     }
   }
+
   public static function validateName(&$values) {
     if (!isset($values['name']) || empty(trim($values['name']))) {
       throw new \Exception(t('The league\'s name should be set'));
@@ -189,6 +189,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       $values['points_score_found'] = $values['points_winner_found'];
     }
   }
+
   /**
    * @param array $values
    * @return League
@@ -283,6 +284,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     }
     return [$class];
   }
+
   public function isActive() {
     return $this->get('status')->value == 'active';
   }
@@ -290,7 +292,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   public function close() {
     $this->set('status', 'archived');
     $this->save();
-    \Drupal::logger('mespronos')->notice(t('League @league_label as been set as archived', ['@league_label'=>$this->label()]));
+    \Drupal::logger('mespronos')->notice(t('League @league_label as been set as archived', ['@league_label' => $this->label()]));
     RankingGeneral::createRanking();
   }
 
