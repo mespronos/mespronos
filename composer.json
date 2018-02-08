@@ -2,7 +2,7 @@
   "name": "mespronos/mespronos",
   "description": " Betting module build on Drupal 8",
   "keywords": ["mespronos","drupal8","drupal"],
-  "license": "GNU GPL V2",
+  "license": "GPL-2.0+",
   "homepage": "https://mespronos.net",
   "authors": [
     {
