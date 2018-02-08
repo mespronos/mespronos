@@ -40,12 +40,16 @@ class GroupForm extends ContentEntityForm {
     ];
 
     if (!\Drupal::currentUser()->hasPermission('choose to join group')) {
-      $form['autojoin']['#default_value'] = true;
-      $form['autojoin']['#access'] = false;
+      $form['autojoin']['#default_value'] = FALSE;
+      $form['autojoin']['#access'] = FALSE;
     }
 
-    $form['user_id']['#access'] = false;
-    $form['field_group_logo']['widget'][0]['#description'] = null;
+    if (\Drupal::moduleHandler()->moduleExists('domain') && !\Drupal::currentUser()->hasPermission('affect domain group')) {
+      $form['domain']['#access'] = FALSE;
+    }
+
+    $form['user_id']['#access'] = FALSE;
+    $form['field_group_logo']['widget'][0]['#description'] = NULL;
     $id = $this->entity->id();
     if (isset($id) && $id > 0) {
       $form['actions']['submit']['#value'] = t('Modifier mon groupe');

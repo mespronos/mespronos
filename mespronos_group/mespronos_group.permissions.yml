@@ -1,6 +1,9 @@
 add group entities:
   title: 'Create new Group entities'
 
+affect domain group:
+  title: 'Affecter un domaine au groupe'
+
 administer group entities:
   title: 'Administer Group entities'
   description: 'Allow to access the administration form to configure Group entities.'

@@ -348,6 +348,24 @@ class Group extends ContentEntityBase implements GroupInterface {
       ))
       ->setDisplayConfigurable('form', TRUE);
 
+    $fields['domain'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Domaine'))
+      ->setSetting('target_type', 'domain')
+      ->setSetting('handler', 'default')
+      ->setDefaultValueCallback(NULL)
+      ->setDisplayOptions('form', array(
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 5,
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'size' => '60',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ),
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
