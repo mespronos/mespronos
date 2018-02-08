@@ -7,6 +7,7 @@
   - Refactoring
   - Change User block
   - Drop support for PHP < 7 
+  - Change bet calculation method
 
 ## 8.x-1.0-alpha13, 2017-08-05
   - Remove useless "Welcome block"

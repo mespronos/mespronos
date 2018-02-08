@@ -29,7 +29,7 @@ trait BetGettersTrait {
     return $game;
   }
 
-  public function getPoints() : int {
+  public function getPoints() {
     return $this->get('points')->value;
   }
 }

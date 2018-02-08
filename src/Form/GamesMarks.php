@@ -111,8 +111,8 @@ class GamesMarks extends FormBase {
     }
     RankingGeneral::createRanking();
     drupal_set_message($this->t('Ranking updated for @nb_ranking days and @nb_leagues leagues', [
-      '@nb_ranking'=>count($days_to_update),
-      '@nb_leagues'=>count($leagues),
+      '@nb_ranking'=> \count($days_to_update),
+      '@nb_leagues'=> \count($leagues),
     ]));
     Cache::invalidateTags(array('nextbets', 'lastbets', 'ranking', 'bet'));
   }

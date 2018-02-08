@@ -2,7 +2,9 @@
 
 namespace Drupal\mespronos\Entity\Getters;
 
+use Drupal\mespronos\Entity\Bet;
 use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Team;
 
@@ -198,6 +200,17 @@ trait GameGettersTrait {
     $date = new \DateTime($this->getGameDate(), new \DateTimeZone('UTC'));
     $date->setTimezone(new \DateTimeZone('Europe/Paris'));
     return \Drupal::service('date.formatter')->format($date->format('U'), 'long');
+  }
+
+  /**
+   * Return all bets for the current game
+   * @return \Drupal\mespronos\Entity\Bet[]
+   */
+  public function getBets() {
+    $query = \Drupal::entityQuery('bet');
+    $query->condition('game', $this->id());
+    $games_ids = $query->execute();
+    return Bet::loadMultiple($games_ids);
   }
 
 }

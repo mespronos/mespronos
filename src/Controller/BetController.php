@@ -31,104 +31,53 @@ class BetController extends ControllerBase {
    * @return boolean
    */
   public static function updateBetsFromGame(Game $game) {
-    $injected_database = Database::getConnection();
-    if (!$game->isScoreSetted()) {
-      $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points' => NULL, 'changed' => time()]);
-      $query->condition('game', $game->id());
-      $query->execute();
-      unset($query);
-      return FALSE;
-    }
-    $st1 = $game->getScoreTeam1();
-    $st2 = $game->getScoreTeam2();
+    $bets = $game->getBets();
     $points = $game->getLeague()->getPoints();
 
-    //perfect bet
-    $query = $injected_database->update('mespronos__bet');
-    $query->fields(['points' => $points['points_score_found'], 'changed' => time()]);
-    $query->condition('score_team_1', $st1);
-    $query->condition('score_team_2', $st2);
-    $query->condition('game', $game->id());
-    $query->execute();
-    unset($query);
+    //Définition du batch
+    $batch = [
+      'title' => t('Calcul des points des pronostics'),
+      'operations' => [],
+      'finished' => '\Drupal\mespronos\Controller\BetController::updateBetsFromGameOver',
+    ];
 
-    if ($st1 === $st2) {
-      $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points' => $points['points_winner_found'], 'changed' => time()]);
-      $query->where('score_team_1 = score_team_2');
-      $query->condition('score_team_2', $st2, '!=');
-      $query->condition('score_team_1', $st1, '!=');
-      $query->condition('game', $game->id());
-      $query->execute();
-      unset($query);
+    foreach ($bets as $bet) {
+      $batch['operations'][] = ['\Drupal\mespronos\Controller\BetController::updateBetFromGame', [$bet, $game, $points]];
+    }
+    batch_set($batch);
+  }
 
-      $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points' => $points['points_participation'], 'changed' => time()]);
-      $query->where('score_team_1 <> score_team_2');
-      $query->condition('game', $game->id());
-      $query->execute();
-      unset($query);
+  public static function updateBetFromGame(Bet $bet, Game $game, array $points) {
+    debug('laaaa');;
+    $bst1 = $bet->getScoreTeam1();
+    $bst2 = $bet->getScoreTeam2();
+    $gst1 = $bet->getScoreTeam1();
+    $gst2 = $bet->getScoreTeam2();
+
+    if (!$game->isScoreSetted()) {
+      $bet->setPoints(NULL);
+    }
+    elseif ($bst1 === $gst1 && $bst2 === $gst2) {
+      $bet->setPoints($points['points_score_found']);
+    }
+    elseif (($bst1 === $bst2 && $gst1 === $bst2) || ($bst1 > $bst2 && $gst1 > $bst2) || ($bst1 < $bst2 && $gst1 < $bst2)) {
+      $bet->setPoints($points['points_winner_found']);
     }
     else {
-      $query = $injected_database->update('mespronos__bet');
-      $query->fields(['points' => $points['points_participation'], 'changed' => time()]);
-      $query->where('score_team_1 = score_team_2');
-      $query->condition('game', $game->id());
-      $query->execute();
-      unset($query);
-
-      $notExactScore = new Condition('OR');
-      $notExactScore->condition('score_team_2', $st2, '!=');
-      $notExactScore->condition('score_team_1', $st1, '!=');
-
-      if ($st1 > $st2) {
-        $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points' => $points['points_winner_found'], 'changed' => time()]);
-        $query->where('score_team_1 > score_team_2');
-        $query->condition($notExactScore);
-        $query->condition('game', $game->id());
-        $query->execute();
-        unset($query);
-
-        $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points' => $points['points_participation'], 'changed' => time()]);
-        $query->where('score_team_1 < score_team_2');
-        $query->condition('game', $game->id());
-        $query->execute();
-        unset($query);
-      }
-
-      if ($st1 < $st2) {
-        $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points' => $points['points_winner_found'], 'changed' => time()]);
-        $query->where('score_team_1 < score_team_2');
-        $query->condition($notExactScore);
-        $query->condition('game', $game->id());
-        $query->execute();
-        unset($query);
-
-        $query = $injected_database->update('mespronos__bet');
-        $query->fields(['points' => $points['points_participation'], 'changed' => time()]);
-        $query->where('score_team_1 > score_team_2');
-        $query->condition('game', $game->id());
-        $query->execute();
-        unset($query);
-      }
+      $bet->setPoints($points['points_participation']);
     }
-    //cache invalidation
 
-    $query = $injected_database->select('mespronos__bet', 'bet');
-    $query->addField('bet', 'id');
-    $query->condition('game', $game->id());
-    $ids = $query->execute()->fetchAllKeyed(0, 0);
-    $caches = [];
-    foreach ($ids as $id) {
-      $caches[] = 'bet:' . $id;
+    $bet->save();
+  }
+
+  public static function updateBetsFromGameOver($success, $results, $operations) {
+    if ($success) {
+      $message = t('Pronostics des matchs mis à jour');
     }
-    Cache::invalidateTags($caches);
-
-    return TRUE;
+    else {
+      $message = t('Mise à jour des pronostics echouée');
+    }
+    drupal_set_message($message);
   }
 
   public static function updateBetsForDay(Day $day) {

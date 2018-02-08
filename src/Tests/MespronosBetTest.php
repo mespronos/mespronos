@@ -100,6 +100,36 @@ class MespronosBetTest extends WebTestBase {
     $this->assertTrue($bet->save(),t('Bet saving return true'));
   }
 
+  public function testMethodeGetGames() {
+    $bet = Bet::create(array(
+      'better' => 1,
+      'game' => $this->game->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 1,
+      'points' => 10,
+    ));
+
+    $bet->save();
+
+    $bets = $this->game->getBets();
+    $this->assertEqual(\count($bets), 1, t('La methode getGames retourne bien le bon nombre de pronostics'));
+
+
+    $bet = Bet::create(array(
+      'better' => 2,
+      'game' => $this->game->id(),
+      'score_team_1' => 1,
+      'score_team_2' => 2,
+      'points' => 10,
+    ));
+
+    $bet->save();
+
+    $bets = $this->game->getBets();
+    $this->assertEqual(\count($bets), 2, t('La methode getGames retourne bien le bon nombre de pronostics'));
+
+  }
+
   public function testMethodIsAllowedInFuture() {
     $dateO = new \DateTime(null,new \DateTimeZone(drupal_get_user_timezone()));
     $dateO->setTimezone(new \DateTimeZone('UTC'));
@@ -153,7 +183,7 @@ class MespronosBetTest extends WebTestBase {
   }
 
   public function testSettingGameScoreSetBetPoints() {
-    $dateO = new \DateTime(null,new \DateTimeZone(drupal_get_user_timezone()));
+    $dateO = new \DateTime(NULL, new \DateTimeZone(drupal_get_user_timezone()));
     $dateO->setTimezone(new \DateTimeZone('UTC'));
     $dateO->sub(new \DateInterval('P2D'));
     $date = $dateO->format('Y-m-d\TH:i:s');
@@ -183,7 +213,7 @@ class MespronosBetTest extends WebTestBase {
 
     $points = $this->league->getPoints();
 
-    $this->assertEqual($bet_reloaded->getPoints(),$points['points_score_found'],t('Setting a game score update bets points'));
+    $this->assertEqual($bet_reloaded->getPoints(), $points['points_score_found'], t('Setting a game score update bets points'));
 
   }
 
