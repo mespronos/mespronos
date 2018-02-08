@@ -13,14 +13,14 @@ trait ScoreTeamTrait {
    * @return int|null
    */
   public function getScoreTeam1() {
-    return $this->get('score_team_1')->value;
+    return is_numeric($this->get('score_team_1')->value) ? (int) $this->get('score_team_1')->value : NULL;
   }
 
   /**
    * @return int|null
    */
   public function getScoreTeam2() {
-    return $this->get('score_team_2')->value;
+    return is_numeric($this->get('score_team_2')->value) ? (int) $this->get('score_team_2')->value : NULL;
   }
 
 }

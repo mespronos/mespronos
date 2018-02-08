@@ -30,6 +30,6 @@ trait BetGettersTrait {
   }
 
   public function getPoints() {
-    return $this->get('points')->value;
+    return is_numeric($this->get('points')->value) ? (int) $this->get('points')->value : NULL;
   }
 }

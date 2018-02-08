@@ -33,26 +33,16 @@ class BetController extends ControllerBase {
   public static function updateBetsFromGame(Game $game) {
     $bets = $game->getBets();
     $points = $game->getLeague()->getPoints();
-
-    //Définition du batch
-    $batch = [
-      'title' => t('Calcul des points des pronostics'),
-      'operations' => [],
-      'finished' => '\Drupal\mespronos\Controller\BetController::updateBetsFromGameOver',
-    ];
-
     foreach ($bets as $bet) {
-      $batch['operations'][] = ['\Drupal\mespronos\Controller\BetController::updateBetFromGame', [$bet, $game, $points]];
+      self::updateBetFromGame($bet, $game, $points);
     }
-    batch_set($batch);
   }
 
   public static function updateBetFromGame(Bet $bet, Game $game, array $points) {
-    debug('laaaa');;
     $bst1 = $bet->getScoreTeam1();
     $bst2 = $bet->getScoreTeam2();
-    $gst1 = $bet->getScoreTeam1();
-    $gst2 = $bet->getScoreTeam2();
+    $gst1 = $game->getScoreTeam1();
+    $gst2 = $game->getScoreTeam2();
 
     if (!$game->isScoreSetted()) {
       $bet->setPoints(NULL);
@@ -60,7 +50,7 @@ class BetController extends ControllerBase {
     elseif ($bst1 === $gst1 && $bst2 === $gst2) {
       $bet->setPoints($points['points_score_found']);
     }
-    elseif (($bst1 === $bst2 && $gst1 === $bst2) || ($bst1 > $bst2 && $gst1 > $bst2) || ($bst1 < $bst2 && $gst1 < $bst2)) {
+    elseif (($bst1 === $bst2 && $gst1 === $gst2) || ($bst1 > $bst2 && $gst1 > $gst2) || ($bst1 < $bst2 && $gst1 < $gst2)) {
       $bet->setPoints($points['points_winner_found']);
     }
     else {
@@ -70,23 +60,13 @@ class BetController extends ControllerBase {
     $bet->save();
   }
 
-  public static function updateBetsFromGameOver($success, $results, $operations) {
-    if ($success) {
-      $message = t('Pronostics des matchs mis à jour');
-    }
-    else {
-      $message = t('Mise à jour des pronostics echouée');
-    }
-    drupal_set_message($message);
-  }
-
   public static function updateBetsForDay(Day $day) {
     $games = $day->getGames();
 
     foreach ($games as $game) {
       self::updateBetsFromGame($game);
     }
-    drupal_set_message(t('Points updated for @nb games', ['@nb'=>count($games)]));
+    drupal_set_message(t('Points updated for @nb games', ['@nb' => \count($games)]));
     $response = RankingController::recalculateDay($day);
     return $response;
   }

@@ -271,7 +271,7 @@ entity.day.edit_form:
     _entity_access: 'day.edit'
 
 entity.day.recount_points:
-  path: '/admin/day/{day}/recount_ranking'
+  path: '/admin/day/{day}/recount_points'
   defaults:
     _controller: '\Drupal\mespronos\Controller\BetController::updateBetsForDay'
     _title: 'Recalculate points and ranking for Day'
