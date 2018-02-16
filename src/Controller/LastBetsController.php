@@ -62,6 +62,7 @@ class LastBetsController extends ControllerBase {
                 [
                   'data'=> t('Bets', array(), array('context' => 'mespronos-block')),
                   'title' => t('Day', array(), array('context' => 'mespronos-block')),
+                  'class' => array(RESPONSIVE_PRIORITY_MEDIUM),
                 ],
                 [
                   'data'=> t('Points', array(), array('context' => 'mespronos-block')),
