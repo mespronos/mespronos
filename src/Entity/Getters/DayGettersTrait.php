@@ -18,9 +18,11 @@ trait DayGettersTrait {
       '#theme' => 'day-small',
       '#league' => [
         'label' => $league->label(),
-        'logo' => $league->getLogo('mini_logo')
+        'logo' => $league->getLogo('mini_logo'),
+        'url' => $league->url(),
       ],
       '#day'=> [
+        'url'=> $this->url(),
         'label'=> $this->label(),
       ]
     ];

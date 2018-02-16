@@ -92,12 +92,10 @@ class NextBetsController extends ControllerBase {
               ]
             ];
 
-            $link_details = Url::fromRoute('entity.day.canonical', ['day'=>$day_id])->toString();
             $link_bet = Url::fromRoute('mespronos.day.bet', ['day'=>$day_id])->toString();
 
             $links = [
-              'details' => ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('See games and results').'"><i class="fa fa-list" aria-hidden="true"></i></a>'],
-              'bets' => ['#markup'=>'<a class="picto" href="'.$link_bet.'" title="'.t('Bet').'"><i class="fa fa-edit" aria-hidden="true"></i></a>'],
+              'bets' => ['#markup'=>'<a class="picto" href="'.$link_bet.'" title="'.t('Bet now').'"><i class="fa fa-edit" aria-hidden="true"></i></a>'],
             ];
 
             $row['data']['action'] = ['data'=>render($links), 'class'=>'picto'];
