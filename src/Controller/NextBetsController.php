@@ -49,7 +49,7 @@ class NextBetsController extends ControllerBase {
             ],
             [
                 'data' => t('Games', array(), array('context'=>'mespronos-block')),
-                'class' => array(RESPONSIVE_PRIORITY_LOW),
+                'class' => array(RESPONSIVE_PRIORITY_MEDIUM),
             ],
             [
                 'data' => t('Bets left', array(), array('context'=>'mespronos-block')),

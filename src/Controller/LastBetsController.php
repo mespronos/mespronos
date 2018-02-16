@@ -73,7 +73,7 @@ class LastBetsController extends ControllerBase {
                 ],
                 [
                   'data'=> '',
-                  //'class' => array(RESPONSIVE_PRIORITY_LOW),
+                  //'class' => array(RESPONSIVE_PRIORITY_MEDIUM),
                 ],
             ];
         }
