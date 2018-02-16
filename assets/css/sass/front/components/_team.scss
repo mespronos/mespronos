@@ -3,7 +3,7 @@ article.team {
     margin : 0;
     padding: 0;
     display: flex;
-  //    justify-content: lef;
+    justify-content: center;
     li {
       text-align: center;
 
@@ -13,10 +13,10 @@ article.team {
       span.result {
         display: block;
         font-size: 10px;
-        width : 14px;
-        border-radius: 7px;
-        height : 14px;
-        line-height: 14px;
+        width : 16px;
+        border-radius: 8px;
+        height : 16px;
+        padding-top: 1px;
         text-align: center;
         font-weight: bold;
         color : white;

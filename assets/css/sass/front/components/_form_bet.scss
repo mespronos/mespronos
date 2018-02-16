@@ -1,6 +1,18 @@
 form#games-betting {
   fieldset.game-wrapper {
     clear: both;
+    text-align: center;
+    margin-bottom: 3rem;
+    legend {
+      font-style: italic;
+      font-weight: bold;
+      display: block;
+      width: 100%;
+      span.fieldset-legend {
+        display: block;
+        width: 100%;
+      }
+    }
     .fieldset-wrapper {
       display: flex;
       justify-content: center;
