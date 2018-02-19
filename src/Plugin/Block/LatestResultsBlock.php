@@ -57,6 +57,9 @@ class LatestResultsBlock extends BlockBase {
       '#theme' => 'item_list',
       '#items' => $items,
       '#list_type' => 'ul',
+      '#cache' => [
+        'tags' => ['games_results'],
+      ]
     ];
     return $build;
   }

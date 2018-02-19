@@ -7,6 +7,7 @@
 
 namespace Drupal\mespronos\Entity;
 
+use Drupal\Core\Cache\Cache;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\EntityTypeInterface;
@@ -73,6 +74,7 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     $return = parent::save();
     if ($this->isScoreSetted()) {
       BetController::updateBetsFromGame($this);
+      Cache::invalidateTags(['games_results']);
     }
     return $return;
   }
