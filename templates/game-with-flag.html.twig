@@ -2,8 +2,10 @@
     {{ team_1.logo }}
 </section>
 <section class="game">
-    <span class="game__label">{{ team_1.label }} - {{ team_2.label }}</span><br />
-    <span class="game__date">{{ game.date }}</span>
+    <a title="{{ 'see game\'s details' | trans }}" href="{{ game.url }}">
+        <span class="game__label">{{ team_1.label }} - {{ team_2.label }}</span><br />
+        <span class="game__date">{{ game.date }}</span>
+    </a>
 </section>
 <section class="team team2">
     {{ team_2.logo }}

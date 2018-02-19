@@ -144,6 +144,7 @@ trait GameGettersTrait {
       ],
       '#game' => [
         'date' => $date->format('d/m/Y H\hi'),
+        'url' => $this->url(),
       ],
     ];
 

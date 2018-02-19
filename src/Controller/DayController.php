@@ -51,10 +51,10 @@ class DayController extends ControllerBase {
     }
     $rows = self::getDayRows($day, $user);
     $header = [
-      t('Game', array(), array('context'=>'mespronos')),
-      t('Score', array(), array('context'=>'mespronos')),
-      t('Bet', array(), array('context'=>'mespronos')),
-      t('Points', array(), array('context'=>'mespronos')),
+      t('Game', array(), array('context' => 'mespronos')),
+      t('Score', array(), array('context' => 'mespronos')),
+      t('Bet', array(), array('context' => 'mespronos')),
+      t('Points', array(), array('context' => 'mespronos')),
       '',
     ];
 
@@ -96,6 +96,7 @@ class DayController extends ControllerBase {
   private static function getDayRows(Day $day, User $user) {
     $games = Game::getGamesForDay($day);
     $games_ids = $games['ids'];
+    /** @var Game[] $games_entity */
     $games_entity = $games['entities'];
     $bets = Bet::getUserBetsForGames($games_ids, $user);
     $league = $day->getLeague();
@@ -119,19 +120,12 @@ class DayController extends ControllerBase {
       ];
 
       if (!$game->isPassed()) {
-        if ($user->id() === \Drupal::currentUser()->id()) {
           $link_details = Url::fromRoute('mespronos.day.bet', ['day' => $game->getDay()->id()])->toString();
           $cell_edit = ['#markup' => '<a class="picto" href="' . $link_details . '" title="' . t('Edit my bet') . '"><i class="fa fa-edit" aria-hidden="true"></i></a>'];
           $row['data'][] = ['data' => render($cell_edit), 'class' => 'picto'];
-        }
-        else {
-          $row['data'][] = ['data' => ''];
-        }
       }
       else {
-        $link_details = Url::fromRoute('entity.game.canonical', ['game' => $game->id()])->toString();
-        $cell_details = ['#markup' => '<a class="picto" href="' . $link_details . '" title="' . t('see details') . '"><i class="fa fa-list" aria-hidden="true"></i></a>'];
-        $row['data'][] = ['data' => render($cell_details), 'class' => 'picto'];
+        $row['data'][] = ['data' => ''];
       }
       $rows[] = $row;
     }
