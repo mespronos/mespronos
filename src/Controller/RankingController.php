@@ -113,27 +113,23 @@ class RankingController extends ControllerBase {
         ],
       ];
       $old_points = $ranking->get('points')->value;
-      if ($ranking->getOwner()->id() == $user->id()) {
+      if ((int) $ranking->getOwner()->id() === (int) $user->id()) {
         $row['class'] = ['highlighted', 'bold'];
       }
-      $link_user = Url::fromRoute('entity.user.canonical', ['user'=>$ranking->getOwner()->id()])->toString();
-      $cell = ['#markup'=>'<a class="picto" href="' . $link_user . '" title="' . t('see user\'s profile') . '"><i class="fa fa-user" aria-hidden="true"></i></a>'];
-      $row['data']['user'] = ['data'=>render($cell), 'class'=>'picto'];
       if ($ranking instanceof RankingDay) {
-        $link_details_user = Url::fromRoute('mespronos.lastbetsdetailsforuser', ['day'=>$ranking->getDayiD(), 'user'=>$ranking->getOwner()->id()])->toString();
-        $cell = ['#markup'=>'<a class="picto" href="' . $link_details_user . '" title="' . t('see user\'s bets') . '"><i class="fa fa-list" aria-hidden="true"></i></a>'];
-        $row['data']['details'] = ['data' => render($cell), 'class'=>'picto'];
+        $link_details_user = Url::fromRoute('mespronos.lastbetsdetailsforuser', ['day' => $ranking->getDayiD(), 'user' => $ranking->getOwner()->id()])->toString();
+        $cell = ['#markup' => '<a class="picto" href="' . $link_details_user . '" title="' . t('see user\'s bets') . '"><i class="fa fa-list" aria-hidden="true"></i></a>'];
+        $row['data']['details'] = ['data' => render($cell), 'class' => 'picto'];
       }
       $rows[] = $row;
     }
     $header = [
-      t('#', array(), array('context'=>'mespronos-ranking')),
-      t('Better', array(), array('context'=>'mespronos-ranking')),
-      t('Points', array(), array('context'=>'mespronos-ranking')),
-      t('Bets', array(), array('context'=>'mespronos-ranking')),
+      t('#', [], ['context' => 'mespronos-ranking']),
+      t('Better', [], ['context' => 'mespronos-ranking']),
+      t('Points', [], ['context' => 'mespronos-ranking']),
+      t('Bets', [], ['context' => 'mespronos-ranking']),
     ];
 
-    $header[] = '';
     if (isset($ranking) && $ranking instanceof RankingDay) {
       $header[] = '';
     }
