@@ -1,3 +1,9 @@
 <article  {{ attributes }}>
-    {{ content }}
+    {{ content |without('description', 'block_members', 'block_ranking') }}
+    {% if has_description %}
+        <h2>{{  "À propos du groupe" | t  }}</h2>
+        {{ content.description }}
+    {% endif %}
+    {{ content.block_members }}
+    {{ content.block_ranking }}
 </article>

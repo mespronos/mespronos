@@ -40,9 +40,7 @@ use Drupal\user\Entity\User;
  *   entity_keys = {
  *     "id" = "id",
  *     "label" = "name",
- *     "uuid" = "uuid",
  *     "uid" = "user_id",
- *     "langcode" = "langcode",
  *     "status" = "status",
  *   },
  *   links = {
@@ -251,10 +249,6 @@ class Group extends ContentEntityBase implements GroupInterface {
       ->setLabel(t('ID'))
       ->setDescription(t('The ID of the Group entity.'))
       ->setReadOnly(TRUE);
-    $fields['uuid'] = BaseFieldDefinition::create('uuid')
-      ->setLabel(t('UUID'))
-      ->setDescription(t('The UUID of the Group entity.'))
-      ->setReadOnly(TRUE);
 
     $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Creator'))
@@ -285,7 +279,7 @@ class Group extends ContentEntityBase implements GroupInterface {
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Group name'))
       ->setDescription(t('The public name of the group'))
-      ->setRequired(true)
+      ->setRequired(TRUE)
       ->setSettings(array(
         'max_length' => 50,
         'text_processing' => 0,
@@ -303,10 +297,19 @@ class Group extends ContentEntityBase implements GroupInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    $fields['description'] = BaseFieldDefinition::create('text_long')
+      ->setLabel(t('Description publique du groupe'))
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'text_textfield',
+        'weight' => 6,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
     $fields['code'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Access code'))
       ->setDescription(t('The code required to join this group'))
-      ->setRequired(true)
+      ->setRequired(TRUE)
       ->setSettings(array(
         'max_length' => 50,
         'text_processing' => 0,
@@ -338,15 +341,6 @@ class Group extends ContentEntityBase implements GroupInterface {
       ->setLabel(t('Publishing status'))
       ->setDescription(t('A boolean indicating whether the Group is published.'))
       ->setDefaultValue(TRUE);
-
-    $fields['langcode'] = BaseFieldDefinition::create('language')
-      ->setLabel(t('Language code'))
-      ->setDescription(t('The language code for the Group entity.'))
-      ->setDisplayOptions('form', array(
-        'type' => 'language_select',
-        'weight' => 10,
-      ))
-      ->setDisplayConfigurable('form', TRUE);
 
     $fields['domain'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Domaine'))
