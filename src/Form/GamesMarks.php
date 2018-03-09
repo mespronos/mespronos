@@ -27,34 +27,38 @@ class GamesMarks extends FormBase {
    * {@inheritdoc}.
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    /** @var Game[] $games */
     $games = $form_state->getBuildInfo()['args'][0];
 
     $form['games'] = array(
       '#type' => 'container',
-      '#tree' => true,
+      '#tree' => TRUE,
     );
+
     foreach ($games as $game) {
       $form['games'][$game->id()] = array(
         '#type' => 'fieldset',
-        '#title' => $game->label(),
+        '#title' => $game->getLeague()->label(),
         '#attributes' => array(
           'class' => array('game'),
         ),
       );
       $form['games'][$game->id()]['score_team_1'] = array(
+        '#title' => $game->getTeam1()->label(),
         '#type' => 'number',
         '#min' => 0,
         '#step' => 1,
         '#size' => '5',
       );
       $form['games'][$game->id()]['score_team_2'] = array(
+        '#title' => $game->getTeam2()->label(),
         '#type' => 'number',
         '#min' => 0,
         '#step' => 1,
         '#size' => '5',
       );
     }
-    if (count($games) > 0) {
+    if (\count($games) > 0) {
       $form['actions']['#type'] = 'actions';
       $form['actions']['submit'] = array(
         '#type' => 'submit',
@@ -63,7 +67,7 @@ class GamesMarks extends FormBase {
       );
     } else {
       $form['no-bet'] = [
-        '#markup' => '<p>'.t('There is no game without mark').'</p>'
+        '#markup' => '<p>' . t('There is no game without mark') . '</p>'
       ];
     }
     return $form;

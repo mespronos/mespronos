@@ -16,6 +16,15 @@ form#games-marks {
       display: flex;
 
       .form-type-number {
+        width: 50%;
+        text-align: center;
+        label {
+          display: block;
+        }
+        input {
+          max-width: 100px;
+          height:40px;
+        }
         &:first-of-type {
           margin-right: 5px;
         }
@@ -24,6 +33,10 @@ form#games-marks {
         }
       }
     }
+  }
+  #edit-submit {
+    width: 100%;
+    height:40px;
   }
 }
 
