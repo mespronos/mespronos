@@ -101,7 +101,7 @@ class GamesMarks extends FormBase {
         $days_to_update[$game->getDayId()] = $game->getDayId();
       }
     }
-    drupal_set_message($this->t('@nb_mark games updated', array('@nb_mark' => $i)));
+    drupal_set_message($this->t('@nb_mark games updated', ['@nb_mark' => $i]));
     $i = 0;
     $leagues = [];
     foreach ($days_to_update as $day_id) {
@@ -118,6 +118,6 @@ class GamesMarks extends FormBase {
       '@nb_ranking'=> \count($days_to_update),
       '@nb_leagues'=> \count($leagues),
     ]));
-    Cache::invalidateTags(array('nextbets', 'lastbets', 'ranking', 'bet'));
+    Cache::invalidateTags(['nextbets', 'lastbets', 'ranking', 'bet', 'games_results']);
   }
 }
