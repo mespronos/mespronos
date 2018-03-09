@@ -110,6 +110,7 @@ class RankingController extends ControllerBase {
           ],
           'points' => $ranking->get('points')->value,
           'games_betted' => $ranking->get('games_betted')->value,
+          'average' => round($ranking->get('points')->value / $ranking->get('games_betted')->value, 3),
         ],
       ];
       $old_points = $ranking->get('points')->value;
@@ -125,9 +126,10 @@ class RankingController extends ControllerBase {
     }
     $header = [
       t('#', [], ['context' => 'mespronos-ranking']),
-      t('Better', [], ['context' => 'mespronos-ranking']),
+      t('', [], ['context' => 'mespronos-ranking']),
       t('Points', [], ['context' => 'mespronos-ranking']),
       t('Bets', [], ['context' => 'mespronos-ranking']),
+      t('Moyenne', [], ['context' => 'mespronos-ranking']),
     ];
 
     if (isset($ranking) && $ranking instanceof RankingDay) {
