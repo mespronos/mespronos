@@ -35,6 +35,7 @@ class DayController extends ControllerBase {
       '#theme' => 'day-details',
       '#last_bets' => self::getResults($day, $user),
       '#ranking' => RankingController::getRankingTableForDay($day),
+      '#league_ranking' => RankingController::getRankingLeague($day->getLeague()),
       '#groups' => self::getDayRankings($day, $user),
       '#cache' => [
         'contexts' => ['user'],
@@ -86,6 +87,7 @@ class DayController extends ControllerBase {
             'label' => $group->label(),
             'group_logo' => $render_controller->view($group, 'logo'),
             'group_ranking' => RankingController::getRankingTableForDay($day, $group),
+            'group_league_ranking' => RankingController::getRankingLeague($day->getLeague(), $group),
           ];
         }
       }

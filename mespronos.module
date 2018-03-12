@@ -108,6 +108,7 @@ function mespronos_theme() {
     'variables' => array(
       'last_bets' => NULL,
       'ranking' => NULL,
+      'league_ranking' => NULL,
       'groups' => [],
     ),
   );
