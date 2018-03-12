@@ -65,7 +65,7 @@ class RankingController extends ControllerBase {
 
   public static function getRankingGeneral(Group $group = NULL) {
     $ranking = RankingGeneral::getRanking(NULL, 'general', 'ranking_general', $group);
-    if (count($ranking) === 0) {
+    if (\count($ranking) === 0) {
       return FALSE;
     }
     return self::getTableFromRanking($ranking);
@@ -74,7 +74,7 @@ class RankingController extends ControllerBase {
 
   public static function getRankingLeague(League $league, Group $group = NULL) {
     $ranking = RankingLeague::getRanking($league, 'league', 'ranking_league', $group);
-    if (count($ranking) == 0) {
+    if (\count($ranking) === 0) {
       return FALSE;
     }
     return self::getTableFromRanking($ranking);
@@ -82,7 +82,7 @@ class RankingController extends ControllerBase {
 
   public static function getRankingTableForDay(Day $day, Group $group = NULL) {
     $rankingDays = RankingDay::getRankingForDay($day, $group);
-    if (count($rankingDays) == 0) {
+    if (\count($rankingDays) === 0) {
       return FALSE;
     }
     return self::getTableFromRanking($rankingDays);
