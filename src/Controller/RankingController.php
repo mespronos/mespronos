@@ -58,9 +58,7 @@ class RankingController extends ControllerBase {
     if (!$ranking = self::getRankingGeneral()) {
       return ['#markup' => t('No ranking for now')];
     }
-    else {
-      return $ranking;
-    }
+    return $ranking;
   }
 
   public static function getRankingGeneral(Group $group = NULL) {
