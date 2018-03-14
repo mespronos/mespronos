@@ -133,6 +133,13 @@ class RankingGeneral extends RankingBase {
   }
 
   /**
+   * @return \Drupal\mespronos\Entity\RankingGeneral
+   */
+  public static function getRankingAverage($entity = null, $entity_name = 'general', $storage_name = 'ranking_general', Group $group = null) {
+    return parent::getRankingAverage(null, $entity_name, $storage_name, $group);
+  }
+
+  /**
    * Get General ranking for user
    * @param \Drupal\user\Entity\User $better
    * @param \Drupal\mespronos\Entity\Base\RankingBase $entity

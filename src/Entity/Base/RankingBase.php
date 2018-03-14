@@ -77,6 +77,27 @@ abstract class RankingBase extends MPNContentEntityBase implements MPNEntityInte
     return $rankings;
   }
 
+  public static function getRankingAverage($entity = null,$entity_name=null,$storage_name,Group $group = null) {
+    $storage = \Drupal::entityTypeManager()->getStorage($storage_name);
+    $query = \Drupal::entityQuery($storage_name);
+    if(!is_null($entity_name) && !is_null($entity)) {
+      $query->condition($entity_name, $entity->id());
+    }
+    if(!is_null($group) ) {
+      $member_ids = $group->getMembers();
+      $query->condition('better',$member_ids,'IN');
+    }
+    $query->sort('points','DESC');
+    $ids = $query->execute();
+
+    $rankings = $storage->loadMultiple($ids);
+
+    usort($rankings, function ($a, $b) {
+      return $a->get('points')->value / $a->get('games_betted')->value > $b->get('points')->value / $b->get('games_betted')->value  ? -1 : 1;
+    });
+    return $rankings;
+  }
+
   /**
    * @param \Drupal\user\Entity\User $better
    * @return \Drupal\mespronos\Entity\RankingDay

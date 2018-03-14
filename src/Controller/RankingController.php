@@ -63,10 +63,15 @@ class RankingController extends ControllerBase {
 
   public static function getRankingGeneral(Group $group = NULL) {
     $ranking = RankingGeneral::getRanking(NULL, 'general', 'ranking_general', $group);
-    if (\count($ranking) === 0) {
+    $rankingAverage = RankingGeneral::getRankingAverage(NULL, 'general', 'ranking_general', $group);
+    if (\count($ranking) === 0 && \count($rankingAverage) === 0) {
       return FALSE;
     }
-    return self::getTableFromRanking($ranking);
+    return [
+      '#theme' => 'ranking',
+      '#general' => self::getTableFromRanking($ranking),
+      '#average' => self::getTableFromRanking($rankingAverage),
+      ];
 
   }
 

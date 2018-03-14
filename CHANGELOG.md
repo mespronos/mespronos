@@ -1,4 +1,7 @@
 # Changelog - Mespronos
+## 8.x-1.0-alpha15, XXXX-XX-XX
+  - Ranking - add average ranking
+  
 ## 8.x-1.0-alpha14, 2018-03-14
   - Tokens - Add league logo
   - Group - Allow to delete group

@@ -145,6 +145,13 @@ function mespronos_theme() {
       'day' => NULL,
     ),
   );
+  $theme['ranking'] = [
+    'template' => 'ranking',
+    'variables' => [
+      'general' => NULL,
+      'average' => NULL,
+    ],
+  ];
 
   return $theme;
 }
