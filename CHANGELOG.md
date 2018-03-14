@@ -1,5 +1,5 @@
 # Changelog - Mespronos
-## 8.x-1.0-alpha14, XXXX-XX-XX
+## 8.x-1.0-alpha14, 2018-03-14
   - Tokens - Add league logo
   - Group - Allow to delete group
   - Group - add email alert
@@ -9,6 +9,7 @@
   - Drop support for PHP < 7 
   - Change bet calculation method
   - Start domain integration
+  - Multiple refactoring
 
 ## 8.x-1.0-alpha13, 2017-08-05
   - Remove useless "Welcome block"
