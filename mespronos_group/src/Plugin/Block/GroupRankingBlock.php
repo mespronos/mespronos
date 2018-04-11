@@ -20,19 +20,25 @@ class GroupRankingBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    if (\Drupal::routeMatch()->getRouteName() == 'entity.group.canonical') {
+    $group = FALSE;
+    if (\Drupal::routeMatch()->getRouteName() === 'entity.group.canonical') {
       $group = \Drupal::routeMatch()->getParameter('group');
-      $build = RankingController::getRankingGeneral($group);
+    }
+    if(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+      $domaine = \Drupal::service('domain.negotiator')->getActiveDomain();
+      $group = Group::loadForDomaine($domaine);
+    }
 
+    if ($group) {
+      $build = RankingController::getRankingGeneral($group);
       $build['#cache'] = [
         'contexts' => ['user'],
-        'tags' => ['user:'.\Drupal::currentUser()->id(), 'ranking'],
+        'tags' => ['user:' . \Drupal::currentUser()->id(), 'ranking'],
       ];
-
       $build['#title'] = t('Group ranking');
       return $build;
     }
-    return [];
+    return ['#cache' => ['max-age' => 0]];
 
   }
 

@@ -7,6 +7,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\domain\Entity\Domain;
 use Drupal\mespronos_group\GroupInterface;
 use Drupal\user\UserInterface;
 use Drupal\user\Entity\User;
@@ -240,6 +241,18 @@ class Group extends ContentEntityBase implements GroupInterface {
     }
     return false;
   }
+
+  public static function loadForDomaine(Domain $domain) {
+    $query = \Drupal::entityQuery('group');
+    $query->condition('domain', $domain->id());
+    $ids = $query->execute();
+    if(count($ids) >= 1) {
+      $group_id = array_pop($ids);
+      return self::load($group_id);
+    }
+    return FALSE;
+  }
+
   /**
    * {@inheritdoc}
    */
