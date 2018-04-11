@@ -112,16 +112,18 @@ function mespronos_group_form_user_register_form_alter(&$form, \Drupal\Core\Form
 function mespronos_group_form_user_register_form_validate(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
 
   $code = $form_state->getValue('group_access_code');
-  if ($code != null) {
+  if ($code !== NULL) {
     $group = Group::loadByCode($code);
     if (!$group) {
-      $form_state->setErrorByName('group_access_code', t("The access code to join a group is wrong"));
+      $form_state->setErrorByName('group_access_code', t('The access code to join a group is wrong'));
     } else {
       $formO = $form_state->getFormObject();
       $user = $formO->getEntity();
-      $user->set("field_group", $group->id());
+      $user->set('field_group', $group->id());
+      if ($form['group_info']['group_access_code']['#type'] !== 'value') {
+        drupal_set_message(t('You are now part of the group %group_name', ['%group_name' => $group->label()]));
+      }
       Cache::invalidateTags(array('groups', 'ranking'));
-      drupal_set_message(t('You are now part of the group %group_name', ['%group_name'=>$group->label()]));
     }
   }
 }
