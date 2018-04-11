@@ -19,9 +19,16 @@ class GroupMembersBlock extends BlockBase {
    * {@inheritdoc}
    */
   public function build() {
-    if (\Drupal::routeMatch()->getRouteName() == 'entity.group.canonical') {
+    $group = FALSE;
+    if (\Drupal::routeMatch()->getRouteName() === 'entity.group.canonical') {
       $group = \Drupal::routeMatch()->getParameter('group');
-      $members = $group->getMembers(true);
+    }
+    if(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+      $domaine = \Drupal::service('domain.negotiator')->getActiveDomain();
+      $group = Group::loadForDomaine($domaine);
+    }
+    if ($group) {
+      $members = $group->getMembers(TRUE);
       $items = [];
       $render_controller = \Drupal::entityTypeManager()->getViewBuilder('user');
       foreach ($members as $member) {
@@ -33,16 +40,16 @@ class GroupMembersBlock extends BlockBase {
         '#items' => $items,
         '#list_type' => 'ul',
         '#attributes' => [
-          'id' => 'group-members-list'
+          'id' => 'group-members-list',
         ],
         '#cache' => [
           'contexts' => ['user'],
-          'tags' => ['group:'.$group->id(), 'groups'],
-      ],
+          'tags' => ['group:' . $group->id(), 'groups'],
+        ],
       ];
       return $build;
     }
-    return [];
+    return ['#cache' => ['max-age' => 0]];
 
   }
 
