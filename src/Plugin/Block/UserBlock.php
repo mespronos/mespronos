@@ -41,7 +41,7 @@ class UserBlock extends BlockBase {
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
     $ranking = RankingGeneral::getRankingForBetter($user);
     $groups = [];
-    if(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+    if(\Drupal::moduleHandler()->moduleExists('mespronos_group') && !\Drupal::service('mespronos.domain_manager')->getGroupFromDomain()) {
       $user_groups = Group::getUserGroup($user);
       if ($user_groups && count($user_groups) > 0) {
         foreach ($user_groups as $user_group) {
