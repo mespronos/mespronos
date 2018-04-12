@@ -72,12 +72,17 @@ class RankingDay extends RankingBase {
    * return the position of the user of the user concerned by the ranking instance
    * @return int
    */
-  public function getPosition() {
+  public function getPosition($group = NULL) {
     $injected_database = Database::getConnection();
     $query = $injected_database->select('mespronos__ranking_day', 'rd');
     $query->addField('rd', 'id');
     $query->addField('rd', 'points');
     $query->condition('rd.day', $this->getDayiD());
+    if($group) {
+      $query->join('user__field_group', 'ug', 'ug.entity_id = rd.better');
+      $query->condition('ug.field_group_target_id', $group->id());
+    }
+
     $query->orderBy('points', 'DESC');
     $results = $query->execute()->fetchAllAssoc('id');
     $ranking = $this->determinePosition($results);
@@ -172,8 +177,9 @@ class RankingDay extends RankingBase {
    * @param String $storage_name
    * @return integer
    */
-  public static function getNumberOfBetters($day = null, $entity_name = 'day', $storage_name = 'ranking_day') {
-    return parent::getNumberOfBetters($day, $entity_name, $storage_name);
+  public static function getNumberOfBetters($day = null, $entity_name = 'day', $storage_name = 'ranking_day', Group $group = NULL) {
+
+    return parent::getNumberOfBetters($day, $entity_name, $storage_name, $group);
   }
 
   /**

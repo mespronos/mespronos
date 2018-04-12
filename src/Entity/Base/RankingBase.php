@@ -125,10 +125,14 @@ abstract class RankingBase extends MPNContentEntityBase implements MPNEntityInte
    * @param String $storage_name
    * @return integer
    */
-  public static function getNumberOfBetters($entity = null, $entity_name = null, $storage_name) {
+  public static function getNumberOfBetters($entity = null, $entity_name = null, $storage_name, Group $group = NULL) {
     $query = \Drupal::entityQuery($storage_name);
     if (!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
+    }
+    if($group) {
+      $members = $group->getMembers(FALSE);
+      $query->condition('better', $members, 'IN');
     }
     $ids = $query->execute();
     return count($ids);

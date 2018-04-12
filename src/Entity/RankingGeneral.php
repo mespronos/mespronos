@@ -151,8 +151,8 @@ class RankingGeneral extends RankingBase {
     return parent::getRankingForBetter($better, null, null, 'ranking_general');
   }
 
-  public static function getNumberOfBetters($entity = null, $entity_name = null, $storage_name = null) {
-    return parent::getNumberOfBetters(null, null, 'ranking_general');
+  public static function getNumberOfBetters($entity = NULL, $entity_name = NULL, $storage_name = NULL, Group $group = NULL) {
+    return parent::getNumberOfBetters(NULL, NULL, 'ranking_general', $group);
   }
 
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
