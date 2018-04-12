@@ -62,6 +62,9 @@ class RankingController extends ControllerBase {
   }
 
   public static function getRankingGeneral(Group $group = NULL) {
+    if($group === NULL && \Drupal::service('mespronos.domain_manager')->getGroupFromDomain()) {
+      $group = \Drupal::service('mespronos.domain_manager')->getGroupFromDomain();
+    }
     $ranking = RankingGeneral::getRanking(NULL, 'general', 'ranking_general', $group);
     $rankingAverage = RankingGeneral::getRankingAverage(NULL, 'general', 'ranking_general', $group);
     if (\count($ranking) === 0 && \count($rankingAverage) === 0) {
@@ -71,11 +74,14 @@ class RankingController extends ControllerBase {
       '#theme' => 'ranking',
       '#general' => self::getTableFromRanking($ranking),
       '#average' => self::getTableFromRanking($rankingAverage),
-      ];
+    ];
 
   }
 
   public static function getRankingLeague(League $league, Group $group = NULL) {
+    if($group === NULL && \Drupal::service('mespronos.domain_manager')->getGroupFromDomain()) {
+      $group = \Drupal::service('mespronos.domain_manager')->getGroupFromDomain();
+    }
     $ranking = RankingLeague::getRanking($league, 'league', 'ranking_league', $group);
     if (\count($ranking) === 0) {
       return FALSE;
@@ -84,6 +90,9 @@ class RankingController extends ControllerBase {
   }
 
   public static function getRankingTableForDay(Day $day, Group $group = NULL) {
+    if($group === NULL && \Drupal::service('mespronos.domain_manager')->getGroupFromDomain()) {
+      $group = \Drupal::service('mespronos.domain_manager')->getGroupFromDomain();
+    }
     $rankingDays = RankingDay::getRankingForDay($day, $group);
     if (\count($rankingDays) === 0) {
       return FALSE;
