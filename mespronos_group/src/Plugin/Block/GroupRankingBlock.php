@@ -24,9 +24,8 @@ class GroupRankingBlock extends BlockBase {
     if (\Drupal::routeMatch()->getRouteName() === 'entity.group.canonical') {
       $group = \Drupal::routeMatch()->getParameter('group');
     }
-    if(\Drupal::moduleHandler()->moduleExists('domain')) {
-      $domaine = \Drupal::service('domain.negotiator')->getActiveDomain();
-      $group = Group::loadForDomaine($domaine);
+    if($domainGroup = \Drupal::service('mespronos.domain_manager')->getGroupFromDomain()) {
+      $group = $domainGroup;
     }
 
     if ($group) {

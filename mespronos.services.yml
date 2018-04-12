@@ -19,3 +19,6 @@ services:
     class: Drupal\mespronos\Breadcrumb\DayBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+  mespronos.domain_manager:
+    class: Drupal\mespronos\MespronosDomainManager
+    arguments: ['@domain.negotiator', '@module_handler']
