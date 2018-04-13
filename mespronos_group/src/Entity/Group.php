@@ -7,6 +7,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Url;
 use Drupal\domain\Entity\Domain;
 use Drupal\mespronos_group\GroupInterface;
 use Drupal\user\UserInterface;
@@ -218,6 +219,22 @@ class Group extends ContentEntityBase implements GroupInterface {
       return $users;
     }
     return $ids;
+  }
+
+  public function url($rel = 'canonical', $options = []) {
+    if ($rel === 'canonical' && $domain = $this->getDomain()) {
+      if ($domain->status()) {
+        return Url::fromUri($domain->getUrl());
+      }
+    }
+    return parent::url($rel, $options);
+  }
+
+  /**
+   * @return \Drupal\domain\Entity\Domain
+   */
+  public function getDomain() {
+    return $this->get('domain')->entity;
   }
 
   /**

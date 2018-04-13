@@ -46,7 +46,7 @@ class UserBlock extends BlockBase {
       if ($user_groups && count($user_groups) > 0) {
         foreach ($user_groups as $user_group) {
           $groups[] = [
-            'url' => Url::fromRoute('entity.group.canonical', ['group' => $user_group->id()]),
+            'url' => $user_group->url(),
             'name' => $user_group->getTheName(),
           ];
         }

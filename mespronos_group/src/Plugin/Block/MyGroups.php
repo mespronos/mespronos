@@ -38,11 +38,11 @@ class MyGroups extends BlockBase {
     }
     $build['my_groups'] = [
       '#theme' => 'group-list',
-      '#display_titles' => false,
+      '#display_titles' => TRUE,
       '#user_groups' => $user_groups,
       '#cache' => [
         'contexts' => ['user'],
-        'tags' => ['user:'.$user->id(), 'groups'],
+        'tags' => ['user:' . $user->id(), 'groups'],
         'max-age' => '120',
       ],
     ];
