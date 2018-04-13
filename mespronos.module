@@ -143,6 +143,7 @@ function mespronos_theme() {
     'variables' => array(
       'user' => NULL,
       'day' => NULL,
+      'config' => NULL,
     ),
   );
   $theme['ranking'] = [

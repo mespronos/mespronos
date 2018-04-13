@@ -82,12 +82,20 @@ class ReminderController extends ControllerBase {
       $params = [];
 
       $mail = self::getReminderEmailVariables($user, $day);
+      $mail['#config']['baseurl'] = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+      $mail['#config']['name'] = \Drupal::config('system.site')->get('name');
+      if ($domain = \Drupal::service('mespronos.domain_manager')->getUserMainDomain($user)) {
+        if($name = \Drupal::config('domain.config.' . $domain->id() . '.system.site')->get('name')) {
+          $mail['#config']['name'] = $name;
+        }
+        $mail['#config']['baseurl'] = $domain->getUrl();
+      }
 
       $params['message'] = self::getReminderEmailRendered($mail);
       $params['subject'] = t('@sitename - Bet Reminder - @league - @day', [
-        '@sitename'=>\Drupal::config('system.site')->get('name'),
-        '@league'=>$league->label(),
-        '@day'=>$day->label(),
+        '@sitename' => $mail['#config']['name'],
+        '@league' => $league->label(),
+        '@day' => $day->label(),
       ]);
 
       $mailManager->mail('mespronos', 'reminder', $user->getEmail(), $user->getPreferredLangcode(), $params, NULL, TRUE);
@@ -100,18 +108,16 @@ class ReminderController extends ControllerBase {
     $games = $day->getGames();
     $emailvars = [];
     $emailvars['#theme'] = 'bet-reminder';
-    $destination_my_account = Url::fromRoute('entity.user.edit_form', ['user' => $user->id()]);
 
     $emailvars['#user'] = [
       'name' => $user->getAccountName(),
-      'myaccount' => Url::fromRoute('user.login', [], ['absolute' => TRUE, 'query' => ['destination' => $destination_my_account->toString()]]),
+      'myaccount' => Url::fromRoute('entity.user.edit_form', ['user' => $user->id()]),
     ];
-    $destination = Url::fromRoute('mespronos.day.bet', ['day' => $day->id()]);
 
     $emailvars['#day'] = [
       'label' => $league->label() . ' - ' . $day->label(),
       'games' => [],
-      'bet_link' => Url::fromRoute('user.login', [], ['absolute' => TRUE, 'query' => ['destination' => $destination->toString()]]),
+      'bet_link' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()]),
     ];
     $style = ImageStyle::load('thumbnail');
 
