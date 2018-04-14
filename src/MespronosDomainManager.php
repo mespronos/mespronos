@@ -3,6 +3,7 @@
 namespace Drupal\mespronos;
 use Drupal\domain\DomainNegotiatorInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
+use Drupal\domain\Entity\Domain;
 use Drupal\mespronos_group\Entity\Group;
 use Drupal\user\Entity\User;
 
@@ -36,10 +37,12 @@ class MespronosDomainManager {
     $this->moduleHandler = $module_handler;
   }
 
-  public function getGroupFromDomain() {
+  public function getGroupFromDomain(Domain $domain = NULL) {
     if($this->domainEnabled) {
-      $domaine = $this->domainNegotiator->getActiveDomain();
-      return Group::loadForDomaine($domaine);
+      if (!$domain) {
+        $domain = $this->domainNegotiator->getActiveDomain();
+      }
+      return Group::loadForDomaine($domain);
     }
     return FALSE;
   }
