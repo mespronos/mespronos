@@ -224,7 +224,7 @@ class Group extends ContentEntityBase implements GroupInterface {
   public function url($rel = 'canonical', $options = []) {
     if ($rel === 'canonical' && $domain = $this->getDomain()) {
       if ($domain->status()) {
-        return Url::fromUri($domain->getUrl());
+        return Url::fromUri($domain->getPath());
       }
     }
     return parent::url($rel, $options);
