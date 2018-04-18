@@ -234,8 +234,10 @@ class ReminderController extends ControllerBase {
 
   public static function getUsersToRemindOnThisDay($user_to_remind, $betters_on_league) {
     $user_to_remind_on_this_day = [];
+
+    $user_connected_this_last_days = self::getUserConnectedThisLast30Days();
     foreach ($user_to_remind as $user) {
-      if (in_array($user, $betters_on_league)) {
+      if (in_array($user, $betters_on_league) || in_array($user, $user_connected_this_last_days)) {
         $user_to_remind_on_this_day[] = $user;
       }
     }
@@ -280,6 +282,11 @@ class ReminderController extends ControllerBase {
     return array_values($results);
   }
 
-
+  public static function getUserConnectedThisLast30Days() {
+    $query = \Drupal::entityQuery('user');
+    $limit = date('U') - 30 * 24 * 3600;
+    $query->condition('access', $limit, '>');
+    return $query->execute();
+  }
 
 }
