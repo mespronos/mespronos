@@ -59,8 +59,8 @@ trait DayGettersTrait {
    *
    * @return \Drupal\mespronos\Entity\Game[]
    */
-  public function getGames() {
-    $ids = $this->getGamesId();
+  public function getGames($onlyFuture = FALSE) {
+    $ids = $this->getGamesId($onlyFuture);
     return Game::loadMultiple($ids);
   }
 
@@ -68,9 +68,13 @@ trait DayGettersTrait {
    * Return all games id for day
    * @return integer[]
    */
-  public function getGamesId() {
+  public function getGamesId($onlyFuture = FALSE) {
     $query = \Drupal::entityQuery('game');
     $query->condition('day', $this->id());
+    if($onlyFuture) {
+      $now = new \DateTime(NULL, new \DateTimeZone('UTC'));
+      $query->condition('game_date', $now->format('Y-m-d\TH:i:s'), '>');
+    }
     $query->sort('game_date');
     $query->sort('id');
 

@@ -23,9 +23,11 @@ use Drupal\Core\Url;
  */
 class ReminderController extends ControllerBase {
 
+
+
   public static function init() {
     if (!self::isEnabled()) {
-      return false;
+      return FALSE;
     }
     $hours = self::getHoursDefined();
     $upcommings_games = self::getUpcomming($hours);
@@ -33,7 +35,7 @@ class ReminderController extends ControllerBase {
     $users = self::getUserWithEnabledReminder();
 
     $user_to_remind = self::getUsersToRemind($users, $upcommings_games);
-    if (count($user_to_remind) > 0) {
+    if (\count($user_to_remind) > 0) {
       $days = self::getDaysFromGames($upcommings_games);
       foreach ($days as $day) {
         /** @var Day $day */
@@ -41,6 +43,8 @@ class ReminderController extends ControllerBase {
         $user_to_remind_on_this_day = self::getUsersToRemindOnThisDay($user_to_remind, $betters_on_league);
         $nb_mail = self::sendReminder($user_to_remind_on_this_day, $day);
         if ($nb_mail > 0) {
+          $key = 'mepronos.reminder.day.' . $day->id() . '.lastSend';
+          \Drupal::state()->set($key, date('U'));
           $reminder = Reminder::create(array(
             'day' => $day->id(),
             'emails_sended' => $nb_mail,
@@ -55,7 +59,7 @@ class ReminderController extends ControllerBase {
         }
       }
     }
-    return true;
+    return TRUE;
   }
 
   public static function isEnabled() {
@@ -66,7 +70,13 @@ class ReminderController extends ControllerBase {
   public static function getHoursDefined() {
     $config = \Drupal::config('mespronos.reminder');
     $hours = $config->get('hours');
-    return !is_null($hours) ? $hours : [];
+    return $hours ?? 0;
+  }
+
+  public static function getHoursGapDefined() {
+    $config = \Drupal::config('mespronos.reminder');
+    $hours = $config->get('hours_gap');
+    return $hours ?? 99999999;
   }
 
   public static function sendReminder(array $users_to_remind, Day $day) {
@@ -105,7 +115,7 @@ class ReminderController extends ControllerBase {
 
   public static function getReminderEmailVariables(User $user, Day $day) {
     $league = $day->getLeague();
-    $games = $day->getGames();
+    $games = $day->getGames(TRUE);
     $emailvars = [];
     $emailvars['#theme'] = 'bet-reminder';
 
@@ -120,7 +130,6 @@ class ReminderController extends ControllerBase {
       'bet_link' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()]),
     ];
     $style = ImageStyle::load('thumbnail');
-
 
     foreach ($games as $game) {
       $date = new \DateTime($game->getGameDate(), new \DateTimeZone('UTC'));
@@ -188,14 +197,19 @@ class ReminderController extends ControllerBase {
     }
 
   public static function checkIfReminderAlreadySended(&$games) {
+    $gap = self::getHoursGapDefined();
     $days = [];
     foreach ($games as $key => $game) {
       $day_id = $game->getDayId();
-      if(isset($days[$day_id]) && $days[$day_id]) {
+      $cacheKey = 'mepronos.reminder.day.' . $day_id . '.lastSend';
+      if(!empty($days[$day_id])) {
         unset($games[$key]);
-      } elseif(Reminder::loadForDay($day_id)) {
-        $days[$day_id] = true;
-        unset($games[$key]);
+      }
+      elseif ($lastSend = (int) \Drupal::state()->get($cacheKey)) {
+        if (($lastSend + $gap * 3600) > date('U')) {
+          $days[$day_id] = TRUE;
+          unset($games[$key]);
+        }
       }
     }
   }

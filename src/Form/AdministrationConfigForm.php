@@ -40,8 +40,21 @@ class AdministrationConfigForm extends ConfigFormBase {
       '#size' => '1',
       '#default_value' => $this->config('mespronos.reminder')->get('hours'),
       '#states' => [
-        'required' => [':input[name="reminder_enabled"]' => ['checked' => true]],
-        'visible' =>[':input[name="reminder_enabled"]' => ['checked' => true]],
+        'required' => [':input[name="reminder_enabled"]' => ['checked' => TRUE]],
+        'visible' =>[':input[name="reminder_enabled"]' => ['checked' => TRUE]],
+      ]
+    ];
+
+    $form['reminder']['reminder_hours_gap'] = [
+      '#title' => $this->t('Number of hours between two reminders for the same day'),
+      '#type' => 'number',
+      '#min' => 0,
+      '#step' => 1,
+      '#size' => 1,
+      '#default_value' => $this->config('mespronos.reminder')->get('hours_gap'),
+      '#states' => [
+        'required' => [':input[name="reminder_enabled"]' => ['checked' => TRUE]],
+        'visible' =>[':input[name="reminder_enabled"]' => ['checked' => TRUE]],
       ]
     ];
 
@@ -59,6 +72,7 @@ class AdministrationConfigForm extends ConfigFormBase {
     $this->config('mespronos.reminder')
       ->set('enabled', (string) $form_state->getValue('reminder_enabled'))
       ->set('hours', $form_state->getValue('reminders_hours'))
+      ->set('hours_gap', $form_state->getValue('reminder_hours_gap'))
       ->save(TRUE);
   }
 
