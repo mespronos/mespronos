@@ -150,6 +150,18 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
     return 'mespronos__game';
   }
 
+  public function getGameDate($format = 'U') {
+    if ($format === 'RAW') {
+      return $this->get('game_date')->value;
+    }
+    $date = new \DateTime($this->get('game_date')->value, new \DateTimeZone('UTC'));
+    $date->setTimezone(new \DateTimeZone('Europe/Paris'));
+    if ($format === 'OBJECT') {
+      return $date;
+    }
+    return $date->format($format);
+  }
+
   /**
    * {@inheritdoc}
    */

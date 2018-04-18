@@ -22,3 +22,7 @@ services:
   mespronos.domain_manager:
     class: Drupal\mespronos\MespronosDomainManager
     arguments: ['@module_handler']
+
+  mespronos.game_manager:
+    class: Drupal\mespronos\GameManager
+    arguments: ['@module_handler']
