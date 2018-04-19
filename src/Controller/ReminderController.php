@@ -43,7 +43,7 @@ class ReminderController extends ControllerBase {
         $user_to_remind_on_this_day = self::getUsersToRemindOnThisDay($user_to_remind, $betters_on_league);
         $nb_mail = self::sendReminder($user_to_remind_on_this_day, $day);
         if ($nb_mail > 0) {
-          $key = 'mepronos.reminder.day.' . $day->id() . '.lastSend';
+          $key = 'mespronos.reminder.day.' . $day->id() . '.lastSend';
           \Drupal::state()->set($key, date('U'));
           $reminder = Reminder::create(array(
             'day' => $day->id(),
@@ -201,7 +201,7 @@ class ReminderController extends ControllerBase {
     $days = [];
     foreach ($games as $key => $game) {
       $day_id = $game->getDayId();
-      $cacheKey = 'mepronos.reminder.day.' . $day_id . '.lastSend';
+      $cacheKey = 'mespronos.reminder.day.' . $day_id . '.lastSend';
       if(!empty($days[$day_id])) {
         unset($games[$key]);
       }
