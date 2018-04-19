@@ -42,6 +42,17 @@ class Reminder extends ContentEntityBase {
 
   }
 
+  public function getNbEmailsSended() {
+    return $this->get('emails_sended')->value;
+  }
+
+  /**
+   * @return \Drupal\mespronos\Entity\Day
+   */
+  public function getDay() {
+    return $this->get('day')->entity;
+  }
+
   public static function baseFieldDefinitions(EntityTypeInterface $entity_type) {
     $fields = [];
 
