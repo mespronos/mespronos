@@ -1,6 +1,7 @@
 # Changelog - Mespronos
 ## 8.x-1.0-alpha15, XXXX-XX-XX
   - Ranking - add average ranking
+  - Allow a group member to hide his profile on the general ranking
   
 ## 8.x-1.0-alpha14, 2018-03-14
   - Tokens - Add league logo
