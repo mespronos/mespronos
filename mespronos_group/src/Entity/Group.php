@@ -248,7 +248,7 @@ class Group extends ContentEntityBase implements GroupInterface {
     }
     if ($user->get('field_group')->first()) {
       $groups = [];
-      $user_groups = $user->get("field_group")->getValue();
+      $user_groups = $user->get('field_group')->getValue();
       foreach ($user_groups as $group) {
         if ($group = Group::load($group['target_id'])) {
           $groups[] = $group;
@@ -256,7 +256,7 @@ class Group extends ContentEntityBase implements GroupInterface {
       }
       return $groups;
     }
-    return false;
+    return [];
   }
 
   public static function loadForDomaine(Domain $domain) {

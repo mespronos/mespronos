@@ -26,3 +26,7 @@ services:
   mespronos.game_manager:
     class: Drupal\mespronos\GameManager
     arguments: ['@module_handler']
+
+  mespronos.user_manager:
+    class: Drupal\mespronos\UserManager
+    arguments: ['@module_handler']

@@ -338,3 +338,16 @@ function mespronos_user_update(\Drupal\user\Entity\User $user) {
     }
   }
 }
+
+
+function mespronos_form_user_register_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if(!\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+    $form['bet_private']['#access'] = FALSE;
+  }
+}
+
+function mespronos_form_user_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+  if(!\Drupal::moduleHandler()->moduleExists('mespronos_group') || \count(\Drupal::service('mespronos.user_manager')->getUserGroups()) == 0) {
+    $form['bet_private']['#access'] = FALSE;
+  }
+}

@@ -24,7 +24,7 @@ class StatisticsController extends ControllerBase {
     $stats['games'] = t('@nb games', ['@nb'=>self::getGamesNumber()]);
     $stats['bets'] = t('@nb bets', ['@nb'=>self::getBetsNumber()]);
 
-    if (\Drupal::moduleHandler()->moduleExists('mespronos_groups')) {
+    if (\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
       $stats['groups'] = t('@nb groups', ['@nb'=>self::getGroupsNumber()]);
     }
     return $stats;

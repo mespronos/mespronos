@@ -153,6 +153,12 @@ class RankingDay extends RankingBase {
       $member_ids = $group->getMembers();
       $query->condition('better', $member_ids, 'IN');
     }
+    elseif(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+      $queryUserToExclude = \Drupal::entityQuery('user')->condition('bet_private', 1)->execute();
+      if (\count($queryUserToExclude) > 0) {
+        $query->condition('better', $queryUserToExclude,'NOT IN');
+      }
+    }
     $query->sort('points', 'DESC');
     $ids = $query->execute();
 

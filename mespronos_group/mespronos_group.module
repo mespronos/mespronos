@@ -105,6 +105,10 @@ function mespronos_group_form_user_register_form_alter(&$form, \Drupal\Core\Form
   ];
   if ($code = \Drupal::request()->query->get('group_code')) {
     $form['group_info']['group_access_code']['#default_value'] = $code;
+    $form['bet_private']['#access'] = TRUE;
+  }
+  else {
+    $form['bet_private']['#access'] = FALSE;
   }
   $form['#validate'][] = 'mespronos_group_form_user_register_form_validate';
 }
@@ -134,6 +138,7 @@ function mespronos_group_entity_base_field_info(\Drupal\Core\Entity\EntityTypeIn
 
     $fields['bet_private'] = \Drupal\Core\Field\BaseFieldDefinition::create('boolean')
       ->setLabel(t('Hide my account on main website'))
+      ->setDescription(t('Your ranking will only be visible on your group page, and will be hidden in the general ranking.'))
       ->setDefaultValue(0)
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
