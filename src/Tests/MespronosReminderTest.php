@@ -100,13 +100,8 @@ class MespronosReminderTest extends WebTestBase {
 
   public function testReminderInitReturnTrue() {
     $this->assertFalse(ReminderController::init());
-    $this->assertTrue(is_array(ReminderController::getHoursDefined()));
-    $this->assertEqual(count(ReminderController::getHoursDefined()),0);
-
     \Drupal::configFactory()->getEditable('mespronos.reminder')->set('hours',36)->save();
-
     \Drupal::configFactory()->getEditable('mespronos.reminder')->set('enabled',TRUE)->save();
-
     $this->assertTrue(ReminderController::init());
   }
 
