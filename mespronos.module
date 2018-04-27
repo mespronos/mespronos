@@ -167,7 +167,7 @@ function mespronos_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormS
     $form['league_id']['#type'] = 'select';
     $form['league_id']['#size'] = 1;
     $form['league_id']['#empty_option'] = t('All');
-    $form['league_id']['#empty_value'] = null;
+    $form['league_id']['#empty_value'] = NULL;
     unset($form['league_id']['#default_value']);
     $form['league_id']['#options'] = [];
     foreach ($leagues as $league) {
@@ -179,16 +179,16 @@ function mespronos_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormS
     $form['day_id']['#type'] = 'select';
     $form['day_id']['#size'] = 1;
     $form['day_id']['#empty_option'] = t('All');
-    $form['day_id']['#empty_value'] = null;
+    $form['day_id']['#empty_value'] = NULL;
     unset($form['day_id']['#default_value']);
     $form['day_id']['#options'] = [];
-    $league_id = isset($input['league_id']) && is_numeric($input['league_id']) ? $input['league_id'] : null;
+    $league_id = isset($input['league_id']) && is_numeric($input['league_id']) ? $input['league_id'] : NULL;
     foreach ($days as $day) {
       $league = $day->getLeagueID();
       if($league_id && $league_id != $league) {
         continue;
       }
-      $form['day_id']['#options'][$day->id()] = $form['league_id']['#options'][$league]. ' - ' .$day->label();
+      $form['day_id']['#options'][$day->id()] = $form['league_id']['#options'][$league] . ' - ' . $day->label();
     }
   }
 }
