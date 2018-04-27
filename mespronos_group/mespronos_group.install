@@ -35,3 +35,11 @@ function mespronos_group_update_8003() {
 function mespronos_group_update_8004() {
   user_role_grant_permissions(RoleInterface::AUTHENTICATED_ID, array('add group entities'));
 }
+
+/**
+ * User - create property bet_private
+ */
+function mespronos_group_update_8005() {
+  $entity_manager = \Drupal::entityManager();
+  $definition = $entity_manager->getFieldStorageDefinitions('user')['bet_private'];
+  $entity_manager->onFieldStorageDefinitionCreate($definition);}

@@ -127,3 +127,17 @@ function mespronos_group_form_user_register_form_validate(&$form, \Drupal\Core\F
     }
   }
 }
+
+function mespronos_group_entity_base_field_info(\Drupal\Core\Entity\EntityTypeInterface $entity_type) {
+  if ($entity_type->id() === 'user') {
+    $fields = [];
+
+    $fields['bet_private'] = \Drupal\Core\Field\BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Hide my account on main website'))
+      ->setDefaultValue(0)
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    return $fields;
+  }
+}
