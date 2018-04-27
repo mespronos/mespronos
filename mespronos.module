@@ -210,8 +210,8 @@ function mespronos_mail($key, &$message, $params) {
   $message['body'][] = $params['message'];
   $message['options'] = [];
   if (isset($params['options']) && !empty($params['options'])) {
-    foreach ($params['options'] as $key => $value) {
-      $message['options'][$key] = $value;
+    foreach ($params['options'] as $k => $value) {
+      $message['options'][$k] = $value;
     }
   }
 }
