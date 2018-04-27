@@ -234,32 +234,32 @@ function mespronos_entity_extra_field_info() {
   $extra['user']['user']['display']['pseudo'] = array(
     'label' => t('Pseudo'),
     'weight' => 100,
-    'visible' => false,
+    'visible' => FALSE,
   );
   $extra['game']['game']['display']['better_bets'] = array(
     'label' => t('Betters\' bets'),
     'weight' => 100,
-    'visible' => true,
+    'visible' => TRUE,
   );
   $extra['game']['game']['display']['flags'] = array(
     'label' => t('Teamss\' logos'),
     'weight' => 101,
-    'visible' => true,
+    'visible' => TRUE,
   );
   $extra['day']['day']['display']['results_and_ranking'] = array(
     'label' => t('Day results and rankings'),
     'weight' => 101,
-    'visible' => true,
+    'visible' => TRUE,
   );
   $extra['league']['league']['display']['results_and_ranking'] = array(
     'label' => t('Day results and rankings'),
     'weight' => 100,
-    'visible' => true,
+    'visible' => TRUE,
   );
   $extra['team']['team']['display']['last_results'] = array(
     'label' => t('Team last results'),
     'weight' => 100,
-    'visible' => true,
+    'visible' => TRUE,
   );
   return $extra;
 }
