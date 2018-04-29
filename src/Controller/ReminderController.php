@@ -98,7 +98,7 @@ class ReminderController extends ControllerBase {
         if($name = \Drupal::config('domain.config.' . $domain->id() . '.system.site')->get('name')) {
           $mail['#config']['name'] = $name;
         }
-        $mail['#config']['baseurl'] = $domain->getUrl();
+        $mail['#config']['baseurl'] = $domain->buildUrl('/');
       }
 
       $params['message'] = self::getReminderEmailRendered($mail);
@@ -127,7 +127,7 @@ class ReminderController extends ControllerBase {
     $emailvars['#day'] = [
       'label' => $league->label() . ' - ' . $day->label(),
       'games' => [],
-      'bet_link' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()]),
+      'bet_link' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(),
     ];
     $style = ImageStyle::load('thumbnail');
 
