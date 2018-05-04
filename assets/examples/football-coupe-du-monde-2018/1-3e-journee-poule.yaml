@@ -1,0 +1,43 @@
+league :
+  name : 'Coupe du monde 2018'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 3
+      name : 'Troisième journée de poule'
+      day_default_date : 2018-06-25t14:00:00
+      games :
+        - game : Uruguay | Russie
+          game_date : 2018-06-25t14:00:00
+        - game : Arabie Saoudite | Egypte
+          game_date : 2018-06-25t14:00:00
+        - game : Espagne | Maroc
+          game_date : 2018-06-25t18:00:00
+        - game : Iran | Portugal
+          game_date : 2018-06-25t18:00:00
+        - game : Danemark | France
+          game_date : 2018-06-26t14:00:00
+        - game : Australie | Pérou
+          game_date : 2018-06-26t14:00:00
+        - game : Islande | Croatie
+          game_date : 2018-06-26t18:00:00
+        - game : Nigeria | Argentine
+          game_date : 2018-06-26t18:00:00
+        - game : Mexique | Suède
+          game_date : 2018-06-27t14:00:00
+        - game : République de Corée | Allemagne
+          game_date : 2018-06-27t14:00:00
+        - game : Serbie | Brésil
+          game_date : 2018-06-27t18:00:00
+        - game : Suisse | Costa Rica
+          game_date : 2018-06-27t18:00:00
+        - game : Japon | Pologne
+          game_date : 2018-06-28t14:00:00
+        - game : Sénégal | Colombie
+          game_date : 2018-06-28t14:00:00
+        - game : Angleterre | Belgique
+          game_date : 2018-06-28t18:00:00
+        - game : Panama | Tunisie
+          game_date : 2018-06-28t18:00:00

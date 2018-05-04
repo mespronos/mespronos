@@ -1,0 +1,43 @@
+league :
+  name : 'Coupe du monde 2018'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 1
+      name : 'Première journée de poule'
+      day_default_date : 2018-06-14t15:00:00
+      games :
+        - game : Russie | Arabie Saoudite
+          game_date : 2018-06-14t15:00:00
+        - game : Egypte | Uruguay
+          game_date : 2018-06-15t12:00:00
+        - game : Maroc | Iran
+          game_date : 2018-06-15t15:00:00
+        - game : Portugal | Espagne
+          game_date : 2018-06-15t18:00:00
+        - game : France | Australie
+          game_date : 2018-06-16t10:00:00
+        - game : Argentine | Islande
+          game_date : 2018-06-16t13:00:00
+        - game : Pérou | Danemark
+          game_date : 2018-06-16t16:00:00
+        - game : Croatie | Nigeria
+          game_date : 2018-06-16t19:00:00
+        - game : Costa Rica | Serbie
+          game_date : 2018-06-17t12:00:00
+        - game : Allemagne | Mexique
+          game_date : 2018-06-17t15:00:00
+        - game : Brésil | Suisse
+          game_date : 2018-06-17t18:00:00
+        - game : Suède | République de Corée
+          game_date : 2018-06-18t12:00:00
+        - game : Belgique | Panama
+          game_date : 2018-06-18t15:00:00
+        - game : Tunisie | Angleterre
+          game_date : 2018-06-18t18:00:00
+        - game : Colombie | Japon
+          game_date : 2018-06-19t12:00:00
+        - game : Pologne | Sénégal
+          game_date : 2018-06-19t15:00:00

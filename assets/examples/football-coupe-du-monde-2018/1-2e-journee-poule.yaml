@@ -1,0 +1,43 @@
+league :
+  name : 'Coupe du monde 2018'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 2
+      name : 'Seconde journée de poule'
+      day_default_date : 2018-06-19t18:00:00
+      games :
+        - game : Russie | Egypte
+          game_date : 2018-06-19t18:00:00
+        - game : Portugal | Maroc
+          game_date : 2018-06-20t12:00:00
+        - game : Uruguay | Arabie Saoudite
+          game_date : 2018-06-20t15:00:00
+        - game : Iran | Espagne
+          game_date : 2018-06-20t18:00:00
+        - game : Danemark | Australie
+          game_date : 2018-06-21t12:00:00
+        - game : France | Pérou
+          game_date : 2018-06-21t15:00:00
+        - game : Argentine | Croatie
+          game_date : 2018-06-21t18:00:00
+        - game : Brésil | Costa Rica
+          game_date : 2018-06-22t12:00:00
+        - game : Nigeria | Islande
+          game_date : 2018-06-22t15:00:00
+        - game : Serbie | Suisse
+          game_date : 2018-06-22t18:00:00
+        - game : Belgique | Tunisie
+          game_date : 2018-06-23t12:00:00
+        - game : République de Corée | Mexique
+          game_date : 2018-06-23t15:00:00
+        - game : Allemagne | Suède
+          game_date : 2018-06-23t18:00:00
+        - game : Angleterre | Panama
+          game_date : 2018-06-24t12:00:00
+        - game : Japon | Sénégal
+          game_date : 2018-06-24t15:00:00
+        - game : Pologne | Colombie
+          game_date : 2018-06-24t18:00:00
