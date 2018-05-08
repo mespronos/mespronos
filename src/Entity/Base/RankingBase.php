@@ -145,9 +145,14 @@ abstract class RankingBase extends MPNContentEntityBase implements MPNEntityInte
     if (!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
     }
-    if($group) {
-      $members = $group->getMembers(FALSE);
-      $query->condition('better', $members, 'IN');
+    if(!is_null($group) ) {
+      $member_ids = $group->getMembers();
+      if (\count($member_ids) > 0) {
+        $query->condition('better', $member_ids, 'IN');
+      }
+      else {
+        $query->condition('better', 0);
+      }
     }
     $ids = $query->execute();
     return count($ids);

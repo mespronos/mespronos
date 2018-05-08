@@ -149,9 +149,14 @@ class RankingDay extends RankingBase {
     $storage = \Drupal::entityTypeManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
     $query->condition('day', $day->id());
-    if (!is_null($group)) {
+    if (!NULL !== $group) {
       $member_ids = $group->getMembers();
-      $query->condition('better', $member_ids, 'IN');
+      if (\count($member_ids) > 0) {
+        $query->condition('better', $member_ids, 'IN');
+      }
+      else {
+        $query->condition('better', 0);
+      }
     }
     elseif(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
       $queryUserToExclude = \Drupal::entityQuery('user')->condition('bet_private', 1)->execute();
