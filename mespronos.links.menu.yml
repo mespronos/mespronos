@@ -53,19 +53,3 @@ mespronos.settings:
   description: 'Manage Mespronos Settings'
   parent: mespronos.dashboard
   weight : 100
-
-mespronos.main.leagues:
-  title: Leagues
-  description: 'See league list'
-  route_name: mespronos.leagues.list
-  weight: 5
-  parent: main
-  menu_name: main
-
-mespronos.main.ranking:
-  title: Ranking(s)
-  description: 'See general ranking and by group.'
-  route_name: mespronos.ranking
-  weight: 6
-  parent: main
-  menu_name: main
