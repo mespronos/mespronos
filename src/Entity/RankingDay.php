@@ -149,7 +149,7 @@ class RankingDay extends RankingBase {
     $storage = \Drupal::entityTypeManager()->getStorage('ranking_day');
     $query = \Drupal::entityQuery('ranking_day');
     $query->condition('day', $day->id());
-    if (!NULL !== $group) {
+    if(!is_null($group) ) {
       $member_ids = $group->getMembers();
       if (\count($member_ids) > 0) {
         $query->condition('better', $member_ids, 'IN');

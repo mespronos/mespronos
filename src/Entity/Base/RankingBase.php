@@ -60,13 +60,13 @@ abstract class RankingBase extends MPNContentEntityBase implements MPNEntityInte
     return $this->get('points')->value;
   }
 
-  public static function getRanking($entity = null,$entity_name=null,$storage_name,Group $group = null) {
+  public static function getRanking($entity = null,$entity_name=null,$storage_name,Group $group = NULL) {
     $storage = \Drupal::entityTypeManager()->getStorage($storage_name);
     $query = \Drupal::entityQuery($storage_name);
     if(!is_null($entity_name) && !is_null($entity)) {
       $query->condition($entity_name, $entity->id());
     }
-    if (!NULL !== $group) {
+    if(!is_null($group) ) {
       $member_ids = $group->getMembers();
       if (\count($member_ids) > 0) {
         $query->condition('better', $member_ids, 'IN');
