@@ -68,7 +68,9 @@ class LeagueController extends ControllerBase {
 
 
   public static function getGroupRankings(League $league) {
-
+    if(!\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+      return NULL;
+    }
     $user = User::load(\Drupal::currentUser()->id());
     $groups = UserController::getGroup($user);
 
