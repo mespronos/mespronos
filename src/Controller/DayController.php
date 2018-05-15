@@ -72,14 +72,15 @@ class DayController extends ControllerBase {
   }
 
   public static function getDayRankings(Day $day, User $user = null) {
-    $groups = false;
+    $groups = FALSE;
+
     if ($user == null || $user->id() == \Drupal::currentUser()->id()) {
       $user = User::load(\Drupal::currentUser()->id());
       $groups = UserController::getGroup($user);
     }
-    $render_controller = \Drupal::entityTypeManager()->getViewBuilder('group');
     $groups_ranking = [];
     if ($groups) {
+      $render_controller = \Drupal::entityTypeManager()->getViewBuilder('group');
       foreach ($groups as $group) {
         $ranking = RankingController::getRankingTableForDay($day, $group);
         if ($ranking) {
