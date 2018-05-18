@@ -112,22 +112,25 @@ class RankingController extends ControllerBase {
     foreach ($rankings as $ranking) {
       $next_rank++;
       $better = \Drupal\user\Entity\User::load($ranking->getOwner()->id());
-      $better = UserController::getRenderableUser($better);
+      $better_renderable = UserController::getRenderableUser($better);
+      $clean_username = \Drupal::service('kgaut_tools.stringcleaner')->clean($better->getUsername());
       $row = [
         'data' => [
           'position' => $ranking->get('points')->value != $old_points ? $next_rank : '-',
           'better' => [
-            'data' => render($better),
+            'data' => render($better_renderable),
             'class' => ['better-cell'],
           ],
           'points' => $ranking->get('points')->value,
           'games_betted' => $ranking->get('games_betted')->value,
           'average' => round($ranking->get('points')->value / $ranking->get('games_betted')->value, 3),
         ],
+        'class' => ['ranking-for-' . $clean_username, 'user-' . $clean_username]
       ];
       $old_points = $ranking->get('points')->value;
       if ((int) $ranking->getOwner()->id() === (int) $user->id()) {
-        $row['class'] = ['highlighted', 'bold'];
+        $row['class'][] = 'highlighted';
+        $row['class'][] = 'bold';
       }
       if ($ranking instanceof RankingDay) {
         $link_details_user = Url::fromRoute('mespronos.lastbetsdetailsforuser', ['day' => $ranking->getDayiD(), 'user' => $ranking->getOwner()->id()])->toString();
