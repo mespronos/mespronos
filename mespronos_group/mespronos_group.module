@@ -116,7 +116,7 @@ function mespronos_group_form_user_register_form_alter(&$form, \Drupal\Core\Form
 function mespronos_group_form_user_register_form_validate(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
 
   $code = $form_state->getValue('group_access_code');
-  if ($code !== NULL) {
+  if ($code != NULL) {
     $group = Group::loadByCode($code);
     if (!$group) {
       $form_state->setErrorByName('group_access_code', t('The access code to join a group is wrong'));
