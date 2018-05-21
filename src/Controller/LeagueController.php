@@ -32,13 +32,14 @@ class LeagueController extends ControllerBase {
       '#last_bets' => $last_bets,
       '#next_bets' => $next_bets,
       '#ranking' => $ranking,
-      '#groups' => self::getGroupRankings($league),
+      '#groups' => !\Drupal::service('mespronos.domain_manager')->getGroupFromDomain() ? self::getGroupRankings($league) : NULL,
       '#cache' => [
         'contexts' => ['user'],
-        'tags' => ['user:'.\Drupal::currentUser()->id(), 'league:'.$league->id()],
+        'tags' => ['user:' . \Drupal::currentUser()->id(), 'league:' . $league->id()],
       ],
     ];
   }
+
   public function indexTitle(League $league) {
     return $league->label();
   }
