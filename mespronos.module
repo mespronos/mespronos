@@ -117,6 +117,7 @@ function mespronos_theme() {
     'variables' => array(
       'marks_form' => NULL,
       'stats' => NULL,
+      'nextGames' => [],
     ),
   );
   $theme['day-small'] = array(

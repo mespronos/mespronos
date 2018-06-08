@@ -24,6 +24,7 @@ class DashboardController extends ControllerBase {
       '#theme' =>'dashboard',
       '#marks_form' => $marks_form,
       '#stats' => $stats,
+      '#nextGames' => \Drupal::service('mespronos.statistics_manager')->getNextGamesStats(10),
     ];
   }
 

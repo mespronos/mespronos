@@ -65,4 +65,24 @@ class StatisticsManager {
     $ids = $query->execute();
     return count($ids);
   }
+
+  public function getNextGamesStats($nb_games) {
+    $_games = [];
+    /** @var \Drupal\mespronos\Entity\Game[] $games */
+    $games = \Drupal::service('mespronos.game_manager')->getUpcommingGames(200, 10);
+    foreach ($games as $game) {
+      $game_date = \DateTime::createFromFormat('Y-m-d\TH:i:s', $game->getGameDate(), new \DateTimeZone("GMT"));
+      $game_date->setTimezone(new \DateTimeZone("Europe/Paris"));
+      $_games[] = [
+        'id' => $game->id(),
+        'team_1' => $game->getTeam1()->label(),
+        'team_2' => $game->getTeam2()->label(),
+        'date' => $game_date->format('d/m/Y H:i:s'),
+        'nb_bet' => $game->getNbBets(),
+      ];
+    }
+
+    return $_games;
+  }
+
 }
