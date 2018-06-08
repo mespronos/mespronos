@@ -9,7 +9,6 @@ namespace Drupal\mespronos\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
 use Drupal\mespronos\Controller\RankingController;
-use Drupal\mespronos\Controller\StatisticsController;
 use Drupal\mespronos\Controller\UserController;
 use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\user\Entity\User;
@@ -33,7 +32,7 @@ class UserProfilBlock extends BlockBase {
     }
     $user = User::load($user->id());
     $palmares = RankingController::getPalmares($user);
-    $statistics = StatisticsController::getUserStatistics($user);
+    $statistics = \Drupal::service('mespronos.statistics_manager')->getUserStatistics($user);
     $user_picture = UserController::getUserPictureAsRenderableArray($user);
     $ranking = RankingGeneral::getRankingForBetter($user);
     return [
