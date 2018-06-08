@@ -30,3 +30,7 @@ services:
   mespronos.user_manager:
     class: Drupal\mespronos\UserManager
     arguments: ['@module_handler']
+
+  mespronos.statistics_manager:
+    class: Drupal\mespronos\StatisticsManager
+    arguments: []

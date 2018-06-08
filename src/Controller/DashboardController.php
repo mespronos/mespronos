@@ -15,16 +15,11 @@ use Drupal\Core\Controller\ControllerBase;
  * @package Drupal\mespronos\Controller
  */
 class DashboardController extends ControllerBase {
-  /**
-   * Hello.
-   *
-   * @return string
-   *   Return Hello string.
-   */
+
   public function index() {
     $games = GameController::getGameWithoutMarks();
     $marks_form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesMarks', $games);
-    $stats = StatisticsController::getStatistics();
+    $stats = \Drupal::service('mespronos.statistics_manager')->getStatistics();
     return [
       '#theme' =>'dashboard',
       '#marks_form' => $marks_form,
