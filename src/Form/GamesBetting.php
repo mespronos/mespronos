@@ -221,6 +221,7 @@ class GamesBetting extends FormBase {
     if ($j > 0) {
       drupal_set_message($this->t('@nb_mark bet couldn\'t be saved or updated', array('@nb_mark'=>$j)), 'warning');
     }
+    $form_state->setRedirect('mespronos.nextbets');
     Cache::invalidateTags(array('user:'.$user->id()));
   }
 
