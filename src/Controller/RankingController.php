@@ -109,14 +109,23 @@ class RankingController extends ControllerBase {
     $rows = [];
     $old_points = NULL;
     $next_rank = 0;
+    $current_rank = 0;
     foreach ($rankings as $ranking) {
       $next_rank++;
+      if($ranking->get('points')->value != $old_points) {
+        $current_rank = $next_rank;
+      }
+
       $better = \Drupal\user\Entity\User::load($ranking->getOwner()->id());
       $better_renderable = UserController::getRenderableUser($better);
       $clean_username = \Drupal::service('kgaut_tools.stringcleaner')->clean($better->getUsername());
+
+      $position = [
+        '#markup' => $ranking->get('points')->value != $old_points ? $current_rank : '↪ ' . $current_rank ,
+      ];
       $row = [
         'data' => [
-          'position' => $ranking->get('points')->value != $old_points ? $next_rank : '-',
+          'position' => render($position),
           'better' => [
             'data' => render($better_renderable),
             'class' => ['better-cell'],
