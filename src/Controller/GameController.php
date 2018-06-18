@@ -131,6 +131,7 @@ class GameController extends ControllerBase {
     $query->join('users_field_data', 'ufd', 'ufd.uid = u.uid');
     $query->fields('b', ['better', 'score_team_1', 'score_team_2', 'points']);
     $query->condition('b.game', $game->id());
+    $query->orderBy('b.points', 'DESC');
     $query->orderBy('ufd.name');
     $results = $query->execute()->fetchAllAssoc('better');
     return $results;
