@@ -237,6 +237,11 @@ function mespronos_entity_extra_field_info() {
     'weight' => 100,
     'visible' => FALSE,
   );
+  $extra['user']['user']['display']['last_bets'] = array(
+    'label' => t('Derniers pronostics'),
+    'weight' => 100,
+    'visible' => FALSE,
+  );
   $extra['game']['game']['display']['better_bets'] = array(
     'label' => t('Betters\' bets'),
     'weight' => 100,
@@ -274,19 +279,22 @@ function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, Ent
       $build['hall_of_flame'] = [];
       $build['hall_of_flame']['content'] = [
         '#type' => 'container',
-        "element-content" => $render,
+        'element-content' => $render,
       ];
+    }
+    if ($display->getComponent('last_results')) {
+      $lastBetController = new LastBetsController();
+      $user = \Drupal\user\Entity\User::load($entity->id());
+      $build['last_results'] = $lastBetController->lastBets(NULL,50,'BLOCK', $user,TRUE);
+    }
+    if ($display->getComponent('last_bets')) {
+      $build['last_bets'] = \Drupal::service('mespronos.bet_manager')->getRecentBetsForUserTable($user, 64);
     }
   }
   if ($display->getComponent('pseudo')) {
     $build['username'] = [
       '#markup' => '<h3>'.$entity->label().'</h3>',
     ];
-  }
-  if ($display->getComponent('last_results')) {
-    $lastBetController = new LastBetsController();
-    $user = \Drupal\user\Entity\User::load($entity->id());
-    $build['last_results'] = $lastBetController->lastBets(null,50,'BLOCK',$user,true);
   }
 }
 

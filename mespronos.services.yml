@@ -27,6 +27,10 @@ services:
     class: Drupal\mespronos\GameManager
     arguments: ['@module_handler']
 
+  mespronos.bet_manager:
+    class: Drupal\mespronos\BetManager
+    arguments: []
+
   mespronos.user_manager:
     class: Drupal\mespronos\UserManager
     arguments: ['@module_handler']
