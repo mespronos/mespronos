@@ -65,7 +65,7 @@ class BetManager {
     $ids = \Drupal::entityQuery('bet')
       ->condition('better', $user->id())
       ->condition('points', '', 'IS NOT NULL')
-      ->sort('created', 'DESC')
+      ->sort('game', 'DESC')
       ->range(0, $nb)
       ->execute();
     if (\count($ids) > 0) {
@@ -73,4 +73,5 @@ class BetManager {
     }
     return [];
   }
+
 }
