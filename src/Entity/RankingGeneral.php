@@ -96,33 +96,22 @@ class RankingGeneral extends RankingBase {
   }
 
   public function getPosition() {
-    $query = "SELECT rank FROM
-                  (
-                    SELECT AA.*,BB.ID,
-                  (@rnk:=@rnk+1) rnk,
-                  (@rank:=IF(@curscore=points,@rank,@rnk)) rank,
-                  (@curscore:=points) newscore
-                  FROM
-                  (
-                    SELECT * FROM
-                    (SELECT COUNT(1) scorecount,points
-                      FROM {".$this->getBaseTable()."} GROUP BY points
-                  ) AAA ORDER BY points DESC
-              ) AA LEFT JOIN {".$this->getBaseTable()."} BB USING (points)) A where id = :id";
-
-    $args = [':id'=>$this->id()];
-    \Drupal::database()->query('SET @rnk=0;');
-    \Drupal::database()->query('SET @rank=0');
-    \Drupal::database()->query('SET @curscore=0');
-
-    $results = \Drupal::database()->query($query, $args);
+    if(\Drupal::moduleHandler()->moduleExists('domain')) {
+      $results = db_query('SELECT count(*) +1 as position from {mespronos__ranking_general} rg join {users_field_data} ufd  on ufd.uid = rg.better and ufd.status = 1 and ufd.bet_private = 0 WHERE points > :points', [
+        ':points'=> $this->getPoints(),
+      ]);
+    }
+    else {
+      $results = db_query('SELECT count(*) +1 as position from {mespronos__ranking_general} rg join {users_field_data} ufd  on ufd.uid = rg.better and ufd.status = 1 WHERE points > :points', [
+        ':points'=> $this->getPoints(),
+      ]);
+    }
 
     $res = $results->fetchField();
     if ($res) {
-      return intval($res);
-    } else {
-      return false;
+      return (int) $res;
     }
+    return FALSE;
   }
 
   /**
