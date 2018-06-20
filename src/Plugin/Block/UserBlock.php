@@ -71,8 +71,8 @@ class UserBlock extends BlockBase {
       ],
       '#user_picture' => $user_picture,
       '#cache' => [
-        'contexts' => ['user', 'ranking'],
-        'tags' => ['user:' . $user->id(), 'user_block'],
+        'contexts' => ['user'],
+        'tags' => ['user:' . $user->id(), 'user_block', 'ranking'],
       ],
     ];
   }
