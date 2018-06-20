@@ -82,6 +82,10 @@ class RankingDay extends RankingBase {
       $query->join('user__field_group', 'ug', 'ug.entity_id = rd.better');
       $query->condition('ug.field_group_target_id', $group->id());
     }
+    elseif(\Drupal::moduleHandler()->moduleExists('domain')) {
+      $query->join('users_field_data', 'ufd', 'ufd.uid = rd.better');
+      $query->condition('ufd.bet_private', 0);
+    }
 
     $query->orderBy('points', 'DESC');
     $results = $query->execute()->fetchAllAssoc('id');
