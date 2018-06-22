@@ -85,14 +85,11 @@ class GameController extends ControllerBase {
   }
 
   public static function getBettersBets(Game $game) {
-    if (!$game->isPassed()) {return ["#markup"=> t('Bets will be visible once the game is started')]; }
-    $data = self::getBettersBetsData($game);
+    if (!$game->isPassed()) {return ['#markup' => t('Bets will be visible once the game is started')]; }
+    $group = \Drupal::service('mespronos.domain_manager')->getGroupFromDomain();
+    $data = self::getBettersBetsData($game, $group);
     $rows = [];
-    $header = [
-      t('Better', array(), array('context'=>'mespronos')),
-      t('bet', array(), array('context'=>'mespronos')),
-      t('Points', array(), array('context'=>'mespronos')),
-    ];
+    $header = [t('Better'), t('bet'), t('Points')];
     $league = $game->getLeague();
     foreach ($data as $better => $bet) {
       $better_entity = \Drupal\user\Entity\User::load($better);
@@ -103,8 +100,8 @@ class GameController extends ControllerBase {
             'data' => render($better_renderable),
             'class' => ['better-cell']
           ],
-          $bet->score_team_1.' - '.$bet->score_team_2,
-          ['data' => $bet->points, 'class'=>'points'],
+          $bet->score_team_1 . ' - ' . $bet->score_team_2,
+          ['data' => $bet->points, 'class' => 'points'],
         ],
         'class' => $league->getPointsCssClass($bet->points),
       ];
@@ -116,20 +113,30 @@ class GameController extends ControllerBase {
       '#header' => $header,
       '#cache' => [
         'contexts' => ['user'],
-        'tags' => ['game:'.$game->id()],
+        'tags' => ['game:' . $game->id()],
       ],
     ];
+
+    if($group) {
+      $table_array['#cache']['tags'][] = 'group:' . $group->id();
+    }
 
     return [
       'table' => $table_array,
     ];
   }
 
-  public static function getBettersBetsData(Game $game) {
+  public static function getBettersBetsData(Game $game, $group = FALSE) {
     $query = \Drupal::database()->select('mespronos__bet', 'b');
     $query->join('users', 'u', 'b.better = u.uid');
     $query->join('users_field_data', 'ufd', 'ufd.uid = u.uid');
     $query->fields('b', ['better', 'score_team_1', 'score_team_2', 'points']);
+    if ($group) {
+      $member_ids = $group->getMembers();
+      if (\count($member_ids) > 0) {
+        $query->condition('better', $member_ids, 'IN');
+      }
+    }
     $query->condition('b.game', $game->id());
     $query->orderBy('b.points', 'DESC');
     $query->orderBy('ufd.name');
