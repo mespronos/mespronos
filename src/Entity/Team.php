@@ -81,11 +81,9 @@ class Team extends MPNContentEntityBase implements MPNEntityInterface {
   public function getLogo($style_name = 'thumbnail') {
     $logo = $this->get("field_team_logo")->first();
     if ($logo && !is_null($logo) && $logo_file = File::load($logo->getValue()['target_id'])) {
-      return self::getImageAsRenderableArray($logo_file, $style_name);
+      return self::getImageAsRenderableArray($logo_file, $style_name, $this->label());
     }
-    else {
-      return [];
-    }
+    return [];
   }
 
   public function getLogoAsFile() {

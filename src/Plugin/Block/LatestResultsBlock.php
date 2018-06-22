@@ -47,10 +47,9 @@ class LatestResultsBlock extends BlockBase {
     $games = Game::getLastestGamesWithMark($this->configuration['number_of_results_to_display']);
     $items = [];
     foreach ($games as $game) {
-      $day_id = $game->getDayId();
       $items[] = Link::fromTextAndUrl(
         $game->labelWithScoreAndLogo(),
-        new Url('entity.day.canonical', ['day' => $day_id])
+        new Url('entity.game.canonical', ['game' => $game->id()])
       );
     }
     $build = [
