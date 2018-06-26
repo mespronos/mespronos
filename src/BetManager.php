@@ -11,8 +11,8 @@ use Drupal\mespronos_group\Entity\Group;
 use Drupal\user\Entity\User;
 
 class BetManager {
-  public function getRecentBetsForUserTable(User $user, $nb_bets = 20, Day $day = NULL) {
-    $bets = $this->getRecentBetsForUser($user, $nb_bets);
+  public function getRecentBetsForUserTable(User $user, $nb_bets = 20, Day $day = NULL, $includeGameNotOver = FALSE) {
+    $bets = $this->getRecentBetsForUser($user, $nb_bets, $includeGameNotOver);
     $rows = [];
     $leagues = [];
     foreach ($bets as $bet) {
@@ -61,13 +61,22 @@ class BetManager {
     return $table_array;
   }
 
-  public function getRecentBetsForUser($user, $nb) {
-    $ids = \Drupal::entityQuery('bet')
-      ->condition('better', $user->id())
-      ->condition('points', '', 'IS NOT NULL')
-      ->sort('game', 'DESC')
-      ->range(0, $nb)
-      ->execute();
+  public function getRecentBetsForUser($user, $nb, $includeGameNotOver = FALSE) {
+
+    $now = new \DateTime(null, new \DateTimeZone("UTC"));
+    $query = db_select('mespronos__bet', 'b');
+    $query->condition('b.better', $user->id());
+    $query->join('mespronos__game', 'g', 'g.id = b.game');
+    if ($includeGameNotOver) {
+      $query->condition('g.game_date', $now->format('Y-m-d\TH:i:s'), '<');
+    }
+    else {
+      $query->isNotNull('b.points');
+    }
+    $query->orderBy('g.game_date', 'DESC');
+    $query->range(0, $nb);
+    $query->fields('b', ['id']);
+    $ids = $query->execute()->fetchAllKeyed(0,0);
     if (\count($ids) > 0) {
       return Bet::loadMultiple($ids);
     }
