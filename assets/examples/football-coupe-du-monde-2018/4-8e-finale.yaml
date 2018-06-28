@@ -19,5 +19,9 @@ league :
           game_date : 2018-07-01t18:00:00
         - game : Brésil | Mexique
           game_date : 2018-07-02t14:00:00
+        - game : Belgique | Japon
+          game_date : 2018-07-02t18:00:00
         - game : Suède | Suisse
+          game_date : 2018-07-03t14:00:00
+        - game : Colombie | Angleterre
           game_date : 2018-07-03t18:00:00
