@@ -1,0 +1,15 @@
+league :
+  name : 'Coupe du monde 2018'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 5
+      name : '1/4 de finale'
+      day_default_date : 2018-07-06t14:00:00
+      games :
+        - game : Uruguay | France
+          game_date : 2018-07-06t14:00:00
+        - game : Russie | Croatie
+          game_date : 2018-07-07t18:00:00
