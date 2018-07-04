@@ -11,5 +11,9 @@ league :
       games :
         - game : Uruguay | France
           game_date : 2018-07-06t14:00:00
+        - game : Brésil | Belgique
+          game_date : 2018-07-06t18:00:00
+        - game : Suède | Angleterre
+          game_date : 2018-07-07t16:00:00
         - game : Russie | Croatie
           game_date : 2018-07-07t18:00:00
