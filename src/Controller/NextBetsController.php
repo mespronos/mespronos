@@ -21,13 +21,26 @@ use Drupal\user\Entity\User;
  */
 class NextBetsController extends ControllerBase {
 
-    public function nextBets(League $league = null, $nb = 10) {
+    public function nextBets(League $league = null, $nb = 10, $mode = 'PAGE') {
         $user = User::load(\Drupal::currentUser()->id());
         $user_uid = $user->id();
         $days = DayController::getNextDaysToBet($nb, $league);
         $page_league = isset($league);
 
-        if (count($days) == 0) {return false; }
+        if (count($days) == 0) {
+          if($mode === 'PAGE') {
+            $return['next-bet'] = [
+              '#markup' => '<p>' . t('No bet for now') . '</p>'
+            ];
+            $return['#cache'] = [
+              'contexts' => ['user'],
+              'tags' => ['user:' . $user_uid, 'nextbets'],
+              'max-age' => '600',
+            ];
+            return $return;
+          }
+          return FALSE;
+        }
 
         return [
           '#theme' => 'table',
