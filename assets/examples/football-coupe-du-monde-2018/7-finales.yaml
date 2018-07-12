@@ -1,0 +1,15 @@
+league :
+  name : 'Coupe du monde 2018'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 7
+      name : 'Finales'
+      day_default_date : 2018-07-14t14:00:00
+      games :
+        - game : Belgique | Angleterre
+          game_date : 2018-07-14t14:00:00
+        - game : France | Croatie
+          game_date : 2018-07-15t15:00:00
