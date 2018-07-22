@@ -49,7 +49,7 @@ function mespronos_theme() {
   );
   $theme['league'] = array(
     'render element' => 'elements',
-    'template' => 'group',
+    'template' => 'league',
     'file' => 'templates-preprocess/league.page.inc',
   );
   $theme['team'] = array(
