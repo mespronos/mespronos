@@ -237,7 +237,8 @@ class ReminderController extends ControllerBase {
 
     $user_connected_this_last_days = self::getUserConnectedThisLast30Days();
     foreach ($user_to_remind as $user) {
-      if (in_array($user, $betters_on_league) || in_array($user, $user_connected_this_last_days)) {
+      //if (in_array($user, $betters_on_league) || in_array($user, $user_connected_this_last_days)) {
+      if (in_array($user, $betters_on_league)) {
         $user_to_remind_on_this_day[] = $user;
       }
     }
