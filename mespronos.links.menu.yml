@@ -2,7 +2,7 @@ mespronos.dashboard:
   title: Mespronos
   description: 'Reference for usage, configuration, and modules.'
   route_name: mespronos.dashboard
-  weight: 9
+  weight: -10
   parent: system.admin
 
 mespronos.set_marks:
@@ -10,14 +10,21 @@ mespronos.set_marks:
   title: 'Set Marks'
   description: 'Set games marks'
   parent: mespronos.dashboard
+  weight: 0
+
+entity.sport.collection:
+  route_name: entity.sport.collection
+  title: 'Sports'
+  description: 'Sports listing'
+  parent: mespronos.dashboard
   weight : 1
 
-mespronos.games:
-  route_name: view.admin_game.admin_games
-  title: 'Games'
-  description: 'See games list'
+entity.league.collection:
+  route_name: view.admin_leagues.page
+  title: 'Leagues'
+  description: 'Leagues listing'
   parent: mespronos.dashboard
-  weight : 2
+  weight: 2
 
 entity.day.collection:
   route_name: entity.day.collection
@@ -26,19 +33,19 @@ entity.day.collection:
   parent: mespronos.dashboard
   weight : 3
 
-entity.league.collection:
-  route_name: entity.league.collection
-  title: 'Leagues'
-  description: 'Leagues listing'
-  parent: mespronos.dashboard
-  weight : 4
-
-entity.sport.collection:
-  route_name: entity.sport.collection
-  title: 'Sports'
-  description: 'Sports listing'
+mespronos.teams:
+  route_name: view.admin_teams.page
+  title: 'Teams'
+  description: 'See teams list'
   parent: mespronos.dashboard
   weight : 5
+
+mespronos.games:
+  route_name: view.admin_game.admin_games
+  title: 'Games'
+  description: 'See games list'
+  parent: mespronos.dashboard
+  weight : 4
 
 mespronos.import:
   route_name: mespronos.import

@@ -51,8 +51,7 @@ use Drupal\Core\Url;
  *     "edit-form" = "/entity.league.edit_form",
  *     "recount_points" = "/entity.league.recount_points",
  *     "archive" = "/entity.league.archive",
- *     "delete-form" = "/entity.league.delete_form",
- *     "collection" = "/entity.league.collection"
+ *     "delete-form" = "/entity.league.delete_form"
  *   },
  *   field_ui_base_route = "league.settings"
  * )

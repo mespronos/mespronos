@@ -842,6 +842,9 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -885,6 +888,9 @@ display:
               authenticated: authenticated
               anonymous: '0'
               administrator: '0'
+            placeholder: ''
+            min_placeholder: ''
+            max_placeholder: ''
           is_grouped: false
           group_info:
             label: ''
@@ -967,7 +973,7 @@ display:
         - url.query_args
         - user.permissions
       cacheable: false
-      max-age: 0
+      max-age: -1
       tags: {  }
   admin_games:
     display_plugin: page
@@ -978,15 +984,14 @@ display:
       display_extenders: {  }
       path: admin/mespronos/games
       menu:
-        type: tab
+        type: none
         title: Games
         description: ''
+        expanded: false
         parent: mespronos.dashboard
         weight: 14
         context: '0'
         menu_name: admin
-        enabled: true
-        expanded: false
     cache_metadata:
       contexts:
         - 'languages:language_content'
@@ -995,5 +1000,5 @@ display:
         - url.query_args
         - user.permissions
       cacheable: false
-      max-age: 0
+      max-age: -1
       tags: {  }

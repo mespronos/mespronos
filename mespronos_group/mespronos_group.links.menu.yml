@@ -1,6 +1,6 @@
 # Group menu items definition
 mespronos.groups:
-  route_name: entity.group.collection
+  route_name: view.admin_groups.page
   title: 'Groups'
   description: 'Goups list'
   parent: mespronos.dashboard

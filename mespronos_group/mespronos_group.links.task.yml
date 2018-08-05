@@ -1,8 +1,8 @@
 # Group routing definition
 entity.group.collection:
-  route_name: entity.group.collection
+  route_name: view.admin_groups.page
   title: 'Groups'
-  description: 'Groups listing'
+  description: 'Goups list'
   base_route: mespronos.dashboard
   weight : 6
 
