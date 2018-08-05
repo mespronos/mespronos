@@ -284,7 +284,7 @@ class ReminderController extends ControllerBase {
 
   public static function getUserConnectedThisLast30Days() {
     $query = \Drupal::entityQuery('user');
-    $limit = date('U') - 30 * 24 * 3600;
+    $limit = date('U') - 15 * 24 * 3600;
     $query->condition('access', $limit, '>');
     return $query->execute();
   }
