@@ -2,7 +2,7 @@ mespronos.dashboard:
   title: Mespronos
   description: 'Reference for usage, configuration, and modules.'
   route_name: mespronos.dashboard
-  weight: -10
+  weight: -50
   parent: system.admin
 
 mespronos.set_marks:
