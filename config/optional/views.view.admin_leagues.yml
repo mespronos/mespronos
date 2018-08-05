@@ -8,6 +8,7 @@ dependencies:
   module:
     - image
     - mespronos
+    - user
 id: admin_leagues
 label: 'Admin - Leagues'
 module: views
@@ -24,8 +25,9 @@ display:
     position: 0
     display_options:
       access:
-        type: none
-        options: {  }
+        type: perm
+        options:
+          perm: 'manage mespronos settings'
       cache:
         type: tag
         options: {  }
@@ -450,6 +452,7 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user.permissions
       tags:
         - 'config:field.storage.league.field_league_logo'
   page:
@@ -466,5 +469,6 @@ display:
         - 'languages:language_content'
         - 'languages:language_interface'
         - url.query_args
+        - user.permissions
       tags:
         - 'config:field.storage.league.field_league_logo'

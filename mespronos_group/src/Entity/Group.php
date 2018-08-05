@@ -202,7 +202,7 @@ class Group extends ContentEntityBase implements GroupInterface {
     ->condition('field_group', $this->id());
 
     $ids = $query->execute();
-    return count($ids);
+    return \count($ids);
   }
 
   public function getMembers($asEntity = FALSE) {
