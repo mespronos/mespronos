@@ -70,6 +70,16 @@ function mespronos_theme() {
     'template' => 'day',
     'file' => 'templates-preprocess/day.page.inc',
   );
+  $theme['day-to-bet'] = [
+    'render element' => 'elements',
+    'template' => 'day-to-bet',
+    'variables' => [
+      'day' => NULL,
+      'bet_left' => 0,
+      'league_logo' => NULL,
+      'time_left' => 0,
+    ],
+  ];
   $theme['user-profile-block'] = array(
     'template' => 'user-profile-block',
     'variables' => array(

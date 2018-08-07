@@ -1,0 +1,10 @@
+<article class="block-content large-4 columns">
+    <header>
+        <h3>{{ day.entity.getLeague().label() }}</h3>
+        <h4>{{ day.entity.label() }}</h4>
+    </header>
+    {{ league_logo }}
+    <p class="time-left discret cap bold"><label>{{ 'Time left' | t }}</label><i class="far fa-clock"></i>&nbsp;{{ time_left }}</p>
+    <p class="bet-left cap"><label class="bold">{{ 'Games to bet' | t }}</label><span class="em">{{ bet_left }}/{{ day.nb_game }}</span></p>
+    <a class="button secondary full-width" href="{{ path('mespronos.day.bet', {'day' : day.day })}}">{{ 'Bet now' | t }}</a>
+</article>

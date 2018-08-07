@@ -55,7 +55,7 @@ class NextBets extends BlockBase {
   public function build() {
     $next_bet_controller = new NextBetsController();
     $return = [];
-    $next_bet = $next_bet_controller->nextBets(NULL, 5, 'BLOCK');
+    $next_bet = $next_bet_controller->nextBets(NULL, 3, 'BLOCK');
     if ($next_bet) {
       $return['next-bet'] = $next_bet;
     } else {
