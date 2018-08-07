@@ -80,6 +80,17 @@ function mespronos_theme() {
       'time_left' => 0,
     ],
   ];
+  $theme['league-to-bet'] = [
+    'render element' => 'elements',
+    'template' => 'league-to-bet',
+    'variables' => [
+      'league' => NULL,
+      'league_logo' => NULL,
+      'ranking' => NULL,
+      'betters' => NULL,
+      'days' => 0,
+    ],
+  ];
   $theme['user-profile-block'] = array(
     'template' => 'user-profile-block',
     'variables' => array(

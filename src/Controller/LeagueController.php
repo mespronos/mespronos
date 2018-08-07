@@ -47,26 +47,32 @@ class LeagueController extends ControllerBase {
   public function leaguesList() {
     $user = User::load(\Drupal::currentUser()->id());
     $leagues_as_status = self::getLeagueSortedFromStatus();
-    $leagues_table = [];
+    $leagues_table = [
+      '#cache' => [
+        'contexts' => ['user'],
+        'tags' => ['leagues', 'user:' . $user->id()],
+      ],
+    ];
     foreach ($leagues_as_status as $status => $leagues) {
-      $leagues_table[$status] = [
-        '#theme' => 'table',
-        '#rows' => self::leaguesListParseLeagues($leagues, $user),
-        '#header' => self::leaguesListGetHeader(),
-        '#footer' => self::leaguesListGetFooter(),
-        '#cache' => [
-          'contexts' => ['user'],
-          'tags' => ['leagues', 'user:'.$user->id()],
-        ],
-      ];
+      $leagues_table[$status] = [];
+      foreach ($leagues as $league) {
+        $ranking = RankingLeague::getRankingForBetter($user, $league);
+        /** @var League $league */
+        $leagues_table[$status][] = [
+          '#theme' => 'league-to-bet',
+          '#league' => $league,
+          '#league_logo' => $league->getLogo(),
+          '#ranking' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '-',
+          '#betters' => $league->getBettersNumber(),
+          '#days' => $league->getDaysNumber(),
+        ];
+      }
     }
     return [
       '#theme' =>'leagues-list',
       '#leagues' => $leagues_table,
     ];
-
   }
-
 
   public static function getGroupRankings(League $league) {
     if(!\Drupal::moduleHandler()->moduleExists('mespronos_group')) {

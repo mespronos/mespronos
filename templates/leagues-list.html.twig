@@ -1,9 +1,17 @@
 {% if leagues.active|length > 0 %}
-    <h2>{% trans 'Active leagues' %}</h2>
-    {{ leagues.active }}
+    <div class="row">
+        <header class="columns large-12">
+            <h2>{% trans 'Active leagues' %}</h2>
+        </header>
+        {{ leagues.active }}
+    </div>
 {% endif %}
 
 {% if leagues.archived|length > 0 %}
-    <h2>{% trans 'Archived leagues' %}</h2>
-    {{ leagues.archived }}
+    <div class="row">
+        <header class="columns large-12">
+            <h2>{% trans 'Archived leagues' %}</h2>
+        </header>
+        {{ leagues.archived }}
+    </div>
 {% endif %}

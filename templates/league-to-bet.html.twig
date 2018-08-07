@@ -1,0 +1,16 @@
+<article class="block-content medium-6 large-4 columns">
+    <div class="content">
+        <header>
+            <h3>{{ league.label() }}</h3>
+            <h4>{{ day.entity.label() }}</h4>
+        </header>
+        <aside class="left">
+            {{ league_logo }}
+        </aside>
+        <p class="days discret cap bold"><label>{{ 'Days' | t }}</label>{{ days }}</p>
+        <p class="ranking cap"><label class="bold">{{ 'Ranking' | t }}</label><span class="em">{{ ranking }}/{{ betters }}</span></p>
+        <footer>
+            <a class="button secondary full-width" href="{{ path('entity.league.canonical', {'league' : league.id()})}}">{{ 'Details' | t }}</a>
+        </footer>
+    </div>
+</article>
