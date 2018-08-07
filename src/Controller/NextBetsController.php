@@ -58,9 +58,6 @@ class NextBetsController extends ControllerBase {
         '#bet_left' => $bets_left,
       ];
     }
-    if ($mode === 'BLOCK') {
-      $build[] = Link::fromTextAndUrl('Next bets', new Url('mespronos.nextbets'))->toRenderable();
-    }
 
     return $build;
   }
