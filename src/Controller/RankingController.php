@@ -61,19 +61,21 @@ class RankingController extends ControllerBase {
     return $ranking;
   }
 
-  public static function getRankingGeneral(Group $group = NULL) {
+  public static function getRankingGeneral(Group $group = NULL, $withAverage = TRUE) {
     if($group === NULL && \Drupal::service('mespronos.domain_manager')->getGroupFromDomain()) {
       $group = \Drupal::service('mespronos.domain_manager')->getGroupFromDomain();
     }
     $ranking = RankingGeneral::getRanking(NULL, 'general', 'ranking_general', $group);
-    $rankingAverage = RankingGeneral::getRankingAverage(NULL, 'general', 'ranking_general', $group);
+    if($withAverage) {
+      $rankingAverage = RankingGeneral::getRankingAverage(NULL, 'general', 'ranking_general', $group);
+    }
     if (\count($ranking) === 0 && \count($rankingAverage) === 0) {
       return FALSE;
     }
     return [
       '#theme' => 'ranking',
       '#general' => self::getTableFromRanking($ranking),
-      '#average' => self::getTableFromRanking($rankingAverage),
+      '#average' => $withAverage ? self::getTableFromRanking($rankingAverage) : NULL,
     ];
 
   }
