@@ -38,3 +38,7 @@ services:
   mespronos.statistics_manager:
     class: Drupal\mespronos\StatisticsManager
     arguments: []
+
+  mespronos.ranking_manager:
+    class: Drupal\mespronos\RankingManager
+    arguments: []
