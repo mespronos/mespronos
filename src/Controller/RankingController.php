@@ -152,7 +152,7 @@ class RankingController extends ControllerBase {
     }
     $header = [
       t('#', [], ['context' => 'mespronos-ranking']),
-      t('', [], ['context' => 'mespronos-ranking']),
+      t('Better', [], ['context' => 'mespronos-ranking']),
       t('Points', [], ['context' => 'mespronos-ranking']),
       t('Bets', [], ['context' => 'mespronos-ranking']),
       t('Moyenne', [], ['context' => 'mespronos-ranking']),
