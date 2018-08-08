@@ -44,7 +44,7 @@ class NextBetsController extends ControllerBase {
       $bets_left = BetController::betsLeft($user, $dayEntity);
 
 
-      $time_left = $i->format('%a') > 0 ? t('@d days, @GH@im', [
+      $time_left = $i->format('%a') > 0 ? t('@d days', [
         '@d' => $i->format('%a'),
         '@G' => $i->format('%H'),
         '@i' => $i->format('%I'),
@@ -53,9 +53,9 @@ class NextBetsController extends ControllerBase {
       $build[$day->entity->id()] = [
         '#theme' => 'day-to-bet',
         '#day' => $day,
-        '#league_logo' => $league->getLogo(),
+        '#league_logo' => $league->getLogo('medium'),
         '#time_left' => $time_left,
-        '#bet_left' => $bets_left,
+        '#nb_bet_left' => $bets_left,
       ];
     }
 

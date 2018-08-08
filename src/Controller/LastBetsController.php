@@ -30,30 +30,36 @@ class LastBetsController extends ControllerBase {
     if($group = \Drupal::service('mespronos.domain_manager')->getGroupFromDomain()) {
       $cache_tag .= ':group:' . $group->id();
     }
-    $page_league = isset($league);
-    $days = DayController::getlastDays($nb, $league, $include_archived);
-    $return = [];
-
-    if ('BLOCK' !== $mode) {
-        $page_competition_link = Url::fromRoute('mespronos.leagues.list')->toString();
-        $return['help'] = [
-          '#markup' => '<p>' . t('You can see past results of archived competitions on the <a href="@competition_url">leagues</a> page.', ['@competition_url' => $page_competition_link]) . '</p>',
-        ];
+    else {
+      $group = NULL;
     }
-
-    if (\count($days) === 0) {return $return; }
-
-    $return['table'] = [
-      '#theme' => 'table',
-      '#rows' => self::parseDays($days, $user, $page_league, $group),
-      '#header' => self::getHeader($user),
-      '#footer' => self::getFooter(),
+    $days = DayController::getlastDays($nb, $league, $include_archived);
+    $build = [
       '#cache' => [
         'contexts' => ['user'],
         'tags' => ['lastbets', $cache_tag],
       ],
     ];
-    return $return;
+
+    foreach ($days as $day) {
+      /** @var \Drupal\mespronos\Entity\Day $dayEntity */
+      $dayEntity = $day->entity;
+      $league = $dayEntity->getLeague();
+      $ranking = $user->id() > 0 ?  RankingDay::getRankingForBetter($user, $day->entity) : FALSE;
+
+      $build[$day->entity->id()] = [
+        '#theme' => 'day-past',
+        '#day' => $day,
+        '#nb_game' => $dayEntity->getNbGameWIthScore(),
+        '#league_logo' => $league->getLogo('medium'),
+        '#ranking' => $ranking ? $ranking->getPosition($group) : '-',
+        '#points' => $ranking ? $ranking->getPoints() : '-',
+        '#logged_user' => $user->id() > 0,
+        '#nb_betters' => RankingDay::getNumberOfBetters($day->entity, 'day', 'ranking_day', $group),
+      ];
+    }
+
+    return $build;
   }
 
     public static function getHeader(User $user) {

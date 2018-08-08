@@ -75,9 +75,24 @@ function mespronos_theme() {
     'template' => 'day-to-bet',
     'variables' => [
       'day' => NULL,
-      'bet_left' => 0,
+      'nb_bet_left' => 0,
+      'nb_game' => 0,
       'league_logo' => NULL,
       'time_left' => 0,
+      'logged_user' => FALSE,
+    ],
+  ];
+  $theme['day-past'] = [
+    'render element' => 'elements',
+    'template' => 'day-past',
+    'variables' => [
+      'day' => NULL,
+      'nb_game' => NULL,
+      'ranking' => NULL,
+      'points' => NULL,
+      'league_logo' => NULL,
+      'nb_betters' => NULL,
+      'logged_user' => FALSE,
     ],
   ];
   $theme['league-to-bet'] = [
@@ -89,6 +104,7 @@ function mespronos_theme() {
       'ranking' => NULL,
       'betters' => NULL,
       'days' => 0,
+      'logged_user' => FALSE,
     ],
   ];
   $theme['user-profile-block'] = array(

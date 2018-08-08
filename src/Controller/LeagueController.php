@@ -61,10 +61,11 @@ class LeagueController extends ControllerBase {
         $leagues_table[$status][] = [
           '#theme' => 'league-to-bet',
           '#league' => $league,
-          '#league_logo' => $league->getLogo(),
+          '#league_logo' => $league->getLogo('medium'),
           '#ranking' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '-',
           '#betters' => $league->getBettersNumber(),
           '#days' => $league->getDaysNumber(),
+          '#logged_user' => $user->isAuthenticated(),
         ];
       }
     }
