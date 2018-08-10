@@ -78,6 +78,7 @@ function mespronos_group_preprocess_group(&$variables) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
   $variables['has_description'] = $variables['elements']['#view_mode'] === 'full' && NULL !== $group->get('description')->value;
+  $variables['has_baseline'] = $variables['elements']['#view_mode'] === 'full' && NULL !== $group->get('baseline')->value;
   $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
   $variables['member'] = t('@nb members', ['@nb' => $group->getMemberNumber()]);
   $variables['is_member'] = $group->isMemberOf($user);
@@ -94,11 +95,7 @@ function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisp
     if ($display->getComponent('block_members')) {
       $plugin_block = $block_manager->createInstance('group_members_block', []);
       $render = $plugin_block->build();
-      $build['block_members'] = [];
-      $build['block_members']['title'] = [
-        '#markup' => '<h2>' . t('Members') . '</h2>'
-      ];
-      $build['block_members']['content'] = [
+      $build['block_members'] = [
         '#type' => 'container',
         'element-content' => $render,
       ];
@@ -107,11 +104,7 @@ function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisp
     if ($display->getComponent('block_ranking')) {
       $plugin_block = $block_manager->createInstance('group_ranking_block', []);
       $render = $plugin_block->build();
-      $build['block_ranking'] = [];
-      $build['block_ranking']['title'] = [
-        '#markup' => '<h2>' . t('Group ranking') . '</h2>'
-      ];
-      $build['block_ranking']['content'] = [
+      $build['block_ranking'] = [
         '#type' => 'container',
         'element-content' => $render,
       ];

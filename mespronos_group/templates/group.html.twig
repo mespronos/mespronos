@@ -1,9 +1,37 @@
-<article  {{ attributes }}>
-    {{ content |without('description', 'block_members', 'block_ranking') }}
-    {% if has_description %}
-        <h2>{{  "À propos du groupe" | t  }}</h2>
-        {{ content.description }}
-    {% endif %}
+{% set attributes = attributes.addClass(['row']) %}
+<article {{ attributes }}>
+    <div class="columns large-12">
+        <div class="block-content">
+            <div class="content clearfix">
+                <div class="row">
+                    <aside class="columns medium-2">
+                        {{ content.field_group_logo }}
+                    </aside>
+                    <header class="columns  medium-4">
+                        <div class="inner">
+                            {% if has_description or has_baseline %}
+                                <h2>{{ "À propos du groupe" | t }}</h2>
+                                {{ content.baseline }}
+                                {{ content.description }}
+                            {% endif %}
+
+                        </div>
+                    </header>
+                    <div class="inner">
+                        <h2>{{ "Group creator" | t }}</h2>
+                        {{ content.user_id }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="columns large-12">
+        <h2>{% trans %}members{% endtrans %}</h2>
+    </div>
     {{ content.block_members }}
-    {{ content.block_ranking }}
+    <div class="columns large-12">
+        <h2>{% trans %}Group Ranking{% endtrans %}</h2>
+        {{ content.block_ranking }}
+    </div>
 </article>

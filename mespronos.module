@@ -369,6 +369,16 @@ function mespronos_team_view(array &$build, Team $entity, EntityViewDisplay $dis
   }
 }
 
+
+function mespronos_preprocess_user(&$variables) {
+  $user = $variables['user'];
+  $ranking = \Drupal\mespronos\Entity\RankingGeneral::getRankingForBetter($user);
+  $variables['position'] = $ranking ? $ranking->getPosition() : '-';
+  $variables['points'] = $ranking ? $ranking->getPoints() : '-';
+  $variables['bets'] = $ranking ? $ranking->getGameBetted() : '-';
+  $variables['average'] = $ranking ? number_format($ranking->getPoints() / $ranking->getGameBetted(),3) : '-';
+}
+
 /**
  * Implements hook_user_update().
  */

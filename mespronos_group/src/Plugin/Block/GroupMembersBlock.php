@@ -28,16 +28,7 @@ class GroupMembersBlock extends BlockBase {
     }
     if ($group) {
       $members = $group->getMembers(TRUE);
-      $items = [];
-      $render_controller = \Drupal::entityTypeManager()->getViewBuilder('user');
-      foreach ($members as $member) {
-        $items[] = $render_controller->view($member, 'compact');
-      }
-      $build = [];
       $build['group_members_block'] = [
-        '#theme' => 'item_list',
-        '#items' => $items,
-        '#list_type' => 'ul',
         '#attributes' => [
           'id' => 'group-members-list',
         ],
@@ -46,6 +37,10 @@ class GroupMembersBlock extends BlockBase {
           'tags' => ['group:' . $group->id(), 'groups'],
         ],
       ];
+      $render_controller = \Drupal::entityTypeManager()->getViewBuilder('user');
+      foreach ($members as $member) {
+        $build['group_members_block'][] = $render_controller->view($member, 'compact');
+      }
       return $build;
     }
     return ['#cache' => ['max-age' => 0]];
