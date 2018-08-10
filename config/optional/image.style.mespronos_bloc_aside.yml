@@ -1,0 +1,15 @@
+uuid: f4a04af4-4204-4884-9dff-a7554b13fafe
+langcode: fr
+status: true
+dependencies: {  }
+name: mespronos_bloc_aside
+label: 'Mespronos - Bloc - Aside'
+effects:
+  d9b79775-a744-4a69-b5c1-47abf2ee88bf:
+    uuid: d9b79775-a744-4a69-b5c1-47abf2ee88bf
+    id: image_scale
+    weight: 1
+    data:
+      width: null
+      height: 150
+      upscale: true

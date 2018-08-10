@@ -51,7 +51,7 @@ class LastBetsController extends ControllerBase {
         '#theme' => 'day-past',
         '#day' => $day,
         '#nb_game' => $dayEntity->getNbGameWIthScore(),
-        '#league_logo' => $league->getLogo('medium'),
+        '#league_logo' => $league->getLogo('mespronos_bloc_aside'),
         '#ranking' => $ranking ? $ranking->getPosition($group) : '-',
         '#points' => $ranking ? $ranking->getPoints() : '-',
         '#logged_user' => $user->id() > 0,

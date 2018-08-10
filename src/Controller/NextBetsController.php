@@ -53,7 +53,7 @@ class NextBetsController extends ControllerBase {
       $build[$day->entity->id()] = [
         '#theme' => 'day-to-bet',
         '#day' => $day,
-        '#league_logo' => $league->getLogo('medium'),
+        '#league_logo' => $league->getLogo('mespronos_bloc_aside'),
         '#time_left' => $time_left,
         '#nb_bet_left' => $bets_left,
       ];
