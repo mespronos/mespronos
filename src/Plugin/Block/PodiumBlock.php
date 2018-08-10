@@ -34,14 +34,32 @@ class PodiumBlock extends BlockBase {
       $better = $ranking->getOwner();
       $podium[] = [
         'better' => $better,
-        'better_avatar' => UserController::getUserPictureAsRenderableArray($better, 'medium'),
+        'better_avatar' => UserController::getUserPictureAsRenderableArray($better, 'podium'),
         'better_name' => $better->getDisplayName(),
         'position' => $ranking->getPosition(),
         'points' => $ranking->getPoints(),
+        'bets' => $ranking->getGameBetted(),
         'average' => number_format($ranking->getPoints() / $ranking->getGameBetted(),3)
       ];
     }
-    return [];
+    $build =  [
+      '#theme' => 'podium',
+      '#data' => $podium,
+      '#cache' => [
+        'tags' => [
+          'ranking'
+        ],
+      ],
+    ];
+
+
+    if($group = \Drupal::service('mespronos.domain_manager')->getGroupFromDomain()) {
+      $build['#cache']['tags'][] = 'group:' . $group->id();
+    }
+    else {
+      $build['#cache']['tags'][] = 'group:main';
+    }
+    return $build;
   }
 
 }

@@ -107,6 +107,13 @@ function mespronos_theme() {
       'logged_user' => FALSE,
     ],
   ];
+  $theme['podium'] = [
+    'render element' => 'elements',
+    'template' => 'podium',
+    'variables' => [
+      'data' => [],
+    ],
+  ];
   $theme['user-profile-block'] = array(
     'template' => 'user-profile-block',
     'variables' => array(
