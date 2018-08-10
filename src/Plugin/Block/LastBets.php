@@ -51,7 +51,7 @@ class LastBets extends BlockBase {
   public function build() {
     $lastBetsController = new LastBetsController();
     $return = [];
-    $return['last-bet'] = $lastBetsController->lastBets(NULL, 10, 'BLOCK');
+    $return['last-bet'] = $lastBetsController->lastBets(NULL, 4, 'BLOCK');
     if (!$return['last-bet']) {
       $return['more-last-bets'] = [
         '#markup'=> t('You can see past results on <a href="@url">leagues page</a>.', [

@@ -7,6 +7,7 @@ use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
 use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Url;
 use Drupal\domain\Entity\Domain;
 use Drupal\mespronos_group\GroupInterface;
@@ -324,6 +325,17 @@ class Group extends ContentEntityBase implements GroupInterface {
         'type' => 'string_textfield',
         'weight' => -4,
       ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    $fields['baseline'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Base line'))
+      ->setDescription(t('Will be publicly displayed on group list'))
+      ->setSettings(array(
+        'max_length' => 255,
+        'text_processing' => 0,
+      ))
+      ->setDefaultValue(NULL)
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 

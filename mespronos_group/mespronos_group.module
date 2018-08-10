@@ -2,10 +2,17 @@
 use Drupal\mespronos_group\Entity\Group;
 use Drupal\Core\Entity\Entity\EntityViewDisplay;
 use Drupal\Core\Cache\Cache;
+use Drupal\Core\Render\Element;
 
 
 function mespronos_group_theme() {
   $themes = [];
+
+  $themes['group'] = array(
+    'render element' => 'elements',
+    'template' => 'group',
+  );
+
   $themes['group-list'] = array(
     'template' => 'group-list',
     'variables' => array(
@@ -38,6 +45,14 @@ function mespronos_group_theme() {
   return $themes;
 }
 
+
+function mespronos_group_theme_suggestions_group(array $variables) {
+  $suggestions = [];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+  $suggestions[] = $variables['theme_hook_original'] . '__' . $sanitized_view_mode;
+  return $suggestions;
+}
+
 function mespronos_group_entity_extra_field_info() {
   $extra = [];
   $extra['group']['group']['display']['block_members'] = array(
@@ -59,7 +74,18 @@ function mespronos_group_entity_extra_field_info() {
 function mespronos_group_preprocess_group(&$variables) {
   /**@var Group $group */
   $group = $variables['group'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
   $variables['has_description'] = $variables['elements']['#view_mode'] === 'full' && NULL !== $group->get('description')->value;
+  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+  $variables['member'] = t('@nb members', ['@nb' => $group->getMemberNumber()]);
+  $variables['is_member'] = $group->isMemberOf($user);
+  $variables['display_join_link'] = \Drupal::currentUser()->isAuthenticated();
+  $variables['betters'] = $group->getMemberNumber();
+  $variables['join_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.join', ['group' => $group->id()]);
+  $variables['leave_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.leave', ['group' => $group->id()]);
+  $variables['#cache'] = ['context' => 'user'];
 }
 
 function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisplay $display, $view_mode) {
