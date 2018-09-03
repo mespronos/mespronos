@@ -1,0 +1,166 @@
+league :
+  name : "Ligue des champions 2018/2019"
+  sport : 'Football'
+  status : 'active'
+  classement : true
+  betting_type : 'score'
+  days:
+    - number : 1
+      name : "Phase de groupe - Journée 1"
+      day_default_date : 2018-09-18T20:45:00
+      games :
+        - game :  FC Barcelone | PSV Eindhoven
+          game_date: 2018-09-18T18:55:00+01:00
+        - game : Inter Milan | Tottenham
+          game_date: 2018-09-18T18:55:00+01:00
+        - game : Bruges | Borussia Dortmund
+          game_date: 2018-09-18T21:00:00+01:00
+        - game : AS Monaco | Atletico Madrid
+          game_date: 2018-09-18T21:00:00+01:00
+        - game : Liverpool | Paris Saint-Germain
+          game_date: 2018-09-18T21:00:00+01:00
+        - game : Etoile Rouge Belgrade | Naples
+          game_date: 2018-09-18T21:00:00+01:00
+        - game : Galatasaray | Lokomotiv Moscou
+          game_date: 2018-09-18T21:00:00+01:00
+        - game : Schalke 04 | FC Porto
+          game_date: 2018-09-18T21:00:00+01:00
+        - game : Ajax Amsterdam | AEK Athènes
+          game_date: 2018-09-19T18:55:00+01:00
+        - game : Chakhtior Donetsk | Hoffenheim
+          game_date: 2018-09-19T18:55:00+01:00
+        - game : Benfica | Bayern Munich
+          game_date: 2018-09-19T21:00:00+01:00
+        - game : Manchester City | Olympique Lyonnais
+          game_date: 2018-09-19T21:00:00+01:00
+        - game : Real Madrid | AS Rome
+          game_date: 2018-09-19T21:00:00+01:00
+        - game : FC Viktoria Plzen | CSKA Moscou
+          game_date: 2018-09-19T21:00:00+01:00
+        - game : Young Boys Berne | Manchester United
+          game_date: 2018-09-19T21:00:00+01:00
+        - game : Valence CF | Juventus Turin
+          game_date: 2018-09-19T21:00:00+01:00
+    - number : 2
+      name : "Phase de groupe - Journée 2"
+      day_default_date : 2018-10-02T20:45:00
+      games :
+        - game: Hoffenheim | Manchester City
+          game_date: 2018-10-02T18:55:00+01:00
+        - game: Juventus Turin | Young Boys Berne
+          game_date: 2018-10-02T18:55:00+01:00
+        - game: AEK Athènes | Benfica
+          game_date: 2018-10-02T21:00:00+01:00
+        - game: CSKA Moscou | Real Madrid
+          game_date: 2018-10-02T21:00:00+01:00
+        - game: Bayern Munich | Ajax Amsterdam
+          game_date: 2018-10-02T21:00:00+01:00
+        - game: Manchester United | Valence CF
+          game_date: 2018-10-02T21:00:00+01:00
+        - game: Olympique Lyonnais | Chakhtior Donetsk
+          game_date: 2018-10-02T21:00:00+01:00
+        - game: AS Rome | FC Viktoria Plzen
+          game_date: 2018-10-02T21:00:00+01:00
+        - game: Paris Saint-Germain | Etoile Rouge Belgrade
+          game_date: 2018-10-03T18:55:00+01:00
+        - game: Lokomotiv Moscou | Schalke 04
+          game_date: 2018-10-03T18:55:00+01:00
+        - game: Naples | Liverpool
+          game_date: 2018-10-03T21:00:00+01:00
+        - game: FC Porto | Galatasaray
+          game_date: 2018-10-03T21:00:00+01:00
+        - game: PSV Eindhoven | Inter Milan
+          game_date: 2018-10-03T21:00:00+01:00
+        - game: Borussia Dortmund | AS Monaco
+          game_date: 2018-10-03T21:00:00+01:00
+        - game: Tottenham | FC Barcelone
+          game_date: 2018-10-03T21:00:00+01:00
+        - game: Atletico Madrid | Bruges
+          game_date: 2018-10-03T21:00:00+01:00
+    - number : 3
+      name : "Phase de groupe - Journée 3"
+      day_default_date : 2018-10-23T20:45:00
+      games :
+      - game: AEK Athènes | Bayern Munich
+        game_date: 2018-10-23T18:55:00+01:00
+      - game: Young Boys Berne | Valence CF
+        game_date: 2018-10-23T18:55:00+01:00
+      - game: Ajax Amsterdam | Benfica
+        game_date: 2018-10-23T21:00:00+01:00
+      - game: Real Madrid | FC Viktoria Plzen
+        game_date: 2018-10-23T21:00:00+01:00
+      - game: Manchester United | Juventus Turin
+        game_date: 2018-10-23T21:00:00+01:00
+      - game: Hoffenheim | Olympique Lyonnais
+        game_date: 2018-10-23T21:00:00+01:00
+      - game: AS Rome | CSKA Moscou
+        game_date: 2018-10-23T21:00:00+01:00
+      - game: Chakhtior Donetsk | Manchester City
+        game_date: 2018-10-23T21:00:00+01:00
+      - game: PSV Eindhoven | Tottenham
+        game_date: 2018-10-24T18:55:00+01:00
+      - game: Bruges | AS Monaco
+        game_date: 2018-10-24T18:55:00+01:00
+      - game: Paris Saint-Germain | Naples
+        game_date: 2018-10-24T21:00:00+01:00
+      - game: Borussia Dortmund | Atletico Madrid
+        game_date: 2018-10-24T21:00:00+01:00
+      - game: Lokomotiv Moscou | FC Porto
+        game_date: 2018-10-24T21:00:00+01:00
+      - game: Galatasaray | Schalke 04
+        game_date: 2018-10-24T21:00:00+01:00
+      - game: FC Barcelone | Inter Milan
+        game_date: 2018-10-24T21:00:00+01:00
+      - game: Liverpool | Etoile Rouge Belgrade
+        game_date: 2018-10-24T21:00:00+01:00
+
+
+
+#AEK Athènes
+#Ajax Amsterdam
+#AS Monaco
+#Atletico Madrid
+#Bayern Munich
+#FC Barcelone
+#Benfica
+#Borussia Dortmund
+#Bruges
+#Chakhtior Donetsk
+#Etoile Rouge Belgrade
+#Galatasaray
+#Hoffenheim
+#Inter Milan
+#Liverpool
+#Lokomotiv Moscou
+#Manchester City
+#Naples
+#Paris Saint-Germain
+#FC Porto
+#PSV Eindhoven
+#Schalke 04
+#Tottenham
+
+
+
+#Juventus Turin
+#Young Boys Berne
+#CSKA Moscou
+#Real Madrid
+#Manchester United
+#Valence CF
+#Olympique Lyonnais
+#AS Rome
+#FC Viktoria Plzen
+
+
+
+
+
+
+
+
+
+
+
+
+
