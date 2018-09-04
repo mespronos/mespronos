@@ -13,7 +13,7 @@ league :
           game_date: 2018-09-18T18:55:00+01:00
         - game : Inter Milan | Tottenham
           game_date: 2018-09-18T18:55:00+01:00
-        - game : Bruges | Borussia Dortmund
+        - game : Club Brugge KV | Borussia Dortmund
           game_date: 2018-09-18T21:00:00+01:00
         - game : AS Monaco | Atletico Madrid
           game_date: 2018-09-18T21:00:00+01:00
@@ -75,7 +75,7 @@ league :
           game_date: 2018-10-03T21:00:00+01:00
         - game: Tottenham | FC Barcelone
           game_date: 2018-10-03T21:00:00+01:00
-        - game: Atletico Madrid | Bruges
+        - game: Atletico Madrid | Club Brugge KV
           game_date: 2018-10-03T21:00:00+01:00
     - number : 3
       name : "Phase de groupe - Journée 3"
@@ -99,7 +99,7 @@ league :
         game_date: 2018-10-23T21:00:00+01:00
       - game: PSV Eindhoven | Tottenham
         game_date: 2018-10-24T18:55:00+01:00
-      - game: Bruges | AS Monaco
+      - game: Club Brugge KV | AS Monaco
         game_date: 2018-10-24T18:55:00+01:00
       - game: Paris Saint-Germain | Naples
         game_date: 2018-10-24T21:00:00+01:00
@@ -113,46 +113,114 @@ league :
         game_date: 2018-10-24T21:00:00+01:00
       - game: Liverpool | Etoile Rouge Belgrade
         game_date: 2018-10-24T21:00:00+01:00
-
-
-
-#AEK Athènes
-#Ajax Amsterdam
-#AS Monaco
-#Atletico Madrid
-#Bayern Munich
-#FC Barcelone
-#Benfica
-#Borussia Dortmund
-#Bruges
-#Chakhtior Donetsk
-#Etoile Rouge Belgrade
-#Galatasaray
-#Hoffenheim
-#Inter Milan
-#Liverpool
-#Lokomotiv Moscou
-#Manchester City
-#Naples
-#Paris Saint-Germain
-#FC Porto
-#PSV Eindhoven
-#Schalke 04
-#Tottenham
-
-
-
-#Juventus Turin
-#Young Boys Berne
-#CSKA Moscou
-#Real Madrid
-#Manchester United
-#Valence CF
-#Olympique Lyonnais
-#AS Rome
-#FC Viktoria Plzen
-
-
+    - number: 4
+      name: "Phase de groupe - Journée 4"
+      day_default_date: 2018-11-06T18:55:00+01:00
+      games:
+      - game: Etoile Rouge Belgrade | Liverpool
+        game_date: 2018-11-06T18:55:00+01:00
+      - game: AS Monaco | Club Brugge KV
+        game_date: 2018-11-06T18:55:00+01:00
+      - game: Atletico Madrid | Borussia Dortmund
+        game_date: 2018-11-06T21:00:00+01:00
+      - game: Tottenham | PSV Eindhoven
+        game_date: 2018-11-06T21:00:00+01:00
+      - game: Schalke 04 | Galatasaray
+        game_date: 2018-11-06T21:00:00+01:00
+      - game: Naples | Paris Saint-Germain
+        game_date: 2018-11-06T21:00:00+01:00
+      - game: FC Porto | Lokomotiv Moscou
+        game_date: 2018-11-06T21:00:00+01:00
+      - game: Inter Milan | FC Barcelone
+        game_date: 2018-11-06T21:00:00+01:00
+      - game: Valence CF | Young Boys Berne
+        game_date: 2018-11-07T18:55:00+01:00
+      - game: CSKA Moscou | AS Rome
+        game_date: 2018-11-07T18:55:00+01:00
+      - game: Manchester City | Chakhtior Donetsk
+        game_date: 2018-11-07T21:00:00+01:00
+      - game: Olympique Lyonnais | Hoffenheim
+        game_date: 2018-11-07T21:00:00+01:00
+      - game: FC Viktoria Plzen | Real Madrid
+        game_date: 2018-11-07T21:00:00+01:00
+      - game: Juventus Turin | Manchester United
+        game_date: 2018-11-07T21:00:00+01:00
+      - game: Benfica | Ajax Amsterdam
+        game_date: 2018-11-07T21:00:00+01:00
+      - game: Bayern Munich | AEK Athènes
+        game_date: 2018-11-07T21:00:00+01:00
+    - number: 5
+      name: "Phase de groupe - Journée 5"
+      day_default_date: 2018-11-27T18:55:00+01:00
+      games:
+      - game: AEK Athènes | Ajax Amsterdam
+        game_date: 2018-11-27T18:55:00+01:00
+      - game: CSKA Moscou | FC Viktoria Plzen
+        game_date: 2018-11-27T18:55:00+01:00
+      - game: AS Rome | Real Madrid
+        game_date: 2018-11-27T21:00:00+01:00
+      - game: Olympique Lyonnais | Manchester City
+        game_date: 2018-11-27T21:00:00+01:00
+      - game: Juventus Turin | Valence CF
+        game_date: 2018-11-27T21:00:00+01:00
+      - game: Manchester United | Young Boys Berne
+        game_date: 2018-11-27T21:00:00+01:00
+      - game: Bayern Munich | Benfica
+        game_date: 2018-11-27T21:00:00+01:00
+      - game: Hoffenheim | Chakhtior Donetsk
+        game_date: 2018-11-27T21:00:00+01:00
+      - game: Lokomotiv Moscou | Galatasaray
+        game_date: 2018-11-28T21:00:00+01:00
+      - game: Atletico Madrid | AS Monaco
+        game_date: 2018-11-28T21:00:00+01:00
+      - game: Borussia Dortmund | Club Brugge KV
+        game_date: 2018-11-28T21:00:00+01:00
+      - game: Paris Saint-Germain | Liverpool
+        game_date: 2018-11-28T21:00:00+01:00
+      - game: Naples | Etoile Rouge Belgrade
+        game_date: 2018-11-28T21:00:00+01:00
+      - game: PSV Eindhoven | FC Barcelone
+        game_date: 2018-11-28T21:00:00+01:00
+      - game: FC Porto | Schalke 04
+        game_date: 2018-11-28T21:00:00+01:00
+      - game: Tottenham | Inter Milan
+        game_date: 2018-11-28T21:00:00+01:00
+    - number: 6
+      name: "Phase de groupe - Journée 6"
+      day_default_date: 2018-12-11T18:55:00+01:00
+      games:
+      - game: Schalke 04 | Lokomotiv Moscou
+        game_date: 2018-12-11T18:55:00+01:00
+      - game: Galatasaray | FC Porto
+        game_date: 2018-12-11T18:55:00+01:00
+      - game: Club Brugge KV | Atletico Madrid
+        game_date: 2018-12-11T21:00:00+01:00
+      - game: Inter Milan | PSV Eindhoven
+        game_date: 2018-12-11T21:00:00+01:00
+      - game: FC Barcelone | Tottenham
+        game_date: 2018-12-11T21:00:00+01:00
+      - game: Etoile Rouge Belgrade | Paris Saint-Germain
+        game_date: 2018-12-11T21:00:00+01:00
+      - game: AS Monaco | Borussia Dortmund
+        game_date: 2018-12-11T21:00:00+01:00
+      - game: Liverpool | Naples
+        game_date: 2018-12-11T21:00:00+01:00
+      - game: FC Viktoria Plzen | AS Rome
+        game_date: 2018-12-12T18:55:00+01:00
+      - game: Real Madrid | CSKA Moscou
+        game_date: 2018-12-12T18:55:00+01:00
+      - game: Young Boys Berne | Juventus Turin
+        game_date: 2018-12-12T21:00:00+01:00
+      - game: Benfica | AEK Athènes
+        game_date: 2018-12-12T21:00:00+01:00
+      - game: Chakhtior Donetsk | Olympique Lyonnais
+        game_date: 2018-12-12T21:00:00+01:00
+      - game: Manchester City | Hoffenheim
+        game_date: 2018-12-12T21:00:00+01:00
+      - game: Ajax Amsterdam | Bayern Munich
+        game_date: 2018-12-12T21:00:00+01:00
+      - game: Valence CF | Manchester United
+        game_date: 2018-12-12T21:00:00+01:00
 
 
 
