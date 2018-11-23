@@ -78,7 +78,6 @@ function mespronos_group_preprocess_group(&$variables) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
   $variables['has_description'] = $variables['elements']['#view_mode'] === 'full' && NULL !== $group->get('description')->value;
-  $variables['has_baseline'] = $variables['elements']['#view_mode'] === 'full' && NULL !== $group->get('baseline')->value;
   $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
   $variables['member'] = t('@nb members', ['@nb' => $group->getMemberNumber()]);
   $variables['is_member'] = $group->isMemberOf($user);
