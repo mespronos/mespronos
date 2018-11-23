@@ -7,19 +7,16 @@
                     <aside class="columns medium-3">
                         {{ content.field_group_logo }}
                     </aside>
-                    <header class="columns  medium-4">
+                    <header class="columns  medium-9">
                         <div class="inner">
+
+                            <h2>{{ content.name }}</h2>
                             {% if has_description or has_baseline %}
-                                <h2>{{ "À propos du groupe" | t }}</h2>
+                                <h3>{{ "À propos du groupe" | t }}</h3>
                                 {{ content.description }}
                             {% endif %}
-
                         </div>
                     </header>
-                    <aside class="inner">
-                        <h2>{{ "Group creator" | t }}</h2>
-                        {{ content.user_id }}
-                    </aside>
                 </div>
             </div>
         </div>
