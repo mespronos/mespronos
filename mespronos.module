@@ -54,7 +54,7 @@ function mespronos_theme() {
   );
   $theme['team'] = array(
     'render element' => 'elements',
-    'template' => 'group',
+    'template' => 'team',
     'file' => 'templates-preprocess/team.page.inc',
   );
   $theme['game-with-flag'] = array(
