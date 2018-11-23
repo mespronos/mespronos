@@ -1,11 +1,36 @@
-<p class="center">{{ user_picture }}</p>
-<h2>{% trans %}Statistics{% endtrans %}</h2>
-<p>{% trans %}General ranking : {{ user.rank}}{% endtrans %}</p>
-<p>{% trans %}Points : {{user.points}}{% endtrans %}</p>
-<p>{% trans %}Total of bets : {{statistics.nb_bets}}{% endtrans %}</p>
-{% if palmares %}
-    <h2>{% trans %}Palmares{% endtrans %}</h2>
-    {{ palmares }}
-{% endif %}
-<h2>{% trans %}Last bets{% endtrans %}</h2>
-{{ last_bets }}
+{% set attributes = attributes.addClass(['row']) %}
+
+<article {{ attributes }}>
+    <div class="columns large-12">
+        <div class="block-content">
+            <div class="content clearfix">
+                <div class="row">
+                    <aside class="columns medium-3">
+                        {{ user_picture }}
+                    </aside>
+                    <header class="columns  medium-9">
+                        <div class="inner">
+
+                            <h2>{% trans %}Statistics{% endtrans %}</h2>
+                            <p>{% trans %}General ranking : {{ user.rank}}{% endtrans %}</p>
+                            <p>{% trans %}Points : {{user.points}}{% endtrans %}</p>
+                            <p>{% trans %}Total of bets : {{statistics.nb_bets}}{% endtrans %}</p>
+                        </div>
+                    </header>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    {% if palmares %}
+    <div class="columns large-12">
+        <h2>{% trans %}Palmares{% endtrans %}</h2>
+        {{ palmares }}
+    </div>
+    {% endif %}
+    <div class="columns large-12">
+        <h2>{% trans %}Last bets{% endtrans %}</h2>
+        {{ last_bets }}
+    </div>
+</article>
+
