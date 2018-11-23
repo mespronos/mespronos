@@ -61,7 +61,7 @@ class LeagueController extends ControllerBase {
         $leagues_table[$status][] = [
           '#theme' => 'league-to-bet',
           '#league' => $league,
-          '#league_logo' => $league->getLogo('medium'),
+          '#league_logo' => $league->getLogo('mespronos_bloc_aside'),
           '#ranking' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '-',
           '#betters' => $league->getBettersNumber(),
           '#days' => $league->getDaysNumber(),

@@ -1,14 +1,16 @@
 <article class="block-content medium-6 columns">
     <div class="content">
-        <aside class="left">
-            {{ league_logo }}
-        </aside>
-        <header class="inner left">
-            <h3>{{ league.label() }}</h3>
-            <h4>{{ day.entity.label() }}</h4>
-            <a class="button secondary full-width" href="{{ path('entity.league.canonical', {'league' : league.id()})}}">{{ 'Details' | t }}</a>
-        </header>
-        <footer class="inner flex-medium">
+        <section class="flex-small flex-left">
+            <aside>
+                {{ league_logo }}
+            </aside>
+            <header class="inner flex-column flex-grow">
+                <h3>{{ league.label() }}</h3>
+                <h4>{{ day.entity.label() }}</h4>
+                <a class="button secondary full-width" href="{{ path('entity.league.canonical', {'league' : league.id()})}}">{{ 'Details' | t }}</a>
+            </header>
+        </section>
+        <footer class="inner flex-small">
             <p class="days cap"><label>{{ 'Days' | t }}</label><span class="em green bold">{{ days }}</span></p>
             <p class="ranking cap"><label>{{ 'Betters' | t }}</label><span class="em green bold">{{ betters }}</span></p>
             {% if logged_user %}
