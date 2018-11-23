@@ -3,8 +3,3 @@ administration-style :
   css:
     theme :
       assets/css/administration.css : {}
-front-style :
-  version: VERSION
-  css:
-    theme :
-      assets/css/front.css : {}

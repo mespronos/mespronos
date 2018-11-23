@@ -33,16 +33,14 @@ class GamesBetting extends FormBase {
     $games = GameController::getGamesToBet($day);
 
     $betting_type = $league->getBettingType(TRUE);
-
-    $block_manager = \Drupal::service('plugin.manager.block');
-    $plugin_block = $block_manager->createInstance('bet_help_block', []);
-    $render = $plugin_block->build();
-    
-    $form['infos'] = $render;
-
     $form['games'] = array(
       '#type' => 'container',
-      '#tree' => true,
+      '#tree' => TRUE,
+      '#attributes' => array(
+        'class' => array(
+          'row',
+        ),
+      ),
     );
     $form['user'] = array(
       '#type' => 'value',
@@ -71,10 +69,15 @@ class GamesBetting extends FormBase {
     $bet = BetController::loadForUser($user, $game);
     $item = array(
       '#type' => 'fieldset',
-      '#title' => $game->labelDate(),
       '#attributes' => array(
-        'class' => array('game', 'game-wrapper'),
+        'class' => array('content'),
       ),
+      '#prefix' => '<div class="columns medium-6 block-content game">',
+      '#suffix' => '</div>',
+    );
+    $item['date'] = array(
+      '#type' => 'markup',
+      '#markup' => '<p class="center italic">' . $game->labelDate() . '</p>',
     );
     $item['token_id'] = array(
       '#type' => 'hidden',
@@ -95,7 +98,7 @@ class GamesBetting extends FormBase {
         '#attributes' => [
           'class' => ['team_1']
         ],
-        '#prefix' => '<div class="score_team_wrapper score_team_1_wrapper">',
+        '#prefix' => '<div class="score_team_wrapper score_team_1_wrapper small-6 columns">',
         '#suffix' => '</div>',
       );
       $item['score_team_2'] = array(
@@ -108,7 +111,7 @@ class GamesBetting extends FormBase {
         '#attributes' => [
           'class' => ['team_2']
         ],
-        '#prefix' => '<div class="score_team_wrapper score_team_2_wrapper">',
+        '#prefix' => '<div class="score_team_wrapper score_team_2_wrapper small-6 columns">',
         '#suffix' => '</div>',
       );
     } else {
