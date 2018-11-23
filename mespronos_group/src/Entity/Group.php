@@ -328,17 +328,6 @@ class Group extends ContentEntityBase implements GroupInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['baseline'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Base line'))
-      ->setDescription(t('Will be publicly displayed on group list'))
-      ->setSettings(array(
-        'max_length' => 255,
-        'text_processing' => 0,
-      ))
-      ->setDefaultValue(NULL)
-      ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
-
     $fields['description'] = BaseFieldDefinition::create('text_long')
       ->setLabel(t('Description publique du groupe'))
       ->setDisplayConfigurable('view', TRUE)

@@ -42,4 +42,5 @@ function mespronos_group_update_8004() {
 function mespronos_group_update_8005() {
   $entity_manager = \Drupal::entityManager();
   $definition = $entity_manager->getFieldStorageDefinitions('user')['bet_private'];
-  $entity_manager->onFieldStorageDefinitionCreate($definition);}
+  $entity_manager->onFieldStorageDefinitionCreate($definition);
+}
