@@ -3,21 +3,21 @@
     <section class="flags">
         <div class="team team1">
             {{ elements.flags.team1 }}
+            {% if is_score_setted %}
+                <div class="score-team score-team1">
+                    {{ elements.score_team_1 }}
+                </div>
+            {% endif %}
         </div>
         <div class="team team2">
             {{ elements.flags.team2 }}
+            {% if is_score_setted %}
+                <div class="score-team score-team2">
+                    {{ elements.score_team_2 }}
+                </div>
+            {% endif %}
         </div>
     </section>
-    {% if is_score_setted %}
-        <section class="score">
-            <div class="team team1">
-                {{ elements.score_team_1 }}
-            </div>
-            <div class="team team2">
-                {{ elements.score_team_2 }}
-            </div>
-        </section>
-    {% endif %}
     <br />
     {{ elements.betters_bets }}
 </section>
