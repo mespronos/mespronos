@@ -1,6 +1,6 @@
 <article class="block-content medium-6 columns">
     <div class="content">
-        <section class="flex-small flex-left">
+        <section class="flex-tiny flex-left">
             <aside>
                 {{ league_logo }}
             </aside>
@@ -10,7 +10,7 @@
                 <a class="button secondary" href="{{ path('entity.day.canonical', {'day' : day.day })}}">{{ 'See results' | t }}</a>
             </header>
         </section>
-        <footer class="inner flex-small">
+        <footer class="inner flex-tiny">
             <p class="bet-left cap"><label class="">{{ 'Games' | t }}</label><span class="em bold green">{{ nb_game }}</span></p>
             {% if logged_user %}
                 <p class="points cap"><label class="">{{ 'Points' | t }}</label><span class="em bold green">{{ points }}</span></p>

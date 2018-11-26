@@ -1,6 +1,6 @@
 <article class="block-content medium-6 columns">
     <div class="content">
-        <section class="flex-small flex-left">
+        <section class="flex-tiny flex-left">
             <aside class="">
                 {{ league_logo }}
             </aside>
@@ -10,7 +10,7 @@
                 <a class="button secondary" href="{{ path('mespronos.day.bet', {'day' : day.day })}}">{{ 'Bet now' | t }}</a>
             </header>
         </section>
-        <footer class="inner flex-small">
+        <footer class="inner flex-tiny">
             <p class="gamediscret cap"><label>{{ 'Games' | t }}</label><span class="em green bold">{{ day.nb_game }}</span></p>
             <p class="bet-left cap"><label>{{ 'Games to bet' | t }}</label><span class="em green bold">{{ nb_bet_left }}</span></p>
             <p class="time-left cap"><label>{{ 'Time left' | t }}</label><span class="em red"><i class="far fa-clock"></i>&nbsp;{{ time_left }}</span></p>
