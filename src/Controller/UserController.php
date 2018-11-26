@@ -8,6 +8,7 @@
 namespace Drupal\mespronos\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\field\Entity\FieldConfig;
 use Drupal\mespronos\Entity\Base\MPNContentEntityBase;
 use Drupal\user\Entity\User;
 use Drupal\file\Entity\File;
@@ -42,7 +43,10 @@ class UserController extends ControllerBase {
       return MPNContentEntityBase::getImageAsRenderableArray($user_picture_file, $style_name);
     }
     else {
-      return [];
+      $field_info = FieldConfig::loadByName('user', 'user', 'user_picture');
+      $image_uuid = $field_info->getSetting('default_image')['uuid'];
+      $image = \Drupal::service('entity.repository')->loadEntityByUuid('file', $image_uuid);
+      return MPNContentEntityBase::getImageAsRenderableArray($image, $style_name);
     }
   }
 
