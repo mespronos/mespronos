@@ -32,13 +32,14 @@ class GamesBetting extends FormBase {
     $league = $day->getLeague();
     $games = GameController::getGamesToBet($day);
 
+
+
     $betting_type = $league->getBettingType(TRUE);
     $form['games'] = array(
       '#type' => 'container',
       '#tree' => TRUE,
       '#attributes' => array(
         'class' => array(
-          'row',
         ),
       ),
     );
