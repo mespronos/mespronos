@@ -33,7 +33,7 @@ class UserProfilBlock extends BlockBase {
     $user = User::load($user->id());
     $palmares = RankingController::getPalmares($user);
     $statistics = \Drupal::service('mespronos.statistics_manager')->getUserStatistics($user);
-    $user_picture = UserController::getUserPictureAsRenderableArray($user);
+    $user_picture = UserController::getUserPictureAsRenderableArray($user, 'medium');
     $ranking = RankingGeneral::getRankingForBetter($user);
     return [
       '#theme' =>'user-profile-block',
