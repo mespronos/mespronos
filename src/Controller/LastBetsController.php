@@ -34,6 +34,9 @@ class LastBetsController extends ControllerBase {
       $group = NULL;
     }
     $days = DayController::getlastDays($nb, $league, $include_archived);
+    if(\count($days) === 0) {
+      return [];
+    }
     $build = [
       '#cache' => [
         'contexts' => ['user'],

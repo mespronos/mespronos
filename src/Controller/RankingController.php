@@ -174,20 +174,22 @@ class RankingController extends ControllerBase {
    */
   public static function getPalmares(\Drupal\user\Entity\User $user) {
     $data = self::getPalmaresData($user);
-    if (!empty($data)) {
-      return [
-        '#theme' => 'table',
-        '#rows' => self::parsePalmares($data),
-        '#header' => self::getPalmaresHeader(),
-        '#footer' => self::getPalmaresFooter(),
-        '#cache' => [
-          'contexts' => ['route'],
-          'tags' => ['palmares', 'user:'.$user->id()],
+    $items = [];
+    foreach ($data as $item) {
+      /** @var League $league */
+      $league = $item->league;
+      $items[] = [
+        '#theme' => 'user_palmares_item',
+        '#league' => [
+          'url' => $league->url(),
+          'name' => $league->label(),
+          'logo' => $league->getLogo('mespronos_bloc_aside')
         ],
+        '#ranking' => $item->position,
+        '#betters' => $item->betters,
       ];
-    } else {
-      return false;
     }
+    return $items;
   }
 
   private static function getPalmaresData(\Drupal\user\Entity\User $user) {
@@ -211,34 +213,4 @@ class RankingController extends ControllerBase {
     return $palmares;
   }
 
-  public static function getPalmaresHeader() {
-    return [
-      t('League', array(), array('context' => 'mespronos-block')),
-      t('Ranking', array(), array('context' => 'mespronos-block')),
-      t('Betters', array(), array('context' => 'mespronos-block')),
-    ];
-  }
-
-  public static function parsePalmares($data) {
-    $rows = [];
-    foreach ($data  as $palmares_line) {
-      $league_renderable = $palmares_line->league->getRenderableLabel();
-      $row = [
-        'data' => [
-          'league' => [
-            'data' => render($league_renderable),
-            'class' => ['day-cell']
-          ],
-          'ranking' => $palmares_line->position,
-          'betters' => $palmares_line->betters,
-        ]
-      ];
-      $rows[] = $row;
-    }
-    return $rows;
-  }
-
-  public static function getPalmaresFooter() {
-    return [];
-  }
 }

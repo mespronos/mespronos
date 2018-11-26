@@ -1,3 +1,7 @@
-<article  {{ attributes }}>
-    {{ content }}
+{% set attributes = attributes.addClass(['block-content']) %}
+<article{{ attributes }}>
+    <div class="small-12 columns center">
+        {{ content.field_league_logo }}
+    </div>
+    {{ content | without('field_league_logo') }}
 </article>

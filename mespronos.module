@@ -197,6 +197,14 @@ function mespronos_theme() {
       'average' => NULL,
     ],
   ];
+  $theme['user_palmares_item'] = [
+    'template' => 'user-palmares-item',
+    'variables' => [
+      'league' => [],
+      'ranking' => NULL,
+      'betters' => NULL,
+    ],
+  ];
 
   return $theme;
 }

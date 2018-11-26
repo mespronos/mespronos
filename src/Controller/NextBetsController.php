@@ -25,6 +25,9 @@ class NextBetsController extends ControllerBase {
     $user = User::load(\Drupal::currentUser()->id());
     $user_uid = $user->id();
     $days = DayController::getNextDaysToBet($nb, $league);
+    if(\count($days) === 0) {
+      return [];
+    }
     $build = [
       '#cache' => [
         'contexts' => ['user'],
