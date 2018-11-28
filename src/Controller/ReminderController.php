@@ -127,8 +127,9 @@ class ReminderController extends ControllerBase {
     $emailvars['#day'] = [
       'label' => $league->label() . ' - ' . $day->label(),
       'games' => [],
-      'bet_link' => Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(),
+      'bet_link' => substr(Url::fromRoute('mespronos.day.bet', ['day' => $day->id()])->toString(), 1),
     ];
+    dd($emailvars['#day']['bet_link']);
     $style = ImageStyle::load('thumbnail');
 
     foreach ($games as $game) {
