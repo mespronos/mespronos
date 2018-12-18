@@ -1,5 +1,5 @@
 league :
-  name : "Ligue des champions 2018/2019"
+  name : "Ligue des champions"
   sport : 'Football'
   status : 'active'
   classement : true
