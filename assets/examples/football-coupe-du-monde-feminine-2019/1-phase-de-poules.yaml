@@ -1,0 +1,91 @@
+league :
+  name : 'Coupe du monde féminine 2019'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 1
+      name : 'Première journée de poule'
+      day_default_date : 2019-06-07t19:00:00
+      games :
+        - game : France | République de Corée
+          game_date : 2019-06-07t19:00:00
+        - game : Allemagne | Chine
+          game_date : 2019-06-08t13:00:00
+        - game : Espagne | Afrique du Sud
+          game_date : 2019-06-08t16:00:00
+        - game : Norvège | Nigeria
+          game_date : 2019-06-08t19:00:00
+        - game : Australie | Italie
+          game_date : 2019-06-09t11:00:00
+        - game : Brésil | Jamaïque
+          game_date : 2019-06-09t13:30:00
+        - game : Angleterre | Ecosse
+          game_date : 2019-06-09t16:00:00
+        - game : Argentine | Japon
+          game_date: 2019-06-10t16:00:00
+        - game : Canada | Cameroun
+          game_date: 2019-06-10t19:00:00
+        - game : Nouvelle-Zélande | Pays-Bas
+          game_date : 2019-06-11t13:00:00
+        - game : Chili | Suède
+          game_date : 2019-06-11t16:00:00
+        - game : USA | Thaïlande
+          game_date : 2019-06-11t19:00:00
+    - number: 2
+      name: 'Seconde journée de poule'
+      day_default_date: 2019-06-12t13:00:00
+      games:
+        - game: Nigeria | République de Corée
+          game_date: 2019-06-12t13:00:00
+        - game: Allemagne | Espagne
+          game_date: 2019-06-12t16:00:00
+        - game: France | Norvège
+          game_date: 2019-06-12t19:00:00
+        - game: Australie | Brésil
+          game_date: 2019-06-13t16:00:00
+        - game: Afrique du Sud | Chine
+          game_date: 2019-06-13t19:00:00
+        - game: Japon | Ecosse
+          game_date: 2019-06-14t13:00:00
+        - game: Jamaïque | Italie
+          game_date: 2019-06-14t16:00:00
+        - game: Angleterre | Argentine
+          game_date: 2019-06-14t19:00:00
+        - game: Pays-Bas | Cameroun
+          game_date: 2019-06-15t13:00:00
+        - game: Canada | Nouvelle-Zélande
+          game_date: 2019-06-15t19:00:00
+        - game: Suède | Thaïlande
+          game_date: 2019-06-16t13:00:00
+        - game: USA | Chili
+          game_date: 2019-06-16t16:00:00
+    - number: 3
+      name: 'Troisième journée de poule'
+      day_default_date: 2019-06-17t16:00:00
+      games:
+        - game: Chine | Espagne
+          game_date: 2019-06-17t16:00:00
+        - game: Afrique du Sud | Allemagne
+          game_date: 2019-06-17t16:00:00
+        - game: Nigeria | France
+          game_date: 2019-06-17t19:00:00
+        - game: République de Corée | Norvège
+          game_date: 2019-06-17t19:00:00
+        - game: Jamaïque | Australie
+          game_date: 2019-06-18t19:00:00
+        - game: Italie | Brésil
+          game_date: 2019-06-18t19:00:00
+        - game: Japon | Angleterre
+          game_date: 2019-06-19t19:00:00
+        - game: Ecosse | Argentine
+          game_date: 2019-06-19t19:00:00
+        - game: Cameroun | Nouvelle-Zélande
+          game_date: 2019-06-20t16:00:00
+        - game: Pays-Bas | Canada
+          game_date: 2019-06-20t16:00:00
+        - game: Suède | USA
+          game_date: 2019-06-20t19:00:00
+        - game: Thaïlande | Chili
+          game_date: 2019-06-20t19:00:00
