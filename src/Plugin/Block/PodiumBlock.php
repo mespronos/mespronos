@@ -29,6 +29,16 @@ class PodiumBlock extends BlockBase {
   public function build() {
     /** @var \Drupal\mespronos\Entity\RankingGeneral[] $rankings */
     $rankings = \Drupal::service('mespronos.ranking_manager')->getTop();
+    if(\count($rankings) === 0) {
+      $build =  [
+        '#cache' => [
+          'tags' => [
+            'ranking'
+          ],
+        ],
+      ];
+      return $build;
+    }
     $podium = [];
     foreach ($rankings as $ranking) {
       $better = $ranking->getOwner();

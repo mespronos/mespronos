@@ -54,9 +54,9 @@ class LastBets extends BlockBase {
     $return['last-bet'] = $lastBetsController->lastBets(NULL, 4, 'BLOCK');
     if (!$return['last-bet']) {
       $return['more-last-bets'] = [
-        '#markup'=> t('You can see past results on <a href="@url">leagues page</a>.', [
+        '#markup'=> '<div class="columns large-12">' . t('You can see past results on <a href="@url">leagues page</a>.', [
           '@url' => Url::fromRoute('mespronos.leagues.list')->toString()
-        ]),
+        ]) . '</div>',
       ];
     }
 

@@ -69,7 +69,7 @@ class RankingController extends ControllerBase {
     if($withAverage) {
       $rankingAverage = RankingGeneral::getRankingAverage(NULL, 'general', 'ranking_general', $group);
     }
-    if (\count($ranking) === 0 && \count($rankingAverage) === 0) {
+    if (\count($ranking) === 0) {
       return FALSE;
     }
     return [
