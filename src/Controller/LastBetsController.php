@@ -35,7 +35,9 @@ class LastBetsController extends ControllerBase {
     }
     $days = DayController::getlastDays($nb, $league, $include_archived);
     if(\count($days) === 0) {
-      return [];
+
+      $url = Url::fromRoute('mespronos.leagues.list');
+      return ['#markup' => '<div class="columns small-12">Aucun résultat pour l\'instant, retrouvez les compétions archivées sur la page ' . \Drupal::l('Compétitions', $url) . '.</div>'];
     }
     $build = [
       '#cache' => [
