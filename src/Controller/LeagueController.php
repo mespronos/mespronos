@@ -110,6 +110,11 @@ class LeagueController extends ControllerBase {
       }
       $return_leagues[$league->getStatus(true)][] = $league;
     }
+    foreach ($return_leagues as &$league_by_status) {
+      usort($league_by_status, function (League $a, League $b) {
+        return $a->getChangedTime() < $b->getChangedTime();
+      });
+    }
     return $return_leagues;
   }
 
