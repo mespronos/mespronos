@@ -11,6 +11,7 @@ function mespronos_group_theme() {
   $themes['group'] = array(
     'render element' => 'elements',
     'template' => 'group',
+    'file' => 'templates-preprocess/group.page.inc',
   );
 
   $themes['group-list'] = array(
@@ -66,26 +67,6 @@ function mespronos_group_entity_extra_field_info() {
     'visible' => TRUE,
   );
   return $extra;
-}
-
-/**
- * Implements hook_preprocess_HOOK().
- */
-function mespronos_group_preprocess_group(&$variables) {
-  /**@var Group $group */
-  $group = $variables['group'];
-  foreach (Element::children($variables['elements']) as $key) {
-    $variables['content'][$key] = $variables['elements'][$key];
-  }
-  $variables['has_description'] = $variables['elements']['#view_mode'] === 'full' && NULL !== $group->get('description')->value;
-  $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
-  $variables['member'] = t('@nb members', ['@nb' => $group->getMemberNumber()]);
-  $variables['is_member'] = $group->isMemberOf($user);
-  $variables['display_join_link'] = \Drupal::currentUser()->isAuthenticated();
-  $variables['betters'] = $group->getMemberNumber();
-  $variables['join_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.join', ['group' => $group->id()]);
-  $variables['leave_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.leave', ['group' => $group->id()]);
-  $variables['#cache'] = ['context' => 'user'];
 }
 
 function mespronos_group_group_view(array &$build, Group $entity, EntityViewDisplay $display, $view_mode) {

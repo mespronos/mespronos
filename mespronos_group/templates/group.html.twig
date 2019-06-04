@@ -11,10 +11,12 @@
                         <div class="inner">
 
                             <h2>{{ content.name }}</h2>
+                            <h3>{{ "À propos du groupe" | t }}</h3>
                             {% if has_description or has_baseline %}
-                                <h3>{{ "À propos du groupe" | t }}</h3>
                                 {{ content.description }}
                             {% endif %}
+                            <p>{{ member }}<br />
+                            {{ created }}</p>
                         </div>
                     </header>
                 </div>
