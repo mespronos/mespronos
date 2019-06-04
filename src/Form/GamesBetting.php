@@ -4,8 +4,8 @@ namespace Drupal\mespronos\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Core\Render\Element;
 use Drupal\Core\Cache\Cache;
+use Drupal\mespronos\Event\UserBetEvent;
 use Drupal\user\Entity\User;
 use Drupal\mespronos\Entity\Game;
 use Drupal\mespronos\Controller\BetController;
@@ -225,6 +225,10 @@ class GamesBetting extends FormBase {
     if ($j > 0) {
       drupal_set_message($this->t('@nb_mark bet couldn\'t be saved or updated', array('@nb_mark'=>$j)), 'warning');
     }
+
+    $event = new UserBetEvent($user, $day);
+    $event_dispatcher = \Drupal::service('event_dispatcher');
+    $event_dispatcher->dispatch(UserBetEvent::EVENT_NAME, $event);
     $form_state->setRedirect('mespronos.nextbets');
     Cache::invalidateTags(array('user:'.$user->id()));
   }
