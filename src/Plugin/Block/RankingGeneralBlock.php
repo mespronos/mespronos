@@ -28,6 +28,7 @@ class RankingGeneralBlock extends BlockBase {
     $table_data = RankingController::getRankingGeneral(NULL, FALSE);
     if ($table_data) {
       $build = [
+        '#data' => TRUE,
         'table' => $table_data,
         '#cache' => [
           'contexts' => ['user'],
@@ -37,6 +38,7 @@ class RankingGeneralBlock extends BlockBase {
       ];
     } else {
       $build = [
+        '#data' => FALSE,
         '#markup' => t('No ranking for now'),
         '#cache' => [
           'contexts' => ['user'],

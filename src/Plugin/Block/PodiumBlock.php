@@ -31,6 +31,7 @@ class PodiumBlock extends BlockBase {
     $rankings = \Drupal::service('mespronos.ranking_manager')->getTop();
     if(\count($rankings) === 0) {
       $build =  [
+        '#data' => FALSE,
         '#cache' => [
           'tags' => [
             'ranking'
