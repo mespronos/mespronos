@@ -10,7 +10,7 @@ function template_preprocess_group(&$variables) {
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
-  $variables['has_description'] = $variables['elements']['#view_mode'] === 'full' && NULL !== $group->get('description')->value;
+  $variables['has_description'] = NULL !== $group->get('description')->value;
   $user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
   $variables['member'] = t('@nb members', ['@nb' => $group->getMemberNumber()]);
   $variables['created'] = t('Created on @date', ['@date' => date('d/m/Y', $group->getCreatedTime())]);
