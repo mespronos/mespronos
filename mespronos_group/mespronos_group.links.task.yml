@@ -21,6 +21,11 @@ entity.group.edit_form:
   base_route: entity.group.canonical
   title: Modifier mon groupe
 
+entity.group.leave:
+  route_name: mespronos_group.group.leave
+  base_route: entity.group.canonical
+  title: Quitter le groupe
+
 entity.group.delete_form:
   route_name:  entity.group.delete_form
   base_route:  entity.group.canonical
