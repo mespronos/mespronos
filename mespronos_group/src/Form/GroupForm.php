@@ -41,7 +41,8 @@ class GroupForm extends ContentEntityForm {
     ];
 
     if (!\Drupal::currentUser()->hasPermission('choose to join group')) {
-      $form['autojoin']['#default_value'] = FALSE;
+      $form['autojoin']['#default_value'] = TRUE;
+      $form['autojoin']['#value'] = TRUE;
       $form['autojoin']['#access'] = FALSE;
     }
 
