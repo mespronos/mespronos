@@ -15,9 +15,12 @@ function template_preprocess_group(&$variables) {
   $variables['member'] = t('@nb members', ['@nb' => $group->getMemberNumber()]);
   $variables['created'] = t('Created on @date', ['@date' => date('d/m/Y', $group->getCreatedTime())]);
   $variables['is_member'] = $group->isMemberOf($user);
+  $variables['is_admin'] = $group->getOwnerId() === $user->id();
   $variables['display_join_link'] = \Drupal::currentUser()->isAuthenticated();
   $variables['betters'] = $group->getMemberNumber();
-  $variables['join_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.join', ['group' => $group->id()]);
+  $variables['join_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.join', ['group' => $group->id()], ['absolute' => TRUE]);
+  $variables['url'] = $group->toUrl('canonical', ['absolute' => TRUE]);
+  $variables['code'] = $group->getCode();
   $variables['leave_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.leave', ['group' => $group->id()]);
   $variables['#cache'] = ['context' => 'user'];
 }

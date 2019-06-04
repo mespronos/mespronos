@@ -9,7 +9,7 @@
                     </aside>
                     <header class="columns  medium-9">
                         <div class="inner">
-                            <h2>{{ "À propos du groupe" | t }}</h2>
+                            <h2 class="no-margin-top">{{ "À propos du groupe" | t }}</h2>
                             {% if has_description or has_baseline %}
                                 {{ content.description }}
                             {% endif %}
@@ -20,8 +20,20 @@
                 </div>
             </div>
         </div>
-
     </div>
+    {% if is_admin %}
+        <div class="columns large-12">
+            <div class="block-content">
+                <div class="content clearfix">
+                    <div class="inner">
+                        <h2 class="no-margin-top">{{ "Administration du groupe" | t }}</h2>
+                        <p>Pour inviter des personnes à rejoindre le groupe, partagez l'adresse suivante : <a href="{{ join_url }}">{{ join_url }}</a></p>
+                        <p>Si la personne est déjà inscrite sur le site, elle peut rejoindre le groupe via : <a href="{{ url }}">{{ url }}</a> avec le code <code>{{ code }}</code></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
     <div class="columns large-12">
         <h2>{% trans %}members{% endtrans %}</h2>
     </div>
