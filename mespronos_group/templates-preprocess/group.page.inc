@@ -6,6 +6,7 @@ use Drupal\mespronos_group\Entity\Group;
 function template_preprocess_group(&$variables) {
   /**@var Group $group */
   $group = $variables['elements']['#group'];
+  $variables['group'] = $group;
   foreach (Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
