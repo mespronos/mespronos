@@ -36,15 +36,29 @@ class GroupJoiningForm extends FormBase {
       drupal_set_message(t('You are already part of %group_name group', ['%group_name'=>$group->label()]));
       return new RedirectResponse(\Drupal::url('entity.group.canonical', ['group'=>$group->id()]));
     }
-    $form['access_code'] = [
+
+    $form['wrapper'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['block-content', 'medium-6', 'columns']],
+    ];
+    $form['wrapper']['inner'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['content']],
+    ];
+    $form['wrapper']['inner']['sub'] = [
+      '#type' => 'container',
+      '#attributes' => ['class' => ['inner', 'header']],
+    ];
+    $form['wrapper']['inner']['sub']['access_code'] = [
       '#title' => t('Access code'),
       '#type' => 'textfield',
       '#description' => t('This group is private, you need an access code to get in.')
     ];
-    $form['actions']['submit'] = array(
+    $form['wrapper']['inner']['sub']['actions']['submit'] = array(
       '#type' => 'submit',
       '#value' => $this->t('Join group'),
       '#button_type' => 'primary',
+      '#attributes' => ['class' => ['button']],
     );
     return $form;
   }
