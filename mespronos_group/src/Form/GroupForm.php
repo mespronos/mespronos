@@ -31,6 +31,7 @@ class GroupForm extends ContentEntityForm {
       '#type' => 'markup',
       '#markup' => $rederer->renderPlain($warning_vars),
       '#weight' => -10,
+      '#prefix' => '<section class="large-12 columns block-content"><div class="content"><div class="inner">',
     ];
 
     $form['autojoin'] = [
@@ -57,6 +58,8 @@ class GroupForm extends ContentEntityForm {
     } else {
       $form['actions']['submit']['#value'] = t('Create my group !');
     }
+
+    $form['actions']['#suffix'] = '</div></div></section>';
 
     return $form;
   }
