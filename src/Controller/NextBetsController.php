@@ -29,6 +29,8 @@ class NextBetsController extends ControllerBase {
       return [];
     }
     $build = [
+      '#theme' => 'next_bets',
+      '#days' => [],
       '#cache' => [
         'contexts' => ['user'],
         'tags' => ['user:' . $user_uid, 'nextbets'],
@@ -53,7 +55,7 @@ class NextBetsController extends ControllerBase {
         '@i' => $i->format('%I'),
       ]) : t('@GH@im', ['@G' => $i->format('%H'), '@i' => $i->format('%I')]);
 
-      $build[$day->entity->id()] = [
+      $build['#days'][$day->entity->id()] = [
         '#theme' => 'day-to-bet',
         '#day' => $day,
         '#league_logo' => $league->getLogo('mespronos_bloc_aside'),

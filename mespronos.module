@@ -200,6 +200,12 @@ function mespronos_theme() {
       'betters' => NULL,
     ],
   ];
+  $theme['next_bets'] = [
+    'template' => 'next-bets',
+    'variables' => [
+      'days' => [],
+    ],
+  ];
 
   return $theme;
 }
