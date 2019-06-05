@@ -26,7 +26,7 @@ class GroupAccessControlHandler extends EntityAccessControlHandler {
           return AccessResult::allowedIfHasPermission($account, 'view unpublished group entities');
         }
         $user = User::load($account->id());
-        if ($entity->isMemberOf($user)) {
+        if ($entity->isMemberOf($user) || $user->hasPermission('administer group entities')) {
           return AccessResult::allowed();
         }
       break;
