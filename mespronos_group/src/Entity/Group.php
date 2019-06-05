@@ -70,6 +70,13 @@ class Group extends ContentEntityBase implements GroupInterface {
     );
   }
 
+  public static function loadAll() {
+    $query = \Drupal::entityQuery('group');
+    $query->sort('name');
+    $groups = $query->execute();
+    return self::loadMultiple($groups);
+  }
+
   public function label() {
     return $this->getTheName();
   }
