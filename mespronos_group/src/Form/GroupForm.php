@@ -2,6 +2,7 @@
 
 namespace Drupal\mespronos_group\Form;
 
+use Drupal\Core\Database\Query\Condition;
 use Drupal\Core\Entity\ContentEntityForm;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\mespronos_group\Entity\Group;
@@ -65,6 +66,36 @@ class GroupForm extends ContentEntityForm {
     return $form;
   }
 
+  public function validateForm(array &$form, FormStateInterface $form_state) {
+    $code = $form_state->getValue('code')[0]['value'];
+    $group_name = $form_state->getValue('name')[0]['value'];
+
+    $entity = $this->entity;
+    $query = \Drupal::entityQuery('group');
+    if ($entity->id() != NULL) {
+      $query->condition('id', $entity->id(), '<>');
+    }
+    $or = new Condition('OR');
+    $query->condition('name', trim($group_name), 'LIKE');
+    $groups = $query->execute();
+    if(\count($groups) > 0) {
+      $form_state->setError($form['name'], 'Un groupe existe déjà avec le même nom');
+    }
+
+    $query = \Drupal::entityQuery('group');
+    if ($entity->id() != NULL) {
+      $query->condition('id', $entity->id(), '<>');
+    }
+    $query->condition('code', $code);
+    $groups = $query->execute();
+    if(\count($groups) > 0) {
+      $form_state->setError($form['code'], 'Le code d\'accès est déjà utilisé.');
+    }
+
+    return parent::validateForm($form, $form_state);
+
+  }
+
   /**
    * {@inheritdoc}
    */
@@ -99,6 +130,7 @@ class GroupForm extends ContentEntityForm {
           '%label' => $entity->label(),
         ]));
     }
+    $form_state->setRedirect('entity.group.canonical', ['group' => $entity->id()]);
 
     $this->sendMail($user, $entity, $status);
 
