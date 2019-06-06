@@ -1,6 +1,8 @@
 <?php
 
+use Drupal\Core\Link;
 use Drupal\Core\Render\Element;
+use Drupal\Core\Url;
 use Drupal\mespronos_group\Entity\Group;
 
 function template_preprocess_group(&$variables) {
@@ -19,6 +21,8 @@ function template_preprocess_group(&$variables) {
   $variables['display_join_link'] = \Drupal::currentUser()->isAuthenticated();
   $variables['betters'] = $group->getMemberNumber();
   $variables['join_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.join', ['group' => $group->id()], ['absolute' => TRUE]);
+  $variables['url_inscription'] = Url::fromRoute('mespronos.registration',[], ['query' => ['group_code' => $group->getCode()], 'absolute'=>true]);
+
   $variables['url'] = $group->toUrl('canonical', ['absolute' => TRUE]);
   $variables['code'] = $group->getCode();
   $variables['leave_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.leave', ['group' => $group->id()]);
