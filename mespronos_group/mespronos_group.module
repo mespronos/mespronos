@@ -110,7 +110,6 @@ function mespronos_group_form_user_register_form_alter(&$form, \Drupal\Core\Form
     $form['bet_private']['#access'] = FALSE;
   }
   $form['#validate'][] = 'mespronos_group_form_user_register_form_validate';
-  $form['#submit'][] = 'mespronos_group_form_user_register_form_submit';
 }
 
 function mespronos_group_form_user_register_form_validate(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
@@ -120,14 +119,7 @@ function mespronos_group_form_user_register_form_validate(&$form, \Drupal\Core\F
     if (!$group) {
       $form_state->setErrorByName('group_access_code', t('The access code to join a group is wrong'));
     }
-  }
-}
-
-function mespronos_group_form_user_register_form_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
-  $code = $form_state->getValue('group_access_code');
-  if ($code != NULL) {
-    $group = Group::loadByCode($code);
-    if ($group) {
+    else {
       $formO = $form_state->getFormObject();
       $user = $formO->getEntity();
       $user->set('field_group', $group->id());
