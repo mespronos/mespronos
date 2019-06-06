@@ -226,6 +226,7 @@ function mespronos_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormS
     foreach ($leagues as $league) {
       $form['league_id']['#options'][$league->id()] = $league->label();
     }
+    krsort( $form['league_id']['#options']);
 
     /** @var Day[] $days */
     $days = Day::loadMultiple();
@@ -243,6 +244,7 @@ function mespronos_form_views_exposed_form_alter(&$form, \Drupal\Core\Form\FormS
       }
       $form['day_id']['#options'][$day->id()] = $form['league_id']['#options'][$league] . ' - ' . $day->label();
     }
+    krsort($form['day_id']['#options']);
   }
 }
 
