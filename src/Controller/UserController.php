@@ -26,7 +26,7 @@ class UserController extends ControllerBase {
     return [
       '#theme' => 'user-ranking',
       '#user'=> [
-        'name'=> $user->getAccountName(),
+        'name'=> $user->getDisplayName(),
         'url'=> $user->url(),
         'id'=> $user->id(),
         'avatar'=> $picture,
