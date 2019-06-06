@@ -50,7 +50,7 @@ class PodiumBlock extends BlockBase {
         'position' => $ranking->getPosition(),
         'points' => $ranking->getPoints(),
         'bets' => $ranking->getGameBetted(),
-        'average' => number_format($ranking->getPoints() / $ranking->getGameBetted(),3),
+        'average' => number_format($ranking->getPoints() / $ranking->getGameBetted(),2),
         'url' => $better->url(),
       ];
     }
