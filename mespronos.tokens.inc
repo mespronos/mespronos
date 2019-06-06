@@ -28,11 +28,16 @@ function mespronos_token_info() {
         'name' => t('Day'),
         'description' => t('Tokens related to a day.'),
       ],
+      'team' => [
+        'name' => t('Team'),
+        'description' => t('Tokens related to a team.'),
+      ],
     ],
     'tokens' => [
       'league' => _mespronos_token_info_league(),
       'game' => _mespronos_token_info_game(),
       'day' => _mespronos_token_info_day(),
+      'team' => _mespronos_token_info_team(),
     ],
   ];
 }
@@ -95,6 +100,18 @@ function _mespronos_token_info_day() {
   return $tokens;
 }
 
+function _mespronos_token_info_team() {
+  $tokens = [
+    'id' => [
+      'name' => t('Team ID'),
+    ],
+    'name' => [
+      'name' => t('Team name'),
+    ],
+  ];
+  return $tokens;
+}
+
 /**
  * Implements hook_tokens().
  */
@@ -112,6 +129,10 @@ function mespronos_tokens($type, $tokens, array $data) {
 
       case 'day':
         _mespronos_tokens_day($tokens, $data['entity'], $replacements);
+        break;
+
+      case 'team':
+        _mespronos_tokens_team($tokens, $data['entity'], $replacements);
         break;
     }
   }
@@ -188,6 +209,20 @@ function _mespronos_tokens_day($tokens, Day $day, &$replacements) {
       case 'league_logo':
         $league = $day->getLeague();
         $replacements[$original] = $league->getLogoUrl();
+        break;
+    }
+  }
+}
+
+function _mespronos_tokens_team($tokens, \Drupal\mespronos\Entity\Team $team, &$replacements) {
+  foreach ($tokens as $name => $original) {
+    switch ($name) {
+      case 'id':
+        $replacements[$original] = $team->id();
+        break;
+
+      case 'name':
+        $replacements[$original] = $team->label();
         break;
     }
   }
