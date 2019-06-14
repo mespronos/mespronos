@@ -26,5 +26,5 @@ function template_preprocess_group(&$variables) {
   $variables['url'] = $group->toUrl('canonical', ['absolute' => TRUE]);
   $variables['code'] = $group->getCode();
   $variables['leave_url'] = \Drupal\Core\Url::fromRoute('mespronos_group.group.leave', ['group' => $group->id()]);
-  $variables['#cache']['context'][] = 'user';
+  $variables['#cache']['contexts'][] = 'user';
 }
