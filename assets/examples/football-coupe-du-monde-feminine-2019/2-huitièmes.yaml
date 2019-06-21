@@ -1,0 +1,28 @@
+league :
+  name : 'Coupe du monde féminine 2019'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 4
+      name : '1/8e finale'
+      day_default_date : 2019-06-22t19:00:00
+      games :
+        - game: Norvège | Australie
+          game_date: 2019-06-22t19:00:00
+        - game: Angleterre | Cameroun
+          game_date: 2019-06-23t15:30:00
+        - game: France | Brésil
+          game_date: 2019-06-23t19:00:00
+        - game: Espagne | USA
+          game_date: 2019-06-24t16:00:00
+        - game: Italie | Chine
+          game_date: 2019-06-25t16:00:00
+        - game: Pays-Bas | Japon
+          game_date: 2019-06-25t19:00:00
+        - game: Allemagne | Nigeria
+          game_date: 2019-06-22t15:30:00
+        - game: Suède | Canada
+          game_date: 2019-06-24t19:00:00
+
