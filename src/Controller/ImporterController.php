@@ -92,8 +92,7 @@ class ImporterController extends ControllerBase {
       Cache::invalidateTags(array('ranking'));
       $messages[] = t('Ranking updated for @nb_ranking days', array('@nb_ranking'=>$i));
     }
-    Cache::invalidateTags(array('nextbets'));
-    Cache::invalidateTags(array('lastbets'));
+    Cache::invalidateTags(['nextbets','lastbets']);
 
     $messages[] = t('@nb games created', array('@nb' => $games['created']));
     $messages[] = t('@nb games updated', array('@nb' => $games['updated']));

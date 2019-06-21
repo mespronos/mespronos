@@ -62,7 +62,12 @@ class NextBetsController extends ControllerBase {
         '#time_left' => $time_left,
         '#nb_bet_left' => $bets_left,
       ];
+
     }
+    $build['#cache'] = [
+      'contexts' => ['user'],
+      'tags' => ['nextbets'],
+    ];
 
     return $build;
   }
