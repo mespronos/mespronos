@@ -51,17 +51,18 @@ class LastBetsController extends ControllerBase {
       $dayEntity = $day->entity;
       $league = $dayEntity->getLeague();
       $ranking = $user->id() > 0 ?  RankingDay::getRankingForBetter($user, $day->entity) : FALSE;
-
-      $build[$day->entity->id()] = [
-        '#theme' => 'day-past',
-        '#day' => $day,
-        '#nb_game' => $dayEntity->getNbGameWIthScore(),
-        '#league_logo' => $league->getLogo('mespronos_bloc_aside'),
-        '#ranking' => $ranking ? $ranking->getPosition($group) : '-',
-        '#points' => $ranking ? $ranking->getPoints() : '-',
-        '#logged_user' => $user->id() > 0,
-        '#nb_betters' => RankingDay::getNumberOfBetters($day->entity, 'day', 'ranking_day', $group),
-      ];
+      if ($ranking) {
+        $build[$day->entity->id()] = [
+          '#theme' => 'day-past',
+          '#day' => $day,
+          '#nb_game' => $dayEntity->getNbGameWIthScore(),
+          '#league_logo' => $league->getLogo('mespronos_bloc_aside'),
+          '#ranking' => $ranking ? $ranking->getPosition($group) : '-',
+          '#points' => $ranking ? $ranking->getPoints() : '-',
+          '#logged_user' => $user->id() > 0,
+          '#nb_betters' => RankingDay::getNumberOfBetters($day->entity, 'day', 'ranking_day', $group),
+        ];
+      }
     }
 
     return $build;
