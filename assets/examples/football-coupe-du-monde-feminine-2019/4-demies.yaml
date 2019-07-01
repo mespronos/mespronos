@@ -1,0 +1,16 @@
+league :
+  name : 'Coupe du monde féminine 2019'
+  sport : 'Football'
+  status : 'active'
+  classement : false
+  betting_type : 'score'
+  days:
+    - number : 6
+      name : '1/2 finale'
+      day_default_date : 2019-07-02t19:00:00
+      games :
+        - game: Angleterre | USA
+          game_date: 2019-07-02t19:00:00
+        - game: Pays-Bas | Suède
+          game_date: 2019-07-03t19:00:00
+
