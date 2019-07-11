@@ -7,7 +7,7 @@ $json_data = json_decode($json_source);
 echo '<pre>';
 $nb_game = 0;
 $journee = 0;
-$league_name = 'Ligue 1 2018/2019';
+$league_name = 'Ligue 1 2019/2020';
 $sport = 'Football';
 $status = 'active';
 $betting_type = 'score';

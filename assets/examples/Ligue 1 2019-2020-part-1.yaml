@@ -1,0 +1,421 @@
+league :
+  name : 'Ligue 1 2019/2020'
+  sport : 'Football'
+  status : 'active'
+  classement : true
+  betting_type : 'score'
+  days:
+    - number : 1
+      day_default_date : 2019-08-10T20:00:00+02:00
+      games :
+        - game : Angers SCO | Girondins de Bordeaux
+          game_date : 2019-08-10T20:00:00+02:00
+        - game : Stade Brestois 29 | Toulouse FC
+          game_date : 2019-08-10T20:00:00+02:00
+        - game : Dijon FCO | AS Saint-Etienne
+          game_date : 2019-08-10T20:00:00+02:00
+        - game : LOSC | FC Nantes
+          game_date : 2019-08-11T20:00:00+02:00
+        - game : Olympique de Marseille | Stade de Reims
+          game_date : 2019-08-10T20:00:00+02:00
+        - game : AS Monaco | Olympique Lyonnais
+          game_date : 2019-08-09T20:00:00+02:00
+        - game : Montpellier Hérault SC | Stade Rennais FC
+          game_date : 2019-08-10T20:00:00+02:00
+        - game : OGC Nice | Amiens SC
+          game_date : 2019-08-10T20:00:00+02:00
+        - game : Paris Saint-Germain | Nîmes Olympique
+          game_date : 2019-08-11T20:00:00+02:00
+        - game : RC Strasbourg Alsace | FC Metz
+          game_date : 2019-08-11T20:00:00+02:00
+    - number : 2
+      day_default_date : 2019-08-17T00:00:00+02:00
+      games :
+        - game : Amiens SC | LOSC
+          game_date : 2019-08-17T20:00:00+02:00
+        - game : Girondins de Bordeaux | Montpellier Hérault SC
+          game_date : 2019-08-17T20:00:00+02:00
+        - game : Olympique Lyonnais | Angers SCO
+          game_date : 2019-08-17T20:00:00+02:00
+        - game : FC Metz | AS Monaco
+          game_date : 2019-08-17T20:00:00+02:00
+        - game : FC Nantes | Olympique de Marseille
+          game_date : 2019-08-17T20:00:00+02:00
+        - game : Nîmes Olympique | OGC Nice
+          game_date : 2019-08-17T20:00:00+02:00
+        - game : Stade de Reims | RC Strasbourg Alsace
+          game_date : 2019-08-17T20:00:00+02:00
+        - game : Stade Rennais FC | Paris Saint-Germain
+          game_date : 2019-08-17T20:00:00+02:00
+        - game : AS Saint-Etienne | Stade Brestois 29
+          game_date : 2019-08-17T20:00:00+02:00
+        - game : Toulouse FC | Dijon FCO
+          game_date : 2019-08-17T20:00:00+02:00
+    - number : 3
+      day_default_date : 2019-08-24T00:00:00+02:00
+      games :
+        - game : Amiens SC | FC Nantes
+          game_date : 2019-08-24T20:00:00+02:00
+        - game : Angers SCO | FC Metz
+          game_date : 2019-08-24T20:00:00+02:00
+        - game : Stade Brestois 29 | Stade de Reims
+          game_date : 2019-08-24T20:00:00+02:00
+        - game : Dijon FCO | Girondins de Bordeaux
+          game_date : 2019-08-24T20:00:00+02:00
+        - game : LOSC | AS Saint-Etienne
+          game_date : 2019-08-24T20:00:00+02:00
+        - game : AS Monaco | Nîmes Olympique
+          game_date : 2019-08-24T20:00:00+02:00
+        - game : Montpellier Hérault SC | Olympique Lyonnais
+          game_date : 2019-08-24T20:00:00+02:00
+        - game : OGC Nice | Olympique de Marseille
+          game_date : 2019-08-24T20:00:00+02:00
+        - game : Paris Saint-Germain | Toulouse FC
+          game_date : 2019-08-24T20:00:00+02:00
+        - game : RC Strasbourg Alsace | Stade Rennais FC
+          game_date : 2019-08-24T20:00:00+02:00
+    - number : 4
+      day_default_date : 2019-08-31T00:00:00+02:00
+      games :
+        - game : Angers SCO | Dijon FCO
+          game_date : 2019-08-31T20:00:00+02:00
+        - game : Olympique Lyonnais | Girondins de Bordeaux
+          game_date : 2019-08-31T20:00:00+02:00
+        - game : Olympique de Marseille | AS Saint-Etienne
+          game_date : 2019-09-01T20:00:00+02:00
+        - game : FC Metz | Paris Saint-Germain
+          game_date : 2019-08-31T20:00:00+02:00
+        - game : FC Nantes | Montpellier Hérault SC
+          game_date : 2019-08-31T20:00:00+02:00
+        - game : Nîmes Olympique | Stade Brestois 29
+          game_date : 2019-08-31T20:00:00+02:00
+        - game : Stade de Reims | LOSC
+          game_date : 2019-08-31T20:00:00+02:00
+        - game : Stade Rennais FC | OGC Nice
+          game_date : 2019-08-31T20:00:00+02:00
+        - game : RC Strasbourg Alsace | AS Monaco
+          game_date : 2019-08-31T20:00:00+02:00
+        - game : Toulouse FC | Amiens SC
+          game_date : 2019-08-31T20:00:00+02:00
+    - number : 5
+      day_default_date : 2019-09-14T00:00:00+02:00
+      games :
+        - game : Amiens SC | Olympique Lyonnais
+          game_date : 2019-09-14T20:00:00+02:00
+        - game : Girondins de Bordeaux | FC Metz
+          game_date : 2019-09-14T20:00:00+02:00
+        - game : Stade Brestois 29 | Stade Rennais FC
+          game_date : 2019-09-14T20:00:00+02:00
+        - game : Dijon FCO | Nîmes Olympique
+          game_date : 2019-09-14T20:00:00+02:00
+        - game : LOSC | Angers SCO
+          game_date : 2019-09-14T20:00:00+02:00
+        - game : AS Monaco | Olympique de Marseille
+          game_date : 2019-09-14T20:00:00+02:00
+        - game : Montpellier Hérault SC | OGC Nice
+          game_date : 2019-09-14T20:00:00+02:00
+        - game : FC Nantes | Stade de Reims
+          game_date : 2019-09-14T20:00:00+02:00
+        - game : Paris Saint-Germain | RC Strasbourg Alsace
+          game_date : 2019-09-14T20:00:00+02:00
+        - game : AS Saint-Etienne | Toulouse FC
+          game_date : 2019-09-14T20:00:00+02:00
+    - number : 6
+      day_default_date : 2019-09-21T00:00:00+02:00
+      games :
+        - game : Angers SCO | AS Saint-Etienne
+          game_date : 2019-09-21T20:00:00+02:00
+        - game : Girondins de Bordeaux | Stade Brestois 29
+          game_date : 2019-09-21T20:00:00+02:00
+        - game : Olympique Lyonnais | Paris Saint-Germain
+          game_date : 2019-09-22T20:00:00+02:00
+        - game : Olympique de Marseille | Montpellier Hérault SC
+          game_date : 2019-09-21T20:00:00+02:00
+        - game : FC Metz | Amiens SC
+          game_date : 2019-09-21T20:00:00+02:00
+        - game : OGC Nice | Dijon FCO
+          game_date : 2019-09-21T20:00:00+02:00
+        - game : Nîmes Olympique | Toulouse FC
+          game_date : 2019-09-21T20:00:00+02:00
+        - game : Stade de Reims | AS Monaco
+          game_date : 2019-09-21T20:00:00+02:00
+        - game : Stade Rennais FC | LOSC
+          game_date : 2019-09-21T20:00:00+02:00
+        - game : RC Strasbourg Alsace | FC Nantes
+          game_date : 2019-09-21T20:00:00+02:00
+    - number : 7
+      day_default_date : 2019-09-25T00:00:00+02:00
+      games :
+        - game : Amiens SC | Girondins de Bordeaux
+          game_date : 2019-09-25T20:00:00+02:00
+        - game : Stade Brestois 29 | Olympique Lyonnais
+          game_date : 2019-09-25T20:00:00+02:00
+        - game : Dijon FCO | Olympique de Marseille
+          game_date : 2019-09-25T20:00:00+02:00
+        - game : LOSC | RC Strasbourg Alsace
+          game_date : 2019-09-25T20:00:00+02:00
+        - game : AS Monaco | OGC Nice
+          game_date : 2019-09-25T20:00:00+02:00
+        - game : Montpellier Hérault SC | Nîmes Olympique
+          game_date : 2019-09-25T20:00:00+02:00
+        - game : FC Nantes | Stade Rennais FC
+          game_date : 2019-09-25T20:00:00+02:00
+        - game : Paris Saint-Germain | Stade de Reims
+          game_date : 2019-09-25T20:00:00+02:00
+        - game : AS Saint-Etienne | FC Metz
+          game_date : 2019-09-25T20:00:00+02:00
+        - game : Toulouse FC | Angers SCO
+          game_date : 2019-09-25T20:00:00+02:00
+    - number : 8
+      day_default_date : 2019-09-28T00:00:00+02:00
+      games :
+        - game : Angers SCO | Amiens SC
+          game_date : 2019-09-28T20:00:00+02:00
+        - game : Girondins de Bordeaux | Paris Saint-Germain
+          game_date : 2019-09-28T20:00:00+02:00
+        - game : Olympique Lyonnais | FC Nantes
+          game_date : 2019-09-28T20:00:00+02:00
+        - game : Olympique de Marseille | Stade Rennais FC
+          game_date : 2019-09-28T20:00:00+02:00
+        - game : FC Metz | Toulouse FC
+          game_date : 2019-09-28T20:00:00+02:00
+        - game : AS Monaco | Stade Brestois 29
+          game_date : 2019-09-28T20:00:00+02:00
+        - game : OGC Nice | LOSC
+          game_date : 2019-09-28T20:00:00+02:00
+        - game : Nîmes Olympique | AS Saint-Etienne
+          game_date : 2019-09-28T20:00:00+02:00
+        - game : Stade de Reims | Dijon FCO
+          game_date : 2019-09-28T20:00:00+02:00
+        - game : RC Strasbourg Alsace | Montpellier Hérault SC
+          game_date : 2019-09-28T20:00:00+02:00
+    - number : 9
+      day_default_date : 2019-10-05T00:00:00+02:00
+      games :
+        - game : Amiens SC | Olympique de Marseille
+          game_date : 2019-10-05T20:00:00+02:00
+        - game : Stade Brestois 29 | FC Metz
+          game_date : 2019-10-05T20:00:00+02:00
+        - game : Dijon FCO | RC Strasbourg Alsace
+          game_date : 2019-10-05T20:00:00+02:00
+        - game : LOSC | Nîmes Olympique
+          game_date : 2019-10-05T20:00:00+02:00
+        - game : Montpellier Hérault SC | AS Monaco
+          game_date : 2019-10-05T20:00:00+02:00
+        - game : FC Nantes | OGC Nice
+          game_date : 2019-10-05T20:00:00+02:00
+        - game : Paris Saint-Germain | Angers SCO
+          game_date : 2019-10-05T20:00:00+02:00
+        - game : Stade Rennais FC | Stade de Reims
+          game_date : 2019-10-05T20:00:00+02:00
+        - game : AS Saint-Etienne | Olympique Lyonnais
+          game_date : 2019-10-06T20:00:00+02:00
+        - game : Toulouse FC | Girondins de Bordeaux
+          game_date : 2019-10-05T20:00:00+02:00
+    - number : 10
+      day_default_date : 2019-10-19T00:00:00+02:00
+      games :
+        - game : Angers SCO | Stade Brestois 29
+          game_date : 2019-10-19T20:00:00+02:00
+        - game : Girondins de Bordeaux | AS Saint-Etienne
+          game_date : 2019-10-19T20:00:00+02:00
+        - game : Olympique Lyonnais | Dijon FCO
+          game_date : 2019-10-19T20:00:00+02:00
+        - game : Olympique de Marseille | RC Strasbourg Alsace
+          game_date : 2019-10-19T20:00:00+02:00
+        - game : FC Metz | FC Nantes
+          game_date : 2019-10-19T20:00:00+02:00
+        - game : AS Monaco | Stade Rennais FC
+          game_date : 2019-10-19T20:00:00+02:00
+        - game : OGC Nice | Paris Saint-Germain
+          game_date : 2019-10-19T20:00:00+02:00
+        - game : Nîmes Olympique | Amiens SC
+          game_date : 2019-10-19T20:00:00+02:00
+        - game : Stade de Reims | Montpellier Hérault SC
+          game_date : 2019-10-19T20:00:00+02:00
+        - game : Toulouse FC | LOSC
+          game_date : 2019-10-19T20:00:00+02:00
+    - number : 11
+      day_default_date : 2019-10-26T00:00:00+02:00
+      games :
+        - game : Stade Brestois 29 | Dijon FCO
+          game_date : 2019-10-26T20:00:00+02:00
+        - game : LOSC | Girondins de Bordeaux
+          game_date : 2019-10-26T20:00:00+02:00
+        - game : Olympique Lyonnais | FC Metz
+          game_date : 2019-10-26T20:00:00+02:00
+        - game : Montpellier Hérault SC | Angers SCO
+          game_date : 2019-10-26T20:00:00+02:00
+        - game : FC Nantes | AS Monaco
+          game_date : 2019-10-26T20:00:00+02:00
+        - game : Paris Saint-Germain | Olympique de Marseille
+          game_date : 2019-10-27T20:00:00+01:00
+        - game : Stade de Reims | Nîmes Olympique
+          game_date : 2019-10-26T20:00:00+02:00
+        - game : Stade Rennais FC | Toulouse FC
+          game_date : 2019-10-26T20:00:00+02:00
+        - game : AS Saint-Etienne | Amiens SC
+          game_date : 2019-10-26T20:00:00+02:00
+        - game : RC Strasbourg Alsace | OGC Nice
+          game_date : 2019-10-26T20:00:00+02:00
+    - number : 12
+      day_default_date : 2019-11-02T00:00:00+01:00
+      games :
+        - game : Amiens SC | Stade Brestois 29
+          game_date : 2019-11-02T20:00:00+01:00
+        - game : Angers SCO | RC Strasbourg Alsace
+          game_date : 2019-11-02T20:00:00+01:00
+        - game : Girondins de Bordeaux | FC Nantes
+          game_date : 2019-11-02T20:00:00+01:00
+        - game : Dijon FCO | Paris Saint-Germain
+          game_date : 2019-11-02T20:00:00+01:00
+        - game : Olympique de Marseille | LOSC
+          game_date : 2019-11-02T20:00:00+01:00
+        - game : FC Metz | Montpellier Hérault SC
+          game_date : 2019-11-02T20:00:00+01:00
+        - game : OGC Nice | Stade de Reims
+          game_date : 2019-11-02T20:00:00+01:00
+        - game : Nîmes Olympique | Stade Rennais FC
+          game_date : 2019-11-02T20:00:00+01:00
+        - game : AS Saint-Etienne | AS Monaco
+          game_date : 2019-11-02T20:00:00+01:00
+        - game : Toulouse FC | Olympique Lyonnais
+          game_date : 2019-11-02T20:00:00+01:00
+    - number : 13
+      day_default_date : 2019-11-09T00:00:00+01:00
+      games :
+        - game : Stade Brestois 29 | Paris Saint-Germain
+          game_date : 2019-11-09T20:00:00+01:00
+        - game : LOSC | FC Metz
+          game_date : 2019-11-09T20:00:00+01:00
+        - game : Olympique de Marseille | Olympique Lyonnais
+          game_date : 2019-11-10T20:00:00+01:00
+        - game : AS Monaco | Dijon FCO
+          game_date : 2019-11-09T20:00:00+01:00
+        - game : Montpellier Hérault SC | Toulouse FC
+          game_date : 2019-11-09T20:00:00+01:00
+        - game : FC Nantes | AS Saint-Etienne
+          game_date : 2019-11-09T20:00:00+01:00
+        - game : OGC Nice | Girondins de Bordeaux
+          game_date : 2019-11-09T20:00:00+01:00
+        - game : Stade de Reims | Angers SCO
+          game_date : 2019-11-09T20:00:00+01:00
+        - game : Stade Rennais FC | Amiens SC
+          game_date : 2019-11-09T20:00:00+01:00
+        - game : RC Strasbourg Alsace | Nîmes Olympique
+          game_date : 2019-11-09T20:00:00+01:00
+    - number : 14
+      day_default_date : 2019-11-23T00:00:00+01:00
+      games :
+        - game : Amiens SC | RC Strasbourg Alsace
+          game_date : 2019-11-23T20:00:00+01:00
+        - game : Angers SCO | Nîmes Olympique
+          game_date : 2019-11-23T20:00:00+01:00
+        - game : Girondins de Bordeaux | AS Monaco
+          game_date : 2019-11-23T20:00:00+01:00
+        - game : Stade Brestois 29 | FC Nantes
+          game_date : 2019-11-23T20:00:00+01:00
+        - game : Dijon FCO | Stade Rennais FC
+          game_date : 2019-11-23T20:00:00+01:00
+        - game : Olympique Lyonnais | OGC Nice
+          game_date : 2019-11-23T20:00:00+01:00
+        - game : FC Metz | Stade de Reims
+          game_date : 2019-11-23T20:00:00+01:00
+        - game : Paris Saint-Germain | LOSC
+          game_date : 2019-11-23T20:00:00+01:00
+        - game : AS Saint-Etienne | Montpellier Hérault SC
+          game_date : 2019-11-23T20:00:00+01:00
+        - game : Toulouse FC | Olympique de Marseille
+          game_date : 2019-11-23T20:00:00+01:00
+    - number : 15
+      day_default_date : 2019-11-30T00:00:00+01:00
+      games :
+        - game : LOSC | Dijon FCO
+          game_date : 2019-11-30T20:00:00+01:00
+        - game : Olympique de Marseille | Stade Brestois 29
+          game_date : 2019-11-30T20:00:00+01:00
+        - game : AS Monaco | Paris Saint-Germain
+          game_date : 2019-11-30T20:00:00+01:00
+        - game : Montpellier Hérault SC | Amiens SC
+          game_date : 2019-11-30T20:00:00+01:00
+        - game : FC Nantes | Toulouse FC
+          game_date : 2019-11-30T20:00:00+01:00
+        - game : OGC Nice | Angers SCO
+          game_date : 2019-11-30T20:00:00+01:00
+        - game : Nîmes Olympique | FC Metz
+          game_date : 2019-11-30T20:00:00+01:00
+        - game : Stade de Reims | Girondins de Bordeaux
+          game_date : 2019-11-30T20:00:00+01:00
+        - game : Stade Rennais FC | AS Saint-Etienne
+          game_date : 2019-11-30T20:00:00+01:00
+        - game : RC Strasbourg Alsace | Olympique Lyonnais
+          game_date : 2019-11-30T20:00:00+01:00
+    - number : 16
+      day_default_date : 2019-12-04T00:00:00+01:00
+      games :
+        - game : Amiens SC | Stade de Reims
+          game_date : 2019-12-04T20:00:00+01:00
+        - game : Angers SCO | Olympique de Marseille
+          game_date : 2019-12-04T20:00:00+01:00
+        - game : Girondins de Bordeaux | Nîmes Olympique
+          game_date : 2019-12-04T20:00:00+01:00
+        - game : Stade Brestois 29 | RC Strasbourg Alsace
+          game_date : 2019-12-04T20:00:00+01:00
+        - game : Dijon FCO | Montpellier Hérault SC
+          game_date : 2019-12-04T20:00:00+01:00
+        - game : Olympique Lyonnais | LOSC
+          game_date : 2019-12-04T20:00:00+01:00
+        - game : FC Metz | Stade Rennais FC
+          game_date : 2019-12-04T20:00:00+01:00
+        - game : Paris Saint-Germain | FC Nantes
+          game_date : 2019-12-04T20:00:00+01:00
+        - game : AS Saint-Etienne | OGC Nice
+          game_date : 2019-12-04T20:00:00+01:00
+        - game : Toulouse FC | AS Monaco
+          game_date : 2019-12-04T20:00:00+01:00
+    - number : 17
+      day_default_date : 2019-12-07T00:00:00+01:00
+      games :
+        - game : LOSC | Stade Brestois 29
+          game_date : 2019-12-07T20:00:00+01:00
+        - game : Olympique de Marseille | Girondins de Bordeaux
+          game_date : 2019-12-07T20:00:00+01:00
+        - game : AS Monaco | Amiens SC
+          game_date : 2019-12-07T20:00:00+01:00
+        - game : Montpellier Hérault SC | Paris Saint-Germain
+          game_date : 2019-12-07T20:00:00+01:00
+        - game : FC Nantes | Dijon FCO
+          game_date : 2019-12-07T20:00:00+01:00
+        - game : OGC Nice | FC Metz
+          game_date : 2019-12-07T20:00:00+01:00
+        - game : Nîmes Olympique | Olympique Lyonnais
+          game_date : 2019-12-07T20:00:00+01:00
+        - game : Stade de Reims | AS Saint-Etienne
+          game_date : 2019-12-07T20:00:00+01:00
+        - game : Stade Rennais FC | Angers SCO
+          game_date : 2019-12-07T20:00:00+01:00
+        - game : RC Strasbourg Alsace | Toulouse FC
+          game_date : 2019-12-07T20:00:00+01:00
+    - number : 18
+      day_default_date : 2019-12-14T00:00:00+01:00
+      games :
+        - game : Amiens SC | Dijon FCO
+          game_date : 2019-12-14T20:00:00+01:00
+        - game : Angers SCO | AS Monaco
+          game_date : 2019-12-14T20:00:00+01:00
+        - game : Girondins de Bordeaux | RC Strasbourg Alsace
+          game_date : 2019-12-14T20:00:00+01:00
+        - game : Stade Brestois 29 | OGC Nice
+          game_date : 2019-12-14T20:00:00+01:00
+        - game : LOSC | Montpellier Hérault SC
+          game_date : 2019-12-14T20:00:00+01:00
+        - game : Olympique Lyonnais | Stade Rennais FC
+          game_date : 2019-12-14T20:00:00+01:00
+        - game : FC Metz | Olympique de Marseille
+          game_date : 2019-12-14T20:00:00+01:00
+        - game : Nîmes Olympique | FC Nantes
+          game_date : 2019-12-14T20:00:00+01:00
+        - game : AS Saint-Etienne | Paris Saint-Germain
+          game_date : 2019-12-15T20:00:00+01:00
+        - game : Toulouse FC | Stade de Reims
+          game_date : 2019-12-14T20:00:00+01:00
