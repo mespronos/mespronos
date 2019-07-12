@@ -22,7 +22,7 @@ use Drupal\user\Entity\User;
  */
 class LastBetsController extends ControllerBase {
 
-  public function lastBets(League $league = null, $nb = 10, $mode = 'PAGE', User $user = null, $include_archived = false) {
+  public function lastBets(League $league = null, $nb = 10, $mode = 'PAGE', User $user = null, $include_archived = false, $onlyRanked = FALSE) {
     if (!$user) {
       $user = User::load(\Drupal::currentUser()->id());
     }
@@ -51,7 +51,7 @@ class LastBetsController extends ControllerBase {
       $dayEntity = $day->entity;
       $league = $dayEntity->getLeague();
       $ranking = $user->id() > 0 ?  RankingDay::getRankingForBetter($user, $day->entity) : FALSE;
-      if ($ranking) {
+      if (($onlyRanked && $ranking) || !$onlyRanked) {
         $build[$day->entity->id()] = [
           '#theme' => 'day-past',
           '#day' => $day,

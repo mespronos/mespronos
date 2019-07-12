@@ -339,7 +339,7 @@ function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, Ent
     if ($display->getComponent('last_results')) {
       $lastBetController = new LastBetsController();
       $user = \Drupal\user\Entity\User::load($entity->id());
-      $build['last_results'] = $lastBetController->lastBets(NULL,50,'BLOCK', $user,TRUE);
+      $build['last_results'] = $lastBetController->lastBets(NULL,50,'BLOCK', $user,TRUE, TRUE);
     }
     if ($display->getComponent('last_bets')) {
       $build['last_bets'] = \Drupal::service('mespronos.bet_manager')->getRecentBetsForUserTable($user, 64, NULL, TRUE);
