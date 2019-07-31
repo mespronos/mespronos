@@ -16,6 +16,8 @@ use Drupal\mespronos\Entity\Getters\GameGettersTrait;
 use Drupal\mespronos\Entity\Traits\ScoreTeamTrait;
 use Drupal\mespronos\Entity\Interfaces\MPNEntityInterface;
 use Drupal\mespronos\Controller\BetController;
+use Drupal\mespronos\Event\GameScoreDefinedEvent;
+use Drupal\mespronos\Event\UserBetEvent;
 
 /**
  * Defines the Game entity.
@@ -139,6 +141,10 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
   public function setScore($score_team_1, $score_team_2) {
     $this->set('score_team_1', $score_team_1);
     $this->set('score_team_2', $score_team_2);
+
+    $event = new GameScoreDefinedEvent($this);
+    $event_dispatcher = \Drupal::service('event_dispatcher');
+    $event_dispatcher->dispatch($event::EVENT_NAME, $event);
     return $this;
   }
 
