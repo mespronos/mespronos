@@ -10,9 +10,9 @@ class RankingManager {
    * @param int $number
    * @param null $group
    *
-   * @return \Drupal\mespronos\Entity\RankingGeneral
+   * @return \Drupal\mespronos\Entity\RankingGeneral[]
    */
-  public function getTop($number = 3, $group = NULL) {
+  public function getTop($number = 3, $group = NULL) : array {
     $query = \Drupal::entityQuery('ranking_general');
     if($group === NULL && \Drupal::service('mespronos.domain_manager')->getGroupFromDomain()) {
       $group = \Drupal::service('mespronos.domain_manager')->getGroupFromDomain();

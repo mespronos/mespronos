@@ -8,13 +8,9 @@ use Drupal\domain\Entity\Domain;
 use Drupal\mespronos_group\Entity\Group;
 use Drupal\user\Entity\User;
 
-/**
- * Class MespronosDomainManager.
- */
 class StatisticsManager {
 
-
-  public function getStatistics() {
+  public function getStatistics() : array {
     $stats = [];
     $stats['members'] = t('@nb members', ['@nb' => $this->getMembersNumber()]);
     $stats['leagues'] = t('@nb leagues', ['@nb' => $this->getLeaguesNumber()]);
@@ -27,9 +23,9 @@ class StatisticsManager {
     return $stats;
   }
 
-  public function getUserStatistics(User $user) {
+  public function getUserStatistics(User $user) : array {
     $stats = [];
-    $stats['nb_bets'] = self::getBetsNumber($user);
+    $stats['nb_bets'] = $this->getBetsNumber($user);
     return $stats;
   }
 
