@@ -1,12 +1,7 @@
 <?php
+namespace Drupal\mespronos\Service;
 
-namespace Drupal\mespronos;
-use Drupal\domain\DomainNegotiatorInterface;
-use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\domain\Entity\Domain;
 use Drupal\mespronos\Entity\Game;
-use Drupal\mespronos_group\Entity\Group;
-use Drupal\user\Entity\User;
 
 class GameManager {
 

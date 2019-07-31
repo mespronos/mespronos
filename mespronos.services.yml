@@ -3,44 +3,49 @@ services:
     class: Drupal\mespronos\Breadcrumb\BetBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+
   mespronos.breadcrumb.league:
     class: Drupal\mespronos\Breadcrumb\LeagueBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+
   mespronos.breadcrumb.better:
     class: Drupal\mespronos\Breadcrumb\BetterBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+
   mespronos.breadcrumb.game:
     class: Drupal\mespronos\Breadcrumb\GameBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+
   mespronos.breadcrumb.day:
     class: Drupal\mespronos\Breadcrumb\DayBreadcrumbBuilder
     tags:
       - { name: breadcrumb_builder, priority: 100 }
+
   mespronos.domain_manager:
-    class: Drupal\mespronos\MespronosDomainManager
+    class: Drupal\mespronos\Service\MespronosDomainManager
     arguments: ['@module_handler']
 
   mespronos.game_manager:
-    class: Drupal\mespronos\GameManager
+    class: Drupal\mespronos\Service\GameManager
     arguments: ['@module_handler']
 
   mespronos.bet_manager:
-    class: Drupal\mespronos\BetManager
+    class: Drupal\mespronos\Service\BetManager
     arguments: []
 
   mespronos.user_manager:
-    class: Drupal\mespronos\UserManager
+    class: Drupal\mespronos\Service\UserManager
     arguments: ['@module_handler']
 
   mespronos.statistics_manager:
-    class: Drupal\mespronos\StatisticsManager
+    class: Drupal\mespronos\Service\StatisticsManager
     arguments: []
 
   mespronos.ranking_manager:
-    class: Drupal\mespronos\RankingManager
+    class: Drupal\mespronos\Service\RankingManager
     arguments: []
 
   mespronos.day_manager:

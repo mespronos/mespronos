@@ -1,18 +1,18 @@
 <?php
+namespace Drupal\mespronos\Service;
 
-namespace Drupal\mespronos;
-use Drupal\domain\DomainNegotiatorInterface;
+use Drupal\Core\Session\AccountInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
-use Drupal\domain\Entity\Domain;
 use Drupal\mespronos_group\Entity\Group;
 use Drupal\user\Entity\User;
 
 /**
  * Class MespronosDomainManager.
  */
-class MespronosDomainManager {
+class UserManager {
 
   protected $domainEnabled = FALSE;
+  protected $groupEnabled = FALSE;
 
   /**
    * Drupal\domain\DomainNegotiatorInterface definition.
@@ -30,21 +30,32 @@ class MespronosDomainManager {
    * Constructs a new MespronosDomainManager object.
    */
   public function __construct(ModuleHandlerInterface $module_handler) {
+    if(\Drupal::moduleHandler()->moduleExists('mespronos_group')) {
+      $this->groupEnabled = TRUE;
+    }
+    else {
+      $this->groupEnabled = FALSE;
+    }
     if(\Drupal::moduleHandler()->moduleExists('domain')) {
       $this->domainEnabled = TRUE;
       $this->domainNegotiator = \Drupal::service('domain.negotiator');
     }
+    else {
+      $this->domainEnabled = FALSE;
+    }
+
     $this->moduleHandler = $module_handler;
   }
 
-  public function getGroupFromDomain(Domain $domain = NULL) {
-    if($this->domainEnabled) {
-      if (!$domain) {
-        $domain = $this->domainNegotiator->getActiveDomain();
+  public function getUserGroups(AccountInterface $user = NULL) {
+    if($this->groupEnabled) {
+      if(NULL === $user) {
+        $user = \Drupal::currentUser();
       }
-      return Group::loadForDomaine($domain);
+      $user = User::load($user->id());
+      return Group::getUserGroup($user);
     }
-    return FALSE;
+    return [];
   }
 
   /**

@@ -1,6 +1,6 @@
 <?php
+namespace Drupal\mespronos\Service;
 
-namespace Drupal\mespronos;
 use Drupal\domain\DomainNegotiatorInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\domain\Entity\Domain;

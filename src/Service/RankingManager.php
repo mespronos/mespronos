@@ -1,6 +1,5 @@
 <?php
-
-namespace Drupal\mespronos;
+namespace Drupal\mespronos\Service;
 
 use Drupal\mespronos\Entity\RankingGeneral;
 
