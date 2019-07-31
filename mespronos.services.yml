@@ -42,3 +42,7 @@ services:
   mespronos.ranking_manager:
     class: Drupal\mespronos\RankingManager
     arguments: []
+
+  mespronos.day_manager:
+    class: Drupal\mespronos\Service\DayManager
+    arguments: ['@mespronos.bet_manager']
