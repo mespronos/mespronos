@@ -109,6 +109,7 @@ class LeagueController extends ControllerBase {
     }
     return $groups_ranking;
   }
+
   /**
    * @return array
    */
@@ -116,10 +117,10 @@ class LeagueController extends ControllerBase {
     $leagues = League::loadMultiple();
     $return_leagues = [];
     foreach ($leagues as $league) {
-      if (!isset($return_leagues[$league->getStatus(true)])) {
-        $return_leagues[$league->getStatus(true)] = [];
+      if (!isset($return_leagues[$league->getStatus(TRUE)])) {
+        $return_leagues[$league->getStatus(TRUE)] = [];
       }
-      $return_leagues[$league->getStatus(true)][] = $league;
+      $return_leagues[$league->getStatus(TRUE)][] = $league;
     }
     foreach ($return_leagues as &$league_by_status) {
       usort($league_by_status, function (League $a, League $b) {
@@ -131,9 +132,9 @@ class LeagueController extends ControllerBase {
 
   public static function leaguesListGetHeader() {
     return [
-      t('Name', array(), array('context'=>'mespronos-block')),
-      t('Days', array(), array('context'=>'mespronos-block')),
-      t('Rank', array(), array('context'=>'mespronos-block')),
+      t('Name', array(), array('context' => 'mespronos-block')),
+      t('Days', array(), array('context' => 'mespronos-block')),
+      t('Rank', array(), array('context' => 'mespronos-block')),
       '',
     ];
   }
@@ -141,36 +142,5 @@ class LeagueController extends ControllerBase {
   public static function leaguesListGetFooter() {
     return [];
   }
-
-  /**
-   * @param League[] $leagues
-   * @param \Drupal\user\Entity\User $user
-   * @return array
-   */
-  public static function leaguesListParseLeagues($leagues, User $user) {
-    $rows = [];
-    foreach ($leagues as $league) {
-      $ranking = RankingLeague::getRankingForBetter($user, $league);
-      $league_renderable = $league->getRenderableLabel();
-
-      $row = [
-        'data' => [
-          'names' => render($league_renderable),
-          'days' => \Drupal::service('mespronos.league_manager')->getDaysNumber($league),
-          'rank' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '/',
-        ]
-      ];
-
-      $link_details = Url::fromRoute('entity.league.canonical', ['league'=>$league->id()])->toString();
-      $cell = ['#markup'=>'<a class="picto" href="'.$link_details.'" title="'.t('See league detailed results').'"><i class="fa fa-list" aria-hidden="true"></i></a>'];
-      $row['data']['details'] = ['data'=>render($cell), 'class'=>'picto'];
-
-
-
-      $rows[] = $row;
-    }
-    return $rows;
-  }
-
 
 }
