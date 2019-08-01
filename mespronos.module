@@ -367,13 +367,6 @@ function mespronos_day_view(array &$build, Day $entity, EntityViewDisplay $displ
   }
 }
 
-function mespronos_team_view(array &$build, Team $entity, EntityViewDisplay $display, $view_mode) {
-  if ($display->getComponent('last_results')) {
-    $build['last_results'] = \Drupal\mespronos\Controller\TeamController::getLastResults($entity);
-  }
-}
-
-
 function mespronos_preprocess_user(&$variables) {
   $user = $variables['user'];
   $ranking = \Drupal\mespronos\Entity\RankingGeneral::getRankingForBetter($user);

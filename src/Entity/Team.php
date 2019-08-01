@@ -23,7 +23,7 @@ use Drupal\mespronos\Entity\Interfaces\MPNEntityInterface;
  *   id = "team",
  *   label = @Translation("Team"),
  *   handlers = {
- *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+ *     "view_builder" = "Drupal\mespronos\Entity\ViewBuilder\TeamViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\TeamListController",
  *     "views_data" = "Drupal\mespronos\Entity\ViewsData\TeamViewsData",
  *
