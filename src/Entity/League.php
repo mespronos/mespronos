@@ -174,14 +174,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     return parent::create($values);
   }
 
-  public function label($as_entity = FALSE) {
-    if ($as_entity) {
-      $entity = entity_view($this, 'full');
-      return render($entity);
-    }
-    return $this->get('name')->value;
-  }
-
   public function getRenderableLabel() {
     return [
       '#theme' => 'league-small',
@@ -251,14 +243,13 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       ->setSetting('handler', 'default')
       ->setDefaultValueCallback('Drupal\node\Entity\Node::getCurrentUserId')
       ->setTranslatable(TRUE)
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'author',
         'weight' => 0,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
-
 
     $fields['sport'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Sport'))
@@ -335,7 +326,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
     $fields['betting_type'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Betting type'))
-      ->setRequired(true)
+      ->setRequired(TRUE)
       ->setSettings(array(
         //définition des valeurs possible
         'allowed_values' => self::$betting_types,
@@ -353,7 +344,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
     $fields['points_score_found'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Points when the game\'s score is found'))
-      ->setRequired(true)
+      ->setRequired(TRUE)
       ->setDefaultValue(self::$points_default['points_score_found'])
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array('type' => 'hidden'))
@@ -366,7 +357,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
     $fields['points_winner_found'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Points when the game\'s winner is found'))
-      ->setRequired(true)
+      ->setRequired(TRUE)
       ->setDefaultValue(self::$points_default['points_winner_found'])
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array('type' => 'hidden'))
@@ -379,7 +370,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
 
     $fields['points_participation'] = BaseFieldDefinition::create('integer')
       ->setLabel(t('Points when nothing is right.'))
-      ->setRequired(true)
+      ->setRequired(TRUE)
       ->setDefaultValue(self::$points_default['points_participation'])
       ->setSetting('unsigned', TRUE)
       ->setDisplayOptions('view', array('type' => 'hidden'))
