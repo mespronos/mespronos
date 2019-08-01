@@ -81,7 +81,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   public static $status_default_value = 'active';
   public static $betting_type_default_value = 'score';
 
-  public function getStatus($asMachineName = false) {
+  public function getStatus($asMachineName = FALSE) {
     $s = $this->get('status')->value;
     if ($asMachineName) {
       return $s;
@@ -89,7 +89,7 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     return self::$status_allowed_value[$s];
   }
 
-  public function getBettingType($asMachineName = false) {
+  public function getBettingType($asMachineName = FALSE) {
     $s = $this->get('betting_type')->value;
     if ($asMachineName) {
       return $s;
