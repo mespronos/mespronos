@@ -81,19 +81,12 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   public static $status_default_value = 'active';
   public static $betting_type_default_value = 'score';
 
-  public static function load($id) {
-    $storage = \Drupal::entityTypeManager()->getStorage('league');
-    $entity = $storage->loadMultiple(array($id));
-    return array_pop($entity);
-  }
-
   public function getStatus($asMachineName = false) {
     $s = $this->get('status')->value;
     if ($asMachineName) {
       return $s;
-    } else {
-      return self::$status_allowed_value[$s];
     }
+    return self::$status_allowed_value[$s];
   }
   
   /**
