@@ -26,7 +26,7 @@ use Drupal\Core\Url;
  *   id = "league",
  *   label = @Translation("League"),
  *   handlers = {
- *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+ *     "view_builder" = "Drupal\mespronos\Entity\ViewBuilder\LeagueViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\LeagueListController",
  *     "views_data" = "Drupal\mespronos\Entity\ViewsData\LeagueViewsData", *
  *     "form" = {
@@ -330,17 +330,12 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    //Création d'un champ booléen avec un widget checkbox
     $fields['classement'] = BaseFieldDefinition::create('boolean')
       ->setLabel(t('Classement activé'))
       ->setDescription(t('Doit-on calculer le classement entre les équipes pour cette competitions'))
-      //est-ce que l'on autorise les modifications d'affichage dans le formulaire
       ->setDisplayConfigurable('form', TRUE)
-      //est-ce que l'on autorise les modifications d'affichage en frontoffice
       ->setDisplayConfigurable('view', TRUE)
-      //définition de la valeur par défaut
       ->setDefaultValue(TRUE)
-      //définition des options d'affichage par défaut (front => view, back => form)
       ->setDisplayOptions('form', array(
         //on veut une checkbox
         'type' => 'boolean_checkbox',
@@ -351,15 +346,12 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
       ))
       ->setDisplayOptions('view', array('type' => 'hidden'));
 
-    //Création d'une propriété "liste de texte"
     $fields['status'] = BaseFieldDefinition::create('list_string')
       ->setLabel(t('Statut de la compétition'))
-      ->setRequired(true)
+      ->setRequired(TRUE)
       ->setSettings(array(
-        //définition des valeurs possible
         'allowed_values' => self::$status_allowed_value,
       ))
-      //définition de la valeur par défaut
       ->setDefaultValue(self::$status_default_value)
       ->setDisplayOptions('view', array(
         'type' => 'hidden',
