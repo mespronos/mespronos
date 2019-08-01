@@ -352,12 +352,6 @@ function mespronos_user_view(array &$build, Drupal\user\Entity\User $entity, Ent
   }
 }
 
-function mespronos_day_view(array &$build, Day $entity, EntityViewDisplay $display, $view_mode) {
-  if ($display->getComponent('results_and_ranking')) {
-    $build['results_and_ranking'] = \Drupal\mespronos\Controller\DayController::getResultsAndRankings($entity);
-  }
-}
-
 function mespronos_preprocess_user(&$variables) {
   $user = $variables['user'];
   $ranking = \Drupal\mespronos\Entity\RankingGeneral::getRankingForBetter($user);
