@@ -8,6 +8,8 @@ use Drupal\mespronos\Entity\RankingDay;
 use Drupal\mespronos\Entity\RankingLeague;
 use Drupal\mespronos\Entity\RankingGeneral;
 use Drupal\mespronos\Entity\Day;
+use Drupal\mespronos\Service\LeagueManager;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Drupal\Core\Cache\Cache;
 use Drupal\Core\Url;
@@ -20,6 +22,16 @@ use Drupal\mespronos_group\Entity\Group;
  * @package Drupal\mespronos\Controller
  */
 class RankingController extends ControllerBase {
+
+  protected $leagueManager;
+
+  public function __construct(LeagueManager $leagueManager) {
+    $this->leagueManager = $leagueManager;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('mespronos.league_manager'));
+  }
 
   /**
    * @param \Drupal\mespronos\Entity\Day $day
@@ -206,7 +218,7 @@ class RankingController extends ControllerBase {
     while ($row = $results->fetchObject()) {
       $row->league = League::load($row->league_id);
       $ranking = RankingLeague::getRankingForBetter($user, $row->league);
-      $row->betters = $row->league->getBettersNumber();
+      $row->betters = \Drupal::service('mespronos.league_manager')->getBettersNumber($row->league);
       $row->position = $ranking ? $ranking->getPosition() : ' ';
       $palmares[] = $row;
     }

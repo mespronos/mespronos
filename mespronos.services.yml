@@ -55,4 +55,4 @@ services:
 
   mespronos.league_manager:
     class: Drupal\mespronos\Service\LeagueManager
-    arguments: []
+    arguments: ['@database']

@@ -74,7 +74,7 @@ class LeagueController extends ControllerBase {
           '#league' => $league,
           '#league_logo' => $league->getLogo('mespronos_bloc_aside'),
           '#ranking' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '-',
-          '#betters' => $league->getBettersNumber(),
+          '#betters' => $this->leagueManager->getBettersNumber($league),
           '#days' => $this->leagueManager->getDaysNumber($league),
           '#logged_user' => $user->isAuthenticated(),
         ];
