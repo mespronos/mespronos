@@ -23,7 +23,7 @@ use Drupal\mespronos\Entity\Interfaces\MPNEntityInterface;
  *   id = "day",
  *   label = @Translation("Day entity"),
  *   handlers = {
- *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+ *     "view_builder" = "Drupal\mespronos\Entity\ViewBuilder\DayViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\DayListController",
  *     "views_data" = "Drupal\mespronos\Entity\ViewsData\DayViewsData",
  *
