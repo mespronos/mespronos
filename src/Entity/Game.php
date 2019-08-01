@@ -28,7 +28,7 @@ use Drupal\mespronos\Event\UserBetEvent;
  *   id = "game",
  *   label = @Translation("Game entity"),
  *   handlers = {
- *     "view_builder" = "Drupal\Core\Entity\EntityViewBuilder",
+ *     "view_builder" = "Drupal\mespronos\Entity\ViewBuilder\GameViewBuilder",
  *     "list_builder" = "Drupal\mespronos\Entity\Controller\GameListController",
  *     "views_data" = "Drupal\mespronos\Entity\ViewsData\GameViewsData",
  *
