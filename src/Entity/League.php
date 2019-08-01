@@ -88,13 +88,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
     }
     return self::$status_allowed_value[$s];
   }
-  
-  /**
-   * {@inheritdoc}
-   */
-  public function getTheName() {
-    return $this->get('name')->value;
-  }
 
   public function getBettingType($asMachineName = false) {
     $s = $this->get('betting_type')->value;

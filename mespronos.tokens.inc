@@ -147,7 +147,7 @@ function _mespronos_tokens_league($tokens, League $league, &$replacements) {
         break;
 
       case 'name':
-        $replacements[$original] = $league->getTheName();
+        $replacements[$original] = $league->label();
         break;
 
       case 'sport':

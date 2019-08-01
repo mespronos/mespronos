@@ -179,7 +179,7 @@ trait GameGettersTrait {
         '@team2'=> $team2->label(),
         '@s1'=> $this->get('score_team_1')->value,
         '@s2'=> $this->get('score_team_2')->value,
-        '@league'=> $league->getTheName(),
+        '@league'=> $league->label(),
         '@date'=> $date->format('d/m/Y'),
       )
     );
