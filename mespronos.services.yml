@@ -51,3 +51,8 @@ services:
   mespronos.day_manager:
     class: Drupal\mespronos\Service\DayManager
     arguments: ['@mespronos.bet_manager']
+
+
+  mespronos.league_manager:
+    class: Drupal\mespronos\Service\LeagueManager
+    arguments: []

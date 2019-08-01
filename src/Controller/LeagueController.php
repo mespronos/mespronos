@@ -10,9 +10,10 @@ namespace Drupal\mespronos\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\RankingLeague;
+use Drupal\mespronos\Service\LeagueManager;
 use Drupal\user\Entity\User;
 use Drupal\Core\Url;
-use Drupal\Core\Link;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Class LeagueController.
@@ -20,6 +21,16 @@ use Drupal\Core\Link;
  * @package Drupal\mespronos\Controller
  */
 class LeagueController extends ControllerBase {
+
+  protected $leagueManager;
+
+  public function __construct(LeagueManager $leagueManager) {
+    $this->leagueManager = $leagueManager;
+  }
+
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('mespronos.league_manager'));
+  }
 
   public static function getResultsAndRanking(League $league) {
     $last_bets_controller = new LastBetsController();
@@ -64,7 +75,7 @@ class LeagueController extends ControllerBase {
           '#league_logo' => $league->getLogo('mespronos_bloc_aside'),
           '#ranking' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '-',
           '#betters' => $league->getBettersNumber(),
-          '#days' => $league->getDaysNumber(),
+          '#days' => $this->leagueManager->getDaysNumber($league),
           '#logged_user' => $user->isAuthenticated(),
         ];
       }
@@ -145,8 +156,7 @@ class LeagueController extends ControllerBase {
       $row = [
         'data' => [
           'names' => render($league_renderable),
-          'days' => $league->getDaysNumber(),
-          'rank' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '/',
+          'days' => \Drupal::service('mespronos.league_manager')->getDaysNumber($league),
           'rank' => $user->id() > 0 && $ranking ? $ranking->getPosition() : '/',
         ]
       ];

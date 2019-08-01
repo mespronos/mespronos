@@ -117,10 +117,6 @@ class League extends MPNContentEntityBase implements MPNEntityInterface {
   }
 
   public function getDaysNumber() {
-    $query = \Drupal::entityQuery('day')
-      ->condition('league', $this->id());
-    $ids = $query->execute();
-    return count($ids);
   }
 
   public function getBettersNumber() {
