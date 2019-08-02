@@ -13,6 +13,14 @@ sudo: false
 php:
   - 7
 
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: hhvm
+
+services:
+  - mysql
+
 env:
   global:
     # add composer's global bin directory to the path
