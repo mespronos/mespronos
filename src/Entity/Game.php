@@ -117,14 +117,6 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
 
   }
 
-  /**
-   * Remove bets on current day
-   *
-   * @return integer number of deleted bets
-   */
-  public function removeBets() {
-  }
-
   public function setScore($score_team_1, $score_team_2) {
     $this->set('score_team_1', $score_team_1);
     $this->set('score_team_2', $score_team_2);
