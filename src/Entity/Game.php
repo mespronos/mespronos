@@ -123,19 +123,6 @@ class Game extends MPNContentEntityBase implements MPNEntityInterface {
    * @return integer number of deleted bets
    */
   public function removeBets() {
-    $query = \Drupal::entityQuery('bet');
-    $query->condition('game', $this->id());
-    $ids = $query->execute();
-    $bets = Bet::loadMultiple($ids);
-    foreach ($bets as $bet) {
-      $bet->delete();
-    }
-    \Drupal::logger('mespronos')->notice(t('Bets removed on game #@id (@game_label) : @nb_bets removed', [
-      '@id' => $this->id(),
-      '@game_label' => $this->label(),
-      '@nb_bets' => \count($ids),
-    ]));
-    return \count($ids);
   }
 
   public function setScore($score_team_1, $score_team_2) {

@@ -83,4 +83,20 @@ class BetManager {
     return [];
   }
 
+  public function removeBetsOnGame(Game $game) : int {
+    $query = \Drupal::entityQuery('bet');
+    $query->condition('game', $game->id());
+    $ids = $query->execute();
+    $bets = Bet::loadMultiple($ids);
+    foreach ($bets as $bet) {
+      $bet->delete();
+    }
+    \Drupal::logger('mespronos')->notice(t('Bets removed on game #@id (@game_label) : @nb_bets removed', [
+      '@id' => $game->id(),
+      '@game_label' => $game->label(),
+      '@nb_bets' => \count($ids),
+    ]));
+    return \count($ids);
+  }
+
 }

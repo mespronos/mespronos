@@ -42,12 +42,8 @@ class GameRemoveBetsForm extends ContentEntityConfirmFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $nb_bets_deleted = $this->entity->removeBets();
-
-    drupal_set_message(
-      $this->t('@nb_bets bets deleted', ['@nb_bets' => $nb_bets_deleted])
-    );
-
+    $nb_bets_deleted = \Drupal::service('mespronos.bet_manager')->removeBetsOnGame($this->entity);
+    \Drupal::messenger()->addStatus($this->t('@nb_bets bets deleted', ['@nb_bets' => $nb_bets_deleted]));
     $form_state->setRedirectUrl($this->getCancelUrl());
   }
 
