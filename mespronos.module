@@ -252,13 +252,6 @@ function _mespronos_games_form_ajax_callback($form, \Drupal\Core\Form\FormStateI
   return $form;
 }
 
-function mespronos_user_login($account) {
-  $destination = \Drupal::destination()->getAsArray();
-  if(isset($destination['destination'])) {
-    return new RedirectResponse($destination['destination']);
-  }
-}
-
 function mespronos_mail($key, &$message, $params) {
   $message['from'] = \Drupal::config('system.site')->get('mail');
   $message['subject'] = $params['subject'];
