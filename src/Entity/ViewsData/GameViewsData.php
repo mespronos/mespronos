@@ -1,19 +1,14 @@
 <?php
 
-/**
- * @file
- * Contains Drupal\mespronos\Entity\Game.
- */
-
 namespace Drupal\mespronos\Entity\ViewsData;
 
 use Drupal\views\EntityViewsData;
-use Drupal\views\EntityViewsDataInterface;
 
 /**
  * Provides the views data for the Game entity type.
  */
-class GameViewsData extends EntityViewsData implements EntityViewsDataInterface {
+class GameViewsData extends EntityViewsData {
+
   /**
    * {@inheritdoc}
    */
@@ -25,7 +20,19 @@ class GameViewsData extends EntityViewsData implements EntityViewsDataInterface 
       'title' => $this->t('Game'),
       'help' => $this->t('The game entity ID.'),
     );
-
+    $data['mespronos__game']['bets'] = [
+      'title' => t('Bets'),
+      'help' => t('Link to bets on current game'),
+      'relationship' => [
+        'group' => t('game'),
+        'label' => t('Bets de formation'),
+        'base' => 'mespronos__bet',
+        'field table' => 'mespronos__bet',
+        'base field' => 'game',
+        'relationship field' => 'id',
+        'id' => 'standard',
+      ],
+    ];
     return $data;
   }
 
