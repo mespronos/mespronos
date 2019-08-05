@@ -52,7 +52,10 @@ services:
     class: Drupal\mespronos\Service\DayManager
     arguments: ['@mespronos.bet_manager']
 
-
   mespronos.league_manager:
     class: Drupal\mespronos\Service\LeagueManager
+    arguments: ['@database']
+
+  mespronos.notification_manager:
+    class: Drupal\mespronos\Service\NotificationManager
     arguments: ['@database']

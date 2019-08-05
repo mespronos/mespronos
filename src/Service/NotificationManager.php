@@ -1,47 +1,45 @@
 <?php
+namespace Drupal\mespronos\Service;
 
-/**
- * @file
- * Contains Drupal\mespronos\Controller\ReminderController.
- */
-
-namespace Drupal\mespronos\Controller;
-
-use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Datetime\DateFormatter;
+use Drupal\Core\Database\Connection;
+use Drupal\Core\Database\Database;
+use Drupal\Core\Url;
 use Drupal\image\Entity\ImageStyle;
 use Drupal\mespronos\Entity\Day;
-use Drupal\Core\Database\Database;
+use Drupal\mespronos\Entity\League;
 use Drupal\mespronos\Entity\Reminder;
 use Drupal\user\Entity\User;
-use Drupal\Core\Url;
 
-/**
- * Class ReminderController.
- *
- * @package Drupal\mespronos\Controller
- */
-class ReminderController extends ControllerBase {
+class NotificationManager {
 
+  /** @var \Drupal\Core\Database\Connection  */
+  protected $connection;
 
+  public function __construct(Connection $connection) {
+    $this->connection = $connection;
+  }
 
-  public static function init() {
-    if (!self::isEnabled()) {
+  public function cron() {
+    $this->notificationNextBets();
+  }
+
+  public function notificationNextBets() {
+    if (!$this->isEnabled()) {
       return FALSE;
     }
-    $hours = self::getHoursDefined();
-    $upcommings_games = self::getUpcomming($hours);
+    $hours = $this->getHoursDefined();
+    $upcommings_games = $this->getUpcomming($hours);
 
-    $users = self::getUserWithEnabledReminder();
+    $users = $this->getUserWithEnabledReminder();
 
-    $user_to_remind = self::getUsersToRemind($users, $upcommings_games);
+    $user_to_remind = $this->getUsersToRemind($users, $upcommings_games);
     if (\count($user_to_remind) > 0) {
-      $days = self::getDaysFromGames($upcommings_games);
+      $days = $this->getDaysFromGames($upcommings_games);
       foreach ($days as $day) {
         /** @var Day $day */
-        $betters_on_league = self::getBetterOnLeague($day->getLeagueID());
-        $user_to_remind_on_this_day = self::getUsersToRemindOnThisDay($user_to_remind, $betters_on_league);
-        $nb_mail = self::sendReminder($user_to_remind_on_this_day, $day);
+        $betters_on_league = $this->getBetterOnLeague($day->getLeagueID());
+        $user_to_remind_on_this_day = $this->getUsersToRemindOnThisDay($user_to_remind, $betters_on_league);
+        $nb_mail = $this->sendReminder($user_to_remind_on_this_day, $day);
         if ($nb_mail > 0) {
           $key = 'mespronos.reminder.day.' . $day->id() . '.lastSend';
           \Drupal::state()->set($key, date('U'));
@@ -62,24 +60,24 @@ class ReminderController extends ControllerBase {
     return TRUE;
   }
 
-  public static function isEnabled() {
+  public function isEnabled() {
     $config = \Drupal::config('mespronos.reminder');
     return $config->get('enabled') == true ? true : false;
   }
 
-  public static function getHoursDefined() {
+  public function getHoursDefined() {
     $config = \Drupal::config('mespronos.reminder');
     $hours = $config->get('hours');
     return $hours ?? 0;
   }
 
-  public static function getHoursGapDefined() {
+  public function getHoursGapDefined() {
     $config = \Drupal::config('mespronos.reminder');
     $hours = $config->get('hours_gap');
     return $hours ?? 99999999;
   }
 
-  public static function sendReminder(array $users_to_remind, Day $day) {
+  public function sendReminder(array $users_to_remind, Day $day) {
     $league = $day->getLeague();
     if (empty($users_to_remind)) {
       return FALSE;
@@ -91,7 +89,7 @@ class ReminderController extends ControllerBase {
       $mailManager = \Drupal::service('plugin.manager.mail');
       $params = [];
 
-      $mail = self::getReminderEmailVariables($user, $day);
+      $mail = $this->getReminderEmailVariables($user, $day);
       $mail['#config']['baseurl'] = Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
       $mail['#config']['name'] = \Drupal::config('system.site')->get('name');
       if ($domain = \Drupal::service('mespronos.domain_manager')->getUserMainDomain($user)) {
@@ -101,7 +99,7 @@ class ReminderController extends ControllerBase {
         $mail['#config']['baseurl'] = $domain->buildUrl('/');
       }
 
-      $params['message'] = self::getReminderEmailRendered($mail);
+      $params['message'] = $this->getReminderEmailRendered($mail);
       $params['subject'] = t('@sitename - Bet Reminder - @league - @day', [
         '@sitename' => $mail['#config']['name'],
         '@league' => $league->label(),
@@ -113,7 +111,7 @@ class ReminderController extends ControllerBase {
     return $nb_mail;
   }
 
-  public static function getReminderEmailVariables(User $user, Day $day) {
+  public function getReminderEmailVariables(User $user, Day $day) {
     $league = $day->getLeague();
     $games = $day->getGames(TRUE);
     $emailvars = [];
@@ -151,7 +149,7 @@ class ReminderController extends ControllerBase {
     return $emailvars;
   }
 
-  public static function getReminderEmailRendered($variables) {
+  public function getReminderEmailRendered($variables) {
     $rederer = \Drupal::service('renderer');
     $rendered_email = $rederer->renderPlain($variables);
     return $rendered_email;
@@ -162,7 +160,7 @@ class ReminderController extends ControllerBase {
    * @param int $nb_hours number of hours
    * @return \Drupal\mespronos\Entity\Game[]
    */
-  public static function getUpcomming($nb_hours) {
+  public function getUpcomming($nb_hours) {
     $date_to = new \DateTime(null, new \DateTimeZone("UTC"));
     $date_to->add(new \DateInterval('PT'.intval($nb_hours).'H'));
     $now = new \DateTime(null, new \DateTimeZone("UTC"));
@@ -184,7 +182,7 @@ class ReminderController extends ControllerBase {
 
     $games = $game_storage->loadMultiple($ids);
 
-    self::checkIfReminderAlreadySended($games);
+    $this->checkIfReminderAlreadySended($games);
     if (count($games) > 0) {
       \Drupal::logger('mespronos_reminder')->debug(t('@nb_games games upcomming in the next @hour hours', [
         '@nb_games'=>count($games),
@@ -194,10 +192,10 @@ class ReminderController extends ControllerBase {
 
     return $games;
 
-    }
+  }
 
-  public static function checkIfReminderAlreadySended(&$games) {
-    $gap = self::getHoursGapDefined();
+  public function checkIfReminderAlreadySended(&$games) {
+    $gap = $this->getHoursGapDefined();
     $days = [];
     foreach ($games as $key => $game) {
       $day_id = $game->getDayId();
@@ -214,7 +212,7 @@ class ReminderController extends ControllerBase {
     }
   }
 
-  public static function getUserWithEnabledReminder() {
+  public function getUserWithEnabledReminder() {
     $query = \Drupal::entityQuery('user')
       ->condition('status', 1)
       ->condition('field_reminder_enable.value', 1);
@@ -222,20 +220,20 @@ class ReminderController extends ControllerBase {
     return $uids;
   }
 
-  public static function getUsersToRemind($users, $upcommings_games) {
+  public function getUsersToRemind($users, $upcommings_games) {
     $user_to_remind = [];
     foreach ($users as $user_id) {
-      if (self::doUserHasMissingBets($user_id, $upcommings_games)) {
+      if ($this->doUserHasMissingBets($user_id, $upcommings_games)) {
         $user_to_remind[] = $user_id;
       }
     }
     return $user_to_remind;
   }
 
-  public static function getUsersToRemindOnThisDay($user_to_remind, $betters_on_league) {
+  public function getUsersToRemindOnThisDay($user_to_remind, $betters_on_league) {
     $user_to_remind_on_this_day = [];
 
-    $user_connected_this_last_days = self::getUserConnectedThisLast30Days();
+    $user_connected_this_last_days = $this->getUserConnectedThisLast30Days();
     foreach ($user_to_remind as $user) {
       //if (in_array($user, $betters_on_league) || in_array($user, $user_connected_this_last_days)) {
       if (in_array($user, $betters_on_league)) {
@@ -249,7 +247,7 @@ class ReminderController extends ControllerBase {
    * @param integer $user_id id of user
    * @return \Drupal\mespronos\Entity\Game[]
    */
-  public static function doUserHasMissingBets($user_id, $games) {
+  public function doUserHasMissingBets($user_id, $games) {
     if (count($games) == 0) {return false; }
     $games_id = array_map(function($a) {return $a->id(); },$games);
     $injected_database = Database::getConnection();
@@ -263,7 +261,7 @@ class ReminderController extends ControllerBase {
     return $results['nb_bets_done'] < count($games_id);
   }
 
-  public static function getDaysFromGames($games) {
+  public function getDaysFromGames($games) {
     $days = [];
     foreach ($games as $game) {
       $day_id = $game->getDayId();
@@ -274,7 +272,7 @@ class ReminderController extends ControllerBase {
     return $days;
   }
 
-  public static function getBetterOnLeague($league_id) {
+  public function getBetterOnLeague($league_id) {
     $injected_database = Database::getConnection();
     $query = $injected_database->select('mespronos__ranking_league', 'rl');
     $query->fields('rl', ['better']);
@@ -283,7 +281,7 @@ class ReminderController extends ControllerBase {
     return array_values($results);
   }
 
-  public static function getUserConnectedThisLast30Days() {
+  public function getUserConnectedThisLast30Days() {
     $query = \Drupal::entityQuery('user');
     $limit = date('U') - 15 * 24 * 3600;
     $query->condition('access', $limit, '>');

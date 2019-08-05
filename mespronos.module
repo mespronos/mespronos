@@ -265,7 +265,7 @@ function mespronos_mail($key, &$message, $params) {
 }
 
 function mespronos_cron() {
-  \Drupal\mespronos\Controller\ReminderController::init();
+  \Drupal::service('mespronos.notification_manager')->cron();
 }
 
 function mespronos_entity_extra_field_info() {
