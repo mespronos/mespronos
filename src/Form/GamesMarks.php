@@ -10,6 +10,7 @@ use Drupal\mespronos\Entity\RankingDay;
 use Drupal\Core\Cache\Cache;
 use Drupal\mespronos\Entity\RankingLeague;
 use Drupal\mespronos\Entity\RankingGeneral;
+use Drupal\mespronos\Event\GamesMarksSubmitEvent;
 
 /**
  * Implements an example form.
@@ -92,6 +93,7 @@ class GamesMarks extends FormBase {
     $games = $form_state->getValue('games');
     $i = 0;
     $days_to_update = [];
+    $gamesUpdated = [];
     foreach ($games as $game_id => $game_data) {
       if ($game_data['score_team_1'] != '' && $game_data['score_team_2'] != '') {
         $i++;
@@ -99,6 +101,7 @@ class GamesMarks extends FormBase {
         $game->setScore($game_data['score_team_1'], $game_data['score_team_2']);
         $game->save();
         $days_to_update[$game->getDayId()] = $game->getDayId();
+        $gamesUpdated[] = $game;
       }
     }
     drupal_set_message($this->t('@nb_mark games updated', ['@nb_mark' => $i]));
@@ -118,6 +121,12 @@ class GamesMarks extends FormBase {
       '@nb_ranking'=> \count($days_to_update),
       '@nb_leagues'=> \count($leagues),
     ]));
+
+    $event = new GamesMarksSubmitEvent($gamesUpdated);
+    $event_dispatcher = \Drupal::service('event_dispatcher');
+    $event_dispatcher->dispatch($event::EVENT_NAME, $event);
+
     Cache::invalidateTags(['nextbets', 'lastbets', 'ranking', 'bet', 'games_results']);
   }
+
 }
