@@ -96,12 +96,19 @@ mespronos.games.listing:
   parent: mespronos.games
   weight: 1
 
+mespronos.games.marks:
+  route_name: mespronos.set_marks
+  title: 'Set marks'
+  description: 'Set games marks'
+  parent: mespronos.games
+  weight: 2
+
 mespronos.games.settings:
   route_name: game.settings
   title: 'Settings'
   description: 'Game settings'
   parent: mespronos.games
-  weight: 2
+  weight: 3
 
 mespronos.import:
   route_name: mespronos.import
