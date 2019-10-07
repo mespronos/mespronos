@@ -2,7 +2,8 @@ mespronos.dashboard:
   title: Mespronos
   description: 'Reference for usage, configuration, and modules.'
   route_name: mespronos.dashboard
-  parent: system.admin_content
+  weight: -50
+  parent: system.admin
 
 entity.sport.collection:
   route_name: entity.sport.collection
@@ -11,11 +12,32 @@ entity.sport.collection:
   parent: mespronos.dashboard
   weight : 1
 
+entity.sport.listing:
+  route_name: entity.sport.collection
+  title: 'Sports'
+  description: 'Sports listing'
+  parent: entity.sport.collection
+  weight: 1
+
 entity.league.collection:
   route_name: view.admin_leagues.page
   title: 'Leagues'
   description: 'Leagues listing'
   parent: mespronos.dashboard
+  weight: 2
+
+entity.league.listing:
+  route_name: view.admin_leagues.page
+  title: 'Leagues'
+  description: 'Leagues listing'
+  parent: entity.league.collection
+  weight: 1
+
+league.settings:
+  route_name: league.settings
+  title: 'Settings'
+  description: 'Leagues settings'
+  parent: entity.league.collection
   weight: 2
 
 entity.day.collection:
@@ -25,12 +47,40 @@ entity.day.collection:
   parent: mespronos.dashboard
   weight : 3
 
+entity.day.listing:
+  route_name: entity.day.collection
+  title: 'League days'
+  description: 'League days listing'
+  parent: entity.day.collection
+  weight : 1
+
+day.settings:
+  route_name: day.settings
+  title: 'Settings'
+  description: 'Day settings'
+  parent: entity.day.collection
+  weight: 2
+
 mespronos.teams:
   route_name: view.admin_teams.page
   title: 'Teams'
   description: 'See teams list'
   parent: mespronos.dashboard
   weight : 5
+
+mespronos.teams.listing:
+  route_name: view.admin_teams.page
+  title: 'Teams'
+  description: 'See teams list'
+  parent: mespronos.teams
+  weight: 1
+
+mespronos.teams.settings:
+  route_name: team.settings
+  title: 'Settings'
+  description: 'Team settings'
+  parent: mespronos.teams
+  weight: 2
 
 mespronos.games:
   route_name: view.admin_game.admin_games
@@ -39,6 +89,20 @@ mespronos.games:
   parent: mespronos.dashboard
   weight : 4
 
+mespronos.games.listing:
+  route_name: view.admin_game.admin_games
+  title: 'Games'
+  description: 'See games list'
+  parent: mespronos.games
+  weight: 1
+
+mespronos.games.settings:
+  route_name: game.settings
+  title: 'Settings'
+  description: 'Game settings'
+  parent: mespronos.games
+  weight: 2
+
 mespronos.import:
   route_name: mespronos.import
   title: 'Import'
@@ -46,9 +110,23 @@ mespronos.import:
   parent: mespronos.dashboard
   weight : 50
 
+mespronos.import.import:
+  route_name: mespronos.import
+  title: 'Import'
+  description: 'Import file containing a league and all of his games'
+  parent: mespronos.import
+  weight : 1
+
 mespronos.settings:
   route_name: mespronos.settings
   title: 'Settings'
   description: 'Manage Mespronos Settings'
   parent: mespronos.dashboard
   weight : 100
+
+mespronos.settings.settings:
+  route_name: mespronos.settings
+  title: 'Global Settings'
+  description: 'Manage Mespronos Settings'
+  parent: mespronos.settings
+  weight : 1
