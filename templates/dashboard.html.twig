@@ -1,36 +1,36 @@
 <section id="mespronos-dashboard">
-    <fieldset id="dashboard-stats">
-        <legend>{% trans 'Stats' %}</legend>
-        <ul>
-            {% for stat in stats %}
-                <li>{{ stat }}</li>
-            {% endfor %}
-        </ul>
-    </fieldset>
 
-    <fieldset id="dashboard-marks">
-        <legend>{% trans 'Next Games' %}</legend>
-        <table>
-            <thead>
-            <tr>
-                <th>{% trans 'Game' %}</th>
-                <th>{% trans 'Date' %}</th>
-                <th>{% trans 'Betters' %}</th>
-            </tr>
-            </thead>
-            {% for game in nextGames %}
-                <tr>
-                    <th>{{ game.team_1 }} - {{ game.team_2 }}</th>
-                    <th>{{ game.date }}</th>
-                    <th>{{ game.nb_bet }}</th>
-                </tr>
-            {% endfor %}
-        </table>
-    </fieldset>
+  <fieldset id="dashboard-marks">
+    <legend>{% trans 'Marks' %}</legend>
+    {{marks_form}}
+  </fieldset>
 
-    <fieldset id="dashboard-marks">
-        <legend>{% trans 'Marks' %}</legend>
-        {{marks_form}}
-    </fieldset>
+  <fieldset id="dashboard-marks">
+      <legend>{% trans 'Next Games' %}</legend>
+      <table>
+          <thead>
+          <tr>
+              <th>{% trans 'Game' %}</th>
+              <th>{% trans 'Date' %}</th>
+              <th>{% trans 'Betters' %}</th>
+          </tr>
+          </thead>
+          {% for game in nextGames %}
+              <tr>
+                  <th>{{ game.team_1 }} - {{ game.team_2 }}</th>
+                  <th>{{ game.date }}</th>
+                  <th>{{ game.nb_bet }}</th>
+              </tr>
+          {% endfor %}
+      </table>
+  </fieldset>
+  <fieldset id="dashboard-stats">
+    <legend>{% trans 'Stats' %}</legend>
+    <ul>
+      {% for stat in stats %}
+        <li>{{ stat }}</li>
+      {% endfor %}
+    </ul>
+  </fieldset>
 
 </section>
