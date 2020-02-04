@@ -204,6 +204,7 @@ function mespronos_theme() {
     'template' => 'next-bets',
     'variables' => [
       'days' => [],
+      'mode' => 'PAGE',
     ],
   ];
 

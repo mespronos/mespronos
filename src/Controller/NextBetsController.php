@@ -30,6 +30,7 @@ class NextBetsController extends ControllerBase {
     }
     $build = [
       '#theme' => 'next_bets',
+      '#mode' => $mode,
       '#days' => [],
       '#cache' => [
         'contexts' => ['user'],
