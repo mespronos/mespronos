@@ -1,5 +1,5 @@
 # Changelog - Mespronos
-## 8.x-2.0-alpha15, XXXX-XX-XX
+## 8.x-3.0-alpha1, XXXX-XX-XX
   - Big refactoring
 
 ## 8.x-1.0-alpha15, XXXX-XX-XX

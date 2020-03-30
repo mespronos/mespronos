@@ -1,5 +1,0 @@
-administration-style :
-  version: VERSION
-  css:
-    theme :
-      assets/css/administration.css : {}

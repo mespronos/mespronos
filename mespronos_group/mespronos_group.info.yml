@@ -1,7 +1,0 @@
-name: MesPronos Group
-type: module
-description: Group integration for MesPronos
-core: 8.x
-package: MesPronos
-dependencies :
-  - mespronos

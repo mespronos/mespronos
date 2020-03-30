@@ -1,9 +1,9 @@
-name: MesPronos
+name: 'MesPronos'
 type: module
-description: Betting module for drupal 8
+description: 'Sport betting module'
 core: 8.x
-package: MesPronos
-dependencies :
+package: 'Mespronos'
+dependencies:
   - block
   - views
   - field

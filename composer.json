@@ -1,28 +1,22 @@
 {
-  "name": "mespronos/mespronos",
-  "description": " Betting module build on Drupal 8",
-  "keywords": ["mespronos","drupal8","drupal"],
-  "license": "GPL-2.0+",
-  "homepage": "https://mespronos.net",
-  "authors": [
-    {
-      "name": "Kevin Gautreau",
-      "email": "contact@mespronos.net",
-      "homepage": "https://kgaut.net",
-      "role": "Developer"
-    }
-  ],
-  "require": {
+    "name": "mespronos/mespronos",
+    "description": " Betting module build on Drupal 8",
+    "keywords": ["mespronos","drupal8","drupal"],
+    "license": "GPL-2.0+",
+    "homepage": "https://mespronos.net",
+    "authors": [
+        {
+          "name": "Kevin Gautreau",
+          "email": "contact@mespronos.net",
+          "homepage": "https://kgaut.net",
+          "role": "Developer"
+        }
+    ],
+    "require": {
     "php": ">=7.2"
-  },
-  "extra": {
-    "installer-name": "mespronos"
-  },
-  "type":"drupal-module",
-  "repositories": [
-    {
-      "type": "composer",
-      "url":  "https://packages.drupal.org/8"
+    },
+    "support": {
+        "issues": "https://github.com/mespronos/mespronos/issues",
+        "source": "http://cgit.drupalcode.org/mespronos3"
     }
-  ]
 }
