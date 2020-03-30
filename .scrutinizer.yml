@@ -1,8 +1,0 @@
-checks:
-    php: true
-filter:
-    excluded_paths:
-        - tests/*
-        - src/Tests/*
-        - mespronos_group/tests/*
-        - mespronos_group/src/Tests/*
