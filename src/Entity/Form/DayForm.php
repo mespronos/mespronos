@@ -42,6 +42,6 @@ class DayForm extends ContentEntityForm {
         '%label' => $entity->label(),
       )));
     }
-    $form_state->setRedirect('entity.day.edit_form', ['day' => $entity->id()]);
+    $form_state->setRedirect('entity.day.collection');
   }
 }
