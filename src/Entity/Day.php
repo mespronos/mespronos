@@ -62,41 +62,6 @@ class Day extends MPNContentEntityBase implements MPNEntityInterface {
     );
   }
 
-  /**
-   * Create pathauto aliases for the day
-   * @param \Drupal\Core\Entity\EntityStorageInterface $storage
-   * @param bool $update
-   */
-  public function postSave(EntityStorageInterface $storage, $update = TRUE) {
-    parent::postSave($storage, $update);
-    if (\Drupal::moduleHandler()->moduleExists('pathauto')) {
-      \Drupal::service('pathauto.generator')->updateEntityAlias($this, 'update');
-
-      $trans = \Drupal::service('transliteration');
-      $alias_manager = \Drupal::service('path.alias_manager');
-      $alias_storage = \Drupal::service('path.alias_storage');
-
-      $system_path = '/mespronos/day/'.$this->id().'/bet';
-      $alias_day = $alias_manager->getAliasByPath('/mespronos/day/'.$this->id());
-      $path_alias = str_replace('.html', '', $alias_day).'/pronostiquer.html';
-      $urlAlias = $alias_manager->getAliasByPath($system_path);
-      if ($urlAlias && $urlAlias != $path_alias) {
-        $alias_storage->save($system_path, $path_alias);
-      }
-
-      $user_ids = \Drupal::entityQuery('user')->execute();
-      $users = \Drupal::entityTypeManager()->getStorage("user")->loadMultiple($user_ids);
-      foreach ($users as $user) {
-        $system_path = '/mespronos/day/'.$this->id().'/results/user/'.$user->id();
-        $path_alias = str_replace('.html', '', $alias_day).'/les-pronos-de-'.$trans->transliterate($user->label()).'.html';
-        $urlAlias = $alias_manager->getAliasByPath($system_path);
-        if ($urlAlias && $urlAlias != $path_alias) {
-          $alias_storage->save($system_path, $path_alias);
-        }
-      }
-    }
-  }
-
   public function label() {
     return $this->get('name')->value;
   }
