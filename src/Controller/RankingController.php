@@ -132,7 +132,6 @@ class RankingController extends ControllerBase {
 
       $better = \Drupal\user\Entity\User::load($ranking->getOwner()->id());
       $better_renderable = UserController::getRenderableUser($better);
-      $clean_username = \Drupal::service('kgaut_tools.stringcleaner')->clean($better->getUsername());
 
       $position = [
         '#markup' => $ranking->get('points')->value != $old_points ? $current_rank : '↪ ' . $current_rank ,
@@ -148,7 +147,7 @@ class RankingController extends ControllerBase {
           'games_betted' => $ranking->get('games_betted')->value,
           'average' => round($ranking->get('points')->value / $ranking->get('games_betted')->value, 3),
         ],
-        'class' => ['ranking-for-' . $clean_username, 'user-' . $clean_username]
+        'class' => ['ranking-for-' . $better->id(), 'user-' . $better->id()]
       ];
       $old_points = $ranking->get('points')->value;
       if ((int) $ranking->getOwner()->id() === (int) $user->id()) {
