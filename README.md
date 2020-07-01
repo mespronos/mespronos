@@ -10,6 +10,5 @@ MesPronos is a Drupal 8 module which aims to provide all the features needed to 
 ## How to test
 
   - Without any installation you can test this module, as a better, on the dedicated website : [https://mespronos.net](https://mespronos.net?utm_source=github&utm_medium=link&utm_campaign=github-readme)
-  - Use a preset github repository that holds a **composer.json** with the module as a dependency : [Site scaffolder](https://github.com/mespronos/site-test/)
   - Download this module in a existing drupal installation with composer : `composer require drupal/mespronos`
   - Clone or download this repository in your **modules** folder of your Drupal 8 website.
