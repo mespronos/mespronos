@@ -34,15 +34,12 @@ class LeagueForm extends ContentEntityForm {
     $status = $entity->save();
 
     if ($status) {
-      drupal_set_message($this->t('La compétition "%label" a été enregistrée.', array(
-        '%label' => $entity->label(),
-      )));
-    } else {
-      drupal_set_message($this->t('The %label League was not saved.', array(
-        '%label' => $entity->label(),
-      )));
+      $this->messenger()->addStatus($this->t('Saved the %label League.', ['%label' => $entity->label()]));
     }
-    $form_state->setRedirect('entity.league.collection');
+    else {
+      $this->messenger()->addStatus($this->t('The %label League was not saved.', ['%label' => $entity->label()]));
+    }
+    $form_state->setRedirect('view.admin_leagues.page');
   }
 
 }
