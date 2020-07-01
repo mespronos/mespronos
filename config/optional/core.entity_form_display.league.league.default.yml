@@ -8,6 +8,8 @@ dependencies:
   module:
     - image
     - mespronos
+_core:
+  default_config_hash: lMBKxdqDKLJqebXlJQ-IkyjfBnspF03Qpe-lGFJUxIg
 id: league.league.default
 targetEntityType: league
 bundle: league
@@ -18,12 +20,14 @@ content:
     weight: -4
     settings: {  }
     third_party_settings: {  }
+    region: content
   classement:
     type: boolean_checkbox
     weight: -4
     settings:
       display_label: true
     third_party_settings: {  }
+    region: content
   field_league_logo:
     weight: -2
     settings:
@@ -31,6 +35,7 @@ content:
       preview_image_style: thumbnail
     third_party_settings: {  }
     type: image_image
+    region: content
   name:
     type: string_textfield
     weight: -5
@@ -38,33 +43,43 @@ content:
       size: 60
       placeholder: ''
     third_party_settings: {  }
+    region: content
   points_participation:
     type: number
     settings:
       placeholder: ''
     third_party_settings: {  }
+    region: content
+    weight: null
   points_score_found:
     type: number
     settings:
       placeholder: ''
     third_party_settings: {  }
+    region: content
+    weight: null
   points_winner_found:
     type: number
     settings:
       placeholder: ''
     third_party_settings: {  }
+    region: content
+    weight: null
   sport:
     type: entity_reference_autocomplete
     settings:
       match_operator: CONTAINS
       size: 60
       placeholder: ''
+      match_limit: 10
     weight: -3
     third_party_settings: {  }
+    region: content
   status:
     type: options_select
     weight: -4
     settings: {  }
     third_party_settings: {  }
+    region: content
 hidden:
   creator: true
