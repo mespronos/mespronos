@@ -263,7 +263,7 @@ entity.day.add_form:
     _entity_create_access: 'day'
 
 entity.day.edit_form:
-  path: '/admin/day/{day}/edit'
+  path: '/admin/mespronos/day/{day}/edit'
   defaults:
     _entity_form: day.edit
     _title: 'Edit Day'
@@ -271,7 +271,7 @@ entity.day.edit_form:
     _entity_access: 'day.edit'
 
 entity.day.recount_points:
-  path: '/admin/day/{day}/recount_points'
+  path: '/admin/mespronos/day/{day}/recount_points'
   defaults:
     _controller: '\Drupal\mespronos\Controller\BetController::updateBetsForDay'
     _title: 'Recalculate points and ranking for Day'
@@ -279,7 +279,7 @@ entity.day.recount_points:
     _permission: 'set marks'
 
 entity.day.recount_ranking:
-  path: '/admin/day/{day}/recount_ranking'
+  path: '/admin/mespronos/day/{day}/recount_ranking'
   defaults:
     _controller: '\Drupal\mespronos\Controller\RankingController::recalculateDay'
     _title: 'Recalculate ranking for Day'
@@ -287,7 +287,7 @@ entity.day.recount_ranking:
     _permission: 'set marks'
 
 entity.day.delete_form:
-  path: '/admin/day/{day}/delete'
+  path: '/admin/mespronos/day/{day}/delete'
   defaults:
     _entity_form: day.delete
     _title: 'Delete Day'
