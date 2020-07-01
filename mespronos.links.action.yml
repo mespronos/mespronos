@@ -15,6 +15,7 @@ entity.league.add_form:
   title: 'Add league'
   appears_on:
     - entity.league.collection
+    - view.admin_leagues.page
 
 entity.sport.add_form:
   route_name: entity.sport.add_form
