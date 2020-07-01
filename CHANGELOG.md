@@ -3,6 +3,7 @@
   - Big refactoring
   - Sport form - update redirection
   - Leagues - Add « add league » menu link action
+  - Day - remove alias generation (please use pathauto config)
 
 ## 8.x-1.0-alpha15, XXXX-XX-XX
   - Ranking - add average ranking
