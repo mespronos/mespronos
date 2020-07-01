@@ -30,28 +30,21 @@ class SportForm extends ContentEntityForm {
    */
   public function save(array $form, FormStateInterface $form_state) {
     $entity = $this->entity;
-    $query = \Drupal::entityQuery('sport')->condition('name', '%'.$entity->get('name')->value.'%', 'LIKE');
+    $query = \Drupal::entityQuery('sport')->condition('name', '%' . $entity->get('name')->value . '%', 'LIKE');
     $id = $query->execute();
 
-    if (count($id) == 0) {
-      $status = $entity->save();
-      if ($status) {
-        drupal_set_message($this->t('Saved the %label Sport.', array(
-          '%label' => $entity->label(),
-        )));
-      } else {
-        drupal_set_message($this->t('The %label Sport was not saved.', array(
-          '%label' => $entity->label(),
-        )));
+    if (count($id) === 0) {
+      if ($entity->save()) {
+        $this->messenger()->addStatus($this->t('Saved the %label Sport.', ['%label' => $entity->label()]));
       }
-    } else {
-      drupal_set_message($this->t('The %label Sport was not saved as it already exist.', array(
-        '%label' => $entity->label(),
-      )));
-      $entity = entity_load('sport', array_pop($id));
+      else {
+        $this->messenger()->addStatus($this->t('The %label Sport was not saved.', ['%label' => $entity->label()]));
+      }
     }
-
-    $form_state->setRedirect('entity.sport.edit_form', ['sport' => $entity->id()]);
+    else {
+      $this->messenger()->addStatus($this->t('The %label Sport was not saved as it already exist.', ['%label' => $entity->label()]));
+    }
+    $form_state->setRedirect('entity.sport.collection');
   }
 
 }

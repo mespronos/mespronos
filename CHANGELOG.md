@@ -1,6 +1,7 @@
 # Changelog - Mespronos
-## 8.x-2.0-alpha15, XXXX-XX-XX
+## 8.x-2.0-dev, XXXX-XX-XX
   - Big refactoring
+  - Sport form - update redirection
 
 ## 8.x-1.0-alpha15, XXXX-XX-XX
   - Ranking - add average ranking
