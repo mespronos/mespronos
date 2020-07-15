@@ -12,9 +12,6 @@
               "role": "Developer"
         }
     ],
-    "require": {
-    "php": ">=7.2"
-    },
     "support": {
         "issues": "https://www.drupal.org/project/mespronos/issues",
         "source": "https://git.drupalcode.org/mespronos/field_time"
