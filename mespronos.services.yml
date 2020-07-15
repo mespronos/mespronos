@@ -30,7 +30,7 @@ services:
 
   mespronos.game_manager:
     class: Drupal\mespronos\Service\GameManager
-    arguments: ['@module_handler']
+    arguments: ['@entity_type.manager']
 
   mespronos.bet_manager:
     class: Drupal\mespronos\Service\BetManager

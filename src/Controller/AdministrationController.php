@@ -25,7 +25,7 @@ class AdministrationController extends ControllerBase {
   }
 
   public function setMarks() {
-    $games = GameController::getGameWithoutMarks();
+    $games = \Drupal::service('mespronos.game_manager')->getGamesToSetMarks();
     if (count($games) == 0) {
       drupal_set_message($this->t('There\'s no game for which mark is not set'));
     }

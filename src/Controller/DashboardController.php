@@ -18,7 +18,7 @@ use Drupal\system\Controller\SystemController;
 class DashboardController extends ControllerBase {
 
   public function index() {
-    $games = GameController::getGameWithoutMarks();
+    $games = \Drupal::service('mespronos.game_manager')->getGamesToSetMarks();
     $marks_form = \Drupal::formBuilder()->getForm('Drupal\mespronos\Form\GamesMarks', $games);
     $stats = \Drupal::service('mespronos.statistics_manager')->getStatistics();
     $build = [];

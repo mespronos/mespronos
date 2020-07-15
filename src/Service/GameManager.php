@@ -1,9 +1,19 @@
 <?php
 namespace Drupal\mespronos\Service;
 
+use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\mespronos\Entity\Game;
 
 class GameManager {
+
+  /**
+   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
+   */
+  protected $entityTypeManager;
+
+  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+    $this->entityTypeManager = $entityTypeManager;
+  }
 
   /**
    * @param $nb_hours
@@ -42,6 +52,20 @@ class GameManager {
       return Game::loadMultiple($ids);
     }
     return [];
+  }
+
+  public function getGamesToSetMarks() {
+    $game_storage = $this->entityTypeManager->getStorage('game');
+    $query = \Drupal::entityQuery('game');
+
+    $group = $query->orConditionGroup()
+      ->condition('score_team_1', NULL, 'is')
+      ->condition('score_team_2', NULL, 'is');
+    $query->sort('game_date', 'ASC');
+    $ids = $query->condition($group)->execute();
+
+    return $game_storage->loadMultiple($ids);
+
   }
 
 }

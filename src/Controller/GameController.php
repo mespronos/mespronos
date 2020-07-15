@@ -19,29 +19,6 @@ use Drupal\mespronos\Entity\Game;
 class GameController extends ControllerBase {
 
   /**
-   * Return array of games that has no marks setted
-   * @param bool $only_past
-   * @return \Drupal\mespronos\Entity\Game[]
-   */
-  public static function getGameWithoutMarks($only_past = true) {
-    $game_storage = \Drupal::entityTypeManager()->getStorage('game');
-    $query = \Drupal::entityQuery('game');
-
-    if ($only_past) {
-      $now = new \DateTime(null, new \DateTimeZone("UTC"));
-      $query->condition('game_date', $now->format('Y-m-d\TH:i:s'), '<');
-    }
-
-    $group = $query->orConditionGroup()
-      ->condition('score_team_1', null, 'is')
-      ->condition('score_team_2', null, 'is');
-    $query->sort('game_date', 'ASC');
-    $ids = $query->condition($group)->execute();
-
-    return $game_storage->loadMultiple($ids);
-  }
-
-  /**
    * Return all games available to bet on a given day
    * @param \Drupal\mespronos\Entity\Day $day
    * @return \Drupal\mespronos\Entity\Game[]
