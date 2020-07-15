@@ -38,9 +38,7 @@ class GameController extends ControllerBase {
     $query->sort('game_date', 'ASC');
     $ids = $query->condition($group)->execute();
 
-    $games = $game_storage->loadMultiple($ids);
-
-    return $games;
+    return $game_storage->loadMultiple($ids);
   }
 
   /**
