@@ -14,7 +14,7 @@
     ],
     "support": {
         "issues": "https://www.drupal.org/project/mespronos/issues",
-        "source": "https://git.drupalcode.org/mespronos/field_time"
+        "source": "https://git.drupalcode.org/project/mespronos"
     },
     "type":"drupal-module"
 }
