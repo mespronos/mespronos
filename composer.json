@@ -1,5 +1,5 @@
 {
-  "name": "mespronos/mespronos",
+  "name": "drupal/mespronos",
   "description": " Betting module build on Drupal 8",
   "keywords": ["mespronos","drupal8","drupal"],
   "license": "GPL-2.0+",
