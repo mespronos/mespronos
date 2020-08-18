@@ -3,6 +3,7 @@ namespace Drupal\mespronos\Service;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\mespronos\Entity\Game;
+use function foo\func;
 
 class GameManager {
 
@@ -11,8 +12,9 @@ class GameManager {
    */
   protected $entityTypeManager;
 
-  public function __construct(EntityTypeManagerInterface $entityTypeManager) {
+  public function __construct(EntityTypeManagerInterface $entityTypeManager, LeagueManager $leagueManager) {
     $this->entityTypeManager = $entityTypeManager;
+    $this->LeagueManager = $leagueManager;
   }
 
   /**
@@ -55,17 +57,17 @@ class GameManager {
   }
 
   public function getGamesToSetMarks() {
+    $now = new \DateTime();
     $game_storage = $this->entityTypeManager->getStorage('game');
     $query = \Drupal::entityQuery('game');
-
-    $group = $query->orConditionGroup()
-      ->condition('score_team_1', NULL, 'is')
-      ->condition('score_team_2', NULL, 'is');
+    $query->condition('day.entity:day.league.entity:league.status', 'active');
+    $query->condition('game_date', $now->format('Y-m-d\TH:i:s'), '<');
+    $group = $query->orConditionGroup()->notExists('score_team_1')->notExists('score_team_2');
     $query->sort('game_date', 'ASC');
-    $ids = $query->condition($group)->execute();
+    $query->condition($group);
+    $ids = $query->execute();
 
     return $game_storage->loadMultiple($ids);
-
   }
 
 }

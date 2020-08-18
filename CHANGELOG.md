@@ -5,6 +5,7 @@
   - Leagues - Add « add league » menu link action
   - Day - remove alias generation (please use pathauto config)
   - Extract static method to service
+  - Allow to set marks only on active leagues
 
 ## 8.x-1.0-alpha15, XXXX-XX-XX
   - Ranking - add average ranking

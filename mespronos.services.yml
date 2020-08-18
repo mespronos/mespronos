@@ -30,7 +30,7 @@ services:
 
   mespronos.game_manager:
     class: Drupal\mespronos\Service\GameManager
-    arguments: ['@entity_type.manager']
+    arguments: ['@entity_type.manager', '@mespronos.league_manager']
 
   mespronos.bet_manager:
     class: Drupal\mespronos\Service\BetManager
@@ -54,7 +54,7 @@ services:
 
   mespronos.league_manager:
     class: Drupal\mespronos\Service\LeagueManager
-    arguments: ['@database']
+    arguments: ['@database', '@entity_type.manager']
 
   mespronos.notification_manager:
     class: Drupal\mespronos\Service\NotificationManager
