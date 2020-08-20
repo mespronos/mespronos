@@ -4,7 +4,7 @@
 .qa:
   tags:
     - docker
-  image: phpqa:php7.4
+  image: jakzal/phpqa:php7.4
   stage: QA
   except:
     - schedules
