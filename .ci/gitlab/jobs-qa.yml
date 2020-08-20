@@ -1,0 +1,54 @@
+##############
+# Extends
+##############
+.qa:
+  tags:
+    - docker
+  image: phpqa:php7.4
+  stage: QA
+  except:
+    - schedules
+  artifacts:
+    when: always
+    expire_in: 1 week
+  allow_failure: true
+
+##############
+# Jobs
+##############
+php-phpmd:
+  extends:
+    - .qa
+  script: phpmd ./ text ./files/QA/phpmd.xml | tee .ci/QA/phpmd.txt
+  artifacts:
+    paths:
+      - .ci/QA/phpmd.txt
+
+php-metrics:
+  extends:
+    - .qa
+  script: phpmetrics --report-html=.ci/QA/php-metrics ./ | tee .ci/QA/php-metrics.txt
+  artifacts:
+    paths:
+      - .ci/QA/php-metrics.txt
+
+php-cs:
+  extends:
+    - .qa
+  script:
+    - phpcs ./ | tee .ci/QA/phpcs.txt
+  artifacts:
+    paths:
+      - files/QA/phpcs.txt
+
+phpstan:
+  extends:
+    - .qa
+  image: wodby/drupal-php:7.4-dev-4.17.1
+  script:
+    - composer global require hirak/prestissimo
+    - composer install -q
+    - ./vendor/bin/phpstan analyse --level 2 ./ | tee .ci/QA/phpstan.txt
+  artifacts:
+    paths:
+      - .ci/QA/phpstan.txt

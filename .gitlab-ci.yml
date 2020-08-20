@@ -1,0 +1,9 @@
+##############
+# Stages
+##############
+stages:
+  - QA
+
+include:
+  - local: '/.ci/gitlab/jobs-qa.yml'
+
