@@ -51,6 +51,7 @@ Les classements restent dans **base** (cœur du domaine) mais isolés dans `src/
   - `enum BettingType: string { Score, Winner }`, `enum LeagueStatus: string { Future, Active, Over, Archived }`, `enum MatchOutcome { Team1Win, Team2Win, Draw }` (remplacent les tableaux statiques `League::$betting_types`/`$status_allowed_value`).
   - Value objects `readonly` : `Domain\Score(team1, team2)` avec `winner(): MatchOutcome`, `Domain\PointRules(scoreFound, winnerFound, participation)`.
   - Renommer `isScoreSetted()` → `isScoreSet()`.
+  - **Nouveaux basefields image `logo`** sur **Team** et **League** (type `image`, cardinalité 1, dépend du module core `image`) — exposés dans les SDC (`game-flag`, `ranking-row`, `day-card`, `podium`). Champ nouveau : pas de source legacy garantie → vide par défaut, alimentable après migration (mappé si une colonne image existe côté legacy, cf. §2.9).
 - **Tables** : renommer en `mespronos_<entity>` (simple underscore, idiomatique D11) — les données arrivent par Migrate de toute façon.
 - Les 3 ex-entités `RankingDay/League/General` sont **supprimées** au profit d'une table d'agrégats (§2.4).
 
@@ -118,18 +119,22 @@ Les repositories renvoient des entités ou des DTO typés, jamais des render arr
 
 **Adopter `drupal/group` (Group 3.x, compatible D11) avec un adaptateur fin `mespronos_group`**, plutôt que porter l'entité Group custom (~700 l. de code supprimées : membership, join/leave, accès, listes sont fournis par contrib).
 
-L'adaptateur conserve uniquement le spécifique MesPronos :
-- un `GroupType` « mespronos_group » + plugin de relation pour l'adhésion (remplace `field_group` sur l'utilisateur) ;
-- les **classements par groupe** via l'unique `RankingRepository::applyGroupScope(GroupInterface $group)` (filtre sur les `uid` membres, requêtés via le storage de relations de Group) ;
-- code d'accès à l'inscription + mail « nouveau groupe » (event subscriber sur création de groupe + alter du formulaire d'inscription).
+**Adhésion N-à-N** : un membre peut appartenir à **plusieurs groupes** (et un groupe a plusieurs membres). C'est natif dans `drupal/group` via les entités de relation **membership** (une relation par couple user↔groupe) — ce qui **renforce** l'abandon de l'ancien `field_group` posé sur l'utilisateur, inadapté à l'appartenance multiple.
 
-*Repli si l'adoption de contrib Group s'avère trop lourde au cutover : entité Group custom minimale (id, label, access_code, owner) + champ membership. Recommandation = contrib Group.*
+L'adaptateur conserve uniquement le spécifique MesPronos :
+- un `GroupType` « mespronos_group » + plugin de relation **membership** (N-à-N user↔groupe) ;
+- les **classements par groupe** via l'unique `RankingRepository::applyGroupScope(GroupInterface $group)` (filtre sur les `uid` membres, requêtés via le storage de relations de Group) ;
+- code d'accès à l'inscription + mail « nouveau groupe » (event subscriber sur création de groupe + alter du formulaire d'inscription) ;
+- **migration** : l'ancien `field_group` (potentiellement multivalué) → **une relation membership par couple (user, groupe)**.
+
+*Repli si l'adoption de contrib Group s'avère trop lourde au cutover : entité Group custom minimale (id, label, access_code, owner) + **table de liaison `membership(user_id, group_id)` N-à-N** (et non un simple champ sur l'utilisateur, qui ne modéliserait pas l'appartenance multiple). Recommandation = contrib Group.*
 
 ### 2.9 Migration de données (API Migrate) — `mespronos_migrate`
 
 - **Source** : les anciennes tables `mespronos__*` lues via une connexion DB secondaire (clé `migrate` dans `settings.php`). Un plugin source `SqlBase` par table (`src/Plugin/migrate/source/`).
 - **Destination** : plugins standards `entity:<id>`. Remappage des FK via `migration_lookup` ; normalisation des enums via un petit process plugin custom.
-- **Configs** `migrate_plus.migration.mespronos_*.yml` avec `migrate_plus` + `migrate_tools`. **Ordre de dépendances** : `sport → team → league → day → game → bet` ; `reminder` après `day` ; users supposés présents (sinon migration `users` d'abord + `migration_lookup`).
+- **Configs** `migrate_plus.migration.mespronos_*.yml` avec `migrate_plus` + `migrate_tools`. **Ordre de dépendances** : `sport → team → league → day → game → bet` ; `reminder` après `day` ; adhésions (membership) après `league` + users ; users supposés présents (sinon migration `users` d'abord + `migration_lookup`).
+- **Logos Team/League** : nouveaux champs ; mappés depuis une éventuelle colonne image legacy si elle existe (process `image`/`file`), sinon laissés vides.
 - **Classements : RECALCULÉS, pas migrés** (données dérivées) ; aucune ex-table `ranking_*` à migrer. Post-import : commande Drush `mespronos:recompute-rankings --all` qui **reconstruit la table d'agrégats** depuis les `points` des paris (`RankingService::rebuild()`, batché). Commande `mespronos:verify-points` qui **diffe les points recalculés vs la colonne `points` héritée des paris** — gate de validation prouvant que `ScoringService` reproduit la prod.
 
 ---
@@ -235,12 +240,13 @@ Chaque phase laisse le module installable.
 - `baseFieldDefinitions()`, getters/setters typés, `preCreate` pour l'ownership.
 - Handlers via la map `handlers` ; `MPNContentEntityBase` base fine.
 - Intégrer enums/value objects comme wrappers sur les **mêmes colonnes** (mappables 1:1).
+- **Basefields image `logo`** sur **Team** et **League** (type `image`, cardinalité 1, dépendance module core `image`), exposés via les SDC.
 - Renommer `isScoreSetted()` → `isScoreSet()`.
 - Tables `mespronos_<entity>`.
 - **Vérifier la liste des champs contre le legacy** (`src/Entity/League.php`).
 - Schéma de `mespronos_ranking_points(scope_type, scope_id, uid, points, games_betted)` (`hook_schema`), index `(scope_type, scope_id, points)`.
 
-**Critères d'acceptation.** Module installable, schéma créé sans erreur (7 entités + table d'agrégats) ; entités sans requête/`\Drupal::`/HTML ; aucune entité de classement.
+**Critères d'acceptation.** Module installable, schéma créé sans erreur (7 entités + table d'agrégats) ; `logo` présent sur Team et League ; entités sans requête/`\Drupal::`/HTML ; aucune entité de classement.
 
 ## Phase 4 — Repositories + tests Kernel ([#124](https://github.com/mespronos/mespronos/issues/124))
 
@@ -280,7 +286,7 @@ Chaque phase laisse le module installable.
 
 **Objectif.** Couche présentation fine : controllers/blocs/formulaires délèguent aux services, front migré en SDC.
 
-**Tâches.** Controllers fins (purger Day/RankingController) ; blocs sur repositories (supprimer `new LastBetsController()`) ; formulaires délégant aux services (plus de `createRanking()`/`Cache::invalidateTags()` manuels) ; SDC sous `components/` ; view builders via `#type: component` ; remplacer `render()`/`\Drupal::l()` par `#type link`/`Url`.
+**Tâches.** Controllers fins (purger Day/RankingController) ; blocs sur repositories (supprimer `new LastBetsController()`) ; formulaires délégant aux services (plus de `createRanking()`/`Cache::invalidateTags()` manuels) ; SDC sous `components/` (dont affichage des `logo` Team/League) ; view builders via `#type: component` ; remplacer `render()`/`\Drupal::l()` par `#type link`/`Url`.
 
 **Tests (Functional).** `GamesBettingFormTest`, `GamesMarksFormTest`, `RankingPageTest`, `DayPageTest`.
 
@@ -300,11 +306,13 @@ Chaque phase laisse le module installable.
 
 **Objectif.** Remplacer l'entité Group custom (~700 l.) par un **adaptateur fin** au-dessus de `drupal/group` 3.x. **Gate de décision** avec le commanditaire avant d'engager.
 
-**Tâches.** `GroupType` « mespronos_group » + plugin de relation ; **classements par groupe** via `RankingRepository::applyGroupScope()` ; accès inscription + mail « nouveau groupe » ; **repli documenté** (entité Group custom minimale).
+**Adhésion N-à-N** : un membre peut appartenir à **plusieurs groupes** (et un groupe a plusieurs membres) → modélisé par les relations **membership** de Group, pas par un champ unique sur l'utilisateur.
 
-**Tests (Functional).** `GroupRankingTest`.
+**Tâches.** `GroupType` « mespronos_group » + plugin de relation **membership** (N-à-N) ; **classements par groupe** via `RankingRepository::applyGroupScope()` ; accès inscription + mail « nouveau groupe » ; migration de l'ancien `field_group` → relations membership ; **repli documenté** (entité Group custom minimale **+ table de liaison `membership(user_id, group_id)` N-à-N**).
 
-**Critères d'acceptation.** Adhésion + classement par groupe fonctionnels via `drupal/group` ; membership/join/leave/accès fournis par contrib.
+**Tests (Functional).** `GroupRankingTest` (dont un user membre de plusieurs groupes).
+
+**Critères d'acceptation.** Adhésion multi-groupes + classement par groupe fonctionnels via `drupal/group` ; membership/join/leave/accès fournis par contrib.
 
 ## Phase 9 — Sous-module mespronos_import ([#129](https://github.com/mespronos/mespronos/issues/129))
 
@@ -320,9 +328,9 @@ Chaque phase laisse le module installable.
 
 **Objectif.** Migrer les données de prod via l'API Migrate + commandes recompute/verify.
 
-**Tâches.** Plugins `SqlBase` par table legacy (connexion `migrate`) ; destinations `entity:<id>` + `migration_lookup` + process plugin enums ; configs `migrate_plus.migration.mespronos_*.yml` dans l'ordre `sport → team → league → day → game → bet`, `reminder` après `day` ; **classements recalculés, pas migrés** ; Drush `mespronos:recompute-rankings --all` (rebuild de la table d'agrégats, batché) ; Drush `mespronos:verify-points` (diff vs `points` des paris).
+**Tâches.** Plugins `SqlBase` par table legacy (connexion `migrate`) ; destinations `entity:<id>` + `migration_lookup` + process plugin enums ; logos Team/League mappés si source legacy, sinon vides ; configs `migrate_plus.migration.mespronos_*.yml` dans l'ordre `sport → team → league → day → game → bet`, `reminder` après `day`, adhésions (membership) après `league` + users ; **classements recalculés, pas migrés** ; Drush `mespronos:recompute-rankings --all` (rebuild de la table d'agrégats, batché) ; Drush `mespronos:verify-points` (diff vs `points` des paris).
 
-**Critères d'acceptation.** `migrate:import` importe les 7 entités dans le bon ordre ; `verify-points` → **0 diff** sur copie prod ; `migrate:rollback` réversible.
+**Critères d'acceptation.** `migrate:import` importe les 7 entités + adhésions dans le bon ordre ; `verify-points` → **0 diff** sur copie prod ; `migrate:rollback` réversible.
 
 ## Phase 11 — Durcissement tests / CI ([#131](https://github.com/mespronos/mespronos/issues/131))
 
